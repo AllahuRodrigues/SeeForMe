@@ -1,0 +1,282 @@
+{
+ "name": "text_corridor_5100",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "NEW MENU",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.358651854533249,
+    0.1011741694396992,
+    0.608651854533249,
+    0.2011741694396992
+   ],
+   "bbox_end": [
+    0.358651854533249,
+    0.1011741694396992,
+    0.608651854533249,
+    0.2011741694396992
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "SALE 50% OFF",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6112034567141049,
+    0.08317457196174632,
+    0.8612034567141049,
+    0.18317457196174633
+   ],
+   "bbox_end": [
+    0.6112034567141049,
+    0.08317457196174632,
+    0.8612034567141049,
+    0.18317457196174633
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "NEW MENU",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.27118229510903524,
+    0.02534080083133456,
+    0.5211822951090352,
+    0.12534080083133456
+   ],
+   "bbox_end": [
+    0.27118229510903524,
+    0.02534080083133456,
+    0.5211822951090352,
+    0.12534080083133456
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "JOIN THE CLUB",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.29554812637140665,
+    0.03152057181118918,
+    0.5455481263714066,
+    0.1315205718111892
+   ],
+   "bbox_end": [
+    0.29554812637140665,
+    0.03152057181118918,
+    0.5455481263714066,
+    0.1315205718111892
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "www.example.com",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5259607040896638,
+    0.17792400536145883,
+    0.7759607040896638,
+    0.27792400536145884
+   ],
+   "bbox_end": [
+    0.5259607040896638,
+    0.17792400536145883,
+    0.7759607040896638,
+    0.27792400536145884
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "GATE 12",
+   "t_appear": 3.0626493443759535,
+   "t_disappear": 9.062649344375954,
+   "bbox_start": [
+    0.5284127492848296,
+    0.1,
+    0.8284127492848297,
+    0.22
+   ],
+   "bbox_end": [
+    0.5284127492848296,
+    0.1,
+    0.8284127492848297,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.3626493443759533,
+     9.062649344375954
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "STOP",
+   "t_appear": 11.502941053028405,
+   "t_disappear": 17.502941053028405,
+   "bbox_start": [
+    0.4839519460067435,
+    0.1,
+    0.7839519460067434,
+    0.22
+   ],
+   "bbox_end": [
+    0.4839519460067435,
+    0.1,
+    0.7839519460067434,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     11.802941053028405,
+     17.502941053028405
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "text": "DO NOT ENTER",
+   "t_appear": 22.184274472028704,
+   "t_disappear": 28.184274472028704,
+   "bbox_start": [
+    0.5086832734071967,
+    0.1,
+    0.8086832734071967,
+    0.22
+   ],
+   "bbox_end": [
+    0.5086832734071967,
+    0.1,
+    0.8086832734071967,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     22.484274472028705,
+     28.184274472028704
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "box",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 5100,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 5100"
+}

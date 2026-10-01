@@ -1,0 +1,257 @@
+{
+ "name": "text_corridor_14005",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.04692367661426739,
+    0.11976497291439148,
+    0.2969236766142674,
+    0.21976497291439148
+   ],
+   "bbox_end": [
+    0.04692367661426739,
+    0.11976497291439148,
+    0.2969236766142674,
+    0.21976497291439148
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "FOLLOW US ONLINE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.21851950471217188,
+    0.08756683648470821,
+    0.46851950471217185,
+    0.18756683648470823
+   ],
+   "bbox_end": [
+    0.21851950471217188,
+    0.08756683648470821,
+    0.46851950471217185,
+    0.18756683648470823
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.37149061913293757,
+    0.05968225902199964,
+    0.6214906191329376,
+    0.15968225902199965
+   ],
+   "bbox_end": [
+    0.37149061913293757,
+    0.05968225902199964,
+    0.6214906191329376,
+    0.15968225902199965
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3080149960932008,
+    0.06358396326180325,
+    0.5580149960932008,
+    0.16358396326180324
+   ],
+   "bbox_end": [
+    0.3080149960932008,
+    0.06358396326180325,
+    0.5580149960932008,
+    0.16358396326180324
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "DO NOT ENTER",
+   "t_appear": 2.810618597272204,
+   "t_disappear": 8.810618597272203,
+   "bbox_start": [
+    0.5947340478501245,
+    0.1,
+    0.8947340478501244,
+    0.22
+   ],
+   "bbox_end": [
+    0.5947340478501245,
+    0.1,
+    0.8947340478501244,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.110618597272204,
+     8.810618597272203
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 204",
+   "t_appear": 10.848565402582423,
+   "t_disappear": 16.848565402582423,
+   "bbox_start": [
+    0.4723178434119807,
+    0.1,
+    0.7723178434119806,
+    0.22
+   ],
+   "bbox_end": [
+    0.4723178434119807,
+    0.1,
+    0.7723178434119806,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     11.148565402582424,
+     16.848565402582423
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 117B",
+   "t_appear": 20.56090910407828,
+   "t_disappear": 26.56090910407828,
+   "bbox_start": [
+    0.5798427643813419,
+    0.1,
+    0.8798427643813418,
+    0.22
+   ],
+   "bbox_end": [
+    0.5798427643813419,
+    0.1,
+    0.8798427643813418,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     20.86090910407828,
+     26.56090910407828
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "cone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 14005,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 14005"
+}

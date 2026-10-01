@@ -1,0 +1,337 @@
+{
+ "name": "office_6001",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "clock",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6298799683729187,
+    0.4518863548412152,
+    0.6908975945809097,
+    0.618243197356005
+   ],
+   "bbox_end": [
+    0.6298799683729187,
+    0.4518863548412152,
+    0.6908975945809097,
+    0.618243197356005
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.44839866100803966,
+    0.22464102124739393,
+    0.5302555020033615,
+    0.32575191861549047
+   ],
+   "bbox_end": [
+    0.44839866100803966,
+    0.22464102124739393,
+    0.5302555020033615,
+    0.32575191861549047
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.831069284189674,
+    0.2155203989048371,
+    0.9656745110730687,
+    0.33325830416777025
+   ],
+   "bbox_end": [
+    0.831069284189674,
+    0.2155203989048371,
+    0.9656745110730687,
+    0.33325830416777025
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "clock",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.46070046274620097,
+    0.4309694795800013,
+    0.5683773842407396,
+    0.5815832464040794
+   ],
+   "bbox_end": [
+    0.46070046274620097,
+    0.4309694795800013,
+    0.5683773842407396,
+    0.5815832464040794
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.29630622321101824,
+    0.2112634420863604,
+    0.41209255443399384,
+    0.32554255634992935
+   ],
+   "bbox_end": [
+    0.29630622321101824,
+    0.2112634420863604,
+    0.41209255443399384,
+    0.32554255634992935
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "poster",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6356823770793133,
+    0.34403193759578976,
+    0.8043917560681262,
+    0.5159597956895778
+   ],
+   "bbox_end": [
+    0.6356823770793133,
+    0.34403193759578976,
+    0.8043917560681262,
+    0.5159597956895778
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "BUY ONE GET ONE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "bbox_end": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.0,
+   "t_disappear": 7.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     2.0,
+     7.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "t_appear": 19.672142078197844,
+   "t_disappear": 27.672142078197844,
+   "bbox_start": [
+    0.45,
+    0.47500000000000003,
+    0.55,
+    0.625
+   ],
+   "bbox_end": [
+    0.2,
+    0.050000000000000044,
+    0.8,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     21.672142078197844,
+     27.672142078197844
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 204",
+   "t_appear": 20.672142078197844,
+   "t_disappear": 27.672142078197844,
+   "bbox_start": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "bbox_end": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     20.972142078197844,
+     26.672142078197844
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "trash can",
+   "kind": "object",
+   "text": null,
+   "t_appear": 8.0,
+   "t_disappear": 13.0,
+   "bbox_start": [
+    0.5096351828159118,
+    0.508,
+    0.5696351828159119,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.36463518281591184,
+    0.46,
+    0.7146351828159119,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     9.5,
+     13.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "trash can",
+   "kind": "object",
+   "text": null,
+   "t_appear": 18.55300834148718,
+   "t_disappear": 23.55300834148718,
+   "bbox_start": [
+    0.5208043137132845,
+    0.508,
+    0.5808043137132846,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.37580431371328454,
+    0.46,
+    0.7258043137132846,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     20.05300834148718,
+     23.55300834148718
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 6001,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "office scenario, seed 6001"
+}

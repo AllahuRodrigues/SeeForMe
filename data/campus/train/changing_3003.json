@@ -1,0 +1,531 @@
+{
+ "name": "changing_3003",
+ "kind": "changing",
+ "duration": 30.0,
+ "fps": 10.0,
+ "seed": 3003,
+ "description": "changing scenario, seed 3003",
+ "goal": null,
+ "goal_tags": [],
+ "user_keyframes": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   30.0,
+   33.0
+  ]
+ ],
+ "camera": {
+  "hfov_deg": 70.0,
+  "aspect": 1.3333333333333333,
+  "height_m": 1.35,
+  "pitch_deg": 15.0
+ },
+ "pitch_jitter_deg": 0.0,
+ "yaw_jitter_deg": 0.0,
+ "blackout_windows": [],
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "depth_noise_rel": 0.06,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     2.2203630488164072,
+     20.782333519240865
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 0.6536669045796571,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "poster",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     -1.6894214667805194,
+     11.950339984582794
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 0.8225806386451726,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "BUY ONE GET ONE",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     -0.8115545728782183,
+     23.65533853835615
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "event_type": "hazard_static",
+   "keyframes": [
+    [
+     0.0,
+     1.6,
+     17.719069741582928
+    ],
+    [
+     8.835517946893573,
+     1.6,
+     17.719069741582928
+    ],
+    [
+     10.335517946893573,
+     0.1,
+     17.719069741582928
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.9,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     8.237865359962903,
+     1.8,
+     26.461651895959193
+    ],
+    [
+     12.237865359962903,
+     1.8,
+     22.461651895959193
+    ],
+    [
+     14.737865359962903,
+     0.0,
+     20.461651895959193
+    ],
+    [
+     18.237865359962903,
+     0.0,
+     16.961651895959193
+    ]
+   ],
+   "t_appear": 8.237865359962903,
+   "t_disappear": 1000000000.0,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "bicycle",
+   "kind": "object",
+   "text": null,
+   "event_type": "bike",
+   "keyframes": [
+    [
+     22.402885139106868,
+     2.5,
+     26.84317365301755
+    ],
+    [
+     23.51399625021798,
+     -2.5,
+     26.84317365301755
+    ]
+   ],
+   "t_appear": 22.402885139106868,
+   "t_disappear": 23.51399625021798,
+   "height": 1.0,
+   "width": 0.6,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "event_type": "door",
+   "keyframes": [
+    [
+     0.0,
+     0.0,
+     16.507869131167663
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 8.916244664697874,
+   "height": 2.1,
+   "width": 1.0,
+   "base_height": 0.0,
+   "detail": {
+    "open": true,
+    "handle": "right"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "event_type": "door",
+   "keyframes": [
+    [
+     0.0,
+     0.0,
+     16.507869131167663
+    ]
+   ],
+   "t_appear": 8.916244664697874,
+   "t_disappear": 1000000000.0,
+   "height": 2.1,
+   "width": 1.0,
+   "base_height": 0.0,
+   "detail": {
+    "open": false,
+    "handle": "right"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     0.5,
+     -1.6,
+     12.55
+    ],
+    [
+     12.5,
+     -1.6,
+     -0.6500000000000004
+    ]
+   ],
+   "t_appear": 0.5,
+   "t_disappear": 12.5,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "events": [
+  {
+   "obj_id": 1,
+   "label": "painting",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 2,
+   "label": "poster",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "BUY ONE GET ONE",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 4,
+   "label": "chair",
+   "kind": "object",
+   "event_type": "hazard_static",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.7,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 10.6,
+   "ideal_s": 13.1,
+   "latest_safe_s": 13.9,
+   "t_contact": 15.4,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.31,
+   "direction_at_ideal_deg": 1.7,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance",
+    "motion"
+   ],
+   "ideal_cue": "Chair, about 3 meters.",
+   "detail": {}
+  },
+  {
+   "obj_id": 5,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_moving",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.5,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 12.74,
+   "ideal_s": 14.24,
+   "latest_safe_s": 14.94,
+   "t_contact": 16.44,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 5.2,
+   "direction_at_ideal_deg": 4.0,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "motion"
+   ],
+   "ideal_cue": "Person, crossing from the right.",
+   "detail": {}
+  },
+  {
+   "obj_id": 6,
+   "label": "bicycle",
+   "kind": "object",
+   "event_type": "bike",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.9,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 22.6,
+   "ideal_s": 22.6,
+   "latest_safe_s": 22.9,
+   "t_contact": 22.8,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 1.98,
+   "direction_at_ideal_deg": 38.9,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Bicycle, on your right, crossing from the right.",
+   "detail": {}
+  },
+  {
+   "obj_id": 7,
+   "label": "door",
+   "kind": "object",
+   "event_type": "door",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {
+    "open": true,
+    "handle": "right"
+   }
+  },
+  {
+   "obj_id": 8,
+   "label": "door",
+   "kind": "object",
+   "event_type": "door",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.45,
+   "urgency": "low",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 9.62,
+   "ideal_s": 11.92,
+   "latest_safe_s": 13.32,
+   "t_contact": 14.32,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.4,
+   "direction_at_ideal_deg": 0.0,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance",
+    "detail"
+   ],
+   "ideal_cue": "Door, about 3 meters. Handle on the right.",
+   "detail": {
+    "open": false,
+    "handle": "right"
+   }
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_static",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  }
+ ]
+}

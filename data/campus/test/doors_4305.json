@@ -1,0 +1,558 @@
+{
+ "name": "doors_4305",
+ "kind": "doors",
+ "duration": 30.0,
+ "fps": 10.0,
+ "seed": 4305,
+ "description": "doors scenario, seed 4305",
+ "goal": null,
+ "goal_tags": [],
+ "user_keyframes": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   30.0,
+   33.0
+  ]
+ ],
+ "camera": {
+  "hfov_deg": 70.0,
+  "aspect": 1.3333333333333333,
+  "height_m": 1.35,
+  "pitch_deg": 15.0
+ },
+ "pitch_jitter_deg": 0.0,
+ "yaw_jitter_deg": 0.0,
+ "blackout_windows": [],
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "depth_noise_rel": 0.06,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     1.400872847436661,
+     29.787018962914328
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 1.200704891663551,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "cup",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     1.4821381516042036,
+     11.259111623756517
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 1.3096823654330119,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "NEW MENU",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     -1.8982233786081866,
+     20.23961978189583
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "event_type": "door",
+   "keyframes": [
+    [
+     0.0,
+     -1.9,
+     5
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 2.1,
+   "width": 0.9,
+   "base_height": 0.0,
+   "detail": {
+    "handle": "right"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "event_type": "door",
+   "keyframes": [
+    [
+     0.0,
+     1.9,
+     13
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 2.1,
+   "width": 0.9,
+   "base_height": 0.0,
+   "detail": {
+    "handle": "right"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "event_type": "door",
+   "keyframes": [
+    [
+     0.0,
+     1.9,
+     21
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 2.1,
+   "width": 0.9,
+   "base_height": 0.0,
+   "detail": {
+    "handle": "left"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "event_type": "door",
+   "keyframes": [
+    [
+     0.0,
+     0.0,
+     21.092779841922145
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 2.1,
+   "width": 1.0,
+   "base_height": 0.0,
+   "detail": {
+    "handle": "right",
+    "push_pull": "push"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "text": "PULL",
+   "event_type": "sign_nav",
+   "keyframes": [
+    [
+     0.0,
+     0.3,
+     20.992779841922143
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.4,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "event_type": "door",
+   "keyframes": [
+    [
+     0.0,
+     0.0,
+     32.89105673381917
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 2.1,
+   "width": 1.4,
+   "base_height": 0.0,
+   "detail": {
+    "automatic": true
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     13.90252712902013,
+     0.1,
+     25.292779841922144
+    ],
+    [
+     21.90252712902013,
+     0.1,
+     16.492779841922143
+    ]
+   ],
+   "t_appear": 13.90252712902013,
+   "t_disappear": 21.90252712902013,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "events": [
+  {
+   "obj_id": 1,
+   "label": "book",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 2,
+   "label": "cup",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "NEW MENU",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 4,
+   "label": "door",
+   "kind": "object",
+   "event_type": "door",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {
+    "handle": "right"
+   }
+  },
+  {
+   "obj_id": 5,
+   "label": "door",
+   "kind": "object",
+   "event_type": "door",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {
+    "handle": "right"
+   }
+  },
+  {
+   "obj_id": 6,
+   "label": "door",
+   "kind": "object",
+   "event_type": "door",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {
+    "handle": "left"
+   }
+  },
+  {
+   "obj_id": 7,
+   "label": "door",
+   "kind": "object",
+   "event_type": "door",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.45,
+   "urgency": "low",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 13.8,
+   "ideal_s": 16.0,
+   "latest_safe_s": 17.5,
+   "t_contact": 18.5,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.49,
+   "direction_at_ideal_deg": 0.0,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance",
+    "detail"
+   ],
+   "ideal_cue": "Door, about 3 meters. Handle on the right, push.",
+   "detail": {
+    "handle": "right",
+    "push_pull": "push"
+   }
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_nav",
+   "text": "PULL",
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.45,
+   "urgency": "low",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 11.9,
+   "ideal_s": 14.6,
+   "latest_safe_s": 18.6,
+   "t_contact": 18.4,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 4.93,
+   "direction_at_ideal_deg": 3.5,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "direction"
+   ],
+   "ideal_cue": "Sign reads PULL, ahead.",
+   "detail": {}
+  },
+  {
+   "obj_id": 9,
+   "label": "door",
+   "kind": "object",
+   "event_type": "door",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.45,
+   "urgency": "low",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 24.5,
+   "ideal_s": 26.8,
+   "latest_safe_s": 28.2,
+   "t_contact": 29.2,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.41,
+   "direction_at_ideal_deg": 0.0,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance",
+    "detail"
+   ],
+   "ideal_cue": "Door, about 3 meters. Automatic.",
+   "detail": {
+    "automatic": true
+   }
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_moving",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.5,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 14.2,
+   "ideal_s": 15.7,
+   "latest_safe_s": 16.6,
+   "t_contact": 18.1,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 6.04,
+   "direction_at_ideal_deg": 0.9,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "motion"
+   ],
+   "ideal_cue": "Person, approaching.",
+   "detail": {}
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "n_train": 12244,
+ "pos_rate_train": 0.018458020254818686,
+ "n_val": 6464,
+ "features": [
+  "confidence",
+  "relevance",
+  "novelty",
+  "proximity",
+  "text_importance",
+  "duplicate"
+ ],
+ "models": {
+  "logreg": {
+   "val_auc": 0.997364097632321,
+   "val_ap": 0.7871008967249202,
+   "val_f1@0.5": 0.586046511627907,
+   "learned_weights": {
+    "confidence": 0.5198724865913391,
+    "relevance": 4.368961811065674,
+    "novelty": 8.459183692932129,
+    "proximity": 16.43987274169922,
+    "text_importance": 10.554903984069824,
+    "duplicate": -4.62701416015625
+   },
+   "intercept": -17.317018508911133,
+   "val_threshold": 0.915321946144104,
+   "val_f1@best": 0.854014598540146
+  },
+  "gbm": {
+   "val_auc": 0.9966052582808657,
+   "val_ap": 0.8356454547089588,
+   "val_f1@0.5": 0.7793103448275862,
+   "val_threshold": 0.46058028511941096,
+   "val_f1@best": 0.7918088737201364
+  },
+  "mlp_torch": {
+   "val_auc": 0.9979263399900825,
+   "val_ap": 0.8886350115943606,
+   "val_f1@0.5": 0.6830601092896175,
+   "final_train_loss": 0.06232431450872708,
+   "val_threshold": 0.9801782965660095,
+   "val_f1@best": 0.8581560283687943
+  }
+ }
+}

@@ -1,0 +1,457 @@
+{
+ "name": "cluttered_room_3102",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "poster",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.8160418844580832,
+    0.19498983702375328,
+    0.9846497939614558,
+    0.35697494464294743
+   ],
+   "bbox_end": [
+    0.8160418844580832,
+    0.19498983702375328,
+    0.9846497939614558,
+    0.35697494464294743
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8480433819912812,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "vase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6134656050655155,
+    0.02283325724056242,
+    0.6915276631974422,
+    0.10441334362298324
+   ],
+   "bbox_end": [
+    0.6134656050655155,
+    0.02283325724056242,
+    0.6915276631974422,
+    0.10441334362298324
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6651303251287772,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "vase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4563327193761591,
+    0.5579349315350972,
+    0.5746604567758598,
+    0.6395695031658224
+   ],
+   "bbox_end": [
+    0.4563327193761591,
+    0.5579349315350972,
+    0.5746604567758598,
+    0.6395695031658224
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6499359419708438,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "handbag",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5339824360530405,
+    0.0886469084528111,
+    0.7093900258004613,
+    0.21545503188863285
+   ],
+   "bbox_end": [
+    0.5339824360530405,
+    0.0886469084528111,
+    0.7093900258004613,
+    0.21545503188863285
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.7918597115956825,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "vase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5973585063722567,
+    0.4835947596763408,
+    0.6609117714667633,
+    0.6304806486127198
+   ],
+   "bbox_end": [
+    0.5973585063722567,
+    0.4835947596763408,
+    0.6609117714667633,
+    0.6304806486127198
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8120053943034208,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "clock",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.8156788356725302,
+    0.3085313840358515,
+    0.9114744494645944,
+    0.44753164273015944
+   ],
+   "bbox_end": [
+    0.8156788356725302,
+    0.3085313840358515,
+    0.9114744494645944,
+    0.44753164273015944
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8018214096637303,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.23215131966262956,
+    0.3032286856004945,
+    0.3088879126972174,
+    0.4721258190381848
+   ],
+   "bbox_end": [
+    0.23215131966262956,
+    0.3032286856004945,
+    0.3088879126972174,
+    0.4721258190381848
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9291596029527305,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7944122744881613,
+    0.5484460223186021,
+    0.9770380650502715,
+    0.7420298629156956
+   ],
+   "bbox_end": [
+    0.7944122744881613,
+    0.5484460223186021,
+    0.9770380650502715,
+    0.7420298629156956
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6699472872507835,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.8190719194230947,
+    0.28490946083008695,
+    0.912514132872636,
+    0.3791982797587411
+   ],
+   "bbox_end": [
+    0.8190719194230947,
+    0.28490946083008695,
+    0.912514132872636,
+    0.3791982797587411
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8254652111293046,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.23809855221293302,
+    0.2081330466311774,
+    0.4301998906941929,
+    0.32431755172723276
+   ],
+   "bbox_end": [
+    0.23809855221293302,
+    0.2081330466311774,
+    0.4301998906941929,
+    0.32431755172723276
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8018755448269151,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "backpack",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3096686578717745,
+    0.014822824447725001,
+    0.49096422155528296,
+    0.17508012032003764
+   ],
+   "bbox_end": [
+    0.3096686578717745,
+    0.014822824447725001,
+    0.49096422155528296,
+    0.17508012032003764
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8862347529278094,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "text",
+   "kind": "text",
+   "text": "HAPPY HOUR",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3716314216956987,
+    0.08780803809384326,
+    0.6216314216956986,
+    0.18780803809384328
+   ],
+   "bbox_end": [
+    0.3716314216956987,
+    0.08780803809384326,
+    0.6216314216956986,
+    0.18780803809384328
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 13,
+   "label": "text",
+   "kind": "text",
+   "text": "www.example.com",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.47363044029887413,
+    0.08543319882540092,
+    0.7236304402988741,
+    0.18543319882540094
+   ],
+   "bbox_end": [
+    0.47363044029887413,
+    0.08543319882540092,
+    0.7236304402988741,
+    0.18543319882540094
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 14,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 2.650158544725344,
+   "t_disappear": 7.650158544725344,
+   "bbox_start": [
+    0.33652310116980866,
+    0.508,
+    0.3965231011698087,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.16652310116980867,
+    0.39,
+    0.5665231011698086,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     3.8501585447253444,
+     7.650158544725344
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 15,
+   "label": "trash can",
+   "kind": "object",
+   "text": null,
+   "t_appear": 9.357211423176512,
+   "t_disappear": 14.357211423176512,
+   "bbox_start": [
+    0.3932442738902542,
+    0.508,
+    0.45324427389025423,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.2232442738902542,
+    0.39,
+    0.6232442738902542,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     10.557211423176511,
+     14.357211423176512
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 16,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 18.324959532426114,
+   "t_disappear": 23.324959532426114,
+   "bbox_start": [
+    0.4438972370909564,
+    0.508,
+    0.5038972370909565,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.2738972370909564,
+    0.39,
+    0.6738972370909564,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     19.524959532426113,
+     23.324959532426114
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 17,
+   "label": "text",
+   "kind": "text",
+   "text": "FIRE EXIT",
+   "t_appear": 13.490237761318737,
+   "t_disappear": 19.49023776131874,
+   "bbox_start": [
+    0.4,
+    0.08,
+    0.7,
+    0.2
+   ],
+   "bbox_end": [
+    0.4,
+    0.08,
+    0.7,
+    0.2
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     13.790237761318737,
+     19.49023776131874
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 3102,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.15,
+ "description": "cluttered_room scenario, seed 3102"
+}

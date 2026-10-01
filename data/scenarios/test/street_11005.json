@@ -1,0 +1,402 @@
+{
+ "name": "street_11005",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "traffic light",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5,
+    0.05,
+    0.56,
+    0.2
+   ],
+   "bbox_end": [
+    0.5,
+    0.05,
+    0.56,
+    0.2
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.0,
+   "t_disappear": 3.825876588262741,
+   "bbox_start": [
+    1.0,
+    0.37500000000000006,
+    1.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    -0.21,
+    0.37500000000000006,
+    0.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     1.3,
+     3.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 6.559316744594717,
+   "t_disappear": 8.649549649577565,
+   "bbox_start": [
+    1.0,
+    0.37500000000000006,
+    1.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    -0.21,
+    0.37500000000000006,
+    0.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     6.859316744594717,
+     8.559316744594717
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.616122438303616,
+   "t_disappear": 15.321356750347842,
+   "bbox_start": [
+    1.0,
+    0.37500000000000006,
+    1.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    -0.21,
+    0.37500000000000006,
+    0.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     12.916122438303617,
+     14.616122438303616
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 17.787577117291804,
+   "t_disappear": 20.98043423689819,
+   "bbox_start": [
+    1.0,
+    0.37500000000000006,
+    1.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    -0.21,
+    0.37500000000000006,
+    0.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     18.087577117291804,
+     19.787577117291804
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 24.256528473986926,
+   "t_disappear": 26.31394075181865,
+   "bbox_start": [
+    1.0,
+    0.37500000000000006,
+    1.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    -0.21,
+    0.37500000000000006,
+    0.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     24.556528473986926,
+     26.256528473986926
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "STOP",
+   "t_appear": 11.350597278300336,
+   "t_disappear": 18.350597278300334,
+   "bbox_start": [
+    0.15,
+    0.15,
+    0.32,
+    0.32
+   ],
+   "bbox_end": [
+    0.15,
+    0.15,
+    0.32,
+    0.32
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     11.650597278300337,
+     17.350597278300334
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.8,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "bicycle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 16.406836906493275,
+   "t_disappear": 20.406836906493275,
+   "bbox_start": [
+    0.3949879258577097,
+    0.508,
+    0.45498792585770964,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.17498792585770967,
+    0.25,
+    0.6749879258577096,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     16.906836906493275,
+     20.406836906493275
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4257234536653249,
+    0.45,
+    0.47572345366532487,
+    0.62
+   ],
+   "bbox_end": [
+    0.4257234536653249,
+    0.45,
+    0.47572345366532487,
+    0.62
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.21080378349286022,
+    0.45,
+    0.2608037834928602,
+    0.62
+   ],
+   "bbox_end": [
+    0.21080378349286022,
+    0.45,
+    0.2608037834928602,
+    0.62
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.26458111980807625,
+    0.45,
+    0.31458111980807624,
+    0.62
+   ],
+   "bbox_end": [
+    0.26458111980807625,
+    0.45,
+    0.31458111980807624,
+    0.62
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5783076745357372,
+    0.45,
+    0.6283076745357372,
+    0.62
+   ],
+   "bbox_end": [
+    0.5783076745357372,
+    0.45,
+    0.6283076745357372,
+    0.62
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 13,
+   "label": "text",
+   "kind": "text",
+   "text": "ART SHOW FRIDAY",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.1,
+    0.95,
+    0.25
+   ],
+   "bbox_end": [
+    0.7,
+    0.1,
+    0.95,
+    0.25
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 14,
+   "label": "pole",
+   "kind": "object",
+   "text": null,
+   "t_appear": 11.778581236065005,
+   "t_disappear": 16.778581236065005,
+   "bbox_start": [
+    0.4633668096814548,
+    0.49000000000000005,
+    0.48336680968145485,
+    0.6100000000000001
+   ],
+   "bbox_end": [
+    0.41336680968145484,
+    0.28,
+    0.5333668096814548,
+    1.0
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.278581236065005,
+     16.778581236065005
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 11005,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.08,
+ "description": "street scenario, seed 11005"
+}

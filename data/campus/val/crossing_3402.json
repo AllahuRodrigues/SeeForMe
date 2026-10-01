@@ -1,0 +1,829 @@
+{
+ "name": "crossing_3402",
+ "kind": "crossing",
+ "duration": 30.0,
+ "fps": 10.0,
+ "seed": 3402,
+ "description": "crossing scenario, seed 3402",
+ "goal": null,
+ "goal_tags": [],
+ "user_keyframes": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   11.315963864582024,
+   12.447560251040228
+  ],
+  [
+   14.315963864582024,
+   12.447560251040228
+  ],
+  [
+   30.0,
+   29.700000000000003
+  ]
+ ],
+ "camera": {
+  "hfov_deg": 70.0,
+  "aspect": 1.3333333333333333,
+  "height_m": 1.35,
+  "pitch_deg": 15.0
+ },
+ "pitch_jitter_deg": 0.0,
+ "yaw_jitter_deg": 0.0,
+ "blackout_windows": [],
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.08,
+ "depth_noise_rel": 0.06,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "traffic light",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     1.6,
+     12.0
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.0,
+   "width": 0.35,
+   "base_height": 2.5,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.8,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "curb",
+   "kind": "object",
+   "text": null,
+   "event_type": "curb",
+   "keyframes": [
+    [
+     0.0,
+     0.0,
+     14.387669803461565
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.15,
+   "width": 3.0,
+   "base_height": 0.0,
+   "detail": {
+    "direction": "down"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "STOP",
+   "event_type": "sign_nav",
+   "keyframes": [
+    [
+     0.0,
+     1.5,
+     15.387669803461565
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 2.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.8,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "event_type": "vehicle",
+   "keyframes": [
+    [
+     8.48141826055034,
+     -14,
+     13.64000222907131
+    ],
+    [
+     13.030861458523917,
+     14,
+     13.64000222907131
+    ]
+   ],
+   "t_appear": 8.48141826055034,
+   "t_disappear": 13.030861458523917,
+   "height": 1.5,
+   "width": 1.8,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "event_type": "vehicle",
+   "keyframes": [
+    [
+     21.203390606746595,
+     14,
+     22.991231557766138
+    ],
+    [
+     24.200338353558145,
+     -14,
+     22.991231557766138
+    ]
+   ],
+   "t_appear": 21.203390606746595,
+   "t_disappear": 24.200338353558145,
+   "height": 1.5,
+   "width": 1.8,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "event_type": "vehicle",
+   "keyframes": [
+    [
+     22.697158788278426,
+     -14,
+     37.327119492750356
+    ],
+    [
+     25.680172662526214,
+     14,
+     37.327119492750356
+    ]
+   ],
+   "t_appear": 22.697158788278426,
+   "t_disappear": 25.680172662526214,
+   "height": 1.5,
+   "width": 1.8,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "event_type": "vehicle",
+   "keyframes": [
+    [
+     5.126141832309097,
+     14,
+     8.225108574200199
+    ],
+    [
+     8.359560533382396,
+     -14,
+     8.225108574200199
+    ]
+   ],
+   "t_appear": 5.126141832309097,
+   "t_disappear": 8.359560533382396,
+   "height": 1.5,
+   "width": 1.8,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "event_type": "vehicle",
+   "keyframes": [
+    [
+     0.0,
+     2.6,
+     9.0
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.5,
+   "width": 1.8,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "bicycle",
+   "kind": "object",
+   "text": null,
+   "event_type": "bike",
+   "keyframes": [
+    [
+     21.03714134194243,
+     8,
+     22.840855476136674
+    ],
+    [
+     24.796177442390672,
+     -8,
+     22.840855476136674
+    ]
+   ],
+   "t_appear": 21.03714134194243,
+   "t_disappear": 24.796177442390672,
+   "height": 1.0,
+   "width": 0.6,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "scooter",
+   "kind": "object",
+   "text": null,
+   "event_type": "bike",
+   "keyframes": [
+    [
+     13.07235341237284,
+     -7,
+     14.947560251040228
+    ],
+    [
+     15.872353412372838,
+     7,
+     14.947560251040228
+    ]
+   ],
+   "t_appear": 13.07235341237284,
+   "t_disappear": 15.872353412372838,
+   "height": 1.1,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     0.0,
+     2.322561814660367,
+     4.92018445095957
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     0.0,
+     2.2365965062647764,
+     4.171817330312248
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 13,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     0.0,
+     2.822332639036042,
+     20.60561795987282
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 14,
+   "label": "pole",
+   "kind": "object",
+   "text": null,
+   "event_type": "hazard_static",
+   "keyframes": [
+    [
+     0.0,
+     0.2690360716259765,
+     24.3199470856043
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 2.5,
+   "width": 0.2,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 15,
+   "label": "text",
+   "kind": "text",
+   "text": "ART SHOW FRIDAY",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     1.2581396175003987,
+     6.3719611923261095
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "events": [
+  {
+   "obj_id": 1,
+   "label": "traffic light",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 2,
+   "label": "curb",
+   "kind": "object",
+   "event_type": "curb",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.8,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 8.1,
+   "ideal_s": 10.0,
+   "latest_safe_s": 13.9,
+   "t_contact": 15.4,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.39,
+   "direction_at_ideal_deg": 0.0,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance",
+    "action"
+   ],
+   "ideal_cue": "Curb, about 3 meters. Step down.",
+   "detail": {
+    "direction": "down"
+   }
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_nav",
+   "text": "STOP",
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.45,
+   "urgency": "low",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 6.8,
+   "ideal_s": 9.5,
+   "latest_safe_s": 14.3,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": 4.94,
+   "direction_at_ideal_deg": 16.9,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "direction"
+   ],
+   "ideal_cue": "Sign reads STOP, slightly right.",
+   "detail": {}
+  },
+  {
+   "obj_id": 4,
+   "label": "car",
+   "kind": "object",
+   "event_type": "vehicle",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 1.0,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 10.38,
+   "ideal_s": 10.38,
+   "latest_safe_s": 10.68,
+   "t_contact": 10.58,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 2.22,
+   "direction_at_ideal_deg": -46.1,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Car, on your left, crossing from the left.",
+   "detail": {}
+  },
+  {
+   "obj_id": 5,
+   "label": "car",
+   "kind": "object",
+   "event_type": "vehicle",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 1.0,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 22.5,
+   "ideal_s": 22.5,
+   "latest_safe_s": 22.8,
+   "t_contact": 22.6,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 1.54,
+   "direction_at_ideal_deg": 50.3,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Car, on your right, crossing from the right.",
+   "detail": {}
+  },
+  {
+   "obj_id": 6,
+   "label": "car",
+   "kind": "object",
+   "event_type": "vehicle",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 7,
+   "label": "car",
+   "kind": "object",
+   "event_type": "vehicle",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 1.0,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 6.63,
+   "ideal_s": 6.63,
+   "latest_safe_s": 6.93,
+   "t_contact": 6.63,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 0.94,
+   "direction_at_ideal_deg": 47.2,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Car, on your right, crossing from the right.",
+   "detail": {}
+  },
+  {
+   "obj_id": 8,
+   "label": "car",
+   "kind": "object",
+   "event_type": "vehicle",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 9,
+   "label": "bicycle",
+   "kind": "object",
+   "event_type": "bike",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.9,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 22.74,
+   "ideal_s": 22.74,
+   "latest_safe_s": 23.04,
+   "t_contact": 22.84,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 1.13,
+   "direction_at_ideal_deg": 34.1,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Bicycle, on your right, crossing from the right.",
+   "detail": {}
+  },
+  {
+   "obj_id": 10,
+   "label": "scooter",
+   "kind": "object",
+   "event_type": "bike",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.9,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 14.17,
+   "ideal_s": 14.37,
+   "latest_safe_s": 14.47,
+   "t_contact": 14.37,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 2.44,
+   "direction_at_ideal_deg": -11.6,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Scooter, slightly left, crossing from the left.",
+   "detail": {}
+  },
+  {
+   "obj_id": 11,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_static",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 12,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_static",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 13,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_static",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 14,
+   "label": "pole",
+   "kind": "object",
+   "event_type": "hazard_static",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.7,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 19.7,
+   "ideal_s": 22.2,
+   "latest_safe_s": 22.9,
+   "t_contact": 24.4,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.2,
+   "direction_at_ideal_deg": 4.8,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance"
+   ],
+   "ideal_cue": "Pole, about 3 meters.",
+   "detail": {}
+  },
+  {
+   "obj_id": 15,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "ART SHOW FRIDAY",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  }
+ ]
+}

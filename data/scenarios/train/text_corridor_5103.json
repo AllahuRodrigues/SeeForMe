@@ -1,0 +1,257 @@
+{
+ "name": "text_corridor_5103",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "BUY ONE GET ONE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.13374370163527896,
+    0.22797739728280325,
+    0.38374370163527893,
+    0.3279773972828033
+   ],
+   "bbox_end": [
+    0.13374370163527896,
+    0.22797739728280325,
+    0.38374370163527893,
+    0.3279773972828033
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "JOIN THE CLUB",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.451501954630393,
+    0.07146204039488747,
+    0.701501954630393,
+    0.1714620403948875
+   ],
+   "bbox_end": [
+    0.451501954630393,
+    0.07146204039488747,
+    0.701501954630393,
+    0.1714620403948875
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3884575330319658,
+    0.060351638262817406,
+    0.6384575330319657,
+    0.1603516382628174
+   ],
+   "bbox_end": [
+    0.3884575330319658,
+    0.060351638262817406,
+    0.6384575330319657,
+    0.1603516382628174
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "SALE 50% OFF",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.47831200586492334,
+    0.1463393920363042,
+    0.7283120058649233,
+    0.2463393920363042
+   ],
+   "bbox_end": [
+    0.47831200586492334,
+    0.1463393920363042,
+    0.7283120058649233,
+    0.2463393920363042
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "ELEVATOR",
+   "t_appear": 3.0970401259725557,
+   "t_disappear": 9.097040125972555,
+   "bbox_start": [
+    0.5896436550630204,
+    0.1,
+    0.8896436550630205,
+    0.22
+   ],
+   "bbox_end": [
+    0.5896436550630204,
+    0.1,
+    0.8896436550630205,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.3970401259725556,
+     9.097040125972555
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "CAUTION WET FLOOR",
+   "t_appear": 12.237741665476417,
+   "t_disappear": 18.237741665476417,
+   "bbox_start": [
+    0.42853744039287134,
+    0.1,
+    0.7285374403928713,
+    0.22
+   ],
+   "bbox_end": [
+    0.42853744039287134,
+    0.1,
+    0.7285374403928713,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     12.537741665476418,
+     18.237741665476417
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "RESTROOM",
+   "t_appear": 20.561511074300146,
+   "t_disappear": 26.561511074300146,
+   "bbox_start": [
+    0.38645404983988624,
+    0.1,
+    0.6864540498398862,
+    0.22
+   ],
+   "bbox_end": [
+    0.38645404983988624,
+    0.1,
+    0.6864540498398862,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     20.861511074300147,
+     26.561511074300146
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "cone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 5103,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 5103"
+}

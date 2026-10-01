@@ -1,0 +1,22 @@
+{
+ "source": "yolo11n.pt",
+ "imgsz": 640,
+ "exports": {
+  "onnx": {
+   "path": "models/export/yolo11n.onnx",
+   "size_mb": 10.24,
+   "onnxruntime_cpu_ms_mean": 38.0,
+   "onnxruntime_cpu_ms_p95": 39.6,
+   "output_shape": [
+    [
+     1,
+     84,
+     8400
+    ]
+   ]
+  },
+  "coreml": {
+   "error": "TypeError: only 0-dimensional arrays can be converted to Python scalars"
+  }
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "device": "mps",
+ "model": "yolo11n.pt",
+ "depth_input": 252,
+ "configs": {
+  "yolo+depth+pcacs": {
+   "detect": {
+    "mean_ms": 14.016,
+    "p95_ms": 17.143
+   },
+   "ocr": {
+    "mean_ms": 0.001,
+    "p95_ms": 0.001
+   },
+   "track": {
+    "mean_ms": 0.126,
+    "p95_ms": 0.179
+   },
+   "policy": {
+    "mean_ms": 0.008,
+    "p95_ms": 0.069
+   },
+   "end_to_end": {
+    "mean_ms": 47.647,
+    "p95_ms": 55.98
+   },
+   "depth": {
+    "mean_ms": 32.88,
+    "p95_ms": 39.58
+   },
+   "fps_end_to_end": 20.98,
+   "n_cues": 0,
+   "max_rss_mb": 1010.7
+  },
+  "yolo+pcacs(bbox depth)": {
+   "detect": {
+    "mean_ms": 16.777,
+    "p95_ms": 17.191
+   },
+   "ocr": {
+    "mean_ms": 0.001,
+    "p95_ms": 0.001
+   },
+   "track": {
+    "mean_ms": 0.119,
+    "p95_ms": 0.171
+   },
+   "policy": {
+    "mean_ms": 0.006,
+    "p95_ms": 0.061
+   },
+   "end_to_end": {
+    "mean_ms": 17.381,
+    "p95_ms": 17.999
+   },
+   "depth": {
+    "mean_ms": 0.0,
+    "p95_ms": 0.0
+   },
+   "fps_end_to_end": 57.5,
+   "n_cues": 0,
+   "max_rss_mb": 1017.3
+  }
+ }
+}

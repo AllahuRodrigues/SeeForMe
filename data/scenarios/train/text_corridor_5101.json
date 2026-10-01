@@ -1,0 +1,252 @@
+{
+ "name": "text_corridor_5101",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "HAPPY HOUR",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5039516314465003,
+    0.12112910029139351,
+    0.7539516314465003,
+    0.22112910029139352
+   ],
+   "bbox_end": [
+    0.5039516314465003,
+    0.12112910029139351,
+    0.7539516314465003,
+    0.22112910029139352
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "NEW MENU",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.1033163760253234,
+    0.09161233839415701,
+    0.3533163760253234,
+    0.19161233839415703
+   ],
+   "bbox_end": [
+    0.1033163760253234,
+    0.09161233839415701,
+    0.3533163760253234,
+    0.19161233839415703
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.25077195343496306,
+    0.22891586226049185,
+    0.5007719534349631,
+    0.32891586226049185
+   ],
+   "bbox_end": [
+    0.25077195343496306,
+    0.22891586226049185,
+    0.5007719534349631,
+    0.32891586226049185
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5629248780379504,
+    0.26229605889198127,
+    0.8129248780379504,
+    0.36229605889198124
+   ],
+   "bbox_end": [
+    0.5629248780379504,
+    0.26229605889198127,
+    0.8129248780379504,
+    0.36229605889198124
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "FOLLOW US ONLINE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.26019909405211494,
+    0.13911265468801537,
+    0.5101990940521149,
+    0.23911265468801537
+   ],
+   "bbox_end": [
+    0.26019909405211494,
+    0.13911265468801537,
+    0.5101990940521149,
+    0.23911265468801537
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "EMERGENCY EXIT",
+   "t_appear": 3.289425059329968,
+   "t_disappear": 9.289425059329968,
+   "bbox_start": [
+    0.5941536950120889,
+    0.1,
+    0.894153695012089,
+    0.22
+   ],
+   "bbox_end": [
+    0.5941536950120889,
+    0.1,
+    0.894153695012089,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.589425059329968,
+     9.289425059329968
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "GATE 12",
+   "t_appear": 13.395507007837223,
+   "t_disappear": 19.395507007837224,
+   "bbox_start": [
+    0.5895917991540788,
+    0.1,
+    0.8895917991540787,
+    0.22
+   ],
+   "bbox_end": [
+    0.5895917991540788,
+    0.1,
+    0.8895917991540787,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     13.695507007837223,
+     19.395507007837224
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "trash can",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 5101,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 5101"
+}

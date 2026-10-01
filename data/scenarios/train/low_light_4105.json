@@ -1,0 +1,312 @@
+{
+ "name": "low_light_4105",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "clock",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.13710094433139863,
+    0.29230563960018247,
+    0.28710094433139866,
+    0.44230563960018243
+   ],
+   "bbox_end": [
+    0.13710094433139863,
+    0.29230563960018247,
+    0.28710094433139866,
+    0.44230563960018243
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.81,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "cup",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3269748500260765,
+    0.1889365497378584,
+    0.47697485002607654,
+    0.33893654973785836
+   ],
+   "bbox_end": [
+    0.3269748500260765,
+    0.1889365497378584,
+    0.47697485002607654,
+    0.33893654973785836
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.81,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.75041251747664,
+    0.2576491046059342,
+    0.90041251747664,
+    0.4076491046059342
+   ],
+   "bbox_end": [
+    0.75041251747664,
+    0.2576491046059342,
+    0.90041251747664,
+    0.4076491046059342
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.81,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.28215300330320314,
+    0.26534588061734854,
+    0.43215300330320316,
+    0.41534588061734856
+   ],
+   "bbox_end": [
+    0.28215300330320314,
+    0.26534588061734854,
+    0.43215300330320316,
+    0.41534588061734856
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.81,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "www.example.com",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "bbox_end": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.675,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "bbox_end": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.81,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 4.984048015667483,
+   "t_disappear": 10.984048015667483,
+   "bbox_start": [
+    0.434459569918507,
+    0.508,
+    0.49445956991850704,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.239459569918507,
+    0.31999999999999995,
+    0.689459569918507,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     6.484048015667483,
+     10.984048015667483
+    ]
+   ],
+   "detectability": 0.81,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 14.33144500832011,
+   "t_disappear": 20.33144500832011,
+   "bbox_start": [
+    0.557967833994732,
+    0.508,
+    0.6179678339947321,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.3629678339947321,
+    0.31999999999999995,
+    0.812967833994732,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     15.83144500832011,
+     20.33144500832011
+    ]
+   ],
+   "detectability": 0.81,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 22.354290520349593,
+   "t_disappear": 28.354290520349593,
+   "bbox_start": [
+    0.3799465047062307,
+    0.508,
+    0.43994650470623065,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.18494650470623067,
+    0.31999999999999995,
+    0.6349465047062307,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     23.854290520349593,
+     28.354290520349593
+    ]
+   ],
+   "detectability": 0.81,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "text",
+   "kind": "text",
+   "text": "ELEVATOR",
+   "t_appear": 13.538844798232383,
+   "t_disappear": 20.538844798232383,
+   "bbox_start": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "bbox_end": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     13.838844798232383,
+     19.538844798232383
+    ]
+   ],
+   "detectability": 0.675,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 18.483334454533903,
+   "t_disappear": 22.483334454533903,
+   "bbox_start": [
+    1.0,
+    0.375,
+    1.27,
+    0.825
+   ],
+   "bbox_end": [
+    -0.27,
+    0.375,
+    0.0,
+    0.825
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     18.983334454533903,
+     21.983334454533903
+    ]
+   ],
+   "detectability": 0.81,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 4105,
+ "lighting": "low",
+ "motion_blur": 0.3,
+ "clutter_fp_rate": 0.05,
+ "description": "low_light scenario, seed 4105"
+}

@@ -1,0 +1,92 @@
+{
+ "cacs_full": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.8208553791887125,
+  "cue_precision": 0.9408950617283951,
+  "audio_load_per_min": 8.62962962962963,
+  "duplicate_rate": 0.0015432098765432098,
+  "mean_critical_delay": 1.7745541029790657,
+  "recall_sd": 0.18221837962666834,
+  "audio_load_sd": 1.295237662966349
+ },
+ "no_novelty": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.7512235449735449,
+  "cue_precision": 0.5776334776334776,
+  "audio_load_per_min": 12.555555555555555,
+  "duplicate_rate": 0.3872107316551761,
+  "mean_critical_delay": 1.774873114050487,
+  "recall_sd": 0.17831385438345773,
+  "audio_load_sd": 2.5507200629442215
+ },
+ "no_proximity": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.2321979717813051,
+  "cue_precision": 0.6660493827160494,
+  "audio_load_per_min": 3.5925925925925926,
+  "duplicate_rate": 0.006172839506172839,
+  "mean_critical_delay": 0.5766288146482498,
+  "recall_sd": 0.19477467532527354,
+  "audio_load_sd": 2.121481998758472
+ },
+ "no_uncertainty": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.8208553791887125,
+  "cue_precision": 0.9408950617283951,
+  "audio_load_per_min": 8.62962962962963,
+  "duplicate_rate": 0.0015432098765432098,
+  "mean_critical_delay": 1.7710818807568436,
+  "recall_sd": 0.18221837962666834,
+  "audio_load_sd": 1.295237662966349
+ },
+ "no_temporal_memory": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.7460537918871252,
+  "cue_precision": 0.4849490273101384,
+  "audio_load_per_min": 14.981481481481481,
+  "duplicate_rate": 0.4869719015552349,
+  "mean_critical_delay": 1.7337069680925372,
+  "recall_sd": 0.1682218828712129,
+  "audio_load_sd": 2.8086555419561097
+ },
+ "no_relevance": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.7787588183421517,
+  "cue_precision": 0.9371913580246913,
+  "audio_load_per_min": 8.092592592592593,
+  "duplicate_rate": 0.0015432098765432098,
+  "mean_critical_delay": 2.074354857905881,
+  "recall_sd": 0.21676870538250023,
+  "audio_load_sd": 1.4753344695295936
+ },
+ "no_text_importance": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.8046626984126984,
+  "cue_precision": 0.6927469135802469,
+  "audio_load_per_min": 11.592592592592593,
+  "duplicate_rate": 0.005511463844797178,
+  "mean_critical_delay": 1.8658746602841796,
+  "recall_sd": 0.198971311850873,
+  "audio_load_sd": 1.9004728312099999
+ },
+ "no_scene_context": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.8414572310405644,
+  "cue_precision": 0.9404320987654321,
+  "audio_load_per_min": 8.851851851851851,
+  "duplicate_rate": 0.0015432098765432098,
+  "mean_critical_delay": 1.885601607326232,
+  "recall_sd": 0.18631940746527656,
+  "audio_load_sd": 1.3663604996812384
+ },
+ "keyword_text_model": {
+  "n_scenarios": 108,
+  "important_cue_recall": 0.8180114638447972,
+  "cue_precision": 0.9473765432098765,
+  "audio_load_per_min": 8.537037037037036,
+  "duplicate_rate": 0.0015432098765432098,
+  "mean_critical_delay": 1.7791785174211425,
+  "recall_sd": 0.18258741702418246,
+  "audio_load_sd": 1.294045665273619
+ }
+}

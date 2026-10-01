@@ -1,0 +1,312 @@
+{
+ "name": "hallway_103",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.39222370721888616,
+    0.30159646193508277,
+    0.5422237072188861,
+    0.45159646193508274
+   ],
+   "bbox_end": [
+    0.39222370721888616,
+    0.30159646193508277,
+    0.5422237072188861,
+    0.45159646193508274
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5668137666473424,
+    0.3693281468820582,
+    0.7168137666473424,
+    0.5193281468820582
+   ],
+   "bbox_end": [
+    0.5668137666473424,
+    0.3693281468820582,
+    0.7168137666473424,
+    0.5193281468820582
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "cup",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5407461724182216,
+    0.21140871578004944,
+    0.6907461724182217,
+    0.3614087157800494
+   ],
+   "bbox_end": [
+    0.5407461724182216,
+    0.21140871578004944,
+    0.6907461724182217,
+    0.3614087157800494
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.704112719047588,
+    0.09154116713396099,
+    0.854112719047588,
+    0.24154116713396098
+   ],
+   "bbox_end": [
+    0.704112719047588,
+    0.09154116713396099,
+    0.854112719047588,
+    0.24154116713396098
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "bbox_end": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "bbox_end": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 2.667458226902429,
+   "t_disappear": 8.66745822690243,
+   "bbox_start": [
+    0.33321774324443076,
+    0.508,
+    0.3932177432444308,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.13821774324443079,
+    0.31999999999999995,
+    0.5882177432444308,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     4.167458226902429,
+     8.66745822690243
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 13.514638238986578,
+   "t_disappear": 19.514638238986578,
+   "bbox_start": [
+    0.502157291151788,
+    0.508,
+    0.562157291151788,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.307157291151788,
+    0.31999999999999995,
+    0.757157291151788,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     15.014638238986578,
+     19.514638238986578
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 21.68933659726699,
+   "t_disappear": 27.68933659726699,
+   "bbox_start": [
+    0.5782808198031464,
+    0.508,
+    0.6382808198031464,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.38328081980314643,
+    0.31999999999999995,
+    0.8332808198031464,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     23.18933659726699,
+     27.68933659726699
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 204",
+   "t_appear": 17.418744905371412,
+   "t_disappear": 24.418744905371412,
+   "bbox_start": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "bbox_end": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     17.718744905371413,
+     23.418744905371412
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 19.936561752019625,
+   "t_disappear": 23.936561752019625,
+   "bbox_start": [
+    1.0,
+    0.375,
+    1.27,
+    0.825
+   ],
+   "bbox_end": [
+    -0.27,
+    0.375,
+    0.0,
+    0.825
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     20.436561752019625,
+     23.436561752019625
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 103,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "hallway scenario, seed 103"
+}

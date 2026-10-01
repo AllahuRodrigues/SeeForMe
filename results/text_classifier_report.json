@@ -1,0 +1,52 @@
+{
+ "n_train": 900,
+ "n_test": 300,
+ "cv_f1_mean": 0.9788440495695893,
+ "cv_f1_std": 0.014508260856383839,
+ "test_accuracy": 0.9866666666666667,
+ "test_f1": 0.9866666666666667,
+ "test_auc": 0.9990222222222223,
+ "unseen_accuracy": 1.0,
+ "unseen_examples": [
+  [
+   "EXIT 3",
+   0.956
+  ],
+  [
+   "R00M 218",
+   0.87
+  ],
+  [
+   "CAUT1ON",
+   0.866
+  ],
+  [
+   "STAIRS DOWN",
+   0.908
+  ],
+  [
+   "WOMENS RESTROOM",
+   0.92
+  ],
+  [
+   "FREE SAMPLES",
+   0.038
+  ],
+  [
+   "CONCERT TICKETS",
+   0.164
+  ],
+  [
+   "FOLLOW US",
+   0.175
+  ],
+  [
+   "BEST COFFEE",
+   0.051
+  ],
+  [
+   "JOIN US FRIDAY",
+   0.087
+  ]
+ ]
+}

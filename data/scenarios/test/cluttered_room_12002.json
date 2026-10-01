@@ -1,0 +1,462 @@
+{
+ "name": "cluttered_room_12002",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6781337185449717,
+    0.3440090676115027,
+    0.7795294892537502,
+    0.46554731578134334
+   ],
+   "bbox_end": [
+    0.6781337185449717,
+    0.3440090676115027,
+    0.7795294892537502,
+    0.46554731578134334
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.780000085240445,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "cell phone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.10306872017270302,
+    0.3750214371523973,
+    0.19678748089744313,
+    0.48061944992345995
+   ],
+   "bbox_end": [
+    0.10306872017270302,
+    0.3750214371523973,
+    0.19678748089744313,
+    0.48061944992345995
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9112387056127544,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "cell phone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.13509310484369316,
+    0.22738098828139652,
+    0.29476578942508325,
+    0.4018126237249469
+   ],
+   "bbox_end": [
+    0.13509310484369316,
+    0.22738098828139652,
+    0.29476578942508325,
+    0.4018126237249469
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6600901719962575,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "backpack",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.8373758043493217,
+    0.1716935717543738,
+    1.0323343750568892,
+    0.3712269175610896
+   ],
+   "bbox_end": [
+    0.8373758043493217,
+    0.1716935717543738,
+    1.0323343750568892,
+    0.3712269175610896
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8894096142514102,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "backpack",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7299002842321637,
+    0.44585650737952676,
+    0.822834837448687,
+    0.6180902694547425
+   ],
+   "bbox_end": [
+    0.7299002842321637,
+    0.44585650737952676,
+    0.822834837448687,
+    0.6180902694547425
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.7528545057214986,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6562045680659662,
+    0.5532294886489681,
+    0.7125608626804765,
+    0.7389582555631238
+   ],
+   "bbox_end": [
+    0.6562045680659662,
+    0.5532294886489681,
+    0.7125608626804765,
+    0.7389582555631238
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6667131186418593,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.30013524127452157,
+    0.12189087021196891,
+    0.36312735425525483,
+    0.28743281676292526
+   ],
+   "bbox_end": [
+    0.30013524127452157,
+    0.12189087021196891,
+    0.36312735425525483,
+    0.28743281676292526
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8626280187798598,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.12612347466286963,
+    0.22381557788924203,
+    0.1844527583557582,
+    0.357152369787071
+   ],
+   "bbox_end": [
+    0.12612347466286963,
+    0.22381557788924203,
+    0.1844527583557582,
+    0.357152369787071
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9024238465595449,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "cell phone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.11870211280886224,
+    0.29489929870962023,
+    0.1695783652060056,
+    0.4109900451390167
+   ],
+   "bbox_end": [
+    0.11870211280886224,
+    0.29489929870962023,
+    0.1695783652060056,
+    0.4109900451390167
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.7275455439649148,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.14466710527359913,
+    0.35494362517961675,
+    0.3412516641913741,
+    0.5519821477519045
+   ],
+   "bbox_end": [
+    0.14466710527359913,
+    0.35494362517961675,
+    0.3412516641913741,
+    0.5519821477519045
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6630984113834266,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "text",
+   "kind": "text",
+   "text": "BUY ONE GET ONE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2891879169058896,
+    0.07694573106080634,
+    0.5391879169058895,
+    0.17694573106080635
+   ],
+   "bbox_end": [
+    0.2891879169058896,
+    0.07694573106080634,
+    0.5391879169058895,
+    0.17694573106080635
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.08218718941818805,
+    0.0014270718140745097,
+    0.33218718941818803,
+    0.10142707181407451
+   ],
+   "bbox_end": [
+    0.08218718941818805,
+    0.0014270718140745097,
+    0.33218718941818803,
+    0.10142707181407451
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 13,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.1535659996237246,
+   "t_disappear": 6.153565999623725,
+   "bbox_start": [
+    0.36432570861100766,
+    0.508,
+    0.4243257086110077,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.19432570861100767,
+    0.39,
+    0.5943257086110076,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     2.353565999623725,
+     6.153565999623725
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 14,
+   "label": "suitcase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 7.40658588150583,
+   "t_disappear": 12.40658588150583,
+   "bbox_start": [
+    0.4630691428311716,
+    0.508,
+    0.5230691428311717,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.29306914283117164,
+    0.39,
+    0.6930691428311717,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     8.60658588150583,
+     12.40658588150583
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 15,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 14.221428255319513,
+   "t_disappear": 19.221428255319513,
+   "bbox_start": [
+    0.4855430461554613,
+    0.508,
+    0.5455430461554613,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.3155430461554613,
+    0.39,
+    0.7155430461554613,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     15.421428255319512,
+     19.221428255319513
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 16,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 21.670769396670348,
+   "t_disappear": 26.670769396670348,
+   "bbox_start": [
+    0.4448696137429735,
+    0.508,
+    0.5048696137429736,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.27486961374297353,
+    0.39,
+    0.6748696137429735,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     22.870769396670347,
+     26.670769396670348
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 17,
+   "label": "text",
+   "kind": "text",
+   "text": "RESTROOM",
+   "t_appear": 9.844042307240054,
+   "t_disappear": 15.844042307240054,
+   "bbox_start": [
+    0.4,
+    0.08,
+    0.7,
+    0.2
+   ],
+   "bbox_end": [
+    0.4,
+    0.08,
+    0.7,
+    0.2
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     10.144042307240055,
+     15.844042307240054
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 12002,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.15,
+ "description": "cluttered_room scenario, seed 12002"
+}

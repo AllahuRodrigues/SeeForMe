@@ -1,0 +1,322 @@
+{
+ "name": "street_11003",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "traffic light",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5,
+    0.05,
+    0.56,
+    0.2
+   ],
+   "bbox_end": [
+    0.5,
+    0.05,
+    0.56,
+    0.2
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.0,
+   "t_disappear": 4.489932470114237,
+   "bbox_start": [
+    1.0,
+    0.37500000000000006,
+    1.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    -0.21,
+    0.37500000000000006,
+    0.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     1.3,
+     3.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 5.475044916529054,
+   "t_disappear": 8.961473024389223,
+   "bbox_start": [
+    0,
+    0.37500000000000006,
+    0.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    0.79,
+    0.37500000000000006,
+    1.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     5.775044916529054,
+     7.475044916529054
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 13.458447195953507,
+   "t_disappear": 16.231384198000516,
+   "bbox_start": [
+    0,
+    0.37500000000000006,
+    0.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    0.79,
+    0.37500000000000006,
+    1.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     13.758447195953508,
+     15.458447195953507
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "car",
+   "kind": "object",
+   "text": null,
+   "t_appear": 20.120387832769342,
+   "t_disappear": 23.074199910681614,
+   "bbox_start": [
+    0,
+    0.37500000000000006,
+    0.21,
+    0.7250000000000001
+   ],
+   "bbox_end": [
+    0.79,
+    0.37500000000000006,
+    1.0,
+    0.7250000000000001
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     20.420387832769343,
+     22.120387832769342
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "STOP",
+   "t_appear": 12.686009367613797,
+   "t_disappear": 19.6860093676138,
+   "bbox_start": [
+    0.15,
+    0.15,
+    0.32,
+    0.32
+   ],
+   "bbox_end": [
+    0.15,
+    0.15,
+    0.32,
+    0.32
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     12.986009367613798,
+     18.6860093676138
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.8,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "bicycle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 22.27954038650538,
+   "t_disappear": 26.27954038650538,
+   "bbox_start": [
+    0.49408120672246403,
+    0.508,
+    0.5540812067224641,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.27408120672246405,
+    0.25,
+    0.774081206722464,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     22.77954038650538,
+     26.27954038650538
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.006254342395157587,
+    0.45,
+    0.056254342395157586,
+    0.62
+   ],
+   "bbox_end": [
+    0.006254342395157587,
+    0.45,
+    0.056254342395157586,
+    0.62
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.41667130726367313,
+    0.45,
+    0.4666713072636731,
+    0.62
+   ],
+   "bbox_end": [
+    0.41667130726367313,
+    0.45,
+    0.4666713072636731,
+    0.62
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "text",
+   "kind": "text",
+   "text": "JOIN THE CLUB",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.1,
+    0.95,
+    0.25
+   ],
+   "bbox_end": [
+    0.7,
+    0.1,
+    0.95,
+    0.25
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "pole",
+   "kind": "object",
+   "text": null,
+   "t_appear": 15.950969046921884,
+   "t_disappear": 20.950969046921884,
+   "bbox_start": [
+    0.43974189467343816,
+    0.49000000000000005,
+    0.4597418946734382,
+    0.6100000000000001
+   ],
+   "bbox_end": [
+    0.38974189467343817,
+    0.28,
+    0.5097418946734382,
+    1.0
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     17.450969046921884,
+     20.950969046921884
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 11003,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.08,
+ "description": "street scenario, seed 11003"
+}

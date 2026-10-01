@@ -1,0 +1,202 @@
+{
+ "name": "text_corridor_14002",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2849772219865353,
+    0.07511790145529926,
+    0.5349772219865353,
+    0.17511790145529926
+   ],
+   "bbox_end": [
+    0.2849772219865353,
+    0.07511790145529926,
+    0.5349772219865353,
+    0.17511790145529926
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.292355485591362,
+    0.24515454047543025,
+    0.5423554855913619,
+    0.34515454047543026
+   ],
+   "bbox_end": [
+    0.292355485591362,
+    0.24515454047543025,
+    0.5423554855913619,
+    0.34515454047543026
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "BUY ONE GET ONE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3184203237543666,
+    0.2644216495694282,
+    0.5684203237543666,
+    0.36442164956942824
+   ],
+   "bbox_end": [
+    0.3184203237543666,
+    0.2644216495694282,
+    0.5684203237543666,
+    0.36442164956942824
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "EMERGENCY EXIT",
+   "t_appear": 3.4443047086428127,
+   "t_disappear": 9.444304708642813,
+   "bbox_start": [
+    0.39586063816190836,
+    0.1,
+    0.6958606381619084,
+    0.22
+   ],
+   "bbox_end": [
+    0.39586063816190836,
+    0.1,
+    0.6958606381619084,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.7443047086428125,
+     9.444304708642813
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "DO NOT ENTER",
+   "t_appear": 13.454022439038402,
+   "t_disappear": 19.454022439038404,
+   "bbox_start": [
+    0.4319250303713597,
+    0.1,
+    0.7319250303713597,
+    0.22
+   ],
+   "bbox_end": [
+    0.4319250303713597,
+    0.1,
+    0.7319250303713597,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     13.754022439038403,
+     19.454022439038404
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 14002,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 14002"
+}

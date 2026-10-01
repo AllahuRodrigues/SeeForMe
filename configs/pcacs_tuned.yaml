@@ -1,0 +1,40 @@
+weights:
+  w_hazard: 1.4345838451670412
+  w_ttc: 0.42464710889918655
+  w_action: 1.0565202797294195
+  w_goal: 1.8148035791469657
+  w_novelty: 0.39904830565667465
+  w_uncert: 0.9047078367960077
+  w_text: 1.5153253597080112
+  lam_speech: 0.4840365373176261
+  lam_queue: 1.1321309592720592
+threshold_speak: 0.9189102379506626
+threshold_interrupt: 2.1414293827556574
+interrupt_margin: 0.5429629133852196
+critical_severity: 0.9
+critical_urgency: 0.6
+haptic_ttc: 1.5
+haptic_min_path: 0.6
+haptic_min_severity: 0.5
+haptic_after_speech_s: 3.0
+haptic_repeat_s: 1.0
+budget_capacity_s: 6.0
+budget_refill: 0.5963391537062852
+urgent_bypass: 0.573063215436029
+min_confidence: 0.35
+sure_confidence: 0.6
+ttc_react: 1.5
+ttc_horizon: 9.73126978643949
+reannounce_move_m: 3.0
+reannounce_tau_s: 10.0
+recent_block_s: 2.8446761393410203
+decision_interval: 0.5
+verbosity: balanced
+units: m
+use_ttc: true
+use_budget: true
+use_interrupt: true
+use_queue_cost: true
+use_haptic: true
+use_depth: true
+use_slots: true

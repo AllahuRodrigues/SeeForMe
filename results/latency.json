@@ -1,0 +1,64 @@
+{
+ "device": "mps",
+ "models": {
+  "yolo11n.pt": {
+   "detect": {
+    "mean_ms": 12.564,
+    "p95_ms": 15.746
+   },
+   "ocr": {
+    "mean_ms": 95.725,
+    "p95_ms": 129.481
+   },
+   "track": {
+    "mean_ms": 0.094,
+    "p95_ms": 0.144
+   },
+   "policy": {
+    "mean_ms": 0.012,
+    "p95_ms": 0.001
+   },
+   "end_to_end": {
+    "mean_ms": 25.087,
+    "p95_ms": 133.958
+   },
+   "fps_end_to_end": 39.85,
+   "n_tracks_last_frame": 9,
+   "n_cues": 1,
+   "cues": [
+    "possibly a bus, ahead, very close"
+   ],
+   "max_rss_mb": 1532.2
+  },
+  "yolo11s.pt": {
+   "detect": {
+    "mean_ms": 15.28,
+    "p95_ms": 24.682
+   },
+   "ocr": {
+    "mean_ms": 84.659,
+    "p95_ms": 128.484
+   },
+   "track": {
+    "mean_ms": 0.117,
+    "p95_ms": 0.19
+   },
+   "policy": {
+    "mean_ms": 0.003,
+    "p95_ms": 0.001
+   },
+   "end_to_end": {
+    "mean_ms": 26.259,
+    "p95_ms": 124.094
+   },
+   "fps_end_to_end": 38.07,
+   "n_tracks_last_frame": 13,
+   "n_cues": 2,
+   "cues": [
+    "bus, ahead, very close",
+    "person, ahead, very close"
+   ],
+   "max_rss_mb": 1614.3
+  }
+ }
+}

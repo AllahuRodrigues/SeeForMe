@@ -1,0 +1,362 @@
+{
+ "name": "office_1103",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "clock",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5591736659655708,
+    0.343095721558985,
+    0.6957997781306121,
+    0.4264734503901523
+   ],
+   "bbox_end": [
+    0.5591736659655708,
+    0.343095721558985,
+    0.6957997781306121,
+    0.4264734503901523
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6794197063289483,
+    0.07144293181376393,
+    0.8502986219424101,
+    0.19230614840180882
+   ],
+   "bbox_end": [
+    0.6794197063289483,
+    0.07144293181376393,
+    0.8502986219424101,
+    0.19230614840180882
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5338810126794662,
+    0.4855276091036521,
+    0.6629441666449809,
+    0.6268622408765017
+   ],
+   "bbox_end": [
+    0.5338810126794662,
+    0.4855276091036521,
+    0.6629441666449809,
+    0.6268622408765017
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "cup",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7662474453570456,
+    0.21906779011680744,
+    0.8809982871352775,
+    0.3349461117990772
+   ],
+   "bbox_end": [
+    0.7662474453570456,
+    0.21906779011680744,
+    0.8809982871352775,
+    0.3349461117990772
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "clock",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.44164132052124483,
+    0.4600508835482946,
+    0.5804150044772283,
+    0.5623451047699882
+   ],
+   "bbox_end": [
+    0.44164132052124483,
+    0.4600508835482946,
+    0.5804150044772283,
+    0.5623451047699882
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3663441464192807,
+    0.046576883185576845,
+    0.4834719957925958,
+    0.10761454955933986
+   ],
+   "bbox_end": [
+    0.3663441464192807,
+    0.046576883185576845,
+    0.4834719957925958,
+    0.10761454955933986
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "mouse",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5749989484130303,
+    0.24850232741317302,
+    0.6383591051827837,
+    0.4088587187859881
+   ],
+   "bbox_end": [
+    0.5749989484130303,
+    0.24850232741317302,
+    0.6383591051827837,
+    0.4088587187859881
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "text": "FOLLOW US ONLINE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "bbox_end": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.0,
+   "t_disappear": 7.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     2.0,
+     7.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "t_appear": 19.59519048319376,
+   "t_disappear": 27.59519048319376,
+   "bbox_start": [
+    0.45,
+    0.47500000000000003,
+    0.55,
+    0.625
+   ],
+   "bbox_end": [
+    0.2,
+    0.050000000000000044,
+    0.8,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     21.59519048319376,
+     27.59519048319376
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 204",
+   "t_appear": 20.59519048319376,
+   "t_disappear": 27.59519048319376,
+   "bbox_start": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "bbox_end": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     20.895190483193762,
+     26.59519048319376
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 8.0,
+   "t_disappear": 13.0,
+   "bbox_start": [
+    0.6372580658707172,
+    0.508,
+    0.6972580658707173,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.49225806587071724,
+    0.46,
+    0.8422580658707173,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     9.5,
+     13.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 13,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 18.416574215169316,
+   "t_disappear": 23.416574215169316,
+   "bbox_start": [
+    0.31339150312273434,
+    0.508,
+    0.3733915031227344,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.16839150312273438,
+    0.46,
+    0.5183915031227344,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     19.916574215169316,
+     23.416574215169316
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 1103,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "office scenario, seed 1103"
+}

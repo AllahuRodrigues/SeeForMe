@@ -1,0 +1,282 @@
+{
+ "name": "hallway_105",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "poster",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.3118389851267778,
+    0.3267532809670991,
+    0.4618389851267778,
+    0.4767532809670991
+   ],
+   "bbox_end": [
+    0.3118389851267778,
+    0.3267532809670991,
+    0.4618389851267778,
+    0.4767532809670991
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "cup",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.28416406954100404,
+    0.3189126852874909,
+    0.43416406954100406,
+    0.46891268528749086
+   ],
+   "bbox_end": [
+    0.28416406954100404,
+    0.3189126852874909,
+    0.43416406954100406,
+    0.46891268528749086
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "clock",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2695503366950259,
+    0.347434527217642,
+    0.41955033669502595,
+    0.49743452721764203
+   ],
+   "bbox_end": [
+    0.2695503366950259,
+    0.347434527217642,
+    0.41955033669502595,
+    0.49743452721764203
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6134211034848062,
+    0.10164849597958561,
+    0.7634211034848062,
+    0.2516484959795856
+   ],
+   "bbox_end": [
+    0.6134211034848062,
+    0.10164849597958561,
+    0.7634211034848062,
+    0.2516484959795856
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "HAPPY HOUR",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "bbox_end": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "bbox_end": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 4.793011520110793,
+   "t_disappear": 10.793011520110792,
+   "bbox_start": [
+    0.5046756325359547,
+    0.508,
+    0.5646756325359548,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.30967563253595476,
+    0.31999999999999995,
+    0.7596756325359547,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     6.293011520110793,
+     10.793011520110792
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "cone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 15.113655495260055,
+   "t_disappear": 21.113655495260055,
+   "bbox_start": [
+    0.5843374246475512,
+    0.508,
+    0.6443374246475513,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.3893374246475513,
+    0.31999999999999995,
+    0.8393374246475512,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     16.613655495260055,
+     21.113655495260055
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "text": "CAUTION WET FLOOR",
+   "t_appear": 11.181473194797746,
+   "t_disappear": 18.181473194797746,
+   "bbox_start": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "bbox_end": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     11.481473194797747,
+     17.181473194797746
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 16.62834976543341,
+   "t_disappear": 20.62834976543341,
+   "bbox_start": [
+    1.0,
+    0.375,
+    1.27,
+    0.825
+   ],
+   "bbox_end": [
+    -0.27,
+    0.375,
+    0.0,
+    0.825
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     17.12834976543341,
+     20.12834976543341
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 105,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "hallway scenario, seed 105"
+}

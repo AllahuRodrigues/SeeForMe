@@ -1,0 +1,287 @@
+{
+ "name": "office_1105",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.07450577679514857,
+    0.2644526918038426,
+    0.13510424392466933,
+    0.40271405163325036
+   ],
+   "bbox_end": [
+    0.07450577679514857,
+    0.2644526918038426,
+    0.13510424392466933,
+    0.40271405163325036
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5626735391463781,
+    0.2521216995543653,
+    0.674596222937228,
+    0.4007457597645922
+   ],
+   "bbox_end": [
+    0.5626735391463781,
+    0.2521216995543653,
+    0.674596222937228,
+    0.4007457597645922
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.15314156639858567,
+    0.4515186367450271,
+    0.2504308583265795,
+    0.5377804879927542
+   ],
+   "bbox_end": [
+    0.15314156639858567,
+    0.4515186367450271,
+    0.2504308583265795,
+    0.5377804879927542
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "mouse",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.539858074736152,
+    0.09191739146087274,
+    0.685341547717967,
+    0.20666574466595528
+   ],
+   "bbox_end": [
+    0.539858074736152,
+    0.09191739146087274,
+    0.685341547717967,
+    0.20666574466595528
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "FOLLOW US ONLINE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "bbox_end": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.0,
+   "t_disappear": 7.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     2.0,
+     7.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "t_appear": 13.351115950654137,
+   "t_disappear": 21.351115950654137,
+   "bbox_start": [
+    0.45,
+    0.47500000000000003,
+    0.55,
+    0.625
+   ],
+   "bbox_end": [
+    0.2,
+    0.050000000000000044,
+    0.8,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     15.351115950654137,
+     21.351115950654137
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "text": "RESTROOM",
+   "t_appear": 14.351115950654137,
+   "t_disappear": 21.351115950654137,
+   "bbox_start": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "bbox_end": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     14.651115950654138,
+     20.351115950654137
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "box",
+   "kind": "object",
+   "text": null,
+   "t_appear": 8.0,
+   "t_disappear": 13.0,
+   "bbox_start": [
+    0.30621387443519665,
+    0.508,
+    0.3662138744351966,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.16121387443519664,
+    0.46,
+    0.5112138744351966,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     9.5,
+     13.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "trash can",
+   "kind": "object",
+   "text": null,
+   "t_appear": 16.157807654839914,
+   "t_disappear": 21.157807654839914,
+   "bbox_start": [
+    0.2949001869387943,
+    0.508,
+    0.3549001869387942,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.14990018693879426,
+    0.46,
+    0.49990018693879423,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     17.657807654839914,
+     21.157807654839914
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 1105,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "office scenario, seed 1105"
+}

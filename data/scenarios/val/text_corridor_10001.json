@@ -1,0 +1,227 @@
+{
+ "name": "text_corridor_10001",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.043792296032098915,
+    0.1378729990324951,
+    0.2937922960320989,
+    0.23787299903249512
+   ],
+   "bbox_end": [
+    0.043792296032098915,
+    0.1378729990324951,
+    0.2937922960320989,
+    0.23787299903249512
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2890913214588536,
+    0.17583744581899485,
+    0.5390913214588535,
+    0.27583744581899483
+   ],
+   "bbox_end": [
+    0.2890913214588536,
+    0.17583744581899485,
+    0.5390913214588535,
+    0.27583744581899483
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.09371912214484976,
+    0.025916821209015298,
+    0.3437191221448498,
+    0.12591682120901532
+   ],
+   "bbox_end": [
+    0.09371912214484976,
+    0.025916821209015298,
+    0.3437191221448498,
+    0.12591682120901532
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "FOLLOW US ONLINE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2137470492819396,
+    0.11039333137349618,
+    0.4637470492819396,
+    0.2103933313734962
+   ],
+   "bbox_end": [
+    0.2137470492819396,
+    0.11039333137349618,
+    0.4637470492819396,
+    0.2103933313734962
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "RESTROOM",
+   "t_appear": 3.516538007021137,
+   "t_disappear": 9.516538007021136,
+   "bbox_start": [
+    0.4128884640930962,
+    0.1,
+    0.7128884640930961,
+    0.22
+   ],
+   "bbox_end": [
+    0.4128884640930962,
+    0.1,
+    0.7128884640930961,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.816538007021137,
+     9.516538007021136
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "FIRE EXIT",
+   "t_appear": 13.280869163249172,
+   "t_disappear": 19.28086916324917,
+   "bbox_start": [
+    0.48829624138873073,
+    0.1,
+    0.7882962413887307,
+    0.22
+   ],
+   "bbox_end": [
+    0.48829624138873073,
+    0.1,
+    0.7882962413887307,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     13.580869163249172,
+     19.28086916324917
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 10001,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 10001"
+}

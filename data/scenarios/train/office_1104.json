@@ -1,0 +1,337 @@
+{
+ "name": "office_1104",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.25432551430980965,
+    0.16500770339503934,
+    0.41344530474513597,
+    0.26316212841178727
+   ],
+   "bbox_end": [
+    0.25432551430980965,
+    0.16500770339503934,
+    0.41344530474513597,
+    0.26316212841178727
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.8230320812070667,
+    0.19242575488433522,
+    0.9219454895246822,
+    0.2746378479935463
+   ],
+   "bbox_end": [
+    0.8230320812070667,
+    0.19242575488433522,
+    0.9219454895246822,
+    0.2746378479935463
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.17965358091814979,
+    0.16303755451425517,
+    0.30638064077691995,
+    0.33218628309312626
+   ],
+   "bbox_end": [
+    0.17965358091814979,
+    0.16303755451425517,
+    0.30638064077691995,
+    0.33218628309312626
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.05052590954763332,
+    0.1477275656329955,
+    0.19686566741185563,
+    0.21886506788492527
+   ],
+   "bbox_end": [
+    0.05052590954763332,
+    0.1477275656329955,
+    0.19686566741185563,
+    0.21886506788492527
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2306720662276028,
+    0.0740900414003462,
+    0.3593605054924024,
+    0.2020766995152879
+   ],
+   "bbox_end": [
+    0.2306720662276028,
+    0.0740900414003462,
+    0.3593605054924024,
+    0.2020766995152879
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2803012803068654,
+    0.38661590972290866,
+    0.4539352684331902,
+    0.4637926797090901
+   ],
+   "bbox_end": [
+    0.2803012803068654,
+    0.38661590972290866,
+    0.4539352684331902,
+    0.4637926797090901
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.88,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "bbox_end": [
+    0.1,
+    0.05,
+    0.4,
+    0.15
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.0,
+   "t_disappear": 7.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     2.0,
+     7.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "door",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.473729654951457,
+   "t_disappear": 20.473729654951455,
+   "bbox_start": [
+    0.45,
+    0.47500000000000003,
+    0.55,
+    0.625
+   ],
+   "bbox_end": [
+    0.2,
+    0.050000000000000044,
+    0.8,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     14.473729654951457,
+     20.473729654951455
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 204",
+   "t_appear": 13.473729654951457,
+   "t_disappear": 20.473729654951455,
+   "bbox_start": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "bbox_end": [
+    0.55,
+    0.2,
+    0.8,
+    0.3
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     13.773729654951458,
+     19.473729654951455
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "trash can",
+   "kind": "object",
+   "text": null,
+   "t_appear": 8.0,
+   "t_disappear": 13.0,
+   "bbox_start": [
+    0.33983817256604765,
+    0.508,
+    0.3998381725660476,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.19483817256604763,
+    0.46,
+    0.5448381725660476,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     9.5,
+     13.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 16.092447657981644,
+   "t_disappear": 21.092447657981644,
+   "bbox_start": [
+    0.444093875740172,
+    0.508,
+    0.5040938757401721,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.29909387574017204,
+    0.46,
+    0.6490938757401721,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     17.592447657981644,
+     21.092447657981644
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 1104,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "office scenario, seed 1104"
+}

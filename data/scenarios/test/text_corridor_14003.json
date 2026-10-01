@@ -1,0 +1,227 @@
+{
+ "name": "text_corridor_14003",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "SALE 50% OFF",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.1614428958915673,
+    0.06968488189825219,
+    0.4114428958915673,
+    0.1696848818982522
+   ],
+   "bbox_end": [
+    0.1614428958915673,
+    0.06968488189825219,
+    0.4114428958915673,
+    0.1696848818982522
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "ART SHOW FRIDAY",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.09119356476534793,
+    0.2503558573002392,
+    0.3411935647653479,
+    0.3503558573002392
+   ],
+   "bbox_end": [
+    0.09119356476534793,
+    0.2503558573002392,
+    0.3411935647653479,
+    0.3503558573002392
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2556831217396024,
+    0.060316355078500375,
+    0.5056831217396024,
+    0.1603163550785004
+   ],
+   "bbox_end": [
+    0.2556831217396024,
+    0.060316355078500375,
+    0.5056831217396024,
+    0.1603163550785004
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4139383586835818,
+    0.24136186263478668,
+    0.6639383586835819,
+    0.3413618626347867
+   ],
+   "bbox_end": [
+    0.4139383586835818,
+    0.24136186263478668,
+    0.6639383586835819,
+    0.3413618626347867
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 117B",
+   "t_appear": 3.4806350195947235,
+   "t_disappear": 9.480635019594724,
+   "bbox_start": [
+    0.35458014682216804,
+    0.1,
+    0.654580146822168,
+    0.22
+   ],
+   "bbox_end": [
+    0.35458014682216804,
+    0.1,
+    0.654580146822168,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.7806350195947234,
+     9.480635019594724
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "DO NOT ENTER",
+   "t_appear": 13.849100714114899,
+   "t_disappear": 19.849100714114897,
+   "bbox_start": [
+    0.31534572516895587,
+    0.1,
+    0.6153457251689558,
+    0.22
+   ],
+   "bbox_end": [
+    0.31534572516895587,
+    0.1,
+    0.6153457251689558,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     14.1491007141149,
+     19.849100714114897
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "bench",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 14003,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 14003"
+}

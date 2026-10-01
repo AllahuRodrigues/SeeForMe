@@ -1,0 +1,262 @@
+{
+ "name": "hallway_102",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "cell phone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5572200891522614,
+    0.1753834713950011,
+    0.7072200891522614,
+    0.3253834713950011
+   ],
+   "bbox_end": [
+    0.5572200891522614,
+    0.1753834713950011,
+    0.7072200891522614,
+    0.3253834713950011
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5843802105314058,
+    0.262741372465115,
+    0.7343802105314058,
+    0.412741372465115
+   ],
+   "bbox_end": [
+    0.5843802105314058,
+    0.262741372465115,
+    0.7343802105314058,
+    0.412741372465115
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "bbox_end": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "bbox_end": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 3.8524929008434032,
+   "t_disappear": 9.852492900843403,
+   "bbox_start": [
+    0.5372896963286062,
+    0.508,
+    0.5972896963286063,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.3422896963286063,
+    0.31999999999999995,
+    0.7922896963286062,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     5.352492900843403,
+     9.852492900843403
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 13.024447491511431,
+   "t_disappear": 19.02444749151143,
+   "bbox_start": [
+    0.5405933491681273,
+    0.508,
+    0.6005933491681273,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.34559334916812734,
+    0.31999999999999995,
+    0.7955933491681273,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     14.524447491511431,
+     19.02444749151143
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "suitcase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 21.53292733827267,
+   "t_disappear": 27.53292733827267,
+   "bbox_start": [
+    0.47302918432961993,
+    0.508,
+    0.53302918432962,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.27802918432962,
+    0.31999999999999995,
+    0.7280291843296199,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     23.03292733827267,
+     27.53292733827267
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "text": "CAUTION WET FLOOR",
+   "t_appear": 8.740102020330793,
+   "t_disappear": 15.740102020330793,
+   "bbox_start": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "bbox_end": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     9.040102020330794,
+     14.740102020330793
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 16.57703392901702,
+   "t_disappear": 20.57703392901702,
+   "bbox_start": [
+    0,
+    0.375,
+    0.27,
+    0.825
+   ],
+   "bbox_end": [
+    0.73,
+    0.375,
+    1.0,
+    0.825
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     17.07703392901702,
+     20.07703392901702
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 102,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "hallway scenario, seed 102"
+}

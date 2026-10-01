@@ -1,0 +1,53 @@
+{
+ "device": "mps",
+ "models": {
+  "yolo11n.pt": {
+   "detect": {
+    "mean_ms": 18.41,
+    "p95_ms": 14.53
+   },
+   "ocr": {
+    "mean_ms": 0.0,
+    "p95_ms": 0.0
+   },
+   "track": {
+    "mean_ms": 0.0,
+    "p95_ms": 0.0
+   },
+   "policy": {
+    "mean_ms": 0.0,
+    "p95_ms": 0.0
+   },
+   "end_to_end": {
+    "mean_ms": 19.18,
+    "p95_ms": 15.18
+   },
+   "fps_end_to_end": 52.14,
+   "max_rss_mb": 781.4
+  },
+  "yolo11s.pt": {
+   "detect": {
+    "mean_ms": 17.96,
+    "p95_ms": 21.14
+   },
+   "ocr": {
+    "mean_ms": 0.0,
+    "p95_ms": 0.0
+   },
+   "track": {
+    "mean_ms": 0.0,
+    "p95_ms": 0.0
+   },
+   "policy": {
+    "mean_ms": 0.0,
+    "p95_ms": 0.0
+   },
+   "end_to_end": {
+    "mean_ms": 18.44,
+    "p95_ms": 21.5
+   },
+   "fps_end_to_end": 54.2,
+   "max_rss_mb": 912.8
+  }
+ }
+}

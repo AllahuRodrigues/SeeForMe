@@ -1,0 +1,202 @@
+{
+ "name": "text_corridor_5105",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "ART SHOW FRIDAY",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4427729819963694,
+    0.13955966566359887,
+    0.6927729819963694,
+    0.23955966566359888
+   ],
+   "bbox_end": [
+    0.4427729819963694,
+    0.13955966566359887,
+    0.6927729819963694,
+    0.23955966566359888
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "BUY ONE GET ONE",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.1454423052797857,
+    0.06655555758525597,
+    0.3954423052797857,
+    0.16655555758525598
+   ],
+   "bbox_end": [
+    0.1454423052797857,
+    0.06655555758525597,
+    0.3954423052797857,
+    0.16655555758525598
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "SALE 50% OFF",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.49385493705036987,
+    0.20984694071349438,
+    0.7438549370503699,
+    0.3098469407134944
+   ],
+   "bbox_end": [
+    0.49385493705036987,
+    0.20984694071349438,
+    0.7438549370503699,
+    0.3098469407134944
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "PUSH",
+   "t_appear": 2.922997537770291,
+   "t_disappear": 8.922997537770291,
+   "bbox_start": [
+    0.39012351538889034,
+    0.1,
+    0.6901235153888903,
+    0.22
+   ],
+   "bbox_end": [
+    0.39012351538889034,
+    0.1,
+    0.6901235153888903,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.222997537770291,
+     8.922997537770291
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "PULL",
+   "t_appear": 12.323407487627978,
+   "t_disappear": 18.32340748762798,
+   "bbox_start": [
+    0.5402343738638079,
+    0.1,
+    0.8402343738638078,
+    0.22
+   ],
+   "bbox_end": [
+    0.5402343738638079,
+    0.1,
+    0.8402343738638078,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     12.62340748762798,
+     18.32340748762798
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "box",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 5105,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 5105"
+}

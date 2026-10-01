@@ -1,0 +1,48 @@
+tracker:
+  iou_threshold: 0.3
+  max_age: 8
+  n_init: 2
+  conf_ema: 0.6
+  text_similarity: 0.6
+cacs:
+  weights:
+    alpha: 0.050427022284334266
+    beta: 0.22661722597798972
+    gamma: 1.588290315942615
+    delta: 1.5539950748796696
+    eta: 1.8004268554717129
+    lam: 0.7672533773957105
+  threshold: 2.7791000360052447
+  min_confidence: 0.35
+  sure_confidence: 0.6
+  duplicate_tau: 6
+  label_duplicate_tau: 4.0
+  move_reset: 0.25
+  approach_boost: 0.5
+  decision_interval: 0.5
+  max_cues_per_decision: 1
+  use_novelty: true
+  use_proximity: true
+  use_uncertainty: true
+  use_temporal_memory: true
+  use_relevance: true
+  use_text: true
+  use_scene_context: true
+baseline:
+  confidence_threshold: 0.5
+  cooldown: 5.0
+  decision_interval: 0.5
+  max_cues_per_decision: 1
+speech:
+  min_gap: 1.2
+  seconds_per_word: 0.35
+perception:
+  yolo_model: yolo11n.pt
+  yolo_conf: 0.25
+  yolo_imgsz: 640
+  device: auto
+  ocr_every_n_frames: 8
+  ocr_min_conf: 0.3
+  ocr_languages:
+  - en
+  frame_width: 640

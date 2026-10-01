@@ -1,0 +1,287 @@
+{
+ "name": "hallway_9005",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "tv",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.37815904699234265,
+    0.07119065594307339,
+    0.5281590469923426,
+    0.22119065594307338
+   ],
+   "bbox_end": [
+    0.37815904699234265,
+    0.07119065594307339,
+    0.5281590469923426,
+    0.22119065594307338
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4493399293173184,
+    0.1365289886768355,
+    0.5993399293173184,
+    0.2865289886768355
+   ],
+   "bbox_end": [
+    0.4493399293173184,
+    0.1365289886768355,
+    0.5993399293173184,
+    0.2865289886768355
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "cup",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.09479416840222839,
+    0.38455694765856346,
+    0.2447941684022284,
+    0.5345569476585634
+   ],
+   "bbox_end": [
+    0.09479416840222839,
+    0.38455694765856346,
+    0.2447941684022284,
+    0.5345569476585634
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "JOIN THE CLUB",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "bbox_end": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "bbox_end": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 3.9960119861696244,
+   "t_disappear": 9.996011986169623,
+   "bbox_start": [
+    0.47325421342271734,
+    0.508,
+    0.5332542134227174,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.2782542134227174,
+    0.31999999999999995,
+    0.7282542134227173,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     5.496011986169624,
+     9.996011986169623
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "suitcase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 14.259970735587434,
+   "t_disappear": 20.259970735587434,
+   "bbox_start": [
+    0.4903750914210435,
+    0.508,
+    0.5503750914210436,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.29537509142104357,
+    0.31999999999999995,
+    0.7453750914210435,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     15.759970735587434,
+     20.259970735587434
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "suitcase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 23.005969832390456,
+   "t_disappear": 29.005969832390456,
+   "bbox_start": [
+    0.4728048346876844,
+    0.508,
+    0.5328048346876845,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.27780483468768447,
+    0.31999999999999995,
+    0.7278048346876844,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     24.505969832390456,
+     29.005969832390456
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "text": "PUSH",
+   "t_appear": 16.616992309843376,
+   "t_disappear": 23.616992309843376,
+   "bbox_start": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "bbox_end": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     16.916992309843376,
+     22.616992309843376
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 22.93802741548682,
+   "t_disappear": 26.93802741548682,
+   "bbox_start": [
+    0,
+    0.375,
+    0.27,
+    0.825
+   ],
+   "bbox_end": [
+    0.73,
+    0.375,
+    1.0,
+    0.825
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     23.43802741548682,
+     26.43802741548682
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 9005,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "hallway scenario, seed 9005"
+}

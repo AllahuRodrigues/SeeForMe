@@ -1,0 +1,282 @@
+{
+ "name": "text_corridor_10000",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6329037378243328,
+    0.2902276072666453,
+    0.8829037378243328,
+    0.3902276072666453
+   ],
+   "bbox_end": [
+    0.6329037378243328,
+    0.2902276072666453,
+    0.8829037378243328,
+    0.3902276072666453
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "SALE 50% OFF",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.48309658306632214,
+    0.20281152260538166,
+    0.7330965830663221,
+    0.3028115226053817
+   ],
+   "bbox_end": [
+    0.48309658306632214,
+    0.20281152260538166,
+    0.7330965830663221,
+    0.3028115226053817
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "SALE 50% OFF",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.43958432085258436,
+    0.09304327686969407,
+    0.6895843208525844,
+    0.19304327686969408
+   ],
+   "bbox_end": [
+    0.43958432085258436,
+    0.09304327686969407,
+    0.6895843208525844,
+    0.19304327686969408
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "HAPPY HOUR",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.648228467653055,
+    0.0691822212066519,
+    0.898228467653055,
+    0.1691822212066519
+   ],
+   "bbox_end": [
+    0.648228467653055,
+    0.0691822212066519,
+    0.898228467653055,
+    0.1691822212066519
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6812367818447972,
+    0.2101536613483621,
+    0.9312367818447972,
+    0.3101536613483621
+   ],
+   "bbox_end": [
+    0.6812367818447972,
+    0.2101536613483621,
+    0.9312367818447972,
+    0.3101536613483621
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "GATE 12",
+   "t_appear": 3.1402543839117762,
+   "t_disappear": 9.140254383911776,
+   "bbox_start": [
+    0.30178613853550584,
+    0.1,
+    0.6017861385355059,
+    0.22
+   ],
+   "bbox_end": [
+    0.30178613853550584,
+    0.1,
+    0.6017861385355059,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     3.440254383911776,
+     9.140254383911776
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "PUSH",
+   "t_appear": 12.366639471273956,
+   "t_disappear": 18.366639471273956,
+   "bbox_start": [
+    0.5263836641772468,
+    0.1,
+    0.8263836641772468,
+    0.22
+   ],
+   "bbox_end": [
+    0.5263836641772468,
+    0.1,
+    0.8263836641772468,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     12.666639471273957,
+     18.366639471273956
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "text": "EXIT",
+   "t_appear": 21.266674641933896,
+   "t_disappear": 27.266674641933896,
+   "bbox_start": [
+    0.39851465504086075,
+    0.1,
+    0.6985146550408607,
+    0.22
+   ],
+   "bbox_end": [
+    0.39851465504086075,
+    0.1,
+    0.6985146550408607,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     21.566674641933897,
+     27.266674641933896
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 10000,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 10000"
+}

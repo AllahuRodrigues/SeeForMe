@@ -1,0 +1,282 @@
+{
+ "name": "text_corridor_14001",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2760197899266237,
+    0.08187536584505252,
+    0.5260197899266237,
+    0.18187536584505254
+   ],
+   "bbox_end": [
+    0.2760197899266237,
+    0.08187536584505252,
+    0.5260197899266237,
+    0.18187536584505254
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "text",
+   "kind": "text",
+   "text": "www.example.com",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6156040529583461,
+    0.09759481407700933,
+    0.8656040529583461,
+    0.19759481407700935
+   ],
+   "bbox_end": [
+    0.6156040529583461,
+    0.09759481407700933,
+    0.8656040529583461,
+    0.19759481407700935
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "www.example.com",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.0461501024952988,
+    0.11524069135866141,
+    0.29615010249529883,
+    0.21524069135866142
+   ],
+   "bbox_end": [
+    0.0461501024952988,
+    0.11524069135866141,
+    0.29615010249529883,
+    0.21524069135866142
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.07436276745285189,
+    0.2907003583807177,
+    0.32436276745285186,
+    0.3907003583807177
+   ],
+   "bbox_end": [
+    0.07436276745285189,
+    0.2907003583807177,
+    0.32436276745285186,
+    0.3907003583807177
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "WELCOME",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4111262852263295,
+    0.02781935677254201,
+    0.6611262852263295,
+    0.12781935677254203
+   ],
+   "bbox_end": [
+    0.4111262852263295,
+    0.02781935677254201,
+    0.6611262852263295,
+    0.12781935677254203
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "text",
+   "kind": "text",
+   "text": "STOP",
+   "t_appear": 2.494941079093738,
+   "t_disappear": 8.494941079093739,
+   "bbox_start": [
+    0.44602863442131296,
+    0.1,
+    0.746028634421313,
+    0.22
+   ],
+   "bbox_end": [
+    0.44602863442131296,
+    0.1,
+    0.746028634421313,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     2.794941079093738,
+     8.494941079093739
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "text",
+   "kind": "text",
+   "text": "EXIT",
+   "t_appear": 11.402637614545174,
+   "t_disappear": 17.402637614545174,
+   "bbox_start": [
+    0.46590662858387555,
+    0.1,
+    0.7659066285838756,
+    0.22
+   ],
+   "bbox_end": [
+    0.46590662858387555,
+    0.1,
+    0.7659066285838756,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     11.702637614545175,
+     17.402637614545174
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "text",
+   "kind": "text",
+   "text": "ROOM 204",
+   "t_appear": 22.576353165462518,
+   "t_disappear": 28.576353165462518,
+   "bbox_start": [
+    0.319302785565342,
+    0.1,
+    0.6193027855653419,
+    0.22
+   ],
+   "bbox_end": [
+    0.319302785565342,
+    0.1,
+    0.6193027855653419,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     22.87635316546252,
+     28.576353165462518
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "chair",
+   "kind": "object",
+   "text": null,
+   "t_appear": 12.0,
+   "t_disappear": 18.0,
+   "bbox_start": [
+    0.47,
+    0.508,
+    0.53,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.275,
+    0.31999999999999995,
+    0.725,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     13.5,
+     18.0
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "bbox_end": [
+    0.2,
+    0.42,
+    0.26,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 14001,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "text_corridor scenario, seed 14001"
+}

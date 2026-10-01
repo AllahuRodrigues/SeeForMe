@@ -1,0 +1,287 @@
+{
+ "name": "hallway_9004",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4026732052953536,
+    0.3444824785329685,
+    0.5526732052953536,
+    0.49448247853296845
+   ],
+   "bbox_end": [
+    0.4026732052953536,
+    0.3444824785329685,
+    0.5526732052953536,
+    0.49448247853296845
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "poster",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4178256878502079,
+    0.07811542158037021,
+    0.5678256878502079,
+    0.2281154215803702
+   ],
+   "bbox_end": [
+    0.4178256878502079,
+    0.07811542158037021,
+    0.5678256878502079,
+    0.2281154215803702
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6618099642118058,
+    0.05828154676396455,
+    0.8118099642118058,
+    0.20828154676396454
+   ],
+   "bbox_end": [
+    0.6618099642118058,
+    0.05828154676396455,
+    0.8118099642118058,
+    0.20828154676396454
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "HAPPY HOUR",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "bbox_end": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "bbox_end": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 2.9551925477397365,
+   "t_disappear": 8.955192547739736,
+   "bbox_start": [
+    0.35327577098379204,
+    0.508,
+    0.413275770983792,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.158275770983792,
+    0.31999999999999995,
+    0.608275770983792,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     4.4551925477397365,
+     8.955192547739736
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 9.958668883921078,
+   "t_disappear": 15.958668883921078,
+   "bbox_start": [
+    0.5601115619317966,
+    0.508,
+    0.6201115619317966,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.3651115619317966,
+    0.31999999999999995,
+    0.8151115619317966,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     11.458668883921078,
+     15.958668883921078
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 17.08533437196887,
+   "t_disappear": 23.08533437196887,
+   "bbox_start": [
+    0.4499249036740477,
+    0.508,
+    0.5099249036740477,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.25492490367404774,
+    0.31999999999999995,
+    0.7049249036740477,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     18.58533437196887,
+     23.08533437196887
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "text": "DO NOT ENTER",
+   "t_appear": 18.554421991358392,
+   "t_disappear": 25.554421991358392,
+   "bbox_start": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "bbox_end": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     18.854421991358393,
+     24.554421991358392
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 16.567325367494306,
+   "t_disappear": 20.567325367494306,
+   "bbox_start": [
+    0,
+    0.375,
+    0.27,
+    0.825
+   ],
+   "bbox_end": [
+    0.73,
+    0.375,
+    1.0,
+    0.825
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     17.067325367494306,
+     20.067325367494306
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 9004,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "hallway scenario, seed 9004"
+}

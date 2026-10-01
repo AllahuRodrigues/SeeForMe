@@ -1,0 +1,412 @@
+{
+ "name": "cluttered_room_3104",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6191145123471739,
+    0.4141713173720905,
+    0.6854942138561229,
+    0.5081334025101365
+   ],
+   "bbox_end": [
+    0.6191145123471739,
+    0.4141713173720905,
+    0.6854942138561229,
+    0.5081334025101365
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8149197159596707,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.581915459715854,
+    0.3232298734732375,
+    0.6834166702719738,
+    0.4059076783773553
+   ],
+   "bbox_end": [
+    0.581915459715854,
+    0.3232298734732375,
+    0.6834166702719738,
+    0.4059076783773553
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9270874248075771,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.12590089578427835,
+    0.44851139565871606,
+    0.26040742177675436,
+    0.5380219891639182
+   ],
+   "bbox_end": [
+    0.12590089578427835,
+    0.44851139565871606,
+    0.26040742177675436,
+    0.5380219891639182
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.7189734029815356,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "backpack",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4899625174648649,
+    0.0497128040570967,
+    0.5403634730052634,
+    0.16910886863662475
+   ],
+   "bbox_end": [
+    0.4899625174648649,
+    0.0497128040570967,
+    0.5403634730052634,
+    0.16910886863662475
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6631663710560192,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7256661884490809,
+    0.35683813669002057,
+    0.905119641977784,
+    0.5508346589056803
+   ],
+   "bbox_end": [
+    0.7256661884490809,
+    0.35683813669002057,
+    0.905119641977784,
+    0.5508346589056803
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.741145332525213,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.10154193877103145,
+    0.12145287453415778,
+    0.2306043901613738,
+    0.2672384094992198
+   ],
+   "bbox_end": [
+    0.10154193877103145,
+    0.12145287453415778,
+    0.2306043901613738,
+    0.2672384094992198
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.8155963914358426,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.8305060115858128,
+    0.5861268561438295,
+    0.9257442440530099,
+    0.6902113170556242
+   ],
+   "bbox_end": [
+    0.8305060115858128,
+    0.5861268561438295,
+    0.9257442440530099,
+    0.6902113170556242
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.6524542706595481,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "vase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.49765889818140185,
+    0.11793276081488391,
+    0.6421143762474419,
+    0.27842530976966245
+   ],
+   "bbox_end": [
+    0.49765889818140185,
+    0.11793276081488391,
+    0.6421143762474419,
+    0.27842530976966245
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.7699868926674278,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.196621305168226,
+    0.22536720078288103,
+    0.446621305168226,
+    0.32536720078288106
+   ],
+   "bbox_end": [
+    0.196621305168226,
+    0.22536720078288103,
+    0.446621305168226,
+    0.32536720078288106
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "text",
+   "kind": "text",
+   "text": "COFFEE $2",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.4737001636446333,
+    0.24161051963576125,
+    0.7237001636446333,
+    0.3416105196357613
+   ],
+   "bbox_end": [
+    0.4737001636446333,
+    0.24161051963576125,
+    0.7237001636446333,
+    0.3416105196357613
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 1.7594027950692597,
+   "t_disappear": 6.75940279506926,
+   "bbox_start": [
+    0.4356529160270476,
+    0.508,
+    0.49565291602704764,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.2656529160270476,
+    0.39,
+    0.6656529160270477,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     2.9594027950692596,
+     6.75940279506926
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 12,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 8.761537923235169,
+   "t_disappear": 13.761537923235169,
+   "bbox_start": [
+    0.3875049074775391,
+    0.508,
+    0.447504907477539,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.21750490747753903,
+    0.39,
+    0.6175049074775391,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     9.961537923235168,
+     13.761537923235169
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 13,
+   "label": "box",
+   "kind": "object",
+   "text": null,
+   "t_appear": 16.67133906356132,
+   "t_disappear": 21.67133906356132,
+   "bbox_start": [
+    0.541773793633058,
+    0.508,
+    0.601773793633058,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.371773793633058,
+    0.39,
+    0.771773793633058,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     17.87133906356132,
+     21.67133906356132
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 14,
+   "label": "cone",
+   "kind": "object",
+   "text": null,
+   "t_appear": 23.803916065409066,
+   "t_disappear": 28.803916065409066,
+   "bbox_start": [
+    0.5088173217130648,
+    0.508,
+    0.5688173217130649,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.33881732171306483,
+    0.39,
+    0.7388173217130649,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     25.003916065409065,
+     28.803916065409066
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 15,
+   "label": "text",
+   "kind": "text",
+   "text": "CAUTION WET FLOOR",
+   "t_appear": 21.05917872636276,
+   "t_disappear": 27.05917872636276,
+   "bbox_start": [
+    0.4,
+    0.08,
+    0.7,
+    0.2
+   ],
+   "bbox_end": [
+    0.4,
+    0.08,
+    0.7,
+    0.2
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     21.35917872636276,
+     27.05917872636276
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 3104,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.15,
+ "description": "cluttered_room scenario, seed 3104"
+}

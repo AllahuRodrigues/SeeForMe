@@ -1,0 +1,312 @@
+{
+ "name": "hallway_5001",
+ "duration": 30.0,
+ "fps": 10.0,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.27100105673995295,
+    0.197657446254135,
+    0.4210010567399529,
+    0.34765744625413497
+   ],
+   "bbox_end": [
+    0.27100105673995295,
+    0.197657446254135,
+    0.4210010567399529,
+    0.34765744625413497
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 2,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.46280175253458244,
+    0.06788405921020177,
+    0.6128017525345825,
+    0.21788405921020176
+   ],
+   "bbox_end": [
+    0.46280175253458244,
+    0.06788405921020177,
+    0.6128017525345825,
+    0.21788405921020176
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 3,
+   "label": "vase",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.2110823005870231,
+    0.18348928810961207,
+    0.36108230058702306,
+    0.3334892881096121
+   ],
+   "bbox_end": [
+    0.2110823005870231,
+    0.18348928810961207,
+    0.36108230058702306,
+    0.3334892881096121
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 4,
+   "label": "bottle",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.5714524440991552,
+    0.11756361972144057,
+    0.7214524440991552,
+    0.26756361972144055
+   ],
+   "bbox_end": [
+    0.5714524440991552,
+    0.11756361972144057,
+    0.7214524440991552,
+    0.26756361972144055
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 5,
+   "label": "text",
+   "kind": "text",
+   "text": "SALE 50% OFF",
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "bbox_end": [
+    0.6,
+    0.15,
+    0.9,
+    0.28
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 6,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 0,
+   "t_disappear": 30.0,
+   "bbox_start": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "bbox_end": [
+    0.7,
+    0.42,
+    0.76,
+    0.6
+   ],
+   "motion": "static",
+   "important_windows": [],
+   "detectability": 0.9,
+   "base_conf": 0.95,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 7,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "t_appear": 3.177421377495954,
+   "t_disappear": 9.177421377495953,
+   "bbox_start": [
+    0.48754597186855064,
+    0.508,
+    0.5475459718685507,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.2925459718685507,
+    0.31999999999999995,
+    0.7425459718685506,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     4.677421377495953,
+     9.177421377495953
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 8,
+   "label": "potted plant",
+   "kind": "object",
+   "text": null,
+   "t_appear": 11.073886212424483,
+   "t_disappear": 17.073886212424483,
+   "bbox_start": [
+    0.43979583543698875,
+    0.508,
+    0.4997958354369888,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.24479583543698877,
+    0.31999999999999995,
+    0.6947958354369888,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     12.573886212424483,
+     17.073886212424483
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 9,
+   "label": "box",
+   "kind": "object",
+   "text": null,
+   "t_appear": 18.116800394275394,
+   "t_disappear": 24.116800394275394,
+   "bbox_start": [
+    0.5622633999177438,
+    0.508,
+    0.6222633999177438,
+    0.5920000000000001
+   ],
+   "bbox_end": [
+    0.3672633999177438,
+    0.31999999999999995,
+    0.8172633999177438,
+    0.95
+   ],
+   "motion": "approach",
+   "important_windows": [
+    [
+     19.616800394275394,
+     24.116800394275394
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 10,
+   "label": "text",
+   "kind": "text",
+   "text": "FIRE EXIT",
+   "t_appear": 13.819139520679517,
+   "t_disappear": 20.819139520679517,
+   "bbox_start": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "bbox_end": [
+    0.45,
+    0.1,
+    0.72,
+    0.22
+   ],
+   "motion": "static",
+   "important_windows": [
+    [
+     14.119139520679518,
+     19.819139520679517
+    ]
+   ],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06
+  },
+  {
+   "obj_id": 11,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "t_appear": 11.095520486086595,
+   "t_disappear": 15.095520486086595,
+   "bbox_start": [
+    1.0,
+    0.375,
+    1.27,
+    0.825
+   ],
+   "bbox_end": [
+    -0.27,
+    0.375,
+    0.0,
+    0.825
+   ],
+   "motion": "pass",
+   "important_windows": [
+    [
+     11.595520486086595,
+     14.595520486086595
+    ]
+   ],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06
+  }
+ ],
+ "seed": 5001,
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "description": "hallway scenario, seed 5001"
+}

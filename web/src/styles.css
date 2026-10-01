@@ -1,0 +1,38 @@
+:root { --bg: #0b0f14; --panel: #121923; --text: #e8eef5; --muted: #8fa1b5; --accent: #5ee0b4; --warn: #ff5a5a; --amber: #f0b13b; --radius: 14px; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #f4f7fa; --panel: #ffffff; --text: #101418; --muted: #4d5d6e; } }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.app { max-width: 980px; margin: 0 auto; padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 12px; }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; } .brand h1 { font-size: 20px; margin: 0; letter-spacing: .3px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(94,224,180,.2); }
+.status { color: var(--muted); font-size: 14px; text-align: right; }
+.stage { position: relative; }
+.view { position: relative; border-radius: var(--radius); overflow: hidden; background: #000; aspect-ratio: 4 / 3; }
+video, canvas#overlay { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.cue-card { position: absolute; left: 12px; right: 12px; bottom: 12px; background: rgba(10,14,20,.86); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 12px 14px; transform: translateY(20px); opacity: 0; transition: .2s; backdrop-filter: blur(6px); }
+.cue-card.show { transform: none; opacity: 1; }
+.cue-card[data-kind="interrupt"] { border-color: var(--warn); } .cue-card[data-kind="haptic"] { border-color: var(--amber); }
+.cue-kind { font-size: 12px; letter-spacing: 1.5px; color: var(--accent); font-weight: 700; }
+.cue-text { font-size: 22px; font-weight: 700; margin: 2px 0; } .cue-meta { color: var(--muted); font-size: 13px; }
+.controls { background: var(--panel); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.modes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+button { font: inherit; color: var(--text); background: rgba(127,127,127,.15); border: 1px solid rgba(127,127,127,.3); border-radius: 10px; padding: 10px 14px; cursor: pointer; min-height: 44px; }
+button.big { flex: 1; font-size: 18px; font-weight: 700; min-height: 56px; }
+button.primary { background: var(--accent); color: #06130e; border-color: transparent; }
+.mode.active { background: var(--accent); color: #06130e; border-color: transparent; font-weight: 700; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.inline { display: flex; gap: 8px; width: 100%; } .inline input { flex: 1; }
+input, select { font: inherit; color: var(--text); background: rgba(127,127,127,.12); border: 1px solid rgba(127,127,127,.3); border-radius: 10px; padding: 10px 12px; min-height: 44px; }
+input[type="file"] { padding: 6px; }
+.field { display: flex; flex-direction: column; font-size: 12px; color: var(--muted); gap: 4px; flex: 1; min-width: 120px; }
+.budget-row { gap: 10px; } .budget { flex: 1; height: 10px; background: rgba(127,127,127,.2); border-radius: 6px; overflow: hidden; min-width: 80px; }
+#budget-fill { height: 100%; width: 100%; background: var(--accent); transition: width .3s; }
+.last-cue { color: var(--muted); } .last-cue strong { color: var(--text); }
+.debug { background: var(--panel); border-radius: var(--radius); padding: 12px; font-size: 13px; }
+.debug table { width: 100%; border-collapse: collapse; } .debug td, .debug th { padding: 4px 6px; text-align: right; border-bottom: 1px solid rgba(127,127,127,.2); } .debug td:first-child, .debug th:first-child { text-align: left; }
+.debug pre { margin: 8px 0 0; color: var(--muted); white-space: pre-wrap; }
+.hidden { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 560px) { .top { flex-direction: column; align-items: flex-start; } .status { text-align: left; } .cue-text { font-size: 19px; } }

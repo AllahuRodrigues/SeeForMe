@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+*.pt
+*.mp4
+models/*.joblib
+results/figures/*.png
+.DS_Store
+.env
+.env.*
+web/node_modules/
+web/dist/
+server/certs/
+models/depth/

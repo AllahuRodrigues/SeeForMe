@@ -1,0 +1,79 @@
+{
+ "n_frames": 10800,
+ "candidates": [
+  {
+   "k": 2,
+   "inertia": 1191.55859375,
+   "clusters": [
+    "person/text/bottle",
+    "text/person/box"
+   ]
+  },
+  {
+   "k": 3,
+   "inertia": 839.9541625976562,
+   "clusters": [
+    "text/person/box",
+    "text/person/bottle",
+    "person/text/traffic light"
+   ]
+  },
+  {
+   "k": 4,
+   "inertia": 731.0313720703125,
+   "clusters": [
+    "text/person/box",
+    "text/tv/laptop",
+    "text/person/clock",
+    "person/text/traffic light"
+   ]
+  },
+  {
+   "k": 5,
+   "inertia": 637.1590576171875,
+   "clusters": [
+    "clock/text/person",
+    "cell phone/text/laptop",
+    "person/text/traffic light",
+    "text/tv/bottle",
+    "text/person/box"
+   ]
+  },
+  {
+   "k": 6,
+   "inertia": 565.2112426757812,
+   "clusters": [
+    "person/text/traffic light",
+    "text/bottle/vase",
+    "text/person/box",
+    "clock/text/person",
+    "tv/laptop/text",
+    "cell phone/text/person"
+   ]
+  },
+  {
+   "k": 7,
+   "inertia": 516.4208374023438,
+   "clusters": [
+    "clock/text/bottle",
+    "text/person/box",
+    "text/bottle/vase",
+    "person/text/traffic light",
+    "laptop/text/person",
+    "cell phone/text/person",
+    "tv/text/laptop"
+   ]
+  }
+ ],
+ "chosen": {
+  "k": 4,
+  "vocab_size": 34,
+  "clusters": [
+   "text/person/box",
+   "text/tv/laptop",
+   "text/person/clock",
+   "person/text/traffic light"
+  ],
+  "inertia": 731.0313720703125
+ }
+}
