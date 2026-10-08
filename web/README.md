@@ -62,3 +62,14 @@ targets with visible focus, and the visual overlay is for low-vision users, deve
 
 Known limits: WebGPU support differs by browser (iOS Safari falls back to WASM, ~10 FPS on older
 devices); OCR and metric depth need the server; ASK is rule-based (no LLM).
+
+## Beta readiness: accessibility and safety
+This is an **experimental prototype**, not a mobility safety aid. It cannot establish that a path is clear.
+Never use it instead of a cane, guide dog, or orientation-and-mobility training, especially at roads or stairs.
+
+- Browser camera requires a secure context (HTTPS) or localhost.
+- Start with **Find** or **Ask** in a familiar indoor setting and confirm spoken information independently.
+- Camera frames feed the local browser detector; connecting the optional SeeForMe server additionally sends frames for OCR/depth processing to that server. ElevenLabs voice uses an optional server-backed provider.
+- Do not deploy a public service with optional OCR/depth/TTS endpoints without authentication, rate limiting, and a clear privacy policy.
+- Screen-reader labels, status announcements, and keyboard controls require manual testing with VoiceOver and TalkBack before any public beta.
+- Do not claim the system is validated, safe for independent navigation, or production-ready on Meta glasses without actual user testing.
