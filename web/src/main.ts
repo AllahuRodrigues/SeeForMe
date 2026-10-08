@@ -115,7 +115,7 @@ function draw(tracks: Track[]) {
     octx.fillStyle = "rgba(0,0,0,.65)"; octx.fillRect(x1 * W, Math.max(0, y1 * H - 18), tw, 18);
     octx.fillStyle = "#fff"; octx.fillText(label, x1 * W + 4, Math.max(13, y1 * H - 5));
   }
-  setStatus(`${state.running ? "LIVE" : "paused"} · ${state.backend || "loading model"} · det ${state.detMs.toFixed(0)} ms · ${tracks.length} tracks · depth ${server.available ? (state.depthOk ? "server" : "…") : "bbox"}${speech.enabled ? "" : " · muted"}`);
+  // Per-frame live-region changes overwhelm screen readers; diagnostics stay in the optional Debug panel.
   if (state.debug) renderDebug(policy.lastCandidates);
 }
 function renderDebug(cands: Candidate[]) {
@@ -134,13 +134,13 @@ function answer(q: string): string {
   for (const key of ["stairs", "door", "exit", "person", "car", "chair", "elevator", "restroom", "sign"]) {
     if (q.includes(key)) {
       const hits = near.filter((t) => t.label.includes(key) || (t.text ?? "").toLowerCase().includes(key));
-      return hits.length ? hits.slice(0, 2).map(desc).join(". ") + "." : `I don't see a ${key} right now.`;
+      return hits.length ? hits.slice(0, 2).map(desc).join(". ") + "." : `I could not confirm a ${key} in the current camera view.`;
     }
   }
-  if (q.includes("left")) { const h = near.filter((t) => camModel.angleDeg((t.bbox[0] + t.bbox[2]) / 2) < -10); return h.length ? h.slice(0, 3).map(desc).join(". ") + "." : "Nothing detected on your left."; }
-  if (q.includes("right")) { const h = near.filter((t) => camModel.angleDeg((t.bbox[0] + t.bbox[2]) / 2) > 10); return h.length ? h.slice(0, 3).map(desc).join(". ") + "." : "Nothing detected on your right."; }
+  if (q.includes("left")) { const h = near.filter((t) => camModel.angleDeg((t.bbox[0] + t.bbox[2]) / 2) < -10); return h.length ? h.slice(0, 3).map(desc).join(". ") + "." : "I could not confirm anything on your left in the current camera view."; }
+  if (q.includes("right")) { const h = near.filter((t) => camModel.angleDeg((t.bbox[0] + t.bbox[2]) / 2) > 10); return h.length ? h.slice(0, 3).map(desc).join(". ") + "." : "I could not confirm anything on your right in the current camera view."; }
   if (q.includes("detail") || q.includes("more")) { const c = state.cues.filter((c) => c.action !== "haptic").at(-1); return c ? `${c.message} Distance ${c.distance?.toFixed(1) ?? "unknown"} meters.` : "No recent cue."; }
-  return near.length ? `I see ${near.length} things. ` + near.slice(0, 3).map(desc).join(". ") + "." : "I don't see anything notable right now.";
+  return near.length ? `I see ${near.length} things. ` + near.slice(0, 3).map(desc).join(". ") + "." : "I could not confirm objects in the current camera view. This does not mean the area is clear.";
 }
 function say(text: string) {
   srLive.textContent = text; lastCueEl.textContent = text;
@@ -149,7 +149,7 @@ function say(text: string) {
 
 // ---- UI wiring ----------------------------------------------------------------------
 $("start").onclick = async () => {
-  if (state.running) { state.running = false; cam.stop(); $("start").textContent = "Start camera"; return; }
+  if (state.running) { state.running = false; cam.stop(); speech.stop(); $("start").textContent = "Start camera"; setStatus("Camera stopped."); return; }
   try {
     const s = await cam.start({ facing: cam.facing });
     camModel.aspect = (s?.width ?? 4) / (s?.height ?? 3);
@@ -165,7 +165,7 @@ $<HTMLSelectElement>("camera-select").onchange = async (e) => { const id = (e.ta
 $<HTMLInputElement>("file-input").onchange = async (e) => {
   const f = (e.target as HTMLInputElement).files?.[0]; if (!f) return;
   await cam.playFile(f); state.mirrored = false; state.running = true; state.t0 = performance.now(); tracker.reset(); policy.reset(); speech.reset();
-  $("start").textContent = "Stop"; loop(); await server.check();
+  $("start").textContent = "Stop"; setStatus("Playing selected video."); loop(); await server.check();
 };
 $("mute").onclick = () => { speech.enabled = !speech.enabled; $("mute").textContent = speech.enabled ? "Sound on" : "Muted"; $("mute").setAttribute("aria-pressed", String(!speech.enabled)); if (!speech.enabled) speech.stop(); };
 $<HTMLSelectElement>("verbosity").onchange = (e) => { policy.cfg.verbosity = (e.target as HTMLSelectElement).value as any; };
@@ -174,7 +174,7 @@ $<HTMLSelectElement>("voice").onchange = (e) => { speech.backend = (e.target as 
 $("debug-toggle").onclick = () => { state.debug = !state.debug; $("debug").classList.toggle("hidden", !state.debug); $("debug-toggle").setAttribute("aria-expanded", String(state.debug)); };
 document.querySelectorAll<HTMLButtonElement>(".mode").forEach((b) => b.onclick = () => {
   state.mode = b.dataset.mode as Mode;
-  document.querySelectorAll(".mode").forEach((x) => { x.classList.toggle("active", x === b); x.setAttribute("aria-selected", String(x === b)); });
+  document.querySelectorAll(".mode").forEach((x) => { x.classList.toggle("active", x === b); x.setAttribute("aria-pressed", String(x === b)); });
   $("find-form").classList.toggle("hidden", state.mode !== "find"); $("read-panel").classList.toggle("hidden", state.mode !== "read"); $("ask-form").classList.toggle("hidden", state.mode !== "ask");
   if (state.mode === "navigate") policy.setGoal([]);
 });
@@ -192,7 +192,8 @@ $("ask-voice").onclick = () => {
   const r = new SR(); r.lang = "en-US"; r.onresult = (ev: any) => { const q = ev.results[0][0].transcript; $<HTMLInputElement>("ask-input").value = q; say(answer(q)); }; r.start();
 };
 document.addEventListener("keydown", (e) => {
-  if ((e.target as HTMLElement).tagName === "INPUT") return;
+  // Do not steal Space or letter-key input from buttons, forms, or other editable controls.
+  if (e.target instanceof HTMLElement && e.target.closest("button, input, textarea, select, [contenteditable]")) return;
   if (e.key === " ") { e.preventDefault(); $("start").click(); }
   if (e.key.toLowerCase() === "f") $("flip").click();
   if (e.key.toLowerCase() === "m") $("mute").click();
