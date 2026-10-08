@@ -12,12 +12,18 @@
   <link rel="stylesheet" href="/src/styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#controls">Skip to camera controls</a>
   <div id="app" class="app">
     <header class="top">
       <div class="brand"><span class="dot" id="live-dot" aria-hidden="true"></span><h1>SeeForMe</h1></div>
       <div class="status" id="status" role="status" aria-live="polite">Starting…</div>
     </header>
 
+    <section class="usage-notice" aria-labelledby="usage-title">
+      <h2 id="usage-title">Experimental visual assistance</h2>
+      <p>SeeForMe can miss objects, make incorrect estimates, or give delayed cues. Do not rely on it to cross roads, avoid hazards, or replace a cane, guide dog, or mobility training.</p>
+      <p>Start with <strong>Find</strong> or <strong>Ask</strong> in a familiar indoor space. Camera access starts only when you select Start camera.</p>
+    </section>
     <main class="stage">
       <div class="view">
         <video id="video" playsinline muted autoplay></video>
@@ -29,15 +35,15 @@
         </div>
       </div>
       <!-- the screen-reader channel: every spoken cue is also announced here -->
-      <div id="sr-live" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+      <div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     </main>
 
-    <section class="controls" aria-label="Controls">
-      <div class="row modes" role="tablist" aria-label="Mode">
-        <button class="mode active" data-mode="navigate" role="tab" aria-selected="true">Navigate</button>
-        <button class="mode" data-mode="find" role="tab" aria-selected="false">Find</button>
-        <button class="mode" data-mode="read" role="tab" aria-selected="false">Read</button>
-        <button class="mode" data-mode="ask" role="tab" aria-selected="false">Ask</button>
+    <section id="controls" class="controls" aria-label="Camera controls">
+      <div class="row modes" role="group" aria-label="Assistance mode">
+        <button class="mode active" data-mode="navigate" aria-pressed="true">Navigate</button>
+        <button class="mode" data-mode="find" aria-pressed="false">Find</button>
+        <button class="mode" data-mode="read" aria-pressed="false">Read</button>
+        <button class="mode" data-mode="ask" aria-pressed="false">Ask</button>
       </div>
       <div class="row" id="mode-panel">
         <form id="find-form" class="inline hidden"><label for="find-input" class="sr-only">What are you looking for?</label>
