@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0f14" />
+  <meta name="theme-color" content="#ffffff" />
   <title>SeeForMe</title>
   <meta name="description" content="Predictive, action-aware audio cues from your camera for blind and low-vision navigation." />
   <link rel="manifest" href="/manifest.webmanifest" />
@@ -12,77 +12,119 @@
   <link rel="stylesheet" href="/src/styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#controls">Skip to camera controls</a>
   <div id="app" class="app">
     <header class="top">
-      <div class="brand"><span class="dot" id="live-dot" aria-hidden="true"></span><h1>SeeForMe</h1></div>
-      <div class="status" id="status" role="status" aria-live="polite">Starting…</div>
+      <div class="brand"><span class="dot" id="live-dot" aria-hidden="true"></span><h1>SeeForMe</h1><span class="tag" id="sched-tag">P-CACS</span><span class="tag" id="app-version">v0.3.1</span></div>
+      <div class="status"><span id="status" role="status" aria-live="polite">Starting…</span> <span id="diag" class="diag" aria-hidden="true"></span></div>
     </header>
 
-    <main class="stage">
-      <div class="view">
-        <video id="video" playsinline muted autoplay></video>
-        <canvas id="overlay" aria-hidden="true"></canvas>
-        <div class="cue-card" id="cue-card" aria-hidden="true">
-          <div class="cue-kind" id="cue-kind"></div>
-          <div class="cue-text" id="cue-text"></div>
-          <div class="cue-meta" id="cue-meta"></div>
+    <section class="usage-notice" aria-labelledby="usage-title">
+      <h2 id="usage-title">Experimental visual assistance</h2>
+      <p>SeeForMe can miss objects, make incorrect estimates, or give delayed cues. Do not rely on it to cross roads, avoid hazards, or replace a cane, guide dog, or mobility training.</p>
+      <p>Start with <strong>Find</strong> or <strong>Ask</strong> in a familiar indoor space. Camera access starts only when you select Start.</p>
+    </section>
+
+    <div class="layout">
+      <!-- LEFT: camera + cue + controls -->
+      <main class="left">
+        <div class="view">
+          <video id="video" playsinline muted autoplay></video>
+          <canvas id="overlay" aria-hidden="true"></canvas>
+          <div class="cue-card" id="cue-card" aria-hidden="true">
+            <div class="cue-kind" id="cue-kind"></div>
+            <div class="cue-text" id="cue-text"></div>
+            <div class="cue-meta" id="cue-meta"></div>
+          </div>
         </div>
-      </div>
-      <!-- the screen-reader channel: every spoken cue is also announced here -->
-      <div id="sr-live" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
-    </main>
+        <div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+        <div id="sr-alert" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
 
-    <section class="controls" aria-label="Controls">
-      <div class="row modes" role="tablist" aria-label="Mode">
-        <button class="mode active" data-mode="navigate" role="tab" aria-selected="true">Navigate</button>
-        <button class="mode" data-mode="find" role="tab" aria-selected="false">Find</button>
-        <button class="mode" data-mode="read" role="tab" aria-selected="false">Read</button>
-        <button class="mode" data-mode="ask" role="tab" aria-selected="false">Ask</button>
-      </div>
-      <div class="row" id="mode-panel">
-        <form id="find-form" class="inline hidden"><label for="find-input" class="sr-only">What are you looking for?</label>
-          <input id="find-input" placeholder="e.g. exit, room 204, a seat" autocomplete="off" />
-          <button type="submit">Find</button><button type="button" id="find-clear">Clear</button></form>
-        <div id="read-panel" class="inline hidden"><button id="read-now" class="big">Read text in view</button></div>
-        <form id="ask-form" class="inline hidden"><label for="ask-input" class="sr-only">Ask about the scene</label>
-          <input id="ask-input" placeholder="What's around me? Any stairs? Where is the door?" autocomplete="off" />
-          <button type="submit">Ask</button><button type="button" id="ask-voice" aria-label="Ask by voice">🎤</button></form>
-      </div>
-      <div class="row main-actions">
-        <button id="start" class="big primary">Start camera</button>
-        <button id="flip" class="big" aria-label="Flip camera">Flip</button>
-        <button id="mute" class="big" aria-pressed="false">Sound on</button>
-      </div>
-      <div class="row">
-        <label class="field">Verbosity
-          <select id="verbosity"><option value="quiet">Quiet</option><option value="balanced" selected>Balanced</option><option value="detailed">Detailed</option></select>
-        </label>
-        <label class="field">Units
-          <select id="units"><option value="m">meters</option><option value="ft">feet</option></select>
-        </label>
-        <label class="field">Voice
-          <select id="voice"><option value="browser">Browser</option><option value="elevenlabs">ElevenLabs (server)</option></select>
-        </label>
-        <label class="field">Camera
-          <select id="camera-select"><option value="">auto</option></select>
-        </label>
-        <label class="field">Video file
-          <input id="file-input" type="file" accept="video/*" />
-        </label>
-      </div>
-      <div class="row budget-row">
-        <span>Speech budget</span><div class="budget" aria-hidden="true"><div id="budget-fill"></div></div>
-        <span id="budget-text">100%</span>
-        <button id="debug-toggle" aria-expanded="false">Debug</button>
-      </div>
-      <div class="last-cue"><span>Last cue:</span> <strong id="last-cue">—</strong></div>
-    </section>
+        <section id="controls" class="row main-actions" tabindex="-1" aria-label="Camera controls">
+          <button id="start" class="big primary">Start</button>
+          <button id="mic" class="big" aria-label="Ask by voice">🎤 Ask</button>
+          <button id="flip" class="big" aria-label="Flip camera">Flip</button>
+          <button id="mute" class="big" aria-pressed="false">Mute</button>
+        </section>
 
-    <section id="debug" class="debug hidden" aria-label="Debug view">
-      <table><thead><tr><th>track</th><th>dist</th><th>TTC</th><th>path</th><th>hazard</th><th>urg</th><th>U</th></tr></thead>
-        <tbody id="debug-rows"></tbody></table>
-      <pre id="debug-log"></pre>
-    </section>
+        <div class="row modes" role="group" aria-label="Assistance mode">
+          <button class="mode active" data-mode="navigate" aria-pressed="true">Navigate</button>
+          <button class="mode" data-mode="find" aria-pressed="false">Find</button>
+          <button class="mode" data-mode="read" aria-pressed="false">Read</button>
+          <button class="mode" data-mode="ask" aria-pressed="false">Ask</button>
+        </div>
+        <div class="row" id="mode-panel">
+          <form id="find-form" class="inline hidden"><label for="find-input" class="sr-only">What are you looking for?</label>
+            <input id="find-input" placeholder="exit, room 204, a seat…" autocomplete="off" />
+            <button type="submit">Find</button><button type="button" id="find-clear">Clear</button></form>
+          <div id="read-panel" class="inline hidden"><button id="read-now" class="big">Read text in view</button></div>
+          <form id="ask-form" class="inline hidden"><label for="ask-input" class="sr-only">Ask about the scene</label>
+            <input id="ask-input" placeholder="What's around me? Any stairs? Where is the door?" autocomplete="off" />
+            <button type="submit">Ask</button><button type="button" id="ask-voice" aria-label="Ask by voice">🎤</button></form>
+        </div>
+
+        <details class="settings-box">
+          <summary>Settings</summary>
+          <div class="row settings">
+            <label class="field">Scheduler<select id="scheduler"><option value="learned" selected>Learned (default)</option><option value="pcacs">Linear P-CACS</option></select></label>
+            <label class="field">Verbosity<select id="verbosity"><option value="quiet">Quiet</option><option value="balanced" selected>Balanced</option><option value="detailed">Detailed</option></select></label>
+            <label class="field">Units<select id="units"><option value="m">meters</option><option value="ft">feet</option></select></label>
+            <label class="field">Voice<select id="voice"><option value="browser" selected>Browser</option><option value="elevenlabs">ElevenLabs · Sarah</option></select></label>
+            <label class="field">Camera<select id="camera-select"><option value="">auto</option></select></label>
+            <label class="field">Video file<input id="file-input" type="file" accept="video/*" /></label>
+            <button id="test-voice" type="button">Test voice</button>
+          </div>
+          <p class="muted small" id="sched-info">Learned scheduler: loading…</p>
+        </details>
+        <div class="last-cue"><span id="last-cue">—</span></div>
+      </main>
+
+      <!-- RIGHT: algorithm live + benchmarks -->
+      <aside class="right" aria-label="Algorithm and benchmarks">
+        <section class="panel">
+          <h2>Algorithm <span class="sub">live</span></h2>
+          <p class="formula" id="formula">U = w<sub>h</sub>·H·f(TTC) + w<sub>a</sub>·A·P + w<sub>t</sub>·T + w<sub>g</sub>·G &nbsp;·&nbsp; (0.35 + 0.65·N) − w<sub>u</sub>·Unc − λ<sub>s</sub>·cost − λ<sub>q</sub>·queue</p>
+          <div class="action-line"><span>Decision</span><strong id="action-now">silence</strong><span id="action-why"></span></div>
+          <table class="cands"><thead><tr><th>candidate</th><th>dist</th><th>TTC</th><th>P</th><th>H</th><th>urg</th><th>N</th><th>cost</th><th id="score-head">U</th></tr></thead>
+            <tbody id="cand-rows"><tr><td colspan="9" class="muted">start the camera</td></tr></tbody></table>
+          <div class="kv">
+            <div><span>Speech budget</span><div class="bar"><div id="budget-fill"></div></div><em id="budget-text">100%</em></div>
+            <div><span>Channel</span><em id="channel-state">free</em></div>
+            <div><span>Walking speed</span><em id="ego-speed">1.0 m/s</em></div>
+            <div><span>Depth</span><em id="depth-src">bbox</em></div>
+          </div>
+          <pre id="debug-log" class="log"></pre>
+        </section>
+
+        <section class="panel">
+          <h2>This session <span class="sub">live</span></h2>
+          <div class="stats" id="session-stats">
+            <div><em id="s-cues">0</em><span>cues</span></div>
+            <div><em id="s-rate">0.0</em><span>cues / min</span></div>
+            <div><em id="s-occ">0%</em><span>audio occupancy</span></div>
+            <div><em id="s-silent">100%</em><span>decisions silent</span></div>
+            <div><em id="s-haptic">0</em><span>haptic</span></div>
+            <div><em id="s-interrupt">0</em><span>interrupts</span></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Benchmark <span class="sub">CampusBench, held-out test</span></h2>
+          <div class="bench-controls">
+            <select id="bench-metric" aria-label="Benchmark metric">
+              <option value="action_weighted_recall">timely recall ↑</option>
+              <option value="late_critical_rate">late critical rate ↓</option>
+              <option value="cue_precision">cue precision ↑</option>
+              <option value="audio_occupancy">audio occupancy ↓</option>
+              <option value="silence_precision">silence precision ↑</option>
+              <option value="regret">regret vs reference ↓</option>
+            </select>
+          </div>
+          <div id="bench-rows" class="bench"></div>
+          <p class="muted small">66 scenarios × 3 noise seeds · 11 scene types · metric depth + TTC · <code>results/campus/CAMPUS_RESULTS.md</code></p>
+        </section>
+      </aside>
+    </div>
   </div>
   <script type="module" src="/src/main.ts"></script>
 </body>

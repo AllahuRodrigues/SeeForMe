@@ -1,0 +1,131 @@
+{
+ "output": "/Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/data/timeli/events.jsonl",
+ "events": 24937,
+ "min_quiet_s": 2,
+ "tolerance_s": 1.0,
+ "splits": {
+  "train": {
+   "videos": 269,
+   "frames_s": 56281,
+   "speak_events": 11631,
+   "quiet_windows": 8651,
+   "quiet_seconds": 41525,
+   "quiet_gaps_dropped_(<min)": 3125,
+   "speak_events_per_minute": 12.4,
+   "mean_severity": 0.573,
+   "reasons": {
+    "constant_instruction": 2446,
+    "obstacle_in_front": 3588,
+    "direction_change": 3814,
+    "enter_junction": 890,
+    "exit_junction": 884,
+    "stop": 9
+   },
+   "event_types": {
+    "goal": 6269,
+    "person_moving": 1991,
+    "landmark": 1774,
+    "hazard_static": 1019,
+    "unknown_obstacle": 467,
+    "vehicle": 111
+   },
+   "labels": {
+    "path": 6269,
+    "person": 1991,
+    "junction": 1774,
+    "pole": 1019,
+    "unknown object": 467,
+    "car": 111
+   },
+   "coverable_by_coco_taxonomy": 3121,
+   "reason_inferred_from_text": 0
+  },
+  "test": {
+   "videos": 20,
+   "frames_s": 10820,
+   "speak_events": 2385,
+   "quiet_windows": 1757,
+   "quiet_seconds": 7795,
+   "quiet_gaps_dropped_(<min)": 640,
+   "speak_events_per_minute": 13.23,
+   "mean_severity": 0.579,
+   "reasons": {
+    "constant_instruction": 419,
+    "direction_change": 811,
+    "obstacle_in_front": 898,
+    "enter_junction": 129,
+    "exit_junction": 128
+   },
+   "event_types": {
+    "goal": 1230,
+    "person_moving": 500,
+    "landmark": 257,
+    "hazard_static": 248,
+    "unknown_obstacle": 133,
+    "vehicle": 17
+   },
+   "labels": {
+    "path": 1230,
+    "person": 500,
+    "junction": 257,
+    "pole": 248,
+    "unknown object": 133,
+    "car": 17
+   },
+   "coverable_by_coco_taxonomy": 765,
+   "reason_inferred_from_text": 0
+  },
+  "real": {
+   "videos": 11,
+   "frames_s": 1059,
+   "speak_events": 308,
+   "quiet_windows": 205,
+   "quiet_seconds": 692,
+   "quiet_gaps_dropped_(<min)": 59,
+   "speak_events_per_minute": 17.45,
+   "mean_severity": 0.479,
+   "reasons": {
+    "obstacle_in_front": 183,
+    "constant_instruction": 115,
+    "exit_junction": 5,
+    "enter_junction": 4,
+    "constantly_instruct": 1
+   },
+   "event_types": {
+    "goal": 116,
+    "person_moving": 104,
+    "hazard_static": 35,
+    "unknown_obstacle": 29,
+    "landmark": 9,
+    "barrier": 6,
+    "vehicle": 6,
+    "bike": 3
+   },
+   "labels": {
+    "path": 116,
+    "person": 104,
+    "unknown object": 24,
+    "pole": 22,
+    "junction": 9,
+    "tree": 8,
+    "fence": 6,
+    "car": 6,
+    "obstacle": 4,
+    "bicycle": 3,
+    "trash can": 2,
+    "potted plant": 1
+   },
+   "coverable_by_coco_taxonomy": 154,
+   "reason_inferred_from_text": 126
+  }
+ },
+ "cannot_map": [
+  "object identity / tracks (class + coarse side only)",
+  "distance and time-to-contact (obstacles are 'within cane range' by construction)",
+  "earliest-useful windows (one timestamp per instruction, +/-1 s tolerance)",
+  "sudden events and interruption semantics",
+  "user-confirmed clear paths (quiet windows mean 'no trigger fired')",
+  "periodic reassurance (constant_instruction) has no SeeForMe event type",
+  "frames and videos (not downloaded: 32 GB / 38 GB / 537 GB), so no perception replay yet"
+ ]
+}

@@ -4,14 +4,15 @@ import type { Detection } from "./types";
 export class ServerClient {
   available = false;
   depthModel = "";
+  tts = false;   // /api/health: ElevenLabs is usable (the server has an API key)
   constructor(public baseUrl: string) {}
 
   async check(): Promise<boolean> {
     try {
       const r = await fetch(`${this.baseUrl}/api/health`, { signal: AbortSignal.timeout(2500) });
       if (!r.ok) throw new Error();
-      const j = await r.json(); this.available = true; this.depthModel = j.depth ?? ""; return true;
-    } catch { this.available = false; return false; }
+      const j = await r.json(); this.available = true; this.depthModel = j.depth ?? ""; this.tts = j.tts === true; return true;
+    } catch { this.available = false; this.tts = false; return false; }
   }
 
   private async frameBlob(canvas: HTMLCanvasElement, maxW = 384): Promise<Blob> {

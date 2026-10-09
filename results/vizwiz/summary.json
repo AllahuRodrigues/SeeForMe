@@ -1,0 +1,762 @@
+{
+ "dataset": "VizWiz-Classification (Bafghi & Gurari, CVPR 2023), quality flags from VizWiz-QualityIssues",
+ "n_photos_total": 8900,
+ "n_photos_flagged": 7147,
+ "flag_counts_population": {
+  "BLR": 2528,
+  "BRT": 320,
+  "DRK": 287,
+  "FRM": 3755,
+  "OBS": 169,
+  "ROT": 1112,
+  "OTH": 18,
+  "NON": 3949
+ },
+ "n_sampled": 1500,
+ "seed": 0,
+ "detector": {
+  "model": "yolo11n.pt",
+  "imgsz": 640,
+  "conf": 0.25,
+  "device": "mps",
+  "latency_ms_median": 91.1
+ },
+ "groups": {
+  "all": {
+   "n_images": 1500,
+   "dets_per_image": 1.406,
+   "zero_det_rate": 0.254,
+   "mean_conf": 0.535,
+   "max_conf_mean": 0.607,
+   "coco_targets": 893,
+   "coco_recall": 0.47,
+   "coco_targets_strict": 860,
+   "coco_recall_strict": 0.483,
+   "top_labels": [
+    [
+     "person",
+     285
+    ],
+    [
+     "tv",
+     180
+    ],
+    [
+     "bottle",
+     125
+    ],
+    [
+     "cup",
+     107
+    ],
+    [
+     "cell phone",
+     106
+    ]
+   ]
+  },
+  "flag:BLR": {
+   "n_images": 694,
+   "dets_per_image": 1.356,
+   "zero_det_rate": 0.258,
+   "mean_conf": 0.519,
+   "max_conf_mean": 0.587,
+   "coco_targets": 434,
+   "coco_recall": 0.447,
+   "coco_targets_strict": 415,
+   "coco_recall_strict": 0.46,
+   "top_labels": [
+    [
+     "person",
+     131
+    ],
+    [
+     "tv",
+     102
+    ],
+    [
+     "laptop",
+     62
+    ],
+    [
+     "bottle",
+     53
+    ],
+    [
+     "cup",
+     52
+    ]
+   ]
+  },
+  "only:BLR": {
+   "n_images": 45,
+   "dets_per_image": 1.333,
+   "zero_det_rate": 0.222,
+   "mean_conf": 0.526,
+   "max_conf_mean": 0.596,
+   "coco_targets": 28,
+   "coco_recall": 0.393,
+   "coco_targets_strict": 27,
+   "coco_recall_strict": 0.407,
+   "top_labels": [
+    [
+     "person",
+     11
+    ],
+    [
+     "bottle",
+     8
+    ],
+    [
+     "tv",
+     4
+    ],
+    [
+     "cup",
+     4
+    ],
+    [
+     "dining table",
+     4
+    ]
+   ]
+  },
+  "flag:BRT": {
+   "n_images": 232,
+   "dets_per_image": 1.216,
+   "zero_det_rate": 0.289,
+   "mean_conf": 0.544,
+   "max_conf_mean": 0.611,
+   "coco_targets": 169,
+   "coco_recall": 0.438,
+   "coco_targets_strict": 164,
+   "coco_recall_strict": 0.445,
+   "top_labels": [
+    [
+     "tv",
+     42
+    ],
+    [
+     "person",
+     32
+    ],
+    [
+     "laptop",
+     31
+    ],
+    [
+     "cell phone",
+     23
+    ],
+    [
+     "keyboard",
+     14
+    ]
+   ]
+  },
+  "only:BRT": {
+   "n_images": 8,
+   "dets_per_image": 0.75,
+   "zero_det_rate": 0.625,
+   "mean_conf": 0.52,
+   "max_conf_mean": 0.692,
+   "coco_targets": 7,
+   "coco_recall": 0.286,
+   "coco_targets_strict": 7,
+   "coco_recall_strict": 0.286,
+   "top_labels": [
+    [
+     "tv",
+     2
+    ],
+    [
+     "cup",
+     1
+    ],
+    [
+     "dining table",
+     1
+    ],
+    [
+     "microwave",
+     1
+    ],
+    [
+     "person",
+     1
+    ]
+   ]
+  },
+  "flag:DRK": {
+   "n_images": 214,
+   "dets_per_image": 1.238,
+   "zero_det_rate": 0.304,
+   "mean_conf": 0.536,
+   "max_conf_mean": 0.598,
+   "coco_targets": 147,
+   "coco_recall": 0.537,
+   "coco_targets_strict": 144,
+   "coco_recall_strict": 0.542,
+   "top_labels": [
+    [
+     "person",
+     39
+    ],
+    [
+     "tv",
+     38
+    ],
+    [
+     "laptop",
+     25
+    ],
+    [
+     "bottle",
+     18
+    ],
+    [
+     "cup",
+     12
+    ]
+   ]
+  },
+  "only:DRK": {
+   "n_images": 12,
+   "dets_per_image": 1.583,
+   "zero_det_rate": 0.167,
+   "mean_conf": 0.495,
+   "max_conf_mean": 0.571,
+   "coco_targets": 9,
+   "coco_recall": 0.333,
+   "coco_targets_strict": 9,
+   "coco_recall_strict": 0.333,
+   "top_labels": [
+    [
+     "person",
+     6
+    ],
+    [
+     "bottle",
+     2
+    ],
+    [
+     "teddy bear",
+     1
+    ],
+    [
+     "tv",
+     1
+    ],
+    [
+     "laptop",
+     1
+    ]
+   ]
+  },
+  "flag:FRM": {
+   "n_images": 909,
+   "dets_per_image": 1.296,
+   "zero_det_rate": 0.277,
+   "mean_conf": 0.526,
+   "max_conf_mean": 0.587,
+   "coco_targets": 547,
+   "coco_recall": 0.424,
+   "coco_targets_strict": 529,
+   "coco_recall_strict": 0.437,
+   "top_labels": [
+    [
+     "person",
+     172
+    ],
+    [
+     "tv",
+     112
+    ],
+    [
+     "laptop",
+     65
+    ],
+    [
+     "keyboard",
+     65
+    ],
+    [
+     "book",
+     61
+    ]
+   ]
+  },
+  "only:FRM": {
+   "n_images": 47,
+   "dets_per_image": 1.574,
+   "zero_det_rate": 0.255,
+   "mean_conf": 0.544,
+   "max_conf_mean": 0.625,
+   "coco_targets": 29,
+   "coco_recall": 0.483,
+   "coco_targets_strict": 28,
+   "coco_recall_strict": 0.5,
+   "top_labels": [
+    [
+     "person",
+     11
+    ],
+    [
+     "cup",
+     6
+    ],
+    [
+     "laptop",
+     4
+    ],
+    [
+     "dining table",
+     4
+    ],
+    [
+     "cell phone",
+     3
+    ]
+   ]
+  },
+  "flag:OBS": {
+   "n_images": 169,
+   "dets_per_image": 1.586,
+   "zero_det_rate": 0.213,
+   "mean_conf": 0.491,
+   "max_conf_mean": 0.567,
+   "coco_targets": 92,
+   "coco_recall": 0.446,
+   "coco_targets_strict": 86,
+   "coco_recall_strict": 0.465,
+   "top_labels": [
+    [
+     "person",
+     53
+    ],
+    [
+     "tv",
+     18
+    ],
+    [
+     "bottle",
+     18
+    ],
+    [
+     "laptop",
+     11
+    ],
+    [
+     "chair",
+     11
+    ]
+   ]
+  },
+  "only:OBS": {
+   "n_images": 12,
+   "dets_per_image": 1.667,
+   "zero_det_rate": 0.333,
+   "mean_conf": 0.51,
+   "max_conf_mean": 0.608,
+   "coco_targets": 5,
+   "coco_recall": 0.4,
+   "coco_targets_strict": 5,
+   "coco_recall_strict": 0.4,
+   "top_labels": [
+    [
+     "person",
+     4
+    ],
+    [
+     "bottle",
+     3
+    ],
+    [
+     "refrigerator",
+     2
+    ],
+    [
+     "handbag",
+     1
+    ],
+    [
+     "tv",
+     1
+    ]
+   ]
+  },
+  "flag:ROT": {
+   "n_images": 351,
+   "dets_per_image": 1.165,
+   "zero_det_rate": 0.302,
+   "mean_conf": 0.491,
+   "max_conf_mean": 0.546,
+   "coco_targets": 195,
+   "coco_recall": 0.318,
+   "coco_targets_strict": 185,
+   "coco_recall_strict": 0.319,
+   "top_labels": [
+    [
+     "person",
+     53
+    ],
+    [
+     "book",
+     39
+    ],
+    [
+     "tv",
+     31
+    ],
+    [
+     "bottle",
+     20
+    ],
+    [
+     "cell phone",
+     20
+    ]
+   ]
+  },
+  "only:ROT": {
+   "n_images": 34,
+   "dets_per_image": 1.176,
+   "zero_det_rate": 0.294,
+   "mean_conf": 0.478,
+   "max_conf_mean": 0.541,
+   "coco_targets": 18,
+   "coco_recall": 0.333,
+   "coco_targets_strict": 18,
+   "coco_recall_strict": 0.333,
+   "top_labels": [
+    [
+     "tv",
+     4
+    ],
+    [
+     "person",
+     4
+    ],
+    [
+     "book",
+     4
+    ],
+    [
+     "bed",
+     2
+    ],
+    [
+     "clock",
+     2
+    ]
+   ]
+  },
+  "flag:OTH": {
+   "n_images": 18,
+   "dets_per_image": 1.444,
+   "zero_det_rate": 0.278,
+   "mean_conf": 0.522,
+   "max_conf_mean": 0.63,
+   "coco_targets": 9,
+   "coco_recall": 0.556,
+   "coco_targets_strict": 8,
+   "coco_recall_strict": 0.625,
+   "top_labels": [
+    [
+     "person",
+     4
+    ],
+    [
+     "toothbrush",
+     2
+    ],
+    [
+     "tv",
+     2
+    ],
+    [
+     "cell phone",
+     2
+    ],
+    [
+     "cup",
+     2
+    ]
+   ]
+  },
+  "only:OTH": {
+   "n_images": 0,
+   "dets_per_image": null,
+   "zero_det_rate": null,
+   "mean_conf": null,
+   "max_conf_mean": null,
+   "coco_targets": 0,
+   "coco_recall": null,
+   "coco_targets_strict": 0,
+   "coco_recall_strict": null,
+   "top_labels": []
+  },
+  "flag:NON": {
+   "n_images": 610,
+   "dets_per_image": 1.608,
+   "zero_det_rate": 0.198,
+   "mean_conf": 0.57,
+   "max_conf_mean": 0.653,
+   "coco_targets": 333,
+   "coco_recall": 0.589,
+   "coco_targets_strict": 322,
+   "coco_recall_strict": 0.602,
+   "top_labels": [
+    [
+     "person",
+     118
+    ],
+    [
+     "bottle",
+     70
+    ],
+    [
+     "tv",
+     64
+    ],
+    [
+     "cup",
+     59
+    ],
+    [
+     "cell phone",
+     52
+    ]
+   ]
+  },
+  "only:NON": {
+   "n_images": 156,
+   "dets_per_image": 1.808,
+   "zero_det_rate": 0.199,
+   "mean_conf": 0.583,
+   "max_conf_mean": 0.693,
+   "coco_targets": 84,
+   "coco_recall": 0.512,
+   "coco_targets_strict": 81,
+   "coco_recall_strict": 0.531,
+   "top_labels": [
+    [
+     "bottle",
+     23
+    ],
+    [
+     "person",
+     23
+    ],
+    [
+     "dining table",
+     22
+    ],
+    [
+     "cup",
+     19
+    ],
+    [
+     "cell phone",
+     13
+    ]
+   ]
+  },
+  "issues:0": {
+   "n_images": 156,
+   "dets_per_image": 1.808,
+   "zero_det_rate": 0.199,
+   "mean_conf": 0.583,
+   "max_conf_mean": 0.693,
+   "coco_targets": 84,
+   "coco_recall": 0.512,
+   "coco_targets_strict": 81,
+   "coco_recall_strict": 0.531,
+   "top_labels": [
+    [
+     "bottle",
+     23
+    ],
+    [
+     "person",
+     23
+    ],
+    [
+     "dining table",
+     22
+    ],
+    [
+     "cup",
+     19
+    ],
+    [
+     "cell phone",
+     13
+    ]
+   ]
+  },
+  "issues:1": {
+   "n_images": 476,
+   "dets_per_image": 1.553,
+   "zero_det_rate": 0.216,
+   "mean_conf": 0.551,
+   "max_conf_mean": 0.627,
+   "coco_targets": 268,
+   "coco_recall": 0.575,
+   "coco_targets_strict": 260,
+   "coco_recall_strict": 0.588,
+   "top_labels": [
+    [
+     "person",
+     106
+    ],
+    [
+     "bottle",
+     55
+    ],
+    [
+     "tv",
+     49
+    ],
+    [
+     "cup",
+     46
+    ],
+    [
+     "cell phone",
+     41
+    ]
+   ]
+  },
+  "issues:2": {
+   "n_images": 548,
+   "dets_per_image": 1.277,
+   "zero_det_rate": 0.266,
+   "mean_conf": 0.529,
+   "max_conf_mean": 0.59,
+   "coco_targets": 335,
+   "coco_recall": 0.451,
+   "coco_targets_strict": 322,
+   "coco_recall_strict": 0.46,
+   "top_labels": [
+    [
+     "person",
+     100
+    ],
+    [
+     "tv",
+     81
+    ],
+    [
+     "book",
+     46
+    ],
+    [
+     "cell phone",
+     39
+    ],
+    [
+     "laptop",
+     38
+    ]
+   ]
+  },
+  "issues:3+": {
+   "n_images": 320,
+   "dets_per_image": 1.212,
+   "zero_det_rate": 0.316,
+   "mean_conf": 0.492,
+   "max_conf_mean": 0.555,
+   "coco_targets": 206,
+   "coco_recall": 0.35,
+   "coco_targets_strict": 197,
+   "coco_recall_strict": 0.36,
+   "top_labels": [
+    [
+     "person",
+     56
+    ],
+    [
+     "tv",
+     42
+    ],
+    [
+     "laptop",
+     33
+    ],
+    [
+     "bottle",
+     20
+    ],
+    [
+     "book",
+     19
+    ]
+   ]
+  }
+ },
+ "imagenet_to_coco": {
+  "620": "laptop",
+  "664": "tv",
+  "851": "tv",
+  "673": "mouse",
+  "761": "remote",
+  "508": "keyboard",
+  "487": "cell phone",
+  "651": "microwave",
+  "859": "toaster",
+  "760": "refrigerator",
+  "892": "clock",
+  "409": "clock",
+  "530": "clock",
+  "883": "vase",
+  "850": "teddy bear",
+  "879": "umbrella",
+  "414": "backpack",
+  "748": "handbag",
+  "898": "bottle",
+  "907": "bottle",
+  "737": "bottle",
+  "440": "bottle",
+  "720": "bottle",
+  "968": "cup",
+  "504": "cup",
+  "572": "wine glass",
+  "659": "bowl",
+  "809": "bowl",
+  "910": "spoon",
+  "954": "banana",
+  "950": "orange",
+  "937": "broccoli",
+  "963": "pizza",
+  "934": "hot dog",
+  "559": "chair",
+  "765": "chair",
+  "831": "couch",
+  "861": "toilet",
+  "896": "sink",
+  "817": "car",
+  "751": "car",
+  "717": "truck",
+  "867": "truck",
+  "805": "sports ball",
+  "430": "sports ball",
+  "429": "sports ball",
+  "296": "bear",
+  "527": "tv",
+  "827": "oven",
+  "921": "book",
+  "917": "book"
+ },
+ "loose_mappings": [
+  527,
+  827,
+  917,
+  921
+ ],
+ "sources": {
+  "images": "https://vizwiz.cs.colorado.edu/VizWiz_visualization_img/{name}",
+  "annotations.json": "https://storage.googleapis.com/vw-c/annotations.json",
+  "classification_gt.json": "https://vizwiz.cs.colorado.edu/VizWiz_all_answers/classification_gt.json"
+ }
+}

@@ -16,8 +16,8 @@ from .world import CampusScenario
 
 
 class CampusDetectorSimulator(DetectorSimulator):
-    def __init__(self, scenario: CampusScenario, seed: Optional[int] = None):
-        super().__init__(scenario, seed=seed)
+    def __init__(self, scenario: CampusScenario, seed: Optional[int] = None, perfect: bool = False):
+        super().__init__(scenario, seed=seed, perfect=perfect)
         self.sc: CampusScenario = scenario
         self.drng = random.Random((scenario.seed if seed is None else seed) * 7919 + 13)
         self.depth_noise = scenario.depth_noise_rel * (1.5 if scenario.lighting == "low" else 1.0) * (1 + scenario.motion_blur)
@@ -39,7 +39,7 @@ class CampusDetectorSimulator(DetectorSimulator):
         for d in dets:
             if d.source_id is not None:
                 _, z = by_id[d.source_id].rel_pos(t)
-                d.distance_m, d.depth_conf = self._measure_depth(z)
+                d.distance_m, d.depth_conf = (max(0.2, z), 0.95) if self.perfect else self._measure_depth(z)
             else:
                 d.distance_m, d.depth_conf = self.drng.uniform(1.0, 7.0), self.drng.uniform(0.2, 0.5)
         return dets

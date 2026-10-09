@@ -1,0 +1,20 @@
+dataset,official_url,data_type,use,limitations
+EgoBlind,https://github.com/doc-doc/EgoBlind,egocentric video and BLV-verified questions,relevance/human-needs; independent QA eval,CC BY-NC 4.0 (research and education only; cite and attribute video sources); no scheduler action labels
+GuideDog,https://huggingface.co/datasets/kjunh/GuideDog,"22,084 egocentric image-description pairs",accessibility guidance text; gold eval; silver exploratory train,gated CC BY-NC 4.0; static images; no deadlines
+Ego4D,https://ego4d-data.org/docs/start-here/,large egocentric video,"diversity, negative scenes, transfer",license/credentials required; varied tasks; no action labels
+JRDB,https://jrdb.erc.monash.edu.au/dataset/,"crowds, tracking, 2D/3D boxes",tracking and multi-human scenes,"robot vantage, not BLV egocentric"
+Aria Everyday Activities,https://facebookresearch.github.io/projectaria_tools/docs/open_datasets/aria_everyday_activities_dataset,"wearable RGB, IMU, 3D pose",geometric robustness and memory,license/download; mostly indoor daily activities
+TextOCR,https://textvqa.org/textocr/,scene text images and word annotations,OCR for signs,"static, not signage relevance"
+HierText,https://github.com/google-research-datasets/hiertext,scene text words/lines/paragraphs,layout and OCR generalization,"static, not timing"
+Mapillary Vistas,https://openaccess.thecvf.com/content_iccv_2017/html/Neuhold_The_Mapillary_Vistas_ICCV_2017_paper.html,street image segmentation,outdoor sidewalk and traffic visual parsing,not first-person blind-user walking
+Mapillary traffic signs,https://help.mapillary.com/hc/en-us/articles/4407521157138-Downloading-map-data-via-the-Mapillary-web-app,road sign map data,traffic sign appearance / icon ontology,provider API terms; not all airports/indoor signage
+DADA-2000,https://github.com/JWFangit/LOTVS-DADA,accident dashcam video,out-of-distribution emergencies only,driving viewpoint; never pedestrian safe-route ground truth
+Waymo Open Motion,https://github.com/waymo-research/waymo-open-dataset,labeled traffic trajectories,offline motion perturbation study,noncommercial conditions; driving viewpoint
+User-approved campus recordings,local://approved-campus-recordings,recorded egocentric human walks,main independent event annotation corpus,consent/access/site policies; no public redistribution
+BLV-Road-Nav-Accessibility,https://github.com/Shohan29531/BLV-Road-Nav-Accessibility,"90 crucial-object taxonomy, 671 presence-labelled keyframes",detector vocabulary coverage; priority groups,no videos in the repo; presence labels only (no boxes)
+Mendeley navigation-assistance,https://data.mendeley.com/datasets/66bjx8h79p/1,"35,261 frames of pre-extracted detector features with a Move/Stop decision",weak frame-level action target,no images or timing; label recoverable from its own features
+TIMELI,https://timeli-icra.github.io,per-second instruction / silence labels with a speaking reason (CARLA + 11 real clips),when-to-speak timing statistics; event conversion,videos 537 GB; silence = no rule fired; generator speaks 12-17 times a minute
+VizWiz-Classification,https://vizwiz.org/tasks-and-datasets/image-classification/,"8,900 blind-user photos with capture-quality flags",detector robustness by capture flaw,static photos; no navigation context
+Mobilio,https://github.com/Harvard-Slade-Lab/Mobilio,algorithm scripts and 14-participant study logs of a shipped BLV navigation aid,reference behaviour and constants; study design,app and weights not released
+WalkVLM-LR,https://walkvlm-lr.github.io,VLM walking assistant code (archived) with a danger-grade discriminator,class-agnostic danger grade idea; TRF metric,weights not released; WAD/WRD data 129-375 GB without a licence
+ORBIT,https://orbit.city.ac.uk,"3,822 personal-object videos by 67 BLV collectors with quality-issue labels",FIND-mode test bed; capture-quality calibration,smallest zip 4.15 GB; nothing about when to speak

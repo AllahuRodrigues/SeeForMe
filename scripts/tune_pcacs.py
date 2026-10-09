@@ -3,6 +3,11 @@
 Objective: mean communication score (timely severity-weighted warnings minus off-window cues,
 late penalties and audio occupancy), i.e. minimum regret against the oracle. Writes
 configs/pcacs_tuned.yaml and results/campus/pcacs_tuning.json.
+
+    --domain egoblind   tune on cached EgoBlind `train` replays (the 70% part of the source-recording split; weak
+                        question-derived events); writes configs/pcacs_egoblind.yaml and results/egoblind/pcacs_tuning.json.
+                        The pre-audit config is retired to results/egoblind/exploratory_2026-10-08/.
+    --domain both       objective = mean of the two domains' scores.
 """
 import argparse, json, random, time
 from dataclasses import asdict, replace
@@ -18,23 +23,43 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--trials", type=int, default=80)
 ap.add_argument("--seed", type=int, default=0)
 ap.add_argument("--subset", type=int, default=0, help="use only the first N train scenarios (0 = all)")
+ap.add_argument("--domain", default="campus", choices=["campus", "egoblind", "both"])
 args = ap.parse_args()
 
 rng = random.Random(args.seed)
 cfg = PipelineConfig()
-train = load_campus_split("train")
-if args.subset:
-    train = train[: args.subset]
-osc = oracle_scores(train, cfg)
 tm = text_model()
+domains = {}
+if args.domain in ("campus", "both"):
+    train = load_campus_split("train")
+    domains["campus"] = (train[: args.subset] if args.subset else train, run_on_campus)
+if args.domain in ("egoblind", "both"):
+    from egoblind_common import RESULTS_E, load_egoblind_split
+    from seeforme.egoblind import run_on_egoblind
+    ego = load_egoblind_split("train", require_cache=True, limit=args.subset)
+    if not ego:
+        raise SystemExit("no cached EgoBlind train videos; run scripts/cache_egoblind_perception.py first")
+    domains["egoblind"] = (ego, run_on_egoblind)
+osc = {}
+for name, (scs, run) in domains.items():
+    from seeforme.campus.oracle import CampusOracle
+    from seeforme.campus.metrics import score
+    osc.update({sc.name: score(run(CampusOracle(sc), sc, cfg, seed=sc.seed), sc) for sc in scs})
+print({k: len(v[0]) for k, v in domains.items()}, "train scenarios")
 
 
 def evaluate(pc: PCACSConfig):
-    rows = []
-    for sc in train:
-        pol = PCACSPolicy(pc, text_model=tm, goal_tags=sc.goal_tags)
-        rows.append(evaluate_run(run_on_campus(pol, sc, cfg), sc))
-    a = aggregate(rows, osc)["pcacs"]
+    per = []
+    for name, (scs, run) in domains.items():
+        rows = []
+        for sc in scs:
+            pol = PCACSPolicy(pc, text_model=tm, goal_tags=sc.goal_tags)
+            rows.append(evaluate_run(run(pol, sc, cfg, seed=sc.seed), sc))
+        per.append(aggregate(rows, osc)["pcacs"])
+    a = dict(per[0])
+    for k in a:
+        if isinstance(a[k], (int, float)):
+            a[k] = sum(p[k] for p in per) / len(per)
     return a
 
 
@@ -64,7 +89,8 @@ for i in range(1, args.trials + 1):
         print(f"trial {i}: score={a['score']:.3f} regret={a['regret']:.3f} AWrecall={a['action_weighted_recall']:.3f} "
               f"prec={a['cue_precision']:.3f} occ={a['audio_occupancy']:.2f} lateC={a['late_critical_rate']:.2f} ({time.time()-t0:.0f}s)")
 CONFIGS.mkdir(exist_ok=True)
-(CONFIGS / "pcacs_tuned.yaml").write_text(yaml.safe_dump(asdict(best_cfg), sort_keys=False))
-dump_json({"best": {k: v for k, v in best.items()}, "best_config": asdict(best_cfg), "history": history},
-          RESULTS_C / "pcacs_tuning.json")
-print(f"best score {best['score']:.3f} (regret {best['regret']:.3f}) -> configs/pcacs_tuned.yaml")
+out_cfg = CONFIGS / ("pcacs_tuned.yaml" if args.domain == "campus" else f"pcacs_{args.domain}.yaml")
+out_res = (RESULTS_C if args.domain == "campus" else RESULTS_E) / "pcacs_tuning.json"
+out_cfg.write_text(yaml.safe_dump(asdict(best_cfg), sort_keys=False))
+dump_json({"domain": args.domain, "best": {k: v for k, v in best.items()}, "best_config": asdict(best_cfg), "history": history}, out_res)
+print(f"best score {best['score']:.3f} (regret {best['regret']:.3f}) -> {out_cfg}")

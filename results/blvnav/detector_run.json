@@ -1,0 +1,8 @@
+{
+ "model": "yolo11n.pt",
+ "device": "mps",
+ "imgsz": 640,
+ "frames": 671,
+ "missing_files": [],
+ "seconds": 84.0
+}

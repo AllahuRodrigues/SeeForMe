@@ -16,7 +16,7 @@ from typing import Optional
 
 import requests
 
-DEFAULT_VOICE = "EXAVITQu4vr4xnSDxMaL"      # "Sarah": clear, neutral; available on the free tier
+DEFAULT_VOICE = "EXAVITQu4vr4xnSDxMaL"      # "Sarah" (female, clear, neutral); available on the free tier
 MODEL_ID = "eleven_flash_v2_5"               # lowest latency tier
 
 
@@ -40,7 +40,7 @@ def load_api_key() -> Optional[str]:
 
 class ElevenLabsTTS:
     def __init__(self, api_key: Optional[str] = None, voice_id: str = DEFAULT_VOICE, model_id: str = MODEL_ID,
-                 cache_dir: Optional[str] = None, speed: float = 1.1):
+                 cache_dir: Optional[str] = None, speed: float = 1.0):
         self.api_key = api_key or load_api_key()
         if not self.api_key:
             raise RuntimeError("no ElevenLabs API key (set ELEVENLABS_API_KEY or put it in .env)")
@@ -58,7 +58,7 @@ class ElevenLabsTTS:
         r = self.session.post(f"https://api.elevenlabs.io/v1/text-to-speech/{self.voice_id}",
                               params={"output_format": "mp3_22050_32", "optimize_streaming_latency": 3},
                               json={"text": text, "model_id": self.model_id,
-                                    "voice_settings": {"stability": 0.5, "similarity_boost": 0.75, "speed": self.speed}},
+                                    "voice_settings": {"stability": 0.45, "similarity_boost": 0.8, "style": 0.15, "use_speaker_boost": True, "speed": self.speed}},
                               timeout=15)
         r.raise_for_status()
         f.write_bytes(r.content)

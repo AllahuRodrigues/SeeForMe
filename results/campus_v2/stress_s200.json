@@ -1,0 +1,2111 @@
+{
+ "n_rows": 200,
+ "n_rows_main": 167,
+ "n_rows_ood": 33,
+ "policies": [
+  "oracle",
+  "confidence_cooldown",
+  "pcacs",
+  "pcacs_learned:il",
+  "pcacs_learned:rl"
+ ],
+ "memory_ttl": 0.0,
+ "by_factor": {
+  "speech": {
+   "budget_empty": {
+    "oracle": {
+     "n": 25,
+     "recall": 0.4952367235365185,
+     "late_critical": 0.29333333333333333,
+     "precision": 1.0,
+     "occupancy": 0.15886666666666663,
+     "regret": 0.0,
+     "interrupts": 0.08,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 25,
+     "recall": 0.1473351060768185,
+     "late_critical": 0.16333333333333333,
+     "precision": 0.07674691974691975,
+     "occupancy": 0.4942666666666665,
+     "regret": 5.356487922121103,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 25,
+     "recall": 0.14612010141162746,
+     "late_critical": 0.32,
+     "precision": 0.688,
+     "occupancy": 0.07046666666666665,
+     "regret": 1.0416158885990694,
+     "interrupts": 0.16,
+     "haptics": 0.16
+    },
+    "pcacs_learned:il": {
+     "n": 25,
+     "recall": 0.34182240614857756,
+     "late_critical": 0.25,
+     "precision": 0.613,
+     "occupancy": 0.18213333333333329,
+     "regret": 0.8314724161295098,
+     "interrupts": 0,
+     "haptics": 0.56
+    },
+    "pcacs_learned:rl": {
+     "n": 25,
+     "recall": 0.3783338819303249,
+     "late_critical": 0.2866666666666667,
+     "precision": 0.8099999999999999,
+     "occupancy": 0.13653333333333328,
+     "regret": 0.32704145017199937,
+     "interrupts": 0.04,
+     "haptics": 0.36
+    }
+   },
+   "free": {
+    "oracle": {
+     "n": 31,
+     "recall": 0.5325379387300847,
+     "late_critical": 0.33602150537634407,
+     "precision": 1.0,
+     "occupancy": 0.14591397849462362,
+     "regret": 0.0,
+     "interrupts": 0.1935483870967742,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 31,
+     "recall": 0.11896233071605394,
+     "late_critical": 0.2096774193548387,
+     "precision": 0.08191709723967788,
+     "occupancy": 0.4922043010752687,
+     "regret": 5.433051735333144,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 31,
+     "recall": 0.21823766360663596,
+     "late_critical": 0.27956989247311825,
+     "precision": 0.4962365591397849,
+     "occupancy": 0.122258064516129,
+     "regret": 1.2534177446400931,
+     "interrupts": 0.3548387096774194,
+     "haptics": 0.22580645161290322
+    },
+    "pcacs_learned:il": {
+     "n": 31,
+     "recall": 0.4526217829590344,
+     "late_critical": 0.26344086021505375,
+     "precision": 0.6382488479262672,
+     "occupancy": 0.18962365591397845,
+     "regret": 0.7802260568378988,
+     "interrupts": 0,
+     "haptics": 1.064516129032258
+    },
+    "pcacs_learned:rl": {
+     "n": 31,
+     "recall": 0.4798255698619005,
+     "late_critical": 0.33064516129032256,
+     "precision": 0.839247311827957,
+     "occupancy": 0.14456989247311822,
+     "regret": 0.3765257304407034,
+     "interrupts": 0,
+     "haptics": 0.7419354838709677
+    }
+   },
+   "tts_delay": {
+    "oracle": {
+     "n": 27,
+     "recall": 0.5363398854273431,
+     "late_critical": 0.35185185185185186,
+     "precision": 1.0,
+     "occupancy": 0.18777777777777777,
+     "regret": 0.0,
+     "interrupts": 0.14814814814814814,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 27,
+     "recall": 0.17502619209125456,
+     "late_critical": 0.1882716049382716,
+     "precision": 0.09793971460638128,
+     "occupancy": 0.6082716049382716,
+     "regret": 5.303305023293413,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 27,
+     "recall": 0.20302050330622695,
+     "late_critical": 0.29320987654320985,
+     "precision": 0.5796296296296296,
+     "occupancy": 0.13882716049382718,
+     "regret": 1.0826648637071754,
+     "interrupts": 0.25925925925925924,
+     "haptics": 0.2222222222222222
+    },
+    "pcacs_learned:il": {
+     "n": 27,
+     "recall": 0.4360200583179745,
+     "late_critical": 0.30864197530864196,
+     "precision": 0.6528218694885362,
+     "occupancy": 0.25308641975308643,
+     "regret": 0.9160705049069342,
+     "interrupts": 0,
+     "haptics": 1.037037037037037
+    },
+    "pcacs_learned:rl": {
+     "n": 27,
+     "recall": 0.4138019537950479,
+     "late_critical": 0.32407407407407407,
+     "precision": 0.7895061728395062,
+     "occupancy": 0.18425925925925926,
+     "regret": 0.5295238811183084,
+     "interrupts": 0,
+     "haptics": 0.7777777777777778
+    }
+   },
+   "busy_long": {
+    "oracle": {
+     "n": 30,
+     "recall": 0.2698884238984792,
+     "late_critical": 0.4027777777777778,
+     "precision": 1.0,
+     "occupancy": 0.06305555555555555,
+     "regret": 0.0,
+     "interrupts": 0.23333333333333334,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 30,
+     "recall": 0.13033674924331698,
+     "late_critical": 0.375,
+     "precision": 0.125,
+     "occupancy": 0.22716666666666663,
+     "regret": 2.47577558272624,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 30,
+     "recall": 0.14667630049711675,
+     "late_critical": 0.4111111111111111,
+     "precision": 0.6777777777777778,
+     "occupancy": 0.05999999999999999,
+     "regret": 0.5509215131846712,
+     "interrupts": 0.2,
+     "haptics": 0.7333333333333333
+    },
+    "pcacs_learned:il": {
+     "n": 30,
+     "recall": 0.20432400932153177,
+     "late_critical": 0.4527777777777778,
+     "precision": 0.5277777777777778,
+     "occupancy": 0.09894444444444443,
+     "regret": 0.6350169385925966,
+     "interrupts": 0,
+     "haptics": 1.6333333333333333
+    },
+    "pcacs_learned:rl": {
+     "n": 30,
+     "recall": 0.2423995773854002,
+     "late_critical": 0.4527777777777778,
+     "precision": 0.6944444444444444,
+     "occupancy": 0.07694444444444443,
+     "regret": 0.3602947163703743,
+     "interrupts": 0,
+     "haptics": 1.4333333333333333
+    }
+   },
+   "busy_short": {
+    "oracle": {
+     "n": 33,
+     "recall": 0.4061520700465295,
+     "late_critical": 0.2196969696969697,
+     "precision": 1.0,
+     "occupancy": 0.09353535353535351,
+     "regret": 0.0,
+     "interrupts": 0.06060606060606061,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 33,
+     "recall": 0.11596970370119183,
+     "late_critical": 0.19696969696969696,
+     "precision": 0.07468953605317241,
+     "occupancy": 0.34505050505050494,
+     "regret": 4.277188088744343,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 33,
+     "recall": 0.18124241922401776,
+     "late_critical": 0.2803030303030303,
+     "precision": 0.6121212121212121,
+     "occupancy": 0.08469696969696967,
+     "regret": 1.0136730702015704,
+     "interrupts": 0.18181818181818182,
+     "haptics": 0.48484848484848486
+    },
+    "pcacs_learned:il": {
+     "n": 33,
+     "recall": 0.40491443928546417,
+     "late_critical": 0.20454545454545453,
+     "precision": 0.6535353535353535,
+     "occupancy": 0.14020202020202016,
+     "regret": 0.36886495762171856,
+     "interrupts": 0,
+     "haptics": 0.8181818181818182
+    },
+    "pcacs_learned:rl": {
+     "n": 33,
+     "recall": 0.3647321908290564,
+     "late_critical": 0.22474747474747475,
+     "precision": 0.902020202020202,
+     "occupancy": 0.09924242424242422,
+     "regret": 0.13859282637132647,
+     "interrupts": 0.030303030303030304,
+     "haptics": 0.5151515151515151
+    }
+   }
+  },
+  "perception": {
+   "camera_unavailable": {
+    "oracle": {
+     "n": 18,
+     "recall": 0.52307606709087,
+     "late_critical": 0.2916666666666667,
+     "precision": 1.0,
+     "occupancy": 0.14583333333333331,
+     "regret": 0.0,
+     "interrupts": 0.16666666666666666,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 18,
+     "recall": 0.13657661228818344,
+     "late_critical": 0.24074074074074073,
+     "precision": 0.10768197851531185,
+     "occupancy": 0.43324074074074065,
+     "regret": 4.552475323595679,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 18,
+     "recall": 0.2188973834811635,
+     "late_critical": 0.3287037037037037,
+     "precision": 0.7611111111111111,
+     "occupancy": 0.10212962962962963,
+     "regret": 0.9232404789196587,
+     "interrupts": 0.3888888888888889,
+     "haptics": 0.2777777777777778
+    },
+    "pcacs_learned:il": {
+     "n": 18,
+     "recall": 0.41693056504195825,
+     "late_critical": 0.3055555555555555,
+     "precision": 0.6972222222222222,
+     "occupancy": 0.17018518518518516,
+     "regret": 0.6114643914450415,
+     "interrupts": 0,
+     "haptics": 1.1111111111111112
+    },
+    "pcacs_learned:rl": {
+     "n": 18,
+     "recall": 0.4203797845495823,
+     "late_critical": 0.3055555555555555,
+     "precision": 0.8333333333333334,
+     "occupancy": 0.13222222222222219,
+     "regret": 0.23456996914620754,
+     "interrupts": 0,
+     "haptics": 0.7777777777777778
+    }
+   },
+   "unknown_object": {
+    "oracle": {
+     "n": 24,
+     "recall": 0.43867292096961286,
+     "late_critical": 0.3784722222222222,
+     "precision": 1.0,
+     "occupancy": 0.10319444444444442,
+     "regret": 0.0,
+     "interrupts": 0.125,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 24,
+     "recall": 0.081573441836587,
+     "late_critical": 0.2222222222222222,
+     "precision": 0.0644345238095238,
+     "occupancy": 0.4149999999999999,
+     "regret": 4.737671835657032,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 24,
+     "recall": 0.169046529133952,
+     "late_critical": 0.3368055555555555,
+     "precision": 0.5680555555555555,
+     "occupancy": 0.07958333333333331,
+     "regret": 0.8996001289731941,
+     "interrupts": 0.20833333333333334,
+     "haptics": 0.375
+    },
+    "pcacs_learned:il": {
+     "n": 24,
+     "recall": 0.45215012433040364,
+     "late_critical": 0.3055555555555555,
+     "precision": 0.5963789682539683,
+     "occupancy": 0.1620833333333333,
+     "regret": 0.4478704564806538,
+     "interrupts": 0,
+     "haptics": 1.1666666666666667
+    },
+    "pcacs_learned:rl": {
+     "n": 24,
+     "recall": 0.4888444347107078,
+     "late_critical": 0.3506944444444444,
+     "precision": 0.8583333333333333,
+     "occupancy": 0.13437499999999997,
+     "regret": 0.07764634031903779,
+     "interrupts": 0,
+     "haptics": 0.7916666666666666
+    }
+   },
+   "track_loss": {
+    "oracle": {
+     "n": 36,
+     "recall": 0.37631916826941375,
+     "late_critical": 0.34259259259259256,
+     "precision": 1.0,
+     "occupancy": 0.10402777777777776,
+     "regret": 0.0,
+     "interrupts": 0.05555555555555555,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 36,
+     "recall": 0.13990466398440587,
+     "late_critical": 0.22453703703703703,
+     "precision": 0.10102374477374478,
+     "occupancy": 0.4171296296296296,
+     "regret": 4.20192017843769,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 36,
+     "recall": 0.16369823017395171,
+     "late_critical": 0.3310185185185185,
+     "precision": 0.586574074074074,
+     "occupancy": 0.09249999999999999,
+     "regret": 0.9657297075750378,
+     "interrupts": 0.16666666666666666,
+     "haptics": 0.3055555555555556
+    },
+    "pcacs_learned:il": {
+     "n": 36,
+     "recall": 0.34502072477232915,
+     "late_critical": 0.28703703703703703,
+     "precision": 0.5757275132275133,
+     "occupancy": 0.17013888888888887,
+     "regret": 0.6287865350068652,
+     "interrupts": 0,
+     "haptics": 0.5833333333333334
+    },
+    "pcacs_learned:rl": {
+     "n": 36,
+     "recall": 0.34794521949104396,
+     "late_critical": 0.3194444444444444,
+     "precision": 0.7986111111111112,
+     "occupancy": 0.12254629629629626,
+     "regret": 0.30537210799868825,
+     "interrupts": 0.027777777777777776,
+     "haptics": 0.5277777777777778
+    }
+   },
+   "depth_noisy": {
+    "oracle": {
+     "n": 17,
+     "recall": 0.5002429166953763,
+     "late_critical": 0.3676470588235294,
+     "precision": 1.0,
+     "occupancy": 0.14460784313725486,
+     "regret": 0.0,
+     "interrupts": 0.35294117647058826,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 17,
+     "recall": 0.13649479325696418,
+     "late_critical": 0.2745098039215686,
+     "precision": 0.0887551990493167,
+     "occupancy": 0.4073529411764705,
+     "regret": 4.467867504947955,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 17,
+     "recall": 0.17881882667178167,
+     "late_critical": 0.35784313725490197,
+     "precision": 0.6568627450980392,
+     "occupancy": 0.10088235294117645,
+     "regret": 1.0848818400937779,
+     "interrupts": 0.35294117647058826,
+     "haptics": 0.7058823529411765
+    },
+    "pcacs_learned:il": {
+     "n": 17,
+     "recall": 0.25444161620176187,
+     "late_critical": 0.4068627450980392,
+     "precision": 0.5642857142857143,
+     "occupancy": 0.15245098039215682,
+     "regret": 1.1811157748441485,
+     "interrupts": 0,
+     "haptics": 1.5294117647058822
+    },
+    "pcacs_learned:rl": {
+     "n": 17,
+     "recall": 0.234686541020457,
+     "late_critical": 0.4411764705882353,
+     "precision": 0.7058823529411765,
+     "occupancy": 0.10392156862745096,
+     "regret": 0.8841304807265016,
+     "interrupts": 0,
+     "haptics": 1.1764705882352942
+    }
+   },
+   "nominal": {
+    "oracle": {
+     "n": 24,
+     "recall": 0.43846323650503743,
+     "late_critical": 0.28125,
+     "precision": 1.0,
+     "occupancy": 0.1459722222222222,
+     "regret": 0.0,
+     "interrupts": 0.20833333333333334,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 24,
+     "recall": 0.1536216748605168,
+     "late_critical": 0.2361111111111111,
+     "precision": 0.09620310245310244,
+     "occupancy": 0.4557638888888888,
+     "regret": 4.736398459443052,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 24,
+     "recall": 0.19904987094011628,
+     "late_critical": 0.3159722222222222,
+     "precision": 0.56875,
+     "occupancy": 0.10666666666666666,
+     "regret": 1.0052931839108268,
+     "interrupts": 0.25,
+     "haptics": 0.25
+    },
+    "pcacs_learned:il": {
+     "n": 24,
+     "recall": 0.3674129457586588,
+     "late_critical": 0.3090277777777778,
+     "precision": 0.6967261904761904,
+     "occupancy": 0.18548611111111107,
+     "regret": 0.7467577641357759,
+     "interrupts": 0,
+     "haptics": 1.0833333333333333
+    },
+    "pcacs_learned:rl": {
+     "n": 24,
+     "recall": 0.37485884920020923,
+     "late_critical": 0.3472222222222222,
+     "precision": 0.8569444444444444,
+     "occupancy": 0.14375,
+     "regret": 0.3982065541340847,
+     "interrupts": 0.041666666666666664,
+     "haptics": 0.8333333333333334
+    }
+   },
+   "ocr_error": {
+    "oracle": {
+     "n": 27,
+     "recall": 0.4574883516861534,
+     "late_critical": 0.2561728395061728,
+     "precision": 1.0,
+     "occupancy": 0.1383333333333333,
+     "regret": 0.0,
+     "interrupts": 0.07407407407407407,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 27,
+     "recall": 0.16199920664059447,
+     "late_critical": 0.19753086419753085,
+     "precision": 0.08807252418363529,
+     "occupancy": 0.4296913580246913,
+     "regret": 4.607459073060423,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 27,
+     "recall": 0.1693959148722032,
+     "late_critical": 0.24382716049382716,
+     "precision": 0.5740740740740741,
+     "occupancy": 0.09413580246913578,
+     "regret": 1.0578565350755322,
+     "interrupts": 0.14814814814814814,
+     "haptics": 0.4444444444444444
+    },
+    "pcacs_learned:il": {
+     "n": 27,
+     "recall": 0.36743542059146445,
+     "late_critical": 0.20679012345679013,
+     "precision": 0.6012345679012345,
+     "occupancy": 0.1754938271604938,
+     "regret": 0.6865945845774706,
+     "interrupts": 0,
+     "haptics": 1.1111111111111112
+    },
+    "pcacs_learned:rl": {
+     "n": 27,
+     "recall": 0.3704565944660873,
+     "late_critical": 0.2191358024691358,
+     "precision": 0.7876543209876543,
+     "occupancy": 0.11925925925925923,
+     "regret": 0.2911681658411533,
+     "interrupts": 0,
+     "haptics": 0.7777777777777778
+    }
+   }
+  },
+  "camera": {
+   "stable": {
+    "oracle": {
+     "n": 26,
+     "recall": 0.4627699273509473,
+     "late_critical": 0.17628205128205127,
+     "precision": 1.0,
+     "occupancy": 0.1297435897435897,
+     "regret": 0.0,
+     "interrupts": 0.07692307692307693,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 26,
+     "recall": 0.07819987258394068,
+     "late_critical": 0.15384615384615383,
+     "precision": 0.05941835941835942,
+     "occupancy": 0.4704487179487179,
+     "regret": 5.3696653266605185,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 26,
+     "recall": 0.1621489566487702,
+     "late_critical": 0.16346153846153846,
+     "precision": 0.6474358974358975,
+     "occupancy": 0.07551282051282049,
+     "regret": 0.953875600267003,
+     "interrupts": 0.07692307692307693,
+     "haptics": 0.4230769230769231
+    },
+    "pcacs_learned:il": {
+     "n": 26,
+     "recall": 0.422115317671569,
+     "late_critical": 0.13782051282051283,
+     "precision": 0.623992673992674,
+     "occupancy": 0.19935897435897432,
+     "regret": 0.8236702987183755,
+     "interrupts": 0,
+     "haptics": 1
+    },
+    "pcacs_learned:rl": {
+     "n": 26,
+     "recall": 0.4315997203036492,
+     "late_critical": 0.15064102564102563,
+     "precision": 0.7724358974358975,
+     "occupancy": 0.14333333333333328,
+     "regret": 0.3884299141029909,
+     "interrupts": 0,
+     "haptics": 0.8461538461538461
+    }
+   },
+   "partial_occlusion": {
+    "oracle": {
+     "n": 34,
+     "recall": 0.5140871925517715,
+     "late_critical": 0.37009803921568624,
+     "precision": 1.0,
+     "occupancy": 0.1722549019607843,
+     "regret": 0.0,
+     "interrupts": 0.2647058823529412,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 34,
+     "recall": 0.14234478596756608,
+     "late_critical": 0.2549019607843137,
+     "precision": 0.08883404177521824,
+     "occupancy": 0.44352941176470584,
+     "regret": 4.697762218487479,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 34,
+     "recall": 0.2337580073300266,
+     "late_critical": 0.32598039215686275,
+     "precision": 0.571078431372549,
+     "occupancy": 0.1226470588235294,
+     "regret": 1.043691978846305,
+     "interrupts": 0.38235294117647056,
+     "haptics": 0.35294117647058826
+    },
+    "pcacs_learned:il": {
+     "n": 34,
+     "recall": 0.4004683716094777,
+     "late_critical": 0.338235294117647,
+     "precision": 0.7387254901960785,
+     "occupancy": 0.1704411764705882,
+     "regret": 0.5509143306288438,
+     "interrupts": 0,
+     "haptics": 1.1764705882352942
+    },
+    "pcacs_learned:rl": {
+     "n": 34,
+     "recall": 0.4393675840018377,
+     "late_critical": 0.3480392156862745,
+     "precision": 0.9073529411764706,
+     "occupancy": 0.14465686274509804,
+     "regret": 0.21467953618061167,
+     "interrupts": 0,
+     "haptics": 1
+    }
+   },
+   "motion_blur": {
+    "oracle": {
+     "n": 27,
+     "recall": 0.4169954046402279,
+     "late_critical": 0.25925925925925924,
+     "precision": 1.0,
+     "occupancy": 0.10240740740740738,
+     "regret": 0.0,
+     "interrupts": 0.1111111111111111,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 27,
+     "recall": 0.09992228608096121,
+     "late_critical": 0.21604938271604937,
+     "precision": 0.083994708994709,
+     "occupancy": 0.40580246913580237,
+     "regret": 4.473850821019938,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 27,
+     "recall": 0.17035844811699133,
+     "late_critical": 0.2962962962962963,
+     "precision": 0.6987654320987654,
+     "occupancy": 0.08098765432098765,
+     "regret": 0.7242271067830532,
+     "interrupts": 0.1111111111111111,
+     "haptics": 0.4074074074074074
+    },
+    "pcacs_learned:il": {
+     "n": 27,
+     "recall": 0.3705700573636929,
+     "late_critical": 0.23765432098765432,
+     "precision": 0.5909611992945326,
+     "occupancy": 0.1666049382716049,
+     "regret": 0.5764746691151564,
+     "interrupts": 0,
+     "haptics": 1
+    },
+    "pcacs_learned:rl": {
+     "n": 27,
+     "recall": 0.38686367113637127,
+     "late_critical": 0.28703703703703703,
+     "precision": 0.8666666666666667,
+     "occupancy": 0.11802469135802467,
+     "regret": 0.15227917937760935,
+     "interrupts": 0.037037037037037035,
+     "haptics": 0.7407407407407407
+    }
+   },
+   "camera_tilt": {
+    "oracle": {
+     "n": 29,
+     "recall": 0.4556689187996047,
+     "late_critical": 0.29022988505747127,
+     "precision": 1.0,
+     "occupancy": 0.10551724137931032,
+     "regret": 0.0,
+     "interrupts": 0.13793103448275862,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 29,
+     "recall": 0.13490418987156794,
+     "late_critical": 0.1781609195402299,
+     "precision": 0.07661629558181282,
+     "occupancy": 0.39339080459770104,
+     "regret": 4.507367478760401,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 29,
+     "recall": 0.19320716424255033,
+     "late_critical": 0.29885057471264365,
+     "precision": 0.5902298850574712,
+     "occupancy": 0.09051724137931033,
+     "regret": 1.0689182555697982,
+     "interrupts": 0.3793103448275862,
+     "haptics": 0.3448275862068966
+    },
+    "pcacs_learned:il": {
+     "n": 29,
+     "recall": 0.3401506687786898,
+     "late_critical": 0.28735632183908044,
+     "precision": 0.6252873563218391,
+     "occupancy": 0.11775862068965513,
+     "regret": 0.47901714135833917,
+     "interrupts": 0,
+     "haptics": 0.7931034482758621
+    },
+    "pcacs_learned:rl": {
+     "n": 29,
+     "recall": 0.34192945762319266,
+     "late_critical": 0.3160919540229885,
+     "precision": 0.7787356321839081,
+     "occupancy": 0.09298850574712642,
+     "regret": 0.31512097853749393,
+     "interrupts": 0,
+     "haptics": 0.41379310344827586
+    }
+   },
+   "handheld_pan": {
+    "oracle": {
+     "n": 30,
+     "recall": 0.3628728298571384,
+     "late_critical": 0.4666666666666667,
+     "precision": 1.0,
+     "occupancy": 0.11627777777777777,
+     "regret": 0.0,
+     "interrupts": 0.1,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 30,
+     "recall": 0.2116992383159907,
+     "late_critical": 0.325,
+     "precision": 0.14207551707551708,
+     "occupancy": 0.4187777777777777,
+     "regret": 3.670122297143001,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 30,
+     "recall": 0.13049605204629877,
+     "late_critical": 0.4722222222222222,
+     "precision": 0.5511111111111111,
+     "occupancy": 0.09833333333333331,
+     "regret": 1.1089367049574093,
+     "interrupts": 0.16666666666666666,
+     "haptics": 0.36666666666666664
+    },
+    "pcacs_learned:il": {
+     "n": 30,
+     "recall": 0.31268633128371126,
+     "late_critical": 0.44166666666666665,
+     "precision": 0.49023809523809525,
+     "occupancy": 0.1989444444444444,
+     "regret": 1.0442648461144977,
+     "interrupts": 0,
+     "haptics": 1.1666666666666667
+    },
+    "pcacs_learned:rl": {
+     "n": 30,
+     "recall": 0.2764126036550742,
+     "late_critical": 0.48333333333333334,
+     "precision": 0.7088888888888889,
+     "occupancy": 0.1308333333333333,
+     "regret": 0.6293185077306594,
+     "interrupts": 0.03333333333333333,
+     "haptics": 0.8333333333333334
+    }
+   }
+  },
+  "light": {
+   "glare": {
+    "oracle": {
+     "n": 25,
+     "recall": 0.46593349708547943,
+     "late_critical": 0.27,
+     "precision": 1.0,
+     "occupancy": 0.14839999999999998,
+     "regret": 0.0,
+     "interrupts": 0.16,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 25,
+     "recall": 0.11094683087418264,
+     "late_critical": 0.25666666666666665,
+     "precision": 0.07286147186147186,
+     "occupancy": 0.4747333333333333,
+     "regret": 5.1844725562692044,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 25,
+     "recall": 0.1848837081223079,
+     "late_critical": 0.2533333333333333,
+     "precision": 0.4493333333333333,
+     "occupancy": 0.10866666666666665,
+     "regret": 1.0496067603004675,
+     "interrupts": 0.2,
+     "haptics": 0.4
+    },
+    "pcacs_learned:il": {
+     "n": 25,
+     "recall": 0.4045681833474461,
+     "late_critical": 0.21333333333333332,
+     "precision": 0.613,
+     "occupancy": 0.2011333333333333,
+     "regret": 0.6420359485035686,
+     "interrupts": 0,
+     "haptics": 1.12
+    },
+    "pcacs_learned:rl": {
+     "n": 25,
+     "recall": 0.439901136758271,
+     "late_critical": 0.21,
+     "precision": 0.822,
+     "occupancy": 0.16019999999999998,
+     "regret": 0.17379306908971734,
+     "interrupts": 0,
+     "haptics": 0.84
+    }
+   },
+   "night": {
+    "oracle": {
+     "n": 29,
+     "recall": 0.38474717670603004,
+     "late_critical": 0.28735632183908044,
+     "precision": 1.0,
+     "occupancy": 0.11114942528735632,
+     "regret": 0.0,
+     "interrupts": 0.06896551724137931,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 29,
+     "recall": 0.13863223135538696,
+     "late_critical": 0.17241379310344826,
+     "precision": 0.10505213177626971,
+     "occupancy": 0.3808045977011493,
+     "regret": 3.8976164204021306,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 29,
+     "recall": 0.19871456576951768,
+     "late_critical": 0.2528735632183908,
+     "precision": 0.6752873563218391,
+     "occupancy": 0.08477011494252873,
+     "regret": 0.7244535922001126,
+     "interrupts": 0.27586206896551724,
+     "haptics": 0.06896551724137931
+    },
+    "pcacs_learned:il": {
+     "n": 29,
+     "recall": 0.3334010816733409,
+     "late_critical": 0.3045977011494253,
+     "precision": 0.65935960591133,
+     "occupancy": 0.1479885057471264,
+     "regret": 0.5795835694187156,
+     "interrupts": 0,
+     "haptics": 1.206896551724138
+    },
+    "pcacs_learned:rl": {
+     "n": 29,
+     "recall": 0.35364377179885903,
+     "late_critical": 0.3275862068965517,
+     "precision": 0.8770114942528736,
+     "occupancy": 0.10643678160919537,
+     "regret": 0.20886382735124667,
+     "interrupts": 0.034482758620689655,
+     "haptics": 0.8620689655172413
+    }
+   },
+   "backlit": {
+    "oracle": {
+     "n": 38,
+     "recall": 0.48311352892414955,
+     "late_critical": 0.3157894736842105,
+     "precision": 1.0,
+     "occupancy": 0.1376754385964912,
+     "regret": 0.0,
+     "interrupts": 0.18421052631578946,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 38,
+     "recall": 0.1345598917115286,
+     "late_critical": 0.22807017543859648,
+     "precision": 0.0849247243984086,
+     "occupancy": 0.4442105263157894,
+     "regret": 4.805491541487905,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 38,
+     "recall": 0.20988809265483097,
+     "late_critical": 0.3355263157894737,
+     "precision": 0.6206140350877193,
+     "occupancy": 0.11368421052631578,
+     "regret": 1.104856837139966,
+     "interrupts": 0.23684210526315788,
+     "haptics": 0.5
+    },
+    "pcacs_learned:il": {
+     "n": 38,
+     "recall": 0.3904252750388521,
+     "late_critical": 0.2894736842105263,
+     "precision": 0.643546365914787,
+     "occupancy": 0.1709649122807017,
+     "regret": 0.5977598300448941,
+     "interrupts": 0,
+     "haptics": 0.9736842105263158
+    },
+    "pcacs_learned:rl": {
+     "n": 38,
+     "recall": 0.37863273048715784,
+     "late_critical": 0.34210526315789475,
+     "precision": 0.8267543859649122,
+     "occupancy": 0.12701754385964908,
+     "regret": 0.4220728596196049,
+     "interrupts": 0.02631578947368421,
+     "haptics": 0.7631578947368421
+    }
+   },
+   "bright": {
+    "oracle": {
+     "n": 31,
+     "recall": 0.49133318049822927,
+     "late_critical": 0.3790322580645161,
+     "precision": 1.0,
+     "occupancy": 0.13134408602150535,
+     "regret": 0.0,
+     "interrupts": 0.1935483870967742,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 31,
+     "recall": 0.13817964775353705,
+     "late_critical": 0.25806451612903225,
+     "precision": 0.08826863101056649,
+     "occupancy": 0.43478494623655906,
+     "regret": 4.728896912805394,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 31,
+     "recall": 0.17539192169603526,
+     "late_critical": 0.3655913978494624,
+     "precision": 0.5333333333333333,
+     "occupancy": 0.1039784946236559,
+     "regret": 1.2015390974708238,
+     "interrupts": 0.3548387096774194,
+     "haptics": 0.6129032258064516
+    },
+    "pcacs_learned:il": {
+     "n": 31,
+     "recall": 0.395422026023219,
+     "late_critical": 0.3440860215053763,
+     "precision": 0.6497695852534562,
+     "occupancy": 0.17365591397849459,
+     "regret": 0.7780486257877524,
+     "interrupts": 0,
+     "haptics": 0.9354838709677419
+    },
+    "pcacs_learned:rl": {
+     "n": 31,
+     "recall": 0.4517572692397021,
+     "late_critical": 0.3655913978494624,
+     "precision": 0.7833333333333333,
+     "occupancy": 0.13360215053763438,
+     "regret": 0.2996440296459646,
+     "interrupts": 0,
+     "haptics": 0.7741935483870968
+    }
+   },
+   "dim": {
+    "oracle": {
+     "n": 23,
+     "recall": 0.3684692990390894,
+     "late_critical": 0.33695652173913043,
+     "precision": 1.0,
+     "occupancy": 0.10028985507246375,
+     "regret": 0.0,
+     "interrupts": 0.08695652173913043,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 23,
+     "recall": 0.15839866710705755,
+     "late_critical": 0.2318840579710145,
+     "precision": 0.10807453416149068,
+     "occupancy": 0.38999999999999996,
+     "regret": 3.873884300683836,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 23,
+     "recall": 0.10797827573201037,
+     "late_critical": 0.36594202898550726,
+     "precision": 0.7753623188405797,
+     "occupancy": 0.051159420289855075,
+     "regret": 0.766328709429396,
+     "interrupts": 0.043478260869565216,
+     "haptics": 0.21739130434782608
+    },
+    "pcacs_learned:il": {
+     "n": 23,
+     "recall": 0.3027910680733426,
+     "late_critical": 0.31521739130434784,
+     "precision": 0.4822981366459627,
+     "occupancy": 0.1591304347826087,
+     "regret": 0.9233726256580946,
+     "interrupts": 0,
+     "haptics": 0.9565217391304348
+    },
+    "pcacs_learned:rl": {
+     "n": 23,
+     "recall": 0.22469674692598904,
+     "late_critical": 0.35144927536231885,
+     "precision": 0.717391304347826,
+     "occupancy": 0.10405797101449274,
+     "regret": 0.5999248758487888,
+     "interrupts": 0,
+     "haptics": 0.6086956521739131
+    }
+   }
+  },
+  "reaction_time": {
+   "medium": {
+    "oracle": {
+     "n": 41,
+     "recall": 0.49041531781335895,
+     "late_critical": 0.2764227642276423,
+     "precision": 1.0,
+     "occupancy": 0.14386178861788615,
+     "regret": 0.0,
+     "interrupts": 0.17073170731707318,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 41,
+     "recall": 0.13205847810511123,
+     "late_critical": 0.1951219512195122,
+     "precision": 0.08600931588736467,
+     "occupancy": 0.44353658536585355,
+     "regret": 4.782491415711324,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 41,
+     "recall": 0.19486046899962894,
+     "late_critical": 0.2886178861788618,
+     "precision": 0.5955284552845529,
+     "occupancy": 0.1028861788617886,
+     "regret": 1.047446397808601,
+     "interrupts": 0.17073170731707318,
+     "haptics": 0.36585365853658536
+    },
+    "pcacs_learned:il": {
+     "n": 41,
+     "recall": 0.4064301400429877,
+     "late_critical": 0.23170731707317072,
+     "precision": 0.65,
+     "occupancy": 0.18922764227642275,
+     "regret": 0.6461665914598268,
+     "interrupts": 0,
+     "haptics": 0.7560975609756098
+    },
+    "pcacs_learned:rl": {
+     "n": 41,
+     "recall": 0.4256406824643811,
+     "late_critical": 0.2621951219512195,
+     "precision": 0.8788617886178862,
+     "occupancy": 0.13422764227642275,
+     "regret": 0.22713970565650005,
+     "interrupts": 0.024390243902439025,
+     "haptics": 0.6829268292682927
+    }
+   },
+   "short": {
+    "oracle": {
+     "n": 60,
+     "recall": 0.5169299023064436,
+     "late_critical": 0.26805555555555555,
+     "precision": 1.0,
+     "occupancy": 0.14508333333333331,
+     "regret": 0.0,
+     "interrupts": 0.16666666666666666,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 60,
+     "recall": 0.17132538305885384,
+     "late_critical": 0.21805555555555556,
+     "precision": 0.11677086802086802,
+     "occupancy": 0.42433333333333323,
+     "regret": 4.491398811993819,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 60,
+     "recall": 0.22875268284457348,
+     "late_critical": 0.24444444444444444,
+     "precision": 0.7236111111111111,
+     "occupancy": 0.09147222222222222,
+     "regret": 0.8668651491697158,
+     "interrupts": 0.26666666666666666,
+     "haptics": 0.35
+    },
+    "pcacs_learned:il": {
+     "n": 60,
+     "recall": 0.3549935215918903,
+     "late_critical": 0.30694444444444446,
+     "precision": 0.6471230158730159,
+     "occupancy": 0.1630833333333333,
+     "regret": 0.8317462788329661,
+     "interrupts": 0,
+     "haptics": 1.2666666666666666
+    },
+    "pcacs_learned:rl": {
+     "n": 60,
+     "recall": 0.39052757911772035,
+     "late_critical": 0.3472222222222222,
+     "precision": 0.8808333333333334,
+     "occupancy": 0.12149999999999997,
+     "regret": 0.4190484430430251,
+     "interrupts": 0,
+     "haptics": 0.9
+    }
+   },
+   "long": {
+    "oracle": {
+     "n": 45,
+     "recall": 0.3055026656742082,
+     "late_critical": 0.42592592592592593,
+     "precision": 1.0,
+     "occupancy": 0.08755555555555554,
+     "regret": 0.0,
+     "interrupts": 0.08888888888888889,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 45,
+     "recall": 0.0920022045373346,
+     "late_critical": 0.2740740740740741,
+     "precision": 0.061879910213243544,
+     "occupancy": 0.41322222222222216,
+     "regret": 4.341787447196317,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 45,
+     "recall": 0.10148382991136498,
+     "late_critical": 0.437037037037037,
+     "precision": 0.4651851851851852,
+     "occupancy": 0.09307407407407406,
+     "regret": 1.0922209793504383,
+     "interrupts": 0.24444444444444444,
+     "haptics": 0.4222222222222222
+    },
+    "pcacs_learned:il": {
+     "n": 45,
+     "recall": 0.3528450386404483,
+     "late_critical": 0.337037037037037,
+     "precision": 0.547989417989418,
+     "occupancy": 0.16259259259259257,
+     "regret": 0.5451814794925239,
+     "interrupts": 0,
+     "haptics": 0.9777777777777777
+    },
+    "pcacs_learned:rl": {
+     "n": 45,
+     "recall": 0.30957376349469673,
+     "late_critical": 0.34629629629629627,
+     "precision": 0.6511111111111111,
+     "occupancy": 0.12577777777777774,
+     "regret": 0.3349388652227358,
+     "interrupts": 0.022222222222222223,
+     "haptics": 0.6888888888888889
+    }
+   }
+  },
+  "language": {
+   "portuguese": {
+    "oracle": {
+     "n": 21,
+     "recall": 0.38330840954713885,
+     "late_critical": 0.21031746031746032,
+     "precision": 1.0,
+     "occupancy": 0.09904761904761904,
+     "regret": 0.0,
+     "interrupts": 0.14285714285714285,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 21,
+     "recall": 0.10491806285035611,
+     "late_critical": 0.14285714285714285,
+     "precision": 0.06387223887223888,
+     "occupancy": 0.4358730158730158,
+     "regret": 4.8219649761614045,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 21,
+     "recall": 0.14284039346876376,
+     "late_critical": 0.2222222222222222,
+     "precision": 0.5833333333333334,
+     "occupancy": 0.09,
+     "regret": 0.9247941676670669,
+     "interrupts": 0.14285714285714285,
+     "haptics": 0.47619047619047616
+    },
+    "pcacs_learned:il": {
+     "n": 21,
+     "recall": 0.38738955080469684,
+     "late_critical": 0.18253968253968253,
+     "precision": 0.5380952380952381,
+     "occupancy": 0.15357142857142853,
+     "regret": 0.5393646026786783,
+     "interrupts": 0,
+     "haptics": 1.0476190476190477
+    },
+    "pcacs_learned:rl": {
+     "n": 21,
+     "recall": 0.3795022617864343,
+     "late_critical": 0.18253968253968253,
+     "precision": 0.8214285714285714,
+     "occupancy": 0.10198412698412695,
+     "regret": 0.1602544498456153,
+     "interrupts": 0,
+     "haptics": 0.8571428571428571
+    }
+   },
+   "english": {
+    "oracle": {
+     "n": 33,
+     "recall": 0.39841711243614525,
+     "late_critical": 0.3888888888888889,
+     "precision": 1.0,
+     "occupancy": 0.10934343434343434,
+     "regret": 0.0,
+     "interrupts": 0.06060606060606061,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 33,
+     "recall": 0.14947294457618987,
+     "late_critical": 0.29292929292929293,
+     "precision": 0.10330031920941012,
+     "occupancy": 0.39333333333333326,
+     "regret": 4.035137726077073,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 33,
+     "recall": 0.1619573200598474,
+     "late_critical": 0.35858585858585856,
+     "precision": 0.5060606060606061,
+     "occupancy": 0.09606060606060604,
+     "regret": 0.989928540951444,
+     "interrupts": 0.2727272727272727,
+     "haptics": 0.5454545454545454
+    },
+    "pcacs_learned:il": {
+     "n": 33,
+     "recall": 0.30852605081077783,
+     "late_critical": 0.3838383838383838,
+     "precision": 0.6176767676767677,
+     "occupancy": 0.14919191919191915,
+     "regret": 0.691831079020426,
+     "interrupts": 0,
+     "haptics": 1.121212121212121
+    },
+    "pcacs_learned:rl": {
+     "n": 33,
+     "recall": 0.3389459861793,
+     "late_critical": 0.41919191919191917,
+     "precision": 0.8161616161616162,
+     "occupancy": 0.10308080808080806,
+     "regret": 0.21819903633335944,
+     "interrupts": 0,
+     "haptics": 0.8484848484848485
+    }
+   },
+   "other": {
+    "oracle": {
+     "n": 23,
+     "recall": 0.48474347397076284,
+     "late_critical": 0.3079710144927536,
+     "precision": 1.0,
+     "occupancy": 0.12666666666666665,
+     "regret": 0.0,
+     "interrupts": 0.08695652173913043,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 23,
+     "recall": 0.16063887121654796,
+     "late_critical": 0.20652173913043478,
+     "precision": 0.09358540010713924,
+     "occupancy": 0.44079710144927525,
+     "regret": 4.552113928215187,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 23,
+     "recall": 0.1626122704948066,
+     "late_critical": 0.3297101449275362,
+     "precision": 0.6681159420289855,
+     "occupancy": 0.0703623188405797,
+     "regret": 0.9198171089858228,
+     "interrupts": 0.17391304347826086,
+     "haptics": 0.13043478260869565
+    },
+    "pcacs_learned:il": {
+     "n": 23,
+     "recall": 0.35190120116461526,
+     "late_critical": 0.30434782608695654,
+     "precision": 0.5156314699792961,
+     "occupancy": 0.1855797101449275,
+     "regret": 0.8875052126553842,
+     "interrupts": 0,
+     "haptics": 0.7391304347826086
+    },
+    "pcacs_learned:rl": {
+     "n": 23,
+     "recall": 0.3380797556344482,
+     "late_critical": 0.31521739130434784,
+     "precision": 0.6847826086956522,
+     "occupancy": 0.1321014492753623,
+     "regret": 0.5914842499224651,
+     "interrupts": 0.043478260869565216,
+     "haptics": 0.30434782608695654
+    }
+   },
+   "icon_only": {
+    "oracle": {
+     "n": 24,
+     "recall": 0.4128708688886096,
+     "late_critical": 0.4548611111111111,
+     "precision": 1.0,
+     "occupancy": 0.1404861111111111,
+     "regret": 0.0,
+     "interrupts": 0.20833333333333334,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 24,
+     "recall": 0.13135801612022088,
+     "late_critical": 0.3055555555555555,
+     "precision": 0.09623166185666185,
+     "occupancy": 0.3955555555555555,
+     "regret": 4.282840695361875,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 24,
+     "recall": 0.18202820363758293,
+     "late_critical": 0.4618055555555555,
+     "precision": 0.5368055555555555,
+     "occupancy": 0.10888888888888888,
+     "regret": 1.1356227448075276,
+     "interrupts": 0.2916666666666667,
+     "haptics": 0.5
+    },
+    "pcacs_learned:il": {
+     "n": 24,
+     "recall": 0.36927502174511884,
+     "late_critical": 0.3680555555555555,
+     "precision": 0.7290674603174603,
+     "occupancy": 0.1658333333333333,
+     "regret": 0.46798812323948197,
+     "interrupts": 0,
+     "haptics": 1.2916666666666667
+    },
+    "pcacs_learned:rl": {
+     "n": 24,
+     "recall": 0.3662686079584728,
+     "late_critical": 0.3923611111111111,
+     "precision": 0.8784722222222222,
+     "occupancy": 0.1336111111111111,
+     "regret": 0.2255564222412048,
+     "interrupts": 0,
+     "haptics": 1.0833333333333333
+    }
+   },
+   "french": {
+    "oracle": {
+     "n": 16,
+     "recall": 0.5779204748209783,
+     "late_critical": 0.3177083333333333,
+     "precision": 1.0,
+     "occupancy": 0.17968749999999997,
+     "regret": 0.0,
+     "interrupts": 0.25,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 16,
+     "recall": 0.15835669976934805,
+     "late_critical": 0.2552083333333333,
+     "precision": 0.10740214646464646,
+     "occupancy": 0.4804166666666666,
+     "regret": 5.098136874131093,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 16,
+     "recall": 0.2813395594655571,
+     "late_critical": 0.22916666666666666,
+     "precision": 0.75,
+     "occupancy": 0.10562499999999998,
+     "regret": 0.9179241104854253,
+     "interrupts": 0.25,
+     "haptics": 0.375
+    },
+    "pcacs_learned:il": {
+     "n": 16,
+     "recall": 0.44800621615681163,
+     "late_critical": 0.234375,
+     "precision": 0.6601934523809524,
+     "occupancy": 0.21374999999999994,
+     "regret": 0.854852599308264,
+     "interrupts": 0,
+     "haptics": 1.3125
+    },
+    "pcacs_learned:rl": {
+     "n": 16,
+     "recall": 0.4372893154179559,
+     "late_critical": 0.36979166666666663,
+     "precision": 0.8385416666666666,
+     "occupancy": 0.16635416666666664,
+     "regret": 0.6155761259348237,
+     "interrupts": 0,
+     "haptics": 0.8125
+    }
+   },
+   "spanish": {
+    "oracle": {
+     "n": 29,
+     "recall": 0.46098180901383323,
+     "late_critical": 0.21551724137931033,
+     "precision": 1.0,
+     "occupancy": 0.12741379310344825,
+     "regret": 0.0,
+     "interrupts": 0.1724137931034483,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 29,
+     "recall": 0.1143841268266769,
+     "late_critical": 0.15804597701149425,
+     "precision": 0.08229462108772453,
+     "occupancy": 0.4409770114942528,
+     "regret": 4.74030053117114,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 29,
+     "recall": 0.18368209174897102,
+     "late_critical": 0.2528735632183908,
+     "precision": 0.6747126436781609,
+     "occupancy": 0.10045977011494252,
+     "regret": 0.9972865796164779,
+     "interrupts": 0.2413793103448276,
+     "haptics": 0.20689655172413793
+    },
+    "pcacs_learned:il": {
+     "n": 29,
+     "recall": 0.39311399742288955,
+     "late_critical": 0.24137931034482757,
+     "precision": 0.639080459770115,
+     "occupancy": 0.17390804597701148,
+     "regret": 0.7397143053556728,
+     "interrupts": 0,
+     "haptics": 0.7931034482758621
+    },
+    "pcacs_learned:rl": {
+     "n": 29,
+     "recall": 0.41710575953962853,
+     "late_critical": 0.23850574712643677,
+     "precision": 0.8189655172413793,
+     "occupancy": 0.13804597701149424,
+     "regret": 0.3481124795448119,
+     "interrupts": 0.034482758620689655,
+     "haptics": 0.7241379310344828
+    }
+   }
+  },
+  "density": {
+   "crowded": {
+    "oracle": {
+     "n": 44,
+     "recall": 0.40304097734488564,
+     "late_critical": 0.0,
+     "precision": 1.0,
+     "occupancy": 0.09257575757575755,
+     "regret": 0.0,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 44,
+     "recall": 0.08458580908714156,
+     "late_critical": 0.0,
+     "precision": 0.033934310638856095,
+     "occupancy": 0.46253787878787866,
+     "regret": 5.24288243006993,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 44,
+     "recall": 0.013664496423117114,
+     "late_critical": 0.0,
+     "precision": 0.6590909090909091,
+     "occupancy": 0.018712121212121197,
+     "regret": 0.8883275058275059,
+     "interrupts": 0,
+     "haptics": 0.18181818181818182
+    },
+    "pcacs_learned:il": {
+     "n": 44,
+     "recall": 0.27360213365160346,
+     "late_critical": 0.0,
+     "precision": 0.38506493506493505,
+     "occupancy": 0.17465909090909085,
+     "regret": 1.2105528846153844,
+     "interrupts": 0,
+     "haptics": 0.7272727272727273
+    },
+    "pcacs_learned:rl": {
+     "n": 44,
+     "recall": 0.31895657363203084,
+     "late_critical": 0.0,
+     "precision": 0.7541666666666667,
+     "occupancy": 0.10511363636363633,
+     "regret": 0.43975169085964533,
+     "interrupts": 0,
+     "haptics": 0.45454545454545453
+    }
+   },
+   "burst": {
+    "oracle": {
+     "n": 30,
+     "recall": 0.3942788271177886,
+     "late_critical": 0.6555555555555556,
+     "precision": 1.0,
+     "occupancy": 0.11616666666666663,
+     "regret": 0.0,
+     "interrupts": 0.5333333333333333,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 30,
+     "recall": 0.12746761694665987,
+     "late_critical": 0.47777777777777775,
+     "precision": 0.13305555555555557,
+     "occupancy": 0.28477777777777774,
+     "regret": 3.021182351933126,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 30,
+     "recall": 0.30823132182032575,
+     "late_critical": 0.5555555555555556,
+     "precision": 0.4944444444444444,
+     "occupancy": 0.1366111111111111,
+     "regret": 0.7782083520767733,
+     "interrupts": 0.9666666666666667,
+     "haptics": 0.4
+    },
+    "pcacs_learned:il": {
+     "n": 30,
+     "recall": 0.23088192422996429,
+     "late_critical": 0.7666666666666666,
+     "precision": 0.75,
+     "occupancy": 0.09577777777777777,
+     "regret": 0.6968812543379109,
+     "interrupts": 0,
+     "haptics": 1.5333333333333334
+    },
+    "pcacs_learned:rl": {
+     "n": 30,
+     "recall": 0.2344790646877869,
+     "late_critical": 0.7666666666666666,
+     "precision": 0.8277777777777777,
+     "occupancy": 0.08149999999999998,
+     "regret": 0.5795981403930321,
+     "interrupts": 0,
+     "haptics": 1.2666666666666666
+    }
+   },
+   "empty": {
+    "oracle": {
+     "n": 4,
+     "recall": 0.5,
+     "late_critical": 0.0,
+     "precision": 1.0,
+     "occupancy": 0.029166666666666667,
+     "regret": 0.0,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 4,
+     "recall": 0.0,
+     "late_critical": 0.0,
+     "precision": 0.0,
+     "occupancy": 0.5079166666666667,
+     "regret": 5.724374999999999,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 4,
+     "recall": 0.0,
+     "late_critical": 0.0,
+     "precision": 0.5,
+     "occupancy": 0.055416666666666656,
+     "regret": 0.763125,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs_learned:il": {
+     "n": 4,
+     "recall": 0.75,
+     "late_critical": 0.0,
+     "precision": 0.625,
+     "occupancy": 0.08916666666666664,
+     "regret": 0.23999999999999994,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs_learned:rl": {
+     "n": 4,
+     "recall": 0.75,
+     "late_critical": 0.0,
+     "precision": 1.0,
+     "occupancy": 0.06124999999999998,
+     "regret": -0.11062499999999997,
+     "interrupts": 0,
+     "haptics": 0
+    }
+   },
+   "sparse": {
+    "oracle": {
+     "n": 36,
+     "recall": 0.4391848086900487,
+     "late_critical": 0.4375,
+     "precision": 1.0,
+     "occupancy": 0.14513888888888887,
+     "regret": 0.0,
+     "interrupts": 0.05555555555555555,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 36,
+     "recall": 0.18846429597121558,
+     "late_critical": 0.3101851851851852,
+     "precision": 0.12251244126244126,
+     "occupancy": 0.44865740740740734,
+     "regret": 4.372741887586766,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 36,
+     "recall": 0.2449416648738483,
+     "late_critical": 0.4652777777777778,
+     "precision": 0.6939814814814815,
+     "occupancy": 0.12587962962962962,
+     "regret": 0.929499571850578,
+     "interrupts": 0.027777777777777776,
+     "haptics": 0.6666666666666666
+    },
+    "pcacs_learned:il": {
+     "n": 36,
+     "recall": 0.46719366663327916,
+     "late_critical": 0.28703703703703703,
+     "precision": 0.7042989417989418,
+     "occupancy": 0.20777777777777776,
+     "regret": 0.269196978488774,
+     "interrupts": 0,
+     "haptics": 1.1944444444444444
+    },
+    "pcacs_learned:rl": {
+     "n": 36,
+     "recall": 0.4620708058137584,
+     "late_critical": 0.3587962962962963,
+     "precision": 0.825462962962963,
+     "occupancy": 0.16624999999999998,
+     "regret": 0.03082130151983084,
+     "interrupts": 0,
+     "haptics": 0.9444444444444444
+    }
+   },
+   "moderate": {
+    "oracle": {
+     "n": 32,
+     "recall": 0.5468006623288538,
+     "late_critical": 0.3489583333333333,
+     "precision": 1.0,
+     "occupancy": 0.17635416666666665,
+     "regret": 0.0,
+     "interrupts": 0.09375,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 32,
+     "recall": 0.17198440708822066,
+     "late_critical": 0.24739583333333331,
+     "precision": 0.10693768037518037,
+     "occupancy": 0.47380208333333323,
+     "regret": 4.978375201669796,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 32,
+     "recall": 0.23797297228078607,
+     "late_critical": 0.3984375,
+     "precision": 0.5609375,
+     "occupancy": 0.13187499999999996,
+     "regret": 1.4112503101803453,
+     "interrupts": 0.125,
+     "haptics": 0.34375
+    },
+    "pcacs_learned:il": {
+     "n": 32,
+     "recall": 0.47054219280401743,
+     "late_critical": 0.3046875,
+     "precision": 0.7137276785714286,
+     "occupancy": 0.20203124999999997,
+     "regret": 0.5034036805682605,
+     "interrupts": 0,
+     "haptics": 0.9375
+    },
+    "pcacs_learned:rl": {
+     "n": 32,
+     "recall": 0.4409603717383104,
+     "late_critical": 0.3515625,
+     "precision": 0.8265625,
+     "occupancy": 0.16104166666666664,
+     "regret": 0.3788686870372453,
+     "interrupts": 0.0625,
+     "haptics": 0.65625
+    }
+   }
+  },
+  "scope": {
+   "complex": {
+    "oracle": {
+     "n": 40,
+     "recall": 0.405148374978072,
+     "late_critical": 0.2875,
+     "precision": 1.0,
+     "occupancy": 0.10012499999999998,
+     "regret": 0.0,
+     "interrupts": 0.15,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 40,
+     "recall": 0.15199480577985325,
+     "late_critical": 0.21875,
+     "precision": 0.09309731934731935,
+     "occupancy": 0.3959166666666666,
+     "regret": 4.1800003660984695,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 40,
+     "recall": 0.15832873567753405,
+     "late_critical": 0.26875,
+     "precision": 0.61375,
+     "occupancy": 0.076875,
+     "regret": 0.8365508544173406,
+     "interrupts": 0.275,
+     "haptics": 0.3
+    },
+    "pcacs_learned:il": {
+     "n": 40,
+     "recall": 0.36835333967153217,
+     "late_critical": 0.26875,
+     "precision": 0.6095238095238096,
+     "occupancy": 0.14991666666666664,
+     "regret": 0.6085540127173737,
+     "interrupts": 0,
+     "haptics": 0.95
+    },
+    "pcacs_learned:rl": {
+     "n": 40,
+     "recall": 0.35423904722267313,
+     "late_critical": 0.2875,
+     "precision": 0.7520833333333333,
+     "occupancy": 0.10966666666666663,
+     "regret": 0.3785907302890178,
+     "interrupts": 0,
+     "haptics": 0.725
+    }
+   },
+   "degraded": {
+    "oracle": {
+     "n": 27,
+     "recall": 0.41756828022816905,
+     "late_critical": 0.47530864197530864,
+     "precision": 1.0,
+     "occupancy": 0.1302469135802469,
+     "regret": 0.0,
+     "interrupts": 0.037037037037037035,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 27,
+     "recall": 0.1186082928991971,
+     "late_critical": 0.2839506172839506,
+     "precision": 0.08854016354016354,
+     "occupancy": 0.4200617283950617,
+     "regret": 4.299966063181362,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 27,
+     "recall": 0.1841551469729039,
+     "late_critical": 0.41358024691358025,
+     "precision": 0.6419753086419753,
+     "occupancy": 0.10925925925925924,
+     "regret": 0.9060342197887348,
+     "interrupts": 0.18518518518518517,
+     "haptics": 0.3333333333333333
+    },
+    "pcacs_learned:il": {
+     "n": 27,
+     "recall": 0.33525691822674014,
+     "late_critical": 0.3765432098765432,
+     "precision": 0.6248677248677249,
+     "occupancy": 0.16623456790123453,
+     "regret": 0.6378401194274517,
+     "interrupts": 0,
+     "haptics": 1
+    },
+    "pcacs_learned:rl": {
+     "n": 27,
+     "recall": 0.34741157981585996,
+     "late_critical": 0.4567901234567901,
+     "precision": 0.895679012345679,
+     "occupancy": 0.1159259259259259,
+     "regret": 0.30657348637869797,
+     "interrupts": 0,
+     "haptics": 0.7777777777777778
+    }
+   },
+   "everyday": {
+    "oracle": {
+     "n": 79,
+     "recall": 0.47329320960494,
+     "late_critical": 0.28164556962025317,
+     "precision": 1.0,
+     "occupancy": 0.13951476793248943,
+     "regret": 0.0,
+     "interrupts": 0.17721518987341772,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 79,
+     "recall": 0.1335671348170683,
+     "late_critical": 0.2151898734177215,
+     "precision": 0.09117408611079497,
+     "occupancy": 0.4438185654008438,
+     "regret": 4.780347006807496,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 79,
+     "recall": 0.1895680272189981,
+     "late_critical": 0.30696202531645567,
+     "precision": 0.5934599156118143,
+     "occupancy": 0.09962025316455694,
+     "regret": 1.090913888862226,
+     "interrupts": 0.22784810126582278,
+     "haptics": 0.43037974683544306
+    },
+    "pcacs_learned:il": {
+     "n": 79,
+     "recall": 0.38044561262168125,
+     "late_critical": 0.2805907172995781,
+     "precision": 0.6187914406268836,
+     "occupancy": 0.18196202531645567,
+     "regret": 0.7514801243513708,
+     "interrupts": 0,
+     "haptics": 1.0886075949367089
+    },
+    "pcacs_learned:rl": {
+     "n": 79,
+     "recall": 0.39574769039783614,
+     "late_critical": 0.29535864978902954,
+     "precision": 0.8090717299578059,
+     "occupancy": 0.13843881856540083,
+     "regret": 0.3304654443763995,
+     "interrupts": 0.02531645569620253,
+     "haptics": 0.7974683544303798
+    }
+   },
+   "ood_only": {
+    "oracle": {
+     "n": 27,
+     "recall": 0.28394970977761064,
+     "late_critical": 0.33730158730158727,
+     "precision": 1.0,
+     "occupancy": 0.08993827160493827,
+     "regret": 0.0,
+     "interrupts": 0.07407407407407407,
+     "haptics": 0
+    },
+    "confidence_cooldown": {
+     "n": 27,
+     "recall": 0.08540607838210994,
+     "late_critical": 0.25485008818342153,
+     "precision": 0.05863262252151141,
+     "occupancy": 0.3862345679012345,
+     "regret": 4.169774613246835,
+     "interrupts": 0,
+     "haptics": 0
+    },
+    "pcacs": {
+     "n": 27,
+     "recall": 0.13095896760396025,
+     "late_critical": 0.28791887125220456,
+     "precision": 0.6666666666666666,
+     "occupancy": 0.07037037037037036,
+     "regret": 0.6739863711391489,
+     "interrupts": 0.25925925925925924,
+     "haptics": 0.4444444444444444
+    },
+    "pcacs_learned:il": {
+     "n": 27,
+     "recall": 0.24172707893664286,
+     "late_critical": 0.4237213403880071,
+     "precision": 0.4993827160493827,
+     "occupancy": 0.14728395061728394,
+     "regret": 0.8021835591484284,
+     "interrupts": 0,
+     "haptics": 1
+    },
+    "pcacs_learned:rl": {
+     "n": 27,
+     "recall": 0.2114796221651431,
+     "late_critical": 0.4351851851851852,
+     "precision": 0.6327160493827161,
+     "occupancy": 0.09969135802469135,
+     "regret": 0.672270036457128,
+     "interrupts": 0,
+     "haptics": 0.48148148148148145
+    }
+   }
+  }
+ },
+ "ood_only": {
+  "oracle": {
+   "n": 27,
+   "recall": 0.28394970977761064,
+   "late_critical": 0.33730158730158727,
+   "precision": 1.0,
+   "occupancy": 0.08993827160493827,
+   "regret": 0.0,
+   "interrupts": 0.07407407407407407,
+   "haptics": 0
+  },
+  "confidence_cooldown": {
+   "n": 27,
+   "recall": 0.08540607838210994,
+   "late_critical": 0.25485008818342153,
+   "precision": 0.05863262252151141,
+   "occupancy": 0.3862345679012345,
+   "regret": 4.169774613246835,
+   "interrupts": 0,
+   "haptics": 0
+  },
+  "pcacs": {
+   "n": 27,
+   "recall": 0.13095896760396025,
+   "late_critical": 0.28791887125220456,
+   "precision": 0.6666666666666666,
+   "occupancy": 0.07037037037037036,
+   "regret": 0.6739863711391489,
+   "interrupts": 0.25925925925925924,
+   "haptics": 0.4444444444444444
+  },
+  "pcacs_learned:il": {
+   "n": 27,
+   "recall": 0.24172707893664286,
+   "late_critical": 0.4237213403880071,
+   "precision": 0.4993827160493827,
+   "occupancy": 0.14728395061728394,
+   "regret": 0.8021835591484284,
+   "interrupts": 0,
+   "haptics": 1
+  },
+  "pcacs_learned:rl": {
+   "n": 27,
+   "recall": 0.2114796221651431,
+   "late_critical": 0.4351851851851852,
+   "precision": 0.6327160493827161,
+   "occupancy": 0.09969135802469135,
+   "regret": 0.672270036457128,
+   "interrupts": 0,
+   "haptics": 0.48148148148148145
+  }
+ }
+}

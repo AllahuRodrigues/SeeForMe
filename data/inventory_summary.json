@@ -1,0 +1,74 @@
+{
+ "egoblind_videos": {
+  "present": true,
+  "files": {
+   "video": 673
+  },
+  "gb": 37.7
+ },
+ "egoblind_cache": {
+  "present": true,
+  "files": {
+   "cache": 112
+  },
+  "gb": 0.0
+ },
+ "egoblind_scenarios": {
+  "present": true,
+  "files": {
+   "json": 1330
+  },
+  "gb": 0.0
+ },
+ "campus": {
+  "present": true,
+  "files": {
+   "json": 165
+  },
+  "gb": 0.0
+ },
+ "campus_v2": {
+  "present": true,
+  "files": {
+   "json": 225
+  },
+  "gb": 0.0
+ },
+ "guidedog": {
+  "present": true,
+  "files": {
+   "other": 5
+  },
+  "gb": 0.0
+ },
+ "dada": {
+  "present": true,
+  "files": {
+   "xlsx": 1
+  },
+  "gb": 0.0
+ },
+ "ego4d": {
+  "present": false
+ },
+ "aria": {
+  "present": false
+ },
+ "jrdb": {
+  "present": false
+ },
+ "real_recordings": {
+  "present": false
+ },
+ "external_code": {
+  "present": true,
+  "files": {
+   "csv": 4,
+   "other": 274,
+   "image": 5,
+   "json": 32
+  },
+  "gb": 0.03
+ },
+ "_generated": "2026-10-08 17:07"
+}

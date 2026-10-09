@@ -1,0 +1,9 @@
+CampusBench: 84 train / 42 val scenarios
+imitation (DAgger)
+  dagger iter 0: n=17314 actions={'silence': 16053, 'speak': 1201, 'interrupt': 2, 'haptic': 58} thr=0.7 val score=-0.443 regret=0.796 AWrecall=0.604 prec=0.737 occ=0.26
+  dagger iter 1: n=34672 actions={'silence': 32677, 'speak': 1861, 'interrupt': 12, 'haptic': 122} thr=0.7 val score=-0.426 regret=0.779 AWrecall=0.601 prec=0.656 occ=0.26
+  best imitation iter 1 thr=0.7 val score=-0.426 (816s)
+reward fine-tuning (REINFORCE)
+  silence bias calibrated: +2.0 (val scores [-1.97, -0.89, -0.32, 0.21, 0.01])
+  reinforce epoch 0 (imitation init): val score=0.214 regret=0.138 AWrecall=0.664 prec=0.880 occ=0.22
+done in 1008s -> models/arch_attn/scheduler

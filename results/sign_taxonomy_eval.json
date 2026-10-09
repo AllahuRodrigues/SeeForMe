@@ -1,0 +1,397 @@
+{
+ "n_rows": 199,
+ "n_groups": 90,
+ "cv": "5-fold, grouped by sign intent (a string and all its translations share a fold)",
+ "always_important": {
+  "all": {
+   "n": 199,
+   "n_important": 160,
+   "accuracy": 0.804,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "English taxonomy": {
+   "n": 83,
+   "n_important": 76,
+   "accuracy": 0.916,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "non-English (pt / es / fr)": {
+   "n": 108,
+   "n_important": 84,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:en": {
+   "n": 91,
+   "n_important": 76,
+   "accuracy": 0.835,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:pt": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:es": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:fr": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  }
+ },
+ "majority_class": {
+  "all": {
+   "n": 199,
+   "n_important": 160,
+   "accuracy": 0.804,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "English taxonomy": {
+   "n": 83,
+   "n_important": 76,
+   "accuracy": 0.916,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "non-English (pt / es / fr)": {
+   "n": 108,
+   "n_important": 84,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:en": {
+   "n": 91,
+   "n_important": 76,
+   "accuracy": 0.835,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:pt": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:es": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  },
+  "lang:fr": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.778,
+   "balanced_accuracy": 0.5,
+   "recall_important": 1.0,
+   "recall_not_important": 0.0
+  }
+ },
+ "keyword": {
+  "all": {
+   "n": 199,
+   "n_important": 160,
+   "accuracy": 0.317,
+   "balanced_accuracy": 0.575,
+   "recall_important": 0.15,
+   "recall_not_important": 1.0
+  },
+  "English taxonomy": {
+   "n": 83,
+   "n_important": 76,
+   "accuracy": 0.373,
+   "balanced_accuracy": 0.658,
+   "recall_important": 0.316,
+   "recall_not_important": 1.0
+  },
+  "non-English (pt / es / fr)": {
+   "n": 108,
+   "n_important": 84,
+   "accuracy": 0.222,
+   "balanced_accuracy": 0.5,
+   "recall_important": 0.0,
+   "recall_not_important": 1.0
+  },
+  "lang:en": {
+   "n": 91,
+   "n_important": 76,
+   "accuracy": 0.429,
+   "balanced_accuracy": 0.658,
+   "recall_important": 0.316,
+   "recall_not_important": 1.0
+  },
+  "lang:pt": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.222,
+   "balanced_accuracy": 0.5,
+   "recall_important": 0.0,
+   "recall_not_important": 1.0
+  },
+  "lang:es": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.222,
+   "balanced_accuracy": 0.5,
+   "recall_important": 0.0,
+   "recall_not_important": 1.0
+  },
+  "lang:fr": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.222,
+   "balanced_accuracy": 0.5,
+   "recall_important": 0.0,
+   "recall_not_important": 1.0
+  }
+ },
+ "learned_v1": {
+  "all": {
+   "n": 199,
+   "n_important": 160,
+   "accuracy": 0.633,
+   "balanced_accuracy": 0.714,
+   "recall_important": 0.581,
+   "recall_not_important": 0.846
+  },
+  "English taxonomy": {
+   "n": 83,
+   "n_important": 76,
+   "accuracy": 0.783,
+   "balanced_accuracy": 0.817,
+   "recall_important": 0.776,
+   "recall_not_important": 0.857
+  },
+  "non-English (pt / es / fr)": {
+   "n": 108,
+   "n_important": 84,
+   "accuracy": 0.491,
+   "balanced_accuracy": 0.598,
+   "recall_important": 0.405,
+   "recall_not_important": 0.792
+  },
+  "lang:en": {
+   "n": 91,
+   "n_important": 76,
+   "accuracy": 0.802,
+   "balanced_accuracy": 0.855,
+   "recall_important": 0.776,
+   "recall_not_important": 0.933
+  },
+  "lang:pt": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.444,
+   "balanced_accuracy": 0.509,
+   "recall_important": 0.393,
+   "recall_not_important": 0.625
+  },
+  "lang:es": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.583,
+   "balanced_accuracy": 0.688,
+   "recall_important": 0.5,
+   "recall_not_important": 0.875
+  },
+  "lang:fr": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.444,
+   "balanced_accuracy": 0.598,
+   "recall_important": 0.321,
+   "recall_not_important": 0.875
+  }
+ },
+ "learned_v2_grouped_cv": {
+  "all": {
+   "n": 199,
+   "n_important": 160,
+   "accuracy": 0.864,
+   "balanced_accuracy": 0.838,
+   "recall_important": 0.881,
+   "recall_not_important": 0.795
+  },
+  "English taxonomy": {
+   "n": 83,
+   "n_important": 76,
+   "accuracy": 0.867,
+   "balanced_accuracy": 0.798,
+   "recall_important": 0.882,
+   "recall_not_important": 0.714
+  },
+  "non-English (pt / es / fr)": {
+   "n": 108,
+   "n_important": 84,
+   "accuracy": 0.852,
+   "balanced_accuracy": 0.815,
+   "recall_important": 0.881,
+   "recall_not_important": 0.75
+  },
+  "lang:en": {
+   "n": 91,
+   "n_important": 76,
+   "accuracy": 0.879,
+   "balanced_accuracy": 0.874,
+   "recall_important": 0.882,
+   "recall_not_important": 0.867
+  },
+  "lang:pt": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.861,
+   "balanced_accuracy": 0.777,
+   "recall_important": 0.929,
+   "recall_not_important": 0.625
+  },
+  "lang:es": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.889,
+   "balanced_accuracy": 0.884,
+   "recall_important": 0.893,
+   "recall_not_important": 0.875
+  },
+  "lang:fr": {
+   "n": 36,
+   "n_important": 28,
+   "accuracy": 0.806,
+   "balanced_accuracy": 0.786,
+   "recall_important": 0.821,
+   "recall_not_important": 0.75
+  }
+ },
+ "v2_model": {
+  "n_train": 1049,
+  "n_test": 350,
+  "cv_f1_mean": 0.9590099347069172,
+  "cv_f1_std": 0.00816323777242489,
+  "test_accuracy": 0.9628571428571429,
+  "test_f1": 0.9651474530831099,
+  "test_auc": 0.9977302631578947,
+  "unseen_accuracy": 1.0
+ },
+ "worst_v1": [
+  [
+   0.09,
+   "SALIDAS",
+   1,
+   "es"
+  ],
+  [
+   0.09,
+   "CONTROLE DE PASSAPORTES",
+   1,
+   "pt"
+  ],
+  [
+   0.09,
+   "CONTR\u00d4LE DES PASSEPORTS",
+   1,
+   "fr"
+  ],
+  [
+   0.1,
+   "SORTIE",
+   1,
+   "fr"
+  ],
+  [
+   0.14,
+   "SALIDA",
+   1,
+   "es"
+  ],
+  [
+   0.15,
+   "YOU ARE HERE",
+   1,
+   "en"
+  ],
+  [
+   0.16,
+   "SORTIE DE SECOURS",
+   1,
+   "fr"
+  ],
+  [
+   0.16,
+   "CONTROL DE PASAPORTES",
+   1,
+   "es"
+  ],
+  [
+   0.19,
+   "ESCADAS",
+   1,
+   "pt"
+  ],
+  [
+   0.19,
+   "ESCALIER M\u00c9CANIQUE",
+   1,
+   "fr"
+  ],
+  [
+   0.19,
+   "PORTES D'EMBARQUEMENT",
+   1,
+   "fr"
+  ],
+  [
+   0.2,
+   "AISLE 5",
+   1,
+   "en"
+  ],
+  [
+   0.8,
+   "NONACTIONABLE WALL TEXT",
+   0,
+   "en"
+  ],
+  [
+   0.2,
+   "ESCALERAS",
+   1,
+   "es"
+  ],
+  [
+   0.2,
+   "ESCALERA MEC\u00c1NICA",
+   1,
+   "es"
+  ]
+ ]
+}

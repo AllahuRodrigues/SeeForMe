@@ -1,0 +1,11 @@
+{
+ "name": "models/egoblind",
+ "kind": "learned scheduler (gru, 14268 params)",
+ "license": "derived from CC BY-NC 4.0 data (EgoBlind): research only",
+ "commercial_use_permitted": "no",
+ "trained_on": "egoblind,campus (CampusBench v1)",
+ "selected_on": "egoblind",
+ "n_train": 520,
+ "generated": "2026-10-09",
+ "note": "a model trained on non-commercial data stays non-commercial"
+}

@@ -73,6 +73,8 @@ class Track:
     path_prob: float = 0.0                # P(object will be inside the walking corridor at arrival)
     dist_history: Deque[Tuple[float, float, float]] = field(default_factory=lambda: deque(maxlen=25))  # (t, z, x)
     last_haptic: Optional[float] = None
+    remembered: bool = False              # kept alive by the memory ledger (not currently detected)
+    memory_t: Optional[float] = None      # last time the memory extrapolation ran
 
     @property
     def source_id(self) -> Optional[int]:

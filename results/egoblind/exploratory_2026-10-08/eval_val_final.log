@@ -1,0 +1,21 @@
+EgoBlind val: 47 cached videos, 21 should-speak events, 23 quiet windows, 20.4 min of video, noise=None
+oracle                 recall all/cover/det=0.48/1.00/1.00 prec=1.00 quietViol=0.00 occ=0.01 cues= 0.5/min hap=0.0 lead=1.50s lateC=0.16 silP=0.95 minMsg=1.00 regret=0.00
+confidence_cooldown    recall all/cover/det=0.29/0.67/0.67 prec=0.02 quietViol=0.96 occ=0.42 cues=16.9/min hap=0.0 lead=4.59s lateC=0.20 silP=0.99 minMsg=0.47 regret=2.33
+cacs                   recall all/cover/det=0.33/0.83/0.83 prec=0.03 quietViol=0.83 occ=0.35 cues=10.6/min hap=0.0 lead=5.40s lateC=0.20 silP=0.98 minMsg=0.44 regret=1.75
+pcacs                  recall all/cover/det=0.00/0.00/0.00 prec=0.00 quietViol=0.00 occ=0.01 cues= 0.2/min hap=0.0 lead=nans lateC=0.30 silP=0.93 minMsg=nan regret=0.29
+pcacs_egoblind         recall all/cover/det=0.00/0.00/0.00 prec=nan quietViol=0.00 occ=0.00 cues= 0.0/min hap=0.0 lead=nans lateC=0.30 silP=0.93 minMsg=nan regret=0.24
+pcacs_learned:il       recall all/cover/det=0.14/0.33/0.33 prec=0.03 quietViol=0.22 occ=0.11 cues= 4.7/min hap=0.7 lead=0.77s lateC=0.26 silP=0.93 minMsg=0.44 regret=0.68
+pcacs_learned:rl       recall all/cover/det=0.05/0.17/0.17 prec=0.05 quietViol=0.04 occ=0.02 cues= 1.1/min hap=0.1 lead=-0.05s lateC=0.29 silP=0.93 minMsg=0.67 regret=0.33
+egoblind_learned:il    recall all/cover/det=0.05/0.17/0.17 prec=0.03 quietViol=0.04 occ=0.03 cues= 1.7/min hap=0.0 lead=1.80s lateC=0.29 silP=0.93 minMsg=0.50 regret=0.38
+egoblind_learned:rl    recall all/cover/det=0.00/0.00/0.00 prec=nan quietViol=0.00 occ=0.00 cues= 0.0/min hap=0.0 lead=nans lateC=0.30 silP=0.93 minMsg=nan regret=0.24
+| policy | recall (all events) | recall (coverable) | recall (detected) | precision | quiet-window violations | audio occupancy | cues/min | anticipation lead (s) | late critical rate | regret |
+|---|---|---|---|---|---|---|---|---|---|---|
+| oracle | 0.48 | 1.00 | 1.00 | 1.00 | 0.00 | 0.01 | 0.5 | 1.50 | 0.16 | 0.00 |
+| confidence_cooldown | 0.29 | 0.67 | 0.67 | 0.02 | 0.96 | 0.42 | 16.9 | 4.59 | 0.20 | 2.33 |
+| cacs | 0.33 | 0.83 | 0.83 | 0.03 | 0.83 | 0.35 | 10.6 | 5.40 | 0.20 | 1.75 |
+| pcacs | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 | 0.01 | 0.2 | nan | 0.30 | 0.29 |
+| pcacs_egoblind | 0.00 | 0.00 | 0.00 | nan | 0.00 | 0.00 | 0.0 | nan | 0.30 | 0.24 |
+| pcacs_learned:il | 0.14 | 0.33 | 0.33 | 0.03 | 0.22 | 0.11 | 4.7 | 0.77 | 0.26 | 0.68 |
+| pcacs_learned:rl | 0.05 | 0.17 | 0.17 | 0.05 | 0.04 | 0.02 | 1.1 | -0.05 | 0.29 | 0.33 |
+| egoblind_learned:il | 0.05 | 0.17 | 0.17 | 0.03 | 0.04 | 0.03 | 1.7 | 1.80 | 0.29 | 0.38 |
+| egoblind_learned:rl | 0.00 | 0.00 | 0.00 | nan | 0.00 | 0.00 | 0.0 | nan | 0.30 | 0.24 |

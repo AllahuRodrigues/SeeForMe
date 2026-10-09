@@ -1,0 +1,95 @@
+{
+ "pcacs": {
+  "all": {
+   "below_threshold": 19,
+   "not_coverable": 33,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2,
+   "spoken_late": 1
+  },
+  "coverable": {
+   "below_threshold": 19,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2,
+   "spoken_late": 1
+  },
+  "n_events": 63,
+  "n_coverable": 30
+ },
+ "pcacs_egoblind": {
+  "all": {
+   "below_threshold": 20,
+   "not_coverable": 33,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2
+  },
+  "coverable": {
+   "below_threshold": 20,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2
+  },
+  "n_events": 63,
+  "n_coverable": 30
+ },
+ "pcacs_learned:rl": {
+  "all": {
+   "below_threshold": 20,
+   "not_coverable": 33,
+   "not_detected": 7,
+   "spoken_late": 1,
+   "never_tracked": 2
+  },
+  "coverable": {
+   "below_threshold": 20,
+   "not_detected": 7,
+   "spoken_late": 1,
+   "never_tracked": 2
+  },
+  "n_events": 63,
+  "n_coverable": 30
+ },
+ "egoblind_learned:il@models/egoblind_only": {
+  "all": {
+   "below_threshold": 12,
+   "not_coverable": 33,
+   "spoken_timely": 5,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2,
+   "spoken_early": 1,
+   "spoken_late": 2
+  },
+  "coverable": {
+   "below_threshold": 12,
+   "spoken_timely": 5,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2,
+   "spoken_early": 1,
+   "spoken_late": 2
+  },
+  "n_events": 63,
+  "n_coverable": 30
+ },
+ "egoblind_learned:rl@models/egoblind_only": {
+  "all": {
+   "below_threshold": 20,
+   "not_coverable": 33,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2
+  },
+  "coverable": {
+   "below_threshold": 20,
+   "not_detected": 7,
+   "low_confidence": 1,
+   "never_tracked": 2
+  },
+  "n_events": 63,
+  "n_coverable": 30
+ }
+}

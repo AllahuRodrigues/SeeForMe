@@ -1,0 +1,6 @@
+{'egoblind': 251} train scenarios
+trial 0 (defaults): score=-0.461 regret=0.513 AWrecall=0.529 prec=0.889 occ=0.01
+trial 9: score=-0.435 regret=0.487 AWrecall=0.525 prec=0.925 occ=0.01 lateC=0.47 (160s)
+trial 22: score=-0.408 regret=0.460 AWrecall=0.517 prec=0.972 occ=0.00 lateC=0.48 (424s)
+trial 35: score=-0.400 regret=0.452 AWrecall=0.516 prec=0.992 occ=0.00 lateC=0.48 (686s)
+best score -0.400 (regret 0.452) -> /Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/configs/pcacs_egoblind.yaml

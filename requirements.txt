@@ -13,9 +13,12 @@ tqdm>=4.66
 joblib>=1.3
 pytest>=8.0
 # P-CACS additions (2026-10-01)
-transformers>=4.45
-huggingface_hub
+transformers>=5.0      # 4.x needs huggingface_hub<1.0
+huggingface_hub>=1.33   # scripts/download_guidedog.py, CLI is `hf` (huggingface-cli no longer works in 1.x)
 fastapi
 uvicorn[standard]
 python-dotenv
 python-multipart
+# dataset downloads / parquet (2026-10-09)
+gdown>=6.4      # scripts/download_egoblind.py (Google Drive)
+pyarrow>=25.0   # GuideDog parquet (scripts/guidedog_eval.py)

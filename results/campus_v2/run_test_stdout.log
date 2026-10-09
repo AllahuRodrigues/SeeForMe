@@ -1,0 +1,16 @@
+oracle                   AWrec=0.683 lateC=0.25 lead=1.06s prec=0.994 occ=0.22 cues= 6.9/min hap=0.0 silP=0.82 block=0.05 minMsg=1.00 regret=0.00
+confidence_threshold     AWrec=0.204 lateC=0.25 lead=1.94s prec=0.052 occ=0.72 cues=30.1/min hap=0.0 silP=1.00 block=0.15 minMsg=0.47 regret=8.21
+confidence_cooldown      AWrec=0.203 lateC=0.22 lead=2.07s prec=0.063 occ=0.63 cues=25.4/min hap=0.0 silP=0.98 block=0.12 minMsg=0.47 regret=7.06
+cacs                     AWrec=0.180 lateC=0.63 lead=0.95s prec=0.206 occ=0.24 cues= 7.9/min hap=0.0 silP=0.78 block=0.15 minMsg=0.38 regret=3.23
+pcacs                    AWrec=0.465 lateC=0.27 lead=1.92s prec=0.598 occ=0.21 cues= 6.8/min hap=0.3 silP=0.80 block=0.06 minMsg=0.97 regret=1.25
+pcacs_learned:il         AWrec=0.617 lateC=0.23 lead=2.69s prec=0.736 occ=0.25 cues= 8.3/min hap=0.7 silP=0.95 block=0.08 minMsg=0.87 regret=0.66
+pcacs_learned:rl         AWrec=0.632 lateC=0.24 lead=2.39s prec=0.888 occ=0.21 cues= 6.8/min hap=0.5 silP=0.89 block=0.06 minMsg=0.87 regret=0.25
+| policy | action-weighted recall | late critical rate | mean lead (s) | cue precision | audio occupancy | cues/min | haptics/min | silence precision | critical blocking | min-message ratio | regret |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| oracle | 0.683 ± 0.22 | 0.25 | 1.06 | 0.994 | 0.22 | 6.9 | 0.0 | 0.82 | 0.05 | 1.00 | 0.00 |
+| confidence_threshold | 0.204 ± 0.26 | 0.25 | 1.94 | 0.052 | 0.72 | 30.1 | 0.0 | 1.00 | 0.15 | 0.47 | 8.21 |
+| confidence_cooldown | 0.203 ± 0.25 | 0.22 | 2.07 | 0.063 | 0.63 | 25.4 | 0.0 | 0.98 | 0.12 | 0.47 | 7.06 |
+| cacs | 0.180 ± 0.26 | 0.63 | 0.95 | 0.206 | 0.24 | 7.9 | 0.0 | 0.78 | 0.15 | 0.38 | 3.23 |
+| pcacs | 0.465 ± 0.30 | 0.27 | 1.92 | 0.598 | 0.21 | 6.8 | 0.3 | 0.80 | 0.06 | 0.97 | 1.25 |
+| pcacs_learned:il | 0.617 ± 0.30 | 0.23 | 2.69 | 0.736 | 0.25 | 8.3 | 0.7 | 0.95 | 0.08 | 0.87 | 0.66 |
+| pcacs_learned:rl | 0.632 ± 0.27 | 0.24 | 2.39 | 0.888 | 0.21 | 6.8 | 0.5 | 0.89 | 0.06 | 0.87 | 0.25 |

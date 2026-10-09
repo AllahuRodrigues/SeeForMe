@@ -36,6 +36,7 @@ export interface Track {
   ttc: number;
   pathProb: number;
   distHistory: Array<[number, number, number]>; // t, z, x
+  remembered?: boolean;  // kept alive by a memory ledger (Python only; the web tracker has none)
 }
 
 export type Action = "silence" | "speak" | "interrupt" | "haptic";
@@ -50,6 +51,7 @@ export interface Cue {
   utility: number;
   severity: number;
   distance: number | null;
+  depthConf?: number;   // of `distance`: below 0.45 it is a bounding-box guess, never spoken as a number
   ttc: number | null;
   slots: string[];
 }

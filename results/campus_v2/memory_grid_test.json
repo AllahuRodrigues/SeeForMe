@@ -1,0 +1,108 @@
+{
+ "ttl0_decay0": {
+  "oracle": {
+   "crowd": {
+    "recall": 0.6814961174567086,
+    "precision": 1.0,
+    "late_critical": 0.0
+   },
+   "occlusion": {
+    "recall": 0.4852941176470588,
+    "precision": 1.0,
+    "late_critical": 0.5
+   },
+   "poor_capture": {
+    "recall": 0.557142857142857,
+    "precision": 1.0,
+    "late_critical": 0.5555555555555555
+   }
+  },
+  "pcacs": {
+   "crowd": {
+    "recall": 0.0,
+    "precision": 0.16666666666666666,
+    "late_critical": 0.0
+   },
+   "occlusion": {
+    "recall": 0.5,
+    "precision": 0.75,
+    "late_critical": 0.5
+   },
+   "poor_capture": {
+    "recall": 0.21904761904761905,
+    "precision": 0.3611111111111111,
+    "late_critical": 0.7777777777777778
+   }
+  },
+  "pcacs_learned:rl": {
+   "crowd": {
+    "recall": 0.7182975754404325,
+    "precision": 0.8611111111111112,
+    "late_critical": 0.0
+   },
+   "occlusion": {
+    "recall": 0.4852941176470588,
+    "precision": 0.9166666666666666,
+    "late_critical": 0.5
+   },
+   "poor_capture": {
+    "recall": 0.6071428571428571,
+    "precision": 0.7666666666666666,
+    "late_critical": 0.27777777777777773
+   }
+  }
+ },
+ "ttl3_decay0.8": {
+  "oracle": {
+   "crowd": {
+    "recall": 0.6814961174567086,
+    "precision": 1.0,
+    "late_critical": 0.0
+   },
+   "occlusion": {
+    "recall": 0.6666666666666666,
+    "precision": 1.0,
+    "late_critical": 0.3333333333333333
+   },
+   "poor_capture": {
+    "recall": 0.7999999999999999,
+    "precision": 1.0,
+    "late_critical": 0.2222222222222222
+   }
+  },
+  "pcacs": {
+   "crowd": {
+    "recall": 0.04273504273504274,
+    "precision": 0.08333333333333333,
+    "late_critical": 0.0
+   },
+   "occlusion": {
+    "recall": 0.5,
+    "precision": 0.75,
+    "late_critical": 0.5
+   },
+   "poor_capture": {
+    "recall": 0.2642857142857143,
+    "precision": 0.3333333333333333,
+    "late_critical": 0.6666666666666666
+   }
+  },
+  "pcacs_learned:rl": {
+   "crowd": {
+    "recall": 0.5606200039697576,
+    "precision": 0.8194444444444445,
+    "late_critical": 0.0
+   },
+   "occlusion": {
+    "recall": 0.8333333333333334,
+    "precision": 0.9444444444444445,
+    "late_critical": 0.16666666666666666
+   },
+   "poor_capture": {
+    "recall": 0.6166666666666666,
+    "precision": 0.7031746031746032,
+    "late_critical": 0.16666666666666666
+   }
+  }
+ }
+}

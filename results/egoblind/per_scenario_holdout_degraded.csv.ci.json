@@ -1,0 +1,716 @@
+{
+ "csv": "results/egoblind/per_scenario_holdout_degraded.csv",
+ "n_videos": 77,
+ "n_boot": 2000,
+ "unit": "video",
+ "policies": {
+  "oracle": {
+   "recall_all": {
+    "value": 0.46,
+    "ci95": [
+     0.31,
+     0.603
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.667,
+    "ci95": [
+     0.472,
+     0.833
+    ]
+   },
+   "precision": {
+    "value": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": 0.444,
+    "ci95": [
+     0.299,
+     0.586
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": 0.633,
+    "ci95": [
+     0.429,
+     0.826
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "confidence_threshold": {
+   "recall_all": {
+    "value": 0.175,
+    "ci95": [
+     0.077,
+     0.297
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.233,
+    "ci95": [
+     0.077,
+     0.429
+    ]
+   },
+   "precision": {
+    "value": 0.008,
+    "ci95": [
+     0.003,
+     0.015
+    ]
+   },
+   "quiet_violation": {
+    "value": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": 0.159,
+    "ci95": [
+     0.062,
+     0.284
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": 0.2,
+    "ci95": [
+     0.05,
+     0.414
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 1.0,
+    "ci95": [
+     1.0,
+     1.0
+    ]
+   }
+  },
+  "confidence_cooldown": {
+   "recall_all": {
+    "value": 0.317,
+    "ci95": [
+     0.197,
+     0.44
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.467,
+    "ci95": [
+     0.278,
+     0.625
+    ]
+   },
+   "precision": {
+    "value": 0.025,
+    "ci95": [
+     0.014,
+     0.039
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.885,
+    "ci95": [
+     0.714,
+     1.0
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": 0.302,
+    "ci95": [
+     0.189,
+     0.423
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": 0.433,
+    "ci95": [
+     0.263,
+     0.609
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.885,
+    "ci95": [
+     0.714,
+     1.0
+    ]
+   }
+  },
+  "cacs": {
+   "recall_all": {
+    "value": 0.143,
+    "ci95": [
+     0.056,
+     0.258
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.233,
+    "ci95": [
+     0.08,
+     0.474
+    ]
+   },
+   "precision": {
+    "value": 0.021,
+    "ci95": [
+     0.008,
+     0.042
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.731,
+    "ci95": [
+     0.538,
+     0.897
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": 0.127,
+    "ci95": [
+     0.031,
+     0.25
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": 0.2,
+    "ci95": [
+     0.026,
+     0.471
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.731,
+    "ci95": [
+     0.538,
+     0.897
+    ]
+   }
+  },
+  "pcacs": {
+   "recall_all": {
+    "value": 0.016,
+    "ci95": [
+     0.0,
+     0.045
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.033,
+    "ci95": [
+     0.0,
+     0.091
+    ]
+   },
+   "precision": {
+    "value": 0.125,
+    "ci95": [
+     0.0,
+     0.5
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "pcacs_egoblind": {
+   "recall_all": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "precision": {
+    "value": null,
+    "ci95": [
+     null,
+     null
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": -0.016,
+    "ci95": [
+     -0.045,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": -0.033,
+    "ci95": [
+     -0.091,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "pcacs_learned:il": {
+   "recall_all": {
+    "value": 0.063,
+    "ci95": [
+     0.0,
+     0.149
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.067,
+    "ci95": [
+     0.0,
+     0.179
+    ]
+   },
+   "precision": {
+    "value": 0.018,
+    "ci95": [
+     0.0,
+     0.045
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.5,
+    "ci95": [
+     0.28,
+     0.708
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": 0.048,
+    "ci95": [
+     -0.026,
+     0.143
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": 0.033,
+    "ci95": [
+     -0.071,
+     0.167
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.5,
+    "ci95": [
+     0.28,
+     0.708
+    ]
+   }
+  },
+  "pcacs_learned:rl": {
+   "recall_all": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "precision": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.077,
+    "ci95": [
+     0.0,
+     0.208
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": -0.016,
+    "ci95": [
+     -0.045,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": -0.033,
+    "ci95": [
+     -0.091,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.077,
+    "ci95": [
+     0.0,
+     0.208
+    ]
+   }
+  },
+  "egoblind_learned:il": {
+   "recall_all": {
+    "value": 0.016,
+    "ci95": [
+     0.0,
+     0.051
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.033,
+    "ci95": [
+     0.0,
+     0.1
+    ]
+   },
+   "precision": {
+    "value": 0.053,
+    "ci95": [
+     0.0,
+     0.105
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.038,
+    "ci95": [
+     0.0,
+     0.136
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": 0.0,
+    "ci95": [
+     -0.039,
+     0.045
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": 0.0,
+    "ci95": [
+     -0.083,
+     0.095
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.038,
+    "ci95": [
+     0.0,
+     0.136
+    ]
+   }
+  },
+  "egoblind_learned:rl": {
+   "recall_all": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "precision": {
+    "value": null,
+    "ci95": [
+     null,
+     null
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": -0.016,
+    "ci95": [
+     -0.045,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": -0.033,
+    "ci95": [
+     -0.091,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "egoblind_learned:il@models/egoblind_only": {
+   "recall_all": {
+    "value": 0.016,
+    "ci95": [
+     0.0,
+     0.045
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.033,
+    "ci95": [
+     0.0,
+     0.091
+    ]
+   },
+   "precision": {
+    "value": 0.014,
+    "ci95": [
+     0.0,
+     0.033
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.077,
+    "ci95": [
+     0.0,
+     0.2
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.077,
+    "ci95": [
+     0.0,
+     0.2
+    ]
+   }
+  },
+  "egoblind_learned:rl@models/egoblind_only": {
+   "recall_all": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "precision": {
+    "value": null,
+    "ci95": [
+     null,
+     null
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_all": {
+    "value": -0.016,
+    "ci95": [
+     -0.045,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_recall_coverable": {
+    "value": -0.033,
+    "ci95": [
+     -0.091,
+     0.0
+    ]
+   },
+   "diff_vs_pcacs_quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   }
+  }
+ },
+ "pairs": {
+  "pcacs_learned:il - egoblind_learned:il@models/egoblind_only": {
+   "recall_all": {
+    "value": 0.048,
+    "ci95": [
+     -0.026,
+     0.143
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.033,
+    "ci95": [
+     -0.071,
+     0.167
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.423,
+    "ci95": [
+     0.136,
+     0.667
+    ]
+   }
+  },
+  "egoblind_learned:il@models/egoblind_only - pcacs_learned:rl": {
+   "recall_all": {
+    "value": 0.016,
+    "ci95": [
+     0.0,
+     0.045
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.033,
+    "ci95": [
+     0.0,
+     0.091
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     -0.154,
+     0.154
+    ]
+   }
+  },
+  "egoblind_learned:il - pcacs_learned:rl": {
+   "recall_all": {
+    "value": 0.016,
+    "ci95": [
+     0.0,
+     0.051
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.033,
+    "ci95": [
+     0.0,
+     0.1
+    ]
+   },
+   "quiet_violation": {
+    "value": -0.038,
+    "ci95": [
+     -0.182,
+     0.091
+    ]
+   }
+  },
+  "egoblind_learned:il@models/egoblind_only - egoblind_learned:il": {
+   "recall_all": {
+    "value": 0.0,
+    "ci95": [
+     -0.046,
+     0.039
+    ]
+   },
+   "recall_coverable": {
+    "value": 0.0,
+    "ci95": [
+     -0.095,
+     0.083
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.038,
+    "ci95": [
+     -0.095,
+     0.176
+    ]
+   }
+  },
+  "pcacs_egoblind - pcacs": {
+   "recall_all": {
+    "value": -0.016,
+    "ci95": [
+     -0.045,
+     0.0
+    ]
+   },
+   "recall_coverable": {
+    "value": -0.033,
+    "ci95": [
+     -0.091,
+     0.0
+    ]
+   },
+   "quiet_violation": {
+    "value": 0.0,
+    "ci95": [
+     0.0,
+     0.0
+    ]
+   }
+  }
+ }
+}

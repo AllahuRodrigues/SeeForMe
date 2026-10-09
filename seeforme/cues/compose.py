@@ -30,6 +30,8 @@ def object_phrase(label: str, kind: str = "object", text: Optional[str] = None, 
         core = f"sign reads {txt}" if txt else "a sign"
         return f"possibly a sign, {txt}" if hedged and txt else core
     label = label.replace("_", " ")
+    if label in ("unknown object", "obstruction"):
+        return "possibly an obstacle" if hedged else "an unknown obstacle"
     if label == "stairs":
         label = STAIRS_WORDS.get(str(detail.get("direction", "")), "stairs")
     elif label == "curb":

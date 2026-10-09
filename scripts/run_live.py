@@ -2,7 +2,7 @@
 predictive scheduler (speak / interrupt / haptic / silence) -> speech.
 
     python scripts/run_live.py --policy pcacs --speak                 # macOS `say`
-    python scripts/run_live.py --policy pcacs --speak --elevenlabs    # ElevenLabs voice (key from .env)
+    python scripts/run_live.py --policy pcacs --speak --elevenlabs    # ElevenLabs voice (key from .env; default speaker if missing)
     python scripts/run_live.py --policy pcacs --no-depth              # bbox-height distance guess only
 Keys: q quit | 1 threshold  2 cooldown  3 cacs  4 pcacs  5 learned | s speech | v verbosity | f FIND goal | d depth on/off
 """
@@ -31,10 +31,14 @@ cfg = load_cfg()
 if args.model:
     cfg.perception.yolo_model = args.model
 cfg.pcacs.units = args.units
+speaker = None
 if args.elevenlabs:
     from seeforme.feedback.elevenlabs_tts import ElevenLabsSpeaker
-    speaker = ElevenLabsSpeaker(enabled=args.speak)
-else:
+    try:
+        speaker = ElevenLabsSpeaker(enabled=args.speak)
+    except RuntimeError as e:  # no API key: keep the demo running with the default voice
+        print(f"warning: {e}; falling back to the default speaker", flush=True)
+if speaker is None:
     speaker = Speaker(enabled=args.speak)
 depth = None
 if not args.no_depth:

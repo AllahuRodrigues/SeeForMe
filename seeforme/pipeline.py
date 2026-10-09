@@ -154,13 +154,15 @@ def make_live_policy(name: str, cfg: PipelineConfig, model_dir: str = "models", 
     text_model = LearnedTextImportance(f"{model_dir}/text_importance.joblib")
     if name == "pcacs":
         return PCACSPolicy(cfg.pcacs, text_model=text_model, goal_tags=goal_tags)
-    if name.startswith("pcacs_learned"):
+    if name.startswith("pcacs_learned") or name.startswith("egoblind_learned"):
         import json
         from pathlib import Path
         from .ml.scheduler_model import SchedulerModel, SchedulerPolicy
+        if name.startswith("egoblind_learned"):      # scheduler trained on EgoBlind replays (scripts/train_scheduler_egoblind.py)
+            model_dir = str(Path(model_dir) / "egoblind")
         rep_path = Path(model_dir) / "scheduler_report.json"
         if not rep_path.exists():
-            raise FileNotFoundError("no trained scheduler: run scripts/train_scheduler.py")
+            raise FileNotFoundError(f"no trained scheduler in {model_dir}: run scripts/train_scheduler.py or scripts/train_scheduler_egoblind.py")
         rep = json.loads(rep_path.read_text())
         which = name.split(":", 1)[1] if ":" in name else "rl"
         d = Path(model_dir) / "scheduler"

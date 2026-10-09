@@ -1,0 +1,89 @@
+[01:22:39] stage 1
+[01:22:39] start train_egoblind_only
+[01:22:39] start ego_thr
+[01:22:39] start campus_zeroshot
+[01:22:39] start train_egoblind_mixed
+[01:38:39] campus chain
+[01:38:39] start campus_mem
+[01:38:39] start campus_perfect
+[01:42:32] end campus_mem rc=0
+[01:43:10] end campus_perfect rc=0
+[01:43:10] start memory_grid_val
+[01:43:10] start arch_mlp1
+[01:43:51] end memory_grid_val rc=0
+[01:48:28] end arch_mlp1 rc=0
+[01:48:28] start arch_attn
+[01:53:13] end arch_attn rc=0
+[01:53:13] start arch_gru_mem
+[01:58:39] end arch_gru_mem rc=0
+[01:58:39] start arch_mlpk
+[01:58:39] start stress
+[02:00:11] end stress rc=0
+[02:01:33] COCO re-cache done (673 caches)
+[02:01:38] end arch_mlpk rc=0
+[02:01:38] start arch_gru
+[02:01:53] ego chain: rebuilding scenarios on the label-free caches
+[02:01:53] start build_scenarios
+[02:01:59] end build_scenarios rc=0
+[02:01:59] start train_egoblind_only
+[02:01:59] start train_egoblind_mixed
+[02:01:59] start ego_thr
+[02:06:37] end ego_thr rc=0
+[02:06:37] start ego_aware
+[02:10:23] ego chain v3 (70/15/5/10 split)
+[02:10:23] start train_egoblind_only
+[02:10:23] start train_egoblind_mixed
+[02:10:23] start ego_thr
+[02:10:48] (restarting ego chain v3 with explicit pids)
+[02:10:48] ego chain v3 (70/15/5/10 split)
+[02:10:48] start train_egoblind_only
+[02:10:48] start train_egoblind_mixed
+[02:10:48] start ego_thr
+[02:11:10] ego chain v3 (70/15/5/10 split)
+[02:11:10] start train_egoblind_only
+[02:11:10] start train_egoblind_mixed
+[02:11:10] start ego_thr
+[02:13:36] end arch_gru rc=0
+[02:13:36] start compare_archs
+[02:15:07] end ego_thr rc=0
+[02:15:07] start ego_aware
+[02:32:40] end ego_aware rc=0
+[02:32:40] start decompose_train
+[02:33:01] end decompose_train rc=0
+[02:33:01] start decompose_holdout
+[02:33:08] end compare_archs rc=0
+[02:33:08] campus chain done
+[02:33:08] end decompose_holdout rc=0
+[02:55:17] end train_egoblind_only rc=0
+[03:16:56] end train_egoblind_mixed rc=0
+[03:16:56] ego chain v3: models trained, evaluating on the unseen holdout
+[03:16:56] start holdout_final
+[03:16:56] start holdout_degraded
+[03:16:56] start diag_holdout
+[03:18:27] end diag_holdout rc=0
+[03:18:27] start diag_train
+[03:19:32] end holdout_degraded rc=0
+[03:20:16] end holdout_final rc=0
+[03:25:50] end diag_train rc=0
+[03:25:50] ego chain v3: waiting for open-vocabulary holdout caches
+[03:25:51] start holdout_ow
+[03:25:51] start diag_holdout_ow
+[03:26:10] end diag_holdout_ow rc=0
+[03:26:47] end holdout_ow rc=0
+[03:26:47] start compare_caches
+[03:26:48] end compare_caches rc=0
+[03:26:48] start repro_check
+[03:43:24] end repro_check rc=0
+[03:43:24] ego chain v3 done
+[11:38:39] official EgoBlind test (external benchmark, evaluated once)
+[11:38:39] start build_scenarios_test
+[11:38:41] end build_scenarios_test rc=0
+[11:38:41] start official_final
+[11:38:41] start official_degraded
+[11:38:41] start diag_official
+[11:38:41] start decompose_official
+[11:38:57] end decompose_official rc=0
+[11:40:18] end diag_official rc=0
+[11:41:39] end official_degraded rc=0
+[11:42:24] end official_final rc=0
+[11:42:24] official test done
