@@ -40,9 +40,20 @@ EVENT_SPECS: Dict[str, EventSpec] = {
     "landmark":       EventSpec(0.4, 7.0, 5.0, 1.0, 4.0, 3.0, ("distance", "direction"), "low"),
     "sign_nav":       EventSpec(0.45, 8.0, 5.0, 0.8, 5.0, 3.0, ("direction",), "low"),
     "goal":           EventSpec(0.7, 9.0, 5.0, 1.0, 5.0, 3.0, ("distance", "direction"), "medium"),
+    "unknown_obstacle": EventSpec(0.6, 5.0, 4.0, 1.5, 3.0, 2.5, ("distance",), "medium"),   # something unfamiliar in the path (OOD)
     "decor":          EventSpec(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, (), "none"),
     "sign_decor":     EventSpec(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, (), "none"),
 }
+
+# labels an open-vocabulary detector could produce for things the taxonomy has no class for; large and low in
+# the walking corridor they are treated as an unknown obstacle and announced hedged ("possibly debris")
+UNKNOWN_OBSTACLE_LABELS = {"debris", "broken glass", "fallen sign", "wreckage", "rubble", "unknown object", "obstruction", "spill"}
+
+
+def default_event_type(label: str, kind: str = "object") -> str:
+    if kind == "text":
+        return "sign_decor"
+    return LABEL_EVENT.get(label, "unknown_obstacle" if label in UNKNOWN_OBSTACLE_LABELS else "decor")
 
 # label -> default event type when none is given
 LABEL_EVENT = {
@@ -52,6 +63,10 @@ LABEL_EVENT = {
     "chair": "hazard_static", "bench": "hazard_static", "box": "hazard_static", "cart": "hazard_static",
     "backpack": "hazard_static", "suitcase": "hazard_static", "trash can": "hazard_static",
     "potted plant": "hazard_static", "pole": "hazard_static", "dining table": "hazard_static",
+    # open-vocabulary labels (perception.NAV_VOCAB)
+    "fence": "barrier", "tree": "hazard_static", "shelf": "hazard_static", "machine": "hazard_static",
+    "ground hazard": "hazard_static", "fire hydrant": "hazard_static", "animal": "person_moving",
+    "sign": "landmark", "crossing": "landmark",
 }
 
 
@@ -73,6 +88,7 @@ class WorldObject:
     detectability: float = 0.9
     base_conf: float = 0.85
     conf_noise: float = 0.06
+    occluded_windows: List[Tuple[float, float]] = field(default_factory=list)   # hidden behind something (not detectable)
     _scene: Optional["CampusScenario"] = field(default=None, repr=False, compare=False)
 
     def __post_init__(self):
@@ -81,10 +97,7 @@ class WorldObject:
             self.height = self.height or h
             self.width = self.width or w
         if not self.event_type:
-            if self.kind == "text":
-                self.event_type = "sign_decor"
-            else:
-                self.event_type = LABEL_EVENT.get(self.label, "decor")
+            self.event_type = default_event_type(self.label, self.kind)
 
     # --- motion in the world frame -----------------------------------------
     def world_pos(self, t: float) -> Tuple[float, float]:
@@ -116,8 +129,11 @@ class WorldObject:
         b = sc.camera.project_box(x, z, self.height, self.width, self.base_height, pitch_deg=pitch, yaw_deg=yaw)
         return sc.camera.clip(b) if b is not None else None
 
+    def occluded(self, t: float) -> bool:
+        return any(a <= t < b for a, b in self.occluded_windows)
+
     def visible(self, t: float) -> bool:
-        if not (self.t_appear <= t < self.t_disappear):
+        if not (self.t_appear <= t < self.t_disappear) or self.occluded(t):
             return False
         x, z = self.rel_pos(t)
         if z < 0.3 or z > 40:
@@ -132,7 +148,8 @@ class WorldObject:
                 "event_type": self.event_type, "keyframes": [list(k) for k in self.keyframes],
                 "t_appear": self.t_appear, "t_disappear": self.t_disappear, "height": self.height, "width": self.width,
                 "base_height": self.base_height, "detail": dict(self.detail), "goal_tags": list(self.goal_tags),
-                "detectability": self.detectability, "base_conf": self.base_conf, "conf_noise": self.conf_noise}
+                "detectability": self.detectability, "base_conf": self.base_conf, "conf_noise": self.conf_noise,
+                "occluded_windows": [list(w) for w in self.occluded_windows]}
 
     @property
     def moving(self) -> bool:
@@ -191,6 +208,11 @@ class CampusScenario:
     depth_noise_rel: float = 0.06
     seed: int = 0
     description: str = ""
+    yaw_keyframes: List[Tuple[float, float]] = field(default_factory=list)          # (t, yaw_deg): deliberate camera pans
+    distractor_speech: List[Tuple[float, float, float]] = field(default_factory=list)  # (t_start, duration_s, severity): external audio
+    reaction_scale: float = 1.0                                                      # multiplies every event type's reaction time
+    memory_windows: bool = False     # True: an object seen once stays action-relevant while hidden (the window follows the user's
+                                     # need, not the camera); False: the v1 rule, a window needs the object visible in range
     _events: Optional[List[EventAnnotation]] = field(default=None, repr=False, compare=False)
 
     def __post_init__(self):
@@ -219,7 +241,17 @@ class CampusScenario:
             pitch += self.pitch_jitter_deg * (0.6 * math.sin(2 * math.pi * 0.9 * t + self.seed) + 0.4 * math.sin(2 * math.pi * 0.23 * t))
         if self.yaw_jitter_deg > 0:
             yaw = self.yaw_jitter_deg * (0.7 * math.sin(2 * math.pi * 0.31 * t + 0.5 * self.seed) + 0.3 * math.sin(2 * math.pi * 1.3 * t))
-        return pitch, yaw
+        return pitch, yaw + self.pan_deg(t)
+
+    def pan_deg(self, t: float) -> float:
+        """Piecewise-linear deliberate pan from yaw_keyframes (0 outside them)."""
+        kf = self.yaw_keyframes
+        if not kf or t <= kf[0][0] or t >= kf[-1][0]:
+            return 0.0
+        for (t0, y0), (t1, y1) in zip(kf, kf[1:]):
+            if t0 <= t <= t1:
+                return y0 + (y1 - y0) * (t - t0) / max(1e-6, t1 - t0)
+        return 0.0
 
     def blacked_out(self, t: float) -> bool:
         return any(a <= t < b for a, b in self.blackout_windows)
@@ -299,22 +331,23 @@ class CampusScenario:
             latest = max(vis_s[-1][0], earliest + 0.5)
             ideal = min(latest, max(earliest + 0.5, next((s[0] for s in vis_s if s[2] <= spec.ideal_m), earliest + 0.5)))
             if etype == "goal" and o.kind != "text" and intersect:
-                latest = min(latest, t_contact - spec.react_s)
+                latest = min(latest, t_contact - spec.react_s * self.reaction_scale)
             sev = spec.severity
             sudden = False
         else:
             if not intersect:
                 return none("off_path")
             moving = o.moving
+            seen = (lambda s: s[5]) if not self.memory_windows else (lambda s: s[0] >= first_vis[0])   # seen now, or seen before
             if moving:
-                cand = [s for s in samples if s[5] and s[4] < -0.1 and (s[2] - contact_m) / (-s[4]) <= spec.notice_ttc]
-                cand = cand or [s for s in samples if s[5] and s[2] <= spec.notice_m]
+                cand = [s for s in samples if seen(s) and s[4] < -0.1 and (s[2] - contact_m) / (-s[4]) <= spec.notice_ttc]
+                cand = cand or [s for s in samples if seen(s) and s[2] <= spec.notice_m]
             else:
-                cand = [s for s in samples if s[5] and s[2] <= spec.notice_m]
+                cand = [s for s in samples if seen(s) and s[2] <= spec.notice_m]
             if not cand:
                 return none("never_visible_in_range")
             earliest = cand[0][0]
-            latest = t_contact - spec.react_s
+            latest = t_contact - spec.react_s * self.reaction_scale
             sudden = latest < earliest
             if sudden:
                 earliest = first_vis[0]
@@ -357,6 +390,8 @@ class CampusScenario:
             "camera": asdict(self.camera), "pitch_jitter_deg": self.pitch_jitter_deg, "yaw_jitter_deg": self.yaw_jitter_deg,
             "blackout_windows": self.blackout_windows, "lighting": self.lighting, "motion_blur": self.motion_blur,
             "clutter_fp_rate": self.clutter_fp_rate, "depth_noise_rel": self.depth_noise_rel,
+            "yaw_keyframes": [list(k) for k in self.yaw_keyframes], "distractor_speech": [list(d) for d in self.distractor_speech],
+            "reaction_scale": self.reaction_scale, "memory_windows": self.memory_windows,
             "objects": [o.to_dict() for o in self.objects],
             "events": [e.as_dict() for e in self.events()],
         }
@@ -368,6 +403,7 @@ class CampusScenario:
         objs = []
         for o in d["objects"]:
             o["keyframes"] = [tuple(k) for k in o["keyframes"]]
+            o["occluded_windows"] = [tuple(w) for w in o.get("occluded_windows", [])]
             objs.append(WorldObject(**o))
         sc = CampusScenario(name=d["name"], kind=d["kind"], duration=d["duration"], fps=d["fps"], objects=objs,
                             user_keyframes=[tuple(k) for k in d["user_keyframes"]], goal=d.get("goal"),
@@ -375,5 +411,8 @@ class CampusScenario:
                             pitch_jitter_deg=d.get("pitch_jitter_deg", 0.0), yaw_jitter_deg=d.get("yaw_jitter_deg", 0.0),
                             blackout_windows=[tuple(w) for w in d.get("blackout_windows", [])], lighting=d["lighting"],
                             motion_blur=d["motion_blur"], clutter_fp_rate=d["clutter_fp_rate"],
-                            depth_noise_rel=d.get("depth_noise_rel", 0.06), seed=d["seed"], description=d.get("description", ""))
+                            depth_noise_rel=d.get("depth_noise_rel", 0.06), seed=d["seed"], description=d.get("description", ""),
+                            yaw_keyframes=[tuple(k) for k in d.get("yaw_keyframes", [])],
+                            distractor_speech=[tuple(x) for x in d.get("distractor_speech", [])],
+                            reaction_scale=d.get("reaction_scale", 1.0), memory_windows=d.get("memory_windows", False))
         return sc

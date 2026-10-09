@@ -58,9 +58,22 @@ def _decode(data: bytes) -> np.ndarray:
     return img
 
 
+def tts_usable() -> bool:
+    """ElevenLabs loaded, or not tried yet and an API key is set (the web app picks the browser voice otherwise)."""
+    if STATE["tts"] is not None:
+        return True
+    if STATE["tts_error"] is not None:
+        return False
+    try:
+        from seeforme.feedback.elevenlabs_tts import load_api_key
+    except Exception:
+        return False
+    return load_api_key() is not None
+
+
 @app.get("/api/health")
 def health():
-    return {"ok": True, "depth": "depth-anything-v2-metric-small", "ocr": True, "tts": STATE["tts"] is not None or STATE["tts_error"] is None}
+    return {"ok": True, "depth": "depth-anything-v2-metric-small", "ocr": True, "tts": tts_usable()}
 
 
 @app.post("/api/depth")

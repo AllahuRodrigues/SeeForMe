@@ -32,14 +32,33 @@ class RunLog:
     channel_log: List[List] = field(default_factory=list)    # [start, end, cue]
     decisions: List[DecisionRecord] = field(default_factory=list)
     truth_at_cue: Dict[int, Dict] = field(default_factory=dict)   # cue index -> true distance / ttc at cue time
+    distractors: List[Cue] = field(default_factory=list)     # external speech that occupied the channel (sign reads, conversation)
 
     @property
     def spoken(self) -> List[Cue]:
         return [c for c in self.cues if c.action != "haptic"]
 
 
+def distractor_cue(t: float, duration_s: float, severity: float, speech_cfg) -> Cue:
+    """A message the policy did not choose (a sign read on request, a conversation) that occupies the channel."""
+    n_words = max(1, int(round(duration_s / speech_cfg.seconds_per_word)))
+    return Cue(t=t, track_id=-1, label="external", kind="text", message=" ".join(["word"] * n_words), score=0.0,
+               policy="external", severity=severity, utility=5.0 * severity, action="speak")
+
+
+def play_distractors(distractors, idx: int, t: float, channel: SpeechChannel, log: RunLog, speech_cfg) -> int:
+    """Start every distractor whose time has come (a user-initiated read pre-empts whatever is playing)."""
+    while idx < len(distractors) and distractors[idx][0] <= t:
+        ts, dur, sev = distractors[idx]; idx += 1
+        cue = distractor_cue(t, dur, sev, speech_cfg)
+        channel.speak(cue, interrupt=not channel.free(t))
+        log.distractors.append(cue)
+    return idx
+
+
 def run_on_campus(policy, scenario: CampusScenario, cfg: Optional[PipelineConfig] = None, seed: Optional[int] = None,
-                  on_decision: Optional[Callable] = None, camera: Optional[CameraModel] = None) -> RunLog:
+                  on_decision: Optional[Callable] = None, camera: Optional[CameraModel] = None, distractors=None,
+                  perfect_perception: bool = False) -> RunLog:
     cfg = cfg or PipelineConfig()
     cam = camera or CameraModel()      # the *assumed* camera; the scenario's real pitch may differ (poor capture)
     tracker = IoUTracker(cfg.tracker, dynamics=TrackDynamics(cam))
@@ -50,8 +69,11 @@ def run_on_campus(policy, scenario: CampusScenario, cfg: Optional[PipelineConfig
     announced: Set[int] = set()
     next_decision = 0.0
     supports_actions = getattr(policy, "supports_actions", False)
-    for t, dets in CampusDetectorSimulator(scenario, seed=seed).frames():
+    distractors = sorted(getattr(scenario, "distractor_speech", []) if distractors is None else distractors)
+    di = 0
+    for t, dets in CampusDetectorSimulator(scenario, seed=seed, perfect=perfect_perception).frames():
         tracks = tracker.update(dets, t)
+        di = play_distractors(distractors, di, t, channel, log, cfg.speech)
         if t + 1e-9 < next_decision:
             continue
         next_decision = t + policy.decision_interval

@@ -1,0 +1,526 @@
+{
+ "name": "contention_5100",
+ "kind": "contention",
+ "duration": 30.0,
+ "fps": 10.0,
+ "seed": 5100,
+ "description": "contention scenario, seed 5100",
+ "goal": null,
+ "goal_tags": [],
+ "user_keyframes": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   30.0,
+   33.0
+  ]
+ ],
+ "camera": {
+  "hfov_deg": 70.0,
+  "aspect": 1.3333333333333333,
+  "height_m": 1.35,
+  "pitch_deg": 15.0
+ },
+ "pitch_jitter_deg": 0.0,
+ "yaw_jitter_deg": 0.0,
+ "blackout_windows": [],
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.08,
+ "depth_noise_rel": 0.06,
+ "yaw_keyframes": [],
+ "distractor_speech": [
+  [
+   6.59,
+   7.23,
+   0.3
+  ],
+  [
+   21.28,
+   4.0,
+   0.9
+  ]
+ ],
+ "reaction_scale": 1.0,
+ "memory_windows": false,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "book",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     -1.825211450501314,
+     9.448346349955633
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 1.3598083232928428,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 2,
+   "label": "vase",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     -1.5158728598087317,
+     12.847291804361411
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 0.617166859815004,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "JOIN THE CLUB",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     0.8493738791908109,
+     23.287055729172746
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "www.example.com",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     1.7977425643328653,
+     7.971911094873913
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 5,
+   "label": "stairs",
+   "kind": "object",
+   "text": null,
+   "event_type": "stairs",
+   "keyframes": [
+    [
+     0.0,
+     0.0,
+     15.503870147277775
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.4,
+   "width": 1.6,
+   "base_height": 0.0,
+   "detail": {
+    "direction": "down",
+    "handrail": "left"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 6,
+   "label": "box",
+   "kind": "object",
+   "text": null,
+   "event_type": "hazard_static",
+   "keyframes": [
+    [
+     0.0,
+     0.11736654681439329,
+     21.849466760900334
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.5,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 7,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     14.681333419000303,
+     -0.015593826370189134,
+     25.14946676090033
+    ],
+    [
+     20.681333419000303,
+     -0.015593826370189134,
+     17.949466760900332
+    ]
+   ],
+   "t_appear": 14.681333419000303,
+   "t_disappear": 20.681333419000303,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 8,
+   "label": "bicycle",
+   "kind": "object",
+   "text": null,
+   "event_type": "bike",
+   "keyframes": [
+    [
+     22.27806676361913,
+     4,
+     27.00587343998104
+    ],
+    [
+     24.055844541396908,
+     -4,
+     27.00587343998104
+    ]
+   ],
+   "t_appear": 22.27806676361913,
+   "t_disappear": 24.055844541396908,
+   "height": 1.0,
+   "width": 0.6,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "text": "LIBRARY",
+   "event_type": "sign_nav",
+   "keyframes": [
+    [
+     0.0,
+     0.234691549199058,
+     13.594712274355711
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  }
+ ],
+ "events": [
+  {
+   "obj_id": 1,
+   "label": "book",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 2,
+   "label": "vase",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "JOIN THE CLUB",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "www.example.com",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 5,
+   "label": "stairs",
+   "kind": "object",
+   "event_type": "stairs",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 1.0,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 6.9,
+   "ideal_s": 9.8,
+   "latest_safe_s": 10.9,
+   "t_contact": 13.4,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 4.72,
+   "direction_at_ideal_deg": 0.0,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance",
+    "action"
+   ],
+   "ideal_cue": "Stairs down, about 5 meters. Handrail left.",
+   "detail": {
+    "direction": "down",
+    "handrail": "left"
+   }
+  },
+  {
+   "obj_id": 6,
+   "label": "box",
+   "kind": "object",
+   "event_type": "hazard_static",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.7,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 14.5,
+   "ideal_s": 17.0,
+   "latest_safe_s": 17.7,
+   "t_contact": 19.2,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.15,
+   "direction_at_ideal_deg": 2.1,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance"
+   ],
+   "ideal_cue": "Box, about 3 meters.",
+   "detail": {}
+  },
+  {
+   "obj_id": 7,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_moving",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.5,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 14.78,
+   "ideal_s": 15.88,
+   "latest_safe_s": 16.78,
+   "t_contact": 18.28,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 6.24,
+   "direction_at_ideal_deg": -0.1,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "motion"
+   ],
+   "ideal_cue": "Person, approaching.",
+   "detail": {}
+  },
+  {
+   "obj_id": 8,
+   "label": "bicycle",
+   "kind": "object",
+   "event_type": "bike",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.9,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 22.88,
+   "ideal_s": 22.88,
+   "latest_safe_s": 23.18,
+   "t_contact": 23.08,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 1.84,
+   "direction_at_ideal_deg": 35.2,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Bicycle, on your right, crossing from the right.",
+   "detail": {}
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_nav",
+   "text": "LIBRARY",
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.45,
+   "urgency": "low",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 5.1,
+   "ideal_s": 7.9,
+   "latest_safe_s": 11.3,
+   "t_contact": 11.7,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 4.9,
+   "direction_at_ideal_deg": 2.7,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "direction"
+   ],
+   "ideal_cue": "Sign reads LIBRARY, ahead.",
+   "detail": {}
+  }
+ ]
+}

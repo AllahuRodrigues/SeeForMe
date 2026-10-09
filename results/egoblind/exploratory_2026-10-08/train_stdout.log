@@ -1,0 +1,15 @@
+train: 317 scenarios (251 EgoBlind videos, 66 CampusBench); val: 47 (47 EgoBlind); events in EgoBlind train: 219
+imitation (DAgger) of the question-derived reference scheduler
+  dagger iter 0: n=66643 actions={'silence': 61797, 'speak': 4805, 'interrupt': 0, 'haptic': 41} thr=0.7 val score=-0.350 regret=0.383 AWrecall=0.709 prec=0.649 occ=0.04
+  dagger iter 1: n=123674 actions={'silence': 116522, 'speak': 7092, 'interrupt': 2, 'haptic': 58} thr=0.7 val score=-0.387 regret=0.420 AWrecall=0.738 prec=0.525 occ=0.05
+  best imitation iter 0 thr=0.7 val score=-0.350 (850s)
+reward fine-tuning (REINFORCE)
+  silence bias calibrated: +3.0 (val scores [-2.46, -0.97, -0.31, -0.24, -0.22])
+  reinforce epoch 0 (imitation init): val score=-0.215 regret=0.248 AWrecall=0.702 prec=0.979 occ=0.00
+  reinforce epoch 1: return=-0.34 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
+  reinforce epoch 2: return=-0.24 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
+  reinforce epoch 3: return=-0.19 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
+  reinforce epoch 4: return=-0.23 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
+  reinforce epoch 5: return=-0.18 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
+  reinforce epoch 6: return=-0.16 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
+done in 1778s -> /Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/models/egoblind/scheduler

@@ -1,0 +1,107 @@
+{
+ "pcacs": {
+  "all": {
+   "not_coverable": 167,
+   "below_threshold": 141,
+   "spoken_timely": 14,
+   "not_detected": 25,
+   "never_tracked": 13,
+   "spoken_late": 5,
+   "low_confidence": 1,
+   "spoken_early": 1
+  },
+  "coverable": {
+   "below_threshold": 141,
+   "spoken_timely": 14,
+   "not_detected": 25,
+   "never_tracked": 13,
+   "spoken_late": 5,
+   "low_confidence": 1,
+   "spoken_early": 1
+  },
+  "n_events": 367,
+  "n_coverable": 200
+ },
+ "pcacs_egoblind": {
+  "all": {
+   "not_coverable": 167,
+   "below_threshold": 160,
+   "not_detected": 26,
+   "never_tracked": 13,
+   "low_confidence": 1
+  },
+  "coverable": {
+   "below_threshold": 160,
+   "not_detected": 26,
+   "never_tracked": 13,
+   "low_confidence": 1
+  },
+  "n_events": 367,
+  "n_coverable": 200
+ },
+ "pcacs_learned:rl": {
+  "all": {
+   "not_coverable": 167,
+   "below_threshold": 130,
+   "not_detected": 25,
+   "spoken_timely": 21,
+   "spoken_late": 8,
+   "never_tracked": 13,
+   "low_confidence": 1,
+   "spoken_early": 2
+  },
+  "coverable": {
+   "below_threshold": 130,
+   "not_detected": 25,
+   "spoken_timely": 21,
+   "spoken_late": 8,
+   "never_tracked": 13,
+   "low_confidence": 1,
+   "spoken_early": 2
+  },
+  "n_events": 367,
+  "n_coverable": 200
+ },
+ "egoblind_learned:il@models/egoblind_only": {
+  "all": {
+   "not_coverable": 167,
+   "below_threshold": 102,
+   "not_detected": 25,
+   "spoken_timely": 40,
+   "never_tracked": 13,
+   "spoken_late": 13,
+   "spoken_early": 4,
+   "low_confidence": 1,
+   "other": 2
+  },
+  "coverable": {
+   "below_threshold": 102,
+   "not_detected": 25,
+   "spoken_timely": 40,
+   "never_tracked": 13,
+   "spoken_late": 13,
+   "spoken_early": 4,
+   "low_confidence": 1,
+   "other": 2
+  },
+  "n_events": 367,
+  "n_coverable": 200
+ },
+ "egoblind_learned:rl@models/egoblind_only": {
+  "all": {
+   "not_coverable": 167,
+   "below_threshold": 160,
+   "not_detected": 26,
+   "never_tracked": 13,
+   "low_confidence": 1
+  },
+  "coverable": {
+   "below_threshold": 160,
+   "not_detected": 26,
+   "never_tracked": 13,
+   "low_confidence": 1
+  },
+  "n_events": 367,
+  "n_coverable": 200
+ }
+}

@@ -1,0 +1,526 @@
+{
+ "name": "contention_5105",
+ "kind": "contention",
+ "duration": 30.0,
+ "fps": 10.0,
+ "seed": 5105,
+ "description": "contention scenario, seed 5105",
+ "goal": null,
+ "goal_tags": [],
+ "user_keyframes": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   30.0,
+   33.0
+  ]
+ ],
+ "camera": {
+  "hfov_deg": 70.0,
+  "aspect": 1.3333333333333333,
+  "height_m": 1.35,
+  "pitch_deg": 15.0
+ },
+ "pitch_jitter_deg": 0.0,
+ "yaw_jitter_deg": 0.0,
+ "blackout_windows": [],
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.08,
+ "depth_noise_rel": 0.06,
+ "yaw_keyframes": [],
+ "distractor_speech": [
+  [
+   8.9,
+   6.9,
+   0.3
+  ],
+  [
+   23.27,
+   4.0,
+   0.9
+  ]
+ ],
+ "reaction_scale": 1.0,
+ "memory_windows": false,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     -2.0855459639927387,
+     18.191581666141495
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 0.7869972496454387,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 2,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     -1.6243311374463876,
+     22.499346859801435
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 1.015348891996631,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "ART SHOW FRIDAY",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     1.0994796009370906,
+     14.734825643997818
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "text": "NEW MENU",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     0.8600975530874809,
+     20.298267662302923
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 5,
+   "label": "stairs",
+   "kind": "object",
+   "text": null,
+   "event_type": "stairs",
+   "keyframes": [
+    [
+     0.0,
+     0.0,
+     18.036348960488887
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.4,
+   "width": 1.6,
+   "base_height": 0.0,
+   "detail": {
+    "direction": "down",
+    "handrail": "left"
+   },
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 6,
+   "label": "cart",
+   "kind": "object",
+   "text": null,
+   "event_type": "hazard_static",
+   "keyframes": [
+    [
+     0.0,
+     -0.11481583743440893,
+     21.173594964846078
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 1.0,
+   "width": 0.7,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 7,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     14.066904513496436,
+     0.18547074706516453,
+     24.47359496484608
+    ],
+    [
+     20.066904513496436,
+     0.18547074706516453,
+     17.27359496484608
+    ]
+   ],
+   "t_appear": 14.066904513496436,
+   "t_disappear": 20.066904513496436,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 8,
+   "label": "bicycle",
+   "kind": "object",
+   "text": null,
+   "event_type": "bike",
+   "keyframes": [
+    [
+     24.27347396069657,
+     -4,
+     29.20082135676623
+    ],
+    [
+     26.05125173847435,
+     4,
+     29.20082135676623
+    ]
+   ],
+   "t_appear": 24.27347396069657,
+   "t_disappear": 26.05125173847435,
+   "height": 1.0,
+   "width": 0.6,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "text": "DINING HALL",
+   "event_type": "sign_nav",
+   "keyframes": [
+    [
+     0.0,
+     0.15090462600389853,
+     21.059295455798015
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.7,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  }
+ ],
+ "events": [
+  {
+   "obj_id": 1,
+   "label": "painting",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 2,
+   "label": "painting",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "ART SHOW FRIDAY",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 4,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "NEW MENU",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 5,
+   "label": "stairs",
+   "kind": "object",
+   "event_type": "stairs",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 1.0,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 9.2,
+   "ideal_s": 12.1,
+   "latest_safe_s": 13.2,
+   "t_contact": 15.7,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 4.73,
+   "direction_at_ideal_deg": 0.0,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance",
+    "action"
+   ],
+   "ideal_cue": "Stairs down, about 5 meters. Handrail left.",
+   "detail": {
+    "direction": "down",
+    "handrail": "left"
+   }
+  },
+  {
+   "obj_id": 6,
+   "label": "cart",
+   "kind": "object",
+   "event_type": "hazard_static",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.7,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 13.8,
+   "ideal_s": 16.4,
+   "latest_safe_s": 17.1,
+   "t_contact": 18.6,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.13,
+   "direction_at_ideal_deg": -2.1,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance"
+   ],
+   "ideal_cue": "Cart, about 3 meters.",
+   "detail": {}
+  },
+  {
+   "obj_id": 7,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_moving",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.5,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 14.17,
+   "ideal_s": 15.27,
+   "latest_safe_s": 16.17,
+   "t_contact": 17.67,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 6.24,
+   "direction_at_ideal_deg": 1.7,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "motion"
+   ],
+   "ideal_cue": "Person, approaching.",
+   "detail": {}
+  },
+  {
+   "obj_id": 8,
+   "label": "bicycle",
+   "kind": "object",
+   "event_type": "bike",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.9,
+   "urgency": "high",
+   "interrupt_current_speech": true,
+   "earliest_useful_s": 24.87,
+   "ideal_s": 24.87,
+   "latest_safe_s": 25.17,
+   "t_contact": 25.07,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 1.84,
+   "direction_at_ideal_deg": -35.2,
+   "moving": true,
+   "sudden": true,
+   "minimum_information": [
+    "object",
+    "motion",
+    "direction"
+   ],
+   "ideal_cue": "Bicycle, on your left, crossing from the left.",
+   "detail": {}
+  },
+  {
+   "obj_id": 9,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_nav",
+   "text": "DINING HALL",
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.45,
+   "urgency": "low",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 11.9,
+   "ideal_s": 14.6,
+   "latest_safe_s": 18.1,
+   "t_contact": 18.5,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 5.0,
+   "direction_at_ideal_deg": 1.7,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "direction"
+   ],
+   "ideal_cue": "Sign reads DINING HALL, ahead.",
+   "detail": {}
+  }
+ ]
+}

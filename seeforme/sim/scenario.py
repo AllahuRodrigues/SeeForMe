@@ -111,9 +111,10 @@ OCR_CORRUPTIONS = [("O", "0"), ("I", "1"), ("E", "F"), ("S", "5"), ("T", "7"), (
 class DetectorSimulator:
     """Produces per-frame Detections from a Scenario with realistic noise."""
 
-    def __init__(self, scenario: Scenario, seed: Optional[int] = None):
+    def __init__(self, scenario: Scenario, seed: Optional[int] = None, perfect: bool = False):
         self.sc = scenario
         self.rng = random.Random(scenario.seed if seed is None else seed)
+        self.perfect = perfect          # oracle perception: every visible object, exact box, no confusions, no clutter
         self.degrade = 0.0
         if scenario.lighting == "low":
             self.degrade += 0.25
@@ -142,6 +143,11 @@ class DetectorSimulator:
 
     def detections_at(self, t: float) -> List[Detection]:
         dets: List[Detection] = []
+        if self.perfect:
+            for o in self.sc.objects:
+                if o.visible(t):
+                    dets.append(Detection(label=o.label, confidence=0.95, bbox=o.bbox_at(t), kind=o.kind, text=o.text, source_id=o.obj_id))
+            return dets
         for o in self.sc.objects:
             if not o.visible(t):
                 continue

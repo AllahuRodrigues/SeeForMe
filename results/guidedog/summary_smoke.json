@@ -1,0 +1,74 @@
+{
+ "depth_mcqa": {
+  "n": 1,
+  "order_accuracy": 0.0,
+  "abs_err_m_median": 3.0,
+  "rel_err_median": 0.9375,
+  "order_accuracy_by_closer_depth": {
+   "lt3m": {
+    "n": 1,
+    "order_accuracy": 0.0
+   },
+   "3to8m": {
+    "n": 0,
+    "order_accuracy": null
+   },
+   "gt8m": {
+    "n": 0,
+    "order_accuracy": null
+   }
+  },
+  "order_accuracy_by_depth_ratio": {
+   "lt1.5": {
+    "n": 0,
+    "order_accuracy": null
+   },
+   "1.5to3": {
+    "n": 0,
+    "order_accuracy": null
+   },
+   "gt3": {
+    "n": 1,
+    "order_accuracy": 0.0
+   }
+  },
+  "err_by_ref_depth": {
+   "lt3m": {
+    "n": 1,
+    "abs_err_m_median": 3.0,
+    "rel_err_median": 1.5
+   },
+   "3to8m": {
+    "n": 1,
+    "abs_err_m_median": 3.0,
+    "rel_err_median": 0.375
+   }
+  }
+ },
+ "gold_hazards": {
+  "n_images": 2,
+  "n_hazard_mentions": 4,
+  "coco_coverable": 4,
+  "coverable_rate": 1.0,
+  "detected_in_direction": 0,
+  "detected_rate_of_coverable": 0.0,
+  "top_concepts": {
+   "person": 1,
+   "bicycle": 1,
+   "car": 1,
+   "non-COCO:road": 1,
+   "motorcycle": 1
+  },
+  "top_uncoverable": {},
+  "n_images_with_hazards": 2,
+  "n_clear_direction_mentions": 1,
+  "hazard_mentions_by_hour": {
+   "10": 1,
+   "11": 0,
+   "12": 1,
+   "1": 0,
+   "2": 2
+  }
+ },
+ "smoke": true
+}

@@ -13,7 +13,7 @@ from typing import Dict, List, Optional
 import numpy as np
 
 from ..config import TrackerConfig
-from ..types import Detection, Track, bbox_iou
+from ..types import Detection, Track, bbox_center, bbox_iou
 
 try:
     from scipy.optimize import linear_sum_assignment
@@ -77,6 +77,24 @@ class IoUTracker:
                     self._update_track(self.tracks[track_ids[r]], detections[c], t)
                     matched_t.add(r); matched_d.add(c)
 
+        # second pass: a reappearing object may no longer overlap the box a remembered track last had
+        if self.cfg.memory_ttl_s > 0:
+            for j, det in enumerate(detections):
+                if j in matched_d:
+                    continue
+                best, best_d = None, 0.25
+                for i, tid in enumerate(track_ids):
+                    trk = self.tracks[tid]
+                    if i in matched_t or not trk.remembered or trk.label != det.label or trk.kind != det.kind:
+                        continue
+                    (ax, ay), (bx, by) = bbox_center(det.bbox), bbox_center(trk.bbox)
+                    d = ((ax - bx) ** 2 + (ay - by) ** 2) ** 0.5
+                    if d < best_d:
+                        best, best_d = i, d
+                if best is not None:
+                    self._update_track(self.tracks[track_ids[best]], det, t)
+                    matched_t.add(best); matched_d.add(j)
+
         for j, det in enumerate(detections):
             if j not in matched_d:
                 self._create_track(det, t)
@@ -87,9 +105,31 @@ class IoUTracker:
                 trk.misses += 1
                 trk.age += 1
                 if trk.misses > self.cfg.max_age:
+                    if self.cfg.memory_ttl_s > 0 and trk.confirmed and (t - trk.last_seen) <= self.cfg.memory_ttl_s \
+                            and self._remember(trk, t):
+                        continue
                     del self.tracks[tid]
 
         return self.active_tracks()
+
+    def _remember(self, trk: Track, t: float) -> bool:
+        """Memory ledger step: decay the evidence and extrapolate the range as if the user kept walking.
+        Returns False once the remembered object would have been reached (the user walked past it)."""
+        t_prev = trk.memory_t if trk.memory_t is not None else trk.last_seen
+        dt = max(0.0, t - t_prev)
+        trk.remembered = True
+        trk.memory_t = t
+        decay = self.cfg.memory_decay ** dt
+        trk.confidence *= decay
+        trk.depth_conf *= decay
+        if trk.distance_m is not None:
+            trk.distance_m = trk.distance_m - self.cfg.memory_user_speed * dt
+            if trk.distance_m < 0.5:
+                return False
+            trk.dist_history.append((t, trk.distance_m, trk.lateral_m))
+            if self.dynamics is not None:
+                self.dynamics._ttc_and_path(trk)
+        return True
 
     # ------------------------------------------------------------------
     def _update_track(self, trk: Track, det: Detection, t: float) -> None:
@@ -101,6 +141,8 @@ class IoUTracker:
         trk.age += 1
         trk.hits += 1
         trk.misses = 0
+        trk.remembered = False
+        trk.memory_t = None
         if det.kind == "text" and det.text:
             # keep the higher-confidence reading of the string
             if trk.text is None or det.confidence >= trk.confidence:
@@ -130,8 +172,8 @@ class IoUTracker:
         return trk
 
     def active_tracks(self) -> List[Track]:
-        """Tracks that were matched in the current frame and are confirmed."""
-        return [t for t in self.tracks.values() if t.misses == 0 and t.confirmed]
+        """Tracks that were matched in the current frame and are confirmed, plus remembered ones when the ledger is on."""
+        return [t for t in self.tracks.values() if (t.misses == 0 or t.remembered) and t.confirmed]
 
     def reset(self) -> None:
         self.tracks.clear()

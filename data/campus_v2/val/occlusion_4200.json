@@ -1,0 +1,363 @@
+{
+ "name": "occlusion_4200",
+ "kind": "occlusion",
+ "duration": 30.0,
+ "fps": 10.0,
+ "seed": 4200,
+ "description": "occlusion scenario, seed 4200 {'occlusion': {'seconds': 10.0, 'mechanism': 'pan', 'moved': False, 't_occ': 5.51}}",
+ "goal": null,
+ "goal_tags": [],
+ "user_keyframes": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   30.0,
+   33.0
+  ]
+ ],
+ "camera": {
+  "hfov_deg": 70.0,
+  "aspect": 1.3333333333333333,
+  "height_m": 1.35,
+  "pitch_deg": 15.0
+ },
+ "pitch_jitter_deg": 0.0,
+ "yaw_jitter_deg": 0.0,
+ "blackout_windows": [],
+ "lighting": "normal",
+ "motion_blur": 0.0,
+ "clutter_fp_rate": 0.05,
+ "depth_noise_rel": 0.06,
+ "yaw_keyframes": [
+  [
+   5.51,
+   0.0
+  ],
+  [
+   5.91,
+   55.0
+  ],
+  [
+   15.11,
+   55.0
+  ],
+  [
+   15.51,
+   0.0
+  ]
+ ],
+ "distractor_speech": [],
+ "reaction_scale": 1.0,
+ "memory_windows": true,
+ "objects": [
+  {
+   "obj_id": 1,
+   "label": "laptop",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     -1.7523006191594117,
+     28.32467659860424
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 1.4884048418033369,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 2,
+   "label": "painting",
+   "kind": "object",
+   "text": null,
+   "event_type": "decor",
+   "keyframes": [
+    [
+     0.0,
+     2.357153834862158,
+     11.951803059045632
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.4,
+   "width": 0.5,
+   "base_height": 0.8603880834212904,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.9,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "text": "SPRING CONCERT",
+   "event_type": "sign_decor",
+   "keyframes": [
+    [
+     0.0,
+     -1.0560845230362985,
+     28.534428475598244
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.3,
+   "width": 0.9,
+   "base_height": 1.6,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.75,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 4,
+   "label": "box",
+   "kind": "object",
+   "text": null,
+   "event_type": "hazard_static",
+   "keyframes": [
+    [
+     0.0,
+     0.2155914562350919,
+     13.408383381891706
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.5,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 5,
+   "label": "person",
+   "kind": "object",
+   "text": null,
+   "event_type": "person_static",
+   "keyframes": [
+    [
+     17.794552866091013,
+     1.6,
+     31.574008152700117
+    ],
+    [
+     29.794552866091013,
+     1.6,
+     17.174008152700118
+    ]
+   ],
+   "t_appear": 17.794552866091013,
+   "t_disappear": 29.794552866091013,
+   "height": 1.7,
+   "width": 0.5,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  },
+  {
+   "obj_id": 6,
+   "label": "bench",
+   "kind": "object",
+   "text": null,
+   "event_type": "hazard_static",
+   "keyframes": [
+    [
+     0.0,
+     -0.21027993295367997,
+     31.683464162265764
+    ]
+   ],
+   "t_appear": 0.0,
+   "t_disappear": 1000000000.0,
+   "height": 0.9,
+   "width": 1.6,
+   "base_height": 0.0,
+   "detail": {},
+   "goal_tags": [],
+   "detectability": 0.9,
+   "base_conf": 0.85,
+   "conf_noise": 0.06,
+   "occluded_windows": []
+  }
+ ],
+ "events": [
+  {
+   "obj_id": 1,
+   "label": "laptop",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 2,
+   "label": "painting",
+   "kind": "object",
+   "event_type": "decor",
+   "text": null,
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 3,
+   "label": "text",
+   "kind": "text",
+   "event_type": "sign_decor",
+   "text": "SPRING CONCERT",
+   "should_speak": false,
+   "reason": "not_action_relevant",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 4,
+   "label": "box",
+   "kind": "object",
+   "event_type": "hazard_static",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.7,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 6.8,
+   "ideal_s": 9.3,
+   "latest_safe_s": 10.0,
+   "t_contact": 11.5,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.18,
+   "direction_at_ideal_deg": 3.9,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance"
+   ],
+   "ideal_cue": "Box, about 3 meters.",
+   "detail": {}
+  },
+  {
+   "obj_id": 5,
+   "label": "person",
+   "kind": "object",
+   "event_type": "person_static",
+   "text": null,
+   "should_speak": false,
+   "reason": "off_path",
+   "severity": 0.0,
+   "urgency": "none",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": null,
+   "ideal_s": null,
+   "latest_safe_s": null,
+   "t_contact": null,
+   "path_intersection": 0.0,
+   "distance_at_ideal_m": null,
+   "direction_at_ideal_deg": null,
+   "moving": true,
+   "sudden": false,
+   "minimum_information": [],
+   "ideal_cue": "",
+   "detail": {}
+  },
+  {
+   "obj_id": 6,
+   "label": "bench",
+   "kind": "object",
+   "event_type": "hazard_static",
+   "text": null,
+   "should_speak": true,
+   "reason": "",
+   "severity": 0.7,
+   "urgency": "medium",
+   "interrupt_current_speech": false,
+   "earliest_useful_s": 23.4,
+   "ideal_s": 25.9,
+   "latest_safe_s": 26.6,
+   "t_contact": 28.1,
+   "path_intersection": 1.0,
+   "distance_at_ideal_m": 3.19,
+   "direction_at_ideal_deg": -3.8,
+   "moving": false,
+   "sudden": false,
+   "minimum_information": [
+    "object",
+    "distance"
+   ],
+   "ideal_cue": "Bench, about 3 meters.",
+   "detail": {}
+  }
+ ]
+}

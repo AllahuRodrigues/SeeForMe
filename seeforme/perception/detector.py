@@ -58,6 +58,46 @@ class YoloDetector:
         return out
 
 
+# Open-vocabulary navigation vocabulary: (text prompt, label the rest of the system sees). Labels reuse the
+# names of the P-CACS taxonomy (campus.world.LABEL_EVENT) and of the EgoBlind concept matcher (egoblind.data).
+NAV_VOCAB = [
+    ("person", "person"), ("bicycle", "bicycle"), ("car", "car"), ("motorcycle", "motorcycle"), ("bus", "bus"), ("truck", "truck"),
+    ("train", "train"), ("scooter", "scooter"), ("dog", "animal"), ("cat", "animal"),
+    ("chair", "chair"), ("bench", "bench"), ("table", "dining table"), ("backpack", "backpack"), ("suitcase", "suitcase"),
+    ("potted plant", "potted plant"), ("traffic light", "traffic light"), ("stop sign", "stop sign"), ("fire hydrant", "fire hydrant"),
+    ("stairs", "stairs"), ("escalator", "stairs"), ("door", "door"), ("curb", "curb"), ("pole", "pole"), ("bollard", "pole"),
+    ("fence", "fence"), ("railing", "fence"), ("tree trunk", "tree"), ("box", "box"), ("shopping cart", "cart"), ("trash can", "trash can"),
+    ("traffic cone", "cone"), ("barrier", "barrier"), ("elevator", "elevator"), ("shelf", "shelf"), ("sign", "sign"),
+    ("puddle", "ground hazard"), ("pothole", "ground hazard"), ("crosswalk", "crossing"), ("turnstile", "machine"), ("kiosk", "machine"),
+]
+
+
+class OpenVocabDetector:
+    """YOLO-World (Ultralytics) with a fixed navigation vocabulary: same `Detection` output as `YoloDetector`, but it also
+    sees stairs, doors, poles, curbs, fences, cones ... that the COCO-trained model cannot name."""
+
+    def __init__(self, cfg: Optional[PerceptionConfig] = None, vocab=None):
+        from ultralytics import YOLOWorld
+        self.cfg = cfg or PerceptionConfig()
+        self.device = pick_device(self.cfg.device)
+        self.vocab = list(vocab or NAV_VOCAB)
+        self.model = YOLOWorld(self.cfg.open_vocab_model)
+        self.model.set_classes([p for p, _ in self.vocab])
+        self.names = {i: lab for i, (_, lab) in enumerate(self.vocab)}
+        self.vocab_labels = sorted({lab for _, lab in self.vocab})
+        self.last_latency_ms = 0.0
+        self.model.predict(np.zeros((self.cfg.yolo_imgsz, self.cfg.yolo_imgsz, 3), dtype=np.uint8),
+                           device=self.device, verbose=False, imgsz=self.cfg.yolo_imgsz)
+
+    detect = YoloDetector.detect
+
+
+def make_detector(cfg: Optional[PerceptionConfig] = None):
+    """`cfg.detector`: "yolo" (COCO YOLO11) or "yolo-world" (open vocabulary, NAV_VOCAB)."""
+    cfg = cfg or PerceptionConfig()
+    return OpenVocabDetector(cfg) if cfg.detector == "yolo-world" else YoloDetector(cfg)
+
+
 class MockDetector:
     """Returns scripted detections; `script` maps frame index -> list of Detection."""
 

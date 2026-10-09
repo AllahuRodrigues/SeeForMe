@@ -1,0 +1,8 @@
+Could not reach the Hub ([Errno 8] nodename nor servname provided, or not known). Using cached commit hash for 'depth-anything/Depth-Anything-V2-Metric-Indoor-Small-hf'.
+Could not reach the Hub ([Errno 8] nodename nor servname provided, or not known). Using cached commit hash for 'depth-anything/Depth-Anything-V2-Metric-Indoor-Small-hf'.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 7255.31it/s]
+WARNING ⚠️ NMS time limit 2.050s exceeded
+WARNING ⚠️ NMS time limit 2.050s exceeded
+WARNING ⚠️ NMS time limit 2.050s exceeded
+772 frames, 3 cues -> results/egoblind/demo_105_egoblind_learned_il.mp4, log results/egoblind/demo_105_egoblind_learned_il_cues.jsonl
+latency: {'detect': {'mean_ms': 210.923, 'p95_ms': 502.984}, 'ocr': {'mean_ms': 0.002, 'p95_ms': 0.006}, 'track': {'mean_ms': 2.72, 'p95_ms': 6.404}, 'policy': {'mean_ms': 1.451, 'p95_ms': 2.226}, 'end_to_end': {'mean_ms': 646.009, 'p95_ms': 1130.589}}

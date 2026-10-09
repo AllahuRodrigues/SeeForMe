@@ -29,7 +29,7 @@ import math
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional, Sequence, Tuple
 
-from ..campus.world import EVENT_SPECS, LABEL_EVENT
+from ..campus.world import EVENT_SPECS, LABEL_EVENT, default_event_type
 from ..geometry.camera import CameraModel
 from ..types import Cue, Observation, Track, bbox_center
 from .compose import compose, speech_seconds
@@ -41,13 +41,14 @@ ACTIONS = ("silence", "speak", "interrupt", "haptic")
 ACTIONABILITY = {
     "stairs": 1.0, "curb": 1.0, "vehicle": 1.0, "bike": 1.0, "hazard_static": 0.8, "barrier": 0.85,
     "person_moving": 0.6, "person_static": 0.5, "door": 0.6, "landmark": 0.5, "sign_nav": 0.7, "goal": 0.9,
-    "decor": 0.0, "sign_decor": 0.0,
+    "unknown_obstacle": 0.7, "decor": 0.0, "sign_decor": 0.0,
 }
 MIN_SLOTS = {
     "stairs": ("distance", "action"), "curb": ("distance", "action"), "vehicle": ("motion", "direction"),
     "bike": ("motion", "direction"), "hazard_static": ("distance",), "barrier": ("distance",),
     "person_moving": ("motion",), "person_static": ("distance",), "door": ("distance", "detail"),
     "landmark": ("distance", "direction"), "sign_nav": ("direction",), "goal": ("distance", "direction"),
+    "unknown_obstacle": ("distance",),
 }
 
 
@@ -64,6 +65,7 @@ class PCACSWeights:
     w_text: float = 1.52
     lam_speech: float = 0.48
     lam_queue: float = 1.13
+    w_aware: float = 0.0     # awareness term: a severe object close in front, even off the collision course (0 = off, the CampusBench operating point)
 
 
 @dataclass
@@ -155,7 +157,7 @@ class ChannelState:
 def event_type_for(track: Track) -> str:
     if track.kind == "text":
         return "sign_nav"
-    return LABEL_EVENT.get(track.label, "decor")
+    return default_event_type(track.label, track.kind)
 
 
 class PCACSPolicy(CuePolicy):
@@ -294,6 +296,8 @@ class PCACSPolicy(CuePolicy):
                 f.hazard = f.severity * f.path_prob
                 f.actionability = ACTIONABILITY.get(etype, 0.0)
             f.urgency = self._urgency(trk) if f.hazard > 0 else 0.0
+            # a remembered (currently unseen) object is scored like any other candidate: its decayed confidence and depth
+            # confidence already raise `uncertainty`, so a memory speaks later and hedged, and never blocks others (below)
             f.goal = self._goal(trk)
             f.novelty = self._novelty(trk, t)
             f.uncertainty = 1.0 - f.confidence * (0.5 + 0.5 * f.depth_conf)
@@ -305,17 +309,22 @@ class PCACSPolicy(CuePolicy):
             dur = speech_seconds(msg)
             f.speech_cost = dur / 3.0
             raw.append((trk, f, slots, msg, dur, hedged))
-        # queue cost needs the other candidates' urgency
-        hz = [(fx.hazard * fx.urgency) for (_, fx, *_r) in raw]
+        # queue cost needs the other candidates' urgency (remembered objects do not block the channel for others)
+        hz = [(fx.hazard * fx.urgency) if not trk.remembered else 0.0 for (trk, fx, *_r) in raw]
         for i, (trk, f, slots, msg, dur, hedged) in enumerate(raw):
             others = [h for j, h in enumerate(hz) if j != i]
             f.queue_cost = f.speech_cost * (max(others) if others else 0.0) if c.use_queue_cost else 0.0
             near = 1.0 if f.distance <= 9.0 else 0.0
+            # awareness: proximity in the frontal cone, independent of path probability and TTC (what blind users ask
+            # about: "is it safe?" when a person or a car is close ahead, whether or not it is on a collision course)
+            aware = (max(0.0, 1.0 - f.distance / 6.0) * (1.0 if abs(f.angle) < 25 else 0.4) * f.severity * (1 - f.is_text)
+                     if w.w_aware > 0 else 0.0)
             value = (w.w_hazard * f.hazard * f.urgency                     # how bad x how soon
                      + w.w_ttc * f.hazard * max(0.0, f.urgency - 0.5) * 2   # extra push inside the reaction horizon
                      + w.w_action * f.actionability * f.path_prob * (0.4 + 0.6 * f.urgency) * (1 - f.is_text)
                      + w.w_text * f.text_importance * f.path_prob * near * f.is_text
-                     + w.w_goal * f.goal * near)
+                     + w.w_goal * f.goal * near
+                     + w.w_aware * aware)
             u = (value * (0.35 + 0.65 * f.novelty)
                  - w.w_uncert * f.uncertainty - w.lam_speech * f.speech_cost - w.lam_queue * f.queue_cost)
             o = Observation(track=trk, t=t, features=None, score=float(u), extras=f.as_vector())  # type: ignore[arg-type]

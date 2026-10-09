@@ -1,0 +1,1612 @@
+{
+  "kind": "coverage_catalog_not_training_examples",
+  "version": "1.0",
+  "scenarios": [
+    {
+      "scenario_id": "indoor_hallway-01",
+      "domain": "indoor_hallway",
+      "case": "clear hallway",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "indoor_hallway-02",
+      "domain": "indoor_hallway",
+      "case": "narrow corridor",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "indoor_hallway-03",
+      "domain": "indoor_hallway",
+      "case": "blind corner",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "indoor_hallway-04",
+      "domain": "indoor_hallway",
+      "case": "corridor furniture",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "indoor_hallway-05",
+      "domain": "indoor_hallway",
+      "case": "passage blocked by cart",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "indoor_hallway-06",
+      "domain": "indoor_hallway",
+      "case": "forked hallway",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "indoor_hallway-07",
+      "domain": "indoor_hallway",
+      "case": "glass partition",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "stairs_levels-01",
+      "domain": "stairs_levels",
+      "case": "stairs ascending",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "stairs_levels-02",
+      "domain": "stairs_levels",
+      "case": "stairs descending",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "stairs_levels-03",
+      "domain": "stairs_levels",
+      "case": "open stair landing",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "stairs_levels-04",
+      "domain": "stairs_levels",
+      "case": "partial step",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "stairs_levels-05",
+      "domain": "stairs_levels",
+      "case": "unexpected level change",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "stairs_levels-06",
+      "domain": "stairs_levels",
+      "case": "ramp beside stairs",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "stairs_levels-07",
+      "domain": "stairs_levels",
+      "case": "stairs under low light",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "doors_entries-01",
+      "domain": "doors_entries",
+      "case": "door swings toward user",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "doors_entries-02",
+      "domain": "doors_entries",
+      "case": "door opens away",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "doors_entries-03",
+      "domain": "doors_entries",
+      "case": "automatic door",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "doors_entries-04",
+      "domain": "doors_entries",
+      "case": "revolving door",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "doors_entries-05",
+      "domain": "doors_entries",
+      "case": "glass door",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "doors_entries-06",
+      "domain": "doors_entries",
+      "case": "door with side handle",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "doors_entries-07",
+      "domain": "doors_entries",
+      "case": "locked door and alternate exit",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "floor_hazards-01",
+      "domain": "floor_hazards",
+      "case": "wet floor",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "floor_hazards-02",
+      "domain": "floor_hazards",
+      "case": "loose rug",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "floor_hazards-03",
+      "domain": "floor_hazards",
+      "case": "cable across path",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "floor_hazards-04",
+      "domain": "floor_hazards",
+      "case": "spilled objects",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "floor_hazards-05",
+      "domain": "floor_hazards",
+      "case": "broken tile",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "floor_hazards-06",
+      "domain": "floor_hazards",
+      "case": "uneven paving",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "floor_hazards-07",
+      "domain": "floor_hazards",
+      "case": "construction material",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "moving_people-01",
+      "domain": "moving_people",
+      "case": "oncoming person",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "moving_people-02",
+      "domain": "moving_people",
+      "case": "passing person",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "moving_people-03",
+      "domain": "moving_people",
+      "case": "stationary group",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "moving_people-04",
+      "domain": "moving_people",
+      "case": "crossing crowd",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "moving_people-05",
+      "domain": "moving_people",
+      "case": "running child",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "moving_people-06",
+      "domain": "moving_people",
+      "case": "person leaves frame",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "moving_people-07",
+      "domain": "moving_people",
+      "case": "person returns after occlusion",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "wayfinding-01",
+      "domain": "wayfinding",
+      "case": "find elevator",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "wayfinding-02",
+      "domain": "wayfinding",
+      "case": "find restroom",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "wayfinding-03",
+      "domain": "wayfinding",
+      "case": "find room number",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "wayfinding-04",
+      "domain": "wayfinding",
+      "case": "find exit",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "wayfinding-05",
+      "domain": "wayfinding",
+      "case": "find reception",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "wayfinding-06",
+      "domain": "wayfinding",
+      "case": "find accessible entrance",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "wayfinding-07",
+      "domain": "wayfinding",
+      "case": "find assistance desk",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "campus_outdoors-01",
+      "domain": "campus_outdoors",
+      "case": "sidewalk edge",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "campus_outdoors-02",
+      "domain": "campus_outdoors",
+      "case": "tree root",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "campus_outdoors-03",
+      "domain": "campus_outdoors",
+      "case": "bollard",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "campus_outdoors-04",
+      "domain": "campus_outdoors",
+      "case": "bicycle rack",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "campus_outdoors-05",
+      "domain": "campus_outdoors",
+      "case": "puddle",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "campus_outdoors-06",
+      "domain": "campus_outdoors",
+      "case": "bench partially blocks path",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "campus_outdoors-07",
+      "domain": "campus_outdoors",
+      "case": "temporary fencing",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "text_and_signs-01",
+      "domain": "text_and_signs",
+      "case": "exit sign",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "text_and_signs-02",
+      "domain": "text_and_signs",
+      "case": "room number",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "text_and_signs-03",
+      "domain": "text_and_signs",
+      "case": "accessible route sign",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "text_and_signs-04",
+      "domain": "text_and_signs",
+      "case": "direction arrow",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "text_and_signs-05",
+      "domain": "text_and_signs",
+      "case": "warning placard",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "text_and_signs-06",
+      "domain": "text_and_signs",
+      "case": "temporary handwritten sign",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "text_and_signs-07",
+      "domain": "text_and_signs",
+      "case": "multiple competing signs",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "retail_restaurant-01",
+      "domain": "retail_restaurant",
+      "case": "queue start",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "retail_restaurant-02",
+      "domain": "retail_restaurant",
+      "case": "payment counter",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "retail_restaurant-03",
+      "domain": "retail_restaurant",
+      "case": "chair obstruction",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "retail_restaurant-04",
+      "domain": "retail_restaurant",
+      "case": "table corners",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "retail_restaurant-05",
+      "domain": "retail_restaurant",
+      "case": "aisle cart",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "retail_restaurant-06",
+      "domain": "retail_restaurant",
+      "case": "self-checkout",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "retail_restaurant-07",
+      "domain": "retail_restaurant",
+      "case": "menu request",
+      "scope": "everyday",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "transit_station-01",
+      "domain": "transit_station",
+      "case": "platform warning strip",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "transit_station-02",
+      "domain": "transit_station",
+      "case": "train door opens",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "transit_station-03",
+      "domain": "transit_station",
+      "case": "ticket gate",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "transit_station-04",
+      "domain": "transit_station",
+      "case": "bus stop queue",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "transit_station-05",
+      "domain": "transit_station",
+      "case": "service change display",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "transit_station-06",
+      "domain": "transit_station",
+      "case": "escalator approach",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "transit_station-07",
+      "domain": "transit_station",
+      "case": "station exit signage",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "airport_terminal-01",
+      "domain": "airport_terminal",
+      "case": "security queue entrance",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "airport_terminal-02",
+      "domain": "airport_terminal",
+      "case": "boarding gate lookup",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "airport_terminal-03",
+      "domain": "airport_terminal",
+      "case": "gate changed on display",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "airport_terminal-04",
+      "domain": "airport_terminal",
+      "case": "baggage claim carousel",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "airport_terminal-05",
+      "domain": "airport_terminal",
+      "case": "departure board",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "airport_terminal-06",
+      "domain": "airport_terminal",
+      "case": "accessible restroom",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "airport_terminal-07",
+      "domain": "airport_terminal",
+      "case": "moving walkway entrance",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "hospital_clinic-01",
+      "domain": "hospital_clinic",
+      "case": "triage desk",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "hospital_clinic-02",
+      "domain": "hospital_clinic",
+      "case": "room navigation",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "hospital_clinic-03",
+      "domain": "hospital_clinic",
+      "case": "wheelchair obstruction",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "hospital_clinic-04",
+      "domain": "hospital_clinic",
+      "case": "automatic sliding door",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "hospital_clinic-05",
+      "domain": "hospital_clinic",
+      "case": "clinic signage",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "hospital_clinic-06",
+      "domain": "hospital_clinic",
+      "case": "emergency exit",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "hospital_clinic-07",
+      "domain": "hospital_clinic",
+      "case": "hospital queue",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "crowd_contention-01",
+      "domain": "crowd_contention",
+      "case": "three simultaneous path hazards",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "crowd_contention-02",
+      "domain": "crowd_contention",
+      "case": "critical event while speech busy",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "crowd_contention-03",
+      "domain": "crowd_contention",
+      "case": "two events same deadline",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "crowd_contention-04",
+      "domain": "crowd_contention",
+      "case": "long sign read blocks warning",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "crowd_contention-05",
+      "domain": "crowd_contention",
+      "case": "two nearby identical objects",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "crowd_contention-06",
+      "domain": "crowd_contention",
+      "case": "moving group masks obstacle",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "crowd_contention-07",
+      "domain": "crowd_contention",
+      "case": "haptic and speech competition",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "construction_detours-01",
+      "domain": "construction_detours",
+      "case": "temporary corridor closure",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "construction_detours-02",
+      "domain": "construction_detours",
+      "case": "detour sign points away",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "construction_detours-03",
+      "domain": "construction_detours",
+      "case": "barrier behind corner",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "construction_detours-04",
+      "domain": "construction_detours",
+      "case": "blocked ramp",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "construction_detours-05",
+      "domain": "construction_detours",
+      "case": "temporary path cones",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "construction_detours-06",
+      "domain": "construction_detours",
+      "case": "partially readable notice",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "construction_detours-07",
+      "domain": "construction_detours",
+      "case": "no accessible alternative in view",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "dynamic_hazards-01",
+      "domain": "dynamic_hazards",
+      "case": "cyclist approaches",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "dynamic_hazards-02",
+      "domain": "dynamic_hazards",
+      "case": "scooter crosses",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "dynamic_hazards-03",
+      "domain": "dynamic_hazards",
+      "case": "rolling cart",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "dynamic_hazards-04",
+      "domain": "dynamic_hazards",
+      "case": "door swings suddenly",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "dynamic_hazards-05",
+      "domain": "dynamic_hazards",
+      "case": "animal crosses path",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "dynamic_hazards-06",
+      "domain": "dynamic_hazards",
+      "case": "person stops unexpectedly",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "dynamic_hazards-07",
+      "domain": "dynamic_hazards",
+      "case": "obstacle enters path from side",
+      "scope": "complex",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "poor_capture-01",
+      "domain": "poor_capture",
+      "case": "sudden camera pan",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "poor_capture-02",
+      "domain": "poor_capture",
+      "case": "heavy motion blur",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "poor_capture-03",
+      "domain": "poor_capture",
+      "case": "low light",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "poor_capture-04",
+      "domain": "poor_capture",
+      "case": "glare on glass",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "poor_capture-05",
+      "domain": "poor_capture",
+      "case": "camera covered",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "poor_capture-06",
+      "domain": "poor_capture",
+      "case": "miscalibrated depth",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "poor_capture-07",
+      "domain": "poor_capture",
+      "case": "track identity switch",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "lost_observation-01",
+      "domain": "lost_observation",
+      "case": "hazard exits field of view",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "lost_observation-02",
+      "domain": "lost_observation",
+      "case": "hazard occluded for 2 seconds",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "lost_observation-03",
+      "domain": "lost_observation",
+      "case": "hazard occluded for 10 seconds",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "lost_observation-04",
+      "domain": "lost_observation",
+      "case": "object moved while hidden",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "lost_observation-05",
+      "domain": "lost_observation",
+      "case": "camera points to floor",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "lost_observation-06",
+      "domain": "lost_observation",
+      "case": "object reappears farther away",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "lost_observation-07",
+      "domain": "lost_observation",
+      "case": "tracker falsely remembers old obstacle",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "multilingual_and_symbols-01",
+      "domain": "multilingual_and_symbols",
+      "case": "sign in Portuguese",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "multilingual_and_symbols-02",
+      "domain": "multilingual_and_symbols",
+      "case": "sign in Spanish",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "multilingual_and_symbols-03",
+      "domain": "multilingual_and_symbols",
+      "case": "sign in French",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "multilingual_and_symbols-04",
+      "domain": "multilingual_and_symbols",
+      "case": "sign in Amharic",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "multilingual_and_symbols-05",
+      "domain": "multilingual_and_symbols",
+      "case": "pictogram only",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "multilingual_and_symbols-06",
+      "domain": "multilingual_and_symbols",
+      "case": "mixed multilingual signage",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "multilingual_and_symbols-07",
+      "domain": "multilingual_and_symbols",
+      "case": "unfamiliar script",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "social_context-01",
+      "domain": "social_context",
+      "case": "person gestures directions",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "social_context-02",
+      "domain": "social_context",
+      "case": "conversation blocks cue",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "social_context-03",
+      "domain": "social_context",
+      "case": "guide dog passes",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "social_context-04",
+      "domain": "social_context",
+      "case": "mobility cane in view",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "social_context-05",
+      "domain": "social_context",
+      "case": "child points at object",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "social_context-06",
+      "domain": "social_context",
+      "case": "user asks repeated question",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "social_context-07",
+      "domain": "social_context",
+      "case": "ambient alarm with unknown cause",
+      "scope": "degraded",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "candidate training/evaluation",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "street_edge-01",
+      "domain": "street_edge",
+      "case": "crosswalk approach",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "street_edge-02",
+      "domain": "street_edge",
+      "case": "curb at signal",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "street_edge-03",
+      "domain": "street_edge",
+      "case": "bus passing",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "street_edge-04",
+      "domain": "street_edge",
+      "case": "turning vehicle",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "street_edge-05",
+      "domain": "street_edge",
+      "case": "blocked sidewalk by street",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "street_edge-06",
+      "domain": "street_edge",
+      "case": "traffic signal partly hidden",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "street_edge-07",
+      "domain": "street_edge",
+      "case": "unfamiliar intersection",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "accident_aftermath-01",
+      "domain": "accident_aftermath",
+      "case": "car crash aftermath visible",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "accident_aftermath-02",
+      "domain": "accident_aftermath",
+      "case": "broken glass on pavement",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "accident_aftermath-03",
+      "domain": "accident_aftermath",
+      "case": "fallen street sign",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "accident_aftermath-04",
+      "domain": "accident_aftermath",
+      "case": "debris from incident",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "accident_aftermath-05",
+      "domain": "accident_aftermath",
+      "case": "smoke with uncertain source",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "accident_aftermath-06",
+      "domain": "accident_aftermath",
+      "case": "emergency vehicle arrival",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "accident_aftermath-07",
+      "domain": "accident_aftermath",
+      "case": "crowd after collision",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "extreme_rare-01",
+      "domain": "extreme_rare",
+      "case": "building damage",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "extreme_rare-02",
+      "domain": "extreme_rare",
+      "case": "power failure",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "extreme_rare-03",
+      "domain": "extreme_rare",
+      "case": "flooding in corridor",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "extreme_rare-04",
+      "domain": "extreme_rare",
+      "case": "evacuation alarm",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "extreme_rare-05",
+      "domain": "extreme_rare",
+      "case": "major crowd surge",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "extreme_rare-06",
+      "domain": "extreme_rare",
+      "case": "fire smoke",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    },
+    {
+      "scenario_id": "extreme_rare-07",
+      "domain": "extreme_rare",
+      "case": "unrecognized emergency",
+      "scope": "ood_only",
+      "annotation_status": "not_collected",
+      "scenario_status": "catalog_only",
+      "recommended_role": "OOD/safe-failure evaluation only",
+      "human_review_required": true
+    }
+  ],
+  "modifiers": {
+    "light": [
+      "bright",
+      "dim",
+      "night",
+      "glare",
+      "backlit"
+    ],
+    "camera": [
+      "stable",
+      "handheld_pan",
+      "motion_blur",
+      "partial_occlusion",
+      "camera_tilt"
+    ],
+    "density": [
+      "empty",
+      "sparse",
+      "moderate",
+      "crowded",
+      "burst"
+    ],
+    "geometry": [
+      "near",
+      "far",
+      "left",
+      "right",
+      "center",
+      "occluded"
+    ],
+    "speech": [
+      "free",
+      "busy_short",
+      "busy_long",
+      "budget_empty",
+      "tts_delay"
+    ],
+    "perception": [
+      "nominal",
+      "depth_noisy",
+      "track_loss",
+      "ocr_error",
+      "unknown_object",
+      "camera_unavailable"
+    ],
+    "user_goal": [
+      "travel_forward",
+      "find_destination",
+      "read_sign",
+      "seek_assistance"
+    ],
+    "reaction_time": [
+      "short",
+      "medium",
+      "long"
+    ],
+    "language": [
+      "english",
+      "portuguese",
+      "spanish",
+      "french",
+      "other",
+      "icon_only"
+    ]
+  },
+  "sampling_note": "Do not materialize full cartesian product; use pairwise/stratified sampling. Keep OOD only separate from deployment claims."
+}

@@ -13,6 +13,12 @@ class TrackerConfig:
     n_init: int = 2             # matches required before a track is confirmed
     conf_ema: float = 0.6       # weight of new confidence in the exponential moving average
     text_similarity: float = 0.6
+    # explicit memory ledger: a confirmed track that stops being detected (occlusion, camera pan) stays available to the
+    # scheduler for memory_ttl_s seconds, with confidence and depth confidence decaying by memory_decay per second and
+    # its range extrapolated as if the user kept walking; 0 = off (the frame-only baseline)
+    memory_ttl_s: float = 0.0
+    memory_decay: float = 0.8
+    memory_user_speed: float = 1.0
 
 
 @dataclass
@@ -69,6 +75,8 @@ class SpeechConfig:
 @dataclass
 class PerceptionConfig:
     yolo_model: str = "yolo11n.pt"
+    detector: str = "yolo"                      # "yolo" (COCO) | "yolo-world" (open vocabulary, perception.NAV_VOCAB)
+    open_vocab_model: str = "yolov8s-worldv2.pt"
     yolo_conf: float = 0.25
     yolo_imgsz: int = 640
     device: str = "auto"

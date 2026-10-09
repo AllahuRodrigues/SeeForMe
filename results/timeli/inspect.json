@@ -1,0 +1,574 @@
+{
+ "source": "https://timeli-icra.github.io/ (Data folder on Google Drive)",
+ "licence": "CC BY 4.0 (dataset.croissant.json)",
+ "not_downloaded": {
+  "images.tar.gz": "32 GB",
+  "real_test.tar.gz": "38 GB",
+  "videos.tar.gz": "537 GB",
+  "TIMELI_Train_Eval.tar.gz": "14 MB (model code)"
+ },
+ "splits": {
+  "train": {
+   "file": "train_labels.json",
+   "bytes": 359965200,
+   "records": 56281,
+   "videos": 269,
+   "frames_per_video": {
+    "min": 51,
+    "mean": 209.2,
+    "max": 705
+   },
+   "first_frame_ids": {
+    "16": 269
+   },
+   "id_gaps": {
+    "1": 56012
+   },
+   "fields": {
+    "id": {
+     "type": "int",
+     "example": "16"
+    },
+    "video_id": {
+     "type": "str",
+     "example": "\"data_2024_10_25_03_04_21_session_2_Town05_wk1\""
+    },
+    "video": {
+     "type": "str",
+     "example": "\"videos/videos_data_2024_10_25_03_04_21_session_2_Town05_wk1_0_16.mp4\""
+    },
+    "conversations": {
+     "type": "list",
+     "example": "[{\"from\": \"human\", \"value\": \"<image>\\nYou are guiding a blind person. The blind person needs to approach the g..."
+    },
+    "QA": {
+     "type": "list",
+     "example": "[{\"q\": \"<image>\\nYou are guiding a blind person. The blind person needs to approach the goal: [x,y]=[-0.0, 1.7..."
+    },
+    "history": {
+     "type": "list",
+     "example": "[\"Okay, go straight. There's a fence and traffic sign on your left.\", \"None\", \"None\", \"None\", \"None\", \"None\", ..."
+    },
+    "goal_coord": {
+     "type": "list",
+     "example": "[-0.0, 1.71]"
+    },
+    "is_junction": {
+     "type": "bool",
+     "example": "false"
+    },
+    "reformatted_past_instruction": {
+     "type": "str",
+     "example": "\"\\ninstruction 15 seconds ago was: Okay, go straight. There's a fence and traffic sign on your left.\\ninstruct..."
+    },
+    "description_cluster": {
+     "type": "dict",
+     "example": "{\"FENCE\": [\"front\"]}"
+    },
+    "action": {
+     "type": "str",
+     "example": "\"walk straight\""
+    },
+    "image_name": {
+     "type": "str",
+     "example": "\"image_2024_10_25_03_04_21_session_2_Town05_wk1_0_16.jpg\""
+    },
+    "image": {
+     "type": "str",
+     "example": "\"images/image_2024_10_25_03_04_21_session_2_Town05_wk1_0_16.jpg\""
+    },
+    "meta": {
+     "type": "dict",
+     "example": "{\"id\": \"000000000160\", \"height\": 1080, \"width\": 1920, \"date_captured\": \"Fri Oct 25 03:50:43 2024\", \"town\": \"To..."
+    },
+    "object_detection": {
+     "type": "list",
+     "example": "[]"
+    },
+    "speaking_reason": {
+     "type": "str",
+     "example": "\"constant_instruction\""
+    },
+    "conveyed_obstacles": {
+     "type": "dict",
+     "example": "{}"
+    }
+   },
+   "object_detection_element": "{\"label\": \"person\", \"score\": 1.0, \"box\": [1045.29, 534.15, 1394.94, 1072.71], \"position\": \"front\", \"depth\": 109}",
+   "reasons": {
+    "remain_silent": 37536,
+    "remain_silent_in_junction": 7114,
+    "direction_change": 3814,
+    "obstacle_in_front": 3588,
+    "constant_instruction": 2446,
+    "enter_junction": 890,
+    "exit_junction": 884,
+    "stop": 9
+   },
+   "actions": {
+    "walk straight": 45845,
+    "turn slightly right": 4613,
+    "turn slightly left": 4586,
+    "stop": 571,
+    "turn around": 295,
+    "turn right": 187,
+    "turn left": 184
+   },
+   "junction_share": 0.233,
+   "spoken_share": 0.207,
+   "instructions_per_minute": 12.4,
+   "instruction_words": {
+    "mean": 11.63,
+    "sd": 4.66,
+    "max": 32,
+    "min": 2
+   },
+   "silence_runs": {
+    "n": 11776,
+    "seconds_total": 44650,
+    "mean_s": 3.79,
+    "longest_s": 24,
+    "by_length": {
+     "1": 3125,
+     "10+": 163,
+     "2-3": 3380,
+     "4-6": 2888,
+     "7-9": 2220
+    }
+   },
+   "gap_between_instructions_s": {
+    "mean": 4.8,
+    "median": 4.0,
+    "max": 25
+   },
+   "first_frame_reason": {
+    "constant_instruction": 12,
+    "remain_silent": 173,
+    "remain_silent_in_junction": 35,
+    "obstacle_in_front": 21,
+    "direction_change": 20,
+    "exit_junction": 3,
+    "enter_junction": 5
+   },
+   "reason_vs_instruction_inconsistencies": {},
+   "history_last_equals_previous_instruction": 1.0,
+   "conveyed_obstacles": {
+    "pole": 5274,
+    "pedestrian": 4986,
+    "building": 4830,
+    "vegetation": 3487,
+    "object": 2622,
+    "wall": 2363,
+    "fence": 2308,
+    "vehicle": 1082,
+    "traffic sign": 469
+   },
+   "conveyed_directions": {
+    "right": 11661,
+    "front": 4686,
+    "left": 11523
+   },
+   "description_cluster_objects": {
+    "BUILDING": 11291,
+    "FENCE": 9574,
+    "POLE": 9430,
+    "PEDESTRIAN": 7965,
+    "VEGETATION": 7628,
+    "OBJECT": 5610,
+    "WALL": 2994,
+    "VEHICLE": 1833,
+    "TRAFFIC_SIGN": 891
+   },
+   "description_cluster_directions": {
+    "front": 22695,
+    "right": 19315,
+    "left": 19223
+   },
+   "object_detection_labels": {
+    "person": 11215,
+    "banana": 6334,
+    "car": 3278,
+    "bench": 2574,
+    "traffic light": 2477,
+    "potted plant": 1476,
+    "motorcycle": 896,
+    "bicycle": 568,
+    "truck": 567,
+    "handbag": 414,
+    "stop sign": 263,
+    "chair": 256,
+    "backpack": 204,
+    "skateboard": 173,
+    "book": 89
+   },
+   "weather": {
+    "WetCloudyNoon": 11622,
+    "WetNoon": 11589,
+    "ClearNoon": 10935,
+    "HardRainNoon": 9519,
+    "ClearSunset": 7063,
+    "SoftRainSunset": 5553
+   },
+   "town": {
+    "Town10HD": 28380,
+    "Town05": 27901
+   },
+   "prediction_non_null": 0,
+   "seen": {}
+  },
+  "test": {
+   "file": "test_labels.json",
+   "bytes": 69755804,
+   "records": 10820,
+   "videos": 20,
+   "frames_per_video": {
+    "min": 242,
+    "mean": 541,
+    "max": 705
+   },
+   "first_frame_ids": {
+    "16": 20
+   },
+   "id_gaps": {
+    "1": 10800
+   },
+   "fields": {
+    "id": {
+     "type": "int",
+     "example": "16"
+    },
+    "video_id": {
+     "type": "str",
+     "example": "\"data_2024_11_01_11_56_10_fps_10_sample_10_test_session_0_Town02_wk1\""
+    },
+    "video": {
+     "type": "str",
+     "example": "\"videos/videos_data_2024_11_01_11_56_10_fps_10_sample_10_test_session_0_Town02_wk1_0_16.mp4\""
+    },
+    "conversations": {
+     "type": "list",
+     "example": "[{\"from\": \"human\", \"value\": \"<image>\\nYou are guiding a blind person. The blind person needs to approach the g..."
+    },
+    "QA": {
+     "type": "list",
+     "example": "[{\"q\": \"<image>\\nYou are guiding a blind person. The blind person needs to approach the goal: [x,y]=[0.0, 1.08..."
+    },
+    "history": {
+     "type": "list",
+     "example": "[\"Okay, go straight.\", \"None\", \"None\", \"None\", \"None\", \"None\", \"None\", \"Go to your two and keep walking.\", \"No..."
+    },
+    "goal_coord": {
+     "type": "list",
+     "example": "[0.0, 1.08]"
+    },
+    "is_junction": {
+     "type": "bool",
+     "example": "false"
+    },
+    "reformatted_past_instruction": {
+     "type": "str",
+     "example": "\"\\ninstruction 15 seconds ago was: Okay, go straight.\\ninstruction 14 seconds ago was: None\\ninstruction 13 se..."
+    },
+    "description_cluster": {
+     "type": "dict",
+     "example": "{\"BUILDING\": [\"front\"]}"
+    },
+    "action": {
+     "type": "str",
+     "example": "\"walk straight\""
+    },
+    "image_name": {
+     "type": "str",
+     "example": "\"image_2024_11_01_11_56_10_fps_10_sample_10_test_session_0_Town02_wk1_0_16.jpg\""
+    },
+    "image": {
+     "type": "str",
+     "example": "\"images/image_2024_11_01_11_56_10_fps_10_sample_10_test_session_0_Town02_wk1_0_16.jpg\""
+    },
+    "meta": {
+     "type": "dict",
+     "example": "{\"id\": \"000000000160\", \"height\": 1080, \"width\": 1920, \"date_captured\": \"Sat Nov  2 00:13:39 2024\", \"town\": \"To..."
+    },
+    "object_detection": {
+     "type": "list",
+     "example": "[]"
+    },
+    "speaking_reason": {
+     "type": "str",
+     "example": "\"remain_silent\""
+    },
+    "conveyed_obstacles": {
+     "type": "dict",
+     "example": "{}"
+    }
+   },
+   "object_detection_element": "{\"label\": \"fire hydrant\", \"score\": 1.0, \"box\": [1144.57, 664.62, 1227.91, 853.18], \"position\": \"front\", \"depth\": 147}",
+   "reasons": {
+    "remain_silent": 7699,
+    "obstacle_in_front": 898,
+    "direction_change": 811,
+    "remain_silent_in_junction": 736,
+    "constant_instruction": 419,
+    "enter_junction": 129,
+    "exit_junction": 128
+   },
+   "actions": {
+    "walk straight": 8475,
+    "turn slightly left": 1095,
+    "turn slightly right": 1091,
+    "turn around": 49,
+    "turn right": 47,
+    "turn left": 38,
+    "stop": 25
+   },
+   "junction_share": 0.128,
+   "spoken_share": 0.22,
+   "instructions_per_minute": 13.23,
+   "instruction_words": {
+    "mean": 11.19,
+    "sd": 4.21,
+    "max": 28,
+    "min": 2
+   },
+   "silence_runs": {
+    "n": 2397,
+    "seconds_total": 8435,
+    "mean_s": 3.52,
+    "longest_s": 28,
+    "by_length": {
+     "1": 640,
+     "10+": 15,
+     "2-3": 797,
+     "4-6": 577,
+     "7-9": 368
+    }
+   },
+   "gap_between_instructions_s": {
+    "mean": 4.52,
+    "median": 4,
+    "max": 29
+   },
+   "first_frame_reason": {
+    "remain_silent": 14,
+    "direction_change": 2,
+    "obstacle_in_front": 2,
+    "enter_junction": 1,
+    "remain_silent_in_junction": 1
+   },
+   "reason_vs_instruction_inconsistencies": {},
+   "history_last_equals_previous_instruction": 1.0,
+   "conveyed_obstacles": {
+    "pedestrian": 1119,
+    "pole": 1095,
+    "building": 966,
+    "object": 643,
+    "vegetation": 447,
+    "fence": 376,
+    "wall": 283,
+    "vehicle": 135,
+    "traffic sign": 42,
+    "guard rail": 3
+   },
+   "conveyed_directions": {
+    "front": 1134,
+    "right": 2121,
+    "left": 1925
+   },
+   "description_cluster_objects": {
+    "POLE": 2393,
+    "BUILDING": 2271,
+    "PEDESTRIAN": 1966,
+    "OBJECT": 1455,
+    "FENCE": 1046,
+    "VEGETATION": 1006,
+    "WALL": 923,
+    "VEHICLE": 244,
+    "TRAFFIC_SIGN": 100,
+    "GUARD_RAIL": 19
+   },
+   "description_cluster_directions": {
+    "front": 5097,
+    "right": 3729,
+    "left": 3503
+   },
+   "object_detection_labels": {
+    "person": 2234,
+    "banana": 1535,
+    "car": 549,
+    "bench": 483,
+    "potted plant": 202,
+    "traffic light": 151,
+    "fire hydrant": 111,
+    "truck": 105,
+    "motorcycle": 102,
+    "chair": 94,
+    "bicycle": 68,
+    "handbag": 64,
+    "backpack": 62,
+    "stop sign": 60,
+    "skateboard": 46
+   },
+   "weather": {
+    "WetNoon": 4155,
+    "ClearSunset": 2386,
+    "WetCloudyNoon": 2092,
+    "ClearNoon": 1482,
+    "HardRainNoon": 705
+   },
+   "town": {
+    "Town04": 3904,
+    "Town03": 3693,
+    "Town02": 3223
+   },
+   "prediction_non_null": 0,
+   "seen": {}
+  },
+  "real": {
+   "file": "real_test.json",
+   "bytes": 4940568,
+   "records": 1059,
+   "videos": 11,
+   "frames_per_video": {
+    "min": 47,
+    "mean": 96.3,
+    "max": 165
+   },
+   "first_frame_ids": {
+    "15": 11
+   },
+   "id_gaps": {
+    "1": 1048
+   },
+   "fields": {
+    "id": {
+     "type": "int",
+     "example": "15"
+    },
+    "video_id": {
+     "type": "int",
+     "example": "2"
+    },
+    "video": {
+     "type": "str",
+     "example": "\"output/real_test/image_video_US_00/frame_275.mp4\""
+    },
+    "conversations": {
+     "type": "list",
+     "example": "[{\"from\": \"human\", \"value\": \"You are guiding a blind person. The blind person needs to approach the goal: [x,y..."
+    },
+    "QA": {
+     "type": "list",
+     "example": "[{\"q\": \"You are guiding a blind person. The blind person needs to approach the goal: [x,y]=[0.0, 1.0], which t..."
+    },
+    "goal_coord": {
+     "type": "list",
+     "example": "[0.0, 1.0]"
+    },
+    "is_junction": {
+     "type": "bool",
+     "example": "false"
+    },
+    "action": {
+     "type": "str",
+     "example": "\"walk straight\""
+    },
+    "image": {
+     "type": "str",
+     "example": "\"output/real_test/image_video_US_00/frame_275.jpg\""
+    },
+    "meta": {
+     "type": "dict",
+     "example": "{\"weather\": \"real\", \"town\": \"real\"}"
+    },
+    "prediction": {
+     "type": "str",
+     "example": "\"None\""
+    },
+    "spoken_reason": {
+     "type": "str",
+     "example": "\"remain_silent\""
+    },
+    "seen": {
+     "type": "bool",
+     "example": "true"
+    }
+   },
+   "object_detection_element": null,
+   "reasons": {
+    "remain_silent": 784,
+    "obstacle_in_front": 153,
+    "constant_instruction": 83,
+    "remain_silent_in_junction": 25,
+    "enter_junction": 6,
+    "exit_junction": 6,
+    "None": 1,
+    "constantly_instruct": 1
+   },
+   "actions": {
+    "walk straight": 985,
+    "turn slightly left": 29,
+    "turn slightly right": 17,
+    "stop": 17,
+    "turn left": 10,
+    "turn right": 1
+   },
+   "junction_share": 0.0,
+   "spoken_share": 0.291,
+   "instructions_per_minute": 17.45,
+   "instruction_words": {
+    "mean": 9.46,
+    "sd": 4.27,
+    "max": 20,
+    "min": 1
+   },
+   "silence_runs": {
+    "n": 264,
+    "seconds_total": 751,
+    "mean_s": 2.84,
+    "longest_s": 8,
+    "by_length": {
+     "1": 59,
+     "2-3": 115,
+     "4-6": 85,
+     "7-9": 5
+    }
+   },
+   "gap_between_instructions_s": {
+    "mean": 3.39,
+    "median": 3,
+    "max": 9
+   },
+   "first_frame_reason": {
+    "remain_silent": 7,
+    "constant_instruction": 2,
+    "remain_silent_in_junction": 1,
+    "obstacle_in_front": 1
+   },
+   "reason_vs_instruction_inconsistencies": {
+    "remain_silent but instruction given": 121,
+    "constant_instruction but no instruction": 19,
+    "obstacle_in_front but no instruction": 45,
+    "enter_junction but no instruction": 2,
+    "remain_silent_in_junction but instruction given": 5,
+    "None but no instruction": 1,
+    "exit_junction but no instruction": 1
+   },
+   "history_last_equals_previous_instruction": null,
+   "conveyed_obstacles": {},
+   "conveyed_directions": {},
+   "description_cluster_objects": {},
+   "description_cluster_directions": {},
+   "object_detection_labels": {},
+   "weather": {
+    "real": 1059
+   },
+   "town": {
+    "real": 1059
+   },
+   "prediction_non_null": 250,
+   "seen": {
+    "True": 1053
+   }
+  }
+ }
+}

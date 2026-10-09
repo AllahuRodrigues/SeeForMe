@@ -1,0 +1,57 @@
+[12:24:13] ego chain v4 (review fixes)
+[12:24:13] scenarios already rebuilt (build_scenarios.log)
+[12:24:13] start manifests
+[12:24:14] end manifests rc=0
+[12:24:14] start train_egoblind_only
+[12:24:14] start train_egoblind_mixed
+[12:24:14] start tune_pcacs_egoblind
+[12:24:14] start ego_thr
+[12:25:03] end ego_thr rc=0
+[12:25:03] start ego_aware
+[12:25:52] end ego_aware rc=0
+[12:25:52] start decompose_train
+[12:26:04] end decompose_train rc=0
+[12:26:04] start decompose_holdout
+[12:26:08] end decompose_holdout rc=0
+[12:26:08] start decompose_official
+[12:26:25] end decompose_official rc=0
+[12:28:48] end train_egoblind_only rc=0
+[12:30:19] end train_egoblind_mixed rc=0
+[12:34:43] end tune_pcacs_egoblind rc=0
+[12:34:43] ego chain v4: models trained and P-CACS re-tuned on train; evaluating on the unseen holdout
+[12:34:43] start holdout_final
+[12:34:43] start holdout_degraded
+[12:34:43] start diag_holdout
+[12:34:43] start diag_train
+[12:35:02] end diag_holdout rc=0
+[12:35:14] end holdout_degraded rc=0
+[12:35:21] end holdout_final rc=0
+[12:35:42] end diag_train rc=0
+[12:35:42] official EgoBlind test (external benchmark, evaluated once)
+[12:35:42] start official_final
+[12:35:42] start official_degraded
+[12:35:42] start diag_official
+[12:35:42] start holdout_ow
+[12:36:03] end holdout_ow rc=0
+[12:36:03] start diag_holdout_ow
+[12:36:15] end diag_holdout_ow rc=0
+[12:37:36] end diag_official rc=0
+[12:38:58] end official_degraded rc=0
+[12:39:44] end official_final rc=0
+[12:39:44] start compare_caches
+[12:39:45] end compare_caches rc=0
+[12:39:45] start ci_holdout_final
+[12:39:50] end ci_holdout_final rc=0
+[12:39:50] start ci_holdout_degraded
+[12:39:56] end ci_holdout_degraded rc=0
+[12:39:56] start ci_holdout_ow
+[12:39:59] end ci_holdout_ow rc=0
+[12:39:59] start ci_test_official
+[12:40:48] end ci_test_official rc=0
+[12:40:48] start ci_test_official_degraded
+[12:41:35] end ci_test_official_degraded rc=0
+[12:41:35] start manifests_after
+[12:41:36] end manifests_after rc=0
+[12:41:36] start repro_check
+[12:42:13] end repro_check rc=0
+[12:42:13] ego chain v4 done

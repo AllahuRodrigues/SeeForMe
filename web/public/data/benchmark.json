@@ -1,0 +1,86 @@
+[
+ {
+  "id": "confidence_threshold",
+  "name": "Confidence threshold",
+  "action_weighted_recall": 0.246,
+  "late_critical_rate": 0.27,
+  "cue_precision": 0.059,
+  "audio_occupancy": 0.733,
+  "cues_per_min": 31.778,
+  "silence_precision": 1.0,
+  "min_message_ratio": 0.471,
+  "regret": 8.465
+ },
+ {
+  "id": "confidence_cooldown",
+  "name": "Confidence + cooldown",
+  "action_weighted_recall": 0.256,
+  "late_critical_rate": 0.266,
+  "cue_precision": 0.069,
+  "audio_occupancy": 0.644,
+  "cues_per_min": 27.0,
+  "silence_precision": 0.984,
+  "min_message_ratio": 0.476,
+  "regret": 7.315
+ },
+ {
+  "id": "cacs",
+  "name": "CACS (v1)",
+  "action_weighted_recall": 0.229,
+  "late_critical_rate": 0.609,
+  "cue_precision": 0.252,
+  "audio_occupancy": 0.227,
+  "cues_per_min": 8.455,
+  "silence_precision": 0.776,
+  "min_message_ratio": 0.389,
+  "regret": 3.2
+ },
+ {
+  "id": "pcacs",
+  "name": "P-CACS linear",
+  "action_weighted_recall": 0.477,
+  "late_critical_rate": 0.282,
+  "cue_precision": 0.55,
+  "audio_occupancy": 0.211,
+  "cues_per_min": 7.323,
+  "silence_precision": 0.8,
+  "min_message_ratio": 0.969,
+  "regret": 1.411
+ },
+ {
+  "id": "pcacs_learned:il",
+  "name": "P-CACS GRU imitation",
+  "action_weighted_recall": 0.68,
+  "late_critical_rate": 0.183,
+  "cue_precision": 0.732,
+  "audio_occupancy": 0.245,
+  "cues_per_min": 9.02,
+  "silence_precision": 0.962,
+  "min_message_ratio": 0.895,
+  "regret": 0.545
+ },
+ {
+  "id": "pcacs_learned:rl",
+  "name": "P-CACS GRU + RL",
+  "action_weighted_recall": 0.696,
+  "late_critical_rate": 0.214,
+  "cue_precision": 0.883,
+  "audio_occupancy": 0.201,
+  "cues_per_min": 7.384,
+  "silence_precision": 0.904,
+  "min_message_ratio": 0.89,
+  "regret": 0.114
+ },
+ {
+  "id": "oracle",
+  "name": "Reference",
+  "action_weighted_recall": 0.727,
+  "late_critical_rate": 0.236,
+  "cue_precision": 0.996,
+  "audio_occupancy": 0.213,
+  "cues_per_min": 7.071,
+  "silence_precision": 0.814,
+  "min_message_ratio": 1.0,
+  "regret": -0.0
+ }
+]

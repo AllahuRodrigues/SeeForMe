@@ -1,0 +1,110 @@
+{
+ "depth_mcqa": {
+  "n": 383,
+  "order_accuracy": 0.8851174934725848,
+  "abs_err_m_median": 11.53794813156128,
+  "rel_err_median": 1.4711914582432157,
+  "order_accuracy_by_closer_depth": {
+   "lt3m": {
+    "n": 78,
+    "order_accuracy": 0.9615384615384616
+   },
+   "3to8m": {
+    "n": 197,
+    "order_accuracy": 0.9035532994923858
+   },
+   "gt8m": {
+    "n": 108,
+    "order_accuracy": 0.7962962962962963
+   }
+  },
+  "order_accuracy_by_depth_ratio": {
+   "lt1.5": {
+    "n": 159,
+    "order_accuracy": 0.7547169811320755
+   },
+   "1.5to3": {
+    "n": 146,
+    "order_accuracy": 0.9657534246575342
+   },
+   "gt3": {
+    "n": 78,
+    "order_accuracy": 1.0
+   }
+  },
+  "err_by_ref_depth": {
+   "lt3m": {
+    "n": 88,
+    "abs_err_m_median": 7.001651763916016,
+    "rel_err_median": 3.3351887728060268
+   },
+   "3to8m": {
+    "n": 326,
+    "abs_err_m_median": 8.703200817108154,
+    "rel_err_median": 1.6629956188749289
+   },
+   "gt8m": {
+    "n": 352,
+    "abs_err_m_median": 15.62579870223999,
+    "rel_err_median": 1.087260455785528
+   }
+  }
+ },
+ "gold_hazards": {
+  "n_images": 2106,
+  "n_hazard_mentions": 7154,
+  "coco_coverable": 3940,
+  "coverable_rate": 0.5507408442829187,
+  "detected_in_direction": 3395,
+  "detected_rate_of_coverable": 0.8616751269035533,
+  "top_concepts": {
+   "person": 2311,
+   "non-COCO:road": 2190,
+   "car": 1086,
+   "non-COCO:obstacle": 592,
+   "non-COCO:fence": 482,
+   "non-COCO:pole": 474,
+   "non-COCO:sign": 447,
+   "non-COCO:tree": 438,
+   "truck": 346,
+   "non-COCO:wall": 246,
+   "non-COCO:ground hazard": 233,
+   "bicycle": 220,
+   "motorcycle": 177,
+   "non-COCO:trash can": 144,
+   "chair": 120,
+   "dining table": 98,
+   "bench": 94,
+   "bus": 83,
+   "non-COCO:door": 72,
+   "non-COCO:curb": 46
+  },
+  "top_uncoverable": {
+   "unnamed": 929,
+   "road": 611,
+   "fence": 362,
+   "sign": 311,
+   "tree": 298,
+   "wall": 215,
+   "pole": 131,
+   "trash can": 106,
+   "obstacle": 102,
+   "ground hazard": 56,
+   "door": 35,
+   "stairs": 18,
+   "curb": 17,
+   "water": 11,
+   "machine": 4
+  },
+  "n_images_with_hazards": 2106,
+  "n_clear_direction_mentions": 2394,
+  "hazard_mentions_by_hour": {
+   "10": 1420,
+   "11": 1290,
+   "12": 1626,
+   "1": 1336,
+   "2": 1482
+  }
+ },
+ "smoke": false
+}

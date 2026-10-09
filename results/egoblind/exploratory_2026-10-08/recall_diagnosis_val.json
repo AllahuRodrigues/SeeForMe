@@ -1,0 +1,65 @@
+{
+ "pcacs": {
+  "all": {
+   "below_threshold": 6,
+   "not_coverable": 15
+  },
+  "coverable": {
+   "below_threshold": 6
+  },
+  "n_events": 21,
+  "n_coverable": 6
+ },
+ "pcacs_egoblind": {
+  "all": {
+   "below_threshold": 6,
+   "not_coverable": 15
+  },
+  "coverable": {
+   "below_threshold": 6
+  },
+  "n_events": 21,
+  "n_coverable": 6
+ },
+ "pcacs_learned:rl": {
+  "all": {
+   "other": 1,
+   "spoken_late": 1,
+   "below_threshold": 3,
+   "spoken_timely": 1,
+   "not_coverable": 15
+  },
+  "coverable": {
+   "other": 1,
+   "spoken_late": 1,
+   "below_threshold": 3,
+   "spoken_timely": 1
+  },
+  "n_events": 21,
+  "n_coverable": 6
+ },
+ "egoblind_learned:il": {
+  "all": {
+   "below_threshold": 5,
+   "spoken_timely": 1,
+   "not_coverable": 15
+  },
+  "coverable": {
+   "below_threshold": 5,
+   "spoken_timely": 1
+  },
+  "n_events": 21,
+  "n_coverable": 6
+ },
+ "egoblind_learned:rl": {
+  "all": {
+   "below_threshold": 6,
+   "not_coverable": 15
+  },
+  "coverable": {
+   "below_threshold": 6
+  },
+  "n_events": 21,
+  "n_coverable": 6
+ }
+}

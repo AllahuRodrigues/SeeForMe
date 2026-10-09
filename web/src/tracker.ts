@@ -11,10 +11,11 @@ const DEFAULT_SIZE: [number, number] = [0.8, 0.5];
 
 export class Camera {
   constructor(public hfovDeg = 70, public aspect = 4 / 3, public heightM = 1.35, public pitchDeg = 15) {}
-  get fx() { return 0.5 / Math.tan((this.hfovDeg * Math.PI) / 360); }
+  // same operation order as Python (math.radians / math.degrees), so the angle feature matches bit for bit
+  get fx() { return 0.5 / Math.tan((this.hfovDeg * (Math.PI / 180)) / 2); }
   get fy() { return this.fx * this.aspect; }
   lateralFromU(u: number, z: number) { return ((u - 0.5) * z) / this.fx; }
-  angleDeg(u: number) { return (Math.atan2(u - 0.5, this.fx) * 180) / Math.PI; }
+  angleDeg(u: number) { return (180 / Math.PI) * Math.atan2(u - 0.5, this.fx); }
   distanceFromBBox(b: BBox, label: string) {
     const h = Math.max(1e-3, b[3] - b[1]);
     const [H] = TYPICAL_SIZE[label] ?? DEFAULT_SIZE;

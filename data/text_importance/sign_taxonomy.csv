@@ -1,0 +1,200 @@
+text,label,category,language
+EXIT,1,directional,en
+ENTRANCE,1,directional,en
+THIS WAY,1,directional,en
+LEFT ARROW,1,directional,en
+RIGHT ARROW,1,directional,en
+YOU ARE HERE,1,directional,en
+MAP,1,directional,en
+STAIRS,1,vertical_access,en
+ELEVATOR,1,vertical_access,en
+LIFT,1,vertical_access,en
+RAMP,1,vertical_access,en
+ESCALATOR,1,vertical_access,en
+ACCESSIBLE ROUTE,1,vertical_access,en
+NO STEP ACCESS,1,vertical_access,en
+CAUTION WET FLOOR,1,floor_hazard,en
+WATCH YOUR STEP,1,floor_hazard,en
+UNEVEN SURFACE,1,floor_hazard,en
+SLIPPERY WHEN WET,1,floor_hazard,en
+LOW CLEARANCE,1,floor_hazard,en
+FALL HAZARD,1,floor_hazard,en
+DO NOT ENTER,1,restriction,en
+AUTHORIZED PERSONNEL,1,restriction,en
+ROAD CLOSED,1,restriction,en
+TEMPORARY CLOSURE,1,restriction,en
+NO PEDESTRIANS,1,restriction,en
+STAFF ONLY,1,restriction,en
+EMERGENCY EXIT,1,emergency,en
+FIRE EXIT,1,emergency,en
+EVACUATION ROUTE,1,emergency,en
+FIRST AID,1,emergency,en
+AED,1,emergency,en
+EMERGENCY ASSEMBLY,1,emergency,en
+GATES,1,airport,en
+GATE A12,1,airport,en
+DEPARTURES,1,airport,en
+ARRIVALS,1,airport,en
+BAGGAGE CLAIM,1,airport,en
+SECURITY CHECK,1,airport,en
+PASSPORT CONTROL,1,airport,en
+TRANSFER,1,airport,en
+BOARDING,1,airport,en
+GATE CHANGE,1,airport,en
+PLATFORM,1,transit,en
+TRACK 2,1,transit,en
+BUS STOP,1,transit,en
+TICKET OFFICE,1,transit,en
+TRAIN DELAYED,1,transit,en
+SERVICE CHANGE,1,transit,en
+MIND THE GAP,1,transit,en
+RESTROOM,1,personal_services,en
+ACCESSIBLE TOILET,1,personal_services,en
+INFORMATION,1,personal_services,en
+HELP DESK,1,personal_services,en
+RECEPTION,1,personal_services,en
+CUSTOMER SERVICE,1,personal_services,en
+ROOM 204,1,personal_services,en
+STOP,1,street,en
+YIELD,1,street,en
+PEDESTRIAN CROSSING,1,street,en
+NO CROSSING,1,street,en
+DETOUR,1,street,en
+SCHOOL ZONE,1,street,en
+CONSTRUCTION AHEAD,1,street,en
+EMERGENCY,1,medical,en
+TRIAGE,1,medical,en
+PHARMACY,1,medical,en
+RADIOLOGY,1,medical,en
+REGISTRATION,1,medical,en
+WARD,1,medical,en
+EXIT TO STREET,1,medical,en
+CHECKOUT,1,retail,en
+QUEUE HERE,1,retail,en
+PICKUP,1,retail,en
+CUSTOMER SERVICE,1,retail,en
+AISLE 5,1,retail,en
+SALE 50% OFF,0,retail,en
+CLOSED,1,retail,en
+ADVERTISEMENT,0,negative_text,en
+BRAND LOGO,0,negative_text,en
+DECORATIVE POSTER,0,negative_text,en
+MENU SPECIAL,0,negative_text,en
+EVENT POSTER,0,negative_text,en
+NONACTIONABLE WALL TEXT,0,negative_text,en
+SAÍDA,1,translated:exit,pt
+SALIDA,1,translated:exit,es
+SORTIE,1,translated:exit,fr
+ENTRADA,1,translated:entrance,pt
+ENTRADA,1,translated:entrance,es
+ENTRÉE,1,translated:entrance,fr
+SAÍDA DE EMERGÊNCIA,1,translated:emergency exit,pt
+SALIDA DE EMERGENCIA,1,translated:emergency exit,es
+SORTIE DE SECOURS,1,translated:emergency exit,fr
+ESCADAS,1,translated:stairs,pt
+ESCALERAS,1,translated:stairs,es
+ESCALIER,1,translated:stairs,fr
+ELEVADOR,1,translated:elevator,pt
+ASCENSOR,1,translated:elevator,es
+ASCENSEUR,1,translated:elevator,fr
+ESCADA ROLANTE,1,translated:escalator,pt
+ESCALERA MECÁNICA,1,translated:escalator,es
+ESCALIER MÉCANIQUE,1,translated:escalator,fr
+BANHEIRO,1,translated:restroom,pt
+BAÑOS,1,translated:restroom,es
+TOILETTES,1,translated:restroom,fr
+NÃO ENTRE,1,translated:do not enter,pt
+NO ENTRAR,1,translated:do not enter,es
+ENTRÉE INTERDITE,1,translated:do not enter,fr
+CUIDADO PISO MOLHADO,1,translated:wet floor,pt
+CUIDADO PISO MOJADO,1,translated:wet floor,es
+ATTENTION SOL GLISSANT,1,translated:wet floor,fr
+CUIDADO COM O DEGRAU,1,translated:watch your step,pt
+CUIDADO CON EL ESCALÓN,1,translated:watch your step,es
+ATTENTION À LA MARCHE,1,translated:watch your step,fr
+PORTÕES,1,translated:gates,pt
+PUERTAS DE EMBARQUE,1,translated:gates,es
+PORTES D'EMBARQUEMENT,1,translated:gates,fr
+PORTÃO,1,translated:gate,pt
+PUERTA,1,translated:gate,es
+PORTE,1,translated:gate,fr
+PARTIDAS,1,translated:departures,pt
+SALIDAS,1,translated:departures,es
+DÉPARTS,1,translated:departures,fr
+CHEGADAS,1,translated:arrivals,pt
+LLEGADAS,1,translated:arrivals,es
+ARRIVÉES,1,translated:arrivals,fr
+RESTITUIÇÃO DE BAGAGEM,1,translated:baggage claim,pt
+RECOGIDA DE EQUIPAJE,1,translated:baggage claim,es
+LIVRAISON DES BAGAGES,1,translated:baggage claim,fr
+CONTROLE DE SEGURANÇA,1,translated:security check,pt
+CONTROL DE SEGURIDAD,1,translated:security check,es
+CONTRÔLE DE SÛRETÉ,1,translated:security check,fr
+CONTROLE DE PASSAPORTES,1,translated:passport control,pt
+CONTROL DE PASAPORTES,1,translated:passport control,es
+CONTRÔLE DES PASSEPORTS,1,translated:passport control,fr
+PLATAFORMA,1,translated:platform,pt
+ANDÉN,1,translated:platform,es
+QUAI,1,translated:platform,fr
+PONTO DE ÔNIBUS,1,translated:bus stop,pt
+PARADA DE AUTOBÚS,1,translated:bus stop,es
+ARRÊT DE BUS,1,translated:bus stop,fr
+BILHETERIA,1,translated:ticket office,pt
+TAQUILLA,1,translated:ticket office,es
+BILLETTERIE,1,translated:ticket office,fr
+INFORMAÇÕES,1,translated:information,pt
+INFORMACIÓN,1,translated:information,es
+INFORMATIONS,1,translated:information,fr
+BALCÃO DE ATENDIMENTO,1,translated:help desk,pt
+ATENCIÓN AL CLIENTE,1,translated:help desk,es
+ACCUEIL,1,translated:help desk,fr
+FARMÁCIA,1,translated:pharmacy,pt
+FARMACIA,1,translated:pharmacy,es
+PHARMACIE,1,translated:pharmacy,fr
+EMERGÊNCIA,1,translated:emergency,pt
+URGENCIAS,1,translated:emergency,es
+URGENCES,1,translated:emergency,fr
+CAIXA,1,translated:checkout,pt
+CAJA,1,translated:checkout,es
+CAISSE,1,translated:checkout,fr
+FECHADO,1,translated:closed,pt
+CERRADO,1,translated:closed,es
+FERMÉ,1,translated:closed,fr
+DESVIO,1,translated:detour,pt
+DESVÍO,1,translated:detour,es
+DÉVIATION,1,translated:detour,fr
+CUIDADO COM O VÃO,1,translated:mind the gap,pt
+CUIDADO CON EL HUECO,1,translated:mind the gap,es
+ATTENTION À L'ÉCART,1,translated:mind the gap,fr
+SALE 50% OFF,0,decor:sale,en
+PROMOÇÃO 50% OFF,0,decor:sale,pt
+REBAJAS 50%,0,decor:sale,es
+SOLDES 50%,0,decor:sale,fr
+WELCOME,0,decor:welcome,en
+BEM-VINDO,0,decor:welcome,pt
+BIENVENIDO,0,decor:welcome,es
+BIENVENUE,0,decor:welcome,fr
+NEW MENU,0,decor:menu,en
+NOVO CARDÁPIO,0,decor:menu,pt
+NUEVO MENÚ,0,decor:menu,es
+NOUVEAU MENU,0,decor:menu,fr
+DUTY FREE SHOPPING,0,decor:duty free,en
+COMPRAS DUTY FREE,0,decor:duty free,pt
+COMPRAS LIBRES DE IMPUESTOS,0,decor:duty free,es
+BOUTIQUES HORS TAXES,0,decor:duty free,fr
+FREE WIFI,0,decor:free wifi,en
+WIFI GRÁTIS,0,decor:free wifi,pt
+WIFI GRATIS,0,decor:free wifi,es
+WIFI GRATUIT,0,decor:free wifi,fr
+COFFEE $2,0,decor:coffee,en
+CAFÉ R$5,0,decor:coffee,pt
+CAFÉ 2€,0,decor:coffee,es
+CAFÉ 2€,0,decor:coffee,fr
+FOLLOW US ONLINE,0,decor:follow us,en
+SIGA-NOS,0,decor:follow us,pt
+SÍGUENOS,0,decor:follow us,es
+SUIVEZ-NOUS,0,decor:follow us,fr
+HAPPY HOUR 5 TO 7,0,decor:happy hour,en
+HAPPY HOUR 17H ÀS 19H,0,decor:happy hour,pt
+HORA FELIZ 5 A 7,0,decor:happy hour,es
+HAPPY HOUR 17H À 19H,0,decor:happy hour,fr

@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "categories": {
+    "directional": [
+      "EXIT",
+      "ENTRANCE",
+      "THIS WAY",
+      "LEFT ARROW",
+      "RIGHT ARROW",
+      "YOU ARE HERE",
+      "MAP"
+    ],
+    "vertical_access": [
+      "STAIRS",
+      "ELEVATOR",
+      "LIFT",
+      "RAMP",
+      "ESCALATOR",
+      "ACCESSIBLE ROUTE",
+      "NO STEP ACCESS"
+    ],
+    "floor_hazard": [
+      "CAUTION WET FLOOR",
+      "WATCH YOUR STEP",
+      "UNEVEN SURFACE",
+      "SLIPPERY WHEN WET",
+      "LOW CLEARANCE",
+      "FALL HAZARD"
+    ],
+    "restriction": [
+      "DO NOT ENTER",
+      "AUTHORIZED PERSONNEL",
+      "ROAD CLOSED",
+      "TEMPORARY CLOSURE",
+      "NO PEDESTRIANS",
+      "STAFF ONLY"
+    ],
+    "emergency": [
+      "EMERGENCY EXIT",
+      "FIRE EXIT",
+      "EVACUATION ROUTE",
+      "FIRST AID",
+      "AED",
+      "EMERGENCY ASSEMBLY"
+    ],
+    "airport": [
+      "GATES",
+      "GATE A12",
+      "DEPARTURES",
+      "ARRIVALS",
+      "BAGGAGE CLAIM",
+      "SECURITY CHECK",
+      "PASSPORT CONTROL",
+      "TRANSFER",
+      "BOARDING",
+      "GATE CHANGE"
+    ],
+    "transit": [
+      "PLATFORM",
+      "TRACK 2",
+      "BUS STOP",
+      "TICKET OFFICE",
+      "TRAIN DELAYED",
+      "SERVICE CHANGE",
+      "MIND THE GAP"
+    ],
+    "personal_services": [
+      "RESTROOM",
+      "ACCESSIBLE TOILET",
+      "INFORMATION",
+      "HELP DESK",
+      "RECEPTION",
+      "CUSTOMER SERVICE",
+      "ROOM 204"
+    ],
+    "street": [
+      "STOP",
+      "YIELD",
+      "PEDESTRIAN CROSSING",
+      "NO CROSSING",
+      "DETOUR",
+      "SCHOOL ZONE",
+      "CONSTRUCTION AHEAD"
+    ],
+    "medical": [
+      "EMERGENCY",
+      "TRIAGE",
+      "PHARMACY",
+      "RADIOLOGY",
+      "REGISTRATION",
+      "WARD",
+      "EXIT TO STREET"
+    ],
+    "retail": [
+      "CHECKOUT",
+      "QUEUE HERE",
+      "PICKUP",
+      "CUSTOMER SERVICE",
+      "AISLE 5",
+      "SALE 50% OFF",
+      "CLOSED"
+    ],
+    "negative_text": [
+      "ADVERTISEMENT",
+      "BRAND LOGO",
+      "DECORATIVE POSTER",
+      "MENU SPECIAL",
+      "EVENT POSTER",
+      "NONACTIONABLE WALL TEXT"
+    ],
+    "symbol_only": [
+      "ACCESSIBILITY PICTOGRAM",
+      "EXIT PICTOGRAM",
+      "ELEVATOR PICTOGRAM",
+      "RESTROOM PICTOGRAM",
+      "HAZARD ICON",
+      "DIRECTIONAL ARROW"
+    ]
+  },
+  "disclaimer": "Open vocabulary OCR/classification targets, not verified human communication labels."
+}

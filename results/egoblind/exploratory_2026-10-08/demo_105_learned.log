@@ -1,0 +1,4 @@
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 3966.71it/s]
+WARNING ⚠️ NMS time limit 2.050s exceeded
+772 frames, 0 cues -> results/egoblind/demo_105_egoblind_learned_rl.mp4, log results/egoblind/demo_105_egoblind_learned_rl_cues.jsonl
+latency: {'detect': {'mean_ms': 144.262, 'p95_ms': 568.888}, 'ocr': {'mean_ms': 0.003, 'p95_ms': 0.008}, 'track': {'mean_ms': 0.65, 'p95_ms': 1.398}, 'policy': {'mean_ms': 0.376, 'p95_ms': 0.875}, 'end_to_end': {'mean_ms': 419.832, 'p95_ms': 1517.793}}

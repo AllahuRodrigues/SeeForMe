@@ -10,11 +10,17 @@ ap.add_argument("--split", default="test")
 ap.add_argument("--policies", default="oracle,confidence_threshold,confidence_cooldown,cacs,pcacs")
 ap.add_argument("--repeats", type=int, default=3)
 ap.add_argument("--tag", default="")
+ap.add_argument("--memory-ttl", type=float, default=0.0, help="tracker memory ledger TTL in seconds for every policy (0 = frame-only)")
+ap.add_argument("--memory-decay", type=float, default=0.8)
+ap.add_argument("--perfect-perception", action="store_true", help="oracle detector + exact depth: isolates the scheduler from perception errors")
 args = ap.parse_args()
 
 cfg = load_campus_cfg()
+if args.memory_ttl > 0:
+    from dataclasses import replace
+    cfg.tracker = replace(cfg.tracker, memory_ttl_s=args.memory_ttl, memory_decay=args.memory_decay)
 scenarios = load_campus_split(args.split)
-osc = oracle_scores(scenarios, cfg, repeats=args.repeats)
+osc = oracle_scores(scenarios, cfg, repeats=args.repeats, perfect=args.perfect_perception)
 rows = []
 for name in args.policies.split(","):
     for sc in scenarios:
@@ -23,7 +29,7 @@ for name in args.policies.split(","):
                 pol = make_campus_policy(name, cfg, sc)
             except FileNotFoundError as e:
                 print(f"skip {name}: {e}"); break
-            rows.append(evaluate_run(run_on_campus(pol, sc, cfg, seed=sc.seed + 17 * rep), sc))
+            rows.append(evaluate_run(run_on_campus(pol, sc, cfg, seed=sc.seed + 17 * rep, perfect_perception=args.perfect_perception), sc))
     a = aggregate([r for r in rows if r.policy == name], osc).get(name)
     if a:
         print(f"{name:24s} AWrec={a['action_weighted_recall']:.3f} lateC={a['late_critical_rate']:.2f} lead={a['mean_lead_s']:.2f}s "

@@ -1,7 +1,7 @@
 {
   "name": "seeforme-web",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.1",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
@@ -12,6 +12,7 @@
     "onnxruntime-web": "^1.20.1"
   },
   "devDependencies": {
+    "esbuild": "^0.25.12",
     "typescript": "^5.6.3",
     "vite": "^6.0.3",
     "vite-plugin-pwa": "^0.21.1"

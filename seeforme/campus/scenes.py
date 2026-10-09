@@ -10,6 +10,7 @@ import random
 from typing import List, Optional, Tuple
 
 from .world import CampusScenario, WorldObject
+from ..cues.sign_vocab import translate
 from ..geometry.camera import CameraModel
 
 DECOR_OBJECTS = ["poster", "tv", "clock", "laptop", "book", "cup", "bottle", "vase", "cell phone", "painting"]
@@ -20,7 +21,12 @@ NAV_SIGNS = ["EXIT", "RESTROOM", "ELEVATOR", "STAIRS", "ROOM 204", "ROOM 117B", 
 OBSTACLES = ["chair", "trash can", "potted plant", "suitcase", "bench", "box", "cart", "backpack"]
 
 CAMPUS_KINDS = ["courtyard", "hallway", "stairs", "doors", "crossing", "finding", "crowd",
-                "temporary_hazard", "poor_capture", "negative", "changing"]
+                "temporary_hazard", "poor_capture", "negative", "changing",
+                # v2 (research/scenario_catalog.json): channel contention, lost observation / memory,
+                # multilingual airport wayfinding, and an out-of-distribution accident aftermath (evaluation only)
+                "contention", "occlusion", "wayfinding_airport", "ood_aftermath"]
+CAMPUS_KINDS_V1 = CAMPUS_KINDS[:11]
+OOD_KINDS = {"ood_aftermath"}
 
 
 class _Builder:
@@ -101,10 +107,11 @@ class _Builder:
                       self.rng.uniform(3, 30), nav=False, base_conf=0.85)
 
     def build(self) -> CampusScenario:
+        meta = {k: self.extra.pop(k) for k in ("occlusion", "language") if k in self.extra}
+        desc = f"{self.kind} scenario, seed {self.seed}" + (f" {meta}" if meta else "")
         sc = CampusScenario(name=f"{self.kind}_{self.seed}", kind=self.kind, duration=self.duration, fps=self.fps,
                             objects=self.objects, user_keyframes=self.user_kf, goal=self.goal, goal_tags=self.goal_tags,
-                            camera=self.camera, seed=self.seed, description=f"{self.kind} scenario, seed {self.seed}",
-                            **self.extra)
+                            camera=self.camera, seed=self.seed, description=desc, **self.extra)
         return sc
 
 
@@ -264,6 +271,98 @@ def make_campus_scenario(kind: str, seed: int, duration: float = 30.0, fps: floa
             b.static(rng.choice(["chair", "bench", "potted plant"]), rng.choice([-1, 1]) * rng.uniform(1.4, 2.2), z)
         b.static("door", -1.9, 12, width=0.9, detail={"handle": "right"})   # side door, not in the path
         b.static("fire hydrant", 1.8, 20, width=0.3, height=0.8)
+
+    elif kind == "contention":
+        # research/scenario_catalog.json crowd_contention: the channel is the scarce resource
+        b.extra["clutter_fp_rate"] = 0.08
+        b.decor(2); b.decor_signs(2)
+        distractors = []
+        # 1) a long sign reading (user-requested, low severity) is playing when stairs enter their window
+        t1 = rng.uniform(6, 9)
+        b.static("stairs", 0.0, b.ahead(t1 + 2.5, 5.5), width=1.6, height=1.4,
+                 detail={"direction": "down", "handrail": rng.choice(["left", "right"])})
+        distractors.append((round(t1, 2), round(rng.uniform(6.0, 8.0), 2), 0.3))
+        # 2) two hazards with deadlines within a second of each other: a chair in the path and a person walking in
+        t2 = rng.uniform(14, 18)
+        b.static(rng.choice(["chair", "box", "cart"]), rng.uniform(-0.3, 0.3), b.ahead(t2, 3.5))
+        b.toward("person", rng.uniform(-0.2, 0.2), t2 - 2.0, 9.0, 1.2, length=6)
+        # 3) a critical message is already playing when a cyclist shoots across close in front: haptic territory
+        t3 = rng.uniform(21, 25); side = rng.choice([-1, 1])
+        distractors.append((round(t3 - 1.0, 2), 4.0, 0.9))
+        b.crossing("bicycle", b.ahead(t3, 2.5), t3, side * 4, -side * 4, 4.5)
+        b.sign(rng.choice(NAV_SIGNS), rng.uniform(-0.6, 0.6), rng.uniform(10, 26), nav=True)
+        b.extra["distractor_speech"] = distractors
+
+    elif kind == "occlusion":
+        # lost_observation: a hazard is seen far ahead, then hidden (occluder or camera pan) for d seconds. Short
+        # occlusions can still be handled after reappearance; long ones only by remembering. In 30% of seeds the
+        # object is gone when the view clears, so a memory that is trusted blindly produces a false alarm.
+        b.decor(2); b.decor_signs(1)
+        d_occ = rng.choice([2.0, 4.0, 6.0, 10.0])
+        t_see = rng.uniform(3, 5)
+        lab = rng.choice(["chair", "box", "cart", "stairs"])
+        kw = dict(width=1.6, height=1.4, detail={"direction": "down", "handrail": "left"}) if lab == "stairs" else {}
+        o = b.static(lab, rng.uniform(-0.25, 0.25), b.ahead(t_see, 9.0), **kw)
+        t_occ = t_see + 1.5
+        moved = rng.random() < 0.3
+        mechanism = rng.choice(["occluder", "pan"])
+        if moved:
+            o.t_disappear = t_occ                                   # removed while hidden ...
+            b.static(lab, 1.7, b.ahead(t_see, 9.0), t_appear=t_occ + d_occ, **kw)   # ... and now off to the side
+        if mechanism == "occluder" and not moved:
+            o.occluded_windows = [(round(t_occ, 2), round(t_occ + d_occ, 2))]
+        elif mechanism == "occluder":
+            b.extra["blackout_windows"] = [(round(t_occ, 2), round(t_occ + d_occ, 2))]   # view blocked by a passing group
+        else:
+            b.extra["yaw_keyframes"] = [(round(t_occ, 2), 0.0), (round(t_occ + 0.4, 2), 55.0),
+                                        (round(t_occ + d_occ - 0.4, 2), 55.0), (round(t_occ + d_occ, 2), 0.0)]
+        b.extra["occlusion"] = {"seconds": d_occ, "mechanism": mechanism, "moved": moved, "t_occ": round(t_occ, 2)}
+        b.extra["memory_windows"] = True      # the hazard was seen: it stays due while hidden (what memory is for)
+        b.toward("person", rng.choice([-1, 1]) * 1.6, rng.uniform(16, 20), 12, 1.2)     # later, unrelated
+        b.static(rng.choice(OBSTACLES), rng.uniform(-0.3, 0.3), b.ahead(rng.uniform(20, 24), 6))
+
+    elif kind == "wayfinding_airport":
+        # airport_terminal / transit_station / multilingual_and_symbols: dense signage, one goal, luggage and queues
+        lang = rng.choice(["en", "en", "pt", "es", "fr"])
+        goal_kind = rng.choice(["gate", "baggage", "platform", "restroom"])
+        gate = f"A{rng.randint(10, 29)}"
+        goals = {"gate": (f"find gate {gate}", [gate.lower(), f"gate {gate.lower()}"]),
+                 "baggage": ("find baggage claim", ["baggage", "baggage claim", "bagagem", "equipaje", "bagages"]),
+                 "platform": ("find platform 2", ["platform 2", "plataforma 2", "andén 2", "quai 2"]),
+                 "restroom": ("find the restroom", ["restroom", "toilet", "banheiro", "baños", "toilettes"])}
+        b.goal, b.goal_tags = goals[goal_kind]
+        intents = rng.sample(["departures", "arrivals", "security check", "information", "exit", "elevator", "escalator", "gates", "passport control"], 5)
+        for i, intent in enumerate(intents):
+            b.sign(translate(intent, lang), rng.choice([-1, 1]) * rng.uniform(0.8, 1.6), 4 + i * 5.0, nav=True, base_height=2.0)
+        for intent in rng.sample(["sale", "duty free", "free wifi", "coffee", "welcome"], 3):
+            b.sign(translate(intent, lang), rng.choice([-1, 1]) * rng.uniform(0.8, 2.0), rng.uniform(3, 28), nav=False, base_conf=0.85)
+        goal_text = {"gate": f"{translate('gate', lang)} {gate}", "baggage": translate("baggage claim", lang),
+                     "platform": f"{translate('platform', lang)} 2", "restroom": translate("restroom", lang)}[goal_kind]
+        b.sign(goal_text, rng.uniform(-0.5, 0.5), b.ahead(rng.uniform(16, 22), 6), nav=True, base_height=2.0)
+        b.static("suitcase", rng.uniform(-0.3, 0.3), b.ahead(rng.uniform(5, 9), 7))
+        for i in range(4):                                             # a queue along the wall
+            b.static("person", 1.1, b.ahead(12, 4) + i * 0.8)
+        b.toward("person", rng.uniform(-0.2, 0.2), rng.uniform(8, 14), 14, 1.2)
+        b.static("cart", rng.uniform(-0.3, 0.3), b.ahead(rng.uniform(18, 24), 6), width=0.7, height=1.0)
+        b.decor(2)
+        b.extra["language"] = lang
+
+    elif kind == "ood_aftermath":
+        # accident_aftermath (OOD, evaluation only): smoke-like degraded capture, a stopped car across the path,
+        # debris and glass the taxonomy has no class for, bystanders. Score: are unknown obstacles announced
+        # (hedged) and is nothing said with false confidence when the view is gone?
+        b.extra.update(lighting="low", motion_blur=0.4, clutter_fp_rate=0.12, depth_noise_rel=0.15,
+                       blackout_windows=[(round(t, 2), round(t + rng.uniform(1.0, 2.5), 2)) for t in (rng.uniform(4, 8), rng.uniform(14, 20))])
+        b.decor(2); b.decor_signs(1)
+        tc = rng.uniform(5, 8)
+        b.static("car", rng.uniform(-0.5, 0.5), b.ahead(tc, 8), width=1.8, height=1.5, base_conf=0.75)
+        b.static("debris", rng.uniform(-0.3, 0.3), b.ahead(tc + 3, 6), width=0.8, height=0.4, base_conf=0.5, conf_noise=0.15, detectability=0.7)
+        b.static("broken glass", rng.uniform(-0.4, 0.4), b.ahead(tc + 6, 5), width=1.0, height=0.08, base_conf=0.4, conf_noise=0.15, detectability=0.5)
+        b.static("fallen sign", rng.choice([-1, 1]) * 0.4, b.ahead(tc + 9, 6), width=0.6, height=0.5, base_conf=0.55, detectability=0.7)
+        for _ in range(rng.randint(4, 7)):
+            b.static("person", rng.choice([-1, 1]) * rng.uniform(0.8, 2.5), b.ahead(tc, rng.uniform(3, 12)), base_conf=rng.uniform(0.5, 0.9))
+        b.static("unknown object", 0.0, b.ahead(tc + 13, 6), width=1.2, height=0.9, base_conf=0.45, conf_noise=0.2)
+        b.crossing("person", b.ahead(tc + 4, 3.0), tc + 4, -3, 3, 1.3)
 
     elif kind == "changing":
         b.decor(2); b.decor_signs(1)

@@ -6,7 +6,7 @@
   late_critical_rate       the same restricted to severity >= 0.7 (sudden events reported separately)
   mean_lead_s              mean (latest_safe - first announcement) over timely events: how early the warning came
   cue_precision            spoken cues inside the window of a should-speak event (first time) / spoken cues
-  audio_occupancy          fraction of the scenario during which speech was playing
+  audio_occupancy          fraction of the scenario during which the policy's speech was playing (external speech excluded)
   cues_per_min, haptics_per_min
   silence_precision        decision steps where the policy stayed silent with a free channel and nothing was due
                            / silent-with-free-channel steps
@@ -58,6 +58,17 @@ class CampusMetrics:
         return asdict(self)
 
 
+def _is_external(cue) -> bool:
+    """Speech the policy did not choose (runner.distractor_cue: a sign read on request, a conversation)."""
+    return getattr(cue, "policy", None) == "external"
+
+
+def _policy_airtime(log: RunLog) -> float:
+    """Seconds of channel time taken by the policy's own messages. External speech is not charged to the policy
+    (and cutting it short with an interrupt therefore earns nothing); it still counts for critical_blocking_rate."""
+    return sum(b - a for a, b, c in log.channel_log if not _is_external(c))
+
+
 def _timeliness(t: float, e) -> float:
     """1 inside [earliest, ideal], decaying linearly to 0.5 at latest_safe, 0 after."""
     if t < e.earliest_useful_s or t > e.latest_safe_s:
@@ -73,6 +84,9 @@ def score(log: RunLog, sc: CampusScenario, c_fp: float = 0.3, c_occ: float = 0.1
     ev = {e.obj_id: e for e in sc.speak_events()}
     first: Dict[int, float] = {}
     fp = 0
+    # a scenario whose ground truth is only known in places (EgoBlind: around the users' questions) says where an
+    # off-event cue can be judged a false alarm; CampusBench knows everything and counts them all
+    counts_fp = getattr(sc, "counts_fp", None)
     for c in log.spoken:
         if c.source_id in ev:
             if c.source_id not in first:
@@ -82,7 +96,7 @@ def score(log: RunLog, sc: CampusScenario, c_fp: float = 0.3, c_occ: float = 0.1
             else:
                 fp += 1
         else:
-            fp += 1
+            fp += 1 if counts_fp is None else int(counts_fp(c.t))
     s = 0.0
     for oid, e in ev.items():
         if oid in first:
@@ -92,7 +106,7 @@ def score(log: RunLog, sc: CampusScenario, c_fp: float = 0.3, c_occ: float = 0.1
                 s -= c_late * e.severity
         else:
             s -= c_late * e.severity
-    occ = sum(b - a for a, b, _ in log.channel_log)
+    occ = _policy_airtime(log)
     return s - c_fp * fp - c_occ * occ
 
 
@@ -128,8 +142,8 @@ def evaluate_run(log: RunLog, sc: CampusScenario, oracle_score: Optional[float] 
         if sid is not None:
             last_spoken[sid] = c.t
     precision = useful / len(spoken) if spoken else 1.0
-    # occupancy
-    occ = sum(b - a for a, b, _ in log.channel_log) / sc.duration
+    # occupancy (the policy's own speech; external speech is left out)
+    occ = _policy_airtime(log) / sc.duration
     minutes = sc.duration / 60.0
     # silence precision
     silent_free = [d for d in log.decisions if d.action == "silence" and not d.channel_busy]

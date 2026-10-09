@@ -1,0 +1,1501 @@
+image,pool,flags,n_issues,imagenet_ids,imagenet_names,coco_targets,n_dets,mean_conf,max_conf,top_detections,coco_hit,coco_hit_strict,latency_ms,width,height
+VizWiz_train_00015319.jpg,train,BLR|FRM|OTH,3,692,packet,,0,,,,0,0,2773.1,968,1296
+VizWiz_train_00005832.jpg,train,BLR|FRM|ROT|OTH,4,883,vase,vase,1,0.460,0.460,toothbrush:0.46,0,0,130.8,1224,1632
+VizWiz_train_00007852.jpg,train,FRM|OTH,2,721,pillow,,0,,,,0,0,92.6,1224,1632
+VizWiz_train_00004962.jpg,train,OTH|NON,1,664|673,monitor|mouse,mouse|tv,3,0.499,0.896,tv:0.90;mouse:0.35;mouse:0.26,1,1,372.9,968,1296
+VizWiz_train_00015906.jpg,train,BLR|FRM|OTH,3,923,plate,,0,,,,0,0,164.2,1224,1632
+VizWiz_train_00006286.jpg,train,BRT|OTH,2,487,cellular_telephone,cell phone,2,0.796,0.803,cell phone:0.80;person:0.79,1,1,156.3,968,1296
+VizWiz_val_00007513.jpg,val,DRK|FRM|OTH,3,418,ballpoint,,2,0.569,0.864,toothbrush:0.86;toothbrush:0.27,0,0,215.2,968,1296
+VizWiz_train_00018362.jpg,train,BLR|FRM|OTH,3,737|778|700,pop_bottle|scale|paper_towel,bottle,3,0.444,0.491,cup:0.49;bottle:0.47;cup:0.37,1,1,183.6,484,648
+VizWiz_train_00001332.jpg,train,DRK|FRM|OTH,3,651,microwave,microwave,2,0.366,0.448,book:0.45;microwave:0.28,1,1,212.0,1224,1632
+VizWiz_train_00021274.jpg,train,BLR|FRM|OTH,3,761,remote_control,remote,0,,,,0,0,59.8,1224,1632
+VizWiz_val_00002906.jpg,val,BLR|FRM|OTH,3,827|987,stove|corn,oven,4,0.574,0.875,person:0.88;cup:0.51;bowl:0.47,0,0,67.5,360,480
+VizWiz_train_00011093.jpg,train,FRM|OTH,2,608,jean,,1,0.726,0.726,person:0.73,0,0,140.8,1224,1632
+VizWiz_train_00008332.jpg,train,BRT|FRM|OTH,3,742,printer,,0,,,,0,0,32.2,968,1296
+VizWiz_train_00017451.jpg,train,OTH|NON,1,692,packet,,1,0.315,0.315,cake:0.32,0,0,197.1,968,1296
+VizWiz_train_00003314.jpg,train,OTH|NON,1,546|692,electric_guitar|packet,,2,0.647,0.805,person:0.80;cell phone:0.49,0,0,126.3,1224,1632
+VizWiz_val_00007416.jpg,val,BLR|BRT|FRM|OTH,4,620,laptop,laptop,2,0.723,0.814,laptop:0.81;tv:0.63,1,1,38.6,1224,1632
+VizWiz_val_00002147.jpg,val,OTH|NON,1,963,pizza,pizza,1,0.357,0.357,donut:0.36,0,0,158.7,968,1296
+VizWiz_train_00003167.jpg,train,FRM|OTH,2,728,plastic_bag,,2,0.310,0.337,orange:0.34;cake:0.28,0,0,91.6,720,960
+VizWiz_train_00017411.jpg,train,OBS|NON,1,637,mailbox,,3,0.436,0.609,person:0.61;tv:0.36;person:0.34,0,0,44.1,1224,1632
+VizWiz_train_00006431.jpg,train,BLR|FRM|OBS,3,664|620,monitor|laptop,laptop|tv,2,0.790,0.849,laptop:0.85;cell phone:0.73,1,1,78.4,768,1024
+VizWiz_train_00009348.jpg,train,OBS,1,947,mushroom,,0,,,,0,0,48.2,968,1296
+VizWiz_train_00017665.jpg,train,BLR|BRT|FRM|OBS,4,721|478,pillow|carton,,0,,,,0,0,147.4,968,1296
+VizWiz_val_00002726.jpg,val,OBS,1,897,washer,,4,0.461,0.782,bottle:0.78;handbag:0.41;bottle:0.36,0,0,65.4,968,1296
+VizWiz_train_00009335.jpg,train,BLR|FRM|OBS,3,440,beer_bottle,bottle,4,0.518,0.615,person:0.61;cup:0.60;person:0.51,1,1,192.5,1224,1632
+VizWiz_train_00018144.jpg,train,OBS|NON,1,883|846,vase|table_lamp,vase,1,0.562,0.562,sink:0.56,0,0,91.7,1224,1632
+VizWiz_val_00004429.jpg,val,OBS|ROT,2,412,ashcan,,1,0.309,0.309,bottle:0.31,0,0,134.6,1936,2592
+VizWiz_train_00009043.jpg,train,OBS,1,664,monitor,tv,1,0.277,0.277,tv:0.28,1,1,115.3,484,648
+VizWiz_train_00014160.jpg,train,BLR|OBS,2,761,remote_control,remote,3,0.883,0.909,chair:0.91;chair:0.90;dining table:0.84,0,0,272.8,1224,1632
+VizWiz_val_00004437.jpg,val,FRM|OBS|NON,2,761|692,remote_control|packet,remote,0,,,,0,0,58.6,968,1296
+VizWiz_train_00003396.jpg,train,BLR|OBS,2,721,pillow,,0,,,,0,0,110.4,180,240
+VizWiz_train_00001806.jpg,train,BLR|OBS,2,761,remote_control,remote,1,0.558,0.558,cell phone:0.56,0,0,168.1,1224,1632
+VizWiz_train_00016652.jpg,train,FRM|OBS,2,610,jersey,,1,0.870,0.870,person:0.87,0,0,64.2,968,1296
+VizWiz_train_00000450.jpg,train,BRT|FRM|OBS|ROT,4,827,stove,oven,1,0.319,0.319,car:0.32,0,0,74.5,968,1296
+VizWiz_train_00013345.jpg,train,OBS|NON,1,893,wallet,,0,,,,0,0,225.4,1224,1632
+VizWiz_val_00006501.jpg,val,FRM|OBS,2,610,jersey,,1,0.858,0.858,person:0.86,0,0,100.0,968,1296
+VizWiz_train_00017012.jpg,train,BLR|FRM|OBS|ROT,4,827|859|659|567,stove|toaster|mixing_bowl|frying_pan,bowl|oven|toaster,4,0.440,0.500,bottle:0.50;bottle:0.48;bottle:0.45,0,0,384.1,1224,1632
+VizWiz_val_00001486.jpg,val,FRM|OBS,2,487,cellular_telephone,cell phone,1,0.667,0.667,cell phone:0.67,1,1,109.4,1224,1632
+VizWiz_train_00018973.jpg,train,BLR|OBS,2,534,dishwasher,,1,0.644,0.644,bowl:0.64,0,0,94.4,768,1024
+VizWiz_train_00018616.jpg,train,FRM|OBS,2,748,purse,handbag,0,,,,0,0,38.3,1224,1632
+VizWiz_train_00007072.jpg,train,BLR|BRT|FRM|OBS|ROT,5,530,digital_clock,clock,1,0.282,0.282,person:0.28,0,0,156.7,968,1296
+VizWiz_train_00007403.jpg,train,FRM|OBS|ROT,3,610,jersey,,1,0.666,0.666,person:0.67,0,0,120.8,1936,2592
+VizWiz_train_00006839.jpg,train,BLR|BRT|FRM|OBS,4,720,pill_bottle,bottle,1,0.692,0.692,bottle:0.69,1,1,105.7,968,1296
+VizWiz_train_00007103.jpg,train,BLR|BRT|OBS,3,610,jersey,,1,0.301,0.301,chair:0.30,0,0,71.0,1224,1632
+VizWiz_train_00013701.jpg,train,FRM|OBS|ROT,3,898,water_bottle,bottle,1,0.541,0.541,wine glass:0.54,0,0,78.5,1224,1632
+VizWiz_train_00020020.jpg,train,BRT|FRM|OBS|ROT,4,721|610,pillow|jersey,,1,0.335,0.335,bed:0.33,0,0,172.3,968,1296
+VizWiz_train_00009894.jpg,train,FRM|OBS,2,720,pill_bottle,bottle,0,,,,0,0,34.4,1224,1632
+VizWiz_train_00015341.jpg,train,BLR|DRK|FRM|OBS,4,721,pillow,,0,,,,0,0,79.6,968,1296
+VizWiz_train_00021072.jpg,train,FRM|OBS,2,692|478|711,packet|carton|perfume,,0,,,,0,0,64.8,1224,1632
+VizWiz_train_00015952.jpg,train,FRM|OBS|ROT,3,893,wallet,,1,0.769,0.769,laptop:0.77,0,0,154.7,1224,1632
+VizWiz_train_00011726.jpg,train,FRM|OBS,2,632,loudspeaker,,1,0.770,0.770,bottle:0.77,0,0,236.6,968,1296
+VizWiz_train_00020665.jpg,train,BLR|FRM|OBS,3,761,remote_control,remote,2,0.644,0.896,remote:0.90;person:0.39,1,1,270.1,968,1296
+VizWiz_train_00004256.jpg,train,BLR|BRT|FRM|OBS,4,748,purse,handbag,1,0.254,0.254,traffic light:0.25,0,0,81.0,1224,1632
+VizWiz_train_00022110.jpg,train,BLR|OBS,2,620,laptop,laptop,1,0.593,0.593,laptop:0.59,1,1,49.9,1224,1632
+VizWiz_val_00001445.jpg,val,FRM|OBS,2,711,perfume,,0,,,,0,0,55.3,1224,1632
+VizWiz_train_00006861.jpg,train,BLR|BRT|FRM|OBS,4,851|620,television|laptop,laptop|tv,2,0.360,0.445,tv:0.45;chair:0.28,1,1,144.2,1224,1632
+VizWiz_train_00020403.jpg,train,FRM|OBS|NON,2,850|831|631,teddy|studio_couch|lotion,couch|teddy bear,1,0.663,0.663,refrigerator:0.66,0,0,190.3,968,1296
+VizWiz_train_00017162.jpg,train,BLR|OBS,2,610,jersey,,0,,,,0,0,100.7,768,1024
+VizWiz_train_00010578.jpg,train,FRM|OBS,2,608,jean,,2,0.478,0.532,dog:0.53;chair:0.42,0,0,57.8,1224,1632
+VizWiz_train_00017416.jpg,train,BLR|OBS,2,711,perfume,,1,0.619,0.619,tie:0.62,0,0,156.9,968,1296
+VizWiz_train_00010164.jpg,train,OBS|NON,1,487,cellular_telephone,cell phone,1,0.882,0.882,cell phone:0.88,1,1,89.5,768,1024
+VizWiz_val_00004123.jpg,val,OBS|NON,1,632|868|664|527,loudspeaker|tray|monitor|desktop_computer,tv,6,0.614,0.780,tv:0.78;keyboard:0.75;bed:0.68,1,1,80.9,1224,1632
+VizWiz_val_00004368.jpg,val,BLR|FRM|OBS,3,664|923|478,monitor|plate|carton,tv,4,0.716,0.805,bottle:0.81;tv:0.77;person:0.72,1,1,308.4,1224,1632
+VizWiz_train_00020190.jpg,train,FRM|OBS,2,620,laptop,laptop,1,0.464,0.464,keyboard:0.46,0,0,59.9,968,1296
+VizWiz_train_00022003.jpg,train,BLR|OBS,2,851,television,tv,1,0.299,0.299,person:0.30,0,0,65.0,968,1296
+VizWiz_val_00000775.jpg,val,OBS|NON,1,664|508|527,monitor|computer_keyboard|desktop_computer,keyboard|tv,3,0.585,0.849,person:0.85;tv:0.62;keyboard:0.28,1,1,114.1,1224,1632
+VizWiz_train_00017368.jpg,train,BLR|FRM|OBS,3,721,pillow,,0,,,,0,0,56.7,1224,1632
+VizWiz_train_00004251.jpg,train,FRM|OBS,2,692,packet,,3,0.407,0.473,cup:0.47;cell phone:0.42;person:0.33,0,0,103.5,1936,2592
+VizWiz_train_00018085.jpg,train,FRM|OBS,2,610|619|846,jersey|lampshade|table_lamp,,0,,,,0,0,94.7,968,1296
+VizWiz_val_00002752.jpg,val,OBS,1,610,jersey,,1,0.874,0.874,person:0.87,0,0,125.5,968,1296
+VizWiz_train_00009790.jpg,train,FRM|OBS,2,620|629,laptop|lipstick,laptop,2,0.579,0.812,bed:0.81;person:0.35,0,0,184.1,1224,1632
+VizWiz_train_00004498.jpg,train,OBS|NON,1,750,quilt,,0,,,,0,0,34.7,1936,2592
+VizWiz_val_00002693.jpg,val,BLR|OBS,2,664,monitor,tv,3,0.337,0.440,chair:0.44;tv:0.29;toilet:0.28,1,1,151.8,968,1296
+VizWiz_train_00017972.jpg,train,BLR|OBS,2,827,stove,oven,3,0.301,0.324,bed:0.32;bed:0.32;person:0.26,0,0,361.9,360,480
+VizWiz_train_00020322.jpg,train,BLR|FRM|OBS,3,720,pill_bottle,bottle,2,0.357,0.372,toilet:0.37;cup:0.34,0,0,228.8,1224,1632
+VizWiz_train_00014788.jpg,train,FRM|OBS|ROT,3,720,pill_bottle,bottle,2,0.606,0.823,fork:0.82;person:0.39,0,0,130.0,1224,1632
+VizWiz_train_00001729.jpg,train,FRM|OBS|ROT,3,728|937|692,plastic_bag|broccoli|packet,broccoli,1,0.340,0.340,broccoli:0.34,1,1,56.8,360,480
+VizWiz_train_00002106.jpg,train,OBS|NON,1,837,sunglasses,,4,0.508,0.874,fork:0.87;knife:0.48;book:0.41,0,0,174.5,968,1296
+VizWiz_val_00002498.jpg,val,BLR|BRT|FRM|OBS,4,748,purse,handbag,1,0.440,0.440,keyboard:0.44,0,0,80.5,968,1296
+VizWiz_train_00021294.jpg,train,FRM|OBS|ROT,3,841,sweatshirt,,2,0.342,0.374,person:0.37;person:0.31,0,0,89.8,1224,1632
+VizWiz_train_00015621.jpg,train,OBS,1,804,soap_dispenser,,3,0.576,0.853,person:0.85;cell phone:0.61;couch:0.26,0,0,48.4,1224,1632
+VizWiz_train_00002541.jpg,train,BLR|FRM|OBS,3,750,quilt,,1,0.293,0.293,person:0.29,0,0,76.9,968,1296
+VizWiz_train_00019406.jpg,train,BLR|FRM|OBS,3,720|905|549|831,pill_bottle|window_shade|envelope|studio_couch,bottle|couch,4,0.347,0.401,book:0.40;dining table:0.38;chair:0.31,0,0,31.0,1224,1632
+VizWiz_train_00022345.jpg,train,OBS,1,968,cup,cup,0,,,,0,0,28.4,1224,1632
+VizWiz_train_00002233.jpg,train,FRM|OBS|ROT,3,610|482,jersey|cassette_player,,1,0.814,0.814,person:0.81,0,0,83.7,1936,2592
+VizWiz_train_00006498.jpg,train,BLR|BRT|FRM|OBS,4,851,television,tv,0,,,,0,0,50.1,1224,1632
+VizWiz_train_00004452.jpg,train,BLR|FRM|OBS,3,922,menu,,0,,,,0,0,49.3,1224,1632
+VizWiz_train_00018899.jpg,train,OBS,1,728|427,plastic_bag|barrel,,2,0.326,0.350,person:0.35;suitcase:0.30,0,0,102.7,968,1296
+VizWiz_train_00016717.jpg,train,BLR|FRM|OBS,3,692,packet,,1,0.448,0.448,stop sign:0.45,0,0,82.9,968,1296
+VizWiz_train_00009017.jpg,train,OBS,1,897,washer,,6,0.406,0.549,bottle:0.55;bottle:0.50;bottle:0.48,0,0,49.9,1224,1632
+VizWiz_val_00001034.jpg,val,BLR|FRM|OBS,3,453,bookcase,,9,0.399,0.635,book:0.64;book:0.50;book:0.44,0,0,150.5,1224,1632
+VizWiz_train_00013663.jpg,train,FRM|OBS|ROT,3,738,pot,,1,0.285,0.285,surfboard:0.29,0,0,52.8,1224,1632
+VizWiz_train_00012073.jpg,train,BLR|FRM|OBS,3,620|629,laptop|lipstick,laptop,2,0.501,0.615,laptop:0.62;keyboard:0.39,1,1,60.8,1224,1632
+VizWiz_train_00015238.jpg,train,BLR|OBS,2,632|817|850|751,loudspeaker|sports_car|teddy|racer,car|teddy bear,2,0.427,0.459,teddy bear:0.46;teddy bear:0.40,1,1,83.2,968,1296
+VizWiz_train_00008202.jpg,train,BLR|FRM|OBS,3,765,rocking_chair,chair,1,0.425,0.425,tv:0.43,0,0,71.8,968,1296
+VizWiz_val_00005913.jpg,val,FRM|OBS,2,692,packet,,1,0.301,0.301,book:0.30,0,0,40.4,1224,1632
+VizWiz_val_00001500.jpg,val,FRM|OBS,2,610,jersey,,0,,,,0,0,171.1,1224,1632
+VizWiz_train_00018515.jpg,train,FRM|OBS|NON,2,620,laptop,laptop,3,0.579,0.901,laptop:0.90;person:0.56;laptop:0.28,1,1,95.0,968,1296
+VizWiz_train_00006895.jpg,train,FRM|OBS,2,610|453,jersey|bookcase,,3,0.383,0.488,person:0.49;book:0.37;person:0.30,0,0,40.4,1224,1632
+VizWiz_train_00002110.jpg,train,BLR|OBS,2,761,remote_control,remote,1,0.343,0.343,toothbrush:0.34,0,0,131.5,1224,1632
+VizWiz_train_00013639.jpg,train,BLR|FRM|OBS,3,738,pot,,4,0.313,0.349,bottle:0.35;potted plant:0.34;bowl:0.30,0,0,112.2,1224,1632
+VizWiz_train_00013600.jpg,train,FRM|OBS|NON,2,738|951,pot|lemon,,3,0.591,0.936,bottle:0.94;dining table:0.47;surfboard:0.37,0,0,80.5,968,1296
+VizWiz_train_00022696.jpg,train,BLR|FRM|OBS,3,610,jersey,,1,0.255,0.255,tennis racket:0.26,0,0,69.0,1224,1632
+VizWiz_train_00019672.jpg,train,FRM|OBS,2,963,pizza,pizza,3,0.523,0.694,pizza:0.69;person:0.62;person:0.25,1,1,70.9,484,648
+VizWiz_train_00010438.jpg,train,OBS|ROT,2,620|692,laptop|packet,laptop,2,0.313,0.333,dining table:0.33;bottle:0.29,0,0,201.5,1224,1632
+VizWiz_train_00010948.jpg,train,BLR|FRM|OBS|NON,3,721,pillow,,0,,,,0,0,68.6,1224,1632
+VizWiz_val_00007133.jpg,val,BLR|BRT|FRM|OBS,4,620,laptop,laptop,2,0.446,0.617,sports ball:0.62;keyboard:0.27,0,0,137.1,1224,1632
+VizWiz_train_00013669.jpg,train,BLR|OBS,2,894,wardrobe,,2,0.327,0.402,person:0.40;person:0.25,0,0,160.2,1224,1632
+VizWiz_train_00014841.jpg,train,BLR|FRM|OBS,3,632,loudspeaker,,2,0.646,0.800,remote:0.80;toothbrush:0.49,0,0,131.9,1936,2592
+VizWiz_val_00003902.jpg,val,BRT|OBS,2,892,wall_clock,clock,0,,,,0,0,73.0,968,1296
+VizWiz_train_00017269.jpg,train,OBS|NON,1,464,buckle,,1,0.423,0.423,toilet:0.42,0,0,114.1,1224,1632
+VizWiz_val_00004365.jpg,val,BLR|FRM|OBS,3,632|848,loudspeaker|tape_player,,2,0.620,0.756,dining table:0.76;bottle:0.48,0,0,85.5,1224,1632
+VizWiz_train_00010171.jpg,train,BLR|FRM|OBS,3,664|478,monitor|carton,tv,1,0.299,0.299,person:0.30,0,0,56.4,1224,1632
+VizWiz_train_00000633.jpg,train,OBS|NON,1,846|530|898,table_lamp|digital_clock|water_bottle,bottle|clock,5,0.535,0.841,cell phone:0.84;bottle:0.61;bottle:0.61,1,1,48.4,968,1296
+VizWiz_train_00009821.jpg,train,BLR|FRM|OBS,3,827,stove,oven,0,,,,0,0,49.8,1224,1632
+VizWiz_train_00009478.jpg,train,OBS|NON,1,999,toilet_tissue,,2,0.327,0.363,cup:0.36;cup:0.29,0,0,54.5,1224,1632
+VizWiz_val_00003774.jpg,val,OBS|NON,1,774,sandal,,0,,,,0,0,41.6,1224,1632
+VizWiz_train_00017875.jpg,train,BLR|FRM|OBS,3,794,shower_curtain,,1,0.713,0.713,vase:0.71,0,0,95.8,1224,1632
+VizWiz_train_00010295.jpg,train,DRK|FRM|OBS,3,881|402|851,upright|acoustic_guitar|television,tv,4,0.522,0.683,bicycle:0.68;person:0.63;banana:0.42,0,0,67.0,968,1296
+VizWiz_val_00006730.jpg,val,BLR|FRM|OBS,3,549,envelope,,1,0.381,0.381,oven:0.38,0,0,104.8,1224,1632
+VizWiz_val_00003444.jpg,val,BLR|FRM|OBS,3,963,pizza,pizza,3,0.539,0.773,pizza:0.77;person:0.58;person:0.26,1,1,37.6,968,1296
+VizWiz_train_00005818.jpg,train,BLR|OBS,2,882|765,vacuum|rocking_chair,chair,2,0.664,0.880,person:0.88;cell phone:0.45,0,0,64.1,968,1296
+VizWiz_train_00015345.jpg,train,BLR|DRK|FRM|OBS,4,495,china_cabinet,,0,,,,0,0,42.3,1224,1632
+VizWiz_val_00003126.jpg,val,BLR|OBS,2,760|907,refrigerator|wine_bottle,bottle|refrigerator,3,0.355,0.385,bottle:0.39;bottle:0.38;bottle:0.30,1,1,66.1,968,1296
+VizWiz_val_00006648.jpg,val,OBS,1,508,computer_keyboard,keyboard,0,,,,0,0,36.5,1224,1632
+VizWiz_val_00005546.jpg,val,BLR|FRM|OBS,3,434,bath_towel,,0,,,,0,0,69.2,1224,1632
+VizWiz_val_00005866.jpg,val,BLR|OBS|NON,2,827,stove,oven,2,0.576,0.580,oven:0.58;bottle:0.57,1,0,75.3,1224,1632
+VizWiz_val_00000629.jpg,val,BLR|OBS,2,620|629,laptop|lipstick,laptop,2,0.574,0.794,laptop:0.79;tv:0.35,1,1,62.7,968,1296
+VizWiz_train_00022405.jpg,train,FRM|OBS|ROT|NON,3,632|750|711,loudspeaker|quilt|perfume,,2,0.443,0.455,bed:0.45;tv:0.43,0,0,44.9,1224,1632
+VizWiz_val_00000468.jpg,val,FRM|OBS,2,664|620,monitor|laptop,laptop|tv,1,0.417,0.417,keyboard:0.42,0,0,42.8,1224,1632
+VizWiz_train_00012733.jpg,train,FRM|OBS|NON,2,827|859|909,stove|toaster|wok,oven|toaster,2,0.363,0.391,person:0.39;person:0.33,0,0,87.0,360,480
+VizWiz_train_00019296.jpg,train,DRK|OBS,2,737|905,pop_bottle|window_shade,bottle,1,0.325,0.325,bottle:0.32,1,1,75.7,968,1296
+VizWiz_val_00006870.jpg,val,FRM|OBS,2,893,wallet,,1,0.318,0.318,person:0.32,0,0,90.7,968,1296
+VizWiz_train_00015990.jpg,train,BLR|FRM|OBS,3,737,pop_bottle,bottle,2,0.391,0.450,cup:0.45;person:0.33,0,0,109.2,180,240
+VizWiz_train_00015759.jpg,train,BLR|DRK|OBS,3,651,microwave,microwave,0,,,,0,0,39.4,1224,1632
+VizWiz_train_00005945.jpg,train,FRM|OBS|NON,2,963|692,pizza|packet,pizza,0,,,,0,0,126.2,968,1296
+VizWiz_val_00005808.jpg,val,FRM|OBS,2,761|446,remote_control|binder,remote,9,0.462,0.902,remote:0.90;book:0.60;book:0.54,1,1,64.6,1224,1632
+VizWiz_train_00009828.jpg,train,OBS|ROT,2,935,mashed_potato,,2,0.431,0.554,person:0.55;book:0.31,0,0,275.8,1224,1632
+VizWiz_train_00009593.jpg,train,FRM|OBS|NON,2,608,jean,,1,0.389,0.389,sports ball:0.39,0,0,53.2,968,1296
+VizWiz_train_00010169.jpg,train,BRT|FRM|OBS,3,664,monitor,tv,0,,,,0,0,53.0,1224,1632
+VizWiz_train_00007885.jpg,train,BLR|BRT|FRM|OBS,4,487,cellular_telephone,cell phone,0,,,,0,0,89.9,968,1296
+VizWiz_val_00005057.jpg,val,FRM|OBS,2,721,pillow,,3,0.524,0.748,giraffe:0.75;giraffe:0.53;person:0.30,0,0,68.2,1936,2592
+VizWiz_train_00017348.jpg,train,FRM|OBS|ROT,3,664|508|527,monitor|computer_keyboard|desktop_computer,keyboard|tv,3,0.655,0.836,tv:0.84;person:0.60;mouse:0.53,1,1,85.7,1536,2048
+VizWiz_train_00021043.jpg,train,FRM|OBS,2,664|851,monitor|television,tv,2,0.725,0.798,person:0.80;tv:0.65,1,1,118.6,968,1296
+VizWiz_val_00001378.jpg,val,BLR|FRM|OBS,3,608,jean,,1,0.258,0.258,person:0.26,0,0,30.8,1224,1632
+VizWiz_train_00010113.jpg,train,FRM|OBS,2,760,refrigerator,refrigerator,1,0.268,0.268,refrigerator:0.27,1,1,63.6,968,1296
+VizWiz_train_00018933.jpg,train,BLR|FRM|OBS|ROT,4,495,china_cabinet,,2,0.559,0.798,person:0.80;laptop:0.32,0,0,80.3,968,1296
+VizWiz_train_00003429.jpg,train,OBS,1,737|619|700|846,pop_bottle|lampshade|paper_towel|table_lamp,bottle,2,0.581,0.604,person:0.60;bottle:0.56,1,1,106.0,1224,1632
+VizWiz_train_00022543.jpg,train,BLR|FRM|OBS,3,761,remote_control,remote,2,0.481,0.679,remote:0.68;remote:0.28,1,1,101.7,968,1296
+VizWiz_train_00002765.jpg,train,BLR|BRT|DRK|FRM|OBS,5,620|629,laptop|lipstick,laptop,1,0.439,0.439,person:0.44,0,0,223.6,968,1296
+VizWiz_val_00006528.jpg,val,BLR|FRM|OBS|NON,3,414,backpack,backpack,0,,,,0,0,41.3,968,1296
+VizWiz_train_00015056.jpg,train,BLR|OBS|NON,2,620,laptop,laptop,2,0.829,0.927,laptop:0.93;person:0.73,1,1,125.7,1224,1632
+VizWiz_train_00004894.jpg,train,FRM|OBS,2,761,remote_control,remote,2,0.555,0.707,remote:0.71;person:0.40,1,1,71.0,1224,1632
+VizWiz_train_00005013.jpg,train,FRM|OBS,2,806,sock,,0,,,,0,0,41.0,1224,1632
+VizWiz_train_00000951.jpg,train,OBS|NON,1,721,pillow,,2,0.490,0.551,person:0.55;tie:0.43,0,0,73.1,1224,1632
+VizWiz_train_00007514.jpg,train,BLR|BRT|FRM|OBS,4,664|620|629,monitor|laptop|lipstick,laptop|tv,1,0.306,0.306,laptop:0.31,1,1,74.7,968,1296
+VizWiz_val_00006471.jpg,val,BLR|BRT|OBS,3,851,television,tv,0,,,,0,0,54.7,1224,1632
+VizWiz_val_00003453.jpg,val,BRT|FRM|OBS,3,827,stove,oven,0,,,,0,0,89.9,968,1296
+VizWiz_train_00001140.jpg,train,FRM|OBS|NON,2,504|851,coffee_mug|television,cup|tv,1,0.697,0.697,tv:0.70,1,1,67.3,968,1296
+VizWiz_train_00013024.jpg,train,BLR|FRM|OBS,3,896|610,washbasin|jersey,sink,2,0.301,0.343,person:0.34;carrot:0.26,0,0,62.6,1224,1632
+VizWiz_train_00004614.jpg,train,BLR|FRM|OBS,3,827,stove,oven,1,0.413,0.413,person:0.41,0,0,75.3,360,480
+VizWiz_val_00004941.jpg,val,BLR|FRM|OBS|ROT,4,651,microwave,microwave,1,0.268,0.268,cup:0.27,0,0,57.1,1936,2592
+VizWiz_train_00013837.jpg,train,BLR|OBS,2,414,backpack,backpack,3,0.474,0.864,person:0.86;person:0.28;chair:0.27,0,0,77.8,768,1024
+VizWiz_train_00016253.jpg,train,DRK|FRM|OBS,3,504|692,coffee_mug|packet,cup,1,0.819,0.819,cup:0.82,1,1,62.6,1224,1632
+VizWiz_train_00003516.jpg,train,BLR|FRM|OBS,3,841,sweatshirt,,3,0.366,0.519,person:0.52;person:0.31;person:0.27,0,0,63.3,968,1296
+VizWiz_val_00006055.jpg,val,FRM|OBS,2,760,refrigerator,refrigerator,2,0.694,0.746,person:0.75;person:0.64,0,0,59.3,1224,1632
+VizWiz_train_00017746.jpg,train,OBS|ROT,2,562|858,fountain|tile_roof,,0,,,,0,0,34.6,1936,2592
+VizWiz_val_00004745.jpg,val,FRM|OBS|ROT,3,412,ashcan,,2,0.479,0.579,bottle:0.58;bottle:0.38,0,0,135.5,1936,2592
+VizWiz_val_00000357.jpg,val,BLR|FRM|OBS,3,664|620,monitor|laptop,laptop|tv,2,0.754,0.860,laptop:0.86;tv:0.65,1,1,39.6,968,1296
+VizWiz_train_00015310.jpg,train,OBS,1,919,street_sign,,1,0.577,0.577,refrigerator:0.58,0,0,1516.8,1632,1224
+VizWiz_train_00003014.jpg,train,BRT|OBS,2,881|610,upright|jersey,,1,0.296,0.296,umbrella:0.30,0,0,163.7,1224,1632
+VizWiz_train_00012956.jpg,train,FRM|OBS|ROT,3,632|453|446,loudspeaker|bookcase|binder,,3,0.368,0.458,book:0.46;dining table:0.34;book:0.30,0,0,69.4,1936,2592
+VizWiz_val_00003700.jpg,val,OBS,1,620|742,laptop|printer,laptop,0,,,,0,0,97.6,1224,1632
+VizWiz_val_00001299.jpg,val,BLR|FRM|OBS,3,610,jersey,,2,0.252,0.254,chair:0.25;person:0.25,0,0,117.6,1224,1632
+VizWiz_train_00022732.jpg,train,FRM|OBS,2,742,printer,,2,0.539,0.641,mouse:0.64;suitcase:0.44,0,0,70.2,1224,1632
+VizWiz_train_00011918.jpg,train,BLR|FRM|OBS,3,706,patio,,1,0.587,0.587,chair:0.59,0,0,108.8,968,1296
+VizWiz_train_00018638.jpg,train,BLR|OBS,2,608,jean,,1,0.255,0.255,person:0.25,0,0,64.5,1224,1632
+VizWiz_train_00008381.jpg,train,FRM|OBS,2,610,jersey,,1,0.499,0.499,person:0.50,0,0,93.9,1224,1632
+VizWiz_val_00003792.jpg,val,FRM|OBS|NON,2,632,loudspeaker,,3,0.368,0.458,book:0.46;dining table:0.34;book:0.30,0,0,56.7,1936,2592
+VizWiz_val_00007501.jpg,val,OBS|NON,1,487,cellular_telephone,cell phone,2,0.539,0.774,person:0.77;cell phone:0.30,1,1,97.3,968,1296
+VizWiz_val_00005511.jpg,val,BLR|FRM|OBS,3,673|508,mouse|computer_keyboard,keyboard|mouse,0,,,,0,0,62.5,768,1024
+VizWiz_train_00013863.jpg,train,BLR|BRT|DRK|FRM|OBS,5,664,monitor,tv,1,0.815,0.815,tv:0.81,1,1,93.4,1536,2048
+VizWiz_train_00000696.jpg,train,FRM|OBS,2,664|673|508|527,monitor|mouse|computer_keyboard|desktop_computer,keyboard|mouse|tv,3,0.736,0.905,keyboard:0.90;tv:0.66;laptop:0.64,1,1,36.6,1224,1632
+VizWiz_val_00002497.jpg,val,BRT|FRM|OBS,3,664|620,monitor|laptop,laptop|tv,1,0.428,0.428,cat:0.43,0,0,53.4,1224,1632
+VizWiz_train_00004111.jpg,train,FRM|OBS,2,473,can_opener,,2,0.449,0.478,cup:0.48;bowl:0.42,0,0,93.1,360,480
+VizWiz_train_00001368.jpg,train,BLR|FRM|OBS,3,664|620|527,monitor|laptop|desktop_computer,laptop|tv,1,0.287,0.287,tv:0.29,1,1,37.5,968,1296
+VizWiz_val_00007657.jpg,val,OBS|NON,1,922,menu,,1,0.255,0.255,person:0.26,0,0,130.4,1224,1632
+VizWiz_val_00000309.jpg,val,BLR|FRM|OBS,3,664,monitor,tv,3,0.527,0.859,tv:0.86;chair:0.41;tv:0.31,1,1,72.3,968,1296
+VizWiz_val_00000785.jpg,val,BLR|DRK|FRM,3,664,monitor,tv,0,,,,0,0,75.4,1224,1632
+VizWiz_train_00017294.jpg,train,DRK|NON,1,851,television,tv,3,0.538,0.644,tv:0.64;tv:0.62;tv:0.36,1,1,65.5,1224,1632
+VizWiz_val_00006583.jpg,val,BLR|DRK|FRM,3,620|492,laptop|chest,laptop,0,,,,0,0,90.0,360,480
+VizWiz_val_00002614.jpg,val,DRK,1,664,monitor,tv,0,,,,0,0,90.6,968,1296
+VizWiz_train_00018750.jpg,train,BLR|DRK|FRM|NON,3,620|508,laptop|computer_keyboard,keyboard|laptop,0,,,,0,0,39.9,768,1024
+VizWiz_train_00006565.jpg,train,BLR|BRT|DRK|FRM|NON,4,831,studio_couch,couch,2,0.617,0.925,couch:0.93;book:0.31,1,1,66.3,1224,1632
+VizWiz_train_00023388.jpg,train,BLR|DRK|NON,2,851,television,tv,3,0.495,0.785,tv:0.78;person:0.41;person:0.29,1,1,101.9,1224,1632
+VizWiz_train_00017585.jpg,train,BLR|DRK|FRM|ROT,4,508,computer_keyboard,keyboard,2,0.572,0.620,keyboard:0.62;laptop:0.52,1,1,52.5,968,1296
+VizWiz_val_00004381.jpg,val,DRK|FRM|ROT,3,761,remote_control,remote,0,,,,0,0,90.0,1936,2592
+VizWiz_train_00000179.jpg,train,DRK|FRM|NON,2,664,monitor,tv,1,0.397,0.397,tv:0.40,1,1,39.2,968,1296
+VizWiz_train_00007637.jpg,train,DRK|NON,1,851,television,tv,1,0.670,0.670,tv:0.67,1,1,57.4,360,480
+VizWiz_train_00005270.jpg,train,DRK|FRM,2,851,television,tv,3,0.611,0.732,tv:0.73;teddy bear:0.70;person:0.40,1,1,173.6,968,1296
+VizWiz_val_00006362.jpg,val,DRK|FRM,2,664|851,monitor|television,tv,1,0.487,0.487,tv:0.49,1,1,58.3,360,480
+VizWiz_train_00014493.jpg,train,DRK,1,851,television,tv,3,0.344,0.397,person:0.40;person:0.34;person:0.30,0,0,200.5,1224,1632
+VizWiz_train_00007818.jpg,train,DRK|NON,1,907|549,wine_bottle|envelope,bottle,2,0.786,0.933,bottle:0.93;car:0.64,1,1,55.0,968,1296
+VizWiz_val_00003430.jpg,val,BLR|DRK|ROT,3,961|692,dough|packet,,1,0.310,0.310,book:0.31,0,0,82.6,768,1024
+VizWiz_train_00014218.jpg,train,DRK|NON,1,487,cellular_telephone,cell phone,2,0.745,0.894,cell phone:0.89;person:0.60,1,1,112.8,768,1024
+VizWiz_val_00003917.jpg,val,DRK|NON,1,435|876|896,bathtub|tub|washbasin,sink,1,0.553,0.553,sink:0.55,1,1,89.0,768,1024
+VizWiz_train_00012223.jpg,train,BLR|DRK,2,898,water_bottle,bottle,1,0.825,0.825,person:0.83,0,0,51.2,1224,1632
+VizWiz_val_00006110.jpg,val,BLR|DRK,2,549,envelope,,0,,,,0,0,72.6,968,1296
+VizWiz_train_00022994.jpg,train,DRK|FRM,2,761|750,remote_control|quilt,remote,2,0.524,0.625,bed:0.63;scissors:0.42,0,0,131.9,1224,1632
+VizWiz_train_00014523.jpg,train,BLR|DRK|FRM,3,664,monitor,tv,0,,,,0,0,47.5,1536,2048
+VizWiz_val_00000734.jpg,val,DRK,1,850,teddy,teddy bear,2,0.535,0.690,teddy bear:0.69;person:0.38,1,1,38.0,1224,1632
+VizWiz_train_00020650.jpg,train,DRK|FRM|ROT,3,760,refrigerator,refrigerator,3,0.444,0.556,cup:0.56;bottle:0.42;cup:0.36,0,0,77.5,1536,2048
+VizWiz_val_00005209.jpg,val,DRK|FRM|ROT,3,664|673,monitor|mouse,mouse|tv,1,0.364,0.364,tv:0.36,1,1,46.0,720,960
+VizWiz_val_00000345.jpg,val,DRK|FRM,2,664|620|629,monitor|laptop|lipstick,laptop|tv,2,0.638,0.792,laptop:0.79;keyboard:0.48,1,1,75.5,968,1296
+VizWiz_train_00016911.jpg,train,DRK|FRM|ROT,3,753|834|905,radiator|suit|window_shade,,2,0.581,0.603,person:0.60;tie:0.56,0,0,134.1,1536,2048
+VizWiz_train_00020407.jpg,train,DRK|FRM,2,898,water_bottle,bottle,7,0.371,0.476,bottle:0.48;bed:0.44;bottle:0.39,1,1,47.3,484,648
+VizWiz_val_00002328.jpg,val,DRK|FRM|NON,2,897,washer,,1,0.482,0.482,person:0.48,0,0,50.1,1224,1632
+VizWiz_train_00009496.jpg,train,BLR|DRK|FRM,3,620,laptop,laptop,1,0.286,0.286,airplane:0.29,0,0,83.7,768,1024
+VizWiz_train_00008499.jpg,train,BLR|DRK,2,761|851,remote_control|television,remote|tv,2,0.780,0.835,remote:0.84;person:0.72,1,1,33.8,360,480
+VizWiz_train_00013981.jpg,train,DRK,1,851|619|846,television|lampshade|table_lamp,tv,1,0.280,0.280,person:0.28,0,0,125.7,360,480
+VizWiz_val_00002692.jpg,val,BLR|DRK|ROT,3,651|700,microwave|paper_towel,microwave,2,0.304,0.347,bottle:0.35;cup:0.26,0,0,64.6,1936,2592
+VizWiz_train_00009015.jpg,train,DRK,1,905,window_shade,,1,0.384,0.384,person:0.38,0,0,232.0,968,1296
+VizWiz_train_00015850.jpg,train,BLR|DRK|FRM,3,402|851,acoustic_guitar|television,tv,1,0.703,0.703,toothbrush:0.70,0,0,163.4,1224,1632
+VizWiz_train_00016356.jpg,train,BLR|DRK,2,692,packet,,0,,,,0,0,57.8,360,480
+VizWiz_val_00001354.jpg,val,DRK|NON,1,806,sock,,1,0.289,0.289,person:0.29,0,0,136.4,968,1296
+VizWiz_train_00017529.jpg,train,BLR|DRK|FRM,3,692,packet,,3,0.327,0.433,remote:0.43;person:0.27;person:0.27,0,0,67.9,768,1024
+VizWiz_train_00002327.jpg,train,BLR|DRK|FRM,3,761|530|485,remote_control|digital_clock|CD_player,clock|remote,1,0.485,0.485,keyboard:0.49,0,0,40.5,968,1296
+VizWiz_val_00000922.jpg,val,DRK,1,851,television,tv,2,0.541,0.792,tv:0.79;bottle:0.29,1,1,149.3,360,480
+VizWiz_val_00006205.jpg,val,BLR|DRK|FRM,3,664|922,monitor|menu,tv,0,,,,0,0,91.4,612,816
+VizWiz_train_00013027.jpg,train,BLR|DRK|ROT,3,608,jean,,2,0.644,0.677,bottle:0.68;person:0.61,0,0,35.5,1536,2048
+VizWiz_val_00000472.jpg,val,DRK|NON,1,620|629|966|572,laptop|lipstick|red_wine|goblet,laptop|wine glass,5,0.629,0.844,wine glass:0.84;keyboard:0.82;keyboard:0.55,1,1,85.5,1224,1632
+VizWiz_train_00013738.jpg,train,DRK|FRM,2,610,jersey,,1,0.495,0.495,person:0.50,0,0,60.7,1224,1632
+VizWiz_val_00007092.jpg,val,BLR|DRK,2,487,cellular_telephone,cell phone,0,,,,0,0,38.8,768,1024
+VizWiz_val_00007252.jpg,val,BLR|DRK|NON,2,427,barrel,,2,0.386,0.411,chair:0.41;suitcase:0.36,0,0,53.6,1224,1632
+VizWiz_train_00023061.jpg,train,DRK|FRM,2,620,laptop,laptop,0,,,,0,0,42.9,1224,1632
+VizWiz_train_00002577.jpg,train,DRK|NON,1,968|923,cup|plate,cup,2,0.438,0.549,cup:0.55;toothbrush:0.33,1,1,49.6,1224,1632
+VizWiz_val_00001015.jpg,val,BLR|DRK,2,664|527,monitor|desktop_computer,tv,1,0.517,0.517,laptop:0.52,0,0,137.1,1224,1632
+VizWiz_train_00020198.jpg,train,BLR|DRK|FRM,3,508|414,computer_keyboard|backpack,backpack|keyboard,1,0.882,0.882,keyboard:0.88,1,1,57.7,360,480
+VizWiz_train_00007271.jpg,train,BLR|DRK|ROT,3,748|493,purse|chiffonier,handbag,1,0.273,0.273,handbag:0.27,1,1,190.8,1536,2048
+VizWiz_train_00022088.jpg,train,BLR|DRK|NON,2,968,cup,cup,2,0.593,0.888,cup:0.89;dining table:0.30,1,1,45.7,968,1296
+VizWiz_train_00005691.jpg,train,DRK|FRM|NON,2,412,ashcan,,0,,,,0,0,44.2,768,1024
+VizWiz_train_00006857.jpg,train,DRK|NON,1,711,perfume,,0,,,,0,0,57.2,968,1296
+VizWiz_val_00000378.jpg,val,BLR|BRT|DRK|FRM,4,508|620|629,computer_keyboard|laptop|lipstick,keyboard|laptop,1,0.948,0.948,laptop:0.95,1,1,97.8,968,1296
+VizWiz_val_00001667.jpg,val,DRK|NON,1,968|966,cup|red_wine,cup,2,0.455,0.640,wine glass:0.64;vase:0.27,0,0,56.3,1224,1632
+VizWiz_val_00001159.jpg,val,BLR|DRK,2,620,laptop,laptop,1,0.378,0.378,tv:0.38,0,0,91.2,968,1296
+VizWiz_train_00016066.jpg,train,BLR|BRT|DRK|FRM,4,650|819,microphone|stage,,0,,,,0,0,39.3,1224,1632
+VizWiz_train_00013619.jpg,train,BLR|DRK,2,761|831,remote_control|studio_couch,couch|remote,1,0.359,0.359,cat:0.36,0,0,73.7,768,1024
+VizWiz_val_00002472.jpg,val,BLR|DRK|FRM,3,827,stove,oven,0,,,,0,0,112.4,968,1296
+VizWiz_train_00007286.jpg,train,BLR|DRK|FRM,3,664,monitor,tv,1,0.490,0.490,laptop:0.49,0,0,96.8,360,480
+VizWiz_train_00017385.jpg,train,DRK|NON,1,487|831,cellular_telephone|studio_couch,cell phone|couch,1,0.360,0.360,person:0.36,0,0,1800.4,320,568
+VizWiz_train_00013926.jpg,train,BLR|DRK,2,846,table_lamp,,0,,,,0,0,112.0,360,480
+VizWiz_train_00020257.jpg,train,DRK|FRM|ROT,3,761|851,remote_control|television,remote|tv,3,0.502,0.857,remote:0.86;person:0.34;person:0.31,1,1,60.1,1224,1632
+VizWiz_train_00005857.jpg,train,DRK|NON,1,434|435,bath_towel|bathtub,,1,0.339,0.339,banana:0.34,0,0,104.4,768,1024
+VizWiz_val_00005370.jpg,val,BLR|DRK|FRM|ROT,4,620,laptop,laptop,4,0.549,0.917,person:0.92;tv:0.57;donut:0.40,0,0,66.8,968,1296
+VizWiz_train_00009222.jpg,train,DRK|FRM,2,620|629,laptop|lipstick,laptop,1,0.927,0.927,laptop:0.93,1,1,60.7,968,1296
+VizWiz_train_00022444.jpg,train,DRK|FRM,2,664|620|629,monitor|laptop|lipstick,laptop|tv,0,,,,0,0,57.7,768,1024
+VizWiz_val_00005680.jpg,val,BLR|DRK|FRM,3,806,sock,,0,,,,0,0,47.4,768,1024
+VizWiz_train_00022436.jpg,train,BLR|DRK,2,664,monitor,tv,1,0.759,0.759,tv:0.76,1,1,83.7,1224,1632
+VizWiz_train_00012872.jpg,train,DRK|FRM,2,963|692,pizza|packet,pizza,0,,,,0,0,75.0,360,480
+VizWiz_train_00009018.jpg,train,DRK|FRM,2,721,pillow,,1,0.255,0.255,umbrella:0.25,0,0,76.5,1224,1632
+VizWiz_train_00017879.jpg,train,DRK|FRM,2,545|692,electric_fan|packet,,0,,,,0,0,32.7,1224,1632
+VizWiz_train_00006786.jpg,train,BLR|DRK|FRM,3,620|629,laptop|lipstick,laptop,2,0.298,0.327,person:0.33;cup:0.27,0,0,89.5,968,1296
+VizWiz_train_00022338.jpg,train,BLR|DRK|FRM,3,620,laptop,laptop,0,,,,0,0,83.0,360,480
+VizWiz_train_00005633.jpg,train,BRT|DRK|FRM,3,664|650|508|527,monitor|microphone|computer_keyboard|desktop_computer,keyboard|tv,6,0.425,0.675,chair:0.68;keyboard:0.62;chair:0.37,1,1,58.2,968,1296
+VizWiz_train_00005879.jpg,train,DRK,1,487,cellular_telephone,cell phone,1,0.252,0.252,laptop:0.25,0,0,82.9,360,480
+VizWiz_train_00012706.jpg,train,BLR|DRK,2,620,laptop,laptop,2,0.586,0.702,laptop:0.70;keyboard:0.47,1,1,84.4,1224,1632
+VizWiz_train_00000187.jpg,train,DRK|FRM|ROT,3,620|508,laptop|computer_keyboard,keyboard|laptop,1,0.757,0.757,keyboard:0.76,1,1,135.4,1224,1632
+VizWiz_val_00006287.jpg,val,BLR|DRK|FRM,3,620,laptop,laptop,1,0.780,0.780,laptop:0.78,1,1,81.9,1224,1632
+VizWiz_train_00002263.jpg,train,DRK|FRM|ROT,3,720|905|899|588,pill_bottle|window_shade|water_jug|hamper,bottle,1,0.738,0.738,traffic light:0.74,0,0,118.2,968,1296
+VizWiz_train_00004504.jpg,train,BLR|DRK,2,605,iPod,,2,0.476,0.498,cell phone:0.50;laptop:0.45,0,0,139.3,360,480
+VizWiz_train_00007585.jpg,train,BLR|DRK|FRM,3,750,quilt,,0,,,,0,0,51.4,360,480
+VizWiz_val_00002777.jpg,val,DRK|NON,1,716|733,picket_fence|pole,,1,0.537,0.537,airplane:0.54,0,0,64.7,968,1296
+VizWiz_train_00022057.jpg,train,BLR|DRK,2,761,remote_control,remote,1,0.295,0.295,remote:0.30,1,1,106.0,360,480
+VizWiz_val_00000417.jpg,val,DRK|NON,1,851|631,television|lotion,tv,7,0.450,0.880,tv:0.88;bottle:0.77;bottle:0.36,1,1,137.6,768,1024
+VizWiz_train_00008569.jpg,train,DRK|NON,1,504|883|968,coffee_mug|vase|cup,cup|vase,4,0.475,0.641,cup:0.64;person:0.49;dining table:0.49,1,1,67.7,1224,1632
+VizWiz_train_00014777.jpg,train,DRK|FRM|ROT,3,851,television,tv,0,,,,0,0,59.3,1936,2592
+VizWiz_train_00018426.jpg,train,BLR|DRK|FRM|ROT,4,700,paper_towel,,0,,,,0,0,79.5,720,960
+VizWiz_train_00021157.jpg,train,BLR|BRT|DRK|FRM,4,851|738|883|664,television|pot|vase|monitor,tv|vase,1,0.371,0.371,tv:0.37,1,1,111.2,968,1296
+VizWiz_train_00021761.jpg,train,BLR|DRK|FRM,3,508,computer_keyboard,keyboard,2,0.335,0.385,laptop:0.39;laptop:0.28,0,0,53.2,1224,1632
+VizWiz_val_00006660.jpg,val,BLR|BRT|DRK|ROT,4,883|846|799,vase|table_lamp|sliding_door,vase,2,0.284,0.292,refrigerator:0.29;cat:0.28,0,0,108.7,1224,1632
+VizWiz_train_00018409.jpg,train,BRT|DRK|FRM,3,851,television,tv,0,,,,0,0,31.8,360,480
+VizWiz_train_00007053.jpg,train,BLR|BRT|DRK|FRM|ROT,5,720,pill_bottle,bottle,2,0.336,0.384,cup:0.38;bottle:0.29,1,1,63.8,1936,2592
+VizWiz_val_00006977.jpg,val,DRK|FRM|NON,2,478,carton,,0,,,,0,0,81.6,1224,1632
+VizWiz_train_00017410.jpg,train,BLR|DRK,2,632|754,loudspeaker|radio,,1,0.611,0.611,mouse:0.61,0,0,87.7,360,480
+VizWiz_train_00014043.jpg,train,BLR|DRK|FRM,3,620|508|487,laptop|computer_keyboard|cellular_telephone,cell phone|keyboard|laptop,3,0.482,0.738,cell phone:0.74;keyboard:0.41;person:0.30,1,1,107.9,1224,1632
+VizWiz_train_00000241.jpg,train,DRK|NON,1,692,packet,,0,,,,0,0,94.3,968,1296
+VizWiz_train_00022438.jpg,train,BLR|DRK,2,761,remote_control,remote,1,0.480,0.480,person:0.48,0,0,88.6,1224,1632
+VizWiz_train_00017035.jpg,train,DRK|ROT,2,632|761|851,loudspeaker|remote_control|television,remote|tv,2,0.493,0.638,tv:0.64;sink:0.35,1,1,67.3,1224,1632
+VizWiz_train_00018334.jpg,train,BLR|DRK|FRM,3,692,packet,,0,,,,0,0,139.6,1224,1632
+VizWiz_train_00006526.jpg,train,BLR|DRK|FRM,3,898|619|846,water_bottle|lampshade|table_lamp,bottle,3,0.461,0.683,bottle:0.68;vase:0.38;remote:0.32,1,1,95.2,968,1296
+VizWiz_train_00022966.jpg,train,BLR|BRT|DRK|FRM,4,620,laptop,laptop,1,0.930,0.930,laptop:0.93,1,1,80.3,968,1296
+VizWiz_train_00008731.jpg,train,BLR|DRK|FRM,3,851,television,tv,2,0.403,0.463,tv:0.46;cat:0.34,1,1,69.5,968,1296
+VizWiz_train_00021265.jpg,train,DRK|FRM,2,760|851|750,refrigerator|television|quilt,refrigerator|tv,3,0.703,0.917,tv:0.92;bed:0.86;chair:0.33,1,1,56.0,1224,1632
+VizWiz_val_00000341.jpg,val,DRK|NON,1,632,loudspeaker,,2,0.561,0.728,remote:0.73;cell phone:0.39,0,0,44.5,968,1296
+VizWiz_val_00000849.jpg,val,DRK|FRM|NON,2,620|629,laptop|lipstick,laptop,1,0.930,0.930,laptop:0.93,1,1,73.5,968,1296
+VizWiz_train_00016285.jpg,train,BLR|DRK|FRM,3,664|487,monitor|cellular_telephone,cell phone|tv,0,,,,0,0,100.0,768,1024
+VizWiz_train_00007057.jpg,train,BLR|DRK|FRM,3,664,monitor,tv,1,0.412,0.412,tv:0.41,1,1,101.0,768,1024
+VizWiz_train_00020004.jpg,train,DRK|ROT,2,720,pill_bottle,bottle,3,0.504,0.777,bottle:0.78;bottle:0.39;bottle:0.34,1,1,89.7,720,960
+VizWiz_train_00001870.jpg,train,DRK|FRM|NON,2,928|478,ice_cream|carton,,1,0.415,0.415,person:0.42,0,0,55.9,1224,1632
+VizWiz_train_00002023.jpg,train,DRK,1,919,street_sign,,3,0.526,0.679,car:0.68;traffic light:0.58;traffic light:0.32,0,0,196.5,968,1296
+VizWiz_train_00022620.jpg,train,BLR|BRT|DRK|FRM,4,804,soap_dispenser,,1,0.454,0.454,bottle:0.45,0,0,94.5,968,1296
+VizWiz_train_00015268.jpg,train,BLR|DRK|FRM,3,806,sock,,1,0.453,0.453,laptop:0.45,0,0,62.8,1536,2048
+VizWiz_train_00001509.jpg,train,BLR|DRK|NON,2,620|629,laptop|lipstick,laptop,1,0.916,0.916,laptop:0.92,1,1,76.2,968,1296
+VizWiz_train_00009669.jpg,train,BLR|DRK,2,631,lotion,,1,0.460,0.460,parking meter:0.46,0,0,56.5,768,1024
+VizWiz_train_00015221.jpg,train,BLR|BRT|DRK|FRM,4,549,envelope,,0,,,,0,0,56.9,968,1296
+VizWiz_val_00000919.jpg,val,BLR|DRK|FRM,3,620|629,laptop|lipstick,laptop,1,0.892,0.892,laptop:0.89,1,1,68.0,968,1296
+VizWiz_train_00006456.jpg,train,BLR|DRK|FRM,3,664|620|629,monitor|laptop|lipstick,laptop|tv,0,,,,0,0,77.7,768,1024
+VizWiz_val_00007716.jpg,val,DRK|NON,1,851,television,tv,4,0.603,0.798,person:0.80;person:0.65;potted plant:0.59,1,1,132.0,968,1296
+VizWiz_val_00003141.jpg,val,DRK|FRM|NON,2,664,monitor,tv,0,,,,0,0,37.5,1224,1632
+VizWiz_train_00003327.jpg,train,DRK|NON,1,827|923,stove|plate,oven,0,,,,0,0,92.5,968,1296
+VizWiz_train_00017549.jpg,train,DRK|FRM,2,664,monitor,tv,0,,,,0,0,52.0,768,1024
+VizWiz_train_00014363.jpg,train,DRK|NON,1,733,pole,,0,,,,0,0,35.4,968,1296
+VizWiz_train_00012126.jpg,train,DRK|NON,1,753|923,radiator|plate,,2,0.569,0.637,bottle:0.64;dining table:0.50,0,0,76.0,484,648
+VizWiz_train_00012208.jpg,train,DRK|NON,1,487,cellular_telephone,cell phone,2,0.382,0.393,tv:0.39;cell phone:0.37,1,1,95.9,360,480
+VizWiz_train_00015675.jpg,train,DRK|ROT|NON,2,963,pizza,pizza,1,0.384,0.384,cat:0.38,0,0,71.0,768,1024
+VizWiz_train_00021525.jpg,train,DRK|FRM,2,834|851|650,suit|television|microphone,tv,3,0.527,0.748,person:0.75;tv:0.55;tv:0.28,1,1,140.8,360,480
+VizWiz_train_00007864.jpg,train,BLR|DRK|FRM|ROT,4,610,jersey,,0,,,,0,0,205.7,1224,1632
+VizWiz_train_00011840.jpg,train,BLR|DRK|FRM|NON,3,750,quilt,,4,0.658,0.831,bed:0.83;tv:0.82;chair:0.66,0,0,42.9,1224,1632
+VizWiz_train_00014311.jpg,train,DRK,1,508,computer_keyboard,keyboard,2,0.886,0.888,keyboard:0.89;bottle:0.88,1,1,96.5,968,1296
+VizWiz_train_00001903.jpg,train,DRK|FRM,2,907,wine_bottle,bottle,0,,,,0,0,63.8,1224,1632
+VizWiz_val_00002824.jpg,val,DRK|FRM,2,664,monitor,tv,0,,,,0,0,226.2,768,1024
+VizWiz_train_00003375.jpg,train,DRK|ROT,2,610|851,jersey|television,tv,2,0.493,0.516,tv:0.52;person:0.47,1,1,63.2,360,480
+VizWiz_val_00002696.jpg,val,DRK|ROT,2,893,wallet,,3,0.351,0.413,laptop:0.41;clock:0.36;book:0.27,0,0,81.8,1224,1632
+VizWiz_train_00020453.jpg,train,DRK|NON,1,711,perfume,,1,0.482,0.482,person:0.48,0,0,165.8,968,1296
+VizWiz_train_00002302.jpg,train,DRK|NON,1,761,remote_control,remote,1,0.907,0.907,remote:0.91,1,1,77.9,360,480
+VizWiz_val_00006059.jpg,val,DRK|NON,1,899|495|851|632|508,water_jug|china_cabinet|television|loudspeaker|computer_keyboard,keyboard|tv,3,0.775,0.818,tv:0.82;person:0.78;bottle:0.73,1,1,127.3,1224,1632
+VizWiz_train_00013514.jpg,train,BLR|DRK|NON,2,706,patio,,1,0.928,0.928,dog:0.93,0,0,45.1,968,1296
+VizWiz_train_00009066.jpg,train,BLR|DRK|FRM,3,508,computer_keyboard,keyboard,1,0.620,0.620,cell phone:0.62,0,0,73.5,360,480
+VizWiz_train_00007589.jpg,train,BLR|DRK|FRM,3,664,monitor,tv,0,,,,0,0,60.9,968,1296
+VizWiz_train_00015176.jpg,train,BLR|BRT|DRK|FRM,4,620,laptop,laptop,0,,,,0,0,72.2,968,1296
+VizWiz_val_00001688.jpg,val,BLR|DRK|FRM,3,664,monitor,tv,0,,,,0,0,29.5,1224,1632
+VizWiz_val_00000731.jpg,val,DRK|FRM|NON,2,664,monitor,tv,2,0.642,0.807,tv:0.81;book:0.48,1,1,44.9,768,1024
+VizWiz_val_00007376.jpg,val,BLR|DRK|FRM,3,631,lotion,,2,0.486,0.533,suitcase:0.53;chair:0.44,0,0,103.5,1224,1632
+VizWiz_val_00003085.jpg,val,DRK|FRM|ROT,3,968|923,cup|plate,cup,0,,,,0,0,51.9,968,1296
+VizWiz_train_00006579.jpg,train,BLR|DRK|FRM,3,664|851,monitor|television,tv,1,0.303,0.303,tv:0.30,1,1,59.4,360,480
+VizWiz_train_00005640.jpg,train,DRK|FRM|NON,2,721,pillow,,1,0.658,0.658,person:0.66,0,0,115.4,1224,1632
+VizWiz_train_00017579.jpg,train,BRT|DRK|FRM,3,664,monitor,tv,2,0.736,0.882,keyboard:0.88;tv:0.59,1,1,78.9,1224,1632
+VizWiz_train_00002777.jpg,train,BLR|DRK|NON,2,851|620,television|laptop,laptop|tv,1,0.291,0.291,tv:0.29,1,1,106.6,1224,1632
+VizWiz_train_00020102.jpg,train,DRK|NON,1,545,electric_fan,,0,,,,0,0,89.7,1936,2592
+VizWiz_train_00018646.jpg,train,DRK|NON,1,761,remote_control,remote,2,0.928,0.944,remote:0.94;remote:0.91,1,1,98.1,360,480
+VizWiz_train_00013630.jpg,train,DRK,1,664|851,monitor|television,tv,0,,,,0,0,143.5,360,480
+VizWiz_train_00008787.jpg,train,BLR|DRK|FRM|ROT,4,631,lotion,,1,0.532,0.532,toilet:0.53,0,0,88.9,1224,1632
+VizWiz_train_00007440.jpg,train,BLR|DRK,2,664,monitor,tv,3,0.470,0.628,cell phone:0.63;bottle:0.52;cup:0.27,0,0,62.7,968,1296
+VizWiz_train_00014919.jpg,train,BLR|DRK,2,692,packet,,2,0.304,0.304,tv:0.30;laptop:0.30,0,0,123.1,968,1296
+VizWiz_train_00016256.jpg,train,BLR|DRK,2,620,laptop,laptop,0,,,,0,0,57.7,768,1024
+VizWiz_train_00023318.jpg,train,DRK,1,850|750,teddy|quilt,teddy bear,3,0.526,0.681,bed:0.68;person:0.58;person:0.32,0,0,61.9,1224,1632
+VizWiz_train_00015074.jpg,train,BLR|DRK,2,733,pole,,0,,,,0,0,98.8,968,1296
+VizWiz_val_00000786.jpg,val,BLR|DRK,2,664|620,monitor|laptop,laptop|tv,2,0.320,0.367,tv:0.37;cup:0.27,1,1,66.8,968,1296
+VizWiz_train_00000233.jpg,train,DRK|NON,1,664|620|629,monitor|laptop|lipstick,laptop|tv,0,,,,0,0,91.2,768,1024
+VizWiz_val_00000662.jpg,val,BLR|BRT|DRK,3,620|629,laptop|lipstick,laptop,2,0.365,0.457,tv:0.46;laptop:0.27,1,1,45.0,1224,1632
+VizWiz_train_00001129.jpg,train,DRK,1,697,pajama,,1,0.672,0.672,person:0.67,0,0,66.2,1936,2592
+VizWiz_val_00003891.jpg,val,DRK|FRM|NON,2,762|963|922,restaurant|pizza|menu,pizza,2,0.371,0.410,person:0.41;cell phone:0.33,0,0,90.9,1936,2592
+VizWiz_val_00000150.jpg,val,DRK|NON,1,664|922,monitor|menu,tv,0,,,,0,0,82.9,968,1296
+VizWiz_val_00000709.jpg,val,BLR|DRK,2,720|905,pill_bottle|window_shade,bottle,3,0.543,0.764,cup:0.76;cat:0.53;tv:0.34,0,0,129.2,1224,1632
+VizWiz_train_00021764.jpg,train,BLR|DRK|FRM,3,549,envelope,,1,0.370,0.370,chair:0.37,0,0,160.8,360,480
+VizWiz_val_00001133.jpg,val,BLR|DRK|ROT|NON,3,487,cellular_telephone,cell phone,1,0.420,0.420,chair:0.42,0,0,49.9,1224,1632
+VizWiz_val_00004544.jpg,val,BLR|DRK,2,692,packet,,0,,,,0,0,39.6,1224,1632
+VizWiz_train_00012768.jpg,train,BLR|DRK,2,761,remote_control,remote,1,0.676,0.676,remote:0.68,1,1,41.4,360,480
+VizWiz_train_00006753.jpg,train,DRK|NON,1,487,cellular_telephone,cell phone,1,0.769,0.769,cell phone:0.77,1,1,59.2,1224,1632
+VizWiz_train_00003597.jpg,train,DRK|NON,1,750,quilt,,1,0.855,0.855,bed:0.86,0,0,42.7,968,1296
+VizWiz_train_00001592.jpg,train,DRK|NON,1,487,cellular_telephone,cell phone,1,0.849,0.849,cell phone:0.85,1,1,123.6,968,1296
+VizWiz_train_00000232.jpg,train,DRK|FRM|NON,2,487,cellular_telephone,cell phone,0,,,,0,0,142.7,320,568
+VizWiz_train_00008489.jpg,train,BLR|DRK|FRM,3,620|508,laptop|computer_keyboard,keyboard|laptop,0,,,,0,0,133.1,968,1296
+VizWiz_train_00020330.jpg,train,BLR|DRK,2,692,packet,,1,0.509,0.509,clock:0.51,0,0,93.0,968,1296
+VizWiz_train_00021714.jpg,train,DRK|NON,1,664|620|508,monitor|laptop|computer_keyboard,keyboard|laptop|tv,2,0.531,0.573,keyboard:0.57;laptop:0.49,1,1,81.4,968,1296
+VizWiz_train_00014046.jpg,train,BLR|DRK|ROT,3,692,packet,,1,0.528,0.528,book:0.53,0,0,152.9,1224,1632
+VizWiz_train_00013868.jpg,train,DRK|NON,1,761|806|831,remote_control|sock|studio_couch,couch|remote,2,0.926,0.951,remote:0.95;person:0.90,1,1,72.5,968,1296
+VizWiz_train_00009787.jpg,train,DRK|NON,1,610,jersey,,0,,,,0,0,38.0,968,1296
+VizWiz_val_00000065.jpg,val,BLR|DRK|FRM,3,664,monitor,tv,1,0.425,0.425,tv:0.42,1,1,37.9,968,1296
+VizWiz_train_00009347.jpg,train,DRK|FRM,2,728|504|692|968,plastic_bag|coffee_mug|packet|cup,cup,1,0.430,0.430,wine glass:0.43,0,0,173.2,768,1024
+VizWiz_val_00003806.jpg,val,DRK|NON,1,794,shower_curtain,,0,,,,0,0,48.8,968,1296
+VizWiz_val_00002832.jpg,val,DRK|NON,1,619|846,lampshade|table_lamp,,0,,,,0,0,29.1,768,1024
+VizWiz_val_00004451.jpg,val,DRK|ROT,2,493|894,chiffonier|wardrobe,,0,,,,0,0,74.0,968,1296
+VizWiz_val_00000075.jpg,val,DRK|FRM|ROT,3,664|620,monitor|laptop,laptop|tv,1,0.495,0.495,tv:0.49,1,1,72.0,1936,2592
+VizWiz_train_00008092.jpg,train,DRK|FRM,2,664,monitor,tv,2,0.361,0.393,surfboard:0.39;tv:0.33,1,1,57.9,1224,1632
+VizWiz_val_00004499.jpg,val,BLR|BRT|FRM|ROT,4,620,laptop,laptop,1,0.370,0.370,bed:0.37,0,0,135.3,968,1296
+VizWiz_val_00004467.jpg,val,BRT|NON,1,610,jersey,,1,0.892,0.892,person:0.89,0,0,67.4,968,1296
+VizWiz_val_00001017.jpg,val,BLR|BRT|FRM,3,754,radio,,1,0.535,0.535,remote:0.53,0,0,37.9,1224,1632
+VizWiz_train_00016127.jpg,train,BLR|BRT|FRM,3,806,sock,,2,0.393,0.426,cell phone:0.43;dining table:0.36,0,0,121.9,1224,1632
+VizWiz_val_00001175.jpg,val,BLR|BRT|FRM,3,721|620|629,pillow|laptop|lipstick,laptop,3,0.428,0.470,bed:0.47;laptop:0.41;tv:0.41,1,1,75.7,1224,1632
+VizWiz_val_00004138.jpg,val,BRT|FRM,2,692,packet,,0,,,,0,0,57.0,968,1296
+VizWiz_train_00008421.jpg,train,BLR|BRT|FRM,3,620,laptop,laptop,2,0.592,0.736,tv:0.74;keyboard:0.45,0,0,151.5,968,1296
+VizWiz_train_00013097.jpg,train,BLR|BRT|FRM,3,720,pill_bottle,bottle,0,,,,0,0,48.6,968,1296
+VizWiz_train_00004433.jpg,train,BRT,1,968|851,cup|television,cup|tv,3,0.544,0.903,cup:0.90;dining table:0.39;tv:0.34,1,1,82.0,968,1296
+VizWiz_train_00010961.jpg,train,BLR|BRT,2,664,monitor,tv,1,0.339,0.339,airplane:0.34,0,0,45.4,1224,1632
+VizWiz_train_00021867.jpg,train,BRT|FRM|ROT,3,673,mouse,mouse,0,,,,0,0,59.1,1224,1632
+VizWiz_val_00000706.jpg,val,BLR|BRT,2,620,laptop,laptop,2,0.505,0.695,laptop:0.70;bed:0.31,1,1,130.5,1224,1632
+VizWiz_train_00005905.jpg,train,BLR|BRT|FRM,3,664|620|629,monitor|laptop|lipstick,laptop|tv,0,,,,0,0,43.2,968,1296
+VizWiz_train_00005436.jpg,train,BLR|BRT,2,728|954|987|700,plastic_bag|banana|corn|paper_towel,banana,1,0.334,0.334,dining table:0.33,0,0,124.9,1224,1632
+VizWiz_train_00010069.jpg,train,BLR|BRT,2,692,packet,,0,,,,0,0,36.8,1224,1632
+VizWiz_train_00019481.jpg,train,BLR|BRT|FRM|ROT,4,632,loudspeaker,,1,0.294,0.294,refrigerator:0.29,0,0,85.2,968,1296
+VizWiz_train_00012493.jpg,train,BLR|BRT|FRM,3,664,monitor,tv,0,,,,0,0,83.3,968,1296
+VizWiz_val_00001721.jpg,val,BRT|FRM|NON,2,664|508,monitor|computer_keyboard,keyboard|tv,2,0.887,0.901,tv:0.90;keyboard:0.87,1,1,110.1,1224,1632
+VizWiz_val_00006942.jpg,val,BLR|BRT|FRM,3,508,computer_keyboard,keyboard,0,,,,0,0,111.9,1224,1632
+VizWiz_train_00006136.jpg,train,BLR|BRT|FRM,3,968|692,cup|packet,cup,1,0.752,0.752,surfboard:0.75,0,0,142.8,968,1296
+VizWiz_train_00007306.jpg,train,BRT|FRM|NON,2,651,microwave,microwave,0,,,,0,0,68.5,968,1296
+VizWiz_val_00005504.jpg,val,BRT|NON,1,968|950,cup|orange,cup|orange,2,0.389,0.452,dining table:0.45;cup:0.33,1,1,47.2,968,1296
+VizWiz_val_00004364.jpg,val,BLR|BRT|FRM|ROT,4,664,monitor,tv,2,0.490,0.595,laptop:0.60;microwave:0.38,0,0,103.1,968,1296
+VizWiz_train_00009986.jpg,train,BRT,1,487,cellular_telephone,cell phone,0,,,,0,0,42.6,1224,1632
+VizWiz_train_00015106.jpg,train,BLR|BRT|FRM,3,834,suit,,2,0.465,0.516,person:0.52;person:0.41,0,0,137.0,320,240
+VizWiz_val_00007466.jpg,val,BLR|BRT,2,664,monitor,tv,2,0.379,0.458,car:0.46;stop sign:0.30,0,0,147.6,968,1296
+VizWiz_train_00012645.jpg,train,BRT|FRM,2,720,pill_bottle,bottle,1,0.777,0.777,cell phone:0.78,0,0,62.5,1224,1632
+VizWiz_train_00006858.jpg,train,BRT|FRM|NON,2,907,wine_bottle,bottle,3,0.310,0.372,bed:0.37;cell phone:0.28;bed:0.28,0,0,79.1,968,1296
+VizWiz_val_00000604.jpg,val,BLR|BRT|FRM|ROT,4,620,laptop,laptop,3,0.477,0.694,cell phone:0.69;person:0.38;person:0.36,0,0,42.1,968,1296
+VizWiz_val_00001125.jpg,val,BRT|NON,1,620|629,laptop|lipstick,laptop,2,0.670,0.931,laptop:0.93;person:0.41,1,1,118.7,1224,1632
+VizWiz_train_00018261.jpg,train,BLR|BRT|FRM,3,728,plastic_bag,,0,,,,0,0,39.8,1224,1632
+VizWiz_val_00002705.jpg,val,BLR|BRT|FRM,3,692,packet,,1,0.609,0.609,cell phone:0.61,0,0,303.9,360,480
+VizWiz_val_00006842.jpg,val,BRT|FRM|ROT,3,620|629,laptop|lipstick,laptop,0,,,,0,0,33.5,968,1296
+VizWiz_train_00021310.jpg,train,BLR|BRT|FRM,3,968|504|549,cup|coffee_mug|envelope,cup,0,,,,0,0,97.5,968,1296
+VizWiz_train_00009744.jpg,train,BLR|BRT|NON,2,945,bell_pepper,,2,0.612,0.836,person:0.84;apple:0.39,0,0,94.1,1936,2592
+VizWiz_val_00003837.jpg,val,BLR|BRT|FRM,3,907,wine_bottle,bottle,1,0.571,0.571,cell phone:0.57,0,0,61.8,1224,1632
+VizWiz_train_00012374.jpg,train,BLR|BRT|NON,2,508,computer_keyboard,keyboard,4,0.529,0.895,keyboard:0.89;dining table:0.52;laptop:0.43,1,1,57.7,1224,1632
+VizWiz_train_00015703.jpg,train,BRT|FRM,2,968|613,cup|joystick,cup,0,,,,0,0,34.6,968,1296
+VizWiz_train_00017502.jpg,train,BLR|BRT|FRM|ROT,4,737|886,pop_bottle|vending_machine,bottle,1,0.711,0.711,cell phone:0.71,0,0,62.6,1936,2592
+VizWiz_train_00014226.jpg,train,BLR|BRT|FRM,3,608,jean,,1,0.591,0.591,person:0.59,0,0,54.4,968,1296
+VizWiz_train_00011979.jpg,train,BLR|BRT|FRM,3,664|527,monitor|desktop_computer,tv,1,0.267,0.267,cat:0.27,0,0,51.0,1224,1632
+VizWiz_val_00000586.jpg,val,BRT|FRM|NON,2,664|487,monitor|cellular_telephone,cell phone|tv,1,0.842,0.842,tv:0.84,1,1,80.8,1224,1632
+VizWiz_val_00006440.jpg,val,BLR|BRT|FRM,3,664,monitor,tv,0,,,,0,0,52.4,968,1296
+VizWiz_train_00018495.jpg,train,BLR|BRT|FRM|ROT,4,720,pill_bottle,bottle,4,0.369,0.571,bottle:0.57;tv:0.37;cup:0.27,1,1,44.6,1936,2592
+VizWiz_train_00002908.jpg,train,BLR|BRT,2,827,stove,oven,1,0.316,0.316,traffic light:0.32,0,0,50.0,484,648
+VizWiz_train_00019031.jpg,train,BLR|BRT|FRM,3,923,plate,,1,0.672,0.672,banana:0.67,0,0,50.8,1224,1632
+VizWiz_train_00014880.jpg,train,BLR|BRT|FRM,3,692,packet,,2,0.512,0.518,laptop:0.52;person:0.51,0,0,87.9,968,1296
+VizWiz_train_00000216.jpg,train,BLR|BRT,2,664,monitor,tv,0,,,,0,0,57.8,968,1296
+VizWiz_val_00000094.jpg,val,BRT,1,664|922|620,monitor|menu|laptop,laptop|tv,0,,,,0,0,49.2,968,1296
+VizWiz_val_00000656.jpg,val,BLR|BRT|FRM,3,620|629,laptop|lipstick,laptop,2,0.435,0.499,laptop:0.50;tv:0.37,1,1,105.8,1224,1632
+VizWiz_train_00022579.jpg,train,BLR|BRT,2,489,chainlink_fence,,0,,,,0,0,57.3,968,1296
+VizWiz_val_00006642.jpg,val,BLR|BRT|FRM|ROT,4,664|620|487,monitor|laptop|cellular_telephone,cell phone|laptop|tv,0,,,,0,0,82.8,968,1296
+VizWiz_val_00002045.jpg,val,BLR|BRT,2,692,packet,,1,0.476,0.476,dining table:0.48,0,0,59.1,1224,1632
+VizWiz_train_00018506.jpg,train,BRT|FRM,2,487,cellular_telephone,cell phone,0,,,,0,0,35.5,1224,1632
+VizWiz_train_00019556.jpg,train,BRT,1,610,jersey,,0,,,,0,0,65.7,484,648
+VizWiz_train_00012125.jpg,train,BLR|BRT|FRM|ROT,4,720,pill_bottle,bottle,2,0.367,0.424,clock:0.42;clock:0.31,0,0,67.3,1224,1632
+VizWiz_val_00000632.jpg,val,BLR|BRT,2,620,laptop,laptop,1,0.670,0.670,tv:0.67,0,0,69.3,768,1024
+VizWiz_train_00006597.jpg,train,BRT|FRM|NON,2,961|692,dough|packet,,2,0.520,0.616,knife:0.62;book:0.42,0,0,54.9,968,1296
+VizWiz_val_00005319.jpg,val,BRT|FRM,2,851,television,tv,5,0.783,0.853,person:0.85;person:0.78;person:0.77,0,0,83.7,1224,1632
+VizWiz_train_00012891.jpg,train,BLR|BRT|FRM,3,937,broccoli,broccoli,1,0.292,0.292,person:0.29,0,0,29.5,968,1296
+VizWiz_train_00000511.jpg,train,BRT|FRM,2,620|629,laptop|lipstick,laptop,1,0.452,0.452,person:0.45,0,0,44.2,968,1296
+VizWiz_train_00002817.jpg,train,BLR|BRT,2,664|620,monitor|laptop,laptop|tv,2,0.386,0.442,tv:0.44;laptop:0.33,1,1,77.0,968,1296
+VizWiz_train_00010792.jpg,train,BRT|FRM|NON,2,481,cassette,,1,0.353,0.353,person:0.35,0,0,87.1,484,648
+VizWiz_val_00006718.jpg,val,BLR|BRT|DRK|FRM,4,664,monitor,tv,1,0.267,0.267,tv:0.27,1,1,82.8,968,1296
+VizWiz_train_00012851.jpg,train,BLR|BRT|FRM,3,629,lipstick,,3,0.650,0.759,toothbrush:0.76;person:0.75;person:0.44,0,0,58.9,968,1296
+VizWiz_train_00008197.jpg,train,BRT|NON,1,631,lotion,,1,0.776,0.776,bottle:0.78,0,0,119.0,968,1296
+VizWiz_train_00008284.jpg,train,BLR|BRT|ROT,3,488|679,chain|necklace,,1,0.688,0.688,remote:0.69,0,0,102.8,1224,1632
+VizWiz_train_00021786.jpg,train,BRT|FRM,2,664,monitor,tv,1,0.606,0.606,cell phone:0.61,0,0,65.4,968,1296
+VizWiz_train_00005733.jpg,train,BLR|BRT|FRM|NON,3,851,television,tv,1,0.502,0.502,tv:0.50,1,1,97.4,1936,2592
+VizWiz_train_00003919.jpg,train,BRT|ROT,2,620|629,laptop|lipstick,laptop,1,0.720,0.720,tv:0.72,0,0,157.9,1224,1632
+VizWiz_train_00017340.jpg,train,BLR|BRT|FRM,3,620,laptop,laptop,0,,,,0,0,31.4,968,1296
+VizWiz_train_00010684.jpg,train,BLR|BRT|FRM,3,549,envelope,,0,,,,0,0,36.9,484,648
+VizWiz_train_00004600.jpg,train,BLR|BRT,2,692|487,packet|cellular_telephone,cell phone,2,0.350,0.424,dining table:0.42;cake:0.28,0,0,85.1,968,1296
+VizWiz_val_00002059.jpg,val,BRT,1,530,digital_clock,clock,2,0.600,0.756,microwave:0.76;person:0.44,0,0,77.0,1224,1632
+VizWiz_train_00001000.jpg,train,BRT|FRM|NON,2,692|478,packet|carton,,1,0.608,0.608,bottle:0.61,0,0,50.5,1224,1632
+VizWiz_train_00007202.jpg,train,BLR|BRT|FRM,3,754|530,radio|digital_clock,clock,3,0.387,0.431,cup:0.43;toilet:0.40;toilet:0.33,0,0,67.5,1224,1632
+VizWiz_train_00015020.jpg,train,BRT|FRM,2,620,laptop,laptop,0,,,,0,0,43.8,1224,1632
+VizWiz_val_00004322.jpg,val,BLR|BRT|FRM,3,806,sock,,2,0.714,0.940,keyboard:0.94;laptop:0.49,0,0,43.8,1224,1632
+VizWiz_train_00004102.jpg,train,BLR|BRT|DRK|FRM,4,632,loudspeaker,,2,0.741,0.793,cell phone:0.79;person:0.69,0,0,70.3,968,1296
+VizWiz_train_00021481.jpg,train,BRT|FRM,2,487,cellular_telephone,cell phone,1,0.888,0.888,cell phone:0.89,1,1,71.9,1224,1632
+VizWiz_val_00000104.jpg,val,BRT|FRM|NON,2,620,laptop,laptop,0,,,,0,0,143.0,968,1296
+VizWiz_train_00020497.jpg,train,BRT|NON,1,620,laptop,laptop,1,0.878,0.878,laptop:0.88,1,1,43.8,1224,1632
+VizWiz_train_00019573.jpg,train,BRT|FRM|NON,2,728|692,plastic_bag|packet,,0,,,,0,0,29.6,968,1296
+VizWiz_train_00021713.jpg,train,BRT|FRM,2,664|508|527,monitor|computer_keyboard|desktop_computer,keyboard|tv,1,0.938,0.938,keyboard:0.94,1,1,174.6,360,480
+VizWiz_train_00019658.jpg,train,BLR|BRT|FRM,3,692,packet,,1,0.278,0.278,person:0.28,0,0,67.3,968,1296
+VizWiz_val_00001752.jpg,val,BRT|NON,1,487,cellular_telephone,cell phone,0,,,,0,0,34.9,360,480
+VizWiz_val_00004266.jpg,val,BLR|BRT|DRK|FRM,4,692,packet,,0,,,,0,0,82.7,968,1296
+VizWiz_train_00003288.jpg,train,BRT,1,664,monitor,tv,1,0.416,0.416,tv:0.42,1,1,112.3,1224,1632
+VizWiz_train_00022161.jpg,train,BRT|NON,1,737|827,pop_bottle|stove,bottle|oven,1,0.491,0.491,bottle:0.49,1,1,67.0,968,1296
+VizWiz_train_00003063.jpg,train,BRT|DRK,2,907|620,wine_bottle|laptop,bottle|laptop,2,0.415,0.564,laptop:0.56;person:0.27,1,1,74.2,1224,1632
+VizWiz_train_00004515.jpg,train,BLR|BRT,2,620|629,laptop|lipstick,laptop,0,,,,0,0,69.8,968,1296
+VizWiz_val_00000873.jpg,val,BLR|BRT|FRM,3,664|620,monitor|laptop,laptop|tv,2,0.484,0.600,laptop:0.60;tv:0.37,1,1,97.0,1224,1632
+VizWiz_val_00007139.jpg,val,BRT|NON,1,487,cellular_telephone,cell phone,1,0.948,0.948,cell phone:0.95,1,1,81.8,1224,1632
+VizWiz_train_00015874.jpg,train,BRT|NON,1,761|851|613,remote_control|television|joystick,remote|tv,4,0.390,0.581,tv:0.58;cup:0.36;book:0.35,1,1,53.2,968,1296
+VizWiz_train_00006045.jpg,train,BRT|FRM,2,631,lotion,,1,0.298,0.298,vase:0.30,0,0,58.1,968,1296
+VizWiz_val_00002829.jpg,val,BRT|NON,1,692|478,packet|carton,,1,0.269,0.269,refrigerator:0.27,0,0,92.6,968,1296
+VizWiz_train_00016777.jpg,train,BRT|NON,1,760|651,refrigerator|microwave,microwave|refrigerator,4,0.383,0.498,refrigerator:0.50;tv:0.43;dining table:0.32,1,1,77.6,1224,1632
+VizWiz_val_00001153.jpg,val,BRT|FRM,2,620,laptop,laptop,0,,,,0,0,105.9,1224,1632
+VizWiz_train_00008999.jpg,train,BLR|BRT|FRM|NON,3,662|487,modem|cellular_telephone,cell phone,2,0.856,0.864,tv:0.86;keyboard:0.85,0,0,64.8,968,1296
+VizWiz_train_00011994.jpg,train,BRT|FRM,2,851,television,tv,2,0.559,0.855,tv:0.85;mouse:0.26,1,1,87.3,1224,1632
+VizWiz_train_00009819.jpg,train,BRT|NON,1,761|487,remote_control|cellular_telephone,cell phone|remote,1,0.741,0.741,cell phone:0.74,1,1,76.7,1936,2592
+VizWiz_val_00007561.jpg,val,BRT|FRM|ROT,3,508,computer_keyboard,keyboard,0,,,,0,0,40.3,1224,1632
+VizWiz_train_00021429.jpg,train,BRT|NON,1,692,packet,,3,0.407,0.589,book:0.59;couch:0.35;person:0.28,0,0,46.9,968,1296
+VizWiz_train_00003235.jpg,train,BLR|BRT|FRM|ROT,4,692,packet,,1,0.320,0.320,person:0.32,0,0,79.6,1224,1632
+VizWiz_train_00020208.jpg,train,BLR|BRT|FRM,3,620|629,laptop|lipstick,laptop,1,0.845,0.845,clock:0.85,0,0,78.6,968,1296
+VizWiz_train_00005727.jpg,train,BRT|FRM|NON,2,508,computer_keyboard,keyboard,1,0.933,0.933,keyboard:0.93,1,1,67.4,1224,1632
+VizWiz_train_00016476.jpg,train,BRT|FRM,2,711,perfume,,1,0.327,0.327,cell phone:0.33,0,0,109.3,968,1296
+VizWiz_val_00004952.jpg,val,BRT|FRM|NON,2,620|692|629,laptop|packet|lipstick,laptop,0,,,,0,0,80.7,1224,1632
+VizWiz_train_00020645.jpg,train,BLR|BRT,2,760|478|928,refrigerator|carton|ice_cream,refrigerator,0,,,,0,0,40.1,484,648
+VizWiz_val_00000257.jpg,val,BLR|BRT|FRM,3,664|620,monitor|laptop,laptop|tv,3,0.427,0.647,laptop:0.65;person:0.36;bed:0.27,1,1,67.6,968,1296
+VizWiz_train_00018849.jpg,train,BRT|FRM,2,620,laptop,laptop,0,,,,0,0,164.1,768,1024
+VizWiz_val_00000023.jpg,val,BLR|BRT,2,664|673,monitor|mouse,mouse|tv,2,0.923,0.951,tv:0.95;mouse:0.90,1,1,59.4,968,1296
+VizWiz_train_00013154.jpg,train,BLR|BRT|FRM,3,429,baseball,sports ball,2,0.609,0.882,person:0.88;tv:0.34,0,0,52.1,968,1296
+VizWiz_train_00003797.jpg,train,BRT|FRM,2,620,laptop,laptop,1,0.330,0.330,traffic light:0.33,0,0,54.5,968,1296
+VizWiz_train_00022748.jpg,train,BLR|BRT|FRM,3,774,sandal,,0,,,,0,0,182.1,968,1296
+VizWiz_train_00021530.jpg,train,BLR|BRT,2,664|851,monitor|television,tv,2,0.621,0.782,tv:0.78;bed:0.46,1,1,68.1,968,1296
+VizWiz_train_00008963.jpg,train,BLR|BRT|FRM,3,664,monitor,tv,1,0.699,0.699,clock:0.70,0,0,82.6,1224,1632
+VizWiz_train_00002570.jpg,train,BLR|BRT|FRM,3,530|827,digital_clock|stove,clock|oven,1,0.255,0.255,cell phone:0.26,0,0,102.5,1224,1632
+VizWiz_train_00021811.jpg,train,BRT|FRM,2,981,ballplayer,,0,,,,0,0,29.4,968,1296
+VizWiz_train_00005988.jpg,train,BLR|BRT,2,626,lighter,,1,0.622,0.622,knife:0.62,0,0,63.9,1224,1632
+VizWiz_train_00004986.jpg,train,BRT|FRM,2,620,laptop,laptop,0,,,,0,0,35.1,968,1296
+VizWiz_train_00003412.jpg,train,BRT|NON,1,761,remote_control,remote,2,0.858,0.899,remote:0.90;person:0.82,1,1,132.0,968,1296
+VizWiz_train_00016123.jpg,train,BRT|NON,1,485,CD_player,,1,0.368,0.368,laptop:0.37,0,0,36.3,968,1296
+VizWiz_train_00003889.jpg,train,BLR|BRT,2,673|620|453,mouse|laptop|bookcase,laptop|mouse,5,0.534,0.909,mouse:0.91;book:0.48;book:0.47,1,1,77.3,1224,1632
+VizWiz_train_00009262.jpg,train,BRT|NON,1,610|981,jersey|ballplayer,,2,0.751,0.911,person:0.91;sports ball:0.59,0,0,79.6,968,1296
+VizWiz_val_00006928.jpg,val,BRT,1,620,laptop,laptop,0,,,,0,0,56.0,968,1296
+VizWiz_val_00005288.jpg,val,BLR|BRT,2,692,packet,,1,0.305,0.305,bowl:0.30,0,0,61.8,968,1296
+VizWiz_train_00019203.jpg,train,BRT|FRM,2,608,jean,,1,0.580,0.580,book:0.58,0,0,71.5,1224,1632
+VizWiz_train_00015908.jpg,train,BRT|FRM,2,664|527,monitor|desktop_computer,tv,1,0.523,0.523,tv:0.52,1,1,50.9,1224,1632
+VizWiz_train_00010034.jpg,train,BLR|BRT|FRM,3,761,remote_control,remote,2,0.544,0.759,remote:0.76;remote:0.33,1,1,99.9,1224,1632
+VizWiz_train_00011223.jpg,train,BLR|BRT|ROT,3,692|981,packet|ballplayer,,0,,,,0,0,35.0,968,1296
+VizWiz_val_00003974.jpg,val,BRT|FRM,2,664,monitor,tv,1,0.915,0.915,tv:0.92,1,1,101.1,968,1296
+VizWiz_train_00005356.jpg,train,BRT|NON,1,728|692,plastic_bag|packet,,0,,,,0,0,67.4,1224,1632
+VizWiz_train_00003704.jpg,train,BRT|FRM,2,664|620|632,monitor|laptop|loudspeaker,laptop|tv,2,0.675,0.865,tv:0.86;tv:0.49,1,1,77.2,1224,1632
+VizWiz_val_00005622.jpg,val,BRT|NON,1,868,tray,,1,0.636,0.636,toilet:0.64,0,0,72.5,968,1296
+VizWiz_train_00015955.jpg,train,BRT|FRM,2,742|487|968|851|761,printer|cellular_telephone|cup|television|remote_control,cell phone|cup|remote|tv,4,0.387,0.464,dog:0.46;chair:0.46;laptop:0.36,1,1,108.4,968,1296
+VizWiz_train_00017041.jpg,train,BLR|BRT|FRM,3,923|620,plate|laptop,laptop,5,0.527,0.873,laptop:0.87;cup:0.60;cup:0.44,1,1,264.0,968,1296
+VizWiz_train_00018778.jpg,train,BLR|BRT|FRM,3,760,refrigerator,refrigerator,0,,,,0,0,45.5,484,648
+VizWiz_val_00002930.jpg,val,BLR|BRT|FRM,3,851,television,tv,2,0.399,0.447,bed:0.45;tv:0.35,1,1,76.4,968,1296
+VizWiz_train_00002669.jpg,train,BLR|BRT|FRM|ROT,4,894|692|493|478|750,wardrobe|packet|chiffonier|carton|quilt,,1,0.344,0.344,bed:0.34,0,0,883.6,484,648
+VizWiz_val_00000230.jpg,val,BRT,1,664,monitor,tv,0,,,,0,0,136.7,1224,1632
+VizWiz_train_00001221.jpg,train,BLR|BRT,2,487,cellular_telephone,cell phone,3,0.611,0.887,cell phone:0.89;person:0.69;dining table:0.25,1,1,94.0,968,1296
+VizWiz_train_00007279.jpg,train,BLR|BRT|FRM,3,664,monitor,tv,1,0.546,0.546,laptop:0.55,0,0,109.3,968,1296
+VizWiz_val_00005085.jpg,val,BLR|BRT|FRM,3,487,cellular_telephone,cell phone,0,,,,0,0,60.5,968,1296
+VizWiz_train_00020353.jpg,train,BRT|ROT,2,620,laptop,laptop,2,0.399,0.463,book:0.46;dining table:0.33,0,0,52.1,1224,1632
+VizWiz_val_00005629.jpg,val,BLR|BRT,2,851|750,television|quilt,tv,3,0.669,0.698,tv:0.70;couch:0.69;tv:0.62,1,1,98.4,1224,1632
+VizWiz_train_00006356.jpg,train,BRT|FRM,2,664,monitor,tv,0,,,,0,0,111.2,1936,2592
+VizWiz_val_00000909.jpg,val,BLR|BRT,2,664|620,monitor|laptop,laptop|tv,1,0.843,0.843,laptop:0.84,1,1,62.2,360,480
+VizWiz_train_00010451.jpg,train,BLR|BRT,2,664,monitor,tv,2,0.328,0.344,tv:0.34;tv:0.31,1,1,125.0,1224,1632
+VizWiz_val_00003962.jpg,val,BLR|BRT|FRM,3,664|620,monitor|laptop,laptop|tv,1,0.509,0.509,laptop:0.51,1,1,83.7,968,1296
+VizWiz_train_00018693.jpg,train,BRT|FRM|ROT|NON,3,909,wok,,0,,,,0,0,37.0,1224,1632
+VizWiz_val_00007484.jpg,val,BLR|BRT,2,504|754|508,coffee_mug|radio|computer_keyboard,cup|keyboard,1,0.669,0.669,cup:0.67,1,1,73.8,968,1296
+VizWiz_val_00000454.jpg,val,BLR|BRT|FRM|NON,3,620,laptop,laptop,3,0.586,0.764,laptop:0.76;tv:0.69;tv:0.30,1,1,66.2,968,1296
+VizWiz_train_00005474.jpg,train,BRT|FRM|ROT,3,651,microwave,microwave,0,,,,0,0,48.1,968,1296
+VizWiz_train_00007473.jpg,train,BLR|BRT|ROT,3,692,packet,,2,0.523,0.651,pizza:0.65;dining table:0.39,0,0,113.2,720,960
+VizWiz_train_00005895.jpg,train,BLR|BRT|FRM,3,905|487,window_shade|cellular_telephone,cell phone,2,0.741,0.821,person:0.82;cell phone:0.66,1,1,95.8,612,816
+VizWiz_train_00007800.jpg,train,BRT|FRM|NON,2,620|629,laptop|lipstick,laptop,1,0.887,0.887,laptop:0.89,1,1,60.8,1224,1632
+VizWiz_train_00013130.jpg,train,BRT|FRM,2,620,laptop,laptop,0,,,,0,0,31.9,360,480
+VizWiz_train_00005324.jpg,train,BLR|BRT,2,620,laptop,laptop,0,,,,0,0,43.6,1224,1632
+VizWiz_train_00013824.jpg,train,BRT|NON,1,907,wine_bottle,bottle,1,0.298,0.298,cell phone:0.30,0,0,94.8,768,1024
+VizWiz_train_00013219.jpg,train,BRT|FRM,2,664,monitor,tv,0,,,,0,0,76.0,1224,1632
+VizWiz_train_00012906.jpg,train,BRT|NON,1,733,pole,,1,0.642,0.642,car:0.64,0,0,62.2,1224,1632
+VizWiz_train_00015756.jpg,train,BRT|NON,1,664|508|632|487,monitor|computer_keyboard|loudspeaker|cellular_telephone,cell phone|keyboard|tv,2,0.670,0.727,laptop:0.73;tv:0.61,1,1,56.1,1224,1632
+VizWiz_train_00012422.jpg,train,BLR|BRT|FRM|NON,3,898,water_bottle,bottle,2,0.519,0.710,bottle:0.71;bowl:0.33,1,1,109.3,242,324
+VizWiz_val_00000642.jpg,val,BLR|BRT|FRM|NON,3,620,laptop,laptop,3,0.576,0.874,laptop:0.87;tv:0.58;keyboard:0.27,1,1,108.1,968,1296
+VizWiz_train_00019138.jpg,train,BRT|FRM|NON,2,651,microwave,microwave,1,0.492,0.492,cell phone:0.49,0,0,102.4,1936,2592
+VizWiz_train_00014073.jpg,train,BLR|BRT|NON,2,620|629,laptop|lipstick,laptop,2,0.709,0.825,laptop:0.82;keyboard:0.59,1,1,174.5,968,1296
+VizWiz_train_00012777.jpg,train,BLR|BRT,2,664,monitor,tv,1,0.505,0.505,tv:0.51,1,1,95.8,1224,1632
+VizWiz_train_00015239.jpg,train,BLR|BRT|FRM,3,827,stove,oven,2,0.322,0.383,person:0.38;tv:0.26,0,0,97.3,968,1296
+VizWiz_train_00009967.jpg,train,BRT|ROT,2,692,packet,,0,,,,0,0,96.6,1224,1632
+VizWiz_train_00001593.jpg,train,BLR|BRT|FRM,3,631|831,lotion|studio_couch,couch,2,0.394,0.430,cell phone:0.43;vase:0.36,0,0,95.7,1224,1632
+VizWiz_val_00003862.jpg,val,BRT|NON,1,487,cellular_telephone,cell phone,3,0.614,0.930,cell phone:0.93;person:0.60;person:0.31,1,1,95.7,1224,1632
+VizWiz_val_00001060.jpg,val,BLR|BRT|FRM,3,620|629,laptop|lipstick,laptop,1,0.890,0.890,laptop:0.89,1,1,56.4,968,1296
+VizWiz_val_00004722.jpg,val,BLR|BRT|ROT,3,717,pickup,truck,0,,,,0,0,125.7,1936,2592
+VizWiz_val_00004479.jpg,val,BRT|DRK|FRM,3,620,laptop,laptop,0,,,,0,0,41.0,968,1296
+VizWiz_val_00002170.jpg,val,BRT|FRM,2,827,stove,oven,1,0.371,0.371,oven:0.37,1,0,49.0,968,1296
+VizWiz_train_00013238.jpg,train,BRT|FRM,2,487,cellular_telephone,cell phone,2,0.842,0.895,cell phone:0.90;person:0.79,1,1,149.0,1224,1632
+VizWiz_train_00021491.jpg,train,BLR|BRT,2,487,cellular_telephone,cell phone,2,0.678,0.794,cell phone:0.79;person:0.56,1,1,145.1,968,1296
+VizWiz_train_00008741.jpg,train,BLR|BRT|FRM,3,893,wallet,,0,,,,0,0,26.6,1224,1632
+VizWiz_train_00005137.jpg,train,BLR|BRT|FRM|ROT,4,692,packet,,1,0.432,0.432,book:0.43,0,0,58.7,1936,2592
+VizWiz_val_00007583.jpg,val,BLR|BRT,2,521,Crock_Pot,,1,0.845,0.845,mouse:0.84,0,0,137.1,968,1296
+VizWiz_train_00012507.jpg,train,BRT|FRM|NON,2,881,upright,,1,0.664,0.664,chair:0.66,0,0,96.0,1224,1632
+VizWiz_val_00001022.jpg,val,BLR|BRT|FRM,3,620,laptop,laptop,3,0.345,0.490,microwave:0.49;tv:0.28;chair:0.26,0,0,66.4,360,480
+VizWiz_train_00007288.jpg,train,BLR|BRT,2,987,corn,,1,0.652,0.652,bottle:0.65,0,0,112.6,360,480
+VizWiz_val_00003740.jpg,val,BRT|FRM,2,631,lotion,,1,0.428,0.428,bed:0.43,0,0,94.5,1936,2592
+VizWiz_train_00010088.jpg,train,BLR|BRT|FRM,3,720,pill_bottle,bottle,1,0.576,0.576,dining table:0.58,0,0,95.3,968,1296
+VizWiz_train_00019139.jpg,train,BLR|BRT|FRM,3,761,remote_control,remote,3,0.535,0.983,remote:0.98;bicycle:0.36;bicycle:0.26,1,1,125.0,1224,1632
+VizWiz_train_00003918.jpg,train,ROT|NON,1,664|851,monitor|television,tv,0,,,,0,0,148.6,1224,1632
+VizWiz_train_00014702.jpg,train,FRM|ROT|NON,2,572,goblet,wine glass,0,,,,0,0,34.2,1936,2592
+VizWiz_train_00010064.jpg,train,ROT|NON,1,487,cellular_telephone,cell phone,1,0.922,0.922,cell phone:0.92,1,1,93.2,968,1296
+VizWiz_train_00001257.jpg,train,BLR|ROT|NON,2,700,paper_towel,,0,,,,0,0,42.9,1224,1632
+VizWiz_train_00021269.jpg,train,ROT,1,673|632|527|851|664,mouse|loudspeaker|desktop_computer|television|monitor,mouse|tv,4,0.423,0.549,tv:0.55;laptop:0.48;tv:0.40,1,1,92.0,1224,1632
+VizWiz_val_00007368.jpg,val,BLR|ROT,2,968|827,cup|stove,cup|oven,0,,,,0,0,64.5,968,1296
+VizWiz_train_00006467.jpg,train,BLR|FRM|ROT,3,692,packet,,4,0.460,0.745,person:0.74;book:0.40;person:0.37,0,0,175.5,360,480
+VizWiz_train_00008083.jpg,train,FRM|ROT|NON,2,700,paper_towel,,1,0.388,0.388,pizza:0.39,0,0,57.7,968,1296
+VizWiz_train_00018640.jpg,train,BLR|FRM|ROT,3,861,toilet_seat,toilet,1,0.799,0.799,bottle:0.80,0,0,107.8,1536,2048
+VizWiz_train_00018499.jpg,train,BLR|ROT|NON,2,521,Crock_Pot,,0,,,,0,0,43.4,1224,1632
+VizWiz_train_00021001.jpg,train,BLR|FRM|ROT,3,692,packet,,0,,,,0,0,128.3,1224,1632
+VizWiz_val_00002745.jpg,val,BLR|FRM|ROT,3,883,vase,vase,1,0.260,0.260,book:0.26,0,0,132.2,968,1296
+VizWiz_train_00002431.jpg,train,ROT|NON,1,745,projector,,1,0.309,0.309,tv:0.31,0,0,54.4,1224,1632
+VizWiz_val_00004614.jpg,val,FRM|ROT,2,859|700,toaster|paper_towel,toaster,1,0.436,0.436,cup:0.44,0,0,287.1,1936,2592
+VizWiz_train_00013781.jpg,train,BLR|FRM|ROT|NON,3,692,packet,,0,,,,0,0,76.9,968,1296
+VizWiz_val_00004278.jpg,val,FRM|ROT,2,549,envelope,,7,0.522,0.748,bottle:0.75;bottle:0.71;person:0.59,0,0,335.5,1936,2592
+VizWiz_train_00003046.jpg,train,FRM|ROT|NON,2,631,lotion,,2,0.565,0.584,banana:0.58;book:0.55,0,0,120.9,360,480
+VizWiz_train_00018677.jpg,train,FRM|ROT,2,968|827|692,cup|stove|packet,cup|oven,1,0.423,0.423,toilet:0.42,0,0,214.3,1224,1632
+VizWiz_train_00012176.jpg,train,ROT,1,620,laptop,laptop,1,0.371,0.371,person:0.37,0,0,126.2,968,1296
+VizWiz_train_00005420.jpg,train,FRM|ROT,2,508,computer_keyboard,keyboard,1,0.630,0.630,keyboard:0.63,1,1,70.9,968,1296
+VizWiz_train_00012059.jpg,train,FRM|ROT,2,549,envelope,,0,,,,0,0,55.6,968,1296
+VizWiz_train_00014128.jpg,train,BLR|FRM|ROT,3,728,plastic_bag,,2,0.413,0.547,vase:0.55;vase:0.28,0,0,87.5,968,1296
+VizWiz_val_00004774.jpg,val,BLR|ROT,2,631,lotion,,2,0.562,0.822,remote:0.82;dog:0.30,0,0,54.0,360,480
+VizWiz_val_00005789.jpg,val,FRM|ROT,2,692,packet,,2,0.314,0.340,remote:0.34;knife:0.29,0,0,66.3,968,1296
+VizWiz_train_00004747.jpg,train,ROT,1,954|572,banana|goblet,banana|wine glass,2,0.585,0.795,vase:0.80;dining table:0.38,0,0,47.2,1936,2592
+VizWiz_train_00011162.jpg,train,ROT,1,728,plastic_bag,,0,,,,0,0,52.1,1936,2592
+VizWiz_train_00011619.jpg,train,FRM|ROT,2,409|892|494,analog_clock|wall_clock|chime,clock,0,,,,0,0,54.3,1224,1632
+VizWiz_train_00009850.jpg,train,BLR|ROT,2,651,microwave,microwave,0,,,,0,0,50.7,1936,2592
+VizWiz_val_00000231.jpg,val,FRM|ROT,2,664,monitor,tv,1,0.289,0.289,tv:0.29,1,1,36.7,1936,2592
+VizWiz_val_00004091.jpg,val,ROT,1,600|610|493,hook|jersey|chiffonier,,1,0.348,0.348,bed:0.35,0,0,64.8,1224,1632
+VizWiz_train_00005777.jpg,train,FRM|ROT,2,692,packet,,1,0.341,0.341,hot dog:0.34,0,0,48.3,1224,1632
+VizWiz_train_00012573.jpg,train,FRM|ROT|NON,2,567,frying_pan,,1,0.419,0.419,person:0.42,0,0,111.1,968,1296
+VizWiz_train_00009607.jpg,train,FRM|ROT,2,610,jersey,,0,,,,0,0,40.3,720,960
+VizWiz_train_00008122.jpg,train,FRM|ROT,2,951,lemon,,1,0.545,0.545,hot dog:0.55,0,0,68.0,1936,2592
+VizWiz_train_00003361.jpg,train,ROT|NON,1,827,stove,oven,2,0.624,0.734,oven:0.73;cup:0.51,1,0,140.8,1936,2592
+VizWiz_val_00000174.jpg,val,BLR|FRM|ROT|NON,3,664|620|629,monitor|laptop|lipstick,laptop|tv,0,,,,0,0,35.9,1936,2592
+VizWiz_val_00006611.jpg,val,FRM|ROT,2,963|692,pizza|packet,pizza,2,0.702,0.761,pizza:0.76;pizza:0.64,1,1,85.9,1224,1632
+VizWiz_train_00007391.jpg,train,BLR|FRM|ROT,3,922|762,menu|restaurant,,4,0.389,0.562,book:0.56;book:0.40;book:0.33,0,0,130.7,1936,2592
+VizWiz_train_00020979.jpg,train,ROT,1,409,analog_clock,clock,1,0.823,0.823,clock:0.82,1,1,96.2,1936,2592
+VizWiz_train_00014386.jpg,train,BLR|FRM|ROT,3,761,remote_control,remote,4,0.486,0.663,cell phone:0.66;remote:0.59;cell phone:0.36,1,1,100.6,968,1296
+VizWiz_val_00003435.jpg,val,ROT|NON,1,706|539|659,patio|doormat|mixing_bowl,bowl,1,0.700,0.700,dog:0.70,0,0,101.9,1224,1632
+VizWiz_train_00018557.jpg,train,BLR|ROT,2,851,television,tv,2,0.787,0.789,person:0.79;tv:0.78,1,1,54.9,1224,1632
+VizWiz_val_00002406.jpg,val,BLR|FRM|ROT,3,846,table_lamp,,2,0.540,0.810,person:0.81;book:0.27,0,0,56.0,1224,1632
+VizWiz_val_00001005.jpg,val,FRM|ROT,2,664,monitor,tv,2,0.585,0.697,person:0.70;cell phone:0.47,0,0,76.4,968,1296
+VizWiz_train_00006652.jpg,train,BLR|DRK|FRM|ROT,4,610,jersey,,1,0.590,0.590,person:0.59,0,0,96.6,1536,2048
+VizWiz_train_00013928.jpg,train,BLR|ROT,2,632|545|482|453,loudspeaker|electric_fan|cassette_player|bookcase,,3,0.406,0.527,teddy bear:0.53;book:0.37;teddy bear:0.32,0,0,60.8,968,1296
+VizWiz_train_00007342.jpg,train,BLR|FRM|ROT,3,851,television,tv,0,,,,0,0,43.8,1936,2592
+VizWiz_train_00004125.jpg,train,FRM|ROT,2,620|629,laptop|lipstick,laptop,0,,,,0,0,85.9,968,1296
+VizWiz_val_00005750.jpg,val,FRM|ROT,2,742,printer,,0,,,,0,0,150.4,968,1296
+VizWiz_train_00011407.jpg,train,BLR|ROT,2,610,jersey,,0,,,,0,0,105.7,1936,2592
+VizWiz_train_00009682.jpg,train,BLR|ROT,2,868|827|692,tray|stove|packet,oven,2,0.381,0.449,book:0.45;clock:0.31,0,0,106.4,1536,2048
+VizWiz_val_00006943.jpg,val,FRM|ROT,2,664,monitor,tv,1,0.445,0.445,cell phone:0.45,0,0,161.8,1224,1632
+VizWiz_val_00005514.jpg,val,BLR|ROT,2,508,computer_keyboard,keyboard,1,0.656,0.656,keyboard:0.66,1,1,61.3,1224,1632
+VizWiz_train_00013354.jpg,train,BLR|FRM|ROT,3,720|485,pill_bottle|CD_player,bottle,1,0.603,0.603,person:0.60,0,0,136.6,1936,2592
+VizWiz_val_00002270.jpg,val,FRM|ROT,2,620|508,laptop|computer_keyboard,keyboard|laptop,2,0.434,0.563,keyboard:0.56;cell phone:0.31,1,1,63.6,968,1296
+VizWiz_val_00006561.jpg,val,ROT|NON,1,761|692,remote_control|packet,remote,5,0.447,0.744,pizza:0.74;pizza:0.58;laptop:0.33,1,1,164.0,1224,1632
+VizWiz_train_00009227.jpg,train,FRM|ROT,2,692|876,packet|tub,,1,0.283,0.283,frisbee:0.28,0,0,46.9,1224,1632
+VizWiz_train_00014381.jpg,train,FRM|ROT|NON,2,508,computer_keyboard,keyboard,1,0.613,0.613,book:0.61,0,0,87.9,1224,1632
+VizWiz_train_00008583.jpg,train,FRM|ROT,2,728|937,plastic_bag|broccoli,broccoli,1,0.259,0.259,broccoli:0.26,1,1,110.0,360,480
+VizWiz_train_00019132.jpg,train,FRM|ROT,2,968|692,cup|packet,cup,1,0.358,0.358,tennis racket:0.36,0,0,55.0,1224,1632
+VizWiz_train_00015178.jpg,train,ROT,1,949,strawberry,,0,,,,0,0,66.0,968,1296
+VizWiz_val_00005086.jpg,val,FRM|ROT,2,610|430,jersey|basketball,sports ball,0,,,,0,0,50.6,1936,2592
+VizWiz_train_00002943.jpg,train,BLR|FRM|ROT,3,737,pop_bottle,bottle,1,0.630,0.630,person:0.63,0,0,59.8,1536,2048
+VizWiz_train_00013592.jpg,train,ROT,1,692,packet,,2,0.341,0.370,book:0.37;hot dog:0.31,0,0,65.4,1224,1632
+VizWiz_train_00014415.jpg,train,FRM|ROT,2,651,microwave,microwave,1,0.352,0.352,remote:0.35,0,0,56.2,720,960
+VizWiz_train_00017361.jpg,train,FRM|ROT,2,664,monitor,tv,0,,,,0,0,45.1,968,1296
+VizWiz_train_00001500.jpg,train,ROT|NON,1,968,cup,cup,3,0.377,0.454,sink:0.45;carrot:0.35;bowl:0.33,0,0,160.5,968,1296
+VizWiz_val_00006521.jpg,val,FRM|ROT,2,692,packet,,2,0.527,0.635,person:0.64;book:0.42,0,0,64.9,968,1296
+VizWiz_train_00012600.jpg,train,FRM|ROT,2,692,packet,,1,0.443,0.443,cell phone:0.44,0,0,159.6,968,1296
+VizWiz_train_00008441.jpg,train,FRM|ROT|NON,2,692,packet,,1,0.515,0.515,stop sign:0.51,0,0,79.7,1936,2592
+VizWiz_val_00001636.jpg,val,BLR|ROT,2,827|692,stove|packet,oven,1,0.258,0.258,parking meter:0.26,0,0,78.9,768,1024
+VizWiz_train_00000777.jpg,train,FRM|ROT,2,907|651,wine_bottle|microwave,bottle|microwave,1,0.465,0.465,bottle:0.47,1,1,103.0,1936,2592
+VizWiz_val_00000142.jpg,val,FRM|ROT,2,664,monitor,tv,0,,,,0,0,61.2,968,1296
+VizWiz_val_00004762.jpg,val,FRM|ROT,2,664,monitor,tv,0,,,,0,0,77.3,720,960
+VizWiz_train_00007689.jpg,train,ROT|NON,1,504,coffee_mug,cup,5,0.336,0.497,cup:0.50;cup:0.32;chair:0.30,1,1,69.8,720,960
+VizWiz_train_00021816.jpg,train,FRM|ROT,2,664,monitor,tv,0,,,,0,0,138.5,968,1296
+VizWiz_train_00023004.jpg,train,FRM|ROT|NON,2,692,packet,,2,0.568,0.673,book:0.67;bed:0.46,0,0,76.8,968,1296
+VizWiz_train_00019585.jpg,train,FRM|ROT,2,923|692,plate|packet,,3,0.574,0.835,dining table:0.84;pizza:0.57;book:0.32,0,0,155.3,1224,1632
+VizWiz_train_00009046.jpg,train,BLR|FRM|ROT,3,896|692,washbasin|packet,sink,1,0.843,0.843,toilet:0.84,0,0,80.0,1224,1632
+VizWiz_val_00002349.jpg,val,FRM|ROT,2,620|629,laptop|lipstick,laptop,1,0.890,0.890,keyboard:0.89,0,0,93.8,968,1296
+VizWiz_train_00001240.jpg,train,FRM|ROT,2,487,cellular_telephone,cell phone,2,0.335,0.394,tv:0.39;cell phone:0.28,1,1,83.6,1224,1632
+VizWiz_val_00001498.jpg,val,BLR|ROT,2,487,cellular_telephone,cell phone,1,0.960,0.960,cell phone:0.96,1,1,109.7,1936,2592
+VizWiz_train_00008863.jpg,train,ROT,1,892|765|831,wall_clock|rocking_chair|studio_couch,chair|clock|couch,4,0.349,0.543,clock:0.54;couch:0.33;clock:0.27,1,1,87.4,1224,1632
+VizWiz_train_00018760.jpg,train,ROT|NON,1,610,jersey,,0,,,,0,0,324.9,720,960
+VizWiz_train_00019276.jpg,train,ROT,1,963|692,pizza|packet,pizza,3,0.307,0.402,pizza:0.40;pizza:0.27;pizza:0.25,1,1,113.3,968,1296
+VizWiz_train_00001271.jpg,train,FRM|ROT,2,761,remote_control,remote,1,0.612,0.612,clock:0.61,0,0,82.4,1536,2048
+VizWiz_train_00016182.jpg,train,BLR|FRM|ROT,3,692,packet,,1,0.663,0.663,book:0.66,0,0,123.9,1936,2592
+VizWiz_train_00010133.jpg,train,FRM|ROT,2,937|938|923|692,broccoli|cauliflower|plate|packet,broccoli,1,0.508,0.508,bowl:0.51,0,0,119.5,1224,1632
+VizWiz_val_00003893.jpg,val,BLR|ROT,2,530,digital_clock,clock,1,0.465,0.465,stop sign:0.47,0,0,59.1,968,1296
+VizWiz_train_00017764.jpg,train,ROT,1,664,monitor,tv,0,,,,0,0,48.6,360,480
+VizWiz_train_00014063.jpg,train,BLR|FRM|ROT|NON,3,692,packet,,0,,,,0,0,83.8,1536,2048
+VizWiz_val_00003428.jpg,val,BLR|FRM|ROT,3,692,packet,,1,0.343,0.343,book:0.34,0,0,107.7,1936,2592
+VizWiz_val_00003007.jpg,val,BLR|FRM|ROT,3,951,lemon,,2,0.500,0.739,person:0.74;dining table:0.26,0,0,74.1,968,1296
+VizWiz_val_00000093.jpg,val,FRM|ROT,2,922|620,menu|laptop,laptop,2,0.636,0.695,tv:0.69;tv:0.58,0,0,61.5,968,1296
+VizWiz_train_00002646.jpg,train,ROT,1,721|572|446|951,pillow|goblet|binder|lemon,wine glass,1,0.277,0.277,scissors:0.28,0,0,174.0,1224,1632
+VizWiz_train_00019542.jpg,train,BLR|FRM|ROT,3,728|549|751,plastic_bag|envelope|racer,car,0,,,,0,0,57.4,1936,2592
+VizWiz_train_00003069.jpg,train,FRM|ROT,2,791,shopping_cart,,0,,,,0,0,45.4,1224,1632
+VizWiz_train_00006704.jpg,train,ROT|NON,1,968,cup,cup,1,0.908,0.908,frisbee:0.91,0,0,83.0,1224,1632
+VizWiz_train_00007491.jpg,train,BLR|FRM|ROT,3,692,packet,,2,0.468,0.534,clock:0.53;cup:0.40,0,0,63.5,360,480
+VizWiz_train_00007505.jpg,train,FRM|ROT|NON,2,761,remote_control,remote,1,0.791,0.791,remote:0.79,1,1,63.4,1224,1632
+VizWiz_val_00001150.jpg,val,BLR|ROT,2,620,laptop,laptop,0,,,,0,0,63.2,768,1024
+VizWiz_train_00019632.jpg,train,BLR|ROT,2,692,packet,,2,0.574,0.800,cell phone:0.80;donut:0.35,0,0,68.7,1224,1632
+VizWiz_train_00014429.jpg,train,FRM|ROT,2,692,packet,,0,,,,0,0,54.6,360,480
+VizWiz_train_00015767.jpg,train,ROT|NON,1,968|504,cup|coffee_mug,cup,0,,,,0,0,89.3,768,1024
+VizWiz_val_00001080.jpg,val,ROT|NON,1,664|620,monitor|laptop,laptop|tv,2,0.531,0.750,tv:0.75;keyboard:0.31,1,1,62.7,968,1296
+VizWiz_train_00003633.jpg,train,ROT,1,692,packet,,2,0.356,0.429,stop sign:0.43;remote:0.28,0,0,56.3,1224,1632
+VizWiz_train_00002029.jpg,train,BLR|ROT,2,827|692|910,stove|packet|wooden_spoon,oven|spoon,3,0.381,0.419,bowl:0.42;clock:0.38;clock:0.34,0,0,75.8,1536,2048
+VizWiz_train_00011267.jpg,train,BLR|DRK|ROT,3,827|692|567,stove|packet|frying_pan,oven,1,0.312,0.312,oven:0.31,1,0,108.6,1936,2592
+VizWiz_val_00001477.jpg,val,BLR|FRM|ROT,3,922,menu,,0,,,,0,0,30.4,1936,2592
+VizWiz_train_00016827.jpg,train,BLR|FRM|ROT,3,700|907|692,paper_towel|wine_bottle|packet,bottle,0,,,,0,0,40.1,1224,1632
+VizWiz_train_00003033.jpg,train,FRM|ROT,2,898|493|750,water_bottle|chiffonier|quilt,bottle,1,0.513,0.513,bed:0.51,0,0,81.6,1936,2592
+VizWiz_train_00001830.jpg,train,BLR|ROT,2,827,stove,oven,2,0.527,0.572,oven:0.57;cup:0.48,1,0,64.8,1224,1632
+VizWiz_train_00016024.jpg,train,FRM|ROT,2,664,monitor,tv,0,,,,0,0,29.9,1224,1632
+VizWiz_train_00002948.jpg,train,BLR|ROT,2,692,packet,,2,0.391,0.495,person:0.49;person:0.29,0,0,66.4,968,1296
+VizWiz_train_00014993.jpg,train,BLR|FRM|ROT,3,953,pineapple,,1,0.516,0.516,person:0.52,0,0,64.1,1224,1632
+VizWiz_train_00018401.jpg,train,FRM|ROT|NON,2,651|692,microwave|packet,microwave,0,,,,0,0,38.3,1224,1632
+VizWiz_val_00003592.jpg,val,ROT|NON,1,745,projector,,3,0.441,0.621,chair:0.62;laptop:0.41;person:0.29,0,0,91.0,1224,1632
+VizWiz_train_00007175.jpg,train,ROT,1,664,monitor,tv,1,0.438,0.438,tv:0.44,1,1,87.0,1224,1632
+VizWiz_train_00000420.jpg,train,BLR|FRM|ROT,3,923|692,plate|packet,,2,0.673,0.773,pizza:0.77;cup:0.57,0,0,84.0,1224,1632
+VizWiz_val_00007578.jpg,val,FRM|ROT,2,692,packet,,0,,,,0,0,71.8,768,1024
+VizWiz_val_00007104.jpg,val,BLR|FRM|ROT,3,923|692,plate|packet,,1,0.284,0.284,dining table:0.28,0,0,158.9,968,1296
+VizWiz_train_00015984.jpg,train,ROT|NON,1,720,pill_bottle,bottle,2,0.566,0.567,bottle:0.57;dining table:0.56,1,1,56.1,1936,2592
+VizWiz_train_00006246.jpg,train,ROT|NON,1,487,cellular_telephone,cell phone,2,0.696,0.945,cell phone:0.95;person:0.45,1,1,110.1,360,480
+VizWiz_train_00022399.jpg,train,FRM|ROT,2,728|721|831,plastic_bag|pillow|studio_couch,couch,1,0.386,0.386,person:0.39,0,0,86.6,968,1296
+VizWiz_train_00002920.jpg,train,FRM|ROT,2,692,packet,,0,,,,0,0,48.4,1224,1632
+VizWiz_train_00014362.jpg,train,BLR|FRM|ROT|NON,3,851|692,television|packet,tv,1,0.302,0.302,bottle:0.30,0,0,103.2,1936,2592
+VizWiz_train_00001930.jpg,train,ROT|NON,1,761|692|487,remote_control|packet|cellular_telephone,cell phone|remote,2,0.497,0.601,cell phone:0.60;book:0.39,1,1,49.0,1224,1632
+VizWiz_train_00010604.jpg,train,BLR|FRM|ROT,3,651,microwave,microwave,0,,,,0,0,51.9,720,960
+VizWiz_val_00003715.jpg,val,ROT,1,968,cup,cup,1,0.774,0.774,person:0.77,0,0,59.4,1224,1632
+VizWiz_train_00007144.jpg,train,BLR|FRM|ROT,3,508,computer_keyboard,keyboard,1,0.874,0.874,keyboard:0.87,1,1,252.9,1936,2592
+VizWiz_val_00000690.jpg,val,BLR|FRM|ROT,3,620|629,laptop|lipstick,laptop,1,0.468,0.468,book:0.47,0,0,56.9,1224,1632
+VizWiz_val_00003858.jpg,val,BLR|ROT,2,620,laptop,laptop,1,0.498,0.498,laptop:0.50,1,1,85.2,1224,1632
+VizWiz_train_00021153.jpg,train,FRM|ROT,2,508,computer_keyboard,keyboard,1,0.746,0.746,keyboard:0.75,1,1,80.6,968,1296
+VizWiz_train_00005999.jpg,train,BLR|FRM|ROT,3,610|492|831,jersey|chest|studio_couch,couch,0,,,,0,0,36.7,1224,1632
+VizWiz_train_00016470.jpg,train,ROT,1,728|987,plastic_bag|corn,,2,0.582,0.838,person:0.84;tie:0.33,0,0,64.6,484,648
+VizWiz_train_00021694.jpg,train,FRM|ROT,2,692,packet,,0,,,,0,0,51.9,484,648
+VizWiz_train_00009293.jpg,train,ROT,1,610,jersey,,1,0.340,0.340,person:0.34,0,0,79.0,1936,2592
+VizWiz_train_00019905.jpg,train,FRM|ROT,2,692|487,packet|cellular_telephone,cell phone,1,0.866,0.866,cell phone:0.87,1,1,159.6,1936,2592
+VizWiz_val_00000061.jpg,val,BLR|FRM|ROT,3,664,monitor,tv,0,,,,0,0,35.7,720,960
+VizWiz_train_00001732.jpg,train,ROT|NON,1,968,cup,cup,0,,,,0,0,103.9,968,1296
+VizWiz_val_00006446.jpg,val,BLR|ROT,2,692,packet,,0,,,,0,0,44.6,968,1296
+VizWiz_train_00006643.jpg,train,BLR|FRM|ROT,3,750,quilt,,1,0.358,0.358,cat:0.36,0,0,88.2,484,648
+VizWiz_val_00003254.jpg,val,BLR|ROT,2,827|692,stove|packet,oven,0,,,,0,0,258.6,768,1024
+VizWiz_train_00009810.jpg,train,FRM|ROT,2,923|773|943,plate|saltshaker|cucumber,,0,,,,0,0,345.4,360,480
+VizWiz_train_00013204.jpg,train,ROT,1,620|629,laptop|lipstick,laptop,0,,,,0,0,51.9,360,480
+VizWiz_train_00023394.jpg,train,ROT|NON,1,650|819|850,microphone|stage|teddy,teddy bear,0,,,,0,0,99.9,1224,1632
+VizWiz_train_00001460.jpg,train,ROT,1,706,patio,,0,,,,0,0,137.4,1224,1632
+VizWiz_train_00019119.jpg,train,BLR|FRM|ROT,3,720,pill_bottle,bottle,1,0.762,0.762,cat:0.76,0,0,73.6,1936,2592
+VizWiz_train_00019372.jpg,train,FRM|ROT,2,897,washer,,0,,,,0,0,66.3,968,1296
+VizWiz_train_00008641.jpg,train,FRM|ROT,2,664,monitor,tv,2,0.354,0.428,laptop:0.43;tv:0.28,1,1,203.9,720,960
+VizWiz_val_00005049.jpg,val,FRM|ROT,2,440,beer_bottle,bottle,0,,,,0,0,49.2,1936,2592
+VizWiz_train_00018262.jpg,train,BLR|ROT,2,631,lotion,,1,0.847,0.847,bottle:0.85,0,0,66.8,968,1296
+VizWiz_val_00001537.jpg,val,FRM|ROT,2,664,monitor,tv,0,,,,0,0,62.7,1224,1632
+VizWiz_train_00004671.jpg,train,FRM|ROT|NON,2,692,packet,,1,0.339,0.339,cake:0.34,0,0,83.5,968,1296
+VizWiz_train_00002440.jpg,train,BLR|FRM|ROT|NON,3,692,packet,,1,0.384,0.384,stop sign:0.38,0,0,100.7,1224,1632
+VizWiz_train_00016781.jpg,train,ROT|NON,1,692,packet,,2,0.341,0.417,cell phone:0.42;laptop:0.27,0,0,56.8,1224,1632
+VizWiz_train_00016613.jpg,train,ROT,1,728|692,plastic_bag|packet,,0,,,,0,0,34.8,968,1296
+VizWiz_train_00013688.jpg,train,FRM|ROT,2,620|527,laptop|desktop_computer,laptop|tv,0,,,,0,0,124.5,1936,2592
+VizWiz_train_00010166.jpg,train,FRM|ROT,2,692,packet,,3,0.369,0.456,chair:0.46;book:0.37;book:0.28,0,0,150.8,1936,2592
+VizWiz_val_00006708.jpg,val,BLR|ROT,2,728|692|951,plastic_bag|packet|lemon,,0,,,,0,0,94.2,1224,1632
+VizWiz_train_00009584.jpg,train,FRM|ROT,2,737|531,pop_bottle|digital_watch,bottle,1,0.254,0.254,dining table:0.25,0,0,169.0,1936,2592
+VizWiz_train_00000782.jpg,train,ROT,1,620|629|588,laptop|lipstick|hamper,laptop,1,0.460,0.460,toilet:0.46,0,0,86.2,1936,2592
+VizWiz_train_00010598.jpg,train,FRM|ROT|NON,2,610|291,jersey|lion,,0,,,,0,0,54.4,1936,2592
+VizWiz_train_00015280.jpg,train,BLR|FRM|ROT,3,692,packet,,0,,,,0,0,102.7,1936,2592
+VizWiz_train_00021518.jpg,train,FRM|ROT,2,521,Crock_Pot,,1,0.447,0.447,clock:0.45,0,0,51.1,1224,1632
+VizWiz_train_00008722.jpg,train,ROT|NON,1,947,mushroom,,1,0.766,0.766,bottle:0.77,0,0,106.0,1936,2592
+VizWiz_train_00013229.jpg,train,BLR|FRM|ROT,3,692|478|950,packet|carton|orange,orange,0,,,,0,0,66.0,242,324
+VizWiz_train_00006768.jpg,train,BLR|FRM|ROT,3,478,carton,,2,0.363,0.403,book:0.40;person:0.32,0,0,99.5,1224,1632
+VizWiz_train_00006545.jpg,train,ROT|NON,1,664|495|851|831,monitor|china_cabinet|television|studio_couch,couch|tv,2,0.849,0.862,tv:0.86;couch:0.84,1,1,54.4,1224,1632
+VizWiz_val_00003155.jpg,val,FRM|ROT,2,923|951,plate|lemon,,1,0.476,0.476,sandwich:0.48,0,0,136.3,720,960
+VizWiz_val_00000245.jpg,val,FRM|ROT,2,620,laptop,laptop,4,0.622,0.838,keyboard:0.84;laptop:0.71;tv:0.60,1,1,96.0,1936,2592
+VizWiz_val_00006453.jpg,val,ROT,1,999,toilet_tissue,,0,,,,0,0,77.1,968,1296
+VizWiz_train_00017522.jpg,train,BLR|FRM|ROT,3,987,corn,,0,,,,0,0,64.4,360,480
+VizWiz_train_00001071.jpg,train,FRM|ROT,2,987|692|463,corn|packet|bucket,,0,,,,0,0,103.7,1936,2592
+VizWiz_val_00000307.jpg,val,ROT,1,549,envelope,,0,,,,0,0,59.0,1936,2592
+VizWiz_val_00000865.jpg,val,FRM|ROT,2,549,envelope,,0,,,,0,0,68.8,1224,1632
+VizWiz_train_00014270.jpg,train,BLR|FRM|ROT,3,827|692,stove|packet,oven,1,0.369,0.369,bed:0.37,0,0,73.6,968,1296
+VizWiz_train_00000840.jpg,train,BLR|FRM|ROT,3,647,measuring_cup,,2,0.397,0.513,book:0.51;book:0.28,0,0,157.3,768,1024
+VizWiz_train_00010260.jpg,train,BLR|ROT,2,837,sunglasses,,1,0.318,0.318,person:0.32,0,0,202.1,1936,2592
+VizWiz_train_00011291.jpg,train,FRM|ROT|NON,2,907,wine_bottle,bottle,1,0.332,0.332,parking meter:0.33,0,0,114.7,1536,2048
+VizWiz_train_00000908.jpg,train,ROT|NON,1,620,laptop,laptop,0,,,,0,0,102.4,768,1024
+VizWiz_train_00005885.jpg,train,ROT,1,761|692|588,remote_control|packet|hamper,remote,1,0.294,0.294,toothbrush:0.29,0,0,167.9,1224,1632
+VizWiz_val_00001118.jpg,val,BLR|FRM|ROT,3,664|527,monitor|desktop_computer,tv,0,,,,0,0,63.0,968,1296
+VizWiz_val_00000095.jpg,val,BLR|ROT,2,664,monitor,tv,1,0.353,0.353,tv:0.35,1,1,83.6,1536,2048
+VizWiz_train_00022195.jpg,train,FRM|ROT,2,550,espresso_maker,,1,0.335,0.335,book:0.34,0,0,98.8,968,1296
+VizWiz_train_00002670.jpg,train,ROT,1,692,packet,,1,0.507,0.507,book:0.51,0,0,120.1,968,1296
+VizWiz_train_00014382.jpg,train,BLR|ROT,2,631,lotion,,1,0.371,0.371,person:0.37,0,0,74.8,1936,2592
+VizWiz_train_00009817.jpg,train,BLR|FRM,2,664,monitor,tv,1,0.484,0.484,bird:0.48,0,0,179.7,360,480
+VizWiz_train_00014915.jpg,train,BLR|FRM,2,608,jean,,0,,,,0,0,40.1,1224,1632
+VizWiz_train_00001973.jpg,train,BLR|FRM|NON,2,539|572|588|831,doormat|goblet|hamper|studio_couch,couch|wine glass,2,0.652,0.735,person:0.73;book:0.57,0,0,83.5,1224,1632
+VizWiz_train_00007426.jpg,train,BLR|FRM|ROT,3,692,packet,,0,,,,0,0,50.0,968,1296
+VizWiz_val_00001234.jpg,val,BLR|NON,1,585,hair_spray,,3,0.321,0.337,person:0.34;toothbrush:0.31;person:0.31,0,0,74.2,968,1296
+VizWiz_train_00006851.jpg,train,BLR,1,737,pop_bottle,bottle,0,,,,0,0,70.1,968,1296
+VizWiz_train_00016096.jpg,train,BLR|FRM,2,620|629,laptop|lipstick,laptop,2,0.496,0.679,bed:0.68;tv:0.31,0,0,91.6,1224,1632
+VizWiz_train_00017002.jpg,train,BLR|FRM,2,851,television,tv,2,0.755,0.918,person:0.92;tie:0.59,0,0,122.4,1224,1632
+VizWiz_train_00002917.jpg,train,BLR,1,761|692|721|831,remote_control|packet|pillow|studio_couch,couch|remote,3,0.574,0.690,remote:0.69;person:0.65;book:0.38,1,1,128.6,1224,1632
+VizWiz_train_00007254.jpg,train,BLR|FRM,2,508,computer_keyboard,keyboard,1,0.372,0.372,keyboard:0.37,1,1,102.2,1224,1632
+VizWiz_val_00006243.jpg,val,BLR|ROT,2,692|605,packet|iPod,,2,0.522,0.654,cell phone:0.65;person:0.39,0,0,157.7,968,1296
+VizWiz_train_00008016.jpg,train,BLR|FRM|ROT,3,664,monitor,tv,0,,,,0,0,150.0,1224,1632
+VizWiz_train_00003898.jpg,train,BLR|FRM|NON,2,620|629,laptop|lipstick,laptop,3,0.547,0.657,laptop:0.66;tv:0.62;keyboard:0.37,1,1,108.1,968,1296
+VizWiz_train_00000136.jpg,train,BLR|ROT,2,738|987|470,pot|corn|candle,,2,0.492,0.492,person:0.49;tv:0.49,0,0,114.0,1536,2048
+VizWiz_train_00022429.jpg,train,BLR|FRM,2,721,pillow,,3,0.689,0.865,couch:0.87;bottle:0.86;chair:0.34,0,0,67.4,1224,1632
+VizWiz_train_00018610.jpg,train,BLR|FRM|NON,2,968|851,cup|television,cup|tv,3,0.437,0.465,person:0.47;person:0.46;person:0.39,0,0,165.3,968,1296
+VizWiz_val_00003296.jpg,val,BLR|FRM,2,851,television,tv,0,,,,0,0,38.5,1224,1632
+VizWiz_val_00003570.jpg,val,BLR|FRM,2,968|504|692,cup|coffee_mug|packet,cup,4,0.427,0.690,bowl:0.69;pizza:0.43;dining table:0.34,0,0,70.3,360,480
+VizWiz_train_00002209.jpg,train,BLR,1,945|659|692,bell_pepper|mixing_bowl|packet,bowl,2,0.527,0.566,bowl:0.57;person:0.49,1,1,198.7,968,1296
+VizWiz_train_00002819.jpg,train,BLR|FRM|NON,2,987,corn,,1,0.755,0.755,person:0.75,0,0,104.0,968,1296
+VizWiz_val_00001058.jpg,val,BLR|FRM,2,922|762,menu|restaurant,,2,0.377,0.425,book:0.42;book:0.33,0,0,83.5,968,1296
+VizWiz_train_00009071.jpg,train,BLR|FRM,2,937,broccoli,broccoli,1,0.384,0.384,broccoli:0.38,1,1,134.2,1224,1632
+VizWiz_val_00000664.jpg,val,BLR|FRM,2,664|620|629,monitor|laptop|lipstick,laptop|tv,1,0.521,0.521,cell phone:0.52,0,0,70.6,768,1024
+VizWiz_val_00000685.jpg,val,BLR|FRM,2,664,monitor,tv,4,0.484,0.600,tv:0.60;bottle:0.54;laptop:0.42,1,1,81.7,1224,1632
+VizWiz_train_00015531.jpg,train,BLR|FRM,2,673,mouse,mouse,2,0.391,0.508,mouse:0.51;dog:0.27,1,1,115.3,360,480
+VizWiz_val_00002951.jpg,val,BLR|FRM|ROT,3,700,paper_towel,,1,0.596,0.596,person:0.60,0,0,79.3,968,1296
+VizWiz_val_00000670.jpg,val,BLR|FRM,2,922,menu,,0,,,,0,0,85.8,968,1296
+VizWiz_val_00000005.jpg,val,BLR|FRM,2,620,laptop,laptop,1,0.326,0.326,clock:0.33,0,0,133.0,968,1296
+VizWiz_train_00021564.jpg,train,BLR|FRM,2,987,corn,,1,0.363,0.363,scissors:0.36,0,0,293.7,1224,1632
+VizWiz_train_00009823.jpg,train,BLR|FRM,2,664|851,monitor|television,tv,2,0.542,0.559,bed:0.56;tv:0.52,1,1,149.2,1224,1632
+VizWiz_val_00004916.jpg,val,BLR,1,651,microwave,microwave,2,0.478,0.674,bottle:0.67;bottle:0.28,0,0,128.4,1224,1632
+VizWiz_val_00000743.jpg,val,BLR|FRM,2,620|629,laptop|lipstick,laptop,1,0.858,0.858,laptop:0.86,1,1,83.8,1224,1632
+VizWiz_train_00020251.jpg,train,BLR,1,882|692,vacuum|packet,,1,0.277,0.277,clock:0.28,0,0,86.7,1224,1632
+VizWiz_train_00009324.jpg,train,BLR|ROT,2,545|738|851,electric_fan|pot|television,tv,2,0.533,0.811,tv:0.81;potted plant:0.25,1,1,54.4,1936,2592
+VizWiz_train_00014329.jpg,train,BLR|FRM,2,968|647,cup|measuring_cup,cup,1,0.292,0.292,wine glass:0.29,0,0,108.4,1224,1632
+VizWiz_train_00019739.jpg,train,BLR|FRM,2,827|923,stove|plate,oven,0,,,,0,0,51.7,1224,1632
+VizWiz_val_00000212.jpg,val,BLR,1,620|629,laptop|lipstick,laptop,1,0.617,0.617,tv:0.62,0,0,91.7,968,1296
+VizWiz_train_00003363.jpg,train,BLR|NON,1,923,plate,,3,0.358,0.380,vase:0.38;person:0.38;vase:0.32,0,0,59.2,968,1296
+VizWiz_train_00015332.jpg,train,BLR|FRM|ROT,3,608,jean,,3,0.440,0.524,person:0.52;person:0.45;book:0.35,0,0,78.6,1936,2592
+VizWiz_val_00001002.jpg,val,BLR|FRM|NON,2,620|493|894,laptop|chiffonier|wardrobe,laptop,1,0.907,0.907,laptop:0.91,1,1,109.1,360,480
+VizWiz_train_00022355.jpg,train,BLR|NON,1,692,packet,,0,,,,0,0,74.4,968,1296
+VizWiz_train_00007447.jpg,train,BLR|FRM|ROT,3,928|478,ice_cream|carton,,0,,,,0,0,157.8,720,960
+VizWiz_train_00017811.jpg,train,BLR|FRM|ROT,3,481,cassette,,0,,,,0,0,52.7,360,480
+VizWiz_val_00004085.jpg,val,BLR|FRM|ROT,3,651,microwave,microwave,0,,,,0,0,51.1,720,960
+VizWiz_train_00019636.jpg,train,BLR|FRM,2,721|610,pillow|jersey,,1,0.711,0.711,bed:0.71,0,0,83.3,1224,1632
+VizWiz_train_00022919.jpg,train,BLR|FRM,2,968,cup,cup,2,0.634,0.823,cup:0.82;bottle:0.45,1,1,170.9,968,1296
+VizWiz_train_00004937.jpg,train,BLR|FRM|ROT,3,664|620|662,monitor|laptop|modem,laptop|tv,2,0.377,0.403,person:0.40;person:0.35,0,0,67.2,968,1296
+VizWiz_train_00012890.jpg,train,BLR|FRM,2,664|851|470,monitor|television|candle,tv,3,0.413,0.510,cup:0.51;tv:0.47;chair:0.26,1,1,81.4,1224,1632
+VizWiz_train_00019950.jpg,train,BLR|DRK|FRM,3,664,monitor,tv,0,,,,0,0,88.1,1224,1632
+VizWiz_val_00007028.jpg,val,BLR|NON,1,968,cup,cup,2,0.644,0.931,cup:0.93;dining table:0.36,1,1,52.3,1224,1632
+VizWiz_train_00003358.jpg,train,BLR|FRM|NON,2,851|492,television|chest,tv,4,0.508,0.898,tv:0.90;suitcase:0.48;bed:0.39,1,1,54.4,968,1296
+VizWiz_train_00002900.jpg,train,BLR,1,679,necklace,,0,,,,0,0,64.6,1936,2592
+VizWiz_val_00002253.jpg,val,BLR|FRM,2,968,cup,cup,5,0.423,0.593,person:0.59;person:0.54;cup:0.34,1,1,93.4,1224,1632
+VizWiz_train_00005553.jpg,train,BLR|FRM,2,478,carton,,1,0.256,0.256,refrigerator:0.26,0,0,70.9,968,1296
+VizWiz_train_00008265.jpg,train,BLR|FRM,2,632|545,loudspeaker|electric_fan,,1,0.436,0.436,person:0.44,0,0,65.2,768,1024
+VizWiz_train_00018523.jpg,train,BLR,1,883,vase,vase,3,0.620,0.853,vase:0.85;bottle:0.65;cup:0.36,1,1,153.4,1224,1632
+VizWiz_train_00016721.jpg,train,BLR|FRM,2,549,envelope,,0,,,,0,0,104.9,360,480
+VizWiz_train_00009671.jpg,train,BLR,1,470,candle,,0,,,,0,0,51.7,360,480
+VizWiz_train_00014018.jpg,train,BLR|NON,1,414,backpack,backpack,0,,,,0,0,132.2,1224,1632
+VizWiz_train_00007338.jpg,train,BLR,1,827,stove,oven,3,0.496,0.714,cup:0.71;person:0.44;cell phone:0.33,0,0,97.7,1224,1632
+VizWiz_val_00001397.jpg,val,BLR|FRM,2,761,remote_control,remote,0,,,,0,0,48.2,968,1296
+VizWiz_train_00010384.jpg,train,BLR|ROT,2,647|692|567,measuring_cup|packet|frying_pan,,3,0.412,0.445,refrigerator:0.45;person:0.40;book:0.39,0,0,159.6,1224,1632
+VizWiz_train_00003494.jpg,train,BLR|FRM|NON,2,737,pop_bottle,bottle,1,0.534,0.534,chair:0.53,0,0,91.0,360,480
+VizWiz_train_00017578.jpg,train,BLR|FRM,2,664|851,monitor|television,tv,2,0.481,0.606,tv:0.61;laptop:0.36,1,1,107.7,242,324
+VizWiz_train_00013957.jpg,train,BLR,1,549,envelope,,1,0.310,0.310,laptop:0.31,0,0,93.7,1224,1632
+VizWiz_val_00004031.jpg,val,BLR,1,882|508,vacuum|computer_keyboard,keyboard,1,0.877,0.877,clock:0.88,0,0,76.6,1224,1632
+VizWiz_train_00004968.jpg,train,BLR|FRM,2,664,monitor,tv,1,0.359,0.359,tv:0.36,1,1,108.9,360,480
+VizWiz_val_00001700.jpg,val,BLR,1,664,monitor,tv,1,0.689,0.689,person:0.69,0,0,114.1,768,1024
+VizWiz_val_00000560.jpg,val,BLR|FRM,2,664|620,monitor|laptop,laptop|tv,1,0.574,0.574,tv:0.57,1,1,169.9,968,1296
+VizWiz_val_00004137.jpg,val,BLR|NON,1,679,necklace,,0,,,,0,0,131.3,968,1296
+VizWiz_val_00000983.jpg,val,BLR|FRM,2,664,monitor,tv,3,0.390,0.463,laptop:0.46;tv:0.42;sports ball:0.29,1,1,121.5,1224,1632
+VizWiz_val_00000491.jpg,val,BLR|ROT,2,620|629,laptop|lipstick,laptop,0,,,,0,0,39.7,1224,1632
+VizWiz_val_00000484.jpg,val,BLR|FRM,2,664,monitor,tv,2,0.481,0.509,person:0.51;tv:0.45,1,1,67.8,1224,1632
+VizWiz_train_00018027.jpg,train,BLR|NON,1,631,lotion,,5,0.567,0.912,bottle:0.91;bottle:0.83;cup:0.49,0,0,160.8,1224,1632
+VizWiz_train_00015164.jpg,train,BLR|FRM,2,692,packet,,1,0.442,0.442,book:0.44,0,0,754.8,968,1296
+VizWiz_train_00003496.jpg,train,BLR|ROT,2,851,television,tv,2,0.596,0.860,tv:0.86;potted plant:0.33,1,1,168.5,1936,2592
+VizWiz_train_00017950.jpg,train,BLR|FRM,2,692,packet,,2,0.387,0.401,book:0.40;book:0.37,0,0,377.0,1224,1632
+VizWiz_train_00006755.jpg,train,BLR,1,737,pop_bottle,bottle,6,0.558,0.835,bottle:0.84;bottle:0.74;bowl:0.53,1,1,45.7,1224,1632
+VizWiz_train_00007263.jpg,train,BLR|FRM,2,963,pizza,pizza,0,,,,0,0,62.0,1224,1632
+VizWiz_val_00003488.jpg,val,BLR|FRM|NON,2,692|935,packet|mashed_potato,,2,0.773,0.846,donut:0.85;person:0.70,0,0,64.4,1224,1632
+VizWiz_train_00005800.jpg,train,BLR|FRM|ROT,3,664|673|508,monitor|mouse|computer_keyboard,keyboard|mouse|tv,2,0.644,0.666,keyboard:0.67;laptop:0.62,1,1,49.1,720,960
+VizWiz_train_00002803.jpg,train,BLR|NON,1,892|692,wall_clock|packet,clock,3,0.527,0.902,clock:0.90;remote:0.35;cell phone:0.32,1,1,89.2,968,1296
+VizWiz_val_00006281.jpg,val,BLR|DRK|FRM,3,620|629,laptop|lipstick,laptop,1,0.626,0.626,laptop:0.63,1,1,30.2,1224,1632
+VizWiz_train_00009090.jpg,train,BLR,1,761,remote_control,remote,1,0.469,0.469,cell phone:0.47,0,0,49.8,360,480
+VizWiz_val_00003057.jpg,val,BLR|FRM,2,728|692,plastic_bag|packet,,0,,,,0,0,32.2,968,1296
+VizWiz_train_00012121.jpg,train,BLR|FRM,2,809|923,soup_bowl|plate,bowl,0,,,,0,0,60.3,968,1296
+VizWiz_val_00005422.jpg,val,BLR|FRM|NON,2,664,monitor,tv,0,,,,0,0,43.8,360,480
+VizWiz_train_00007759.jpg,train,BLR|FRM,2,620,laptop,laptop,3,0.433,0.445,oven:0.45;laptop:0.44;person:0.41,1,1,37.7,1224,1632
+VizWiz_val_00000260.jpg,val,BLR|FRM,2,664,monitor,tv,1,0.291,0.291,tv:0.29,1,1,92.2,968,1296
+VizWiz_train_00019020.jpg,train,BLR,1,761,remote_control,remote,2,0.598,0.883,remote:0.88;person:0.31,1,1,33.6,968,1296
+VizWiz_train_00001009.jpg,train,BLR|NON,1,550,espresso_maker,,4,0.589,0.785,bottle:0.78;bottle:0.61;cup:0.57,0,0,53.9,768,1024
+VizWiz_train_00014531.jpg,train,BLR|NON,1,664|508,monitor|computer_keyboard,keyboard|tv,0,,,,0,0,109.1,1224,1632
+VizWiz_train_00014061.jpg,train,BLR|NON,1,487,cellular_telephone,cell phone,2,0.845,0.939,cell phone:0.94;person:0.75,1,1,55.4,360,480
+VizWiz_train_00009728.jpg,train,BLR,1,928,ice_cream,,1,0.287,0.287,person:0.29,0,0,91.0,720,960
+VizWiz_train_00015777.jpg,train,BLR|FRM,2,620,laptop,laptop,0,,,,0,0,40.8,1224,1632
+VizWiz_val_00005447.jpg,val,BLR|NON,1,504,coffee_mug,cup,1,0.861,0.861,cup:0.86,1,1,90.7,968,1296
+VizWiz_val_00001444.jpg,val,BLR|FRM,2,610,jersey,,2,0.509,0.669,person:0.67;tie:0.35,0,0,146.8,1224,1632
+VizWiz_train_00003482.jpg,train,BLR|FRM,2,619,lampshade,,0,,,,0,0,1237.6,1224,1632
+VizWiz_train_00022487.jpg,train,BLR|FRM,2,610,jersey,,2,0.497,0.590,person:0.59;person:0.40,0,0,271.1,1224,1632
+VizWiz_val_00000397.jpg,val,BLR|FRM|NON,2,664|620,monitor|laptop,laptop|tv,1,0.645,0.645,tv:0.64,1,1,60.6,768,1024
+VizWiz_val_00000337.jpg,val,BLR|BRT|FRM,3,664|508|527,monitor|computer_keyboard|desktop_computer,keyboard|tv,2,0.492,0.641,tv:0.64;keyboard:0.34,1,1,444.6,1224,1632
+VizWiz_train_00021957.jpg,train,BLR|DRK,2,968,cup,cup,1,0.344,0.344,cup:0.34,1,1,118.8,968,1296
+VizWiz_train_00017919.jpg,train,BLR|FRM,2,737,pop_bottle,bottle,0,,,,0,0,606.1,968,1296
+VizWiz_train_00010281.jpg,train,BLR|FRM,2,968|692,cup|packet,cup,5,0.439,0.646,cake:0.65;remote:0.49;person:0.39,0,0,61.1,1224,1632
+VizWiz_val_00001096.jpg,val,BLR|FRM,2,664,monitor,tv,1,0.267,0.267,tv:0.27,1,1,136.9,1224,1632
+VizWiz_train_00005321.jpg,train,BLR,1,711,perfume,,1,0.274,0.274,microwave:0.27,0,0,453.8,1224,1632
+VizWiz_val_00000916.jpg,val,BLR|FRM,2,664|620,monitor|laptop,laptop|tv,1,0.614,0.614,tv:0.61,1,1,322.2,1224,1632
+VizWiz_train_00021928.jpg,train,BLR|FRM,2,963|692,pizza|packet,pizza,2,0.618,0.900,pizza:0.90;oven:0.34,1,1,206.3,968,1296
+VizWiz_train_00020153.jpg,train,BLR,1,582,grocery_store,,0,,,,0,0,62.8,968,1296
+VizWiz_train_00018176.jpg,train,BLR|NON,1,968|923,cup|plate,cup,4,0.713,0.873,cup:0.87;dining table:0.70;cup:0.69,1,1,101.0,1224,1632
+VizWiz_val_00003006.jpg,val,BLR|DRK|FRM,3,720,pill_bottle,bottle,0,,,,0,0,54.1,1936,2592
+VizWiz_train_00018968.jpg,train,BLR,1,673,mouse,mouse,2,0.696,0.959,mouse:0.96;dining table:0.43,1,1,96.3,968,1296
+VizWiz_train_00017391.jpg,train,BLR|FRM,2,896|737,washbasin|pop_bottle,bottle|sink,6,0.443,0.795,bottle:0.80;cup:0.51;bottle:0.43,1,1,61.5,768,1024
+VizWiz_train_00023282.jpg,train,BLR,1,673|851,mouse|television,mouse|tv,1,0.849,0.849,tv:0.85,1,1,121.1,1224,1632
+VizWiz_train_00012442.jpg,train,BLR|NON,1,605,iPod,,2,0.512,0.736,person:0.74;cell phone:0.29,0,0,58.6,1224,1632
+VizWiz_val_00004042.jpg,val,BLR|FRM|NON,2,728,plastic_bag,,2,0.471,0.662,cup:0.66;bottle:0.28,0,0,59.4,968,1296
+VizWiz_train_00010922.jpg,train,BLR|ROT|NON,2,692,packet,,2,0.714,0.897,person:0.90;donut:0.53,0,0,67.5,1936,2592
+VizWiz_train_00010013.jpg,train,BLR|BRT|FRM,3,896|861|999,washbasin|toilet_seat|toilet_tissue,sink|toilet,0,,,,0,0,72.2,968,1296
+VizWiz_train_00003993.jpg,train,BLR|FRM,2,728|692|876,plastic_bag|packet|tub,,2,0.374,0.452,cell phone:0.45;bottle:0.30,0,0,142.7,968,1296
+VizWiz_train_00020472.jpg,train,BLR|FRM|ROT,3,556|831,fire_screen|studio_couch,couch,2,0.460,0.515,microwave:0.52;person:0.40,0,0,135.6,360,480
+VizWiz_train_00015679.jpg,train,BLR|FRM,2,610,jersey,,2,0.415,0.569,book:0.57;person:0.26,0,0,50.2,1224,1632
+VizWiz_train_00001318.jpg,train,BLR,1,851,television,tv,1,0.287,0.287,bottle:0.29,0,0,81.1,968,1296
+VizWiz_train_00008551.jpg,train,BLR,1,850|692|837|610,teddy|packet|sunglasses|jersey,teddy bear,3,0.632,0.867,bottle:0.87;cat:0.73;dining table:0.30,0,0,141.4,968,1296
+VizWiz_train_00001766.jpg,train,BLR|FRM,2,620,laptop,laptop,2,0.493,0.515,keyboard:0.52;tv:0.47,0,0,138.4,360,480
+VizWiz_train_00023053.jpg,train,BLR|FRM,2,508,computer_keyboard,keyboard,1,0.904,0.904,keyboard:0.90,1,1,82.9,1224,1632
+VizWiz_train_00011655.jpg,train,BLR|FRM,2,620|629,laptop|lipstick,laptop,1,0.625,0.625,remote:0.62,0,0,136.8,1224,1632
+VizWiz_train_00009271.jpg,train,BLR|NON,1,487,cellular_telephone,cell phone,1,0.963,0.963,cell phone:0.96,1,1,57.1,968,1296
+VizWiz_val_00003896.jpg,val,BLR|NON,1,553|692,file|packet,,6,0.339,0.517,bottle:0.52;book:0.36;book:0.32,0,0,45.9,968,1296
+VizWiz_train_00014977.jpg,train,BLR,1,610,jersey,,0,,,,0,0,293.5,1936,2592
+VizWiz_train_00013861.jpg,train,BLR|FRM|ROT,3,631,lotion,,1,0.266,0.266,vase:0.27,0,0,110.5,968,1296
+VizWiz_val_00000808.jpg,val,BLR|FRM,2,664,monitor,tv,1,0.866,0.866,cell phone:0.87,0,0,111.0,1224,1632
+VizWiz_train_00003730.jpg,train,BLR|FRM|NON,2,631|831,lotion|studio_couch,couch,1,0.510,0.510,scissors:0.51,0,0,80.5,1936,2592
+VizWiz_train_00010600.jpg,train,BLR,1,922,menu,,1,0.270,0.270,tv:0.27,0,0,245.9,968,1296
+VizWiz_train_00002698.jpg,train,BLR|FRM,2,427,barrel,,0,,,,0,0,153.0,360,480
+VizWiz_train_00004706.jpg,train,BLR|BRT|FRM,3,664|851,monitor|television,tv,0,,,,0,0,109.2,968,1296
+VizWiz_train_00006925.jpg,train,BLR|FRM,2,968,cup,cup,2,0.590,0.757,person:0.76;dining table:0.42,0,0,58.6,1224,1632
+VizWiz_train_00009215.jpg,train,BLR|DRK|FRM,3,435,bathtub,,0,,,,0,0,60.5,768,1024
+VizWiz_val_00000871.jpg,val,BLR|FRM,2,720|728,pill_bottle|plastic_bag,bottle,1,0.296,0.296,person:0.30,0,0,165.6,968,1296
+VizWiz_val_00003720.jpg,val,BLR|NON,1,487,cellular_telephone,cell phone,2,0.375,0.487,person:0.49;person:0.26,0,0,140.8,612,816
+VizWiz_train_00014257.jpg,train,BLR|NON,1,968|418|620|898,cup|ballpoint|laptop|water_bottle,bottle|cup|laptop,4,0.757,0.851,cup:0.85;bottle:0.85;bottle:0.74,1,1,224.4,1224,1632
+VizWiz_train_00012041.jpg,train,BLR|NON,1,631,lotion,,1,0.618,0.618,bottle:0.62,0,0,149.3,968,1296
+VizWiz_val_00004254.jpg,val,BLR|FRM,2,309,bee,,0,,,,0,0,136.1,968,1296
+VizWiz_train_00008339.jpg,train,BLR|NON,1,414,backpack,backpack,1,0.289,0.289,backpack:0.29,1,1,119.2,360,480
+VizWiz_train_00004645.jpg,train,BLR|FRM,2,508,computer_keyboard,keyboard,1,0.943,0.943,keyboard:0.94,1,1,133.0,1224,1632
+VizWiz_train_00013305.jpg,train,BLR|FRM|NON,2,610,jersey,,1,0.849,0.849,person:0.85,0,0,159.0,484,648
+VizWiz_train_00017253.jpg,train,BLR|NON,1,761|831,remote_control|studio_couch,couch|remote,2,0.672,0.939,remote:0.94;person:0.41,1,1,85.7,360,480
+VizWiz_train_00007214.jpg,train,BLR|FRM,2,720,pill_bottle,bottle,2,0.459,0.488,bottle:0.49;cell phone:0.43,1,1,154.6,1224,1632
+VizWiz_val_00000396.jpg,val,BLR|FRM,2,664|620,monitor|laptop,laptop|tv,2,0.563,0.850,person:0.85;tv:0.28,1,1,90.3,1224,1632
+VizWiz_train_00017524.jpg,train,BLR,1,673,mouse,mouse,1,0.430,0.430,cup:0.43,0,0,212.7,968,1296
+VizWiz_train_00016975.jpg,train,BLR,1,827|651,stove|microwave,microwave|oven,1,0.531,0.531,train:0.53,0,0,101.4,968,1296
+VizWiz_train_00013430.jpg,train,BLR|FRM|ROT,3,651|692,microwave|packet,microwave,1,0.352,0.352,cake:0.35,0,0,118.1,484,648
+VizWiz_val_00000847.jpg,val,BLR|FRM,2,664,monitor,tv,1,0.276,0.276,tv:0.28,1,1,94.0,360,480
+VizWiz_train_00009175.jpg,train,BLR|FRM|ROT,3,481,cassette,,0,,,,0,0,62.8,360,480
+VizWiz_train_00010267.jpg,train,BLR|FRM,2,721|508,pillow|computer_keyboard,keyboard,4,0.448,0.901,keyboard:0.90;cup:0.35;person:0.28,1,1,172.3,968,1296
+VizWiz_train_00017618.jpg,train,BLR|FRM,2,951,lemon,,0,,,,0,0,33.2,968,1296
+VizWiz_val_00004681.jpg,val,BLR|FRM|NON,2,728|692,plastic_bag|packet,,1,0.671,0.671,book:0.67,0,0,162.0,1224,1632
+VizWiz_train_00017778.jpg,train,BLR,1,719,piggy_bank,,1,0.732,0.732,bottle:0.73,0,0,88.2,1224,1632
+VizWiz_val_00007617.jpg,val,BLR|FRM,2,692,packet,,1,0.495,0.495,person:0.49,0,0,226.5,768,1024
+VizWiz_train_00000387.jpg,train,BLR|NON,1,761,remote_control,remote,1,0.948,0.948,remote:0.95,1,1,123.0,1224,1632
+VizWiz_train_00006261.jpg,train,BLR|NON,1,827|907|487,stove|wine_bottle|cellular_telephone,bottle|cell phone|oven,3,0.736,0.890,cell phone:0.89;bottle:0.79;oven:0.53,1,1,184.0,968,1296
+VizWiz_train_00006197.jpg,train,BLR|ROT|NON,2,692,packet,,0,,,,0,0,280.6,1936,2592
+VizWiz_train_00013280.jpg,train,BLR|FRM|NON,2,811|414,space_heater|backpack,backpack,0,,,,0,0,89.1,968,1296
+VizWiz_train_00011866.jpg,train,BLR|ROT,2,737|951,pop_bottle|lemon,bottle,1,0.253,0.253,toilet:0.25,0,0,155.2,1936,2592
+VizWiz_val_00000154.jpg,val,BLR|NON,1,963,pizza,pizza,0,,,,0,0,315.9,968,1296
+VizWiz_train_00020373.jpg,train,BLR|FRM|ROT,3,508,computer_keyboard,keyboard,1,0.386,0.386,keyboard:0.39,1,1,84.9,968,1296
+VizWiz_train_00016834.jpg,train,BLR|NON,1,968,cup,cup,1,0.950,0.950,frisbee:0.95,0,0,124.5,1224,1632
+VizWiz_train_00012863.jpg,train,BLR|FRM,2,737|478,pop_bottle|carton,bottle,4,0.352,0.388,vase:0.39;book:0.34;book:0.34,0,0,128.1,968,1296
+VizWiz_train_00010387.jpg,train,BLR|NON,1,968|954|859,cup|banana|toaster,banana|cup|toaster,6,0.368,0.414,toaster:0.41;cup:0.41;banana:0.38,1,1,90.9,968,1296
+VizWiz_train_00000025.jpg,train,BLR,1,488,chain,,1,0.268,0.268,dog:0.27,0,0,164.6,968,1296
+VizWiz_train_00008769.jpg,train,BLR|BRT|FRM,3,664|851,monitor|television,tv,0,,,,0,0,376.4,1224,1632
+VizWiz_train_00016582.jpg,train,BLR|NON,1,692,packet,,1,0.487,0.487,book:0.49,0,0,183.2,1224,1632
+VizWiz_train_00017075.jpg,train,BLR|FRM|NON,2,521,Crock_Pot,,1,0.257,0.257,tv:0.26,0,0,61.6,968,1296
+VizWiz_train_00018370.jpg,train,BLR|FRM,2,608,jean,,0,,,,0,0,209.6,1224,1632
+VizWiz_train_00003174.jpg,train,BLR,1,692,packet,,1,0.282,0.282,bed:0.28,0,0,121.8,968,1296
+VizWiz_val_00006015.jpg,val,BLR|FRM|NON,2,487,cellular_telephone,cell phone,2,0.438,0.506,cell phone:0.51;cell phone:0.37,1,1,264.7,1224,1632
+VizWiz_train_00008064.jpg,train,BLR|FRM|NON,2,868|893,tray|wallet,,4,0.330,0.344,suitcase:0.34;book:0.34;bowl:0.34,0,0,96.1,968,1296
+VizWiz_train_00011039.jpg,train,BLR,1,608|748,jean|purse,handbag,2,0.388,0.478,tie:0.48;tie:0.30,0,0,130.5,1224,1632
+VizWiz_train_00021524.jpg,train,BLR|NON,1,987|508|527,corn|computer_keyboard|desktop_computer,keyboard|tv,4,0.535,0.706,keyboard:0.71;cup:0.54;laptop:0.52,1,1,151.9,360,480
+VizWiz_val_00001367.jpg,val,BLR|FRM,2,487,cellular_telephone,cell phone,1,0.762,0.762,person:0.76,0,0,118.0,1224,1632
+VizWiz_val_00004847.jpg,val,BLR|FRM,2,664,monitor,tv,1,0.516,0.516,laptop:0.52,0,0,81.9,484,648
+VizWiz_train_00017987.jpg,train,BLR|FRM,2,620,laptop,laptop,0,,,,0,0,95.0,768,1024
+VizWiz_val_00002066.jpg,val,BLR,1,738|907|700|572,pot|wine_bottle|paper_towel|goblet,bottle|wine glass,1,0.890,0.890,bottle:0.89,1,1,82.7,968,1296
+VizWiz_train_00016144.jpg,train,BLR|FRM,2,478,carton,,1,0.525,0.525,book:0.53,0,0,194.0,1224,1632
+VizWiz_train_00016782.jpg,train,BLR|NON,1,504|827|968,coffee_mug|stove|cup,cup|oven,2,0.870,0.933,cup:0.93;bowl:0.81,1,1,120.4,360,480
+VizWiz_train_00016637.jpg,train,BLR|ROT,2,963|692,pizza|packet,pizza,2,0.375,0.390,dining table:0.39;book:0.36,0,0,52.0,1224,1632
+VizWiz_train_00010200.jpg,train,BLR|FRM,2,968,cup,cup,1,0.702,0.702,bowl:0.70,0,0,50.7,1224,1632
+VizWiz_train_00015661.jpg,train,BLR|FRM,2,664,monitor,tv,0,,,,0,0,116.0,768,1024
+VizWiz_train_00018721.jpg,train,BLR|FRM|NON,2,728,plastic_bag,,0,,,,0,0,31.8,1224,1632
+VizWiz_train_00005254.jpg,train,FRM,1,487,cellular_telephone,cell phone,2,0.683,0.732,cell phone:0.73;person:0.63,1,1,87.6,1224,1632
+VizWiz_train_00019218.jpg,train,FRM,1,868,tray,,1,0.370,0.370,toilet:0.37,0,0,81.2,968,1296
+VizWiz_train_00009833.jpg,train,FRM,1,923|692,plate|packet,,2,0.406,0.453,donut:0.45;bowl:0.36,0,0,78.3,968,1296
+VizWiz_train_00000313.jpg,train,FRM|NON,1,851|831,television|studio_couch,couch|tv,2,0.773,0.817,tv:0.82;couch:0.73,1,1,57.5,1224,1632
+VizWiz_train_00021548.jpg,train,FRM|NON,1,882,vacuum,,1,0.469,0.469,cup:0.47,0,0,167.3,1224,1632
+VizWiz_train_00007990.jpg,train,FRM|NON,1,750,quilt,,2,0.356,0.401,scissors:0.40;carrot:0.31,0,0,94.0,1936,2592
+VizWiz_train_00009296.jpg,train,BLR|FRM|ROT,3,748,purse,handbag,0,,,,0,0,40.7,968,1296
+VizWiz_train_00019076.jpg,train,FRM|NON,1,664,monitor,tv,1,0.404,0.404,tv:0.40,1,1,87.4,1224,1632
+VizWiz_val_00001650.jpg,val,FRM|NON,1,907,wine_bottle,bottle,1,0.351,0.351,bottle:0.35,1,1,84.2,1224,1632
+VizWiz_val_00005174.jpg,val,BLR|FRM|ROT,3,968,cup,cup,2,0.735,0.745,vase:0.74;vase:0.72,0,0,120.4,1536,2048
+VizWiz_val_00002797.jpg,val,BLR|FRM,2,508,computer_keyboard,keyboard,0,,,,0,0,60.4,360,480
+VizWiz_train_00016063.jpg,train,FRM|NON,1,610,jersey,,1,0.282,0.282,cake:0.28,0,0,118.8,968,1296
+VizWiz_train_00014264.jpg,train,FRM|NON,1,706|475|479,patio|car_mirror|car_wheel,,3,0.527,0.730,car:0.73;car:0.51;car:0.34,0,0,125.5,1224,1632
+VizWiz_train_00002333.jpg,train,BLR|FRM,2,453,bookcase,,3,0.460,0.673,tv:0.67;book:0.42;cup:0.29,0,0,97.4,968,1296
+VizWiz_val_00006811.jpg,val,FRM,1,508,computer_keyboard,keyboard,2,0.779,0.926,keyboard:0.93;laptop:0.63,1,1,116.5,968,1296
+VizWiz_val_00005280.jpg,val,FRM|NON,1,608,jean,,1,0.403,0.403,person:0.40,0,0,145.0,1936,2592
+VizWiz_train_00000828.jpg,train,FRM|NON,1,664|508|632,monitor|computer_keyboard|loudspeaker,keyboard|tv,2,0.627,0.724,tv:0.72;keyboard:0.53,1,1,196.4,1224,1632
+VizWiz_val_00001166.jpg,val,BLR|FRM|ROT,3,631,lotion,,1,0.306,0.306,toothbrush:0.31,0,0,79.0,612,816
+VizWiz_train_00012942.jpg,train,BLR|FRM,2,664|673,monitor|mouse,mouse|tv,1,0.832,0.832,tv:0.83,1,1,60.4,242,324
+VizWiz_val_00000737.jpg,val,FRM,1,664,monitor,tv,1,0.468,0.468,book:0.47,0,0,82.7,968,1296
+VizWiz_val_00001983.jpg,val,FRM|NON,1,987|692|935,corn|packet|mashed_potato,,2,0.261,0.264,donut:0.26;donut:0.26,0,0,80.0,1224,1632
+VizWiz_train_00014079.jpg,train,FRM,1,610,jersey,,1,0.422,0.422,person:0.42,0,0,103.6,1224,1632
+VizWiz_val_00000663.jpg,val,BLR|FRM,2,664|620|629,monitor|laptop|lipstick,laptop|tv,2,0.579,0.711,tv:0.71;keyboard:0.45,1,1,103.2,768,1024
+VizWiz_train_00007233.jpg,train,FRM|NON,1,968|504|738|883,cup|coffee_mug|pot|vase,cup|vase,7,0.486,0.870,bowl:0.87;cup:0.85;vase:0.41,1,1,68.3,1224,1632
+VizWiz_val_00007350.jpg,val,FRM|NON,1,508,computer_keyboard,keyboard,1,0.554,0.554,keyboard:0.55,1,1,164.6,968,1296
+VizWiz_train_00013885.jpg,train,BLR|DRK|FRM,3,664,monitor,tv,1,0.556,0.556,tv:0.56,1,1,49.4,360,480
+VizWiz_train_00006853.jpg,train,FRM|NON,1,610,jersey,,2,0.647,0.815,person:0.81;person:0.48,0,0,79.1,1224,1632
+VizWiz_val_00007637.jpg,val,FRM|NON,1,508,computer_keyboard,keyboard,2,0.609,0.826,keyboard:0.83;laptop:0.39,1,1,155.4,968,1296
+VizWiz_train_00013805.jpg,train,FRM|NON,1,692,packet,,2,0.311,0.350,pizza:0.35;dining table:0.27,0,0,140.7,360,480
+VizWiz_val_00005192.jpg,val,FRM|NON,1,894,wardrobe,,0,,,,0,0,182.4,968,1296
+VizWiz_train_00006725.jpg,train,FRM,1,827,stove,oven,2,0.554,0.850,person:0.85;potted plant:0.26,0,0,95.1,1224,1632
+VizWiz_train_00012849.jpg,train,FRM,1,700|951,paper_towel|lemon,,2,0.409,0.426,cup:0.43;bottle:0.39,0,0,103.2,968,1296
+VizWiz_train_00002816.jpg,train,FRM|NON,1,720,pill_bottle,bottle,1,0.336,0.336,bottle:0.34,1,1,255.1,968,1296
+VizWiz_train_00018033.jpg,train,BLR|FRM,2,487,cellular_telephone,cell phone,0,,,,0,0,89.7,968,1296
+VizWiz_train_00012758.jpg,train,FRM|NON,1,534,dishwasher,,2,0.360,0.418,laptop:0.42;oven:0.30,0,0,208.2,1224,1632
+VizWiz_val_00004307.jpg,val,BLR|FRM,2,530|827,digital_clock|stove,clock|oven,1,0.373,0.373,cell phone:0.37,0,0,46.5,180,240
+VizWiz_val_00003984.jpg,val,BLR|FRM,2,742,printer,,1,0.467,0.467,keyboard:0.47,0,0,68.1,968,1296
+VizWiz_train_00022484.jpg,train,BLR|FRM,2,620,laptop,laptop,2,0.580,0.882,laptop:0.88;mouse:0.28,1,1,153.0,360,480
+VizWiz_train_00009488.jpg,train,FRM,1,859,toaster,toaster,11,0.598,0.863,cell phone:0.86;bottle:0.82;person:0.78,1,1,77.1,1224,1632
+VizWiz_train_00022719.jpg,train,FRM|NON,1,664|692,monitor|packet,tv,1,0.797,0.797,person:0.80,0,0,139.2,1224,1632
+VizWiz_val_00004549.jpg,val,FRM|ROT,2,738|692,pot|packet,,1,0.919,0.919,stop sign:0.92,0,0,181.2,1224,1632
+VizWiz_train_00005328.jpg,train,FRM|NON,1,692|487,packet|cellular_telephone,cell phone,2,0.554,0.590,cell phone:0.59;pizza:0.52,1,1,74.0,968,1296
+VizWiz_train_00011956.jpg,train,FRM|NON,1,692|750,packet|quilt,,2,0.746,0.785,bed:0.79;book:0.71,0,0,160.8,1936,2592
+VizWiz_val_00003996.jpg,val,BLR|FRM|NON,2,963,pizza,pizza,2,0.775,0.817,person:0.82;pizza:0.73,1,1,93.2,484,648
+VizWiz_val_00000517.jpg,val,FRM|NON,1,620,laptop,laptop,1,0.268,0.268,tv:0.27,0,0,176.9,1224,1632
+VizWiz_train_00021113.jpg,train,FRM|NON,1,508,computer_keyboard,keyboard,1,0.831,0.831,keyboard:0.83,1,1,160.3,1224,1632
+VizWiz_val_00003501.jpg,val,BLR|FRM,2,750,quilt,,0,,,,0,0,94.7,1536,2048
+VizWiz_train_00015404.jpg,train,BLR|FRM|ROT|NON,3,620,laptop,laptop,1,0.302,0.302,traffic light:0.30,0,0,127.0,968,1296
+VizWiz_val_00000302.jpg,val,BLR|FRM|ROT,3,610|429,jersey|baseball,sports ball,0,,,,0,0,82.3,1936,2592
+VizWiz_val_00005564.jpg,val,FRM|NON,1,968|737|620|629,cup|pop_bottle|laptop|lipstick,bottle|cup|laptop,1,0.803,0.803,cup:0.80,1,1,161.4,968,1296
+VizWiz_train_00009622.jpg,train,FRM|NON,1,504|968,coffee_mug|cup,cup,5,0.521,0.754,chair:0.75;cup:0.58;chair:0.45,1,1,284.0,968,1296
+VizWiz_train_00019348.jpg,train,BLR|FRM|NON,2,485,CD_player,,2,0.399,0.413,person:0.41;remote:0.38,0,0,63.8,1224,1632
+VizWiz_train_00009138.jpg,train,BLR|FRM,2,629|620|508,lipstick|laptop|computer_keyboard,keyboard|laptop,1,0.599,0.599,keyboard:0.60,1,1,277.5,768,1024
+VizWiz_train_00012061.jpg,train,BLR|FRM,2,664,monitor,tv,2,0.700,0.715,person:0.71;tv:0.68,1,1,163.7,480,640
+VizWiz_train_00015664.jpg,train,BLR|FRM|NON,2,760|728,refrigerator|plastic_bag,refrigerator,1,0.462,0.462,person:0.46,0,0,76.8,968,1296
+VizWiz_val_00002377.jpg,val,FRM|NON,1,608,jean,,1,0.901,0.901,person:0.90,0,0,86.3,968,1296
+VizWiz_train_00005110.jpg,train,FRM|ROT,2,968,cup,cup,1,0.296,0.296,bottle:0.30,0,0,163.9,1936,2592
+VizWiz_train_00009964.jpg,train,BLR|FRM,2,608|750,jean|quilt,,1,0.890,0.890,person:0.89,0,0,141.4,968,1296
+VizWiz_train_00006339.jpg,train,FRM|NON,1,841,sweatshirt,,2,0.405,0.510,person:0.51;tie:0.30,0,0,88.8,1224,1632
+VizWiz_train_00000942.jpg,train,FRM,1,488|610|679,chain|jersey|necklace,,3,0.416,0.672,person:0.67;potted plant:0.30;person:0.28,0,0,85.5,360,480
+VizWiz_train_00010040.jpg,train,BLR|FRM,2,632|817|453,loudspeaker|sports_car|bookcase,car,0,,,,0,0,55.1,968,1296
+VizWiz_train_00000717.jpg,train,BLR|FRM,2,549,envelope,,0,,,,0,0,41.3,1224,1632
+VizWiz_val_00003899.jpg,val,FRM|NON,1,664|508,monitor|computer_keyboard,keyboard|tv,2,0.805,0.901,keyboard:0.90;tv:0.71,1,1,142.0,968,1296
+VizWiz_train_00021244.jpg,train,FRM|NON,1,761,remote_control,remote,1,0.465,0.465,cell phone:0.47,0,0,83.0,1224,1632
+VizWiz_train_00016283.jpg,train,FRM,1,761,remote_control,remote,1,0.805,0.805,remote:0.81,1,1,74.7,1936,2592
+VizWiz_train_00019602.jpg,train,FRM,1,664|673|851,monitor|mouse|television,mouse|tv,5,0.677,0.917,cup:0.92;mouse:0.87;remote:0.61,1,1,89.9,1224,1632
+VizWiz_train_00006219.jpg,train,BLR|FRM,2,761,remote_control,remote,1,0.793,0.793,remote:0.79,1,1,162.1,1224,1632
+VizWiz_val_00001013.jpg,val,BLR|FRM,2,664,monitor,tv,2,0.386,0.520,book:0.52;book:0.25,0,0,94.8,968,1296
+VizWiz_train_00006060.jpg,train,FRM|NON,1,692,packet,,0,,,,0,0,126.9,968,1296
+VizWiz_train_00010769.jpg,train,BLR|FRM|NON,2,679,necklace,,1,0.309,0.309,person:0.31,0,0,404.6,1936,2592
+VizWiz_val_00002356.jpg,val,FRM|NON,1,508,computer_keyboard,keyboard,1,0.936,0.936,keyboard:0.94,1,1,426.0,360,480
+VizWiz_train_00001955.jpg,train,FRM|NON,1,631,lotion,,1,0.672,0.672,bottle:0.67,0,0,165.0,968,1296
+VizWiz_val_00006198.jpg,val,FRM|NON,1,530|827|651,digital_clock|stove|microwave,clock|microwave|oven,0,,,,0,0,173.3,1224,1632
+VizWiz_train_00000974.jpg,train,BLR|FRM|NON,2,487,cellular_telephone,cell phone,1,0.875,0.875,keyboard:0.87,0,0,124.4,968,1296
+VizWiz_train_00007485.jpg,train,BLR|FRM,2,659,mixing_bowl,bowl,3,0.479,0.563,dining table:0.56;sandwich:0.48;bowl:0.40,1,1,91.8,968,1296
+VizWiz_train_00022106.jpg,train,FRM|NON,1,620|508,laptop|computer_keyboard,keyboard|laptop,1,0.848,0.848,keyboard:0.85,1,1,72.3,1224,1632
+VizWiz_train_00012654.jpg,train,BLR|FRM,2,720,pill_bottle,bottle,1,0.848,0.848,person:0.85,0,0,157.1,1224,1632
+VizWiz_train_00021100.jpg,train,BLR|FRM,2,664,monitor,tv,1,0.263,0.263,dining table:0.26,0,0,87.0,968,1296
+VizWiz_train_00006915.jpg,train,BLR|FRM,2,692,packet,,0,,,,0,0,224.0,968,1296
+VizWiz_train_00011606.jpg,train,FRM|NON,1,750,quilt,,1,0.610,0.610,cake:0.61,0,0,217.8,1936,2592
+VizWiz_val_00000189.jpg,val,BLR|FRM|ROT,3,664|620|629,monitor|laptop|lipstick,laptop|tv,3,0.395,0.466,laptop:0.47;keyboard:0.43;tv:0.28,1,1,270.7,1536,2048
+VizWiz_train_00021342.jpg,train,FRM|NON,1,478|950,carton|orange,orange,1,0.752,0.752,orange:0.75,1,1,135.4,968,1296
+VizWiz_val_00001402.jpg,val,FRM|NON,1,610,jersey,,1,0.352,0.352,person:0.35,0,0,91.4,968,1296
+VizWiz_train_00021700.jpg,train,FRM|NON,1,620,laptop,laptop,0,,,,0,0,247.2,968,1296
+VizWiz_train_00022006.jpg,train,FRM|NON,1,620,laptop,laptop,2,0.432,0.452,keyboard:0.45;laptop:0.41,1,1,355.0,968,1296
+VizWiz_train_00011138.jpg,train,FRM|ROT,2,692,packet,,0,,,,0,0,216.2,720,960
+VizWiz_train_00016216.jpg,train,FRM|NON,1,738,pot,,3,0.544,0.611,vase:0.61;vase:0.51;vase:0.51,0,0,125.2,968,1296
+VizWiz_train_00013788.jpg,train,BLR|FRM,2,711,perfume,,0,,,,0,0,60.4,1224,1632
+VizWiz_train_00017230.jpg,train,BLR|FRM,2,850,teddy,teddy bear,4,0.497,0.709,orange:0.71;orange:0.51;orange:0.40,0,0,246.8,968,1296
+VizWiz_train_00018136.jpg,train,FRM|NON,1,728|620|446,plastic_bag|laptop|binder,laptop,1,0.733,0.733,laptop:0.73,1,1,237.2,1224,1632
+VizWiz_train_00018211.jpg,train,FRM,1,721|619|846,pillow|lampshade|table_lamp,,1,0.747,0.747,person:0.75,0,0,1647.4,1224,1632
+VizWiz_train_00008519.jpg,train,BLR|FRM,2,737|692,pop_bottle|packet,bottle,0,,,,0,0,827.1,968,1296
+VizWiz_train_00016369.jpg,train,FRM,1,728,plastic_bag,,0,,,,0,0,315.9,968,1296
+VizWiz_train_00022848.jpg,train,BLR|FRM,2,632|851|750,loudspeaker|television|quilt,tv,2,0.632,0.634,tv:0.63;bed:0.63,1,1,146.6,360,480
+VizWiz_train_00011193.jpg,train,FRM|NON,1,968|620,cup|laptop,cup|laptop,3,0.733,0.927,cup:0.93;person:0.69;cell phone:0.59,1,1,248.9,1224,1632
+VizWiz_train_00021861.jpg,train,BLR|FRM,2,834,suit,,0,,,,0,0,94.8,1224,1632
+VizWiz_train_00018139.jpg,train,BLR|FRM,2,754,radio,,2,0.560,0.813,cell phone:0.81;tv:0.31,0,0,307.5,968,1296
+VizWiz_train_00018489.jpg,train,FRM,1,809,soup_bowl,bowl,0,,,,0,0,185.6,968,1296
+VizWiz_train_00019008.jpg,train,FRM|ROT,2,664,monitor,tv,0,,,,0,0,64.1,360,480
+VizWiz_train_00017574.jpg,train,FRM|NON,1,809|827,soup_bowl|stove,bowl|oven,0,,,,0,0,202.5,1224,1632
+VizWiz_val_00001129.jpg,val,FRM|NON,1,664,monitor,tv,1,0.254,0.254,book:0.25,0,0,50.1,968,1296
+VizWiz_train_00017245.jpg,train,BLR|FRM,2,610,jersey,,0,,,,0,0,52.0,1224,1632
+VizWiz_train_00007623.jpg,train,FRM|NON,1,827,stove,oven,2,0.519,0.782,bottle:0.78;bottle:0.26,0,0,99.8,1536,2048
+VizWiz_train_00004192.jpg,train,BLR|FRM,2,692,packet,,0,,,,0,0,81.0,1224,1632
+VizWiz_train_00021987.jpg,train,FRM|ROT,2,692,packet,,0,,,,0,0,50.1,968,1296
+VizWiz_train_00009718.jpg,train,BLR|FRM,2,508,computer_keyboard,keyboard,2,0.765,0.891,keyboard:0.89;book:0.64,1,1,107.6,242,324
+VizWiz_train_00014551.jpg,train,FRM|ROT,2,692,packet,,0,,,,0,0,54.9,968,1296
+VizWiz_train_00021950.jpg,train,FRM|NON,1,632|761,loudspeaker|remote_control,remote,2,0.300,0.308,keyboard:0.31;teddy bear:0.29,0,0,171.5,968,1296
+VizWiz_train_00021177.jpg,train,FRM|NON,1,620,laptop,laptop,2,0.740,0.882,keyboard:0.88;laptop:0.60,1,1,163.5,1224,1632
+VizWiz_train_00017668.jpg,train,FRM|NON,1,435,bathtub,,1,0.284,0.284,clock:0.28,0,0,153.4,968,1296
+VizWiz_train_00007897.jpg,train,BLR|FRM,2,412,ashcan,,1,0.746,0.746,person:0.75,0,0,129.1,360,480
+VizWiz_train_00019960.jpg,train,FRM|NON,1,664|620,monitor|laptop,laptop|tv,0,,,,0,0,65.8,1224,1632
+VizWiz_val_00005303.jpg,val,FRM,1,968,cup,cup,2,0.565,0.622,dining table:0.62;cup:0.51,1,1,205.2,968,1296
+VizWiz_train_00014987.jpg,train,FRM|ROT,2,692|748,packet|purse,handbag,0,,,,0,0,134.2,1936,2592
+VizWiz_train_00013285.jpg,train,BLR|FRM,2,937|692,broccoli|packet,broccoli,6,0.470,0.692,bowl:0.69;broccoli:0.56;bowl:0.48,1,1,98.7,1224,1632
+VizWiz_val_00007076.jpg,val,BLR|FRM,2,664,monitor,tv,1,0.612,0.612,tv:0.61,1,1,171.1,968,1296
+VizWiz_train_00007474.jpg,train,FRM|ROT,2,987,corn,,1,0.685,0.685,bottle:0.69,0,0,144.8,1536,2048
+VizWiz_val_00005774.jpg,val,FRM|NON,1,778,scale,,1,0.509,0.509,toilet:0.51,0,0,132.2,968,1296
+VizWiz_train_00001672.jpg,train,FRM|NON,1,697|806,pajama|sock,,1,0.805,0.805,frisbee:0.80,0,0,296.9,360,480
+VizWiz_train_00019163.jpg,train,FRM|NON,1,529,diaper,,1,0.620,0.620,person:0.62,0,0,80.8,360,480
+VizWiz_train_00000306.jpg,train,FRM|NON,1,968|504,cup|coffee_mug,cup,2,0.545,0.840,bottle:0.84;cup:0.25,1,1,109.3,968,1296
+VizWiz_val_00007536.jpg,val,BLR|FRM,2,737|831,pop_bottle|studio_couch,bottle|couch,2,0.473,0.615,vase:0.61;apple:0.33,0,0,259.5,1224,1632
+VizWiz_val_00002743.jpg,val,FRM|NON,1,487,cellular_telephone,cell phone,1,0.381,0.381,suitcase:0.38,0,0,161.5,968,1296
+VizWiz_val_00000867.jpg,val,BLR|FRM|NON,2,664|620,monitor|laptop,laptop|tv,2,0.812,0.938,laptop:0.94;tv:0.69,1,1,91.9,1224,1632
+VizWiz_train_00001784.jpg,train,FRM|NON,1,837,sunglasses,,1,0.736,0.736,person:0.74,0,0,117.2,1224,1632
+VizWiz_train_00015888.jpg,train,BLR|FRM,2,610,jersey,,0,,,,0,0,166.2,1224,1632
+VizWiz_train_00003969.jpg,train,FRM,1,963,pizza,pizza,1,0.435,0.435,pizza:0.43,1,1,152.6,1224,1632
+VizWiz_train_00008974.jpg,train,FRM|NON,1,778|610,scale|jersey,,1,0.877,0.877,person:0.88,0,0,313.3,968,1296
+VizWiz_train_00012636.jpg,train,FRM|ROT,2,610,jersey,,2,0.383,0.396,banana:0.40;bed:0.37,0,0,84.8,1224,1632
+VizWiz_train_00011727.jpg,train,BLR|FRM,2,508|487,computer_keyboard|cellular_telephone,cell phone|keyboard,4,0.568,0.726,cell phone:0.73;keyboard:0.71;mouse:0.55,1,1,190.3,968,1296
+VizWiz_train_00012459.jpg,train,FRM|NON,1,418|987,ballpoint|corn,,6,0.416,0.645,cup:0.65;knife:0.64;cup:0.38,0,0,87.9,1224,1632
+VizWiz_val_00003224.jpg,val,FRM|NON,1,610|899|412,jersey|water_jug|ashcan,,1,0.760,0.760,person:0.76,0,0,205.0,1224,1632
+VizWiz_train_00007160.jpg,train,BLR|FRM|NON,2,608|475|479,jean|car_mirror|car_wheel,,1,0.838,0.838,car:0.84,0,0,75.3,968,1296
+VizWiz_train_00022394.jpg,train,FRM|NON,1,620|629,laptop|lipstick,laptop,1,0.287,0.287,book:0.29,0,0,191.1,968,1296
+VizWiz_train_00018531.jpg,train,FRM|NON,1,402,acoustic_guitar,,0,,,,0,0,138.0,968,1296
+VizWiz_val_00003233.jpg,val,BLR|FRM,2,692,packet,,1,0.432,0.432,dog:0.43,0,0,101.6,360,480
+VizWiz_train_00016840.jpg,train,FRM,1,761|750,remote_control|quilt,remote,1,0.874,0.874,remote:0.87,1,1,75.0,968,1296
+VizWiz_val_00004351.jpg,val,FRM|NON,1,309,bee,,5,0.322,0.462,person:0.46;donut:0.30;donut:0.30,0,0,170.2,968,1296
+VizWiz_train_00021908.jpg,train,BLR|FRM|ROT,3,692|711,packet|perfume,,0,,,,0,0,49.9,360,480
+VizWiz_train_00022790.jpg,train,FRM|NON,1,692|647,packet|measuring_cup,,5,0.368,0.510,bowl:0.51;bottle:0.43;carrot:0.40,0,0,99.0,968,1296
+VizWiz_train_00001674.jpg,train,FRM|NON,1,987|692,corn|packet,,1,0.308,0.308,bottle:0.31,0,0,110.1,968,1296
+VizWiz_train_00008167.jpg,train,BLR|FRM|ROT,3,692,packet,,2,0.380,0.411,cup:0.41;donut:0.35,0,0,70.0,968,1296
+VizWiz_train_00005095.jpg,train,FRM|NON,1,610|679,jersey|necklace,,1,0.436,0.436,person:0.44,0,0,87.0,1224,1632
+VizWiz_train_00020377.jpg,train,FRM,1,692,packet,,4,0.428,0.535,banana:0.53;banana:0.45;banana:0.41,0,0,118.3,484,648
+VizWiz_train_00006457.jpg,train,FRM|NON,1,923|692,plate|packet,,2,0.327,0.361,donut:0.36;person:0.29,0,0,65.6,968,1296
+VizWiz_train_00019060.jpg,train,FRM|ROT,2,728|692,plastic_bag|packet,,1,0.289,0.289,dining table:0.29,0,0,201.9,1224,1632
+VizWiz_train_00015542.jpg,train,BLR|FRM|ROT,3,692|963|868,packet|pizza|tray,pizza,1,0.338,0.338,tv:0.34,0,0,106.2,1224,1632
+VizWiz_train_00000572.jpg,train,BLR|FRM,2,610|750,jersey|quilt,,3,0.388,0.475,person:0.47;person:0.35;remote:0.34,0,0,43.5,968,1296
+VizWiz_val_00007222.jpg,val,FRM|NON,1,987,corn,,3,0.453,0.573,bottle:0.57;cup:0.47;dining table:0.32,0,0,138.3,1224,1632
+VizWiz_train_00011815.jpg,train,FRM|NON,1,728|692,plastic_bag|packet,,2,0.465,0.467,person:0.47;person:0.46,0,0,151.7,1224,1632
+VizWiz_train_00001852.jpg,train,BLR|FRM,2,728,plastic_bag,,1,0.378,0.378,person:0.38,0,0,166.4,1224,1632
+VizWiz_train_00001962.jpg,train,BLR|FRM|NON,2,664|629,monitor|lipstick,tv,1,0.523,0.523,tv:0.52,1,1,89.6,968,1296
+VizWiz_val_00002150.jpg,val,FRM,1,711,perfume,,6,0.464,0.875,laptop:0.88;chair:0.58;person:0.42,0,0,153.3,1224,1632
+VizWiz_train_00006222.jpg,train,FRM|ROT,2,827|692,stove|packet,oven,2,0.381,0.431,dining table:0.43;cup:0.33,0,0,90.7,1936,2592
+VizWiz_train_00008011.jpg,train,BLR|DRK|FRM,3,750,quilt,,1,0.455,0.455,person:0.45,0,0,57.3,968,1296
+VizWiz_val_00003212.jpg,val,BLR|FRM,2,827,stove,oven,0,,,,0,0,84.7,1224,1632
+VizWiz_train_00001721.jpg,train,FRM|ROT|NON,2,692,packet,,1,0.356,0.356,book:0.36,0,0,179.0,1224,1632
+VizWiz_train_00004948.jpg,train,FRM|NON,1,673|470,mouse|candle,mouse,3,0.330,0.351,toilet:0.35;sink:0.35;toilet:0.29,0,0,123.9,1224,1632
+VizWiz_train_00018175.jpg,train,FRM,1,748,purse,handbag,0,,,,0,0,106.2,360,480
+VizWiz_train_00007951.jpg,train,FRM|NON,1,692,packet,,1,0.272,0.272,person:0.27,0,0,82.3,968,1296
+VizWiz_train_00020364.jpg,train,FRM|NON,1,761,remote_control,remote,0,,,,0,0,284.6,968,1296
+VizWiz_train_00007098.jpg,train,FRM|NON,1,907,wine_bottle,bottle,0,,,,0,0,127.0,1224,1632
+VizWiz_train_00008923.jpg,train,FRM|ROT,2,692,packet,,3,0.650,0.766,cell phone:0.77;person:0.75;person:0.43,0,0,100.7,968,1296
+VizWiz_train_00002473.jpg,train,FRM|ROT,2,883,vase,vase,2,0.286,0.319,vase:0.32;vase:0.25,1,1,181.5,1936,2592
+VizWiz_val_00005038.jpg,val,FRM,1,806,sock,,0,,,,0,0,46.4,1224,1632
+VizWiz_train_00000190.jpg,train,FRM,1,664|632,monitor|loudspeaker,tv,2,0.336,0.397,chair:0.40;chair:0.27,0,0,141.1,968,1296
+VizWiz_train_00009067.jpg,train,FRM,1,600|692|949,hook|packet|strawberry,,1,0.634,0.634,book:0.63,0,0,173.5,1224,1632
+VizWiz_train_00001847.jpg,train,FRM|NON,1,841|610,sweatshirt|jersey,,0,,,,0,0,154.2,968,1296
+VizWiz_val_00007161.jpg,val,FRM,1,579,grand_piano,,0,,,,0,0,135.8,968,1296
+VizWiz_train_00006103.jpg,train,FRM|NON,1,750,quilt,,1,0.505,0.505,bed:0.51,0,0,242.4,720,960
+VizWiz_val_00006743.jpg,val,FRM|NON,1,508|631,computer_keyboard|lotion,keyboard,1,0.838,0.838,keyboard:0.84,1,1,177.0,968,1296
+VizWiz_train_00016516.jpg,train,FRM,1,968|478|534,cup|carton|dishwasher,cup,1,0.409,0.409,oven:0.41,0,0,188.0,768,1024
+VizWiz_train_00011784.jpg,train,BLR|FRM,2,620,laptop,laptop,1,0.363,0.363,tv:0.36,0,0,85.3,968,1296
+VizWiz_train_00016437.jpg,train,BLR|FRM|ROT,3,664|526,monitor|desk,tv,1,0.537,0.537,tv:0.54,1,1,58.0,1936,2592
+VizWiz_val_00000224.jpg,val,BLR|FRM,2,487,cellular_telephone,cell phone,1,0.931,0.931,cell phone:0.93,1,1,235.5,968,1296
+VizWiz_train_00014411.jpg,train,FRM|NON,1,608,jean,,2,0.680,0.818,person:0.82;person:0.54,0,0,138.6,1224,1632
+VizWiz_val_00002156.jpg,val,BLR|DRK|FRM,3,692,packet,,0,,,,0,0,188.7,360,480
+VizWiz_train_00006492.jpg,train,BLR|FRM|NON,2,664,monitor,tv,1,0.888,0.888,tv:0.89,1,1,157.6,768,1024
+VizWiz_train_00004505.jpg,train,FRM|ROT,2,928|478,ice_cream|carton,,1,0.729,0.729,clock:0.73,0,0,181.7,968,1296
+VizWiz_train_00010125.jpg,train,BLR|FRM|NON,2,951,lemon,,2,0.433,0.484,cup:0.48;person:0.38,0,0,157.6,768,1024
+VizWiz_val_00003009.jpg,val,FRM|ROT,2,664,monitor,tv,1,0.550,0.550,umbrella:0.55,0,0,118.8,1224,1632
+VizWiz_train_00017732.jpg,train,FRM|ROT,2,610,jersey,,0,,,,0,0,112.2,968,1296
+VizWiz_train_00009882.jpg,train,FRM,1,968|620,cup|laptop,cup|laptop,1,0.823,0.823,person:0.82,0,0,147.4,968,1296
+VizWiz_train_00013523.jpg,train,FRM|NON,1,721|963|692|453,pillow|pizza|packet|bookcase,pizza,6,0.528,0.923,pizza:0.92;person:0.56;person:0.55,1,1,105.9,1224,1632
+VizWiz_train_00008916.jpg,train,BLR|FRM|NON,2,487,cellular_telephone,cell phone,1,0.287,0.287,person:0.29,0,0,76.3,360,480
+VizWiz_train_00011668.jpg,train,FRM,1,610,jersey,,1,0.880,0.880,person:0.88,0,0,304.3,1224,1632
+VizWiz_train_00012703.jpg,train,FRM|NON,1,487,cellular_telephone,cell phone,1,0.921,0.921,cell phone:0.92,1,1,189.6,1936,2592
+VizWiz_train_00014155.jpg,train,FRM|NON,1,843|292,swing|tiger,,0,,,,0,0,215.9,1224,1632
+VizWiz_train_00003115.jpg,train,BLR|NON,1,968,cup,cup,5,0.587,0.789,dining table:0.79;cup:0.76;cup:0.71,1,1,101.0,1224,1632
+VizWiz_val_00004641.jpg,val,NON,0,750|494,quilt|chime,,4,0.533,0.854,bed:0.85;dog:0.72;dog:0.31,0,0,235.8,1224,1632
+VizWiz_train_00012778.jpg,train,NON,0,487,cellular_telephone,cell phone,0,,,,0,0,3760.5,320,480
+VizWiz_train_00003995.jpg,train,NON,0,907|508,wine_bottle|computer_keyboard,bottle|keyboard,2,0.634,0.928,bottle:0.93;bottle:0.34,1,1,304.9,1224,1632
+VizWiz_train_00020570.jpg,train,BLR|FRM|NON,2,470,candle,,0,,,,0,0,189.8,1224,1632
+VizWiz_train_00012428.jpg,train,NON,0,487,cellular_telephone,cell phone,1,0.622,0.622,keyboard:0.62,0,0,547.4,320,568
+VizWiz_train_00020992.jpg,train,NON,0,968|504,cup|coffee_mug,cup,2,0.646,0.933,cup:0.93;dining table:0.36,1,1,100.8,968,1296
+VizWiz_train_00012417.jpg,train,FRM|NON,1,737|923,pop_bottle|plate,bottle,3,0.486,0.559,fork:0.56;dining table:0.48;bottle:0.42,1,1,101.7,968,1296
+VizWiz_train_00022357.jpg,train,NON,0,907,wine_bottle,bottle,1,0.622,0.622,bottle:0.62,1,1,214.0,1224,1632
+VizWiz_train_00011460.jpg,train,BLR|NON,1,526,desk,,1,0.725,0.725,cell phone:0.73,0,0,217.8,968,1296
+VizWiz_train_00016172.jpg,train,NON,0,879,umbrella,umbrella,2,0.837,0.906,umbrella:0.91;surfboard:0.77,1,1,79.8,968,1296
+VizWiz_train_00021155.jpg,train,NON,0,968,cup,cup,1,0.391,0.391,person:0.39,0,0,63.1,968,1296
+VizWiz_train_00021559.jpg,train,NON,0,893,wallet,,1,0.772,0.772,cell phone:0.77,0,0,305.0,968,1296
+VizWiz_train_00012999.jpg,train,BLR|FRM|NON,2,692,packet,,4,0.534,0.699,carrot:0.70;carrot:0.65;carrot:0.45,0,0,142.2,968,1296
+VizWiz_val_00005219.jpg,val,FRM|NON,1,620,laptop,laptop,2,0.588,0.703,tv:0.70;keyboard:0.47,0,0,156.8,968,1296
+VizWiz_train_00002424.jpg,train,NON,0,440|837|950,beer_bottle|sunglasses|orange,bottle|orange,6,0.590,0.804,dining table:0.80;chair:0.78;bottle:0.74,1,1,204.5,1224,1632
+VizWiz_val_00007198.jpg,val,NON,0,923|700,plate|paper_towel,,2,0.563,0.856,bottle:0.86;orange:0.27,0,0,67.0,360,480
+VizWiz_val_00000190.jpg,val,BLR|FRM|NON,2,549,envelope,,0,,,,0,0,43.4,1936,2592
+VizWiz_val_00002386.jpg,val,NON,0,651|910,microwave|wooden_spoon,microwave|spoon,2,0.811,0.909,microwave:0.91;bottle:0.71,1,1,106.1,968,1296
+VizWiz_val_00006231.jpg,val,FRM|NON,1,692|951,packet|lemon,,0,,,,0,0,79.4,968,1296
+VizWiz_val_00003468.jpg,val,BLR|FRM|NON,2,619|620|846,lampshade|laptop|table_lamp,laptop,3,0.440,0.655,chair:0.66;bird:0.37;chair:0.29,0,0,117.2,1224,1632
+VizWiz_val_00004698.jpg,val,NON,0,897,washer,,2,0.365,0.467,mouse:0.47;clock:0.26,0,0,106.7,1224,1632
+VizWiz_train_00001975.jpg,train,FRM|NON,1,711,perfume,,10,0.502,0.782,bottle:0.78;bottle:0.78;bottle:0.63,0,0,196.9,968,1296
+VizWiz_train_00008416.jpg,train,NON,0,631,lotion,,0,,,,0,0,129.6,968,1296
+VizWiz_train_00020706.jpg,train,BLR|FRM|NON,2,478,carton,,1,0.466,0.466,toilet:0.47,0,0,203.7,968,1296
+VizWiz_train_00021057.jpg,train,BLR|NON,1,659,mixing_bowl,bowl,3,0.427,0.734,banana:0.73;dining table:0.28;bowl:0.27,1,1,124.3,360,480
+VizWiz_val_00004620.jpg,val,FRM|NON,1,827|556,stove|fire_screen,oven,1,0.803,0.803,refrigerator:0.80,0,0,87.8,968,1296
+VizWiz_train_00013255.jpg,train,NON,0,968|846,cup|table_lamp,cup,7,0.498,0.743,bottle:0.74;cup:0.57;cup:0.56,1,1,134.5,968,1296
+VizWiz_train_00000254.jpg,train,FRM|NON,1,610,jersey,,1,0.462,0.462,horse:0.46,0,0,73.0,968,1296
+VizWiz_train_00008049.jpg,train,BLR|NON,1,737,pop_bottle,bottle,3,0.603,0.888,bottle:0.89;tv:0.57;microwave:0.35,1,1,71.8,1224,1632
+VizWiz_train_00022663.jpg,train,NON,0,673,mouse,mouse,1,0.464,0.464,mouse:0.46,1,1,171.7,968,1296
+VizWiz_train_00012593.jpg,train,NON,0,919,street_sign,,0,,,,0,0,41.1,484,648
+VizWiz_train_00017317.jpg,train,NON,0,488|679,chain|necklace,,1,0.657,0.657,tennis racket:0.66,0,0,203.8,360,480
+VizWiz_train_00000987.jpg,train,NON,0,706|559,patio|folding_chair,chair,3,0.678,0.874,chair:0.87;dog:0.86;dining table:0.30,1,1,102.8,1224,1632
+VizWiz_val_00001054.jpg,val,NON,0,664|620|527,monitor|laptop|desktop_computer,laptop|tv,0,,,,0,0,98.2,968,1296
+VizWiz_train_00005376.jpg,train,NON,0,610,jersey,,0,,,,0,0,217.7,968,1296
+VizWiz_train_00008616.jpg,train,NON,0,711,perfume,,2,0.653,0.812,person:0.81;bottle:0.49,0,0,169.6,1224,1632
+VizWiz_train_00011143.jpg,train,FRM|NON,1,750,quilt,,0,,,,0,0,84.6,968,1296
+VizWiz_train_00005926.jpg,train,FRM|NON,1,692,packet,,1,0.258,0.258,refrigerator:0.26,0,0,220.0,1224,1632
+VizWiz_train_00015813.jpg,train,BLR|FRM|NON,2,527,desktop_computer,tv,1,0.656,0.656,sports ball:0.66,0,0,60.4,968,1296
+VizWiz_val_00000828.jpg,val,BLR|NON,1,721,pillow,,2,0.461,0.499,remote:0.50;donut:0.42,0,0,120.4,360,480
+VizWiz_train_00002295.jpg,train,NON,0,968|700,cup|paper_towel,cup,2,0.547,0.706,cup:0.71;bottle:0.39,1,1,103.2,1224,1632
+VizWiz_val_00000784.jpg,val,NON,0,664,monitor,tv,1,0.340,0.340,person:0.34,0,0,158.3,1224,1632
+VizWiz_val_00006368.jpg,val,NON,0,409,analog_clock,clock,1,0.387,0.387,book:0.39,0,0,128.9,360,480
+VizWiz_train_00004426.jpg,train,FRM|NON,1,632|504|968,loudspeaker|coffee_mug|cup,cup,3,0.612,0.963,cup:0.96;laptop:0.53;dining table:0.34,1,1,78.5,1224,1632
+VizWiz_train_00011239.jpg,train,NON,0,968,cup,cup,1,0.576,0.576,dining table:0.58,0,0,80.0,1224,1632
+VizWiz_train_00009089.jpg,train,NON,0,488,chain,,0,,,,0,0,75.2,968,1296
+VizWiz_train_00022949.jpg,train,NON,0,673,mouse,mouse,0,,,,0,0,55.3,968,1296
+VizWiz_train_00012624.jpg,train,NON,0,834|851|951,suit|television|lemon,tv,2,0.680,0.804,cup:0.80;dining table:0.56,0,0,58.6,968,1296
+VizWiz_val_00006367.jpg,val,FRM|NON,1,620|508,laptop|computer_keyboard,keyboard|laptop,0,,,,0,0,125.2,1224,1632
+VizWiz_val_00003951.jpg,val,NON,0,631,lotion,,1,0.599,0.599,vase:0.60,0,0,153.8,1224,1632
+VizWiz_train_00015376.jpg,train,NON,0,896|804|631,washbasin|soap_dispenser|lotion,sink,1,0.251,0.251,person:0.25,0,0,126.1,1224,1632
+VizWiz_train_00003427.jpg,train,NON,0,738|846,pot|table_lamp,,3,0.431,0.482,dining table:0.48;chair:0.45;chair:0.36,0,0,93.1,1224,1632
+VizWiz_val_00003236.jpg,val,NON,0,968|504,cup|coffee_mug,cup,1,0.850,0.850,bottle:0.85,0,0,77.3,968,1296
+VizWiz_train_00001247.jpg,train,BLR|FRM|NON,2,907|773,wine_bottle|saltshaker,bottle,3,0.717,0.876,chair:0.88;dining table:0.79;bottle:0.49,1,1,102.2,1224,1632
+VizWiz_val_00002725.jpg,val,FRM|NON,1,761,remote_control,remote,1,0.847,0.847,remote:0.85,1,1,146.7,1224,1632
+VizWiz_val_00002179.jpg,val,FRM|NON,1,470,candle,,3,0.396,0.487,suitcase:0.49;person:0.44;person:0.26,0,0,98.4,360,480
+VizWiz_train_00009258.jpg,train,FRM|NON,1,923,plate,,1,0.349,0.349,knife:0.35,0,0,193.8,968,1296
+VizWiz_val_00006934.jpg,val,BLR|ROT|NON,2,531,digital_watch,,1,0.436,0.436,person:0.44,0,0,186.0,1224,1632
+VizWiz_train_00015009.jpg,train,NON,0,968|504,cup|coffee_mug,cup,4,0.478,0.886,cup:0.89;spoon:0.42;dining table:0.32,1,1,53.4,320,480
+VizWiz_train_00002769.jpg,train,ROT|NON,1,706|738,patio|pot,,2,0.557,0.745,dog:0.75;potted plant:0.37,0,0,165.9,1936,2592
+VizWiz_train_00016650.jpg,train,FRM|NON,1,851,television,tv,2,0.545,0.647,person:0.65;tv:0.44,1,1,104.2,612,816
+VizWiz_train_00002550.jpg,train,NON,0,504,coffee_mug,cup,4,0.444,0.848,cup:0.85;chair:0.37;book:0.30,1,1,121.6,1224,1632
+VizWiz_train_00016959.jpg,train,NON,0,608,jean,,2,0.576,0.874,cat:0.87;banana:0.28,0,0,43.2,1224,1632
+VizWiz_val_00000462.jpg,val,NON,0,620|629,laptop|lipstick,laptop,2,0.358,0.402,tv:0.40;book:0.31,0,0,90.7,1224,1632
+VizWiz_train_00011973.jpg,train,NON,0,750|527,quilt|desktop_computer,tv,1,0.888,0.888,cat:0.89,0,0,131.8,1224,1632
+VizWiz_train_00004502.jpg,train,NON,0,474,cardigan,,1,0.472,0.472,person:0.47,0,0,53.3,1224,1632
+VizWiz_train_00020530.jpg,train,NON,0,750,quilt,,2,0.739,0.794,cat:0.79;bed:0.68,0,0,102.6,1224,1632
+VizWiz_train_00014953.jpg,train,BLR|NON,1,631,lotion,,1,0.720,0.720,bottle:0.72,0,0,148.4,968,1296
+VizWiz_train_00016082.jpg,train,NON,0,632|754|530|485|898,loudspeaker|radio|digital_clock|CD_player|water_bottle,bottle|clock,1,0.734,0.734,cell phone:0.73,0,0,99.1,1224,1632
+VizWiz_train_00011710.jpg,train,NON,0,721|750,pillow|quilt,,3,0.687,0.870,dog:0.87;bed:0.85;person:0.34,0,0,156.9,1224,1632
+VizWiz_train_00022723.jpg,train,NON,0,778,scale,,2,0.418,0.567,scissors:0.57;scissors:0.27,0,0,84.2,1224,1632
+VizWiz_val_00000410.jpg,val,FRM|NON,1,664,monitor,tv,0,,,,0,0,99.9,1224,1632
+VizWiz_val_00001139.jpg,val,FRM|NON,1,620,laptop,laptop,4,0.376,0.429,person:0.43;person:0.41;knife:0.39,0,0,120.3,1224,1632
+VizWiz_train_00018190.jpg,train,NON,0,968|868,cup|tray,cup,4,0.684,0.802,cup:0.80;cup:0.80;bowl:0.73,1,1,86.2,1224,1632
+VizWiz_train_00008978.jpg,train,ROT|NON,1,868,tray,,3,0.294,0.327,person:0.33;donut:0.30;donut:0.26,0,0,118.0,1224,1632
+VizWiz_train_00011703.jpg,train,BLR|NON,1,692,packet,,0,,,,0,0,171.8,360,480
+VizWiz_train_00002241.jpg,train,NON,0,968|504,cup|coffee_mug,cup,1,0.737,0.737,bowl:0.74,0,0,99.2,1224,1632
+VizWiz_train_00011354.jpg,train,NON,0,487,cellular_telephone,cell phone,2,0.708,0.954,cell phone:0.95;person:0.46,1,1,100.2,968,1296
+VizWiz_train_00003157.jpg,train,BLR|FRM|NON,2,692,packet,,3,0.513,0.860,book:0.86;teddy bear:0.36;cup:0.32,0,0,162.8,1224,1632
+VizWiz_train_00011982.jpg,train,NON,0,851,television,tv,1,0.382,0.382,tv:0.38,1,1,162.1,968,1296
+VizWiz_train_00020713.jpg,train,BLR|NON,1,487,cellular_telephone,cell phone,1,0.792,0.792,cell phone:0.79,1,1,113.4,360,480
+VizWiz_train_00003138.jpg,train,FRM|NON,1,716,picket_fence,,0,,,,0,0,158.7,968,1296
+VizWiz_train_00006969.jpg,train,NON,0,711,perfume,,0,,,,0,0,133.5,1224,1632
+VizWiz_train_00021741.jpg,train,NON,0,761,remote_control,remote,1,0.933,0.933,remote:0.93,1,1,114.8,968,1296
+VizWiz_train_00010990.jpg,train,NON,0,737|905|765|831,pop_bottle|window_shade|rocking_chair|studio_couch,bottle|chair|couch,5,0.536,0.929,couch:0.93;chair:0.67;chair:0.44,1,1,249.5,968,1296
+VizWiz_train_00012149.jpg,train,NON,0,968,cup,cup,3,0.559,0.862,person:0.86;keyboard:0.41;bottle:0.40,0,0,130.5,968,1296
+VizWiz_train_00018406.jpg,train,NON,0,572|949|951,goblet|strawberry|lemon,wine glass,7,0.536,0.941,wine glass:0.94;bottle:0.70;person:0.61,1,1,119.5,1224,1632
+VizWiz_train_00011240.jpg,train,NON,0,950,orange,orange,3,0.598,0.857,orange:0.86;apple:0.64;dining table:0.30,1,1,58.9,968,1296
+VizWiz_val_00005253.jpg,val,BLR|NON,1,968,cup,cup,2,0.573,0.827,cup:0.83;vase:0.32,1,1,117.2,1224,1632
+VizWiz_train_00010909.jpg,train,FRM|NON,1,898,water_bottle,bottle,1,0.718,0.718,bottle:0.72,1,1,203.0,968,1296
+VizWiz_train_00002601.jpg,train,NON,0,760,refrigerator,refrigerator,0,,,,0,0,121.3,360,480
+VizWiz_train_00001252.jpg,train,NON,0,504|761,coffee_mug|remote_control,cup|remote,3,0.683,0.877,cup:0.88;cup:0.65;bottle:0.52,1,1,68.3,1224,1632
+VizWiz_train_00001595.jpg,train,NON,0,610,jersey,,0,,,,0,0,118.9,1936,2592
+VizWiz_train_00014272.jpg,train,FRM|NON,1,620|629,laptop|lipstick,laptop,1,0.865,0.865,laptop:0.87,1,1,162.0,968,1296
+VizWiz_train_00007387.jpg,train,NON,0,706,patio,,1,0.774,0.774,cup:0.77,0,0,166.8,968,1296
+VizWiz_train_00003578.jpg,train,NON,0,923,plate,,0,,,,0,0,117.3,968,1296
+VizWiz_train_00004902.jpg,train,NON,0,553|478,file|carton,,2,0.651,0.830,mouse:0.83;suitcase:0.47,0,0,165.5,1224,1632
+VizWiz_train_00001383.jpg,train,NON,0,673|605|487,mouse|iPod|cellular_telephone,cell phone|mouse,3,0.600,0.942,cell phone:0.94;mouse:0.60;cell phone:0.26,1,1,120.5,968,1296
+VizWiz_val_00002688.jpg,val,NON,0,968|692,cup|packet,cup,1,0.449,0.449,person:0.45,0,0,93.9,968,1296
+VizWiz_train_00013491.jpg,train,ROT|NON,1,526,desk,,2,0.568,0.768,cell phone:0.77;cell phone:0.37,0,0,190.9,1536,2048
+VizWiz_train_00015168.jpg,train,NON,0,968|504,cup|coffee_mug,cup,0,,,,0,0,290.5,968,1296
+VizWiz_train_00017539.jpg,train,NON,0,664,monitor,tv,0,,,,0,0,111.9,968,1296
+VizWiz_val_00007270.jpg,val,NON,0,706|716,patio|picket_fence,,2,0.528,0.778,bicycle:0.78;umbrella:0.28,0,0,148.9,1224,1632
+VizWiz_train_00019427.jpg,train,FRM|ROT|NON,2,508,computer_keyboard,keyboard,2,0.863,0.990,mouse:0.99;keyboard:0.73,1,1,83.6,1224,1632
+VizWiz_val_00003463.jpg,val,FRM|NON,1,664,monitor,tv,0,,,,0,0,110.5,360,480
+VizWiz_train_00021924.jpg,train,NON,0,745,projector,,2,0.715,0.933,chair:0.93;dining table:0.50,0,0,88.0,1224,1632
+VizWiz_val_00000004.jpg,val,NON,0,664,monitor,tv,0,,,,0,0,72.5,968,1296
+VizWiz_train_00013287.jpg,train,FRM|NON,1,608|907,jean|wine_bottle,bottle,1,0.397,0.397,bottle:0.40,1,1,113.6,1224,1632
+VizWiz_train_00000871.jpg,train,FRM|NON,1,721,pillow,,0,,,,0,0,212.7,968,1296
+VizWiz_val_00003650.jpg,val,NON,0,979,valley,,0,,,,0,0,32.5,968,1296
+VizWiz_train_00009590.jpg,train,FRM|ROT|NON,2,968,cup,cup,1,0.553,0.553,frisbee:0.55,0,0,185.8,1224,1632
+VizWiz_train_00022990.jpg,train,NON,0,737,pop_bottle,bottle,2,0.477,0.660,person:0.66;frisbee:0.29,0,0,136.3,1224,1632
+VizWiz_train_00004686.jpg,train,FRM|NON,1,534,dishwasher,,1,0.524,0.524,suitcase:0.52,0,0,136.3,1224,1632
+VizWiz_train_00010480.jpg,train,NON,0,664|748|572,monitor|purse|goblet,handbag|tv|wine glass,2,0.365,0.434,suitcase:0.43;backpack:0.30,0,0,115.8,1224,1632
+VizWiz_train_00017944.jpg,train,ROT|NON,1,692|750,packet|quilt,,1,0.462,0.462,toilet:0.46,0,0,186.5,1224,1632
+VizWiz_train_00005732.jpg,train,NON,0,664|620,monitor|laptop,laptop|tv,0,,,,0,0,86.0,768,1024
+VizWiz_val_00007090.jpg,val,BLR|NON,1,664|851,monitor|television,tv,3,0.620,0.776,tv:0.78;tv:0.72;person:0.36,1,1,94.2,768,1024
+VizWiz_train_00010718.jpg,train,BLR|FRM|NON,2,631,lotion,,0,,,,0,0,188.6,968,1296
+VizWiz_train_00013851.jpg,train,NON,0,761,remote_control,remote,2,0.673,0.910,remote:0.91;person:0.44,1,1,167.6,968,1296
+VizWiz_train_00002318.jpg,train,FRM|NON,1,968,cup,cup,2,0.528,0.559,cup:0.56;bottle:0.50,1,1,151.3,968,1296
+VizWiz_train_00020323.jpg,train,BLR|FRM|NON,2,728|692,plastic_bag|packet,,2,0.313,0.360,pizza:0.36;dining table:0.27,0,0,71.2,968,1296
+VizWiz_train_00003366.jpg,train,BLR|NON,1,827|692,stove|packet,oven,1,0.316,0.316,parking meter:0.32,0,0,220.6,384,512
+VizWiz_val_00005274.jpg,val,BLR|FRM|NON,2,721,pillow,,3,0.448,0.528,person:0.53;person:0.51;book:0.30,0,0,99.7,968,1296
+VizWiz_train_00018628.jpg,train,NON,0,947,mushroom,,0,,,,0,0,43.5,968,1296
+VizWiz_train_00004924.jpg,train,FRM|NON,1,987,corn,,2,0.286,0.289,person:0.29;bowl:0.28,0,0,46.2,768,1024
+VizWiz_train_00014872.jpg,train,NON,0,659|868,mixing_bowl|tray,bowl,4,0.584,0.841,bowl:0.84;fork:0.83;bowl:0.40,1,1,188.2,768,1024
+VizWiz_train_00015784.jpg,train,FRM|NON,1,750,quilt,,1,0.858,0.858,bed:0.86,0,0,81.0,484,648
+VizWiz_train_00008864.jpg,train,FRM|NON,1,608,jean,,2,0.483,0.648,person:0.65;person:0.32,0,0,197.7,968,1296
+VizWiz_train_00021358.jpg,train,NON,0,664,monitor,tv,1,0.263,0.263,book:0.26,0,0,191.5,360,480
+VizWiz_train_00021094.jpg,train,NON,0,487,cellular_telephone,cell phone,1,0.757,0.757,cell phone:0.76,1,1,215.7,1224,1632
+VizWiz_train_00022260.jpg,train,FRM|NON,1,897,washer,,1,0.479,0.479,toilet:0.48,0,0,173.5,968,1296
+VizWiz_val_00006180.jpg,val,NON,0,531,digital_watch,,2,0.582,0.830,cell phone:0.83;person:0.33,0,0,319.7,1224,1632
+VizWiz_train_00006572.jpg,train,FRM|NON,1,737,pop_bottle,bottle,1,0.622,0.622,cup:0.62,0,0,158.9,1224,1632
+VizWiz_train_00014243.jpg,train,FRM|NON,1,664,monitor,tv,0,,,,0,0,124.7,1224,1632
+VizWiz_val_00005914.jpg,val,BLR|NON,1,679,necklace,,0,,,,0,0,157.8,1224,1632
+VizWiz_train_00018543.jpg,train,FRM|NON,1,549,envelope,,1,0.643,0.643,person:0.64,0,0,102.7,180,240
+VizWiz_train_00019988.jpg,train,FRM|NON,1,664,monitor,tv,1,0.276,0.276,tv:0.28,1,1,52.2,968,1296
+VizWiz_val_00003549.jpg,val,NON,0,626|572|470,lighter|goblet|candle,wine glass,5,0.530,0.843,wine glass:0.84;cup:0.78;dining table:0.46,1,1,57.8,1224,1632
+VizWiz_train_00015383.jpg,train,NON,0,692,packet,,2,0.620,0.665,person:0.67;book:0.57,0,0,126.1,1224,1632
+VizWiz_train_00021373.jpg,train,FRM|NON,1,841|610,sweatshirt|jersey,,2,0.397,0.475,person:0.48;bed:0.32,0,0,148.7,968,1296
+VizWiz_train_00016305.jpg,train,FRM|NON,1,608,jean,,1,0.621,0.621,person:0.62,0,0,86.3,1224,1632
+VizWiz_train_00020467.jpg,train,NON,0,728|692,plastic_bag|packet,,2,0.466,0.649,dog:0.65;dining table:0.28,0,0,208.9,968,1296
+VizWiz_train_00000671.jpg,train,NON,0,692,packet,,2,0.505,0.539,bed:0.54;bed:0.47,0,0,105.2,968,1296
+VizWiz_val_00001079.jpg,val,NON,0,664,monitor,tv,1,0.679,0.679,tv:0.68,1,1,153.2,968,1296
+VizWiz_train_00000111.jpg,train,NON,0,440,beer_bottle,bottle,3,0.610,0.885,bottle:0.89;person:0.65;person:0.30,1,1,126.9,1224,1632
+VizWiz_train_00011499.jpg,train,FRM|NON,1,721,pillow,,1,0.271,0.271,suitcase:0.27,0,0,129.3,968,1296
+VizWiz_val_00007590.jpg,val,NON,0,817|487,sports_car|cellular_telephone,car|cell phone,3,0.850,0.887,car:0.89;car:0.88;car:0.78,1,1,169.9,320,480
+VizWiz_train_00007089.jpg,train,NON,0,487,cellular_telephone,cell phone,0,,,,0,0,254.5,384,512
+VizWiz_train_00015086.jpg,train,NON,0,664,monitor,tv,4,0.586,0.737,tv:0.74;book:0.61;mouse:0.59,1,1,90.4,1224,1632
+VizWiz_train_00011145.jpg,train,BLR|NON,1,464|711,buckle|perfume,,1,0.874,0.874,person:0.87,0,0,174.3,1224,1632
+VizWiz_train_00011874.jpg,train,FRM|NON,1,692|550,packet|espresso_maker,,0,,,,0,0,114.2,968,1296
+VizWiz_train_00006559.jpg,train,NON,0,700,paper_towel,,1,0.726,0.726,bottle:0.73,0,0,106.0,1224,1632
+VizWiz_train_00001599.jpg,train,NON,0,664|898,monitor|water_bottle,bottle|tv,1,0.907,0.907,bottle:0.91,1,1,61.8,968,1296
+VizWiz_val_00000950.jpg,val,NON,0,620,laptop,laptop,2,0.320,0.330,keyboard:0.33;tv:0.31,0,0,106.5,768,1024
+VizWiz_train_00003861.jpg,train,NON,0,692,packet,,1,0.298,0.298,book:0.30,0,0,124.2,968,1296
+VizWiz_train_00002238.jpg,train,NON,0,894,wardrobe,,1,0.848,0.848,bottle:0.85,0,0,141.8,1224,1632
+VizWiz_train_00012865.jpg,train,BLR|NON,1,487,cellular_telephone,cell phone,1,0.792,0.792,cell phone:0.79,1,1,78.7,360,480
+VizWiz_val_00002966.jpg,val,BLR|NON,1,883|620|629,vase|laptop|lipstick,laptop|vase,5,0.508,0.819,tv:0.82;vase:0.71;potted plant:0.45,1,1,81.0,968,1296
+VizWiz_val_00000292.jpg,val,BLR|ROT|NON,2,664|620|508,monitor|laptop|computer_keyboard,keyboard|laptop|tv,3,0.522,0.912,laptop:0.91;laptop:0.36;chair:0.30,1,1,243.7,720,960
+VizWiz_val_00006037.jpg,val,FRM|NON,1,620,laptop,laptop,1,0.814,0.814,keyboard:0.81,0,0,203.7,968,1296
+VizWiz_train_00013457.jpg,train,BLR|FRM|NON,2,987,corn,,1,0.522,0.522,bottle:0.52,0,0,124.6,968,1296
+VizWiz_train_00018959.jpg,train,BRT|DRK|NON,2,402|620|629,acoustic_guitar|laptop|lipstick,laptop,1,0.866,0.866,laptop:0.87,1,1,265.5,968,1296
+VizWiz_train_00019705.jpg,train,FRM|ROT|NON,2,478,carton,,1,0.637,0.637,bowl:0.64,0,0,90.2,1936,2592
+VizWiz_train_00012663.jpg,train,BLR|NON,1,923|692,plate|packet,,1,0.303,0.303,book:0.30,0,0,108.0,968,1296
+VizWiz_train_00012691.jpg,train,NON,0,475|733,car_mirror|pole,,1,0.695,0.695,car:0.69,0,0,97.3,968,1296
+VizWiz_train_00023183.jpg,train,FRM|NON,1,508,computer_keyboard,keyboard,2,0.776,0.920,keyboard:0.92;cell phone:0.63,1,1,87.8,360,480
+VizWiz_val_00001645.jpg,val,FRM|NON,1,898,water_bottle,bottle,1,0.812,0.812,bottle:0.81,1,1,109.3,1224,1632
+VizWiz_train_00002499.jpg,train,FRM|NON,1,610,jersey,,1,0.863,0.863,person:0.86,0,0,36.6,1224,1632
+VizWiz_val_00004062.jpg,val,NON,0,721|610,pillow|jersey,,1,0.598,0.598,bed:0.60,0,0,61.1,968,1296
+VizWiz_train_00014762.jpg,train,NON,0,608,jean,,1,0.369,0.369,cup:0.37,0,0,103.8,1224,1632
+VizWiz_train_00003298.jpg,train,FRM|NON,1,827,stove,oven,1,0.640,0.640,clock:0.64,0,0,60.5,1224,1632
+VizWiz_train_00002399.jpg,train,FRM|NON,1,737,pop_bottle,bottle,2,0.683,0.697,bottle:0.70;cup:0.67,1,1,117.9,968,1296
+VizWiz_val_00000080.jpg,val,FRM|NON,1,851,television,tv,1,0.725,0.725,tv:0.73,1,1,50.1,968,1296
+VizWiz_train_00010554.jpg,train,NON,0,600|610|894,hook|jersey|wardrobe,,4,0.430,0.600,bed:0.60;bed:0.44;suitcase:0.40,0,0,143.5,1224,1632
+VizWiz_train_00019642.jpg,train,NON,0,728|550,plastic_bag|espresso_maker,,2,0.369,0.399,scissors:0.40;suitcase:0.34,0,0,192.9,1224,1632
+VizWiz_train_00008353.jpg,train,BLR|NON,1,805,soccer_ball,sports ball,2,0.846,0.881,person:0.88;sports ball:0.81,1,1,252.6,160,160
+VizWiz_train_00019731.jpg,train,NON,0,545|851,electric_fan|television,tv,3,0.696,0.894,tv:0.89;chair:0.79;tv:0.40,1,1,185.5,968,1296
+VizWiz_val_00001187.jpg,val,NON,0,750,quilt,,1,0.660,0.660,cake:0.66,0,0,208.9,1224,1632
+VizWiz_train_00005579.jpg,train,NON,0,692|487,packet|cellular_telephone,cell phone,0,,,,0,0,334.1,1224,1632
+VizWiz_val_00002485.jpg,val,NON,0,692,packet,,1,0.628,0.628,book:0.63,0,0,153.2,1224,1632
+VizWiz_train_00019217.jpg,train,NON,0,610,jersey,,1,0.450,0.450,bed:0.45,0,0,131.8,1224,1632
+VizWiz_train_00005049.jpg,train,FRM|NON,1,728,plastic_bag,,1,0.259,0.259,bed:0.26,0,0,54.9,968,1296
+VizWiz_train_00012246.jpg,train,FRM|NON,1,610|453,jersey|bookcase,,6,0.450,0.880,person:0.88;book:0.63;chair:0.35,0,0,68.4,1224,1632
+VizWiz_train_00015283.jpg,train,NON,0,737|851|632|761|923,pop_bottle|television|loudspeaker|remote_control|plate,bottle|remote|tv,3,0.609,0.737,laptop:0.74;dining table:0.67;tv:0.42,1,1,138.9,1224,1632
+VizWiz_val_00005441.jpg,val,BLR|FRM,2,898,water_bottle,bottle,1,0.608,0.608,vase:0.61,0,0,204.2,1224,1632
+VizWiz_train_00013800.jpg,train,ROT,1,530|619,digital_clock|lampshade,clock,1,0.751,0.751,cell phone:0.75,0,0,143.9,1224,1632
+VizWiz_val_00005462.jpg,val,FRM|NON,1,508,computer_keyboard,keyboard,1,0.917,0.917,keyboard:0.92,1,1,130.8,968,1296
+VizWiz_train_00001620.jpg,train,NON,0,827,stove,oven,1,0.429,0.429,bowl:0.43,0,0,139.8,1224,1632
+VizWiz_train_00018238.jpg,train,FRM,1,937|692,broccoli|packet,broccoli,1,0.351,0.351,broccoli:0.35,1,1,124.4,968,1296
+VizWiz_train_00013982.jpg,train,NON,0,922,menu,,0,,,,0,0,70.6,1224,1632
+VizWiz_train_00007558.jpg,train,FRM|NON,1,508,computer_keyboard,keyboard,1,0.827,0.827,keyboard:0.83,1,1,72.8,360,480
+VizWiz_train_00006901.jpg,train,FRM|NON,1,478,carton,,2,0.449,0.611,cup:0.61;person:0.29,0,0,77.3,1224,1632
+VizWiz_train_00015837.jpg,train,NON,0,778,scale,,1,0.912,0.912,person:0.91,0,0,90.9,968,1296
+VizWiz_train_00018762.jpg,train,NON,0,737,pop_bottle,bottle,1,0.361,0.361,cup:0.36,0,0,105.2,360,480
+VizWiz_train_00012800.jpg,train,NON,0,968,cup,cup,1,0.903,0.903,frisbee:0.90,0,0,84.5,1224,1632
+VizWiz_train_00004558.jpg,train,NON,0,750,quilt,,0,,,,0,0,120.5,1224,1632
+VizWiz_train_00010218.jpg,train,NON,0,606,iron,,0,,,,0,0,130.5,1224,1632
+VizWiz_train_00009851.jpg,train,NON,0,418,ballpoint,,2,0.300,0.349,cell phone:0.35;toothbrush:0.25,0,0,78.1,1224,1632
+VizWiz_val_00005211.jpg,val,FRM|NON,1,588,hamper,,3,0.649,0.912,cup:0.91;cup:0.54;dining table:0.50,0,0,175.3,968,1296
+VizWiz_val_00000927.jpg,val,FRM,1,664|620,monitor|laptop,laptop|tv,1,0.594,0.594,tv:0.59,1,1,54.4,968,1296
+VizWiz_train_00017306.jpg,train,BLR|FRM,2,894,wardrobe,,3,0.398,0.501,person:0.50;book:0.41;book:0.28,0,0,136.0,1224,1632
+VizWiz_train_00016228.jpg,train,BLR|FRM,2,968,cup,cup,3,0.461,0.635,knife:0.64;bottle:0.45;cup:0.30,1,1,105.6,1224,1632
+VizWiz_val_00006665.jpg,val,BLR|NON,1,851,television,tv,2,0.552,0.831,tv:0.83;bed:0.27,1,1,145.8,1224,1632
+VizWiz_train_00010313.jpg,train,BLR|FRM|ROT,3,937|692,broccoli|packet,broccoli,2,0.364,0.461,broccoli:0.46;broccoli:0.27,1,1,62.0,1224,1632
+VizWiz_val_00005256.jpg,val,NON,0,692|949,packet|strawberry,,3,0.406,0.533,knife:0.53;bottle:0.36;cake:0.32,0,0,83.8,1224,1632
+VizWiz_train_00001542.jpg,train,BLR|FRM,2,692|791,packet|shopping_cart,,0,,,,0,0,118.9,968,1296
+VizWiz_train_00022509.jpg,train,BLR,1,608|711,jean|perfume,,0,,,,0,0,35.9,768,1024
+VizWiz_train_00019464.jpg,train,FRM|NON,1,987|692,corn|packet,,1,0.382,0.382,book:0.38,0,0,194.6,1224,1632
+VizWiz_val_00000505.jpg,val,BLR|FRM,2,664|620,monitor|laptop,laptop|tv,1,0.262,0.262,laptop:0.26,1,1,172.5,1224,1632
+VizWiz_train_00020921.jpg,train,DRK|NON,1,600|619|846,hook|lampshade|table_lamp,,0,,,,0,0,85.2,612,816
+VizWiz_train_00011516.jpg,train,FRM|ROT,2,928|692|949,ice_cream|packet|strawberry,,0,,,,0,0,104.0,968,1296
+VizWiz_val_00001072.jpg,val,ROT|NON,1,664,monitor,tv,0,,,,0,0,116.0,360,480
+VizWiz_train_00014481.jpg,train,NON,0,720,pill_bottle,bottle,4,0.617,0.895,bottle:0.90;person:0.85;apple:0.37,1,1,81.8,1224,1632
+VizWiz_train_00016070.jpg,train,FRM|ROT,2,610|430,jersey|basketball,sports ball,2,0.684,0.845,person:0.85;umbrella:0.52,0,0,112.3,1936,2592
+VizWiz_train_00005559.jpg,train,FRM,1,728,plastic_bag,,0,,,,0,0,79.4,968,1296
+VizWiz_train_00016264.jpg,train,FRM,1,720|809,pill_bottle|soup_bowl,bottle|bowl,3,0.511,0.831,bowl:0.83;dining table:0.39;cup:0.31,1,1,127.7,1224,1632
+VizWiz_train_00022224.jpg,train,BLR|FRM,2,610,jersey,,1,0.716,0.716,person:0.72,0,0,184.1,968,1296
+VizWiz_train_00001152.jpg,train,BLR,1,610,jersey,,1,0.889,0.889,person:0.89,0,0,59.5,968,1296
+VizWiz_train_00010367.jpg,train,FRM,1,664|527,monitor|desktop_computer,tv,1,0.314,0.314,tv:0.31,1,1,147.1,768,1024
+VizWiz_val_00001283.jpg,val,NON,0,841|494,sweatshirt|chime,,0,,,,0,0,129.0,968,1296
+VizWiz_train_00005689.jpg,train,FRM|NON,1,664,monitor,tv,0,,,,0,0,127.9,1224,1632
+VizWiz_val_00000711.jpg,val,BLR,1,620,laptop,laptop,1,0.360,0.360,laptop:0.36,1,1,152.8,968,1296
+VizWiz_val_00005254.jpg,val,BLR|FRM,2,647|692|567,measuring_cup|packet|frying_pan,,1,0.702,0.702,refrigerator:0.70,0,0,117.2,968,1296
+VizWiz_train_00015478.jpg,train,ROT,1,968|692,cup|packet,cup,1,0.715,0.715,frisbee:0.71,0,0,99.0,968,1296
+VizWiz_val_00005154.jpg,val,ROT,1,434|539|435,bath_towel|doormat|bathtub,,0,,,,0,0,121.7,1224,1632
+VizWiz_val_00001152.jpg,val,BLR|FRM|ROT,3,664,monitor,tv,0,,,,0,0,165.1,1224,1632
+VizWiz_train_00012210.jpg,train,NON,0,721,pillow,,1,0.918,0.918,giraffe:0.92,0,0,177.6,360,480
+VizWiz_train_00015968.jpg,train,BLR|FRM,2,651,microwave,microwave,0,,,,0,0,193.7,1936,2592
+VizWiz_train_00015442.jpg,train,BLR|FRM,2,620,laptop,laptop,0,,,,0,0,95.8,360,480
+VizWiz_train_00019244.jpg,train,BLR|FRM,2,742,printer,,2,0.337,0.417,tv:0.42;person:0.26,0,0,50.4,1224,1632
+VizWiz_train_00022286.jpg,train,BLR,1,711,perfume,,1,0.314,0.314,person:0.31,0,0,164.0,768,1024
+VizWiz_train_00006355.jpg,train,FRM|NON,1,728|692,plastic_bag|packet,,1,0.355,0.355,bottle:0.35,0,0,56.7,1224,1632
+VizWiz_train_00016847.jpg,train,FRM,1,664,monitor,tv,0,,,,0,0,70.4,1224,1632
+VizWiz_val_00000082.jpg,val,BLR|FRM|ROT,3,664,monitor,tv,2,0.391,0.492,tv:0.49;tv:0.29,1,1,53.0,1936,2592
+VizWiz_train_00014541.jpg,train,NON,0,664|851,monitor|television,tv,1,0.305,0.305,potted plant:0.30,0,0,71.8,360,480
+VizWiz_train_00009553.jpg,train,NON,0,748|620|453,purse|laptop|bookcase,handbag|laptop,5,0.373,0.641,suitcase:0.64;book:0.39;book:0.30,0,0,243.8,1224,1632
+VizWiz_train_00005094.jpg,train,FRM|NON,1,608|738|851|453|630,jean|pot|television|bookcase|Loafer,tv,4,0.559,0.681,potted plant:0.68;potted plant:0.66;person:0.45,1,1,122.6,968,1296
+VizWiz_train_00013707.jpg,train,BLR|ROT,2,692,packet,,1,0.472,0.472,book:0.47,0,0,137.9,968,1296
+VizWiz_train_00012931.jpg,train,NON,0,600|610,hook|jersey,,1,0.771,0.771,person:0.77,0,0,164.7,1224,1632
+VizWiz_val_00000882.jpg,val,ROT|NON,1,664|754,monitor|radio,tv,4,0.388,0.484,tv:0.48;toilet:0.47;tv:0.32,1,1,163.2,1224,1632
+VizWiz_train_00002631.jpg,train,FRM|ROT,2,963,pizza,pizza,1,0.927,0.927,pizza:0.93,1,1,178.0,968,1296
+VizWiz_train_00010720.jpg,train,FRM|ROT,2,827|692,stove|packet,oven,2,0.639,0.819,book:0.82;book:0.46,0,0,130.2,1224,1632
+VizWiz_val_00000953.jpg,val,ROT,1,620,laptop,laptop,3,0.572,0.738,tv:0.74;book:0.53;book:0.45,0,0,152.8,1224,1632
+VizWiz_train_00003955.jpg,train,NON,0,968,cup,cup,8,0.616,0.836,cup:0.84;bottle:0.80;dining table:0.72,1,1,119.8,968,1296
+VizWiz_train_00001972.jpg,train,NON,0,720|692,pill_bottle|packet,bottle,2,0.708,0.931,remote:0.93;toilet:0.48,0,0,104.9,1936,2592
+VizWiz_train_00005730.jpg,train,NON,0,488|692,chain|packet,,1,0.269,0.269,car:0.27,0,0,73.9,1224,1632
+VizWiz_train_00001528.jpg,train,BLR|FRM,2,728|504|968,plastic_bag|coffee_mug|cup,cup,0,,,,0,0,132.1,1224,1632
+VizWiz_train_00008515.jpg,train,BLR|NON,1,692,packet,,1,0.820,0.820,cell phone:0.82,0,0,61.9,1224,1632
+VizWiz_train_00010410.jpg,train,FRM|NON,1,631,lotion,,0,,,,0,0,60.2,360,480
+VizWiz_val_00006525.jpg,val,BLR|FRM|ROT,3,760|478,refrigerator|carton,refrigerator,0,,,,0,0,123.3,484,648
+VizWiz_train_00016208.jpg,train,FRM|NON,1,692,packet,,1,0.359,0.359,person:0.36,0,0,55.1,1224,1632
+VizWiz_val_00007322.jpg,val,FRM,1,907,wine_bottle,bottle,4,0.481,0.722,person:0.72;bottle:0.45;bottle:0.39,1,1,124.9,768,1024
+VizWiz_train_00007431.jpg,train,FRM,1,610,jersey,,0,,,,0,0,68.0,968,1296
+VizWiz_train_00018214.jpg,train,BLR|FRM,2,907,wine_bottle,bottle,1,0.305,0.305,person:0.30,0,0,295.2,968,1296
+VizWiz_train_00000589.jpg,train,BRT|FRM,2,968|692,cup|packet,cup,3,0.478,0.754,book:0.75;book:0.35;knife:0.33,0,0,256.5,1224,1632
+VizWiz_val_00005653.jpg,val,BLR|FRM,2,478,carton,,1,0.594,0.594,toilet:0.59,0,0,106.6,968,1296
+VizWiz_train_00007612.jpg,train,NON,0,737,pop_bottle,bottle,2,0.626,0.680,bottle:0.68;cell phone:0.57,1,1,105.7,768,1024
+VizWiz_train_00022402.jpg,train,NON,0,742,printer,,0,,,,0,0,48.0,768,1024
+VizWiz_train_00020924.jpg,train,BLR|FRM,2,647|692|567,measuring_cup|packet|frying_pan,,3,0.410,0.520,book:0.52;book:0.43;tv:0.28,0,0,142.0,484,648
+VizWiz_train_00022796.jpg,train,BLR|NON,1,728|692,plastic_bag|packet,,2,0.383,0.388,dining table:0.39;book:0.38,0,0,192.9,968,1296
+VizWiz_train_00009672.jpg,train,NON,0,706,patio,,1,0.781,0.781,bear:0.78,0,0,262.0,1224,1632
+VizWiz_val_00000348.jpg,val,BLR|FRM,2,664|620,monitor|laptop,laptop|tv,2,0.320,0.358,tv:0.36;cell phone:0.28,1,1,161.1,484,648
+VizWiz_train_00010757.jpg,train,FRM|ROT|NON,2,620,laptop,laptop,1,0.300,0.300,cell phone:0.30,0,0,118.1,1224,1632
+VizWiz_val_00002683.jpg,val,FRM,1,868,tray,,1,0.253,0.253,dining table:0.25,0,0,171.0,968,1296
+VizWiz_train_00020077.jpg,train,NON,0,898|487,water_bottle|cellular_telephone,bottle|cell phone,6,0.641,0.889,person:0.89;bottle:0.74;bottle:0.67,1,1,186.8,968,1296
+VizWiz_train_00012242.jpg,train,NON,0,494,chime,,0,,,,0,0,37.8,1224,1632
+VizWiz_train_00012844.jpg,train,FRM,1,664,monitor,tv,0,,,,0,0,237.2,1936,2592
+VizWiz_train_00000767.jpg,train,FRM|NON,1,664|922,monitor|menu,tv,0,,,,0,0,212.0,1224,1632
+VizWiz_train_00001995.jpg,train,BLR|NON,1,898|619|846,water_bottle|lampshade|table_lamp,bottle,3,0.582,0.691,bottle:0.69;bottle:0.57;bottle:0.48,1,1,67.8,484,648
+VizWiz_train_00020868.jpg,train,BLR|FRM,2,968|504,cup|coffee_mug,cup,1,0.615,0.615,bowl:0.62,0,0,171.2,968,1296
+VizWiz_train_00019791.jpg,train,BLR|NON,1,721,pillow,,1,0.307,0.307,cake:0.31,0,0,138.6,1536,2048
+VizWiz_train_00010639.jpg,train,NON,0,728|412,plastic_bag|ashcan,,1,0.353,0.353,cup:0.35,0,0,99.9,1224,1632
+VizWiz_train_00002520.jpg,train,NON,0,778|610,scale|jersey,,3,0.573,0.811,person:0.81;person:0.53;person:0.38,0,0,259.5,968,1296
+VizWiz_train_00005747.jpg,train,NON,0,827,stove,oven,0,,,,0,0,340.0,968,1296
+VizWiz_train_00016137.jpg,train,BLR|FRM,2,750,quilt,,0,,,,0,0,204.2,968,1296
+VizWiz_train_00003793.jpg,train,BLR|NON,1,692,packet,,0,,,,0,0,197.3,968,1296
+VizWiz_val_00001483.jpg,val,NON,0,692,packet,,1,0.970,0.970,mouse:0.97,0,0,191.5,1224,1632
+VizWiz_train_00003915.jpg,train,FRM|NON,1,478,carton,,1,0.258,0.258,dining table:0.26,0,0,62.0,1224,1632
+VizWiz_val_00001221.jpg,val,BLR|FRM,2,868,tray,,0,,,,0,0,66.5,1224,1632
+VizWiz_train_00009139.jpg,train,FRM|NON,1,728|937|508,plastic_bag|broccoli|computer_keyboard,broccoli|keyboard,0,,,,0,0,72.2,1224,1632
+VizWiz_train_00014628.jpg,train,FRM|NON,1,632,loudspeaker,,0,,,,0,0,107.0,360,480
+VizWiz_val_00000821.jpg,val,ROT,1,664|527,monitor|desktop_computer,tv,1,0.735,0.735,tv:0.74,1,1,189.6,968,1296
+VizWiz_train_00022665.jpg,train,ROT,1,610|894,jersey|wardrobe,,1,0.371,0.371,toothbrush:0.37,0,0,287.5,1224,1632
+VizWiz_train_00007274.jpg,train,NON,0,999,toilet_tissue,,0,,,,0,0,85.4,1224,1632
+VizWiz_train_00010058.jpg,train,NON,0,923|659,plate|mixing_bowl,bowl,9,0.574,0.807,bowl:0.81;chair:0.74;bowl:0.71,1,1,114.1,1224,1632
+VizWiz_train_00001193.jpg,train,BLR|FRM,2,631,lotion,,1,0.387,0.387,person:0.39,0,0,53.9,1536,2048
+VizWiz_train_00000937.jpg,train,NON,0,968|620,cup|laptop,cup|laptop,5,0.662,0.857,cup:0.86;laptop:0.83;dining table:0.64,1,1,338.7,1224,1632
+VizWiz_val_00000894.jpg,val,FRM,1,664,monitor,tv,0,,,,0,0,310.3,968,1296
+VizWiz_val_00006202.jpg,val,FRM|NON,1,923,plate,,1,0.371,0.371,cup:0.37,0,0,192.4,320,320
+VizWiz_train_00015823.jpg,train,FRM|NON,1,692,packet,,0,,,,0,0,267.9,968,1296
+VizWiz_train_00019840.jpg,train,FRM,1,947|692,mushroom|packet,,1,0.271,0.271,laptop:0.27,0,0,343.2,1224,1632
+VizWiz_train_00004217.jpg,train,FRM|NON,1,487,cellular_telephone,cell phone,1,0.854,0.854,cell phone:0.85,1,1,41.1,360,480
+VizWiz_train_00017349.jpg,train,NON,0,968|692,cup|packet,cup,2,0.373,0.489,dining table:0.49;cup:0.26,1,1,181.7,968,1296
+VizWiz_train_00020227.jpg,train,FRM,1,963,pizza,pizza,1,0.905,0.905,pizza:0.91,1,1,106.3,1224,1632
+VizWiz_train_00018437.jpg,train,FRM|ROT,2,883,vase,vase,1,0.763,0.763,elephant:0.76,0,0,58.6,1224,1632
+VizWiz_train_00008000.jpg,train,BLR|FRM,2,620|508,laptop|computer_keyboard,keyboard|laptop,1,0.947,0.947,keyboard:0.95,1,1,149.4,1224,1632
+VizWiz_train_00007382.jpg,train,BLR|FRM,2,620,laptop,laptop,1,0.323,0.323,tv:0.32,0,0,93.1,1224,1632
+VizWiz_val_00003613.jpg,val,BLR|FRM,2,968|692,cup|packet,cup,2,0.342,0.431,cup:0.43;dining table:0.25,1,1,82.7,968,1296
+VizWiz_val_00003153.jpg,val,NON,0,968,cup,cup,2,0.549,0.794,person:0.79;fork:0.30,0,0,103.3,968,1296
+VizWiz_train_00004519.jpg,train,NON,0,631,lotion,,1,0.408,0.408,vase:0.41,0,0,88.5,1224,1632
+VizWiz_val_00004817.jpg,val,FRM,1,728|859,plastic_bag|toaster,toaster,2,0.588,0.857,microwave:0.86;cup:0.32,0,0,139.2,1224,1632
+VizWiz_train_00013584.jpg,train,FRM|NON,1,664|526|527,monitor|desk|desktop_computer,tv,1,0.645,0.645,tv:0.65,1,1,124.9,360,480
+VizWiz_train_00013223.jpg,train,BLR|BRT|FRM,3,692,packet,,2,0.330,0.396,bed:0.40;bottle:0.26,0,0,175.5,968,1296
+VizWiz_train_00021882.jpg,train,FRM|NON,1,608,jean,,1,0.756,0.756,person:0.76,0,0,90.4,968,1296
+VizWiz_val_00002244.jpg,val,FRM|NON,1,868,tray,,1,0.741,0.741,dining table:0.74,0,0,155.6,1224,1632
+VizWiz_val_00006643.jpg,val,FRM,1,907,wine_bottle,bottle,1,0.326,0.326,cell phone:0.33,0,0,71.0,1224,1632
+VizWiz_val_00000946.jpg,val,BLR,1,664|508|632|527,monitor|computer_keyboard|loudspeaker|desktop_computer,keyboard|tv,5,0.496,0.760,tv:0.76;person:0.63;keyboard:0.48,1,1,106.3,360,480
+VizWiz_train_00015863.jpg,train,BLR|FRM,2,664|851,monitor|television,tv,1,0.797,0.797,cell phone:0.80,0,0,63.1,968,1296
+VizWiz_train_00020917.jpg,train,NON,0,728|692,plastic_bag|packet,,1,0.381,0.381,dining table:0.38,0,0,46.3,484,648
+VizWiz_train_00009722.jpg,train,BLR|FRM|ROT,3,620,laptop,laptop,0,,,,0,0,71.3,968,1296
+VizWiz_val_00003627.jpg,val,BLR,1,631,lotion,,1,0.596,0.596,person:0.60,0,0,74.9,968,1296
+VizWiz_val_00000846.jpg,val,BLR|FRM,2,620,laptop,laptop,0,,,,0,0,91.2,968,1296
+VizWiz_train_00021919.jpg,train,BLR|FRM|ROT,3,608|481,jean|cassette,,1,0.361,0.361,toilet:0.36,0,0,193.7,360,480
+VizWiz_val_00004465.jpg,val,BLR|FRM,2,898|493,water_bottle|chiffonier,bottle,1,0.340,0.340,book:0.34,0,0,133.2,968,1296
+VizWiz_train_00022747.jpg,train,FRM,1,692|711,packet|perfume,,3,0.433,0.497,person:0.50;person:0.48;book:0.33,0,0,71.1,968,1296
+VizWiz_train_00002964.jpg,train,BLR|FRM|NON,2,692,packet,,1,0.754,0.754,pizza:0.75,0,0,91.1,1224,1632
+VizWiz_train_00016946.jpg,train,BLR,1,504,coffee_mug,cup,0,,,,0,0,32.3,968,1296
+VizWiz_train_00004068.jpg,train,BLR,1,631,lotion,,0,,,,0,0,61.1,1936,2592
+VizWiz_train_00012741.jpg,train,BLR|NON,1,899,water_jug,,5,0.405,0.538,toothbrush:0.54;toothbrush:0.45;bottle:0.42,0,0,77.3,360,480
+VizWiz_train_00022657.jpg,train,BLR|NON,1,664,monitor,tv,0,,,,0,0,47.5,968,1296
+VizWiz_train_00005059.jpg,train,BLR|FRM|NON,2,620|629,laptop|lipstick,laptop,0,,,,0,0,84.1,968,1296
+VizWiz_train_00022031.jpg,train,ROT|NON,1,919,street_sign,,0,,,,0,0,97.6,1224,1632
+VizWiz_val_00006578.jpg,val,FRM,1,530,digital_clock,clock,0,,,,0,0,60.7,1224,1632
+VizWiz_val_00002996.jpg,val,ROT,1,692|711,packet|perfume,,0,,,,0,0,69.6,1936,2592
+VizWiz_train_00001697.jpg,train,NON,0,761,remote_control,remote,3,0.678,0.912,frisbee:0.91;cell phone:0.71;zebra:0.41,0,0,118.8,1224,1632
+VizWiz_val_00005393.jpg,val,FRM,1,620,laptop,laptop,1,0.835,0.835,keyboard:0.84,0,0,45.1,1224,1632
+VizWiz_train_00015412.jpg,train,NON,0,706|738,patio|pot,,1,0.291,0.291,sports ball:0.29,0,0,110.0,242,324
+VizWiz_train_00022175.jpg,train,BLR,1,968,cup,cup,1,0.637,0.637,frisbee:0.64,0,0,114.4,968,1296
+VizWiz_train_00019283.jpg,train,NON,0,608,jean,,0,,,,0,0,68.0,968,1296
+VizWiz_train_00016791.jpg,train,FRM|NON,1,610,jersey,,1,0.663,0.663,person:0.66,0,0,52.5,1224,1632
+VizWiz_train_00013798.jpg,train,FRM|NON,1,897,washer,,1,0.382,0.382,toilet:0.38,0,0,140.6,968,1296
+VizWiz_train_00013504.jpg,train,NON,0,761,remote_control,remote,3,0.486,0.934,cell phone:0.93;person:0.26;person:0.26,0,0,78.4,1224,1632
+VizWiz_train_00019170.jpg,train,NON,0,868,tray,,8,0.387,0.750,bowl:0.75;apple:0.47;apple:0.41,0,0,378.1,968,1296
+VizWiz_train_00022251.jpg,train,BLR|ROT,2,868,tray,,1,0.277,0.277,book:0.28,0,0,111.1,360,480
+VizWiz_train_00018022.jpg,train,ROT,1,721|706|799,pillow|patio|sliding_door,,1,0.253,0.253,chair:0.25,0,0,98.2,968,1296
+VizWiz_train_00002843.jpg,train,ROT,1,504|738,coffee_mug|pot,cup,3,0.510,0.851,mouse:0.85;keyboard:0.35;book:0.33,0,0,200.8,1224,1632
+VizWiz_train_00011253.jpg,train,NON,0,700,paper_towel,,4,0.729,0.816,bottle:0.82;bottle:0.81;bottle:0.77,0,0,91.0,1224,1632
+VizWiz_train_00000570.jpg,train,NON,0,418,ballpoint,,1,0.436,0.436,skis:0.44,0,0,51.4,1224,1632
+VizWiz_train_00015757.jpg,train,NON,0,968|504,cup|coffee_mug,cup,0,,,,0,0,68.8,1224,1632
+VizWiz_train_00016771.jpg,train,NON,0,987,corn,,3,0.596,0.788,cup:0.79;bottle:0.71;dining table:0.29,0,0,66.5,968,1296
+VizWiz_val_00007287.jpg,val,NON,0,508,computer_keyboard,keyboard,3,0.386,0.516,cup:0.52;laptop:0.34;mouse:0.31,0,0,57.6,1224,1632
+VizWiz_train_00015047.jpg,train,FRM|ROT,2,897,washer,,0,,,,0,0,94.3,968,1296
+VizWiz_train_00023115.jpg,train,FRM|NON,1,620|629,laptop|lipstick,laptop,1,0.848,0.848,laptop:0.85,1,1,85.5,968,1296
+VizWiz_train_00017284.jpg,train,NON,0,761,remote_control,remote,1,0.939,0.939,remote:0.94,1,1,120.5,360,480
+VizWiz_train_00001377.jpg,train,BLR|FRM|NON,2,898,water_bottle,bottle,2,0.464,0.678,cup:0.68;vase:0.25,0,0,54.1,612,816
+VizWiz_val_00006208.jpg,val,FRM|NON,1,629|620|508,lipstick|laptop|computer_keyboard,keyboard|laptop,2,0.568,0.656,keyboard:0.66;laptop:0.48,1,1,136.0,1224,1632
+VizWiz_train_00023426.jpg,train,NON,0,981|429,ballplayer|baseball,sports ball,2,0.370,0.460,person:0.46;couch:0.28,0,0,58.0,968,1296
+VizWiz_train_00017003.jpg,train,NON,0,508,computer_keyboard,keyboard,2,0.915,0.933,keyboard:0.93;cell phone:0.90,1,1,124.9,968,1296
+VizWiz_train_00013937.jpg,train,FRM|NON,1,851,television,tv,1,0.413,0.413,cat:0.41,0,0,75.7,360,480
+VizWiz_train_00020803.jpg,train,FRM|NON,1,692|534,packet|dishwasher,,1,0.387,0.387,cell phone:0.39,0,0,81.6,968,1296
+VizWiz_train_00001262.jpg,train,FRM|NON,1,761,remote_control,remote,0,,,,0,0,50.9,1224,1632
+VizWiz_val_00000250.jpg,val,BLR,1,664,monitor,tv,1,0.597,0.597,clock:0.60,0,0,101.2,968,1296
+VizWiz_val_00006179.jpg,val,NON,0,478,carton,,0,,,,0,0,33.3,360,480
+VizWiz_train_00009310.jpg,train,NON,0,487,cellular_telephone,cell phone,1,0.615,0.615,cell phone:0.61,1,1,88.6,1224,1632
+VizWiz_train_00023225.jpg,train,NON,0,629,lipstick,,1,0.934,0.934,laptop:0.93,0,0,80.8,1224,1632
+VizWiz_train_00022141.jpg,train,BLR|NON,1,721,pillow,,2,0.700,0.723,dog:0.72;bed:0.68,0,0,85.0,1224,1632
+VizWiz_train_00006324.jpg,train,NON,0,631,lotion,,1,0.623,0.623,cell phone:0.62,0,0,50.8,360,480
+VizWiz_val_00000220.jpg,val,BLR|FRM,2,664,monitor,tv,0,,,,0,0,102.2,1936,2592
+VizWiz_train_00015432.jpg,train,ROT|NON,1,692|549,packet|envelope,,2,0.527,0.590,book:0.59;person:0.46,0,0,107.0,1224,1632
+VizWiz_train_00022638.jpg,train,BLR|FRM,2,692,packet,,2,0.594,0.834,person:0.83;cup:0.35,0,0,79.6,1224,1632
+VizWiz_train_00013763.jpg,train,BLR,1,664,monitor,tv,0,,,,0,0,54.8,1224,1632
+VizWiz_train_00002098.jpg,train,BLR,1,620|629,laptop|lipstick,laptop,0,,,,0,0,166.6,768,1024
+VizWiz_val_00000890.jpg,val,FRM|NON,1,664,monitor,tv,1,0.604,0.604,tv:0.60,1,1,102.5,1224,1632
+VizWiz_val_00004028.jpg,val,FRM|NON,1,737|762|837,pop_bottle|restaurant|sunglasses,bottle,5,0.421,0.624,person:0.62;person:0.44;chair:0.35,0,0,63.1,1224,1632
+VizWiz_val_00007263.jpg,val,FRM|NON,1,761|692,remote_control|packet,remote,3,0.669,0.847,remote:0.85;remote:0.68;book:0.48,1,1,98.4,1224,1632
+VizWiz_train_00012362.jpg,train,FRM|NON,1,545,electric_fan,,1,0.269,0.269,refrigerator:0.27,0,0,76.5,1224,1632
+VizWiz_train_00017106.jpg,train,BLR,1,907,wine_bottle,bottle,4,0.604,0.839,bottle:0.84;chair:0.78;dining table:0.47,1,1,63.2,1224,1632
+VizWiz_train_00019924.jpg,train,NON,0,650,microphone,,1,0.297,0.297,sink:0.30,0,0,59.7,360,480
+VizWiz_train_00023120.jpg,train,NON,0,761,remote_control,remote,1,0.854,0.854,remote:0.85,1,1,49.3,968,1296
+VizWiz_val_00000184.jpg,val,BLR|FRM|NON,2,664,monitor,tv,1,0.287,0.287,tv:0.29,1,1,107.8,968,1296
+VizWiz_val_00004752.jpg,val,BLR|FRM,2,953|868,pineapple|tray,,3,0.322,0.368,cup:0.37;knife:0.31;bed:0.29,0,0,62.1,968,1296
+VizWiz_train_00019822.jpg,train,FRM,1,907,wine_bottle,bottle,0,,,,0,0,59.4,1936,2592
+VizWiz_train_00014102.jpg,train,NON,0,922|762,menu|restaurant,,4,0.510,0.668,book:0.67;bowl:0.57;bowl:0.50,0,0,68.6,968,1296
+VizWiz_val_00003778.jpg,val,NON,0,631,lotion,,0,,,,0,0,118.3,1224,1632
+VizWiz_train_00018807.jpg,train,BLR|ROT|NON,2,963,pizza,pizza,2,0.528,0.711,person:0.71;toothbrush:0.34,0,0,89.2,968,1296

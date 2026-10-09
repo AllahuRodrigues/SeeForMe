@@ -1,0 +1,583 @@
+{
+ "doi": "10.17632/66bjx8h79p.1",
+ "licence": "CC BY 4.0",
+ "files": {
+  "csv": "data/mendeley_navassist/extracted/dataset.csv",
+  "json": "data/mendeley_navassist/extracted/dataset.json",
+  "csv_bytes": 10421911,
+  "json_bytes": 71969856
+ },
+ "csv": {
+  "rows": 35261,
+  "columns": [
+   "image_file",
+   "total_object",
+   "total_left_object",
+   "total_center_object",
+   "total_right_object",
+   "moving_away_left_object",
+   "moving_away_center_object",
+   "moving_away_right_object",
+   "approaching_left_object",
+   "approaching_center_object",
+   "approaching_right_object",
+   "total_left_object_in_4m",
+   "total_center_object_in_4m",
+   "total_right_object_in_4m",
+   "total_left_object_in_2m",
+   "total_center_object_in_2m",
+   "total_right_object_in_2m",
+   "0_index_objects_class_name",
+   "0_index_objects_estimated_distance",
+   "0_index_objects_avg_depth_object",
+   "0_index_objects_nearest_object_depth",
+   "0_index_objects_angle",
+   "0_index_objects_posistion",
+   "0_index_objects_movement_status",
+   "1_index_objects_class_name",
+   "1_index_objects_estimated_distance",
+   "1_index_objects_avg_depth_object",
+   "1_index_objects_nearest_object_depth",
+   "1_index_objects_angle",
+   "1_index_objects_posistion",
+   "1_index_objects_movement_status",
+   "2_index_objects_class_name",
+   "2_index_objects_estimated_distance",
+   "2_index_objects_avg_depth_object",
+   "2_index_objects_nearest_object_depth",
+   "2_index_objects_angle",
+   "2_index_objects_posistion",
+   "2_index_objects_movement_status",
+   "decision"
+  ]
+ },
+ "json": {
+  "records": 35261,
+  "record_keys": [
+   "image_file",
+   "total_object",
+   "total_left_object",
+   "total_center_object",
+   "total_right_object",
+   "moving_away_left_object",
+   "moving_away_center_object",
+   "moving_away_right_object",
+   "approaching_left_object",
+   "approaching_center_object",
+   "approaching_right_object",
+   "total_left_object_in_4m",
+   "total_center_object_in_4m",
+   "total_right_object_in_4m",
+   "total_left_object_in_2m",
+   "total_center_object_in_2m",
+   "total_right_object_in_2m",
+   "object_collection",
+   "decision"
+  ],
+  "object_keys": [
+   "class_id",
+   "class_name",
+   "estimated_distance",
+   "avg_depth_object",
+   "nearest_object_depth",
+   "angle",
+   "object_posistion",
+   "movement_status"
+  ],
+  "max_objects": 20,
+  "objects_per_record": {
+   "0": 1366,
+   "1": 5021,
+   "2": 8869,
+   "3": 7882,
+   "4": 5752,
+   "5": 3163,
+   "6": 1455,
+   "7": 736,
+   "8": 403,
+   "9": 248,
+   "10": 153,
+   "11": 124,
+   "12": 52,
+   "13": 21,
+   "14": 4,
+   "15": 2,
+   "16": 2,
+   "17": 3,
+   "18": 2,
+   "19": 1,
+   "20": 2
+  }
+ },
+ "consistency": {
+  "same_row_count": true,
+  "same_decisions": true,
+  "csv_objects_are_first_three_of_json": 35261,
+  "json_objects_sorted_by_estimated_distance": "28874 of 28874 multi-object records"
+ },
+ "decision": {
+  "Move Forward": {
+   "n": 24936,
+   "share": 0.707
+  },
+  "Move Right": {
+   "n": 3901,
+   "share": 0.111
+  },
+  "Stop": {
+   "n": 3224,
+   "share": 0.091
+  },
+  "Move Left": {
+   "n": 3200,
+   "share": 0.091
+  }
+ },
+ "classes": [
+  {
+   "class_name": "Person",
+   "class_id": 14,
+   "objects": 36046,
+   "frames": 19753,
+   "csv_nearest3": 27072,
+   "seeforme_label": "person",
+   "coco80": true,
+   "event_type": "person_static",
+   "severity": 0.5,
+   "how": "same class"
+  },
+  {
+   "class_name": "Rickshaw",
+   "class_id": 16,
+   "objects": 16585,
+   "frames": 11598,
+   "csv_nearest3": 12281,
+   "seeforme_label": "bicycle",
+   "coco80": true,
+   "event_type": "bike",
+   "severity": 0.9,
+   "how": "cycle rickshaw, a pedal tricycle"
+  },
+  {
+   "class_name": "Car",
+   "class_id": 4,
+   "objects": 14152,
+   "frames": 9442,
+   "csv_nearest3": 8950,
+   "seeforme_label": "car",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "same class"
+  },
+  {
+   "class_name": "Footpath",
+   "class_id": 9,
+   "objects": 8281,
+   "frames": 7896,
+   "csv_nearest3": 7972,
+   "seeforme_label": "",
+   "coco80": false,
+   "event_type": "",
+   "severity": 0.0,
+   "how": "walkable surface (sidewalk); not an object event"
+  },
+  {
+   "class_name": "Motorcycle",
+   "class_id": 11,
+   "objects": 4714,
+   "frames": 3980,
+   "csv_nearest3": 3837,
+   "seeforme_label": "motorcycle",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "same class"
+  },
+  {
+   "class_name": "CNG",
+   "class_id": 3,
+   "objects": 4421,
+   "frames": 3821,
+   "csv_nearest3": 3181,
+   "seeforme_label": "motorcycle",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "CNG auto-rickshaw, a motorised three-wheeler"
+  },
+  {
+   "class_name": "Electric Pole",
+   "class_id": 6,
+   "objects": 4400,
+   "frames": 4254,
+   "csv_nearest3": 3287,
+   "seeforme_label": "pole",
+   "coco80": false,
+   "event_type": "hazard_static",
+   "severity": 0.7,
+   "how": "simulator / open-vocab label"
+  },
+  {
+   "class_name": "Building Pillar",
+   "class_id": 1,
+   "objects": 3607,
+   "frames": 1822,
+   "csv_nearest3": 2396,
+   "seeforme_label": "pole",
+   "coco80": false,
+   "event_type": "hazard_static",
+   "severity": 0.7,
+   "how": "simulator / open-vocab label"
+  },
+  {
+   "class_name": "Bus",
+   "class_id": 2,
+   "objects": 2577,
+   "frames": 2286,
+   "csv_nearest3": 1777,
+   "seeforme_label": "bus",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "same class"
+  },
+  {
+   "class_name": "Cycle",
+   "class_id": 5,
+   "objects": 2468,
+   "frames": 2269,
+   "csv_nearest3": 2288,
+   "seeforme_label": "bicycle",
+   "coco80": true,
+   "event_type": "bike",
+   "severity": 0.9,
+   "how": "same class"
+  },
+  {
+   "class_name": "Van gari",
+   "class_id": 21,
+   "objects": 2212,
+   "frames": 2065,
+   "csv_nearest3": 2141,
+   "seeforme_label": "bicycle",
+   "coco80": true,
+   "event_type": "bike",
+   "severity": 0.9,
+   "how": "pedal cargo tricycle"
+  },
+  {
+   "class_name": "Parking Cone",
+   "class_id": 13,
+   "objects": 1458,
+   "frames": 675,
+   "csv_nearest3": 1245,
+   "seeforme_label": "cone",
+   "coco80": false,
+   "event_type": "barrier",
+   "severity": 0.75,
+   "how": "simulator / open-vocab label"
+  },
+  {
+   "class_name": "Obstacle",
+   "class_id": 12,
+   "objects": 1198,
+   "frames": 641,
+   "csv_nearest3": 888,
+   "seeforme_label": "obstruction",
+   "coco80": false,
+   "event_type": "unknown_obstacle",
+   "severity": 0.6,
+   "how": "UNKNOWN_OBSTACLE_LABELS -> unknown_obstacle"
+  },
+  {
+   "class_name": "Pickup",
+   "class_id": 15,
+   "objects": 1108,
+   "frames": 1035,
+   "csv_nearest3": 961,
+   "seeforme_label": "truck",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "pickup truck"
+  },
+  {
+   "class_name": "Van",
+   "class_id": 20,
+   "objects": 956,
+   "frames": 953,
+   "csv_nearest3": 654,
+   "seeforme_label": "truck",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "van"
+  },
+  {
+   "class_name": "Leguna",
+   "class_id": 10,
+   "objects": 909,
+   "frames": 897,
+   "csv_nearest3": 867,
+   "seeforme_label": "bus",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "Leguna minibus"
+  },
+  {
+   "class_name": "Food cart",
+   "class_id": 8,
+   "objects": 861,
+   "frames": 648,
+   "csv_nearest3": 658,
+   "seeforme_label": "cart",
+   "coco80": false,
+   "event_type": "hazard_static",
+   "severity": 0.7,
+   "how": "simulator / open-vocab label"
+  },
+  {
+   "class_name": "Stairs",
+   "class_id": 17,
+   "objects": 843,
+   "frames": 758,
+   "csv_nearest3": 728,
+   "seeforme_label": "stairs",
+   "coco80": false,
+   "event_type": "stairs",
+   "severity": 1.0,
+   "how": "simulator / open-vocab label"
+  },
+  {
+   "class_name": "Food Van",
+   "class_id": 7,
+   "objects": 798,
+   "frames": 761,
+   "csv_nearest3": 753,
+   "seeforme_label": "truck",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "food truck"
+  },
+  {
+   "class_name": "Bin",
+   "class_id": 0,
+   "objects": 563,
+   "frames": 489,
+   "csv_nearest3": 454,
+   "seeforme_label": "trash can",
+   "coco80": false,
+   "event_type": "hazard_static",
+   "severity": 0.7,
+   "how": "simulator / open-vocab label"
+  },
+  {
+   "class_name": "Truck",
+   "class_id": 19,
+   "objects": 351,
+   "frames": 349,
+   "csv_nearest3": 271,
+   "seeforme_label": "truck",
+   "coco80": true,
+   "event_type": "vehicle",
+   "severity": 1.0,
+   "how": "same class"
+  },
+  {
+   "class_name": "Tree",
+   "class_id": 18,
+   "objects": 113,
+   "frames": 89,
+   "csv_nearest3": 113,
+   "seeforme_label": "tree",
+   "coco80": false,
+   "event_type": "hazard_static",
+   "severity": 0.7,
+   "how": "open-vocab label"
+  }
+ ],
+ "movement_status": {
+  "approaching": 50948,
+  "moving away": 46267,
+  "unknown": 11406
+ },
+ "object_position": {
+  "center": 42484,
+  "right": 34578,
+  "left": 31559
+ },
+ "numeric": {
+  "estimated_distance": {
+   "min": 0.136,
+   "p5": 0.7,
+   "median": 7.287,
+   "p95": 28.713,
+   "max": 398.593
+  },
+  "avg_depth_object": {
+   "min": 0.452,
+   "p5": 5.868,
+   "median": 10.295,
+   "p95": 21.241,
+   "max": 47.532
+  },
+  "nearest_object_depth": {
+   "min": -6.435,
+   "p5": 3.126,
+   "median": 7.351,
+   "p95": 11.564,
+   "max": 33.078
+  },
+  "angle": {
+   "min": -34.028,
+   "p5": -28.259,
+   "median": 0.454,
+   "p95": 29.491,
+   "max": 34.546
+  }
+ },
+ "unique_image_files": 7289,
+ "sequences": {
+  "n_sequences": 50,
+  "frames": 35261,
+  "length_min": 11,
+  "length_median": 206.5,
+  "length_max": 6926,
+  "dropped_frame_numbers": 846,
+  "dropped_share": 0.023,
+  "decision_changes": 2525,
+  "change_rate_per_frame": 0.072,
+  "non_forward_runs": 903,
+  "non_forward_run_median": 4,
+  "non_forward_run_max": 187
+ },
+ "decision_vs_geometry": {
+  "Move Forward": {
+   "n": 24936,
+   "share": 0.707,
+   "mean_total_object": 3.04,
+   "share_centre_object_in_2m": 0.154,
+   "share_approaching_centre": 0.421,
+   "median_nearest_centre_m": 6.66,
+   "share_no_object": 0.055
+  },
+  "Move Left": {
+   "n": 3200,
+   "share": 0.091,
+   "mean_total_object": 3.41,
+   "share_centre_object_in_2m": 0.179,
+   "share_approaching_centre": 0.369,
+   "median_nearest_centre_m": 4.82,
+   "share_no_object": 0
+  },
+  "Move Right": {
+   "n": 3901,
+   "share": 0.111,
+   "mean_total_object": 3.58,
+   "share_centre_object_in_2m": 0.212,
+   "share_approaching_centre": 0.375,
+   "median_nearest_centre_m": 5.37,
+   "share_no_object": 0
+  },
+  "Stop": {
+   "n": 3224,
+   "share": 0.091,
+   "mean_total_object": 2.43,
+   "share_centre_object_in_2m": 1,
+   "share_approaching_centre": 0.6,
+   "median_nearest_centre_m": 1.04,
+   "share_no_object": 0
+  }
+ },
+ "conditional": {
+  "P(not Move Forward | centre object within 2 m)": 0.546,
+  "P(not Move Forward | no centre object within 2 m)": 0.213,
+  "P(Stop | centre object within 2 m)": 0.381,
+  "P(Stop | no centre object within 2 m)": 0
+ },
+ "predictability": {
+  "features": [
+   "total_object",
+   "total_left_object",
+   "total_center_object",
+   "total_right_object",
+   "moving_away_left_object",
+   "moving_away_center_object",
+   "moving_away_right_object",
+   "approaching_left_object",
+   "approaching_center_object",
+   "approaching_right_object",
+   "total_left_object_in_4m",
+   "total_center_object_in_4m",
+   "total_right_object_in_4m",
+   "total_left_object_in_2m",
+   "total_center_object_in_2m",
+   "total_right_object_in_2m",
+   "nearest_left_m",
+   "nearest_center_m",
+   "nearest_right_m"
+  ],
+  "majority_share": 0.707,
+  "tree_depth_3": {
+   "train_accuracy": 0.872,
+   "cv5_accuracy": 0.825
+  },
+  "tree_depth_3_rules": "|--- nearest_left_m <= 2.00\n|   |--- nearest_right_m <= 1.58\n|   |   |--- nearest_left_m <= 1.08\n|   |   |   |--- class: Move Right\n|   |   |--- nearest_left_m >  1.08\n|   |   |   |--- class: Move Left\n|   |--- nearest_right_m >  1.58\n|   |   |--- nearest_center_m <= 1.58\n|   |   |   |--- class: Move Right\n|   |   |--- nearest_center_m >  1.58\n|   |   |   |--- class: Move Right\n|--- nearest_left_m >  2.00\n|   |--- nearest_right_m <= 2.00\n|   |   |--- nearest_right_m <= 0.73\n|   |   |   |--- class: Move Forward\n|   |   |--- nearest_right_m >  0.73\n|   |   |   |--- class: Move Left\n|   |--- nearest_right_m >  2.00\n|   |   |--- nearest_center_m <= 2.00\n|   |   |   |--- class: Move Forward\n|   |   |--- nearest_center_m >  2.00\n|   |   |   |--- class: Move Forward\n",
+  "tree_depth_6": {
+   "train_accuracy": 0.939,
+   "cv5_accuracy": 0.899
+  },
+  "tree_depth_12": {
+   "train_accuracy": 0.974,
+   "cv5_accuracy": 0.894
+  }
+ },
+ "event_features": {
+  "n": 29,
+  "with_counterpart": [
+   "severity",
+   "path_prob",
+   "hazard",
+   "actionability",
+   "distance",
+   "angle",
+   "rel_speed",
+   "moving",
+   "density"
+  ],
+  "map": {
+   "severity": "class_name (through LABEL_EVENT / EVENT_SPECS)",
+   "path_prob": "object_posistion left / center / right (coarse)",
+   "hazard": "derivable: severity x centre position",
+   "urgency": "-",
+   "actionability": "class_name",
+   "goal": "-",
+   "novelty": "-",
+   "uncertainty": "-",
+   "speech_cost": "-",
+   "queue_cost": "-",
+   "confidence": "-",
+   "distance": "estimated_distance (m, monocular)",
+   "depth_conf": "-",
+   "angle": "angle (deg from the frame centre)",
+   "rel_speed": "movement_status approaching / moving away (sign only)",
+   "lateral_speed": "-",
+   "ttc": "-",
+   "growth": "-",
+   "since_announced": "-",
+   "announce_count": "-",
+   "text_importance": "-",
+   "is_text": "-",
+   "moving": "movement_status != unknown (approx.)",
+   "channel_busy": "-",
+   "channel_remaining": "-",
+   "budget": "-",
+   "density": "total_object and the *_in_4m / *_in_2m counts",
+   "own_speed": "-",
+   "ego_speed": "-"
+  }
+ }
+}

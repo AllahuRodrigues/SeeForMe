@@ -1,0 +1,3 @@
+[17:12:53] training arch=mlp1
+[17:16:33] chain replaced by 4 parallel trainings (mlp1 kept running)
+[17:18:36] relaunched all 5 trainings on train/val without ood_aftermath

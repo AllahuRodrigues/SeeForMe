@@ -7,8 +7,8 @@ earliest useful time, ideal time, latest safe time, severity, the minimum inform
 a user needs, and the ideal cue text.
 """
 from .world import WorldObject, CampusScenario, EventAnnotation, EVENT_SPECS
-from .scenes import make_campus_scenario, make_campus_benchmark, CAMPUS_KINDS
+from .scenes import make_campus_scenario, make_campus_benchmark, CAMPUS_KINDS, CAMPUS_KINDS_V1, OOD_KINDS
 from .simulator import CampusDetectorSimulator
 
 __all__ = ["WorldObject", "CampusScenario", "EventAnnotation", "EVENT_SPECS", "make_campus_scenario",
-           "make_campus_benchmark", "CAMPUS_KINDS", "CampusDetectorSimulator"]
+           "make_campus_benchmark", "CAMPUS_KINDS", "CAMPUS_KINDS_V1", "OOD_KINDS", "CampusDetectorSimulator"]

@@ -30,6 +30,26 @@ def test_priority_data_and_torch_mlp():
     assert p.shape == (10, 2) and np.allclose(p.sum(1), 1)
 
 
+def test_attn_encoder_right_aligns_the_current_step():
+    """The current step always sits in the last position embedding, whatever the track's age (as in mlpk)."""
+    import torch
+    from seeforme.ml.scheduler_model import N_IN, SchedulerNet, _pad
+    K, H = 4, 8
+    net = SchedulerNet(N_IN, H, "attn", K)
+    with torch.no_grad():                      # attention lands on whatever sits in the last slot
+        net.embed.weight[0].zero_(); net.embed.bias[0] = 0.0
+        net.key.weight.copy_(torch.eye(H)); net.key.bias.zero_()
+        net.query.zero_(); net.query[0] = 1.0
+        net.pos.zero_(); net.pos[K - 1, 0] = 100.0
+    rng = np.random.default_rng(0)
+    cur = rng.normal(size=N_IN).tolist()
+    older = [rng.normal(size=N_IN).tolist() for _ in range(K - 1)]
+    X, L = _pad([[cur], older + [cur]], K)
+    with torch.no_grad():
+        z = net.encode(X, L)
+    assert torch.allclose(z[0], z[1], atol=1e-5)   # a new track and an old one with the same current step agree
+
+
 def test_scene_context_clusters_and_modulates():
     scs = [make_scenario("hallway", 1, duration=6), make_scenario("street", 2, duration=6)]
     frames = frames_from_scenarios(scs)

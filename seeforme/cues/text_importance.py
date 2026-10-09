@@ -28,7 +28,10 @@ DECORATIVE_PATTERNS = [
 
 
 def normalise_text(s: str) -> str:
-    s = s.lower()
+    """Lower-case, strip accents (SAÍDA -> saida) and punctuation, collapse whitespace."""
+    import unicodedata
+    s = unicodedata.normalize("NFKD", s.lower())
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
     s = re.sub(r"[^a-z0-9%$.\s]", " ", s)
     return re.sub(r"\s+", " ", s).strip()
 

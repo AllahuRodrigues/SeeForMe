@@ -19,6 +19,7 @@ from collections import deque
 from dataclasses import replace
 from typing import Dict, List, Optional, Sequence, Tuple
 
+import math
 import numpy as np
 import torch
 import torch.nn as nn
@@ -38,21 +39,94 @@ ACTION_IDX = {a: i for i, a in enumerate(ACTIONS)}
 SLOT_IDX = {s: i for i, s in enumerate(SLOTS)}
 
 
+ARCHS = ("gru", "mlp1", "mlpk", "attn")
+
+
+def _right_align(x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
+    """Move each left-aligned window (as built by `_pad`) to the end of the K slots, zero-padding in front,
+    so slot K-1 is always the current step."""
+    n, K, d = x.shape
+    src = torch.arange(K).unsqueeze(0) - (K - lengths.clamp(max=K)).unsqueeze(1)   # (n, K) index in the left-aligned window
+    out = x.gather(1, src.clamp(min=0).unsqueeze(-1).expand(n, K, d))
+    return torch.where((src >= 0).unsqueeze(-1), out, torch.zeros((), dtype=x.dtype))
+
+
 class SchedulerNet(nn.Module):
-    def __init__(self, n_in: int = N_IN, hidden: int = 48):
+    """Candidate encoder + heads. `arch` selects how the K-step history is summarised (the Irie comparison):
+
+        gru    GRU over the window (the original scheduler)
+        mlp1   the current step only (no temporal memory)
+        mlpk   the K steps concatenated (fixed-window memory, no recurrence)
+        attn   learned-query attention over the K steps with position embeddings (equal-size temporal attention);
+               the window is right-aligned like mlpk, so the last position embedding always marks the current step
+
+    `hidden` is chosen by `matched_hidden` so every architecture has about the same number of parameters.
+    """
+
+    def __init__(self, n_in: int = N_IN, hidden: int = 48, arch: str = "gru", K: int = 8):
         super().__init__()
-        self.gru = nn.GRU(n_in, hidden, batch_first=True)
+        assert arch in ARCHS, arch
+        self.arch, self.K, self.n_in = arch, K, n_in
+        if arch == "gru":
+            self.gru = nn.GRU(n_in, hidden, batch_first=True)
+        elif arch == "mlp1":
+            self.enc = nn.Sequential(nn.Linear(n_in, hidden), nn.ReLU(), nn.Linear(hidden, hidden), nn.ReLU())
+        elif arch == "mlpk":
+            self.enc = nn.Sequential(nn.Linear(n_in * K, hidden), nn.ReLU(), nn.Linear(hidden, hidden), nn.ReLU())
+        else:
+            self.embed = nn.Linear(n_in, hidden)
+            self.pos = nn.Parameter(torch.zeros(K, hidden))
+            self.query = nn.Parameter(torch.randn(hidden) * 0.1)
+            self.key = nn.Linear(hidden, hidden)
+            self.value = nn.Linear(hidden, hidden)
         self.trunk = nn.Sequential(nn.Linear(hidden, hidden), nn.ReLU())
         self.action = nn.Linear(hidden, len(ACTIONS))
         self.urgency = nn.Linear(hidden, 1)
         self.slots = nn.Linear(hidden, len(SLOTS))
         self.silence_bias = nn.Parameter(torch.zeros(1))   # global "say nothing" logit used in the categorical over candidates
 
+    def encode(self, x: torch.Tensor, lengths: torch.Tensor) -> torch.Tensor:
+        if self.arch == "gru":
+            packed = pack_padded_sequence(x, lengths.cpu(), batch_first=True, enforce_sorted=False)
+            _, h = self.gru(packed)
+            return h[-1]
+        if self.arch == "mlp1":
+            last = x[torch.arange(x.shape[0]), (lengths - 1).clamp(min=0)]
+            return self.enc(last)
+        if self.arch == "mlpk":
+            # right-align the window so "the current step" is always the last block
+            out = _right_align(x, lengths)
+            n, K, d = out.shape
+            return self.enc(out.reshape(n, K * d))
+        # attn: right-align as well, so pos[-1] always marks the current step whatever the track's age
+        x = _right_align(x, lengths)
+        n, K, _ = x.shape
+        e = self.embed(x) + self.pos[-K:].unsqueeze(0)
+        scores = (self.key(e) @ self.query) / math.sqrt(e.shape[-1])
+        mask = torch.arange(K).unsqueeze(0) >= (K - lengths).unsqueeze(1)
+        scores = scores.masked_fill(~mask, -1e9)
+        w = torch.softmax(scores, dim=1).unsqueeze(-1)
+        return torch.relu((w * self.value(e)).sum(1))
+
     def forward(self, x: torch.Tensor, lengths: torch.Tensor):
-        packed = pack_padded_sequence(x, lengths.cpu(), batch_first=True, enforce_sorted=False)
-        _, h = self.gru(packed)
-        z = self.trunk(h[-1])
+        z = self.trunk(self.encode(x, lengths))
         return self.action(z), self.urgency(z).squeeze(-1), self.slots(z)
+
+
+def count_params(net: nn.Module) -> int:
+    return sum(p.numel() for p in net.parameters())
+
+
+def matched_hidden(arch: str, target: int, n_in: int = N_IN, K: int = 8) -> int:
+    """Hidden size for `arch` whose parameter count is closest to `target` (the GRU-48 scheduler has ~14k)."""
+    best = None
+    for h in range(8, 257, 2):
+        n = count_params(SchedulerNet(n_in, h, arch, K))
+        if best is None or abs(n - target) < abs(best[1] - target):
+            best = (h, n)
+        if n > 1.5 * target:
+            break
+    return best[0]
 
 
 def _pad(windows: Sequence[Sequence[Sequence[float]]], K: int):
@@ -91,7 +165,7 @@ class SchedulerDataset:
 
 
 def collect(policy_factory, scenarios: Sequence[CampusScenario], cfg: PipelineConfig, K: int, repeats: int = 1,
-            seed: int = 0) -> SchedulerDataset:
+            seed: int = 0, run=run_on_campus) -> SchedulerDataset:
     """Roll out `policy_factory(scenario)` (a SchedulerPolicy or PCACSPolicy) and label every candidate with the oracle."""
     data = SchedulerDataset()
     for sc in scenarios:
@@ -125,7 +199,7 @@ def collect(policy_factory, scenarios: Sequence[CampusScenario], cfg: PipelineCo
                         and events[cue.source_id].in_window(cue.t):
                     announced.add(cue.source_id)
 
-            run_on_campus(pol, sc, cfg, seed=sc.seed + 17 * r + seed, on_decision=on_decision)
+            run(pol, sc, cfg, seed=sc.seed + 17 * r + seed, on_decision=on_decision)
     return data
 
 
@@ -135,11 +209,17 @@ def collect(policy_factory, scenarios: Sequence[CampusScenario], cfg: PipelineCo
 
 class SchedulerModel:
     def __init__(self, K: int = 8, hidden: int = 48, epochs: int = 25, lr: float = 2e-3, batch_size: int = 512,
-                 weight_decay: float = 1e-4, seed: int = 0):
-        self.K, self.hidden, self.epochs, self.lr, self.bs, self.wd, self.seed = K, hidden, epochs, lr, batch_size, weight_decay, seed
+                 weight_decay: float = 1e-4, seed: int = 0, arch: str = "gru", match_params: bool = True):
+        if arch != "gru" and match_params:
+            hidden = matched_hidden(arch, count_params(SchedulerNet(N_IN, 48, "gru", K)), N_IN, K)
+        self.K, self.hidden, self.epochs, self.lr, self.bs, self.wd, self.seed, self.arch = K, hidden, epochs, lr, batch_size, weight_decay, seed, arch
         torch.manual_seed(seed)
-        self.net = SchedulerNet(N_IN, hidden)
+        self.net = SchedulerNet(N_IN, hidden, arch, K)
         self.history: List[float] = []
+
+    @property
+    def n_params(self) -> int:
+        return count_params(self.net)
 
     def fit(self, data: SchedulerDataset) -> "SchedulerModel":
         X, L = _pad(data.windows, self.K)
@@ -175,12 +255,17 @@ class SchedulerModel:
             return self.net(X, L)
 
     def save(self, path: str) -> None:
-        torch.save({"state": self.net.state_dict(), "K": self.K, "hidden": self.hidden, "history": self.history}, path)
+        torch.save({"state": self.net.state_dict(), "K": self.K, "hidden": self.hidden, "history": self.history, "arch": self.arch,
+                    "pos_align": "right"}, path)
 
     @staticmethod
     def load(path: str) -> "SchedulerModel":
         d = torch.load(path, map_location="cpu")
-        m = SchedulerModel(K=d["K"], hidden=d["hidden"])
+        if d.get("arch") == "attn" and d.get("pos_align") != "right":
+            import warnings
+            warnings.warn(f"{path}: attn checkpoint trained with left-aligned position embeddings; retrain it "
+                          "(the encoder now right-aligns the window)", stacklevel=2)
+        m = SchedulerModel(K=d["K"], hidden=d["hidden"], arch=d.get("arch", "gru"), match_params=False)
         m.net.load_state_dict(d["state"]); m.net.eval(); m.history = d.get("history", [])
         return m
 
@@ -309,22 +394,22 @@ class SchedulerPolicy(PCACSPolicy):
 # training loops
 # ---------------------------------------------------------------------------
 
-def closed_loop(policy_factory, scenarios: Sequence[CampusScenario], cfg: PipelineConfig, seed: int = 0) -> Dict[str, float]:
+def closed_loop(policy_factory, scenarios: Sequence[CampusScenario], cfg: PipelineConfig, seed: int = 0, run=run_on_campus) -> Dict[str, float]:
     from ..campus.metrics import aggregate, evaluate_run
     from ..campus.oracle import CampusOracle
     rows, osc = [], {}
     for sc in scenarios:
-        osc[sc.name] = campus_score(run_on_campus(CampusOracle(sc), sc, cfg, seed=sc.seed + seed), sc)
-        rows.append(evaluate_run(run_on_campus(policy_factory(sc), sc, cfg, seed=sc.seed + seed), sc))
+        osc[sc.name] = campus_score(run(CampusOracle(sc), sc, cfg, seed=sc.seed + seed), sc)
+        rows.append(evaluate_run(run(policy_factory(sc), sc, cfg, seed=sc.seed + seed), sc))
     a = aggregate(rows, osc)
     return next(iter(a.values()))
 
 
 def select_threshold(model: SchedulerModel, val: Sequence[CampusScenario], cfg: PipelineConfig, grid=(0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-                     text_model=None, seed: int = 0):
+                     text_model=None, seed: int = 0, run=run_on_campus):
     best = None; hist = []
     for thr in grid:
-        s = closed_loop(lambda sc: SchedulerPolicy(model, cfg.pcacs, threshold=thr, goal_tags=sc.goal_tags, text_model=text_model), val, cfg, seed)
+        s = closed_loop(lambda sc: SchedulerPolicy(model, cfg.pcacs, threshold=thr, goal_tags=sc.goal_tags, text_model=text_model), val, cfg, seed, run=run)
         hist.append({"threshold": thr, **s})
         if best is None or s["score"] > best[1]["score"]:
             best = (thr, s)
@@ -332,14 +417,18 @@ def select_threshold(model: SchedulerModel, val: Sequence[CampusScenario], cfg: 
 
 
 def dagger(train: Sequence[CampusScenario], val: Sequence[CampusScenario], cfg: PipelineConfig, K: int = 8, n_iter: int = 2,
-           epochs: int = 25, text_model=None, seed: int = 0, log=print):
-    """Imitation with data aggregation. Iteration 0 collects states under the linear P-CACS and the oracle."""
-    data = collect(lambda sc: PCACSPolicy(cfg.pcacs, goal_tags=sc.goal_tags, text_model=text_model), train, cfg, K, repeats=1, seed=seed)
-    data.extend(collect(lambda sc: CampusOracle(sc), train, cfg, K, repeats=1, seed=seed + 7))
+           epochs: int = 25, text_model=None, seed: int = 0, log=print, run=run_on_campus, data0: Optional[SchedulerDataset] = None,
+           arch: str = "gru"):
+    """Imitation with data aggregation. Iteration 0 collects states under the linear P-CACS and the oracle
+    (plus `data0`, e.g. states collected in another domain)."""
+    data = collect(lambda sc: PCACSPolicy(cfg.pcacs, goal_tags=sc.goal_tags, text_model=text_model), train, cfg, K, repeats=1, seed=seed, run=run)
+    data.extend(collect(lambda sc: CampusOracle(sc), train, cfg, K, repeats=1, seed=seed + 7, run=run))
+    if data0 is not None:
+        data.extend(data0)
     best, history = None, []
     for it in range(n_iter + 1):
-        model = SchedulerModel(K=K, epochs=epochs, seed=seed).fit(data)
-        thr, s, _ = select_threshold(model, val, cfg, text_model=text_model, seed=seed)
+        model = SchedulerModel(K=K, epochs=epochs, seed=seed, arch=arch).fit(data)
+        thr, s, _ = select_threshold(model, val, cfg, text_model=text_model, seed=seed, run=run)
         counts = np.bincount(np.array(data.action), minlength=len(ACTIONS)).tolist()
         history.append({"iter": it, "n": len(data), "action_counts": dict(zip(ACTIONS, counts)), "threshold": thr, **s})
         log(f"  dagger iter {it}: n={len(data)} actions={dict(zip(ACTIONS, counts))} thr={thr} val score={s['score']:.3f} "
@@ -348,21 +437,21 @@ def dagger(train: Sequence[CampusScenario], val: Sequence[CampusScenario], cfg: 
             best = {"model": model, "threshold": thr, "score": s["score"], "iter": it}
         if it < n_iter:
             new = collect(lambda sc: SchedulerPolicy(model, cfg.pcacs, threshold=thr, goal_tags=sc.goal_tags, text_model=text_model),
-                          train, cfg, K, repeats=1, seed=1000 * (it + 1) + seed)
+                          train, cfg, K, repeats=1, seed=1000 * (it + 1) + seed, run=run)
             data.extend(new)
     return best, history
 
 
 def train_reinforce(model: SchedulerModel, train: Sequence[CampusScenario], val: Sequence[CampusScenario], cfg: PipelineConfig,
                     epochs: int = 12, lr: float = 4e-4, gamma: float = 0.92, entropy_beta: float = 0.01,
-                    batch_episodes: int = 4, seed: int = 0, text_model=None, log=print) -> dict:
+                    batch_episodes: int = 4, seed: int = 0, text_model=None, log=print, run=run_on_campus) -> dict:
     """REINFORCE in closed loop; the per-decision reward is the increment of the CampusBench score."""
     rng = random.Random(seed); torch.manual_seed(seed)
     opt = torch.optim.Adam(model.net.parameters(), lr=lr)
     baseline: Optional[float] = None
 
     def evaluate():
-        return closed_loop(lambda sc: SchedulerPolicy(model, cfg.pcacs, mode="rl", goal_tags=sc.goal_tags, text_model=text_model), val, cfg, seed)
+        return closed_loop(lambda sc: SchedulerPolicy(model, cfg.pcacs, mode="rl", goal_tags=sc.goal_tags, text_model=text_model), val, cfg, seed, run=run)
 
     # calibrate the global silence bias so the greedy RL policy starts near the imitation operating point
     cal = []
@@ -386,6 +475,7 @@ def train_reinforce(model: SchedulerModel, train: Sequence[CampusScenario], val:
             policy = SchedulerPolicy(model, cfg.pcacs, mode="rl", goal_tags=sc.goal_tags, text_model=text_model)
             policy.train_mode = True
             events = {e.obj_id: e for e in sc.speak_events()}
+            counts_fp = getattr(sc, "counts_fp", None)      # EgoBlind: off-event cues count only near a question
             first: Dict[int, float] = {}
             logps, ents, rewards = [], [], []
             deadline_charged: set = set()
@@ -403,15 +493,17 @@ def train_reinforce(model: SchedulerModel, train: Sequence[CampusScenario], val:
                         first[sid] = t
                         tl = _timeliness(t, events[sid])
                         r += events[sid].severity * tl if tl > 0 else -c_fp
-                    else:
+                    elif sid in events:     # repeat of an announced event: score() always counts it as a false alarm
                         r -= c_fp
+                    else:
+                        r -= c_fp * (1.0 if counts_fp is None else float(counts_fp(t)))
                 elif cue is not None:   # haptic: small reward if it marks a real imminent hazard
                     e = events.get(cue.source_id)
                     r += 0.1 if (e is not None and e.severity >= 0.5) else -0.05
                 if policy.last_logp is not None:
                     logps.append(policy.last_logp); ents.append(policy.last_entropy); rewards.append(r)
 
-            run_on_campus(policy, sc, cfg, seed=sc.seed + 31 * ep, on_decision=on_decision)
+            run(policy, sc, cfg, seed=sc.seed + 31 * ep, on_decision=on_decision)
             if not logps:
                 continue
             G, rets = 0.0, []
@@ -437,7 +529,7 @@ def train_reinforce(model: SchedulerModel, train: Sequence[CampusScenario], val:
     return {"best": best_scores, "history": history}
 
 
-def load_learned_scheduler(which: str, model_dir, cfg: PipelineConfig, scenario: CampusScenario, text_model=None):
+def load_learned_scheduler(which: str, model_dir, cfg: PipelineConfig, scenario: CampusScenario, text_model=None, name: Optional[str] = None):
     import json
     from pathlib import Path
     d = Path(model_dir) / "scheduler"
@@ -447,7 +539,7 @@ def load_learned_scheduler(which: str, model_dir, cfg: PipelineConfig, scenario:
     rep = json.loads(rep_path.read_text())
     if which == "il":
         m = SchedulerModel.load(str(d / "scheduler_il.pt"))
-        return SchedulerPolicy(m, cfg.pcacs, threshold=rep["il"]["threshold"], mode="imitation", name="pcacs_learned:il",
+        return SchedulerPolicy(m, cfg.pcacs, threshold=rep["il"]["threshold"], mode="imitation", name=name or "pcacs_learned:il",
                                goal_tags=scenario.goal_tags, text_model=text_model)
     m = SchedulerModel.load(str(d / "scheduler_rl.pt"))
-    return SchedulerPolicy(m, cfg.pcacs, mode="rl", name="pcacs_learned:rl", goal_tags=scenario.goal_tags, text_model=text_model)
+    return SchedulerPolicy(m, cfg.pcacs, mode="rl", name=name or "pcacs_learned:rl", goal_tags=scenario.goal_tags, text_model=text_model)

@@ -1,0 +1,917 @@
+{
+ "thresholds": {
+  "0.25": {
+   "per_object": {
+    "Bench": {
+     "annotated": true,
+     "group": 3,
+     "coco_labels": [
+      "bench"
+     ],
+     "match": "direct",
+     "tp": 14,
+     "fp": 25,
+     "fn": 62,
+     "tn": 570,
+     "support": 76,
+     "precision": 0.359,
+     "recall": 0.184,
+     "f1": 0.243
+    },
+    "Bicycle": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "bicycle"
+     ],
+     "match": "direct",
+     "tp": 11,
+     "fp": 6,
+     "fn": 34,
+     "tn": 620,
+     "support": 45,
+     "precision": 0.647,
+     "recall": 0.244,
+     "f1": 0.355
+    },
+    "Bus": {
+     "annotated": true,
+     "group": 11,
+     "coco_labels": [
+      "bus"
+     ],
+     "match": "direct",
+     "tp": 30,
+     "fp": 3,
+     "fn": 8,
+     "tn": 630,
+     "support": 38,
+     "precision": 0.909,
+     "recall": 0.789,
+     "f1": 0.845
+    },
+    "Car": {
+     "annotated": true,
+     "group": 11,
+     "coco_labels": [
+      "car"
+     ],
+     "match": "direct",
+     "tp": 228,
+     "fp": 7,
+     "fn": 46,
+     "tn": 390,
+     "support": 274,
+     "precision": 0.97,
+     "recall": 0.832,
+     "f1": 0.896
+    },
+    "Chair": {
+     "annotated": true,
+     "group": 14,
+     "coco_labels": [
+      "chair"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 3,
+     "fn": 4,
+     "tn": 664,
+     "support": 4,
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0
+    },
+    "Counter": {
+     "annotated": true,
+     "group": 14,
+     "coco_labels": [
+      "dining table"
+     ],
+     "match": "proxy",
+     "tp": 0,
+     "fp": 1,
+     "fn": 0,
+     "tn": 670,
+     "support": 0,
+     "precision": 0.0,
+     "recall": null,
+     "f1": null
+    },
+    "Dog": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "dog"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 5,
+     "fn": 0,
+     "tn": 666,
+     "support": 0,
+     "precision": 0.0,
+     "recall": null,
+     "f1": null
+    },
+    "Fire hydrant": {
+     "annotated": true,
+     "group": 2,
+     "coco_labels": [
+      "fire hydrant"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 671,
+     "support": 0,
+     "precision": null,
+     "recall": null,
+     "f1": null
+    },
+    "Guide Dog": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "dog"
+     ],
+     "match": "proxy",
+     "tp": 0,
+     "fp": 5,
+     "fn": 0,
+     "tn": 666,
+     "support": 0,
+     "precision": 0.0,
+     "recall": null,
+     "f1": null
+    },
+    "Maintenance Vehicle": {
+     "annotated": true,
+     "group": 7,
+     "coco_labels": [
+      "truck",
+      "car"
+     ],
+     "match": "proxy",
+     "tp": 4,
+     "fp": 245,
+     "fn": 4,
+     "tn": 418,
+     "support": 8,
+     "precision": 0.016,
+     "recall": 0.5,
+     "f1": 0.031
+    },
+    "Motorcycle": {
+     "annotated": true,
+     "group": 11,
+     "coco_labels": [
+      "motorcycle"
+     ],
+     "match": "direct",
+     "tp": 5,
+     "fp": 3,
+     "fn": 7,
+     "tn": 656,
+     "support": 12,
+     "precision": 0.625,
+     "recall": 0.417,
+     "f1": 0.5
+    },
+    "Paratransit Vehicle": {
+     "annotated": true,
+     "group": 10,
+     "coco_labels": [
+      "bus",
+      "truck",
+      "car"
+     ],
+     "match": "proxy",
+     "tp": 27,
+     "fp": 236,
+     "fn": 2,
+     "tn": 406,
+     "support": 29,
+     "precision": 0.103,
+     "recall": 0.931,
+     "f1": 0.185
+    },
+    "Person": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "direct",
+     "tp": 601,
+     "fp": 6,
+     "fn": 14,
+     "tn": 50,
+     "support": 615,
+     "precision": 0.99,
+     "recall": 0.977,
+     "f1": 0.984
+    },
+    "Person with a Disability": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "proxy",
+     "tp": 576,
+     "fp": 31,
+     "fn": 14,
+     "tn": 50,
+     "support": 590,
+     "precision": 0.949,
+     "recall": 0.976,
+     "f1": 0.962
+    },
+    "Roadside Parking": {
+     "annotated": true,
+     "group": 10,
+     "coco_labels": [
+      "car"
+     ],
+     "match": "proxy",
+     "tp": 141,
+     "fp": 94,
+     "fn": 17,
+     "tn": 419,
+     "support": 158,
+     "precision": 0.6,
+     "recall": 0.892,
+     "f1": 0.718
+    },
+    "Stop Sign": {
+     "annotated": true,
+     "group": 12,
+     "coco_labels": [
+      "stop sign"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 0,
+     "fn": 6,
+     "tn": 665,
+     "support": 6,
+     "precision": null,
+     "recall": 0.0,
+     "f1": null
+    },
+    "Street Vendor": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "proxy",
+     "tp": 9,
+     "fp": 598,
+     "fn": 0,
+     "tn": 64,
+     "support": 9,
+     "precision": 0.015,
+     "recall": 1.0,
+     "f1": 0.029
+    },
+    "Table": {
+     "annotated": true,
+     "group": 14,
+     "coco_labels": [
+      "dining table"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 1,
+     "fn": 9,
+     "tn": 661,
+     "support": 9,
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0
+    },
+    "Traffic Signals": {
+     "annotated": true,
+     "group": 12,
+     "coco_labels": [
+      "traffic light"
+     ],
+     "match": "direct",
+     "tp": 29,
+     "fp": 3,
+     "fn": 40,
+     "tn": 599,
+     "support": 69,
+     "precision": 0.906,
+     "recall": 0.42,
+     "f1": 0.574
+    },
+    "Wheelchair": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "proxy",
+     "tp": 0,
+     "fp": 607,
+     "fn": 0,
+     "tn": 64,
+     "support": 0,
+     "precision": 0.0,
+     "recall": null,
+     "f1": null
+    }
+   },
+   "micro": {
+    "direct": {
+     "tp": 918,
+     "fp": 62,
+     "fn": 230,
+     "tn": 6842,
+     "precision": 0.937,
+     "recall": 0.8,
+     "f1": 0.863
+    },
+    "mappable": {
+     "tp": 1675,
+     "fp": 1879,
+     "fn": 267,
+     "tn": 9599,
+     "precision": 0.471,
+     "recall": 0.863,
+     "f1": 0.61
+    },
+    "all_annotated": {
+     "tp": 1675,
+     "fp": 1879,
+     "fn": 5535,
+     "tn": 43920,
+     "precision": 0.471,
+     "recall": 0.232,
+     "f1": 0.311
+    },
+    "all_annotated_direct": {
+     "tp": 918,
+     "fp": 62,
+     "fn": 6292,
+     "tn": 45737,
+     "precision": 0.937,
+     "recall": 0.127,
+     "f1": 0.224
+    }
+   },
+   "high_priority_frames": {
+    "frames_with_group_3_5_7_object": 205,
+    "frames_with_a_hit": 18,
+    "recall": 0.088
+   }
+  },
+  "0.5": {
+   "per_object": {
+    "Bench": {
+     "annotated": true,
+     "group": 3,
+     "coco_labels": [
+      "bench"
+     ],
+     "match": "direct",
+     "tp": 9,
+     "fp": 11,
+     "fn": 67,
+     "tn": 584,
+     "support": 76,
+     "precision": 0.45,
+     "recall": 0.118,
+     "f1": 0.188
+    },
+    "Bicycle": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "bicycle"
+     ],
+     "match": "direct",
+     "tp": 4,
+     "fp": 3,
+     "fn": 41,
+     "tn": 623,
+     "support": 45,
+     "precision": 0.571,
+     "recall": 0.089,
+     "f1": 0.154
+    },
+    "Bus": {
+     "annotated": true,
+     "group": 11,
+     "coco_labels": [
+      "bus"
+     ],
+     "match": "direct",
+     "tp": 22,
+     "fp": 0,
+     "fn": 16,
+     "tn": 633,
+     "support": 38,
+     "precision": 1.0,
+     "recall": 0.579,
+     "f1": 0.733
+    },
+    "Car": {
+     "annotated": true,
+     "group": 11,
+     "coco_labels": [
+      "car"
+     ],
+     "match": "direct",
+     "tp": 184,
+     "fp": 1,
+     "fn": 90,
+     "tn": 396,
+     "support": 274,
+     "precision": 0.995,
+     "recall": 0.672,
+     "f1": 0.802
+    },
+    "Chair": {
+     "annotated": true,
+     "group": 14,
+     "coco_labels": [
+      "chair"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 1,
+     "fn": 4,
+     "tn": 666,
+     "support": 4,
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0
+    },
+    "Counter": {
+     "annotated": true,
+     "group": 14,
+     "coco_labels": [
+      "dining table"
+     ],
+     "match": "proxy",
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 671,
+     "support": 0,
+     "precision": null,
+     "recall": null,
+     "f1": null
+    },
+    "Dog": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "dog"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 3,
+     "fn": 0,
+     "tn": 668,
+     "support": 0,
+     "precision": 0.0,
+     "recall": null,
+     "f1": null
+    },
+    "Fire hydrant": {
+     "annotated": true,
+     "group": 2,
+     "coco_labels": [
+      "fire hydrant"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "tn": 671,
+     "support": 0,
+     "precision": null,
+     "recall": null,
+     "f1": null
+    },
+    "Guide Dog": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "dog"
+     ],
+     "match": "proxy",
+     "tp": 0,
+     "fp": 3,
+     "fn": 0,
+     "tn": 668,
+     "support": 0,
+     "precision": 0.0,
+     "recall": null,
+     "f1": null
+    },
+    "Maintenance Vehicle": {
+     "annotated": true,
+     "group": 7,
+     "coco_labels": [
+      "truck",
+      "car"
+     ],
+     "match": "proxy",
+     "tp": 2,
+     "fp": 192,
+     "fn": 6,
+     "tn": 471,
+     "support": 8,
+     "precision": 0.01,
+     "recall": 0.25,
+     "f1": 0.02
+    },
+    "Motorcycle": {
+     "annotated": true,
+     "group": 11,
+     "coco_labels": [
+      "motorcycle"
+     ],
+     "match": "direct",
+     "tp": 4,
+     "fp": 0,
+     "fn": 8,
+     "tn": 659,
+     "support": 12,
+     "precision": 1.0,
+     "recall": 0.333,
+     "f1": 0.5
+    },
+    "Paratransit Vehicle": {
+     "annotated": true,
+     "group": 10,
+     "coco_labels": [
+      "bus",
+      "truck",
+      "car"
+     ],
+     "match": "proxy",
+     "tp": 20,
+     "fp": 186,
+     "fn": 9,
+     "tn": 456,
+     "support": 29,
+     "precision": 0.097,
+     "recall": 0.69,
+     "f1": 0.17
+    },
+    "Person": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "direct",
+     "tp": 580,
+     "fp": 3,
+     "fn": 35,
+     "tn": 53,
+     "support": 615,
+     "precision": 0.995,
+     "recall": 0.943,
+     "f1": 0.968
+    },
+    "Person with a Disability": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "proxy",
+     "tp": 555,
+     "fp": 28,
+     "fn": 35,
+     "tn": 53,
+     "support": 590,
+     "precision": 0.952,
+     "recall": 0.941,
+     "f1": 0.946
+    },
+    "Roadside Parking": {
+     "annotated": true,
+     "group": 10,
+     "coco_labels": [
+      "car"
+     ],
+     "match": "proxy",
+     "tp": 119,
+     "fp": 66,
+     "fn": 39,
+     "tn": 447,
+     "support": 158,
+     "precision": 0.643,
+     "recall": 0.753,
+     "f1": 0.694
+    },
+    "Stop Sign": {
+     "annotated": true,
+     "group": 12,
+     "coco_labels": [
+      "stop sign"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 0,
+     "fn": 6,
+     "tn": 665,
+     "support": 6,
+     "precision": null,
+     "recall": 0.0,
+     "f1": null
+    },
+    "Street Vendor": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "proxy",
+     "tp": 9,
+     "fp": 574,
+     "fn": 0,
+     "tn": 88,
+     "support": 9,
+     "precision": 0.015,
+     "recall": 1.0,
+     "f1": 0.03
+    },
+    "Table": {
+     "annotated": true,
+     "group": 14,
+     "coco_labels": [
+      "dining table"
+     ],
+     "match": "direct",
+     "tp": 0,
+     "fp": 0,
+     "fn": 9,
+     "tn": 662,
+     "support": 9,
+     "precision": null,
+     "recall": 0.0,
+     "f1": null
+    },
+    "Traffic Signals": {
+     "annotated": true,
+     "group": 12,
+     "coco_labels": [
+      "traffic light"
+     ],
+     "match": "direct",
+     "tp": 12,
+     "fp": 0,
+     "fn": 57,
+     "tn": 602,
+     "support": 69,
+     "precision": 1.0,
+     "recall": 0.174,
+     "f1": 0.296
+    },
+    "Wheelchair": {
+     "annotated": true,
+     "group": 8,
+     "coco_labels": [
+      "person"
+     ],
+     "match": "proxy",
+     "tp": 0,
+     "fp": 583,
+     "fn": 0,
+     "tn": 88,
+     "support": 0,
+     "precision": 0.0,
+     "recall": null,
+     "f1": null
+    }
+   },
+   "micro": {
+    "direct": {
+     "tp": 815,
+     "fp": 22,
+     "fn": 333,
+     "tn": 6882,
+     "precision": 0.974,
+     "recall": 0.71,
+     "f1": 0.821
+    },
+    "mappable": {
+     "tp": 1520,
+     "fp": 1654,
+     "fn": 422,
+     "tn": 9824,
+     "precision": 0.479,
+     "recall": 0.783,
+     "f1": 0.594
+    },
+    "all_annotated": {
+     "tp": 1520,
+     "fp": 1654,
+     "fn": 5690,
+     "tn": 44145,
+     "precision": 0.479,
+     "recall": 0.211,
+     "f1": 0.293
+    },
+    "all_annotated_direct": {
+     "tp": 815,
+     "fp": 22,
+     "fn": 6395,
+     "tn": 45777,
+     "precision": 0.974,
+     "recall": 0.113,
+     "f1": 0.203
+    }
+   },
+   "high_priority_frames": {
+    "frames_with_group_3_5_7_object": 205,
+    "frames_with_a_hit": 11,
+    "recall": 0.054
+   }
+  }
+ },
+ "frames_scored": 671,
+ "segments": 31,
+ "annotated_objects": [
+  "Accent Paving",
+  "Barrier Post",
+  "Barrier Stump",
+  "Bench",
+  "Bicycle",
+  "Bridge",
+  "Building",
+  "Bus",
+  "Bus Stop",
+  "Car",
+  "Chair",
+  "Closed Sidewalk",
+  "Counter",
+  "Crosswalk",
+  "Curb",
+  "Dog",
+  "Driveway (flat)",
+  "Elevator",
+  "Escalator",
+  "Fence",
+  "Fire hydrant",
+  "Flush Door",
+  "Foldout Sign",
+  "Fountain",
+  "Gate",
+  "Guide Dog",
+  "Gutter",
+  "Hose",
+  "Lamp Post",
+  "Mailbox",
+  "Maintenance Vehicle",
+  "Motorcycle",
+  "Parallel Parking Spot",
+  "Paratransit Vehicle",
+  "Pedestrian Crossing",
+  "Person",
+  "Person with a Disability",
+  "Pillar",
+  "Pole",
+  "Puddle",
+  "Push Button",
+  "Railing",
+  "Raised Entryway",
+  "Retaining Wall",
+  "Road",
+  "Road Divider",
+  "Road Shoulder",
+  "Roadside Parking",
+  "Sidewalk",
+  "Sidewalk Pits",
+  "Sign",
+  "Sign Post",
+  "Sloped Curb",
+  "Sloped Driveway",
+  "Snow",
+  "Stairs",
+  "Stop Sign",
+  "Street Vendor",
+  "Table",
+  "Tactile Paving",
+  "Traffic Signals",
+  "Train Platform",
+  "Train Tracks",
+  "Trash Bins",
+  "Trash on Roads",
+  "Tree",
+  "Turnstile",
+  "Uncontrolled Crossing",
+  "Uneven Stairs",
+  "Unpaved Road",
+  "Unpaved Sidewalk",
+  "Vegetation",
+  "Wall",
+  "Water Leakage",
+  "Water Pipes",
+  "Wet Surface",
+  "Wheelchair",
+  "White Cane",
+  "Yard Waste"
+ ],
+ "frames_present": {
+  "Accent Paving": 136,
+  "Barrier Post": 72,
+  "Barrier Stump": 2,
+  "Bench": 76,
+  "Bicycle": 45,
+  "Bridge": 4,
+  "Building": 346,
+  "Bus": 38,
+  "Bus Stop": 19,
+  "Car": 274,
+  "Chair": 4,
+  "Closed Sidewalk": 28,
+  "Counter": 0,
+  "Crosswalk": 84,
+  "Curb": 345,
+  "Dog": 0,
+  "Driveway (flat)": 51,
+  "Elevator": 1,
+  "Escalator": 0,
+  "Fence": 123,
+  "Fire hydrant": 0,
+  "Flush Door": 2,
+  "Foldout Sign": 0,
+  "Fountain": 0,
+  "Gate": 64,
+  "Guide Dog": 0,
+  "Gutter": 28,
+  "Hose": 0,
+  "Lamp Post": 142,
+  "Mailbox": 16,
+  "Maintenance Vehicle": 8,
+  "Motorcycle": 12,
+  "Parallel Parking Spot": 125,
+  "Paratransit Vehicle": 29,
+  "Pedestrian Crossing": 96,
+  "Person": 615,
+  "Person with a Disability": 590,
+  "Pillar": 19,
+  "Pole": 253,
+  "Puddle": 23,
+  "Push Button": 6,
+  "Railing": 155,
+  "Raised Entryway": 46,
+  "Retaining Wall": 39,
+  "Road": 384,
+  "Road Divider": 11,
+  "Road Shoulder": 41,
+  "Roadside Parking": 158,
+  "Sidewalk": 538,
+  "Sidewalk Pits": 51,
+  "Sign": 78,
+  "Sign Post": 63,
+  "Sloped Curb": 180,
+  "Sloped Driveway": 27,
+  "Snow": 21,
+  "Stairs": 131,
+  "Stop Sign": 6,
+  "Street Vendor": 9,
+  "Table": 9,
+  "Tactile Paving": 82,
+  "Traffic Signals": 69,
+  "Train Platform": 1,
+  "Train Tracks": 0,
+  "Trash Bins": 67,
+  "Trash on Roads": 45,
+  "Tree": 228,
+  "Turnstile": 7,
+  "Uncontrolled Crossing": 15,
+  "Uneven Stairs": 0,
+  "Unpaved Road": 0,
+  "Unpaved Sidewalk": 35,
+  "Vegetation": 331,
+  "Wall": 286,
+  "Water Leakage": 0,
+  "Water Pipes": 0,
+  "Wet Surface": 16,
+  "Wheelchair": 0,
+  "White Cane": 386,
+  "Yard Waste": 19
+ },
+ "run": {
+  "model": "yolo11n.pt",
+  "device": "mps",
+  "imgsz": 640,
+  "frames": 671,
+  "missing_files": [],
+  "seconds": 84.0
+ },
+ "label_oddities": {}
+}

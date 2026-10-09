@@ -1,6 +1,6 @@
 {
   "name": "SeeForMe", "short_name": "SeeForMe", "start_url": "/", "display": "standalone",
-  "background_color": "#0b0f14", "theme_color": "#0b0f14",
+  "background_color": "#ffffff", "theme_color": "#ffffff",
   "description": "Predictive, action-aware audio cues for blind and low-vision navigation.",
   "icons": [{ "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" },
             { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },

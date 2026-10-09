@@ -26,6 +26,8 @@ TYPICAL_SIZE_M = {
     "stop sign": (0.75, 0.75), "traffic light": (1.0, 0.35), "cone": (0.7, 0.4), "pole": (2.5, 0.2),
     "box": (0.5, 0.5), "cart": (1.0, 0.7), "barrier": (1.0, 1.5), "wet floor sign": (0.65, 0.3),
     "curb": (0.15, 2.0), "elevator": (2.1, 1.0), "scooter": (1.1, 0.4), "text": (0.3, 0.8), "umbrella": (1.0, 1.0),
+    "fence": (1.2, 2.0), "tree": (3.0, 0.5), "shelf": (1.8, 1.0), "machine": (1.6, 0.8), "sign": (0.6, 0.6),
+    "ground hazard": (0.1, 0.8), "crossing": (0.1, 3.0), "animal": (0.5, 0.4),
 }
 DEFAULT_SIZE_M = (0.8, 0.5)
 

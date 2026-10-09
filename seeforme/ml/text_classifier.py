@@ -90,12 +90,13 @@ def build_model():
     ])
 
 
-def train_and_save(out_path: str = "models/text_importance.joblib", seed: int = 0) -> dict:
+def train_and_save(out_path: str = "models/text_importance.joblib", seed: int = 0,
+                   extra_csv: str = "data/text_importance/extra.csv") -> dict:
     import joblib
     from sklearn.model_selection import cross_val_score, train_test_split
     from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 
-    X, y = generate_dataset(seed=seed)
+    X, y = generate_dataset(seed=seed, extra_csv=extra_csv)
     Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.25, random_state=seed, stratify=y)
     model = build_model()
     cv = cross_val_score(build_model(), Xtr, ytr, cv=5, scoring="f1")
