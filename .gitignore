@@ -32,3 +32,4 @@ data/aria/
 data/jrdb/
 data/splits_private/
 results/**/*.mp4
+results/live_sessions/

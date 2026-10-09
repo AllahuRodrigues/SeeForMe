@@ -1,0 +1,1535 @@
+{
+ "generated": "2026-10-09 11:54",
+ "host": {
+  "machine": "Apple M1 Max, macOS 26.5.1",
+  "processor": "arm",
+  "torch": "2.14.0",
+  "ultralytics": "8.4.155",
+  "device": "mps",
+  "python": "3.13.9"
+ },
+ "models": [
+  "yolo11n.pt",
+  "yolo11s.pt"
+ ],
+ "protocol": {
+  "imgsz": 640,
+  "width": 640,
+  "live_conf": 0.25,
+  "detector_conf_floor": 0.25,
+  "thresholds": [
+   0.25,
+   0.35
+  ],
+  "splits": [
+   "finetune",
+   "select"
+  ],
+  "clips": 10,
+  "per_clip": 10,
+  "step_s": 0.1,
+  "rounds": 3,
+  "warmup": 10,
+  "seed": 0,
+  "budget_ms": 120.0,
+  "depth_hi_ms": 60.0,
+  "fallback": "yolo11n.pt",
+  "policy": "pcacs_learned:rl"
+ },
+ "recommendation": {
+  "model": "yolo11s.pt",
+  "more_accurate": "yolo11s.pt",
+  "reason": "yolo11s.pt has the higher direct-class F1 at every threshold and its full pipeline runs at 54 ms per frame (median) <= 120 ms",
+  "pipeline_ms_used": "measured LivePipeline end-to-end median + resize",
+  "pipeline_ms": {
+   "yolo11n.pt": 51.11,
+   "yolo11s.pt": 53.99
+  },
+  "conservative_ms": {
+   "yolo11n.pt": 74.97,
+   "yolo11s.pt": 80.33
+  },
+  "notes": [
+   "conf 0.25: direct-class F1 0.863 vs 0.895 (yolo11s - yolo11n = +0.032, 95% CI [+0.013, +0.052] excludes 0); recall 0.801 vs 0.853, precision 0.937 vs 0.942",
+   "conf 0.35: direct-class F1 0.855 vs 0.888 (yolo11s - yolo11n = +0.033, 95% CI [+0.014, +0.056] excludes 0); recall 0.775 vs 0.828, precision 0.952 vs 0.956",
+   "`yolo11n.pt`: detector median 12.3 ms (p95 17.2); full pipeline median 51.1 ms incl. resize (end-to-end p95 61.8); conservative bound 75.0 ms",
+   "`yolo11s.pt`: detector median 17.6 ms (p95 26.2); full pipeline median 54.0 ms incl. resize (end-to-end p95 65.8); conservative bound 80.3 ms",
+   "person boxes on consecutive EgoBlind frames 0.1 s apart (conf 0.25): persistence 0.885 (116/131) vs 0.920 (127/138), presence flip rate 0.078 (7/90) vs 0.033 (3/90) (`yolo11n.pt`, `yolo11s.pt`; 10 clips, so indicative only); a person who drops out and comes back as a new track can be announced again",
+   "raising the detector floor from 0.25 to 0.35 does not help that: person flip rate `yolo11n.pt` 0.078 -> 0.144, `yolo11s.pt` 0.033 -> 0.144; keep perception.yolo_conf = 0.25 (the scheduler already ignores tracks under its own min_confidence)"
+  ],
+  "wire_up": {
+   "cli": "scripts/run_live.py --model yolo11s.pt",
+   "config": {
+    "perception.yolo_model": "yolo11s.pt",
+    "perception.yolo_conf": 0.25,
+    "perception.yolo_imgsz": 640
+   }
+  }
+ },
+ "latency": {
+  "frames": 100,
+  "clips": 10,
+  "rounds": 3,
+  "warmup": 10,
+  "detector": {
+   "yolo11n.pt": {
+    "n": 300,
+    "median_ms": 12.28,
+    "p95_ms": 17.23,
+    "mean_ms": 13.07,
+    "min_ms": 9.69,
+    "max_ms": 23.13
+   },
+   "yolo11s.pt": {
+    "n": 300,
+    "median_ms": 17.63,
+    "p95_ms": 26.24,
+    "mean_ms": 18.74,
+    "min_ms": 13.75,
+    "max_ms": 29.84
+   }
+  },
+  "per_round_median": {
+   "yolo11n.pt": [
+    12.14,
+    12.04,
+    12.89
+   ],
+   "yolo11s.pt": [
+    17.37,
+    17.63,
+    18.24
+   ]
+  },
+  "resize_ms": {
+   "n": 100,
+   "median_ms": 2.61,
+   "p95_ms": 25.85,
+   "mean_ms": 7.3,
+   "min_ms": 2.54,
+   "max_ms": 28.22
+  }
+ },
+ "pipeline": {
+  "measured": true,
+  "depth_model": "depth-anything/Depth-Anything-V2-Metric-Indoor-Small-hf",
+  "depth_input": 308,
+  "policy": {
+   "name": "pcacs_learned:rl",
+   "fallback_from": null,
+   "checkpoint": "/Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/models/scheduler/scheduler_rl.pt"
+  },
+  "rounds": 3,
+  "per_model": {
+   "yolo11n.pt": {
+    "detect": {
+     "n": 300,
+     "median_ms": 12.83,
+     "p95_ms": 16.56,
+     "mean_ms": 13.21,
+     "min_ms": 9.88,
+     "max_ms": 23.03
+    },
+    "track": {
+     "n": 300,
+     "median_ms": 0.09,
+     "p95_ms": 0.26,
+     "mean_ms": 0.11,
+     "min_ms": 0.01,
+     "max_ms": 0.31
+    },
+    "policy": {
+     "n": 300,
+     "median_ms": 0.0,
+     "p95_ms": 0.7,
+     "mean_ms": 0.08,
+     "min_ms": 0.0,
+     "max_ms": 0.87
+    },
+    "end_to_end": {
+     "n": 300,
+     "median_ms": 48.5,
+     "p95_ms": 61.77,
+     "mean_ms": 49.95,
+     "min_ms": 40.08,
+     "max_ms": 108.44
+    },
+    "depth": {
+     "n": 300,
+     "median_ms": 34.9,
+     "p95_ms": 44.8,
+     "mean_ms": 36.08,
+     "min_ms": 27.39,
+     "max_ms": 93.57
+    },
+    "cues_round0": {}
+   },
+   "yolo11s.pt": {
+    "detect": {
+     "n": 300,
+     "median_ms": 16.7,
+     "p95_ms": 21.55,
+     "mean_ms": 17.07,
+     "min_ms": 12.32,
+     "max_ms": 26.44
+    },
+    "track": {
+     "n": 300,
+     "median_ms": 0.09,
+     "p95_ms": 0.25,
+     "mean_ms": 0.12,
+     "min_ms": 0.01,
+     "max_ms": 0.29
+    },
+    "policy": {
+     "n": 300,
+     "median_ms": 0.0,
+     "p95_ms": 0.68,
+     "mean_ms": 0.08,
+     "min_ms": 0.0,
+     "max_ms": 0.89
+    },
+    "end_to_end": {
+     "n": 300,
+     "median_ms": 51.38,
+     "p95_ms": 65.77,
+     "mean_ms": 52.9,
+     "min_ms": 40.8,
+     "max_ms": 77.27
+    },
+    "depth": {
+     "n": 300,
+     "median_ms": 33.93,
+     "p95_ms": 44.76,
+     "mean_ms": 35.18,
+     "min_ms": 27.32,
+     "max_ms": 55.88
+    },
+    "cues_round0": {}
+   }
+  },
+  "budget_ms": {
+   "yolo11n.pt": 51.11,
+   "yolo11s.pt": 53.99
+  }
+ },
+ "conservative_ms": {
+  "yolo11n.pt": 74.97,
+  "yolo11s.pt": 80.33
+ },
+ "blvnav": {
+  "frames_labelled": 671,
+  "segments": 31,
+  "direct_objects": [
+   "Bench",
+   "Bicycle",
+   "Bus",
+   "Car",
+   "Chair",
+   "Dog",
+   "Fire hydrant",
+   "Motorcycle",
+   "Person",
+   "Stop Sign",
+   "Table",
+   "Traffic Signals"
+  ],
+  "direct_coco_classes": [
+   "bench",
+   "bicycle",
+   "bus",
+   "car",
+   "chair",
+   "dining table",
+   "dog",
+   "fire hydrant",
+   "motorcycle",
+   "person",
+   "stop sign",
+   "traffic light"
+  ],
+  "label_oddities": {},
+  "seconds": 25.9,
+  "frames_scored": 671,
+  "latency": {
+   "yolo11n.pt": {
+    "n": 671,
+    "median_ms": 13.12,
+    "p95_ms": 18.54,
+    "mean_ms": 14.78,
+    "min_ms": 9.04,
+    "max_ms": 238.78
+   },
+   "yolo11s.pt": {
+    "n": 671,
+    "median_ms": 19.41,
+    "p95_ms": 27.19,
+    "mean_ms": 20.72,
+    "min_ms": 12.18,
+    "max_ms": 186.63
+   }
+  },
+  "thresholds": {
+   "0.25": {
+    "yolo11n.pt": {
+     "direct_micro": {
+      "tp": 919,
+      "fp": 62,
+      "fn": 229,
+      "tn": 6842,
+      "precision": 0.937,
+      "recall": 0.801,
+      "f1": 0.863
+     },
+     "mappable_micro": {
+      "tp": 1676,
+      "fp": 1884,
+      "fn": 266,
+      "tn": 9594,
+      "precision": 0.471,
+      "recall": 0.863,
+      "f1": 0.609
+     },
+     "paper_style_direct": {
+      "tp": 919,
+      "fp": 62,
+      "fn": 6291,
+      "tn": 45737,
+      "precision": 0.937,
+      "recall": 0.127,
+      "f1": 0.224
+     },
+     "high_priority_frames": {
+      "frames_with_group_3_5_7_object": 205,
+      "frames_with_a_hit": 18,
+      "recall": 0.088
+     },
+     "direct_macro_f1_support_ge_10": 0.624,
+     "direct_macro_objects": [
+      "Bench",
+      "Bicycle",
+      "Bus",
+      "Car",
+      "Motorcycle",
+      "Person",
+      "Traffic Signals"
+     ],
+     "per_object_direct": {
+      "Bench": {
+       "support": 76,
+       "tp": 14,
+       "fp": 25,
+       "fn": 62,
+       "precision": 0.359,
+       "recall": 0.184,
+       "f1": 0.243
+      },
+      "Bicycle": {
+       "support": 45,
+       "tp": 11,
+       "fp": 6,
+       "fn": 34,
+       "precision": 0.647,
+       "recall": 0.244,
+       "f1": 0.355
+      },
+      "Bus": {
+       "support": 38,
+       "tp": 30,
+       "fp": 5,
+       "fn": 8,
+       "precision": 0.857,
+       "recall": 0.789,
+       "f1": 0.822
+      },
+      "Car": {
+       "support": 274,
+       "tp": 230,
+       "fp": 7,
+       "fn": 44,
+       "precision": 0.97,
+       "recall": 0.839,
+       "f1": 0.9
+      },
+      "Chair": {
+       "support": 4,
+       "tp": 0,
+       "fp": 3,
+       "fn": 4,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      },
+      "Dog": {
+       "support": 0,
+       "tp": 0,
+       "fp": 4,
+       "fn": 0,
+       "precision": 0.0,
+       "recall": null,
+       "f1": null
+      },
+      "Fire hydrant": {
+       "support": 0,
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "precision": null,
+       "recall": null,
+       "f1": null
+      },
+      "Motorcycle": {
+       "support": 12,
+       "tp": 5,
+       "fp": 3,
+       "fn": 7,
+       "precision": 0.625,
+       "recall": 0.417,
+       "f1": 0.5
+      },
+      "Person": {
+       "support": 615,
+       "tp": 601,
+       "fp": 6,
+       "fn": 14,
+       "precision": 0.99,
+       "recall": 0.977,
+       "f1": 0.984
+      },
+      "Stop Sign": {
+       "support": 6,
+       "tp": 0,
+       "fp": 0,
+       "fn": 6,
+       "precision": null,
+       "recall": 0.0,
+       "f1": null
+      },
+      "Table": {
+       "support": 9,
+       "tp": 0,
+       "fp": 1,
+       "fn": 9,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      },
+      "Traffic Signals": {
+       "support": 69,
+       "tp": 28,
+       "fp": 2,
+       "fn": 41,
+       "precision": 0.933,
+       "recall": 0.406,
+       "f1": 0.566
+      }
+     }
+    },
+    "yolo11s.pt": {
+     "direct_micro": {
+      "tp": 979,
+      "fp": 60,
+      "fn": 169,
+      "tn": 6844,
+      "precision": 0.942,
+      "recall": 0.853,
+      "f1": 0.895
+     },
+     "mappable_micro": {
+      "tp": 1745,
+      "fp": 1952,
+      "fn": 197,
+      "tn": 9526,
+      "precision": 0.472,
+      "recall": 0.899,
+      "f1": 0.619
+     },
+     "paper_style_direct": {
+      "tp": 979,
+      "fp": 60,
+      "fn": 6231,
+      "tn": 45739,
+      "precision": 0.942,
+      "recall": 0.136,
+      "f1": 0.237
+     },
+     "high_priority_frames": {
+      "frames_with_group_3_5_7_object": 205,
+      "frames_with_a_hit": 21,
+      "recall": 0.102
+     },
+     "direct_macro_f1_support_ge_10": 0.721,
+     "direct_macro_objects": [
+      "Bench",
+      "Bicycle",
+      "Bus",
+      "Car",
+      "Motorcycle",
+      "Person",
+      "Traffic Signals"
+     ],
+     "per_object_direct": {
+      "Bench": {
+       "support": 76,
+       "tp": 17,
+       "fp": 12,
+       "fn": 59,
+       "precision": 0.586,
+       "recall": 0.224,
+       "f1": 0.324
+      },
+      "Bicycle": {
+       "support": 45,
+       "tp": 21,
+       "fp": 8,
+       "fn": 24,
+       "precision": 0.724,
+       "recall": 0.467,
+       "f1": 0.568
+      },
+      "Bus": {
+       "support": 38,
+       "tp": 36,
+       "fp": 4,
+       "fn": 2,
+       "precision": 0.9,
+       "recall": 0.947,
+       "f1": 0.923
+      },
+      "Car": {
+       "support": 274,
+       "tp": 255,
+       "fp": 4,
+       "fn": 19,
+       "precision": 0.985,
+       "recall": 0.931,
+       "f1": 0.957
+      },
+      "Chair": {
+       "support": 4,
+       "tp": 2,
+       "fp": 12,
+       "fn": 2,
+       "precision": 0.143,
+       "recall": 0.5,
+       "f1": 0.222
+      },
+      "Dog": {
+       "support": 0,
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "precision": null,
+       "recall": null,
+       "f1": null
+      },
+      "Fire hydrant": {
+       "support": 0,
+       "tp": 0,
+       "fp": 2,
+       "fn": 0,
+       "precision": 0.0,
+       "recall": null,
+       "f1": null
+      },
+      "Motorcycle": {
+       "support": 12,
+       "tp": 6,
+       "fp": 2,
+       "fn": 6,
+       "precision": 0.75,
+       "recall": 0.5,
+       "f1": 0.6
+      },
+      "Person": {
+       "support": 615,
+       "tp": 603,
+       "fp": 10,
+       "fn": 12,
+       "precision": 0.984,
+       "recall": 0.98,
+       "f1": 0.982
+      },
+      "Stop Sign": {
+       "support": 6,
+       "tp": 0,
+       "fp": 1,
+       "fn": 6,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      },
+      "Table": {
+       "support": 9,
+       "tp": 0,
+       "fp": 1,
+       "fn": 9,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      },
+      "Traffic Signals": {
+       "support": 69,
+       "tp": 39,
+       "fp": 4,
+       "fn": 30,
+       "precision": 0.907,
+       "recall": 0.565,
+       "f1": 0.696
+      }
+     }
+    },
+    "bootstrap_yolo11s_minus_yolo11n": {
+     "segments": 31,
+     "n_boot": 2000,
+     "precision": {
+      "diff": 0.0055,
+      "ci95": [
+       -0.0227,
+       0.0406
+      ],
+      "p_b_not_better": 0.413
+     },
+     "recall": {
+      "diff": 0.0523,
+      "ci95": [
+       0.0324,
+       0.075
+      ],
+      "p_b_not_better": 0.0
+     },
+     "f1": {
+      "diff": 0.032,
+      "ci95": [
+       0.0133,
+       0.0517
+      ],
+      "p_b_not_better": 0.001
+     }
+    }
+   },
+   "0.35": {
+    "yolo11n.pt": {
+     "direct_micro": {
+      "tp": 890,
+      "fp": 45,
+      "fn": 258,
+      "tn": 6859,
+      "precision": 0.952,
+      "recall": 0.775,
+      "f1": 0.855
+     },
+     "mappable_micro": {
+      "tp": 1638,
+      "fp": 1809,
+      "fn": 304,
+      "tn": 9669,
+      "precision": 0.475,
+      "recall": 0.843,
+      "f1": 0.608
+     },
+     "paper_style_direct": {
+      "tp": 890,
+      "fp": 45,
+      "fn": 6320,
+      "tn": 45754,
+      "precision": 0.952,
+      "recall": 0.123,
+      "f1": 0.219
+     },
+     "high_priority_frames": {
+      "frames_with_group_3_5_7_object": 205,
+      "frames_with_a_hit": 16,
+      "recall": 0.078
+     },
+     "direct_macro_f1_support_ge_10": 0.58,
+     "direct_macro_objects": [
+      "Bench",
+      "Bicycle",
+      "Bus",
+      "Car",
+      "Motorcycle",
+      "Person",
+      "Traffic Signals"
+     ],
+     "per_object_direct": {
+      "Bench": {
+       "support": 76,
+       "tp": 12,
+       "fp": 22,
+       "fn": 64,
+       "precision": 0.353,
+       "recall": 0.158,
+       "f1": 0.218
+      },
+      "Bicycle": {
+       "support": 45,
+       "tp": 6,
+       "fp": 4,
+       "fn": 39,
+       "precision": 0.6,
+       "recall": 0.133,
+       "f1": 0.218
+      },
+      "Bus": {
+       "support": 38,
+       "tp": 27,
+       "fp": 5,
+       "fn": 11,
+       "precision": 0.844,
+       "recall": 0.711,
+       "f1": 0.771
+      },
+      "Car": {
+       "support": 274,
+       "tp": 220,
+       "fp": 4,
+       "fn": 54,
+       "precision": 0.982,
+       "recall": 0.803,
+       "f1": 0.884
+      },
+      "Chair": {
+       "support": 4,
+       "tp": 0,
+       "fp": 1,
+       "fn": 4,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      },
+      "Dog": {
+       "support": 0,
+       "tp": 0,
+       "fp": 3,
+       "fn": 0,
+       "precision": 0.0,
+       "recall": null,
+       "f1": null
+      },
+      "Fire hydrant": {
+       "support": 0,
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "precision": null,
+       "recall": null,
+       "f1": null
+      },
+      "Motorcycle": {
+       "support": 12,
+       "tp": 4,
+       "fp": 1,
+       "fn": 8,
+       "precision": 0.8,
+       "recall": 0.333,
+       "f1": 0.471
+      },
+      "Person": {
+       "support": 615,
+       "tp": 597,
+       "fp": 5,
+       "fn": 18,
+       "precision": 0.992,
+       "recall": 0.971,
+       "f1": 0.981
+      },
+      "Stop Sign": {
+       "support": 6,
+       "tp": 0,
+       "fp": 0,
+       "fn": 6,
+       "precision": null,
+       "recall": 0.0,
+       "f1": null
+      },
+      "Table": {
+       "support": 9,
+       "tp": 0,
+       "fp": 0,
+       "fn": 9,
+       "precision": null,
+       "recall": 0.0,
+       "f1": null
+      },
+      "Traffic Signals": {
+       "support": 69,
+       "tp": 24,
+       "fp": 0,
+       "fn": 45,
+       "precision": 1.0,
+       "recall": 0.348,
+       "f1": 0.516
+      }
+     }
+    },
+    "yolo11s.pt": {
+     "direct_micro": {
+      "tp": 951,
+      "fp": 44,
+      "fn": 197,
+      "tn": 6860,
+      "precision": 0.956,
+      "recall": 0.828,
+      "f1": 0.888
+     },
+     "mappable_micro": {
+      "tp": 1713,
+      "fp": 1899,
+      "fn": 229,
+      "tn": 9579,
+      "precision": 0.474,
+      "recall": 0.882,
+      "f1": 0.617
+     },
+     "paper_style_direct": {
+      "tp": 951,
+      "fp": 44,
+      "fn": 6259,
+      "tn": 45755,
+      "precision": 0.956,
+      "recall": 0.132,
+      "f1": 0.232
+     },
+     "high_priority_frames": {
+      "frames_with_group_3_5_7_object": 205,
+      "frames_with_a_hit": 13,
+      "recall": 0.063
+     },
+     "direct_macro_f1_support_ge_10": 0.686,
+     "direct_macro_objects": [
+      "Bench",
+      "Bicycle",
+      "Bus",
+      "Car",
+      "Motorcycle",
+      "Person",
+      "Traffic Signals"
+     ],
+     "per_object_direct": {
+      "Bench": {
+       "support": 76,
+       "tp": 9,
+       "fp": 7,
+       "fn": 67,
+       "precision": 0.562,
+       "recall": 0.118,
+       "f1": 0.196
+      },
+      "Bicycle": {
+       "support": 45,
+       "tp": 18,
+       "fp": 5,
+       "fn": 27,
+       "precision": 0.783,
+       "recall": 0.4,
+       "f1": 0.529
+      },
+      "Bus": {
+       "support": 38,
+       "tp": 35,
+       "fp": 4,
+       "fn": 3,
+       "precision": 0.897,
+       "recall": 0.921,
+       "f1": 0.909
+      },
+      "Car": {
+       "support": 274,
+       "tp": 245,
+       "fp": 4,
+       "fn": 29,
+       "precision": 0.984,
+       "recall": 0.894,
+       "f1": 0.937
+      },
+      "Chair": {
+       "support": 4,
+       "tp": 2,
+       "fp": 9,
+       "fn": 2,
+       "precision": 0.182,
+       "recall": 0.5,
+       "f1": 0.267
+      },
+      "Dog": {
+       "support": 0,
+       "tp": 0,
+       "fp": 0,
+       "fn": 0,
+       "precision": null,
+       "recall": null,
+       "f1": null
+      },
+      "Fire hydrant": {
+       "support": 0,
+       "tp": 0,
+       "fp": 2,
+       "fn": 0,
+       "precision": 0.0,
+       "recall": null,
+       "f1": null
+      },
+      "Motorcycle": {
+       "support": 12,
+       "tp": 6,
+       "fp": 2,
+       "fn": 6,
+       "precision": 0.75,
+       "recall": 0.5,
+       "f1": 0.6
+      },
+      "Person": {
+       "support": 615,
+       "tp": 602,
+       "fp": 8,
+       "fn": 13,
+       "precision": 0.987,
+       "recall": 0.979,
+       "f1": 0.983
+      },
+      "Stop Sign": {
+       "support": 6,
+       "tp": 0,
+       "fp": 0,
+       "fn": 6,
+       "precision": null,
+       "recall": 0.0,
+       "f1": null
+      },
+      "Table": {
+       "support": 9,
+       "tp": 0,
+       "fp": 1,
+       "fn": 9,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      },
+      "Traffic Signals": {
+       "support": 69,
+       "tp": 34,
+       "fp": 2,
+       "fn": 35,
+       "precision": 0.944,
+       "recall": 0.493,
+       "f1": 0.648
+      }
+     }
+    },
+    "bootstrap_yolo11s_minus_yolo11n": {
+     "segments": 31,
+     "n_boot": 2000,
+     "precision": {
+      "diff": 0.0039,
+      "ci95": [
+       -0.0211,
+       0.0374
+      ],
+      "p_b_not_better": 0.437
+     },
+     "recall": {
+      "diff": 0.0531,
+      "ci95": [
+       0.0298,
+       0.0818
+      ],
+      "p_b_not_better": 0.0
+     },
+     "f1": {
+      "diff": 0.033,
+      "ci95": [
+       0.0136,
+       0.0559
+      ],
+      "p_b_not_better": 0.0
+     }
+    }
+   }
+  }
+ },
+ "agreement": {
+  "0.25": {
+   "counts": {
+    "yolo11n.pt": {
+     "person": 148,
+     "car": 0,
+     "chair": 20,
+     "bicycle": 0
+    },
+    "yolo11s.pt": {
+     "person": 154,
+     "car": 0,
+     "chair": 33,
+     "bicycle": 0
+    }
+   },
+   "pairwise": {
+    "person": {
+     "boxes_yolo11n.pt": 148,
+     "boxes_yolo11s.pt": 154,
+     "matched": 109,
+     "only_yolo11n.pt": 39,
+     "only_yolo11s.pt": 45,
+     "frames_yolo11n.pt": 94,
+     "frames_yolo11s.pt": 96,
+     "frames_both": 93,
+     "frames_neither": 3,
+     "frames": 100,
+     "frame_presence_agreement": 0.96,
+     "box_match_rate": 0.708
+    },
+    "car": {
+     "boxes_yolo11n.pt": 0,
+     "boxes_yolo11s.pt": 0,
+     "matched": 0,
+     "only_yolo11n.pt": 0,
+     "only_yolo11s.pt": 0,
+     "frames_yolo11n.pt": 0,
+     "frames_yolo11s.pt": 0,
+     "frames_both": 0,
+     "frames_neither": 100,
+     "frames": 100,
+     "frame_presence_agreement": 1.0,
+     "box_match_rate": 0.0
+    },
+    "chair": {
+     "boxes_yolo11n.pt": 20,
+     "boxes_yolo11s.pt": 33,
+     "matched": 18,
+     "only_yolo11n.pt": 2,
+     "only_yolo11s.pt": 15,
+     "frames_yolo11n.pt": 16,
+     "frames_yolo11s.pt": 21,
+     "frames_both": 16,
+     "frames_neither": 79,
+     "frames": 100,
+     "frame_presence_agreement": 0.95,
+     "box_match_rate": 0.545
+    },
+    "bicycle": {
+     "boxes_yolo11n.pt": 0,
+     "boxes_yolo11s.pt": 0,
+     "matched": 0,
+     "only_yolo11n.pt": 0,
+     "only_yolo11s.pt": 0,
+     "frames_yolo11n.pt": 0,
+     "frames_yolo11s.pt": 0,
+     "frames_both": 0,
+     "frames_neither": 100,
+     "frames": 100,
+     "frame_presence_agreement": 1.0,
+     "box_match_rate": 0.0
+    }
+   }
+  },
+  "0.35": {
+   "counts": {
+    "yolo11n.pt": {
+     "person": 122,
+     "car": 0,
+     "chair": 15,
+     "bicycle": 0
+    },
+    "yolo11s.pt": {
+     "person": 120,
+     "car": 0,
+     "chair": 27,
+     "bicycle": 0
+    }
+   },
+   "pairwise": {
+    "person": {
+     "boxes_yolo11n.pt": 122,
+     "boxes_yolo11s.pt": 120,
+     "matched": 94,
+     "only_yolo11n.pt": 28,
+     "only_yolo11s.pt": 26,
+     "frames_yolo11n.pt": 87,
+     "frames_yolo11s.pt": 85,
+     "frames_both": 78,
+     "frames_neither": 6,
+     "frames": 100,
+     "frame_presence_agreement": 0.84,
+     "box_match_rate": 0.77
+    },
+    "car": {
+     "boxes_yolo11n.pt": 0,
+     "boxes_yolo11s.pt": 0,
+     "matched": 0,
+     "only_yolo11n.pt": 0,
+     "only_yolo11s.pt": 0,
+     "frames_yolo11n.pt": 0,
+     "frames_yolo11s.pt": 0,
+     "frames_both": 0,
+     "frames_neither": 100,
+     "frames": 100,
+     "frame_presence_agreement": 1.0,
+     "box_match_rate": 0.0
+    },
+    "chair": {
+     "boxes_yolo11n.pt": 15,
+     "boxes_yolo11s.pt": 27,
+     "matched": 14,
+     "only_yolo11n.pt": 1,
+     "only_yolo11s.pt": 13,
+     "frames_yolo11n.pt": 14,
+     "frames_yolo11s.pt": 20,
+     "frames_both": 14,
+     "frames_neither": 80,
+     "frames": 100,
+     "frame_presence_agreement": 0.94,
+     "box_match_rate": 0.519
+    },
+    "bicycle": {
+     "boxes_yolo11n.pt": 0,
+     "boxes_yolo11s.pt": 0,
+     "matched": 0,
+     "only_yolo11n.pt": 0,
+     "only_yolo11s.pt": 0,
+     "frames_yolo11n.pt": 0,
+     "frames_yolo11s.pt": 0,
+     "frames_both": 0,
+     "frames_neither": 100,
+     "frames": 100,
+     "frame_presence_agreement": 1.0,
+     "box_match_rate": 0.0
+    }
+   }
+  }
+ },
+ "agreement_wide": {
+  "frames": 417,
+  "clips": 139,
+  "positions": [
+   0.25,
+   0.5,
+   0.75
+  ],
+  "per_threshold": {
+   "0.25": {
+    "counts": {
+     "yolo11n.pt": {
+      "person": 1131,
+      "car": 164,
+      "chair": 56,
+      "bicycle": 4
+     },
+     "yolo11s.pt": {
+      "person": 1245,
+      "car": 180,
+      "chair": 71,
+      "bicycle": 11
+     }
+    },
+    "pairwise": {
+     "person": {
+      "boxes_yolo11n.pt": 1131,
+      "boxes_yolo11s.pt": 1245,
+      "matched": 916,
+      "only_yolo11n.pt": 215,
+      "only_yolo11s.pt": 329,
+      "frames_yolo11n.pt": 348,
+      "frames_yolo11s.pt": 353,
+      "frames_both": 339,
+      "frames_neither": 55,
+      "frames": 417,
+      "frame_presence_agreement": 0.945,
+      "box_match_rate": 0.736
+     },
+     "car": {
+      "boxes_yolo11n.pt": 164,
+      "boxes_yolo11s.pt": 180,
+      "matched": 121,
+      "only_yolo11n.pt": 43,
+      "only_yolo11s.pt": 59,
+      "frames_yolo11n.pt": 66,
+      "frames_yolo11s.pt": 64,
+      "frames_both": 54,
+      "frames_neither": 341,
+      "frames": 417,
+      "frame_presence_agreement": 0.947,
+      "box_match_rate": 0.672
+     },
+     "chair": {
+      "boxes_yolo11n.pt": 56,
+      "boxes_yolo11s.pt": 71,
+      "matched": 32,
+      "only_yolo11n.pt": 24,
+      "only_yolo11s.pt": 39,
+      "frames_yolo11n.pt": 30,
+      "frames_yolo11s.pt": 34,
+      "frames_both": 15,
+      "frames_neither": 368,
+      "frames": 417,
+      "frame_presence_agreement": 0.918,
+      "box_match_rate": 0.451
+     },
+     "bicycle": {
+      "boxes_yolo11n.pt": 4,
+      "boxes_yolo11s.pt": 11,
+      "matched": 3,
+      "only_yolo11n.pt": 1,
+      "only_yolo11s.pt": 8,
+      "frames_yolo11n.pt": 3,
+      "frames_yolo11s.pt": 10,
+      "frames_both": 3,
+      "frames_neither": 407,
+      "frames": 417,
+      "frame_presence_agreement": 0.983,
+      "box_match_rate": 0.273
+     }
+    }
+   },
+   "0.35": {
+    "counts": {
+     "yolo11n.pt": {
+      "person": 885,
+      "car": 117,
+      "chair": 39,
+      "bicycle": 2
+     },
+     "yolo11s.pt": {
+      "person": 1017,
+      "car": 136,
+      "chair": 48,
+      "bicycle": 7
+     }
+    },
+    "pairwise": {
+     "person": {
+      "boxes_yolo11n.pt": 885,
+      "boxes_yolo11s.pt": 1017,
+      "matched": 753,
+      "only_yolo11n.pt": 132,
+      "only_yolo11s.pt": 264,
+      "frames_yolo11n.pt": 329,
+      "frames_yolo11s.pt": 338,
+      "frames_both": 317,
+      "frames_neither": 67,
+      "frames": 417,
+      "frame_presence_agreement": 0.921,
+      "box_match_rate": 0.74
+     },
+     "car": {
+      "boxes_yolo11n.pt": 117,
+      "boxes_yolo11s.pt": 136,
+      "matched": 96,
+      "only_yolo11n.pt": 21,
+      "only_yolo11s.pt": 40,
+      "frames_yolo11n.pt": 52,
+      "frames_yolo11s.pt": 60,
+      "frames_both": 48,
+      "frames_neither": 353,
+      "frames": 417,
+      "frame_presence_agreement": 0.962,
+      "box_match_rate": 0.706
+     },
+     "chair": {
+      "boxes_yolo11n.pt": 39,
+      "boxes_yolo11s.pt": 48,
+      "matched": 19,
+      "only_yolo11n.pt": 20,
+      "only_yolo11s.pt": 29,
+      "frames_yolo11n.pt": 21,
+      "frames_yolo11s.pt": 25,
+      "frames_both": 11,
+      "frames_neither": 382,
+      "frames": 417,
+      "frame_presence_agreement": 0.942,
+      "box_match_rate": 0.396
+     },
+     "bicycle": {
+      "boxes_yolo11n.pt": 2,
+      "boxes_yolo11s.pt": 7,
+      "matched": 2,
+      "only_yolo11n.pt": 0,
+      "only_yolo11s.pt": 5,
+      "frames_yolo11n.pt": 2,
+      "frames_yolo11s.pt": 6,
+      "frames_both": 2,
+      "frames_neither": 411,
+      "frames": 417,
+      "frame_presence_agreement": 0.99,
+      "box_match_rate": 0.286
+     }
+    }
+   }
+  }
+ },
+ "persistence": {
+  "0.25": {
+   "yolo11n.pt": {
+    "person": {
+     "boxes": 131,
+     "persisted": 116,
+     "persistence": 0.885,
+     "transitions": 90,
+     "presence_flips": 7,
+     "flip_rate": 0.078
+    },
+    "car": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    },
+    "chair": {
+     "boxes": 18,
+     "persisted": 14,
+     "persistence": 0.778,
+     "transitions": 90,
+     "presence_flips": 2,
+     "flip_rate": 0.022
+    },
+    "bicycle": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    }
+   },
+   "yolo11s.pt": {
+    "person": {
+     "boxes": 138,
+     "persisted": 127,
+     "persistence": 0.92,
+     "transitions": 90,
+     "presence_flips": 3,
+     "flip_rate": 0.033
+    },
+    "car": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    },
+    "chair": {
+     "boxes": 28,
+     "persisted": 23,
+     "persistence": 0.821,
+     "transitions": 90,
+     "presence_flips": 3,
+     "flip_rate": 0.033
+    },
+    "bicycle": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    }
+   }
+  },
+  "0.35": {
+   "yolo11n.pt": {
+    "person": {
+     "boxes": 109,
+     "persisted": 95,
+     "persistence": 0.872,
+     "transitions": 90,
+     "presence_flips": 13,
+     "flip_rate": 0.144
+    },
+    "car": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    },
+    "chair": {
+     "boxes": 13,
+     "persisted": 11,
+     "persistence": 0.846,
+     "transitions": 90,
+     "presence_flips": 2,
+     "flip_rate": 0.022
+    },
+    "bicycle": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    }
+   },
+   "yolo11s.pt": {
+    "person": {
+     "boxes": 108,
+     "persisted": 97,
+     "persistence": 0.898,
+     "transitions": 90,
+     "presence_flips": 13,
+     "flip_rate": 0.144
+    },
+    "car": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    },
+    "chair": {
+     "boxes": 24,
+     "persisted": 20,
+     "persistence": 0.833,
+     "transitions": 90,
+     "presence_flips": 3,
+     "flip_rate": 0.033
+    },
+    "bicycle": {
+     "boxes": 0,
+     "persisted": 0,
+     "persistence": null,
+     "transitions": 90,
+     "presence_flips": 0,
+     "flip_rate": 0.0
+    }
+   }
+  }
+ },
+ "frames": {
+  "clips": [
+   {
+    "split": "finetune",
+    "video_id": 434,
+    "fps": 30.0,
+    "start_frame": 270,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   },
+   {
+    "split": "finetune",
+    "video_id": 715,
+    "fps": 30.0,
+    "start_frame": 576,
+    "step_frames": 3,
+    "source_wh": [
+     1080,
+     1920
+    ],
+    "frames": 10
+   },
+   {
+    "split": "select",
+    "video_id": 184,
+    "fps": 30.0,
+    "start_frame": 138,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   },
+   {
+    "split": "select",
+    "video_id": 471,
+    "fps": 30.0,
+    "start_frame": 872,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   },
+   {
+    "split": "select",
+    "video_id": 472,
+    "fps": 30.0,
+    "start_frame": 1236,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   },
+   {
+    "split": "finetune",
+    "video_id": 665,
+    "fps": 30.0,
+    "start_frame": 538,
+    "step_frames": 3,
+    "source_wh": [
+     1080,
+     1920
+    ],
+    "frames": 10
+   },
+   {
+    "split": "finetune",
+    "video_id": 121,
+    "fps": 30.0,
+    "start_frame": 457,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   },
+   {
+    "split": "select",
+    "video_id": 348,
+    "fps": 30.0,
+    "start_frame": 475,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   },
+   {
+    "split": "finetune",
+    "video_id": 440,
+    "fps": 30.0,
+    "start_frame": 778,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   },
+   {
+    "split": "select",
+    "video_id": 469,
+    "fps": 30.0,
+    "start_frame": 1738,
+    "step_frames": 3,
+    "source_wh": [
+     1920,
+     1080
+    ],
+    "frames": 10
+   }
+  ]
+ },
+ "caveats": [
+  "BLV-Road-Nav keyframes are outdoor street scenes; the live complaint is a webcam on a desk indoors. Indoor classes (chair, dining table) have only a handful of labelled frames there, so the per-object rows for them are not informative; the EgoBlind agreement and persistence tables are the indoor-relevant evidence.",
+  "Presence labels have no boxes, so a detection anywhere in the frame counts; precision is therefore an upper bound for box-level precision.",
+  "The full-pipeline timing excludes OCR (EasyOCR every 8th frame adds roughly 85-130 ms on those frames, results/latency.json) and speech; both cost the same for either detector.",
+  "Latency was measured on frames already in memory; camera capture runs in parallel with inference in the live loop.",
+  "The EgoBlind perception cache (data/egoblind/cache, the replays behind run_on_egoblind and the holdout numbers) was built with yolo11n.pt; changing the live detector does not change any replay result, but the live demo then runs a different detector from the replays (yolo11s finds somewhat more boxes, mainly people, chairs and cars).",
+  "All timings are one machine (arm64, 26.5.1) on one day; MPS timings vary by a few ms between runs, so the per-round medians are reported to show the spread."
+ ],
+ "seconds": 134.2
+}

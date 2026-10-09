@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: egoblind-holdout egoblind-tune setup test scenarios models tune experiments ablation plots latency all demo clean campus tune-pcacs scheduler campus-experiments campus-report web serve serve-ssl live egoblind-download egoblind-cache egoblind-scenarios egoblind-experiments egoblind-scheduler egoblind-all campus-v2 campus-v2-experiments campus-v2-perfect memory-grid stress archs sign-taxonomy guidedog inventory datasets-studies coverage egoblind-diagnose egoblind-cache-ow egoblind-thr export-models live-elevenlabs smoke repro-check manifests latency-pcacs decompose
+.PHONY: egoblind-holdout egoblind-tune setup test scenarios models tune experiments ablation plots latency all demo clean campus tune-pcacs scheduler campus-experiments campus-report web serve serve-ssl live egoblind-download egoblind-cache egoblind-scenarios egoblind-experiments egoblind-scheduler egoblind-all campus-v2 campus-v2-experiments campus-v2-perfect memory-grid stress archs sign-taxonomy guidedog inventory datasets-studies coverage egoblind-diagnose egoblind-cache-ow egoblind-thr export-models live-elevenlabs live-pcacs live-check live-desk live-raw live-help eval-live smoke repro-check manifests latency-pcacs decompose
 
 setup:
 	python3 -m venv .venv && $(PY) -m pip install -U pip && $(PY) -m pip install -r requirements.txt
@@ -51,12 +51,46 @@ demo:
 	$(PY) scripts/demo_sim.py --kind hallway --policy confidence_threshold
 	$(PY) scripts/demo_sim.py --kind hallway --policy cacs
 
+# learned scheduler (models/scheduler/scheduler_rl.pt); falls back to P-CACS with a spoken warning if it is missing
+# the live demo: learned scheduler + announcement gate (no repeats of the same object) + activity-driven modes
+# (walking -> navigate, still -> scene, still with text -> read, --goal -> find). A camera that is still in the first
+# seconds is treated as a desk webcam: the person in front of it (you) is not announced unless they come closer.
+# Keys in the window: h help (spoken), w what is around me, r read, m mode, space sound, q quit. `make live-help`.
 live:
-	$(PY) scripts/run_live.py --policy pcacs --speak
+	$(PY) scripts/run_live.py --policy pcacs_learned:rl --speak
+
+# laptop webcam on a desk, without waiting for the detection
+live-desk:
+	$(PY) scripts/run_live.py --policy pcacs_learned:rl --speak --setup desk
+
+# the bare scheduler: no repeat filter, navigate mode (to hear the difference)
+live-raw:
+	$(PY) scripts/run_live.py --policy pcacs_learned:rl --speak --no-gate --mode navigate
+
+live-help:
+	$(PY) scripts/run_live.py --help
+
+# which detector the live demo uses (results/live/detector_choice.md) and what the gate changes on EgoBlind
+# development replays (results/live/gate_eval_dev.md; never the holdout or test splits)
+eval-live:
+	$(PY) scripts/eval_live_detector.py
+	$(PY) scripts/eval_live_gate.py
 
 # needs ELEVENLABS_API_KEY in the environment or .env (falls back to the default speaker without one)
 live-elevenlabs:
-	$(PY) scripts/run_live.py --policy pcacs --speak --elevenlabs
+	$(PY) scripts/run_live.py --policy pcacs_learned:rl --speak --elevenlabs
+
+# the linear P-CACS rule
+live-pcacs:
+	$(PY) scripts/run_live.py --policy pcacs --speak
+
+# headless replay of a short local clip through the same live pipeline with the learned scheduler (fails if it cannot
+# be loaded); prints the policy, decisions per second and the cues spoken. Default clip: EgoBlind train 00700 (14 s, people
+# and furniture at 1-4 m); it stays local (EgoBlind licence), never in the repo. Any clip: make live-check LIVE_CLIP=clip.mp4
+LIVE_CLIP ?= $(firstword $(wildcard data/egoblind/videos/train/00700.mp4))
+live-check:
+	@test -n "$(LIVE_CLIP)" || { echo "no local clip found: make live-check LIVE_CLIP=path/to/clip.mp4"; exit 1; }
+	OMP_NUM_THREADS=2 $(PY) scripts/run_live.py --policy pcacs_learned:rl --strict --video $(LIVE_CLIP) --fast --headless --no-ocr --no-log
 
 # ---- CampusBench / P-CACS -------------------------------------------------
 campus:
