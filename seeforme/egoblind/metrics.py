@@ -57,3 +57,24 @@ def aggregate_extras(rows: List[Dict]) -> Dict[str, float]:
         else:
             out[k] = st.mean(vals)
     return out
+
+
+def repeat_counts(spoken, label_window: float = 60.0) -> Dict[str, int]:
+    """Repeated cues in one video.
+
+    repeat_gt     the cue's weak event was already announced. EgoBlind links every detection of the event's label
+                  inside its window to the event, so this also counts a cue about a *different* person or car.
+    repeat_track  the same tracker track was already announced (a true re-announcement of one live object).
+    repeat_label  a cue with the same label was spoken within the previous `label_window` seconds.
+    """
+    seen_sid, seen_tid, last_label = set(), set(), {}
+    gt = trk = lab = 0
+    for c in spoken:
+        if c.source_id is not None:
+            gt += c.source_id in seen_sid
+            seen_sid.add(c.source_id)
+        trk += c.track_id in seen_tid
+        seen_tid.add(c.track_id)
+        lab += c.label in last_label and c.t - last_label[c.label] < label_window
+        last_label[c.label] = c.t
+    return {"repeat_gt": gt, "repeat_track": trk, "repeat_label": lab}

@@ -1,8 +1,18 @@
 {
  "mode": "full_info",
  "tau": 0.18399154786356164,
- "eps": 0.05,
+ "eps": 0.25,
+ "implicit_neg_w": 0.0,
+ "full_info_delay": null,
  "n_labels": 32186,
+ "n_pos": 3516,
+ "label_counts": {
+  "full_info": 25117,
+  "quiet_window": 6101,
+  "tap_not_useful": 67,
+  "missed_question": 852,
+  "tap_useful": 49
+ },
  "w": [
   -0.0707,
   -0.1298,

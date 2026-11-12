@@ -19,11 +19,18 @@ Run on 2026-11-12 (warm start added the same day). Code: `seeforme/online/`, `sc
 | Online greedy | 0.188 | 0.212 | 0.212 | **0.204** | 0.11 |
 | Online apple tasting (25% of budget) | 0.169 | 0.181 | 0.200 | **0.183** | 0.10 |
 | Online Thompson | 0.225 | 0.175 | 0.163 | **0.188** | 0.10 |
-| Full-information upper bound | 0.525 | | | | 0.09 |
+| Full information, zero delay (not causal) | 0.525 | 0.500 | 0.513 | 0.512 | 0.10 |
+| Full information, labels held to video end (causal) | 0.200 | 0.206 | 0.194 | **0.200** | 0.12 |
+| Full information, labels held 2 s | 0.362 | 0.388 | 0.388 | 0.379 | 0.09 |
+| No learning (lr = 0, weights stay 0) | 0.138 | 0.138 | 0.138 | 0.138 | 0.13 |
+
+The full-information rows still also receive the one-sided taps and questions. Without a delay its labels for time t are
+applied before the decision at t + 0.5 s, which scores nearly the same candidate in the same event window, so 0.51 is a
+zero-delay reference and not a causal upper bound (`seeforme/online/policy.py`, `full_info_delay`).
 
 ## What this says
 
-1. **One-sided feedback costs about 60% of the learnable recall.** With the same features and the same budget, the learner that sees every label reaches 0.53; the learners that see only taps and questions reach about 0.20. This gap is the thesis problem, now measured.
+1. **With a causal reference there is no measurable cost of one-sided feedback on this benchmark.** Holding the full-information labels until each video ends gives 0.200 pooled over three seeds against 0.204 for one-sided greedy (paired video bootstrap, causal minus greedy: -0.004 [-0.054, +0.048]). The earlier 0.53 came from zero-delay labels. Delay matters a great deal within a video (2 s: 0.379), so fast feedback inside a clip is worth something, but labels that arrive after the clip are worth no more than taps and questions. Learning does help: greedy beats the no-learning floor by +0.067 [+0.010, +0.121]. Because every question in the data is asked (p_ask = 1), every scored outcome is eventually revealed, so on the scored region the problem is close to delayed full information.
 2. **Naive exploration doesn't close the gap.** Budgeted apple tasting and Thompson sampling sit within seed noise of greedy. The seed-0 Thompson result on `finetune` (7/27) didn't replicate (4/27 and 4/27). Exploration isn't the bottleneck at this budget.
 3. **Online learners beat the fixed rule and the frozen RL model** (0.20 vs 0.09 and 0.05). Against the frozen IL model on its out-of-sample part (`finetune`), they're level: 4/27 for IL against 2–7/27 for the online learners. With n = 27, nothing there is separable.
 4. **Quiet-window violations go up** from 0.02–0.04 for the frozen models to about 0.10. Silence is never labelled, so the learner speaks in some windows where users had confirmed nothing was there.
@@ -42,11 +49,11 @@ One full-information pass over the 84 CampusBench v2 training scenarios (about 1
 "Carry everything" keeps the simulator's AdaGrad accumulator, posterior precision and feature normaliser. "Weights only" keeps the weights as a prior mean and starts the rest fresh on real video.
 
 5. **Naive simulation pretraining hurts.** Carrying the full optimiser state lowers greedy recall by 0.06, and the interval excludes zero. After 17,000 simulated labels the AdaGrad steps are small and the posterior is confident, so the learner cannot move far from a simulator that is wrong about real video. Quiet violations also rise, to 0.10–0.14.
-6. **A weights-only prior is safe but doesn't close the gap.** It removes the harm. Thompson rises to 0.206, and on `finetune` it catches 6–8 of 27 events against 4 for the frozen IL model. Every interval still includes zero. The gap to full information (0.53) is not a cold-start problem, so the next lever is the label signal itself.
+6. **A weights-only prior is safe but doesn't close the gap.** It removes the harm. Thompson rises to 0.206, and on `finetune` it catches 6–8 of 27 events against 4 for the frozen IL model. Every interval still includes zero. Against the causal full-information reference (0.200) there is no gap left for a warm start to close.
 
 ## Implicit negatives (a candidate nobody asked about)
 
-When a remembered candidate leaves the 15 s lookback without any feedback covering it, it becomes a negative of weight w. Stream: `train`, `finetune`, then `select`. Pooled over three seeds; `select` holds 33 coverable events per seed, 99 in all.
+When a remembered candidate leaves the 15 s lookback without any feedback covering it, it becomes a negative of weight w. Stream: `train`, `finetune`, then `select`. `select` holds 11 coverable events per seed, so each `select` cell below is pooled over three seeds on the same 11 events (33 seed-events). Treat `select` differences as indicative only.
 
 | w | greedy dev recall | greedy `select` | Thompson dev recall | Thompson `select` |
 |---|---|---|---|---|
@@ -58,8 +65,40 @@ When a remembered candidate leaves the 15 s lookback without any feedback coveri
 
 7. **Silence-as-negative makes things worse, and more weight makes them worse still.** Quiet-window violations don't improve consistently either. Selected on `select`: w = 0, so the feature stays off. Most candidates nobody asks about sit next to the ones that matter (same label, same moment), so the negatives push down exactly the features the rare positives rely on.
 
+## Causal full-information reference and the p_ask sweep (added 2026-11-12, evening)
+
+Commands (from `scripts/`, `OMP_NUM_THREADS=2`):
+`run_online.py --stream train,finetune,select --policies online_greedy,online_greedy+lr0,online_full_info,online_full_info+causal,online_full_info+d2 --seed S --tag causal_sS`
+and `run_online.py --stream train,finetune --policies online_greedy,online_full_info+causal --p-ask P --seed S --tag paskP_sS`.
+Pooled over seeds 0, 1, 2. Dev = `train` + `finetune` (160 coverable events per seed); `select` = 11 per seed.
+
+| Policy | dev recall | dev quiet viol. | `select` recall | `select` quiet viol. | cues/min |
+|---|---|---|---|---|---|
+| Greedy (one-sided) | 98/480 = 0.204 | 0.115 | 9/33 = 0.273 | 0.148 | 1.67 |
+| No learning (lr = 0) | 66/480 = 0.138 | 0.129 | 3/33 = 0.091 | 0.056 | 1.68 |
+| Full information, zero delay | 246/480 = 0.512 | 0.096 | 17/33 = 0.515 | 0.056 | 1.66 |
+| Full information, held to video end | 96/480 = 0.200 | 0.116 | 6/33 = 0.182 | 0.037 | 1.67 |
+| Full information, held 2 s | 182/480 = 0.379 | 0.091 | 15/33 = 0.455 | 0.111 | 1.67 |
+
+Paired video bootstrap (2,000 resamples, seeds pooled), causal full information minus greedy: dev -0.004 [-0.054, +0.048];
+`select` -0.091 [-0.267, +0.067]. The pre-registered falsifier for "a real one-sided gap exists" (causal full information
+ahead by more than 0.08 on `select` with the interval above 0) is not met.
+
+Users who do not always ask (questions dropped with probability 1 - p_ask, dev only, for diagnosis):
+
+| p_ask | greedy recall (s0 / s1 / s2, mean) | causal full information (mean) | greedy missed-question rows (s0) |
+|---|---|---|---|
+| 1 | 0.188 / 0.212 / 0.212, 0.204 | 0.200 | 3,055 |
+| 0.5 | 0.194 / 0.138 / 0.169, 0.167 | 0.186 | 1,779 |
+| 0.25 | 0.194 / 0.156 / 0.188, 0.179 | 0.179 | 688 |
+
+Halving the questions lowers greedy's mean by 0.037 and quartering them by 0.025, both inside the seed spread (0.138 to 0.212).
+The falsifier for item 2 of the algorithm plan (greedy at p_ask 0.25 within 0.03 of p_ask 1) is met, so on this
+benchmark the feedback channel is not the bottleneck; the features and the amount of labelled data are.
+
 ## Next experiments (selected on `select`, never on holdout)
 
-- **Credit assignment for question labels:** a missed question currently labels every candidate of the event in [earliest, t_q] equally. Weighting the moment closest to the ideal cue time may sharpen the signal.
+- **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
+- **Decision-level "when" features** (change in ego speed, time since last cue, new tracks): check offline AUC on `train` to `finetune` first (baseline 0.683).
 - **Re-identification memory (M2) on and off:** measure repeat cues, once the GPU embedding run has finished.
 - **Bootstrap 95% intervals** (`scripts/bootstrap_ci.py`) on the final comparison.

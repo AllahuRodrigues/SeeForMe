@@ -34,6 +34,7 @@ ap.add_argument("--eps", type=float, default=0.25, help="share of the cue budget
 ap.add_argument("--lr", type=float, default=0.5)
 ap.add_argument("--implicit-neg", type=float, default=0.0, help="weight of the weak negative for a candidate nobody asked about")
 ap.add_argument("--p-tap", type=float, default=0.5, help="probability that the user taps useful / not useful after a cue")
+ap.add_argument("--p-ask", type=float, default=1.0, help="probability that the user asks each question in the data (1 = always)")
 ap.add_argument("--seed", type=int, default=0)
 ap.add_argument("--limit", type=int, default=0)
 ap.add_argument("--noise", default="")
@@ -61,7 +62,7 @@ if not scenarios:
     raise SystemExit("no cached scenarios in the stream")
 minutes = sum(sc.duration for sc in scenarios) / 60
 print(f"stream {splits}: {len(scenarios)} videos, {minutes:.1f} min, {sum(len(sc.speak_events()) for sc in scenarios)} events, "
-      f"{len(set(src.get(sc.video_id) for sc in scenarios))} proxy users; p_tap={args.p_tap} target={args.target}/min", flush=True)
+      f"{len(set(src.get(sc.video_id) for sc in scenarios))} proxy users; p_tap={args.p_tap} p_ask={args.p_ask} target={args.target}/min", flush=True)
 
 
 def row_for(name, k, sc, log):
@@ -75,11 +76,27 @@ rows = []
 for name in [p for p in args.policies.split(",") if p]:
     print(f"-- {name}", flush=True)
     if name.startswith("online_"):
-        mode, _, warm = name.split("_", 1)[1].partition("+")
-        if mode not in MODES or warm not in ("", "campus", "campusw"):
+        # online_<mode>[+campus|+campusw][+causal|+d<seconds>][+lr0]
+        mode, *suffixes = name.split("_", 1)[1].split("+")
+        warm, delay, lr = "", None, args.lr
+        for sfx in suffixes:
+            if sfx in ("campus", "campusw"):
+                warm = sfx
+            elif sfx == "causal" and mode == "full_info":
+                delay = "video"                       # full-information labels held until the video ends
+            elif sfx.startswith("d") and mode == "full_info":
+                try:
+                    delay = float(sfx[1:])            # full-information labels held this many seconds
+                except ValueError:
+                    sys.exit(f"unknown online policy {name}")
+            elif sfx == "lr0":
+                lr = 0.0                              # no-learning floor: weights stay at 0
+            else:
+                sys.exit(f"unknown online policy {name}")
+        if mode not in MODES:
             sys.exit(f"unknown online policy {name}")
-        pol = OnlinePolicy(mode=mode, target_per_min=args.target, tau0=args.tau0, eps=args.eps, lr=args.lr, seed=args.seed,
-                           implicit_neg_w=args.implicit_neg)
+        pol = OnlinePolicy(mode=mode, target_per_min=args.target, tau0=args.tau0, eps=args.eps, lr=lr, seed=args.seed,
+                           implicit_neg_w=args.implicit_neg, full_info_delay=delay)
         if warm:
             from seeforme.campus.world import CampusScenario
             from seeforme.online.pretrain import pretrain_on_campus
@@ -88,7 +105,8 @@ for name in [p for p in args.policies.split(",") if p]:
                                        carry="weights" if warm == "campusw" else "all")
             print(f"   warm start ({warm}): {stats}", flush=True)
         prog = lambda k, sc, log: (k + 1) % 100 == 0 and print(f"   {k + 1}/{len(scenarios)} tau={pol.tau:.3f} labels={pol.n_labels}", flush=True)
-        for k, (sc, log) in enumerate(run_stream(pol, scenarios, cfg, p_tap=args.p_tap, seed=args.seed, noise=noise, on_video=prog)):
+        for k, (sc, log) in enumerate(run_stream(pol, scenarios, cfg, p_tap=args.p_tap, seed=args.seed, noise=noise, on_video=prog,
+                                                       p_ask=args.p_ask)):
             rows.append(row_for(name, k, sc, log))
         dump_json(pol.to_dict(), OUT / f"model_{name}_{args.tag}.json")
     else:
@@ -119,7 +137,7 @@ by = defaultdict(list)
 for r in rows:
     by[r["policy"]].append(r)
 summary = {p: pooled(rs) for p, rs in by.items()}
-summary["_meta"] = {"stream": splits, "n_videos": len(scenarios), "minutes": minutes, "p_tap": args.p_tap, "target": args.target,
+summary["_meta"] = {"stream": splits, "n_videos": len(scenarios), "minutes": minutes, "p_tap": args.p_tap, "p_ask": args.p_ask, "target": args.target,
                     "tau0": args.tau0, "eps": args.eps, "lr": args.lr, "implicit_neg": args.implicit_neg, "seed": args.seed, "noise": args.noise, "final": args.final}
 dump_json(summary, OUT / f"summary_{args.tag}.json")
 with open(OUT / f"curve_{args.tag}.csv", "w", newline="") as f:

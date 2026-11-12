@@ -1,0 +1,60 @@
+{
+ "online_greedy": {
+  "recall_coverable": 0.21052631578947367,
+  "quiet_violation": 0.12794612794612795,
+  "cues_per_min": 1.6694668729217006,
+  "n_coverable": 171,
+  "n_quiet": 297,
+  "n_spoken": 557
+ },
+ "online_greedy+lr0": {
+  "recall_coverable": 0.13450292397660818,
+  "quiet_violation": 0.12457912457912458,
+  "cues_per_min": 1.6754613679770747,
+  "n_coverable": 171,
+  "n_quiet": 297,
+  "n_spoken": 559
+ },
+ "online_full_info": {
+  "recall_coverable": 0.5029239766081871,
+  "quiet_violation": 0.09764309764309764,
+  "cues_per_min": 1.6634723778663263,
+  "n_coverable": 171,
+  "n_quiet": 297,
+  "n_spoken": 555
+ },
+ "online_full_info+causal": {
+  "recall_coverable": 0.21637426900584794,
+  "quiet_violation": 0.10774410774410774,
+  "cues_per_min": 1.6634723778663263,
+  "n_coverable": 171,
+  "n_quiet": 297,
+  "n_spoken": 555
+ },
+ "online_full_info+d2": {
+  "recall_coverable": 0.391812865497076,
+  "quiet_violation": 0.09427609427609428,
+  "cues_per_min": 1.6724641204493875,
+  "n_coverable": 171,
+  "n_quiet": 297,
+  "n_spoken": 558
+ },
+ "_meta": {
+  "stream": [
+   "train",
+   "finetune",
+   "select"
+  ],
+  "n_videos": 592,
+  "minutes": 333.6394444444444,
+  "p_tap": 0.5,
+  "target": 2.0,
+  "tau0": 0.6,
+  "eps": 0.25,
+  "lr": 0.5,
+  "implicit_neg": 0.0,
+  "seed": 1,
+  "noise": "",
+  "final": false
+ }
+}

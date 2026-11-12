@@ -12,4 +12,4 @@ reward fine-tuning (REINFORCE)
   reinforce epoch 4: return=-0.23 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
   reinforce epoch 5: return=-0.18 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
   reinforce epoch 6: return=-0.16 val score=-0.211 regret=0.244 AWrecall=0.702 prec=1.000 occ=0.00 lateC=0.30
-done in 1778s -> /Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/models/egoblind/scheduler
+done in 1778s -> <repo>/models/egoblind/scheduler

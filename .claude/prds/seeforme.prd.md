@@ -2,7 +2,7 @@
 
 ## Problem
 
-Blind and low-vision people already have good on-demand tools (Be My Eyes and Be My AI, Seeing AI, Lookout, Aira, Meta Live AI). All of them wait to be asked. Only narrow products speak up on their own: OKO reads crosswalk signals, and Biped is shoulder-worn obstacle hardware. Nobody has solved the general question: **when should an assistant speak about the surroundings without being asked, and when should it stay quiet?**
+Blind and low-vision people already have good on-demand tools (Be My Eyes and Be My AI, Seeing AI, Lookout, Aira, Meta Live AI). They mostly wait to be asked; where they do speak unprompted (Seeing AI's Short Text channel, Lookout's Explore mode, OKO's crosswalk signals, Biped's obstacle alerts) they follow fixed rules. None learns from the user when to speak. Nobody has solved the general question: **when should an assistant speak about the surroundings without being asked, and when should it stay quiet?**
 
 The October work showed why this is hard:
 - Recall on EgoBlind is low: 0.20 for the learned policies, 0.07 for P-CACS.

@@ -15,11 +15,11 @@ from .feedback import FeedbackModel
 
 
 def run_stream(policy, scenarios: Sequence, cfg: Optional[PipelineConfig] = None, p_tap: float = 1.0, seed: int = 0,
-               noise=None, on_video: Optional[Callable] = None) -> List[Tuple[object, RunLog]]:
+               noise=None, on_video: Optional[Callable] = None, p_ask: float = 1.0) -> List[Tuple[object, RunLog]]:
     out: List[Tuple[object, RunLog]] = []
     learns = hasattr(policy, "learn")
     for k, sc in enumerate(scenarios):
-        fb = FeedbackModel(sc, p_tap=p_tap, seed=seed * 100_003 + k)
+        fb = FeedbackModel(sc, p_tap=p_tap, seed=seed * 100_003 + k, p_ask=p_ask)
         if hasattr(policy, "begin_video"):
             policy.begin_video(sc, fb)
 

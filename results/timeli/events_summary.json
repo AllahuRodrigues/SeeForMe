@@ -1,5 +1,5 @@
 {
- "output": "/Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/data/timeli/events.jsonl",
+ "output": "<repo>/data/timeli/events.jsonl",
  "events": 24937,
  "min_quiet_s": 2,
  "tolerance_s": 1.0,

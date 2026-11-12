@@ -1,6 +1,6 @@
 # TIMELI -> SeeForMe events
 
-`/Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/data/timeli/events.jsonl`: 24937 events (one JSON line each; speak events at the instruction second with a +/-1 s window, quiet windows for silent runs of at least 2 s).
+`<repo>/data/timeli/events.jsonl`: 24937 events (one JSON line each; speak events at the instruction second with a +/-1 s window, quiet windows for silent runs of at least 2 s).
 
 | split | videos | seconds | speak events | per min | quiet windows | quiet s | mean severity | coverable (COCO + taxonomy) | reason inferred from text |
 |---|---|---|---|---|---|---|---|---|---|

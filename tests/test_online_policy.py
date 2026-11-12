@@ -166,3 +166,76 @@ def test_tapped_cue_is_not_implicitly_negated():
     assert pol.n_labels == 1
     pol.reset()
     assert pol.n_labels == 1 + (n_seen - 1)                                  # the spoken candidate is not negated
+
+
+# ---------------------------------------------------------------- causal full-information reference (algo item 1)
+
+def _full_info_at(sc, delay, t=6.0):
+    pol = OnlinePolicy(mode="full_info", tau0=0.999, budget=False, full_info_delay=delay)
+    pol.begin_video(sc, None)
+    pol.reset()
+    pol.decide(_tracks_at(sc, t), t, ChannelState())
+    return pol
+
+
+def test_full_info_default_learns_immediately():
+    sc, _ = synthetic_scenario()
+    pol = _full_info_at(sc, None)
+    assert pol.n_labels > 0                                                  # zero-delay reference, unchanged default
+
+
+def test_causal_full_info_holds_labels_until_video_end():
+    sc, _ = synthetic_scenario()
+    pol = _full_info_at(sc, "video")
+    w0 = pol.state.w.copy()
+    assert pol.n_labels == 0 and pol.n_pending > 0
+    pol.decide(_tracks_at(sc, 8), 8.0, ChannelState())
+    assert pol.n_labels == 0 and (pol.state.w == w0).all()                   # still nothing applied mid-video
+    pending = pol.n_pending
+    pol.reset()                                                              # video end flushes the buffer
+    assert pol.n_pending == 0 and pol.n_labels == pending and not (pol.state.w == w0).all()
+
+
+def test_full_info_fixed_delay_releases_after_d_seconds():
+    sc, _ = synthetic_scenario()
+    pol = _full_info_at(sc, 2.0)
+    assert pol.n_labels == 0 and pol.n_pending > 0
+    first = pol.n_pending
+    pol.decide([], 7.5, ChannelState())                                      # 1.5 s later: not yet
+    assert pol.n_labels == 0
+    pol.decide([], 8.0, ChannelState())                                      # 2 s later: released
+    assert pol.n_labels == first and pol.n_pending == 0
+
+
+def test_full_info_delay_validation():
+    import pytest
+    for bad in (-1.0, "soon"):
+        with pytest.raises(ValueError):
+            OnlinePolicy(mode="full_info", full_info_delay=bad)
+
+
+def test_causal_full_info_equals_greedy_within_the_first_video():
+    # With labels held to video end, full info gets only the one-sided signals inside video 1, exactly like greedy.
+    sc, _ = synthetic_scenario()
+    a = run_stream(OnlinePolicy(mode="full_info", tau0=0.6, budget=False, full_info_delay="video"), [sc])
+    b = run_stream(OnlinePolicy(mode="greedy", tau0=0.6, budget=False), [sc])
+    assert [(c.t, c.source_id) for c in a[0][1].cues] == [(c.t, c.source_id) for c in b[0][1].cues]
+
+
+def test_label_counts_by_kind_are_logged():
+    from seeforme.online.feedback import Feedback
+    sc, _ = synthetic_scenario()
+    pol = OnlinePolicy(mode="greedy", tau0=0.999, budget=False, lookback_s=5.0)
+    pol.reset()
+    pol.decide(_tracks_at(sc, 6), 6.0, ChannelState())
+    n_seen = len(pol._hist)
+    pol.learn([Feedback(t=7.0, label=1, kind="missed_question", source_id=None, t0=0.0, t1=6.0)])
+    d = pol.to_dict()
+    assert d["n_pos"] == n_seen and d["label_counts"] == {"missed_question": n_seen}
+
+
+def test_stream_passes_p_ask():
+    sc, _ = synthetic_scenario()
+    pol = OnlinePolicy(mode="greedy", tau0=0.999, budget=False)
+    run_stream(pol, [sc], p_ask=0.0)
+    assert pol.n_labels == 0                                                 # never spoke, never asked: no labels

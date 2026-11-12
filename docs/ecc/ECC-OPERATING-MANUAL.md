@@ -2,7 +2,7 @@
 
 STAR is a Tauri 2 + React + TypeScript + Rust desktop app that checks and remediates document accessibility (PDF, DOCX, PPTX, HTML). This manual tells coding agents how to build it the way ECC ("Everything Claude Code", v2.2.3) prescribes.
 
-Source of truth: the ECC marketplace checkout at `/Users/allahurodrigues/.claude/plugins/marketplaces/ecc` (read only). Below, `$ECC` means that path. Every rule here is quoted or paraphrased from a file under `$ECC`; when ECC has nothing on a topic, the manual says so instead of inventing guidance.
+Source of truth: the ECC marketplace checkout at `~/.claude/plugins/marketplaces/ecc` (read only). Below, `$ECC` means that path. Every rule here is quoted or paraphrased from a file under `$ECC`; when ECC has nothing on a topic, the manual says so instead of inventing guidance.
 
 Important limit: ECC does not mention Tauri anywhere (`grep -ri tauri $ECC` returns nothing). Tauri-specific advice in Sections 3 and 4 is marked "our adaptation".
 

@@ -1,0 +1,175 @@
+{
+ "per_report": [
+  {
+   "key": "gap",
+   "trust": "High for the literature (TIMELI, VIABench, EgoVoice, WorldScribe, ForeSightGuide, Agarwal et al., Raman et al., ASSETS 2025 ChatGPT study all confirmed to exist with the stated authors, dates and venues). Medium for conclusions, because the report repeats the 0.525 vs 0.20 'cost of one-sided feedback' as its main publishable result, and the algo report's reproduced runs undercut that.",
+   "flags": [
+    {
+     "claim": "What is strong and publishable is the measured cost of one-sided feedback: 0.525 full information vs about 0.20 one-sided, about 60% of learnable recall (Bottom line 5; Not done item 2; section 3b).",
+     "verdict": "misleading",
+     "evidence": "In seeforme/online/policy.py:143-144, decide() calls _learn_full_info at every 0.5 s step with zero delay. The algo agent's logs in scratchpad/alg/ (full_info+dv.log, fi_s1.log, fi_s2.log) show full information delayed to video end at 0.200/0.206/0.194, with 2 s delay at 0.369 and 12 s delay at 0.206. The 0.525 therefore measures zero-delay labels, not the one-sided channel.",
+     "fix": "Drop '60% of learnable recall' and 'first measurement of the cost of one-sided feedback' as claims. If any gap claim is kept, it must compare against a causal (delayed) full-information reference, and the delay must be stated."
+    },
+    {
+     "claim": "EgoBlind: 1,392 videos (1,329 clips of about 40 s).",
+     "verdict": "false",
+     "evidence": "arXiv 2503.08221v4 HTML reports 1,329 clips cut from 478 long-form videos. The figure 1,392 does not appear there.",
+     "fix": "Write '1,329 clips from 478 source videos (https://arxiv.org/html/2503.08221v4)'."
+    },
+    {
+     "claim": "Only 541 of 5,311 questions were asked in situ; the rest are GPT-4o generated or written afterwards by blind annotators.",
+     "verdict": "misleading",
+     "evidence": "The paper says 541 questions were manually extracted from the video and about 300 were added by blind volunteers, out of roughly 16,560 GPT-4o candidates. It does not say how many of the 541 survived final filtering.",
+     "fix": "Say 'at most about 541 of the 5,311 final questions come from the wearer in situ (pre-filter count, arXiv 2503.08221v4)'. Check whether the annotation file marks question source before building the in-situ slice."
+    },
+    {
+     "claim": "TIMELI venue inconsistency: arXiv says ICRA 2026 but it was submitted 4 Sep 2026.",
+     "verdict": "misleading",
+     "evidence": "The arXiv comment field says ICRA 2026, and v1 is dated 4 Sep 2026. Posting to arXiv after the conference is common, so the dates are not in conflict. The repo's docs/timeli_notes.md also says ICRA 2026 (project page timeli-icra.github.io).",
+     "fix": "Cite it as ICRA 2026 (arXiv 2609.05596) and drop the 'inconsistency' remark."
+    },
+    {
+     "claim": "VIA-Agent's 'Continuity' principle means guidance should arrive when actionable.",
+     "verdict": "unverifiable",
+     "evidence": "The arXiv 2511.00945 abstract names Continuity as a principle but does not define it. The paper is UIST 2026; n=15 formative, n=9 evaluation; BLV status of participants not stated.",
+     "fix": "Quote the definition from the full text, or describe it only as 'a Continuity principle (undefined in the abstract)'."
+    },
+    {
+     "claim": "WorldScribe, UIST 2024 Best Paper; n=5 formative, n=6 evaluation.",
+     "verdict": "ok-but-uncited",
+     "evidence": "The arXiv abstract confirms UIST 2024 and the authors. The award and participant counts are not in the abstract.",
+     "fix": "Cite the UIST awards page and the paper body for the award and the n values."
+    },
+    {
+     "claim": "VIABench: 761 videos, 46.9 h, 530 real; LiveCC 75.8%; TPAD; data 'will be released'.",
+     "verdict": "ok-but-uncited",
+     "evidence": "Confirmed in arXiv 2607.14660 HTML: 761 videos, 46.9 h, 530 real from YouTube, Bilibili and DouYin; LiveCC 75.8% Stage-1 recall, attributed by the authors to dense output; TPAD; data promised at MCG-NJU/VIABench; no dataset licence stated.",
+     "fix": "None needed beyond citing the HTML version."
+    }
+   ]
+  },
+  {
+   "key": "market",
+   "trust": "Medium. The core picture (Guided Vision launched 2026-10-01 with Aira, not for navigation; Astra 'can intuitively start conversations'; Be My Eyes 1M users and 10M volunteers in March 2026; 361% growth and a $6.1M Series A+) is confirmed. The OKO pricing row is out of date, and the headline 'speak only when asked' contradicts the report's own table and two other reports.",
+   "flags": [
+    {
+     "claim": "OKO: since Jan 2025, $4.99/mo or about $29.99/yr; subscription backlash; pulled from Canada.",
+     "verdict": "false",
+     "evidence": "The App Store page (https://apps.apple.com/us/app/ayes-oko/id1583614988), version 4.7.5 of 17 July 2025, says 'Subscription requirement has been removed. All app access is now freely available.' Its version history says Maps expanded to Canada, Japan, Spain and Belgium.",
+     "fix": "Present OKO as free since July 2025 (subscription Jan to Jul 2025). Remove 'pulled from Canada', or cite a dated source and note that it conflicts with the App Store history. Revise the 'users won't pay' argument to say OKO dropped its subscription."
+    },
+    {
+     "claim": "Main finding 1: general-purpose AI assistants still speak only when asked, including Seeing AI and Lookout.",
+     "verdict": "misleading",
+     "evidence": "Google's Lookout help page (https://support.google.com/accessibility/android/answer/9031274) lists Explore (beta): 'point your camera around you to hear about what's in your environment'. Seeing AI Short Text reads as soon as text is in view, which the report's own table concedes.",
+     "fix": "Use the gap report's wording: 'they wait to be asked or speak by fixed, content-gated rules (Seeing AI Short Text, Lookout Explore); none learns when to speak'."
+    },
+    {
+     "claim": "Be My Eyes foundation aims at 50M users by 2035 [BME1].",
+     "verdict": "unverifiable",
+     "evidence": "The cited BME1 news page (12 March 2026) does not mention a 50M or 2035 target.",
+     "fix": "Find the source, or drop the claim."
+    },
+    {
+     "claim": "Meta's May 2026 roundup describes only user-started actions [M1].",
+     "verdict": "ok-but-uncited",
+     "evidence": "Confirmed. The page describes Be My Eyes calls started by 'Hey Meta' and OOrion guidance toward a goal the user states.",
+     "fix": "None."
+    },
+    {
+     "claim": "SeeForMe can be the first to measure the problem: 0.525 full information vs 0.204 one-sided recall.",
+     "verdict": "misleading",
+     "evidence": "Same issue as the gap report: the 0.525 reference uses zero-delay labels (algo agent's runs; seeforme/online/policy.py:143).",
+     "fix": "Remove 0.525 from positioning text. Cite 160 coverable events and the about-2 cues/min budget only."
+    }
+   ]
+  },
+  {
+   "key": "algo",
+   "trust": "High. The code path is confirmed (_learn_full_info is called inside decide at every step, policy.py:143-144). Its logs exist and match the reported numbers (dv 0.200/0.206/0.194; d2 0.369; d12 0.206; lr0 0.138). The stale summary_dev.md is confirmed: its apple row reads 0.281 at 3.96 cues/min, against 0.169 in online.md. Its citations check out (Raman et al. COLT 2024 with the \u0398(1)/\u0398(\u221aT)/\u0398(T) trichotomy). The weak spot is wording: calling the effect 'leakage'.",
+   "flags": [
+    {
+     "claim": "The 0.53 upper bound comes from label leakage.",
+     "verdict": "misleading",
+     "evidence": "The decision at time t uses scores computed before the update, so there is no leak within a step. The label at t is available at t+0.5 s, which is standard full-information online learning with zero delay. The real issue is that the comparison mixes feedback type with delay: question labels arrive up to about 10.5 s late. The 'dv' learner also still receives all one-sided feedback.",
+     "fix": "Call it 'a zero-delay full-information reference, not a causal one'. State that the delayed variants also include the one-sided signals."
+    },
+    {
+     "claim": "In the simulator every question is asked, so on the scored region the problem is delayed full information.",
+     "verdict": "ok-but-uncited",
+     "evidence": "docs/online.md says 'Questions are always asked'. feedback.py has no p_ask parameter.",
+     "fix": "None. p_ask is a valid next experiment."
+    },
+    {
+     "claim": "Two-action apple tasting is locally observable (\u221aT).",
+     "verdict": "unverifiable",
+     "evidence": "The report itself marks this as its own reasoning.",
+     "fix": "Keep it out of the paper unless a source or proof is found."
+    }
+   ]
+  },
+  {
+   "key": "uiux",
+   "trust": "High for the code audit: spot-checked styles.css:2 forcing a white background in dark mode, unescaped OCR text in the main.ts:312-315 innerHTML, navigator.vibrate at speech.ts:95, the TTS_LATE_MS 2000 drop, and the absence of wakeLock. High for the studies: Say It My Way (CHI 2026, n=11, 418 interactions), Misfitting (ASSETS 2024, n=26) and Chang et al. (ASSETS 2025, n=8) are confirmed. One important misattribution concerns the PWA default model.",
+   "flags": [
+    {
+     "claim": "The PWA default 'Learned' scheduler may be the frozen October RL model with 0.050 coverable recall, so users get the worst measured policy.",
+     "verdict": "misleading",
+     "evidence": "scripts/export_web_scheduler.py:112 exports models/scheduler/scheduler_rl.pt, the CampusBench-trained pcacs_learned:rl. The 0.050 in docs/online.md and summary_dev.md is egoblind_learned:rl from models/egoblind/ (seeforme/pipeline.py:161). That is a different model. pcacs_learned:rl was itself near 0 recall on earlier EgoBlind holdout and test summaries (results/egoblind/*.ci.md).",
+     "fix": "Restate it as: 'the web default is the CampusBench RL scheduler, which scored near zero coverable recall on earlier EgoBlind evaluations; it has not been run on the M1 dev stream'. Do not cite 0.050 for it."
+    },
+    {
+     "claim": "Say It My Way was a 10-day diary with Be My AI.",
+     "verdict": "ok-but-uncited",
+     "evidence": "The arXiv 2602.16930 abstract confirms 11 blind participants and 418 interactions but does not name the app or the duration.",
+     "fix": "Cite the paper body for 'Be My AI' and '10 days'."
+    },
+    {
+     "claim": "The Seeing AI World channel announced objects with spatial audio from December 2020.",
+     "verdict": "ok-but-uncited",
+     "evidence": "Not opened in this pass. The report already marks its current status as unverified.",
+     "fix": "Keep the hedge."
+    }
+   ]
+  },
+  {
+   "key": "data",
+   "trust": "High. Split counts were verified: train 454 videos/230.9 min/237 events, finetune 104/59.3/56, select 34/43.5/27. Select has 11 coverable events per seed (per_video_ineg0_s0.csv: 22 across 2 policies). Review CSVs carry bin:/max_score: model columns and have 0 human verdicts. inventory_summary shows real_recordings present=false. The ECC manual is in git and contains a home-directory path. The advisor naming is inconsistent between README:3 and update.md:4. The README says 'YouTube video is not used' while TIMELI real_test is YouTube-derived. The weak point is that it repeats the 0.525/60% result as holding up.",
+   "flags": [
+    {
+     "claim": "Results that hold up: one-sided feedback costs about 60% of learnable recall (0.525 vs about 0.20).",
+     "verdict": "misleading",
+     "evidence": "The algo agent's delayed full-information runs give 0.200 mean (scratchpad/alg/*.log), and the code applies full-information labels with zero delay (policy.py:143).",
+     "fix": "Move this to 'under revision'. Report it as a zero-delay reference only."
+    },
+    {
+     "claim": "docs/online.md line 49: select holds 33 coverable events per seed.",
+     "verdict": "ok-but-uncited",
+     "evidence": "Confirmed wrong in online.md. results/online/per_video_ineg0_s0.csv gives 34 select videos and 11 coverable events, so 9/33 means 9 hits pooled over 3 seeds on 11 distinct events.",
+     "fix": "Correct online.md (owner: coder)."
+    }
+   ]
+  }
+ ],
+ "cross_report_conflicts": [
+  "0.525 vs 0.20 gap: gap, market and data present it as the headline publishable result. algo shows it collapses to 0.200 once full-information labels are delayed to video end. algo's reading is backed by the code (policy.py:143) and its logs.",
+  "Proactivity of existing apps: market finding 1 says Seeing AI and Lookout speak only when asked. gap and uiux say both have unprompted modes (Lookout Explore beta, confirmed on Google's help page; Seeing AI Short Text). The PRD line 5 'All of them wait to be asked' is wrong.",
+  "OKO: market says it is a $4.99/mo subscription and pulled from Canada. The App Store says the subscription was removed on 17 July 2025 and maps expanded to Canada.",
+  "PWA default model: uiux equates it with the frozen October RL (0.050). The export script ships the CampusBench RL (pcacs_learned:rl), not egoblind_learned:rl.",
+  "Select-set size: online.md says 33 events per seed. data report and per_video CSVs show 11 per seed. gap report repeats 'n=33 on select' as a per-split count.",
+  "Next experiment: data report and online.md propose credit assignment for question labels. algo predicts it is null, with hindsight relabelling at 0.156 and 0.175 on seed 0."
+ ],
+ "messages_to_agents": [
+  "PAPER WRITER: Do not claim 'one-sided feedback costs about 60% of learnable recall' or cite 0.525 as an upper bound. The full-information learner gets labels with zero delay (seeforme/online/policy.py:143). With labels delayed to video end it scores 0.200/0.206/0.194, which ties greedy at 0.204. Any gap claim needs a causal reference with a stated delay.",
+  "PAPER WRITER: Replace 'Be My Eyes, Seeing AI, Lookout answer only when asked' with 'deployed apps wait to be asked or speak by fixed, content-gated rules (Seeing AI Short Text; Lookout Explore, beta: https://support.google.com/accessibility/android/answer/9031274); none learns when to speak'. Cite Project Astra ('can intuitively start conversations', https://deepmind.google/models/project-astra/) and Guided Vision (launched 2026-10-01, not for navigation, https://www.androidauthority.com/gemini-live-guided-vision-launch-3718122/) as nearest systems.",
+  "PAPER WRITER: Treat 'when to speak' and 'one-sided online learning' as prior art: TIMELI (ICRA 2026, arXiv 2609.05596), VIABench (arXiv 2607.14660), WorldScribe (UIST 2024), EgoVoice (EMNLP 2026, arXiv 2610.12248), Agarwal-Gentile-Marinov (arXiv 2302.03784, no venue listed), and Raman et al. (COLT 2024, arXiv 2310.19064). Present the contribution as a new problem instance with an empirical characterisation, not a new setting.",
+  "PAPER WRITER: EgoBlind has 1,329 clips from 478 videos, not 1,392. In-situ wearer questions number at most 541 (pre-filter). State that most question timestamps and 'miss' labels are simulated. Taps are simulated with p_tap 0.5, and questions are always asked (p_ask=1).",
+  "PAPER WRITER: Select has 11 coverable events per seed. Ratios like 9/33 are pooled over 3 seeds on 11 distinct events. Do not present select-based choices as statistically supported. OKO is free since July 2025; do not use it as a subscription-backlash example without that date.",
+  "CODER: Rewrite docs/online.md points 1 and 6 and the line-49 select count (11 per seed, 33 pooled). Regenerate or delete the stale results/online/summary_dev.md: its apple row reads 0.281 at 3.96 cues/min, against 0.169 in online.md.",
+  "CODER: Add a causal full-information variant (a full_info_delay argument; buffer labels and flush at reset or after latest_safe_s) and an lr=0 no-learning floor to run_online.py. Run them on the dev stream and then on select only; never on holdout or test.",
+  "CODER: Add p_ask to FeedbackModel.advance with a seeded RNG. Log per-kind label counts and n_pos in OnlinePolicy.to_dict. Sweep p_ask on dev for diagnosis only.",
+  "CODER: Before any human review, strip the bin:* and max_score:* columns from results/egoblind/review_events_*.csv copies used by reviewers. Do not open the holdout or test CSVs for anything but blind label correction after policies are frozen.",
+  "CODER: Do not edit web/. Instead, report to the web-owning session that (a) the default 'Learned' scheduler is models/scheduler/scheduler_rl.pt, the CampusBench RL, which was near zero on earlier EgoBlind evaluations; (b) main.ts:312-315 interpolates OCR text into innerHTML unescaped; (c) styles.css:2 forces a white background in dark mode.",
+  "ALL: docs/ecc/ECC-OPERATING-MANUAL.md is a STAR-project manual with a local home path, in a public repo. Flag it to the user; do not run any git operation that changes state. Resolve the advisor naming (README:3 vs update.md:4) with the user, not by guessing."
+ ]
+}

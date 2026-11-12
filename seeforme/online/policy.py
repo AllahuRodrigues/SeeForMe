@@ -4,7 +4,11 @@ Modes
     greedy     speak the best legal candidate when P >= tau; learns only from the labels it happens to get
     apple      greedy plus exploration below tau (apple tasting): a share eps of the cue budget, importance weighted
     thompson   greedy under weights sampled from the Laplace posterior (exploration from uncertainty)
-    full_info  upper bound: every candidate at every decision is labelled from the scenario (not deployable)
+    full_info  reference: every candidate at every decision is labelled from the scenario (not deployable).
+               By default the labels are applied with zero delay (full_info_delay=None), which is NOT a causal
+               reference: the decision 0.5 s later scores nearly the same candidate with the answer already learnt.
+               full_info_delay="video" holds the labels until the video ends; a number d holds each label d seconds.
+               In every variant the learner also receives the one-sided taps and questions through `learn`.
 
 Labels arrive through `learn(feedback)`: a tap applies to the spoken candidate, a missed question to every remembered
 candidate of that event in [t0, t1], a quiet window to every remembered candidate in [t0, t1] (each question carries
@@ -19,7 +23,7 @@ import math
 import random
 from collections import deque
 from dataclasses import dataclass, replace
-from typing import Deque, List, Optional, Sequence, Tuple
+from typing import Deque, List, Optional, Sequence, Tuple, Union
 
 import numpy as np
 
@@ -86,9 +90,16 @@ class OnlinePolicy(PCACSPolicy):
 
     def __init__(self, mode: str = "greedy", cfg: Optional[PCACSConfig] = None, target_per_min: float = 2.0, tau0: float = 0.6,
                  eps: float = 0.25, lr: float = 0.5, l2: float = 1e-3, budget: bool = True, seed: int = 0, lookback_s: float = 15.0,
-                 ts_scale: float = 1.0, implicit_neg_w: float = 0.0, name: Optional[str] = None, **kw):
+                 ts_scale: float = 1.0, implicit_neg_w: float = 0.0, full_info_delay: Union[None, float, str] = None,
+                 name: Optional[str] = None, **kw):
         if mode not in MODES:
             raise ValueError(f"mode must be one of {MODES}, got {mode!r}")
+        if full_info_delay is not None and full_info_delay != "video":
+            if isinstance(full_info_delay, str) or float(full_info_delay) < 0:
+                raise ValueError(f"full_info_delay must be None, 'video' or a number >= 0, got {full_info_delay!r}")
+            full_info_delay = float(full_info_delay)
+        self.full_info_delay = full_info_delay
+        self._pending: List[Tuple[float, np.ndarray, np.ndarray, np.ndarray]] = []   # (release time, X, y, w)
         kw.pop("oracle_scenario", None)
         super().__init__(cfg, name=name or f"online_{mode}", **kw)
         self.mode, self.eps, self.ts_scale, self.lookback_s = mode, eps, ts_scale, lookback_s
@@ -106,6 +117,7 @@ class OnlinePolicy(PCACSPolicy):
         self._feedback = None
         self.n_labels = 0
         self.n_pos = 0
+        self.label_counts: dict = {}            # rows fitted per label source (tap_useful, missed_question, ...)
 
     # ------------------------------------------------------------------ video lifecycle
     def begin_video(self, scenario, feedback_model) -> None:
@@ -113,6 +125,8 @@ class OnlinePolicy(PCACSPolicy):
 
     def reset(self) -> None:
         super().reset()
+        if hasattr(self, "_pending"):
+            self._flush_pending(float("inf"))
         if hasattr(self, "_hist"):
             self._expire(float("inf"))
         self._spoken = []
@@ -126,6 +140,7 @@ class OnlinePolicy(PCACSPolicy):
         c = self.cfg
         ch = ch or ChannelState()
         self.last_action = "silence"
+        self._flush_pending(t)
         self._expire(t - self.lookback_s)
         obs = [o for o in self._features(tracks, t, ch) if o.track.confidence >= c.min_confidence]
         self._last_obs = obs
@@ -170,7 +185,7 @@ class OnlinePolicy(PCACSPolicy):
             if not covered:
                 neg.append(x)
         if neg and self.implicit_neg_w > 0:
-            self._fit(np.array(neg), np.full(len(neg), -1), np.full(len(neg), self.implicit_neg_w))
+            self._fit(np.array(neg), np.full(len(neg), -1), np.full(len(neg), self.implicit_neg_w), kind="implicit_negative")
 
     def _step_budget(self, spoke: bool) -> None:
         if self.use_budget_ctl:
@@ -196,7 +211,7 @@ class OnlinePolicy(PCACSPolicy):
                     h[3] = True
                 rows = [h[2] for h in hits]
                 X = np.array(rows); W = np.full(len(rows), 1.0 / len(rows))
-            self._fit(X, np.full(len(X), f.label), W)
+            self._fit(X, np.full(len(X), f.label), W, kind=f.kind)
 
     def _learn_full_info(self, obs, X: np.ndarray, t: float) -> None:
         sc, fb = self._scenario, self._feedback
@@ -212,13 +227,36 @@ class OnlinePolicy(PCACSPolicy):
                 ys.append(1); xs.append(x)
             elif sc.counts_fp(t):
                 ys.append(-1); xs.append(x)
-        if xs:
-            self._fit(np.array(xs), np.array(ys), np.full(len(xs), 1.0 / len(xs)))
+        if not xs:
+            return
+        X_, y_, w_ = np.array(xs), np.array(ys), np.full(len(xs), 1.0 / len(xs))
+        if self.full_info_delay is None:
+            self._fit(X_, y_, w_, kind="full_info")
+        else:
+            release = float("inf") if self.full_info_delay == "video" else t + self.full_info_delay
+            self._pending.append((release, X_, y_, w_))
 
-    def _fit(self, X: np.ndarray, y: np.ndarray, w: np.ndarray) -> None:
+    def _flush_pending(self, now: float) -> None:
+        """Apply buffered full-information labels whose release time has come, in the order they were made."""
+        if not self._pending:
+            return
+        due = [p for p in self._pending if p[0] <= now + 1e-9]
+        if not due:
+            return
+        self._pending = [p for p in self._pending if p[0] > now + 1e-9]
+        for _, X_, y_, w_ in due:
+            self._fit(X_, y_, w_, kind="full_info")
+
+    @property
+    def n_pending(self) -> int:
+        return sum(len(p[2]) for p in self._pending)
+
+    def _fit(self, X: np.ndarray, y: np.ndarray, w: np.ndarray, kind: str = "other") -> None:
         self.state = update(self.state, X, y, w)
         self.n_labels += len(y)
         self.n_pos += int((np.asarray(y) > 0).sum())
+        self.label_counts[kind] = self.label_counts.get(kind, 0) + len(y)
 
     def to_dict(self):
-        return {"mode": self.mode, "tau": self.tau, "eps": self.eps, "implicit_neg_w": self.implicit_neg_w, "n_labels": self.n_labels, "w": [round(float(v), 4) for v in self.state.w]}
+        return {"mode": self.mode, "tau": self.tau, "eps": self.eps, "implicit_neg_w": self.implicit_neg_w, "full_info_delay": self.full_info_delay, "n_labels": self.n_labels,
+                "n_pos": self.n_pos, "label_counts": dict(self.label_counts), "w": [round(float(v), 4) for v in self.state.w]}
