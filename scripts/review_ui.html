@@ -128,9 +128,24 @@ function show(n) {
   txt("count", `${i + 1} of ${D.events.length} (${reviewed} reviewed)`);
   $("prog").max = D.events.length; $("prog").value = reviewed;
   $("question").focus();
+  shownAt = performance.now();
 }
 
+const MIN_LOOK_MS = 2000;   // a verdict needs at least this long with the event on screen
+let shownAt = 0, saving = false;
+
 async function save(v) {
+  const waited = performance.now() - shownAt;
+  if (saving) return;
+  if (waited < MIN_LOOK_MS) {
+    txt("status", `Not saved: look at the frames first (${((MIN_LOOK_MS - waited) / 1000).toFixed(1)} s more).`);
+    return;
+  }
+  saving = true;
+  try { await post(v); } finally { saving = false; }
+}
+
+async function post(v) {
   const e = D.events[i], a = $("w0").value.trim(), b = $("w1").value.trim();
   const body = { key: e.key, verdict: v, note: $("note").value };
   if (a !== "" || b !== "") body.window = [Number(a), Number(b)];
@@ -152,6 +167,7 @@ function nextUnreviewed() {
 $("prev").addEventListener("click", () => show(i - 1));
 $("next").addEventListener("click", nextUnreviewed);
 document.addEventListener("keydown", ev => {
+  if (ev.repeat) return;                       // a held-down key must never record verdicts
   if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
   const k = Number(ev.key);
   if (k >= 1 && k <= D.verdicts.length) { ev.preventDefault(); save(D.verdicts[k - 1]); }

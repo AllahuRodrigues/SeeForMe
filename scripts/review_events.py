@@ -20,6 +20,7 @@ from seeforme.egoblind.review import (VERDICTS, blind_row, cohen_kappa, latest_v
 
 REVIEW = ROOT / "data" / "review"
 STEP_S, BEFORE_S, AFTER_S, WIDTH = 0.75, 3.0, 1.0, 480
+MIN_GAP_S = 2.0   # server-side floor between two verdicts by one reviewer (held keys, scripted clicks)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("cmd", choices=["frames", "serve", "merge", "kappa"])
@@ -154,6 +155,10 @@ else:
                 win = body.get("window")
                 v = make_verdict(body["key"], body["verdict"], args.reviewer, window=tuple(win) if win else None,
                                  note=body.get("note", ""))
+                recs = load_records()
+                if recs and recs[-1].get("reviewer") == args.reviewer and v["t"] - recs[-1]["t"] < MIN_GAP_S:
+                    raise ValueError(f"saved {v['t'] - recs[-1]['t']:.1f} s after the previous verdict; "
+                                     f"take at least {MIN_GAP_S:g} s per event")
             except (ValueError, KeyError, TypeError) as e:
                 return self._send(400, str(e).encode(), "text/plain")
             with open(store, "a") as f:
