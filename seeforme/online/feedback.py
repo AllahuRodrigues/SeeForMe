@@ -11,7 +11,9 @@ Label sources, in the order a real user would produce them:
                       quiet window should have stayed silent
 
 Cues far from every labelled moment and silence get no label. Taps are dropped with probability 1 - p_tap
-(users do not always tap); questions are never dropped because the user did ask them.
+(users do not always tap). By default every question in the data is asked (p_ask = 1). With p_ask < 1 each question
+(speak or quiet) is asked with probability p_ask, so a miss can go unreported: the feedback is then truly one-sided
+on the scored region too. Taps and questions use separate seeded generators, so p_ask leaves the tap stream unchanged.
 """
 from __future__ import annotations
 
@@ -33,8 +35,12 @@ class Feedback:
 
 
 class FeedbackModel:
-    def __init__(self, scenario, p_tap: float = 1.0, seed: int = 0, near_s: float = NEAR_S):
+    def __init__(self, scenario, p_tap: float = 1.0, seed: int = 0, near_s: float = NEAR_S, p_ask: float = 1.0):
+        if not 0.0 <= float(p_ask) <= 1.0:
+            raise ValueError(f"p_ask must be in [0, 1], got {p_ask!r}")
         self.p_tap = float(p_tap)
+        self.p_ask = float(p_ask)
+        self._ask_rng = random.Random(seed * 7919 + 17)
         self.near_s = float(near_s)
         self._rng = random.Random(seed)
         self._events = {e.obj_id: e for e in scenario.speak_events()}
@@ -72,6 +78,8 @@ class FeedbackModel:
         while self._next_q < len(self._questions) and self._questions[self._next_q][0] <= t + 1e-9:
             t_q, kind, e = self._questions[self._next_q]
             self._next_q += 1
+            if self.p_ask < 1.0 and self._ask_rng.random() >= self.p_ask:
+                continue                                  # the user did not ask this time
             if kind == "speak":
                 if e.obj_id in self._announced or e.earliest_useful_s is None:
                     continue

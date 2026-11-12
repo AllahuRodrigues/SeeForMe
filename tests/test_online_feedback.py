@@ -78,3 +78,38 @@ def test_tap_dropout_is_seeded():                                          # AC-
     dropped = sum(FeedbackModel(sc, p_tap=0.5, seed=s).on_cue(car.ideal_s, source_id=car.obj_id) is None for s in range(200))
     assert 60 < dropped < 140
     assert FeedbackModel(sc, p_tap=0.0).advance(car.detail["t_q"])            # questions are never dropped
+
+
+# ---------------------------------------------------------------- p_ask: users do not always ask (algo item 2)
+
+def _all_questions(fb):
+    return fb.advance(float("inf"))
+
+
+def test_p_ask_default_keeps_every_question():
+    sc, _, _ = _scenario()
+    assert _all_questions(FeedbackModel(sc)) == _all_questions(FeedbackModel(sc, p_ask=1.0))
+    assert len(_all_questions(FeedbackModel(sc))) == 2                         # one missed (car) + one quiet window
+
+
+def test_p_ask_zero_drops_every_question():
+    sc, _, _ = _scenario()
+    assert _all_questions(FeedbackModel(sc, p_ask=0.0)) == []
+
+
+def test_p_ask_is_seeded_and_does_not_disturb_taps():
+    sc, car, _ = _scenario()
+    a = [len(_all_questions(FeedbackModel(sc, p_ask=0.5, seed=s))) for s in range(300)]
+    b = [len(_all_questions(FeedbackModel(sc, p_ask=0.5, seed=s))) for s in range(300)]
+    assert a == b
+    assert 0.4 < sum(a) / (2 * 300) < 0.6
+    # the tap stream is drawn from its own generator, so p_ask does not change which taps survive
+    taps = lambda pa: [FeedbackModel(sc, p_tap=0.5, p_ask=pa, seed=s).on_cue(car.ideal_s, source_id=car.obj_id) for s in range(50)]
+    assert taps(1.0) == taps(0.3)
+
+
+def test_p_ask_validation():
+    import pytest
+    sc, _, _ = _scenario()
+    with pytest.raises(ValueError):
+        FeedbackModel(sc, p_ask=1.5)
