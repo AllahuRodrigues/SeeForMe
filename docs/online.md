@@ -1,6 +1,6 @@
 # Online learning from one-sided feedback (M1): development results
 
-Run on 2026-11-12. Code: `seeforme/online/`, `scripts/run_online.py`. Raw outputs: `results/online/`.
+Run on 2026-11-12 (warm start added the same day). Code: `seeforme/online/`, `scripts/run_online.py`. Raw outputs: `results/online/`.
 
 ## Setup
 
@@ -28,9 +28,24 @@ Run on 2026-11-12. Code: `seeforme/online/`, `scripts/run_online.py`. Raw output
 3. **Online learners beat the fixed rule and the frozen RL model** (0.20 vs 0.09 and 0.05). Against the frozen IL model on its out-of-sample part (`finetune`), they're level: 4/27 for IL against 2–7/27 for the online learners. With n = 27, nothing there is separable.
 4. **Quiet-window violations go up** from 0.02–0.04 for the frozen models to about 0.10. Silence is never labelled, so the learner speaks in some windows where users had confirmed nothing was there.
 
+## Warm start from CampusBench (layer 1 of the data plan)
+
+One full-information pass over the 84 CampusBench v2 training scenarios (about 17,400 labelled candidates, 1,850 positive), then the same one-sided stream. Coverable recall, three seeds each. The last column is the paired bootstrap of pooled recall against the cold start, resampling videos across all three seeds.
+
+| Learner | seed 0 | seed 1 | seed 2 | mean | vs cold start, 95% CI |
+|---|---|---|---|---|---|
+| Greedy, carry everything | 0.169 | 0.138 | 0.131 | 0.146 | **-0.058** [-0.107, -0.013] |
+| Thompson, carry everything | 0.138 | 0.163 | 0.150 | 0.150 | -0.038 [-0.089, +0.007] |
+| Greedy, carry weights only | 0.194 | 0.150 | 0.188 | 0.177 | -0.027 [-0.067, +0.014] |
+| Thompson, carry weights only | 0.206 | 0.194 | 0.219 | **0.206** | +0.019 [-0.016, +0.054] |
+
+"Carry everything" keeps the simulator's AdaGrad accumulator, posterior precision and feature normaliser. "Weights only" keeps the weights as a prior mean and starts the rest fresh on real video.
+
+5. **Naive simulation pretraining hurts.** Carrying the full optimiser state lowers greedy recall by 0.06, and the interval excludes zero. After 17,000 simulated labels the AdaGrad steps are small and the posterior is confident, so the learner cannot move far from a simulator that is wrong about real video. Quiet violations also rise, to 0.10–0.14.
+6. **A weights-only prior is safe but doesn't close the gap.** It removes the harm. Thompson rises to 0.206, and on `finetune` it catches 6–8 of 27 events against 4 for the frozen IL model. Every interval still includes zero. The gap to full information (0.53) is not a cold-start problem, so the next lever is the label signal itself.
+
 ## Next experiments (selected on `select`, never on holdout)
 
-- **Warm start (online-to-batch):** initialise the learner from CampusBench full-information labels (layer 1 of the data plan), then learn online from one-sided feedback. This tests whether simulation pretraining recovers part of the 0.33 gap.
 - **Credit assignment for question labels:** a missed question currently labels every candidate of the event in [earliest, t_q] equally. Weighting the moment closest to the ideal cue time may sharpen the signal.
 - **Re-identification memory (M2) on and off:** measure repeat cues, once the GPU embedding run has finished.
 - **Bootstrap 95% intervals** (`scripts/bootstrap_ci.py`) on the final comparison.
