@@ -14,6 +14,7 @@ import numpy as np
 
 from ..config import TrackerConfig
 from ..types import Detection, Track, bbox_center, bbox_iou
+from .reid import ReIDGallery
 
 try:
     from scipy.optimize import linear_sum_assignment
@@ -34,6 +35,7 @@ class IoUTracker:
         self.tracks: Dict[int, Track] = {}
         self._next_id = 1
         self.frame_index = 0
+        self.gallery = ReIDGallery(self.cfg.reid_horizon_s, self.cfg.reid_threshold) if self.cfg.reid_horizon_s > 0 else None
 
     # ------------------------------------------------------------------
     def _affinity(self, det: Detection, trk: Track) -> float:
@@ -108,6 +110,7 @@ class IoUTracker:
                     if self.cfg.memory_ttl_s > 0 and trk.confirmed and (t - trk.last_seen) <= self.cfg.memory_ttl_s \
                             and self._remember(trk, t):
                         continue
+                    self._retire(trk)
                     del self.tracks[tid]
 
         return self.active_tracks()
@@ -131,6 +134,10 @@ class IoUTracker:
                 self.dynamics._ttc_and_path(trk)
         return True
 
+    def _retire(self, trk: Track) -> None:
+        if self.gallery is not None and trk.confirmed and trk.emb is not None:
+            self.gallery.add(trk.label, trk.kind, trk.emb, trk.last_seen, trk.last_announced, trk.announce_count, trk.track_id)
+
     # ------------------------------------------------------------------
     def _update_track(self, trk: Track, det: Detection, t: float) -> None:
         a = self.cfg.conf_ema
@@ -151,6 +158,13 @@ class IoUTracker:
             trk.label = det.label
         if det.source_id is not None:
             trk.source_votes[det.source_id] = trk.source_votes.get(det.source_id, 0) + 1
+        if det.emb is not None:
+            e = np.asarray(det.emb, dtype=np.float32)
+            if trk.emb is None:
+                trk.emb = e
+            else:
+                m = 0.8 * np.asarray(trk.emb) + 0.2 * e
+                trk.emb = m / max(float(np.linalg.norm(m)), 1e-6)
         if trk.hits >= self.cfg.n_init:
             trk.confirmed = True
         if self.dynamics is not None:
@@ -165,6 +179,11 @@ class IoUTracker:
         trk.bbox_history.append((t, det.bbox))
         if det.source_id is not None:
             trk.source_votes[det.source_id] = 1
+        if det.emb is not None:
+            trk.emb = np.asarray(det.emb, dtype=np.float32)
+            m = self.gallery.match(det.label, det.kind, trk.emb, t) if self.gallery is not None else None
+            if m is not None:
+                trk.reid_of, trk.last_announced, trk.announce_count = m.track_id, m.last_announced, m.announce_count
         self.tracks[trk.track_id] = trk
         self._next_id += 1
         if self.dynamics is not None:
@@ -177,5 +196,7 @@ class IoUTracker:
 
     def reset(self) -> None:
         self.tracks.clear()
+        if self.gallery is not None:
+            self.gallery.clear()
         self._next_id = 1
         self.frame_index = 0

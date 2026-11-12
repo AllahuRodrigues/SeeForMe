@@ -36,6 +36,7 @@ class Detection:
     source_id: Optional[int] = None  # ground-truth object id (simulation only)
     distance_m: Optional[float] = None   # metric depth of the object (depth model / simulated depth sensor)
     depth_conf: float = 0.0              # 0..1 confidence of distance_m (0 = no depth available)
+    emb: Optional[object] = None         # unit appearance embedding (np.ndarray) for long-term re-identification
 
 
 @dataclass
@@ -75,6 +76,8 @@ class Track:
     last_haptic: Optional[float] = None
     remembered: bool = False              # kept alive by the memory ledger (not currently detected)
     memory_t: Optional[float] = None      # last time the memory extrapolation ran
+    emb: Optional[object] = None          # running appearance embedding (np.ndarray, unit norm)
+    reid_of: Optional[int] = None         # id of the earlier track this one was re-identified as
 
     @property
     def source_id(self) -> Optional[int]:

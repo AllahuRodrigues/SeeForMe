@@ -61,6 +61,27 @@ class PerceptionCache:
         self.labels: List[str] = list(meta.get("labels", []))
         # frame index -> slice of detections (detections are stored frame-ordered)
         self._starts = np.searchsorted(self.det_frame, np.arange(len(self.frame_t) + 1))
+        self.det_emb: Optional[np.ndarray] = None   # (N, D) appearance embeddings from scripts/cache_appearance.py
+
+    def attach_embeddings(self, emb: np.ndarray, has_emb: Optional[np.ndarray] = None) -> None:
+        """Align appearance embeddings with the detections (rows without an embedding become NaN, i.e. unused)."""
+        emb = np.asarray(emb, dtype=np.float32)
+        if emb.shape[0] != self.n_detections:
+            raise ValueError(f"embeddings have {emb.shape[0]} rows, cache has {self.n_detections} detections")
+        if has_emb is not None:
+            emb = emb.copy(); emb[~np.asarray(has_emb, dtype=bool)] = np.nan
+        self.det_emb = emb
+
+    def load_embeddings(self, path) -> bool:
+        """Attach the side-car at `path` if it exists and was built from this cache; returns whether it was attached."""
+        if not Path(path).exists():
+            return False
+        with np.load(path, allow_pickle=False) as z:
+            meta = json.loads(str(z["meta"]))
+            if meta.get("cache_built") != self.meta.get("built"):
+                return False
+            self.attach_embeddings(z["det_emb"], z["has_emb"])
+        return True
 
     # ---- persistence --------------------------------------------------------
     def save(self, path) -> None:
@@ -138,8 +159,11 @@ class PerceptionCache:
                 if cands:
                     sid = min(cands, key=lambda e: abs(e.detail.get("t_q", e.latest_safe_s) - t)).obj_id
                 x1, y1, x2, y2 = (float(v) for v in self.det_bbox[i])
+                emb = None
+                if self.det_emb is not None and np.isfinite(self.det_emb[i, 0]):
+                    emb = self.det_emb[i]
                 dets.append(Detection(label=lab, confidence=conf, bbox=(x1, y1, x2, y2), kind="object", source_id=sid,
-                                      distance_m=dist, depth_conf=dconf))
+                                      distance_m=dist, depth_conf=dconf, emb=emb))
             out.append((t, dets))
         return out
 
