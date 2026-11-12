@@ -32,6 +32,7 @@ ap.add_argument("--target", type=float, default=2.0, help="target cues per minut
 ap.add_argument("--tau0", type=float, default=0.6)
 ap.add_argument("--eps", type=float, default=0.25, help="share of the cue budget spent exploring (apple)")
 ap.add_argument("--lr", type=float, default=0.5)
+ap.add_argument("--implicit-neg", type=float, default=0.0, help="weight of the weak negative for a candidate nobody asked about")
 ap.add_argument("--p-tap", type=float, default=0.5, help="probability that the user taps useful / not useful after a cue")
 ap.add_argument("--seed", type=int, default=0)
 ap.add_argument("--limit", type=int, default=0)
@@ -77,7 +78,8 @@ for name in [p for p in args.policies.split(",") if p]:
         mode, _, warm = name.split("_", 1)[1].partition("+")
         if mode not in MODES or warm not in ("", "campus", "campusw"):
             sys.exit(f"unknown online policy {name}")
-        pol = OnlinePolicy(mode=mode, target_per_min=args.target, tau0=args.tau0, eps=args.eps, lr=args.lr, seed=args.seed)
+        pol = OnlinePolicy(mode=mode, target_per_min=args.target, tau0=args.tau0, eps=args.eps, lr=args.lr, seed=args.seed,
+                           implicit_neg_w=args.implicit_neg)
         if warm:
             from seeforme.campus.world import CampusScenario
             from seeforme.online.pretrain import pretrain_on_campus
@@ -118,7 +120,7 @@ for r in rows:
     by[r["policy"]].append(r)
 summary = {p: pooled(rs) for p, rs in by.items()}
 summary["_meta"] = {"stream": splits, "n_videos": len(scenarios), "minutes": minutes, "p_tap": args.p_tap, "target": args.target,
-                    "tau0": args.tau0, "eps": args.eps, "lr": args.lr, "seed": args.seed, "noise": args.noise, "final": args.final}
+                    "tau0": args.tau0, "eps": args.eps, "lr": args.lr, "implicit_neg": args.implicit_neg, "seed": args.seed, "noise": args.noise, "final": args.final}
 dump_json(summary, OUT / f"summary_{args.tag}.json")
 with open(OUT / f"curve_{args.tag}.csv", "w", newline="") as f:
     w = csv.writer(f); w.writerow(["policy", "videos_seen", "recall_coverable", "quiet_violation", "cues_per_min"])

@@ -107,3 +107,62 @@ def test_apple_exploration_spends_budget_share():
     pol = OnlinePolicy(mode="apple", eps=0.25, target_per_min=2.0)
     p_explore = 0.25 * 2.0 * pol.decision_interval / 60.0
     assert abs(p_explore - 0.25 * 2.0 / 120.0) < 1e-12        # 0.25 of 2 cues/min at 2 decisions/s
+
+
+def _tracks_at(sc, t_stop):
+    from seeforme.tracking.tracker import IoUTracker
+    from seeforme.config import PipelineConfig
+    tr = IoUTracker(PipelineConfig().tracker)
+    tracks = []
+    for t, dets in sc.frames():
+        tracks = tr.update(dets, t)
+        if t > t_stop:
+            break
+    return tracks
+
+
+def test_no_implicit_negatives_by_default():
+    sc, _ = synthetic_scenario()
+    pol = OnlinePolicy(mode="greedy", tau0=0.999, budget=False, lookback_s=5.0)
+    pol.reset()
+    pol.decide(_tracks_at(sc, 6), 6.0, ChannelState())
+    pol.decide([], 20.0, ChannelState())
+    pol.reset()
+    assert pol.n_labels == 0
+
+
+def test_unasked_candidates_become_weak_negatives_when_they_expire():
+    sc, _ = synthetic_scenario()
+    pol = OnlinePolicy(mode="greedy", tau0=0.999, budget=False, lookback_s=5.0, implicit_neg_w=0.1)
+    pol.reset()
+    pol.decide(_tracks_at(sc, 6), 6.0, ChannelState())
+    n_seen = len(pol._hist)
+    assert n_seen > 0 and pol.n_labels == 0
+    pol.decide([], 20.0, ChannelState())                                     # 14 s later: nobody asked
+    assert pol.n_labels == n_seen and pol.n_pos == 0
+
+
+def test_candidates_covered_by_a_question_are_not_implicitly_negated():
+    from seeforme.online.feedback import Feedback
+    sc, _ = synthetic_scenario()
+    pol = OnlinePolicy(mode="greedy", tau0=0.999, budget=False, lookback_s=5.0, implicit_neg_w=0.1)
+    pol.reset()
+    pol.decide(_tracks_at(sc, 6), 6.0, ChannelState())
+    n_seen = len(pol._hist)
+    pol.learn([Feedback(t=7.0, label=1, kind="missed_question", source_id=None, t0=0.0, t1=6.0)])
+    assert pol.n_pos == n_seen
+    pol.reset()                                                              # end of video flushes the rest
+    assert pol.n_labels == n_seen
+
+
+def test_tapped_cue_is_not_implicitly_negated():
+    from seeforme.online.feedback import Feedback
+    sc, _ = synthetic_scenario()
+    pol = OnlinePolicy(mode="greedy", tau0=0.0, budget=False, lookback_s=5.0, implicit_neg_w=0.1)
+    pol.reset()
+    assert pol.decide(_tracks_at(sc, 6), 6.0, ChannelState()) != []
+    n_seen = len(pol._hist)
+    pol.learn([Feedback(t=6.0, label=1, kind="tap_useful", source_id=None, t0=6.0, t1=6.0)])
+    assert pol.n_labels == 1
+    pol.reset()
+    assert pol.n_labels == 1 + (n_seen - 1)                                  # the spoken candidate is not negated

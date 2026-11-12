@@ -9,6 +9,9 @@ Modes
 Labels arrive through `learn(feedback)`: a tap applies to the spoken candidate, a missed question to every remembered
 candidate of that event in [t0, t1], a quiet window to every remembered candidate in [t0, t1] (each question carries
 total weight 1, split over its candidates). The model persists across `reset()` (one reset per video).
+
+With `implicit_neg_w > 0`, a remembered candidate that no feedback covered by the time it leaves the lookback window
+(or the video ends) becomes a weak negative of that weight: nobody asked about it, so it probably wasn't needed.
 """
 from __future__ import annotations
 
@@ -83,12 +86,13 @@ class OnlinePolicy(PCACSPolicy):
 
     def __init__(self, mode: str = "greedy", cfg: Optional[PCACSConfig] = None, target_per_min: float = 2.0, tau0: float = 0.6,
                  eps: float = 0.25, lr: float = 0.5, l2: float = 1e-3, budget: bool = True, seed: int = 0, lookback_s: float = 15.0,
-                 ts_scale: float = 1.0, name: Optional[str] = None, **kw):
+                 ts_scale: float = 1.0, implicit_neg_w: float = 0.0, name: Optional[str] = None, **kw):
         if mode not in MODES:
             raise ValueError(f"mode must be one of {MODES}, got {mode!r}")
         kw.pop("oracle_scenario", None)
         super().__init__(cfg, name=name or f"online_{mode}", **kw)
         self.mode, self.eps, self.ts_scale, self.lookback_s = mode, eps, ts_scale, lookback_s
+        self.implicit_neg_w = implicit_neg_w
         self.use_budget_ctl = budget
         self.tau0 = tau0
         self.ctl = BudgetController.make(target_per_min, tau0)
@@ -96,7 +100,7 @@ class OnlinePolicy(PCACSPolicy):
         self.norm = _Normalizer(N_FEAT)
         self._rng = random.Random(seed)
         self._nrng = np.random.default_rng(seed)
-        self._hist: Deque[Tuple[float, Optional[int], np.ndarray]] = deque()
+        self._hist: Deque[list] = deque()      # [t, source_id, x, covered by feedback]
         self._spoken: List[Tuple[float, np.ndarray, float]] = []      # (t, x, importance weight) of this video's cues
         self._scenario = None
         self._feedback = None
@@ -109,7 +113,8 @@ class OnlinePolicy(PCACSPolicy):
 
     def reset(self) -> None:
         super().reset()
-        self._hist.clear()
+        if hasattr(self, "_hist"):
+            self._expire(float("inf"))
         self._spoken = []
 
     @property
@@ -121,6 +126,7 @@ class OnlinePolicy(PCACSPolicy):
         c = self.cfg
         ch = ch or ChannelState()
         self.last_action = "silence"
+        self._expire(t - self.lookback_s)
         obs = [o for o in self._features(tracks, t, ch) if o.track.confidence >= c.min_confidence]
         self._last_obs = obs
         if not obs:
@@ -133,9 +139,7 @@ class OnlinePolicy(PCACSPolicy):
         p = predict(self.state, X, w)
         for o, x, pi in zip(obs, X, p):
             o.score = float(pi)
-            self._hist.append((t, o.track.source_id, x))
-        while self._hist and self._hist[0][0] < t - self.lookback_s:
-            self._hist.popleft()
+            self._hist.append([t, o.track.source_id, x, False])
         if self.mode == "full_info":
             self._learn_full_info(obs, X, t)
         legal = [i for i, o in enumerate(obs)
@@ -158,6 +162,16 @@ class OnlinePolicy(PCACSPolicy):
         self._spoken.append((t, X[i], weight))
         return [self._make_cue(obs[i], t, "speak", ch)]
 
+    def _expire(self, before: float) -> None:
+        """Forget candidates older than `before`; uncovered ones become weak negatives when implicit_neg_w > 0."""
+        neg = []
+        while self._hist and self._hist[0][0] < before:
+            ts, sid, x, covered = self._hist.popleft()
+            if not covered:
+                neg.append(x)
+        if neg and self.implicit_neg_w > 0:
+            self._fit(np.array(neg), np.full(len(neg), -1), np.full(len(neg), self.implicit_neg_w))
+
     def _step_budget(self, spoke: bool) -> None:
         if self.use_budget_ctl:
             self.ctl = self.ctl.step(spoke, self.decision_interval)
@@ -169,12 +183,18 @@ class OnlinePolicy(PCACSPolicy):
                 hit = [(x, wt) for (ts, x, wt) in self._spoken if abs(ts - f.t) < 1e-6]
                 if not hit:
                     continue
+                for h in self._hist:
+                    if abs(h[0] - f.t) < 1e-6 and any(np.array_equal(h[2], x) for x, _ in hit):
+                        h[3] = True
                 X = np.array([h[0] for h in hit]); W = np.array([h[1] for h in hit])
             else:
-                rows = [x for (ts, sid, x) in self._hist
-                        if f.t0 - 1e-6 <= ts <= f.t1 + 1e-6 and (f.source_id is None or sid == f.source_id)]
-                if not rows:
+                hits = [h for h in self._hist
+                        if f.t0 - 1e-6 <= h[0] <= f.t1 + 1e-6 and (f.source_id is None or h[1] == f.source_id)]
+                if not hits:
                     continue
+                for h in hits:
+                    h[3] = True
+                rows = [h[2] for h in hits]
                 X = np.array(rows); W = np.full(len(rows), 1.0 / len(rows))
             self._fit(X, np.full(len(X), f.label), W)
 
@@ -201,4 +221,4 @@ class OnlinePolicy(PCACSPolicy):
         self.n_pos += int((np.asarray(y) > 0).sum())
 
     def to_dict(self):
-        return {"mode": self.mode, "tau": self.tau, "eps": self.eps, "n_labels": self.n_labels, "w": [round(float(v), 4) for v in self.state.w]}
+        return {"mode": self.mode, "tau": self.tau, "eps": self.eps, "implicit_neg_w": self.implicit_neg_w, "n_labels": self.n_labels, "w": [round(float(v), 4) for v in self.state.w]}
