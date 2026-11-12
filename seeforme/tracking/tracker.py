@@ -36,6 +36,7 @@ class IoUTracker:
         self._next_id = 1
         self.frame_index = 0
         self.gallery = ReIDGallery(self.cfg.reid_horizon_s, self.cfg.reid_threshold) if self.cfg.reid_horizon_s > 0 else None
+        self.reid_log: List[Dict] = []    # one row per re-identification, for auditing match precision
 
     # ------------------------------------------------------------------
     def _affinity(self, det: Detection, trk: Track) -> float:
@@ -136,7 +137,8 @@ class IoUTracker:
 
     def _retire(self, trk: Track) -> None:
         if self.gallery is not None and trk.confirmed and trk.emb is not None:
-            self.gallery.add(trk.label, trk.kind, trk.emb, trk.last_seen, trk.last_announced, trk.announce_count, trk.track_id)
+            sid = max(trk.source_votes, key=trk.source_votes.get) if trk.source_votes else None
+            self.gallery.add(trk.label, trk.kind, trk.emb, trk.last_seen, trk.last_announced, trk.announce_count, trk.track_id, sid)
 
     # ------------------------------------------------------------------
     def _update_track(self, trk: Track, det: Detection, t: float) -> None:
@@ -184,6 +186,9 @@ class IoUTracker:
             m = self.gallery.match(det.label, det.kind, trk.emb, t) if self.gallery is not None else None
             if m is not None:
                 trk.reid_of, trk.last_announced, trk.announce_count = m.track_id, m.last_announced, m.announce_count
+                self.reid_log.append({"t": t, "label": det.label, "old_track": m.track_id, "new_track": trk.track_id,
+                                      "cos": self.gallery.last_score, "gap_s": t - m.last_seen, "announced": m.last_announced is not None,
+                                      "old_sid": m.source_id, "new_sid": det.source_id})
         self.tracks[trk.track_id] = trk
         self._next_id += 1
         if self.dynamics is not None:
@@ -196,6 +201,7 @@ class IoUTracker:
 
     def reset(self) -> None:
         self.tracks.clear()
+        self.reid_log = []
         if self.gallery is not None:
             self.gallery.clear()
         self._next_id = 1

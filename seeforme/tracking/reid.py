@@ -23,23 +23,25 @@ class MemoryEntry:
     last_announced: Optional[float]
     announce_count: int
     track_id: int
+    source_id: Optional[int] = None     # ground-truth object id when known (evaluation only)
 
 
 class ReIDGallery:
     def __init__(self, horizon_s: float = 180.0, threshold: float = 0.85, max_entries: int = 256):
         self.horizon_s, self.threshold, self.max_entries = horizon_s, threshold, max_entries
         self._entries: List[MemoryEntry] = []
+        self.last_score: Optional[float] = None    # cosine of the most recent successful match
 
     def __len__(self) -> int:
         return len(self._entries)
 
     def add(self, label: str, kind: str, emb: np.ndarray, last_seen: float, last_announced: Optional[float],
-            announce_count: int, track_id: int) -> None:
+            announce_count: int, track_id: int, source_id: Optional[int] = None) -> None:
         e = np.asarray(emb, dtype=np.float32)
         n = float(np.linalg.norm(e))
         if n <= 1e-6:
             return
-        self._entries.append(MemoryEntry(label, kind, e / n, last_seen, last_announced, announce_count, track_id))
+        self._entries.append(MemoryEntry(label, kind, e / n, last_seen, last_announced, announce_count, track_id, source_id))
         if len(self._entries) > self.max_entries:
             self._entries = self._entries[-self.max_entries:]
 
@@ -60,6 +62,7 @@ class ReIDGallery:
                 best, best_i, best_s = e, i, s
         if best is not None:
             self._entries = self._entries[:best_i] + self._entries[best_i + 1:]
+            self.last_score = best_s
         return best
 
     def clear(self) -> None:

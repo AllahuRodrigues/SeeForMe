@@ -33,6 +33,7 @@ class RunLog:
     decisions: List[DecisionRecord] = field(default_factory=list)
     truth_at_cue: Dict[int, Dict] = field(default_factory=dict)   # cue index -> true distance / ttc at cue time
     distractors: List[Cue] = field(default_factory=list)     # external speech that occupied the channel (sign reads, conversation)
+    reid_matches: List[Dict] = field(default_factory=list)   # long-term re-identifications made by the tracker (M2)
 
     @property
     def spoken(self) -> List[Cue]:

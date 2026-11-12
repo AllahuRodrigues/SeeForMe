@@ -108,3 +108,16 @@ def test_cache_carries_embeddings_into_detections():
     import pytest
     with pytest.raises(ValueError):
         cache.attach_embeddings(emb[:-1])
+
+
+def test_tracker_logs_each_reid_match_for_audit():
+    trk = IoUTracker(TrackerConfig(reid_horizon_s=120.0, reid_threshold=0.85))
+    frames = [(t, [Detection(label=d.label, confidence=d.confidence, bbox=d.bbox, emb=d.emb, source_id=7)] if ds else [])
+              for t, ds in _scene(A2) for d in (ds[0] if ds else None,)]
+    _announce_first_track(trk, frames)
+    assert len(trk.reid_log) == 1
+    m = trk.reid_log[0]
+    assert m["label"] == "bench" and m["old_sid"] == 7 and m["new_sid"] == 7
+    assert 0.85 <= m["cos"] <= 1.0 and m["gap_s"] > 30
+    trk.reset()
+    assert trk.reid_log == []
