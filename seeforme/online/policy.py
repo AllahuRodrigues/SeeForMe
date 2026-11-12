@@ -90,6 +90,7 @@ class OnlinePolicy(PCACSPolicy):
         super().__init__(cfg, name=name or f"online_{mode}", **kw)
         self.mode, self.eps, self.ts_scale, self.lookback_s = mode, eps, ts_scale, lookback_s
         self.use_budget_ctl = budget
+        self.tau0 = tau0
         self.ctl = BudgetController.make(target_per_min, tau0)
         self.state: LogisticState = init_state(N_FEAT, lr=lr, l2=l2)
         self.norm = _Normalizer(N_FEAT)
@@ -100,6 +101,7 @@ class OnlinePolicy(PCACSPolicy):
         self._scenario = None
         self._feedback = None
         self.n_labels = 0
+        self.n_pos = 0
 
     # ------------------------------------------------------------------ video lifecycle
     def begin_video(self, scenario, feedback_model) -> None:
@@ -196,6 +198,7 @@ class OnlinePolicy(PCACSPolicy):
     def _fit(self, X: np.ndarray, y: np.ndarray, w: np.ndarray) -> None:
         self.state = update(self.state, X, y, w)
         self.n_labels += len(y)
+        self.n_pos += int((np.asarray(y) > 0).sum())
 
     def to_dict(self):
         return {"mode": self.mode, "tau": self.tau, "eps": self.eps, "n_labels": self.n_labels, "w": [round(float(v), 4) for v in self.state.w]}
