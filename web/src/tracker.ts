@@ -7,7 +7,7 @@ export const TYPICAL_SIZE: Record<string, [number, number]> = {
   backpack: [0.45, 0.35], suitcase: [0.7, 0.45], "potted plant": [0.6, 0.4], "fire hydrant": [0.8, 0.3], "stop sign": [0.75, 0.75],
   "traffic light": [1.0, 0.35], umbrella: [1.0, 1.0], text: [0.3, 0.8],
 };
-const DEFAULT_SIZE: [number, number] = [0.8, 0.5];
+export const DEFAULT_SIZE: [number, number] = [0.8, 0.5];
 
 export class Camera {
   constructor(public hfovDeg = 70, public aspect = 4 / 3, public heightM = 1.35, public pitchDeg = 15) {}

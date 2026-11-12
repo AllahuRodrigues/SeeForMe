@@ -147,3 +147,176 @@ def test_scene_summary_and_session_log(tmp_path):
     log.close()
     kinds = [line.split('"kind": "')[1].split('"')[0] for line in open(tmp_path / "s.jsonl")]
     assert "cue" in kinds and "mode" in kinds
+
+
+# ---- the audio channel: a cane cue or a spoken reply never holds a safety cue back --------------------------------
+# The pipeline's channel (seeforme/eval/runner.SpeechChannel, as LivePipeline uses it): what plays holds it, a scheduler
+# sees it busy, an interrupt cuts it. The user walks at a wall (the cane says "Obstacle ahead" at 3.0 s, severity 0.7)
+# and something appears while that message, or a reply registered as run_live does (reply_cue), still plays.
+from seeforme.cues.pcacs import ChannelState, PCACSPolicy                       # noqa: E402
+from seeforme.eval.runner import SpeechChannel                                  # noqa: E402
+from seeforme.live.cane import CANE_POLICY                                      # noqa: E402
+from seeforme.live.commands import HELP_VOICE                                   # noqa: E402
+from seeforme.live.controller import REPLY_TRACK_ID, reply_cue                  # noqa: E402
+from tests.test_live_cane import FakeScheduler as NearestFirst, render, track, wall   # noqa: E402
+
+
+class ChannelRule(NearestFirst):
+    """P-CACS's channel rule (pcacs.py decide) for a non-critical cue: speak on a free channel; a busy channel holds it
+    (it would cut in only with a critical cue or one scoring far above the message playing). The nearest track first."""
+
+    def __init__(self, severity=0.5):
+        super().__init__(severity)
+        self.shown: list = []                    # (t, busy) of the channel each decision was shown
+
+    def decide(self, tracks, t, ch=None):
+        self.shown.append((t, bool(ch is not None and ch.busy)))
+        return [] if ch is not None and ch.busy else super().decide(tracks, t, ch)
+
+
+def drive_channel(policy, tracks_fn, cane=True, reply=None, gate=False, goal=None, seconds=8.0,
+                  walk=lambda t: max(0.3, 3.5 - 0.6 * t)):
+    """Every cue the pipeline would act on: frames at 10 fps, a decision every 0.5 s, depth maps at 5 per s of a wall
+    the user walks at (walk(t) metres; None: no depth). reply=(t, text): a reply put on the channel at t."""
+    ctl = LiveController(policy, setup="handheld", gate=gate, cane=cane, goal_tags=goal)
+    chan = SpeechChannel(1.2, 0.35)
+    out, next_dec, depth = [], 0.0, None
+    for i in range(int(seconds * 10)):
+        t = i / 10
+        if reply is not None and abs(t - reply[0]) < 1e-9:
+            chan.speak(reply_cue(reply[1], t), interrupt=True)
+        tracks = tracks_fn(t)
+        if t + 1e-9 >= next_dec:
+            next_dec = t + 0.5
+            busy = not chan.free(t)
+            cur = chan.current if busy else None
+            ch = ChannelState(busy=busy, remaining_s=chan.remaining(t), current_utility=cur.utility if cur else 0.0,
+                              current_severity=cur.severity if cur else 0.0, current_track=cur.track_id if cur else None)
+            cues = ctl.policy.decide(tracks, t, ch)
+            assert len(cues) <= 1
+            for c in cues:
+                out.append(c)
+                if c.action != "haptic":
+                    chan.speak(c, interrupt=c.action == "interrupt")
+        if i % 2 == 0 and walk is not None:
+            depth = render([wall(walk(t))], height=1.4, pitch=15, seed=i)
+        ctl.on_frame(None, t, tracks, depth=depth)
+    return out, ctl
+
+
+def _first(cues, label):
+    return next((c for c in cues if c.label == label), None)
+
+
+IN_PATH_CHAIR = lambda appear: lambda t: [track(5, "chair", (0.80, 0.5, 0.95, 0.9), 1.5, t, path=0.8)] if t >= appear else []  # noqa: E731
+GOAL_CHAIR = lambda appear: lambda t: [track(6, "chair", (0.05, 0.5, 0.2, 0.8), 3.0, t)] if t >= appear else []          # noqa: E731
+
+
+@pytest.mark.parametrize("gate", [False, True])
+@pytest.mark.parametrize("appear", [3.5, 4.0])
+@pytest.mark.parametrize("what", ["in-path chair", "FIND goal"])
+def test_a_spoken_cane_cue_never_holds_a_safety_cue_back(what, appear, gate):
+    """Reviewer repro (critical), real P-CACS: the cane's "Obstacle ahead" (3.0 s) held the channel at severity 0.7,
+    which P-CACS does not cut for a non-critical cue, so an in-path chair appearing at 3.5 s was said at 5.0 s."""
+    fn, goal = (IN_PATH_CHAIR(appear), None) if what == "in-path chair" else (GOAL_CHAIR(appear), ["chair"])
+    with_cane, ctl = drive_channel(PCACSPolicy(), fn, cane=True, gate=gate, goal=goal)
+    bare, _ = drive_channel(PCACSPolicy(), fn, cane=False, gate=gate, goal=goal)
+    spoken_cane = [c for c in with_cane if c.policy == CANE_POLICY and c.action != "haptic" and c.t < appear]
+    assert spoken_cane and appear - spoken_cane[-1].t <= 1.0          # the cane's message was still playing
+    assert _first(bare, "chair").t == appear
+    assert _first(with_cane, "chair").t == appear and _first(with_cane, "chair").action == "interrupt"
+    assert ctl.cane_stats["cut_in"] >= 1
+
+
+@pytest.mark.parametrize("label,ttc,speed", [("person", 2.5, 0.0), ("car", None, 0.0), ("person", None, -0.8)])
+def test_an_approaching_object_or_a_vehicle_cuts_the_cane_cue(label, ttc, speed):
+    """The same for an approaching person (TTC, or a measured closing speed) and a vehicle, with P-CACS's channel rule."""
+    def fn(t):
+        if t < 3.5:
+            return []
+        tr = track(5, label, (0.1, 0.3, 0.3, 0.8), 4.0, t, ttc=ttc if ttc is not None else math.inf)
+        tr.rel_speed_mps = speed
+        return [tr]
+    with_cane, _ = drive_channel(ChannelRule(), fn, cane=True)
+    bare, _ = drive_channel(ChannelRule(), fn, cane=False)
+    assert _first(bare, label).t == _first(with_cane, label).t == 3.5
+
+
+def test_a_routine_cue_waits_for_the_cane_cue():
+    """While the cane speaks, a routine cue is not said over it: with nothing safety-relevant in view the scheduler sees
+    the busy channel; with a vehicle in view it sees a free one, and its routine cue (already marked as said) waits for
+    the channel and is said once the cane's message has ended."""
+    person = lambda t: track(1, "person", (0.85, 0.3, 0.95, 0.8), 2.0, t) if t >= 3.5 else None   # noqa: E731
+    for with_car in (False, True):
+        pol = ChannelRule()
+        car = lambda t: [track(9, "car", (0.0, 0.4, 0.1, 0.5), 9.0, t)] if with_car and t >= 3.5 else []   # noqa: E731
+        cues, ctl = drive_channel(pol, lambda t: [p for p in [person(t)] if p] + car(t), cane=True,
+                                  walk=lambda t: max(1.6, 3.5 - 0.6 * t))
+        cane = next(c for c in cues if c.policy == CANE_POLICY)
+        said = [c for c in cues if c.label == "person"]
+        assert said and said[0].action == "speak" and said[0].t >= cane.t + 1.5, [(c.t, c.label, c.action) for c in cues]
+        assert said[0].t <= 5.0 and len([c for c in said if c.t < 6.0]) == 1
+        busy_at_35 = dict(pol.shown)[3.5]
+        assert busy_at_35 is (not with_car)                         # shown free only with something safety-relevant
+        assert (ctl.cane_stats["waited"] >= 1) is with_car
+
+
+def test_a_cane_cue_cuts_a_reply_but_never_a_scheduler_message():
+    cues, _ = drive_channel(NearestFirst(), lambda t: [], cane=True, reply=(2.9, "I said: Chair, about 2 meters."))
+    first = next(c for c in cues if c.policy == CANE_POLICY)
+    assert first.t == 3.0 and first.action == "interrupt" and first.interrupted_track == REPLY_TRACK_ID
+    # a scheduler message playing: the cane waits for it
+    talk = lambda t: [track(1, "person", (0.85, 0.3, 0.95, 0.8), 2.5, t)] if 2.9 <= t < 3.0 else []   # noqa: E731
+    cues, _ = drive_channel(ChannelRule(), talk, cane=True)
+    assert all(c.action != "interrupt" for c in cues if c.policy == CANE_POLICY)
+
+
+@pytest.mark.parametrize("what", ["in-path chair", "FIND goal", "approaching person", "vehicle"])
+def test_a_reply_never_holds_a_safety_cue_back(what):
+    """Reviewer repro (major): the help reply (9.4 s of channel) registered at 3.0 s held an in-path chair appearing at
+    3.5 s until 12.5 s. Now it is said at 3.5 s, cutting the reply, exactly as without the reply."""
+    if what in ("in-path chair", "FIND goal"):
+        fn, goal = (IN_PATH_CHAIR(3.5), None) if what == "in-path chair" else (GOAL_CHAIR(3.5), ["chair"])
+        make = PCACSPolicy
+    else:
+        label, ttc = ("person", 2.5) if what == "approaching person" else ("car", math.inf)
+        fn = lambda t: [track(5, label, (0.1, 0.3, 0.3, 0.8), 4.0, t, ttc=ttc)] if t >= 3.5 else []   # noqa: E731
+        goal, make = None, ChannelRule
+    for gate in (False, True):
+        bare, _ = drive_channel(make(), fn, cane=False, gate=gate, goal=goal, walk=None)
+        replied, ctl = drive_channel(make(), fn, cane=False, gate=gate, goal=goal, walk=None, reply=(3.0, HELP_VOICE))
+        label = "chair" if "chair" in what or "goal" in what else fn(3.5)[0].label
+        assert _first(bare, label).t == _first(replied, label).t == 3.5, (gate, [(c.t, c.action, c.message) for c in replied])
+        assert _first(replied, label).action == "interrupt" and _first(replied, label).interrupted_track == REPLY_TRACK_ID
+
+
+def test_a_routine_cue_waits_for_a_reply():
+    """Nothing safety-relevant in view: the scheduler sees the reply's busy channel and speaks after it, as before."""
+    pol = ChannelRule()
+    still = lambda t: [track(1, "person", (0.85, 0.3, 0.95, 0.8), 2.0, t)] if t >= 3.5 else []   # noqa: E731
+    text = "Paused. I'll still warn you about hazards."
+    cues, ctl = drive_channel(pol, still, cane=False, walk=None, reply=(3.0, text))
+    ends = 3.0 + SpeechChannel(1.2, 0.35).duration(reply_cue(text, 3.0))       # 5.45 s: the next decision is 5.5 s
+    assert cues[0].label == "person" and cues[0].action == "speak" and cues[0].t == math.ceil(ends * 2) / 2
+    assert all(busy for t, busy in pol.shown if 3.0 <= t < ends) and ctl.cane_stats["cut_in"] == 0
+
+
+def test_camera_change_forgets_the_old_view():
+    cues, ctl = drive_channel(NearestFirst(), lambda t: [], cane=True, seconds=4.0)
+    assert ctl.cane.frame is not None and ctl.cane.floor is not None
+    ctl._waiting.append((cues[0], 4.0))
+    ctl.camera_changed()
+    assert ctl.cane.frame is None and ctl.cane.floor is None and ctl.cane.memory == {} and ctl._waiting == []
+    assert ctl.activity.activity.value == "unknown"
+
+
+def test_through_a_reply_the_scheduler_sees_its_own_message_still_playing():
+    """A reply that cut the scheduler's own message: the scheduler is shown that message as still playing (busy), as it
+    would be without the reply, not a free channel; a free one made the learned scheduler skip a buzz on 00700."""
+    in_path = lambda t: [track(1, "person", (0.4, 0.2, 0.6, 0.9), 2.0, t, path=0.8)]   # noqa: E731
+    bare_pol, replied_pol = ChannelRule(), ChannelRule()
+    bare, _ = drive_channel(bare_pol, in_path, cane=False, walk=None, seconds=4.0)
+    replied, ctl = drive_channel(replied_pol, in_path, cane=False, walk=None, seconds=4.0, reply=(0.1, HELP_VOICE))
+    assert bare_pol.shown == replied_pol.shown and bare_pol.shown[1] == (0.5, True)
+    assert [c.t for c in bare] == [c.t for c in replied] == [0.0, 1.5, 3.0]
+    assert replied[1].action == "interrupt" and replied[1].interrupted_track == REPLY_TRACK_ID

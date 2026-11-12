@@ -54,6 +54,21 @@ export interface Cue {
   depthConf?: number;   // of `distance`: below 0.45 it is a bounding-box guess, never spoken as a number
   ttc: number | null;
   slots: string[];
+  /** identity override for the announcement gate (cane obstacles: "obstacle:<sector>:<level>"); objects use their label */
+  identity?: string;
+  /** who proposed it: the scheduler (default), the gate saying a held cue itself, or the cane obstacle consumer */
+  source?: "scheduler" | "gate" | "cane";
+}
+
+/** The "cane" summary of POST /api/depth (server/app.py): free distance per image sector within a 4 m horizon and the
+ *  nearest class-agnostic obstacle. Directions are in the camera image (left = left side of the picture). */
+export type CaneSector = "left" | "ahead" | "right";
+export type CaneLevel = "ground" | "body" | "head";
+export interface CaneObstacle { sector: CaneSector; distance_m: number; level: CaneLevel; confidence: number; bbox: BBox }
+export interface CaneSummary {
+  clear_m: Record<CaneSector, number | null>;   // null = cannot tell (never read as "clear")
+  obstacle: CaneObstacle | null;
+  suggest: null | "left" | "right" | "stop";
 }
 
 export interface ChannelState {

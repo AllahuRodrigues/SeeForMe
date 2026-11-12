@@ -1,5 +1,10 @@
-// Optional Python server (server/app.py): metric depth, OCR, ElevenLabs TTS. The app works without it.
-import type { Detection } from "./types";
+// Optional Python server (server/app.py): metric depth (and the cane's obstacle summary), OCR, ElevenLabs TTS. The app
+// works without it.
+import { parseCane } from "./cane";
+import type { BBox, CaneSummary, Detection } from "./types";
+
+/** One /api/depth answer: per requested box [metres or null, confidence], and the cane summary (null: no depth map). */
+export interface DepthReply { distances: Array<[number | null, number]>; cane: CaneSummary | null }
 
 export class ServerClient {
   available = false;
@@ -16,24 +21,25 @@ export class ServerClient {
   }
 
   private async frameBlob(canvas: HTMLCanvasElement, maxW = 384): Promise<Blob> {
+    // the frame is copied synchronously (before the first await), so the caller may draw the next frame at once
     const scale = Math.min(1, maxW / canvas.width);
     const c = document.createElement("canvas"); c.width = Math.round(canvas.width * scale); c.height = Math.round(canvas.height * scale);
     c.getContext("2d")!.drawImage(canvas, 0, 0, c.width, c.height);
-    return new Promise((res) => c.toBlob((b) => res(b!), "image/jpeg", 0.7));
+    return new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("frame encoding failed"))), "image/jpeg", 0.7));
   }
 
-  /** Fills distance_m / depth_conf on the detections from the server's depth model. */
-  async depth(canvas: HTMLCanvasElement, dets: Detection[], outdoor = false): Promise<boolean> {
-    if (!this.available || !dets.length) return false;
+  /** Metric depth for the boxes of this frame (an empty list still returns the cane summary). null: not answered. */
+  async depth(canvas: HTMLCanvasElement, boxes: BBox[], outdoor = false): Promise<DepthReply | null> {
+    if (!this.available) return null;
     const fd = new FormData();
     fd.append("image", await this.frameBlob(canvas), "f.jpg");
-    fd.append("boxes", JSON.stringify(dets.map((d) => d.bbox)));
+    fd.append("boxes", JSON.stringify(boxes));
     fd.append("outdoor", String(outdoor));
     const r = await fetch(`${this.baseUrl}/api/depth`, { method: "POST", body: fd, signal: AbortSignal.timeout(1500) });
-    if (!r.ok) return false;
-    const j = await r.json() as { distances: Array<[number | null, number]> };
-    j.distances.forEach(([z, c], i) => { if (z != null) { dets[i].distance_m = z; dets[i].depth_conf = c; } });
-    return true;
+    if (!r.ok) return null;
+    const j = await r.json() as { distances?: Array<[number | null, number]>; cane?: unknown };
+    const distances = Array.isArray(j.distances) && j.distances.length === boxes.length ? j.distances : boxes.map((): [null, number] => [null, 0]);
+    return { distances, cane: parseCane(j.cane) };
   }
 
   async ocr(canvas: HTMLCanvasElement): Promise<Detection[]> {

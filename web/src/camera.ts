@@ -1,4 +1,6 @@
 // One camera abstraction for phone/tablet front & rear cameras, laptop webcams, external cams and video files.
+// The picture is never mirrored, for any camera: the preview shows the frames as the camera delivers them, boxes are
+// drawn where the detector found the objects, and "left" in speech is the left of the picture.
 export type Facing = "environment" | "user";
 
 export class CameraSource {
@@ -43,9 +45,6 @@ export class CameraSource {
     this.video.srcObject = null; this.video.src = URL.createObjectURL(file); this.video.loop = true;
     return this.video.play();
   }
-
-  /** True when the picture is mirrored (front cameras), so left/right in cues must be swapped. */
-  get mirrored() { return !!this.stream && this.facing === "user"; }
 
   stop() { this.stream?.getTracks().forEach((t) => t.stop()); this.stream = null; }
 }

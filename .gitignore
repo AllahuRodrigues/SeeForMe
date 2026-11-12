@@ -17,6 +17,7 @@ web/node_modules/
 web/dist/
 server/certs/
 models/depth/
+models/vosk/
 models/export/*.mlpackage/
 external/
 data/egoblind/

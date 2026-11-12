@@ -214,6 +214,11 @@ class LivePipeline(Pipeline):
         self._depth_map = None
         self.latency.__dict__.setdefault("depth", deque(maxlen=200))
 
+    @property
+    def depth_map(self) -> Optional[np.ndarray]:
+        """The latest metric depth map (metres, at inference resolution) this pipeline computed, or None."""
+        return self._depth_map
+
     def process(self, frame: np.ndarray, t: Optional[float] = None) -> StepResult:
         from .cues.pcacs import ChannelState
         from .perception.depth import object_distances
