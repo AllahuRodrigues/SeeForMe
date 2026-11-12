@@ -1,0 +1,26 @@
+stream ['train', 'finetune']: 558 videos, 290.1 min, 293 events, 111 proxy users; p_tap=0.5 p_ask=1.0 target=2.0/min
+-- online_full_info+d1
+   100/558 tau=0.886 labels=6422
+   200/558 tau=0.237 labels=15591
+   300/558 tau=0.554 labels=19764
+   400/558 tau=0.435 labels=25195
+   500/558 tau=0.410 labels=28579
+-- online_full_info+d4
+   100/558 tau=0.913 labels=6447
+   200/558 tau=0.295 labels=15955
+   300/558 tau=0.554 labels=20340
+   400/558 tau=0.719 labels=25901
+   500/558 tau=0.340 labels=29421
+-- online_full_info+d8
+   100/558 tau=0.886 labels=6490
+   200/558 tau=0.295 labels=16188
+   300/558 tau=0.626 labels=20687
+   400/558 tau=0.510 labels=26407
+   500/558 tau=0.410 labels=29997
+Online stream ['train', 'finetune']: 558 videos, 290.1 min, p_tap=0.5, target 2.0/min
+
+| policy | coverable recall | quiet violations | cues/min | coverable events |
+|---|---|---|---|---|
+| online_full_info+d1 | 0.469 | 0.086 | 1.66 | 160 |
+| online_full_info+d4 | 0.338 | 0.108 | 1.67 | 160 |
+| online_full_info+d8 | 0.244 | 0.115 | 1.66 | 160 |

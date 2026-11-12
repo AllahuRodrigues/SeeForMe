@@ -96,6 +96,23 @@ Halving the questions lowers greedy's mean by 0.037 and quartering them by 0.025
 The falsifier for item 2 of the algorithm plan (greedy at p_ask 0.25 within 0.03 of p_ask 1) is met, so on this
 benchmark the feedback channel is not the bottleneck; the features and the amount of labelled data are.
 
+## Label-delay curve (added 2026-11-12, night)
+
+Full-information labels delivered d seconds after each decision; everything else as above. Dev stream (`train` + `finetune`), 160 coverable events per seed, three seeds. Outputs: `per_video_delay_s*.csv` (1, 4, 8 s) and `per_video_causal_s*.csv` (0 s, 2 s, clip end, greedy, floor).
+
+| Label delay | seed 0 / 1 / 2 | pooled recall | quiet violations |
+|---|---|---|---|
+| 0 s | 0.525 / 0.500 / 0.512 | 0.512 | 0.096 |
+| 1 s | 0.469 / 0.456 / 0.463 | 0.463 | 0.093 |
+| 2 s | 0.362 / 0.388 / 0.388 | 0.379 | 0.091 |
+| 4 s | 0.338 / 0.325 / 0.338 | 0.333 | 0.109 |
+| 8 s | 0.244 / 0.225 / 0.244 | 0.237 | 0.105 |
+| clip end | 0.200 / 0.206 / 0.194 | 0.200 | 0.116 |
+| one-sided greedy (taps and questions) | 0.188 / 0.212 / 0.212 | 0.204 | 0.115 |
+| no learning (floor) | 0.138 / 0.138 / 0.138 | 0.138 | 0.129 |
+
+8. **Recall falls steadily with label delay, and by the end of the clip full labels are worth no more than taps and questions.** Events last a few seconds, so a label that arrives within a second or two mostly teaches the learner about the *same* event while it is still happening; that is adaptation within an event, which no real user can supply before the event. What transfers across videos is worth about 0.06 over the floor (0.20 vs 0.14). The open problem is therefore cross-event generalisation: features that recognise a should-speak moment in advance. That, not the feedback channel, is what the next experiments target.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
