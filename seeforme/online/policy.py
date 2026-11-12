@@ -2,7 +2,7 @@
 
 Modes
     greedy     speak the best legal candidate when P >= tau; learns only from the labels it happens to get
-    apple      greedy plus epsilon exploration below tau (apple tasting); explored labels are importance weighted
+    apple      greedy plus exploration below tau (apple tasting): a share eps of the cue budget, importance weighted
     thompson   greedy under weights sampled from the Laplace posterior (exploration from uncertainty)
     full_info  upper bound: every candidate at every decision is labelled from the scenario (not deployable)
 
@@ -27,6 +27,7 @@ from .learners import LogisticState, init_state, predict, sample_weights, update
 
 MODES = ("greedy", "apple", "thompson", "full_info")
 N_FEAT = len(EventFeatures.names())
+MAX_IPW = 10.0
 
 
 def _logit(p: float) -> float:
@@ -81,7 +82,7 @@ class OnlinePolicy(PCACSPolicy):
     supports_actions = True
 
     def __init__(self, mode: str = "greedy", cfg: Optional[PCACSConfig] = None, target_per_min: float = 2.0, tau0: float = 0.6,
-                 eps: float = 0.05, lr: float = 0.5, l2: float = 1e-3, budget: bool = True, seed: int = 0, lookback_s: float = 15.0,
+                 eps: float = 0.25, lr: float = 0.5, l2: float = 1e-3, budget: bool = True, seed: int = 0, lookback_s: float = 15.0,
                  ts_scale: float = 1.0, name: Optional[str] = None, **kw):
         if mode not in MODES:
             raise ValueError(f"mode must be one of {MODES}, got {mode!r}")
@@ -142,8 +143,12 @@ class OnlinePolicy(PCACSPolicy):
             return []
         i = max(legal, key=lambda j: p[j])
         speak, weight = bool(p[i] >= self.tau), 1.0
-        if not speak and self.mode == "apple" and self._rng.random() < self.eps:
-            speak, weight = True, 1.0 / self.eps
+        if not speak and self.mode == "apple":
+            # eps = share of the cue budget spent on exploration; explored cues count against the budget too, so the
+            # controller raises tau to pay for them. Importance weights are capped to keep updates stable.
+            p_explore = min(1.0, self.eps * self.ctl.target_per_min * self.decision_interval / 60.0)
+            if self._rng.random() < p_explore:
+                speak, weight = True, min(MAX_IPW, 1.0 / p_explore)
         self._step_budget(speak)
         if not speak:
             return []

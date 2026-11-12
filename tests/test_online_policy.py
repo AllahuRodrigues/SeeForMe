@@ -81,7 +81,7 @@ def test_no_speech_on_busy_channel():                                       # AC
 def test_apple_tasting_explores_below_threshold():
     sc, _ = synthetic_scenario()
     quiet = OnlinePolicy(mode="greedy", tau0=0.99, budget=False, seed=1)
-    explore = OnlinePolicy(mode="apple", tau0=0.99, budget=False, eps=0.3, seed=1)
+    explore = OnlinePolicy(mode="apple", tau0=0.99, budget=False, eps=1.0, target_per_min=60.0, seed=1)
     n_greedy = sum(len(log.cues) for _, log in run_stream(quiet, [sc]))
     n_apple = sum(len(log.cues) for _, log in run_stream(explore, [sc]))
     assert n_greedy == 0 and n_apple > 0
@@ -101,3 +101,9 @@ def test_protected_splits_need_final_flag():                                # AC
     for split in ("holdout", "test", "train,holdout"):
         r = subprocess.run([sys.executable, "scripts/run_online.py", "--stream", split], cwd=root, capture_output=True, text=True, timeout=60)
         assert r.returncode == 2 and "--final" in r.stderr
+
+
+def test_apple_exploration_spends_budget_share():
+    pol = OnlinePolicy(mode="apple", eps=0.25, target_per_min=2.0)
+    p_explore = 0.25 * 2.0 * pol.decision_interval / 60.0
+    assert abs(p_explore - 0.25 * 2.0 / 120.0) < 1e-12        # 0.25 of 2 cues/min at 2 decisions/s

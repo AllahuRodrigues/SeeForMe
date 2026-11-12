@@ -30,7 +30,7 @@ ap.add_argument("--stream", default="train,finetune", help="comma list of splits
 ap.add_argument("--policies", default="pcacs,egoblind_learned:il,egoblind_learned:rl,online_greedy,online_apple,online_thompson,online_full_info")
 ap.add_argument("--target", type=float, default=2.0, help="target cues per minute for the online budget controller")
 ap.add_argument("--tau0", type=float, default=0.6)
-ap.add_argument("--eps", type=float, default=0.05)
+ap.add_argument("--eps", type=float, default=0.25, help="share of the cue budget spent exploring (apple)")
 ap.add_argument("--lr", type=float, default=0.5)
 ap.add_argument("--p-tap", type=float, default=0.5, help="probability that the user taps useful / not useful after a cue")
 ap.add_argument("--seed", type=int, default=0)
