@@ -282,14 +282,21 @@ class SchedulerPolicy(PCACSPolicy):
     mode="rl":        one categorical over [candidate x {speak, interrupt, haptic}] + global silence,
                       sampled during REINFORCE training, greedy at test time. Channel semantics are
                       enforced (speak needs a free channel, interrupt a busy one).
+
+    reannounce_guard_s (default 0 = off, the behaviour the October models were evaluated with): the only per-track
+    guard is otherwise `recent_block_s` (~2.8 s), and the learned model does not reproduce P-CACS's 10 s novelty decay,
+    so it re-speaks a track at the first decision after the block (issue 6). With a guard > 0, speaking or
+    interrupting about a track announced less than that many seconds ago is illegal unless the object has come at
+    least `reannounce_move_m` closer since then (the same exception P-CACS's novelty term makes).
     """
 
     name = "pcacs_learned"
 
     def __init__(self, model: SchedulerModel, cfg: Optional[PCACSConfig] = None, threshold: float = 0.5,
-                 mode: str = "imitation", name: Optional[str] = None, **kw):
+                 mode: str = "imitation", name: Optional[str] = None, reannounce_guard_s: float = 0.0, **kw):
         super().__init__(cfg, **kw)
         self.model, self.threshold, self.mode = model, threshold, mode
+        self.reannounce_guard_s = float(reannounce_guard_s)
         self.K = model.K
         self.hist: Dict[int, deque] = {}
         self._seen: Dict[int, int] = {}
@@ -314,6 +321,14 @@ class SchedulerPolicy(PCACSPolicy):
                             angle_deg=f.angle, rel_speed=-f.own_speed, lateral_speed=(f.lateral_speed if f.moving else 0.0),
                             lateral_m=trk.lateral_m, hedged=o.hedged, units=self.cfg.units)  # type: ignore[attr-defined]
         o.duration = speech_seconds(o.message)   # type: ignore[attr-defined]
+
+    def _guarded(self, trk: Track, t: float) -> bool:
+        """True when the re-announcement guard forbids speaking about `trk` again at time t."""
+        if self.reannounce_guard_s <= 0 or trk.last_announced is None or t - trk.last_announced >= self.reannounce_guard_s:
+            return False
+        d0 = self.announced_dist.get(trk.track_id)
+        approached = d0 is not None and trk.distance_m is not None and d0 - trk.distance_m >= self.cfg.reannounce_move_m
+        return not approached
 
     def decide(self, tracks: List[Track], t: float, ch: Optional[ChannelState] = None, scene_ctx=None) -> List[Cue]:
         c = self.cfg
@@ -346,6 +361,7 @@ class SchedulerPolicy(PCACSPolicy):
         for i, o in enumerate(obs):
             trk = o.track
             recent = trk.last_announced is not None and t - trk.last_announced < c.recent_block_s
+            recent = recent or self._guarded(trk, t)
             legal[i, ACTION_IDX["speak"]] = (not ch.busy) and not recent
             legal[i, ACTION_IDX["interrupt"]] = ch.busy and not recent and ch.current_track != trk.track_id
             legal[i, ACTION_IDX["haptic"]] = c.use_haptic and (trk.last_haptic is None or t - trk.last_haptic >= c.haptic_repeat_s)

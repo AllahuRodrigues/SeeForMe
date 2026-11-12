@@ -197,7 +197,15 @@ def make_egoblind_policy(name: str, cfg: PipelineConfig, scenario, model_dir: Op
         from seeforme.ml.scheduler_model import load_learned_scheduler
         spec = name.split(":", 1)[1] if ":" in name else "rl"
         which, _, at = spec.partition("@")
-        return load_learned_scheduler(which, Path(at) if at else (model_dir or MODELS_E), cfg, scenario, text_model=text_model(), name=name)
+        which, _, opt = which.partition("+")       # egoblind_learned:il+guard10 = re-announcement guard of 10 s (issue 6)
+        guard = 0.0
+        if opt:
+            if not opt.startswith("guard"):
+                raise ValueError(f"unknown option {opt!r} in {name}")
+            guard = float(opt[len("guard"):] or 10.0)
+        pol = load_learned_scheduler(which, Path(at) if at else (model_dir or MODELS_E), cfg, scenario, text_model=text_model(), name=name)
+        pol.reannounce_guard_s = guard
+        return pol
     return make_campus_policy(name, cfg, scenario)
 
 

@@ -8,7 +8,9 @@ Each policy runs with the re-identification gallery off (horizon 0) and on. Embe
 data/egoblind_app/<video>.npz (scripts/cache_appearance.py); videos without them run with re-ID inert.
 
 Repeat measures, per spoken cue:
-    repeat_gt     the cue's ground-truth object (event-linked detections only) was already announced in this video
+    repeat_gt     the cue's weak event was already announced in this video. Detections are linked to an event by
+                  label inside its window, so this also counts a cue about a different person or car (issue 6)
+    repeat_track  the same tracker track was already announced in this video (a true re-announcement)
     repeat_label  a cue with the same label was spoken within the previous 60 s (the "door... door..." annoyance)
 Match precision: among matches where both sides carry a ground-truth id, the share where the ids agree.
 Paired bootstrap over videos for on minus off. Writes results/memory/reid_<tag>.{csv,json,md} and matches_<tag>.csv.
@@ -22,6 +24,7 @@ from campus_common import load_campus_cfg
 from egoblind_common import load_egoblind_split, make_egoblind_policy, source_recordings
 from seeforme.campus.metrics import evaluate_run
 from seeforme.egoblind import egoblind_extras, run_on_egoblind
+from seeforme.egoblind.metrics import repeat_counts
 from seeforme.online.policy import OnlinePolicy
 from seeforme.online.stream import run_stream
 
@@ -67,14 +70,7 @@ def variant(h, th):
 
 
 def repeats(log, sc):
-    seen, last_label, gt, lab = set(), {}, 0, 0
-    for c in log.spoken:
-        if c.source_id is not None:
-            gt += c.source_id in seen
-            seen.add(c.source_id)
-        lab += c.label in last_label and c.t - last_label[c.label] < args.label_window
-        last_label[c.label] = c.t
-    return gt, lab
+    return repeat_counts(log.spoken, label_window=args.label_window)
 
 
 rows, matches = [], []
@@ -97,9 +93,9 @@ for name in [p for p in args.policies.split(",") if p]:
         for sc, log in pairs:
             r = evaluate_run(log, sc).as_dict()
             r.update(egoblind_extras(log, sc))
-            gt, lab = repeats(log, sc)
+            rc = repeats(log, sc)
             r.update({"policy": f"{name}@{tag}", "base_policy": name, "variant": tag, "video_id": sc.video_id, "split": sc.split,
-                      "minutes": sc.duration / 60, "repeat_gt": gt, "repeat_label": lab, "n_reid": len(log.reid_matches),
+                      "minutes": sc.duration / 60, "repeat_gt": rc["repeat_gt"], "repeat_track": rc["repeat_track"], "repeat_label": rc["repeat_label"], "n_reid": len(log.reid_matches),
                       "n_reid_announced": sum(m["announced"] for m in log.reid_matches)})
             rows.append(r)
             matches += [{"policy": name, "variant": tag, "video_id": sc.video_id, **m} for m in log.reid_matches]
@@ -113,6 +109,7 @@ def pooled(rs):
     sp = sum(r["n_spoken"] for r in rs); mins = sum(r["minutes"] for r in rs)
     return {"recall_coverable": hit / cov if cov else float("nan"), "quiet_violation": bad / nq if nq else float("nan"),
             "cues_per_min": sp / mins if mins else float("nan"), "repeat_gt_share": sum(r["repeat_gt"] for r in rs) / sp if sp else float("nan"),
+            "repeat_track_share": sum(r["repeat_track"] for r in rs) / sp if sp else float("nan"),
             "repeat_label_per_min": sum(r["repeat_label"] for r in rs) / mins if mins else float("nan"),
             "reid_per_min": sum(r["n_reid"] for r in rs) / mins if mins else float("nan"),
             "reid_announced": sum(r["n_reid_announced"] for r in rs), "n_coverable": cov, "n_spoken": sp}
@@ -161,13 +158,13 @@ if matches:
         w = csv.DictWriter(f, fieldnames=list(matches[0].keys())); w.writeheader(); w.writerows(matches)
 dump_json({"summary": summary, "paired_diffs": diffs}, OUT / f"reid_{args.tag}.json")
 lines = [f"Re-ID memory on {splits}: {len(scenarios)} videos ({with_emb} with embeddings)\n",
-         "| policy | coverable recall | quiet viol. | cues/min | repeat (gt share) | label repeats/min | re-IDs/min | re-IDs of announced objects | match precision (gt) |",
-         "|---|---|---|---|---|---|---|---|---|"]
+         "| policy | coverable recall | quiet viol. | cues/min | repeat (gt share) | repeat (same track share) | label repeats/min | re-IDs/min | re-IDs of announced objects | match precision (gt) |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
 for p, s in summary.items():
     if not p.startswith("_"):
         mp = s.get("match_precision_gt")
         mp_cell = "" if mp is None else f"{mp:.2f} (n={s['n_matches_gt']})"
-        lines.append(f"| {p} | {s['recall_coverable']:.3f} | {s['quiet_violation']:.3f} | {s['cues_per_min']:.2f} | {s['repeat_gt_share']:.3f} | "
+        lines.append(f"| {p} | {s['recall_coverable']:.3f} | {s['quiet_violation']:.3f} | {s['cues_per_min']:.2f} | {s['repeat_gt_share']:.3f} | {s['repeat_track_share']:.3f} | "
                      f"{s['repeat_label_per_min']:.3f} | {s['reid_per_min']:.2f} | {s['reid_announced']} | {mp_cell} |")
 lines += ["", "Paired differences, on minus off (95% bootstrap over videos):", "", "| variant | Δ recall | Δ label repeats/min | Δ cues/min | Δ quiet viol. |", "|---|---|---|---|---|"]
 for k, d in diffs.items():
