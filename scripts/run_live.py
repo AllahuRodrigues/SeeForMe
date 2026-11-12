@@ -10,7 +10,10 @@ demo says so (printed and spoken) and runs the linear P-CACS rule instead (`--st
     walking or turning -> navigate, standing still -> scene (only arrivals, approaching objects, critical events),
     still with text in view -> read (object cues muted unless critical), a FIND goal -> find;
   * --setup auto (default) treats a camera that is still after the first seconds as a desk webcam: the person sitting in
-    front of it (you) is not announced unless they approach. --setup desk forces this, --setup handheld disables it.
+    front of it (you) is not announced unless they approach. --setup desk forces this, --setup handheld disables it;
+  * the cane layer (seeforme/live/cane.py) names what the detector cannot (walls, poles, low and head-height obstacles)
+    from the depth map, quiet about what your own aid covers: --aid cane (default: nothing low within the cane's reach,
+    body-level obstacles 1.2-2.5 m ahead, head height always), guide-dog (head height and the stop only), none (all).
 
 Voice commands (seeforme/live/voice.py, commands.py) replace the buttons: say "SeeForMe, find a door", "SeeForMe,
 what's around me", "SeeForMe, pause" / "start", "SeeForMe, help". "SeeForMe" alone answers with a short sound and
@@ -18,7 +21,8 @@ then takes one command without the wake word for 5 s. --voice auto (default) use
 is installed (`make voice-setup`); commands typed in this terminal always work (wake word optional), and --commands
 "2:find a chair;4:describe" fires commands at stream time in headless replays; lines piped into stdin are commands
 too (`printf "what's around me\nquit\n" | ... --headless`), and a typed single letter is the window key (q, h, w, r, p,
-s). Pause stops routine announcements but never hazard warnings; mute silences everything. Microphone results are
+s); a headless camera run whose only commands come from such a pipe stops at its end (nothing else could stop it).
+Pause stops routine announcements but never hazard warnings; mute silences everything. Microphone results are
 ignored while the demo itself speaks. A reply holds the audio channel, but a hazard warning cuts it (the controller
 shows the scheduler a free channel while a reply plays and something in view could need a warning), and a reply
 waits while a hazard warning plays.
@@ -27,6 +31,7 @@ waits while a hazard warning plays.
     python scripts/run_live.py --speak --setup desk                   # laptop webcam on a desk
     python scripts/run_live.py --speak --mode navigate                # pin a mode (auto, navigate, scene, read, find)
     python scripts/run_live.py --speak --goal "door"                  # FIND a door
+    python scripts/run_live.py --speak --aid guide-dog                # travelling with a guide dog
     python scripts/run_live.py --speak --no-gate                      # the bare scheduler (to compare)
     python scripts/run_live.py --policy pcacs --speak                 # linear P-CACS rule
     python scripts/run_live.py --speak --elevenlabs                   # ElevenLabs voice (key from .env; default speaker if missing)
@@ -45,11 +50,12 @@ import cv2
 from _common import MODELS, load_cfg
 from seeforme.feedback import Speaker
 from seeforme.perception import YoloDetector, EasyOcrReader, NullOcr
-from seeforme.live.controller import LiveController, SETUPS, reply_cue
+from seeforme.live.controller import AIDS, LiveController, SETUPS, reply_cue
 from seeforme.live.activity import MODES
 from seeforme.live.commands import LABELS, CommandRouter, goal_tags as parse_goal, is_safety_cue
 from seeforme.live.summary import SessionLog
-from seeforme.live.voice import Command, TypedBackend, VoiceListener, VoskBackend, parse_script, vosk_status
+from seeforme.live.voice import (DEFAULT_RECOGNISER, RECOGNISERS, Command, TypedBackend, VoiceListener, VoskBackend,
+                                 input_end_stops_run, parse_script, vosk_status)
 from seeforme.pipeline import LivePipeline, make_live_policy
 from seeforme.ui import draw_overlay_pcacs
 
@@ -111,9 +117,16 @@ ap.add_argument("--voice", default="auto", choices=["auto", "on", "off"],
 ap.add_argument("--commands", default="", help='scripted commands at stream time (s), e.g. "2:find a chair;4:describe;6:pause;9:start"')
 ap.add_argument("--mic", default=None, help="microphone for --voice (sounddevice index or name; default: the system input)")
 ap.add_argument("--vosk-model", default=None, help="Vosk model directory (default: $SEEFORME_VOSK_MODEL or models/vosk/vosk-model-small-en-us-0.15)")
+ap.add_argument("--recogniser", default=DEFAULT_RECOGNISER, choices=list(RECOGNISERS),
+                help=f"how Vosk decodes speech (default {DEFAULT_RECOGNISER}): grammar = the command vocabulary only, open = any "
+                     "words, hybrid = the grammar, with the open vocabulary for words it does not know, snap = the open "
+                     "vocabulary, near-misses snapped to the command words (results/live/voice_eval.md)")
 ap.add_argument("--no-ocr", action="store_true", help="no sign reading (faster)")
 ap.add_argument("--no-depth", action="store_true", help="no metric depth: distances from box size only (faster, less accurate)")
 ap.add_argument("--no-cane", action="store_true", help="turn off the cane / guide-dog layer of the live controller")
+ap.add_argument("--aid", default="cane", choices=list(AIDS),
+                help="what you travel with: cane (default: no cue for low obstacles the cane can touch, body-level ones 1.2-2.5 m "
+                     "ahead, head height always), guide-dog (head height and the stop only), none (every cane-layer cue)")
 ap.add_argument("--outdoor", action="store_true", help="use the outdoor metric depth model")
 ap.add_argument("--model", default=None, help="detector weights (default: the one chosen in results/live/detector_choice.json, yolo11s.pt)")
 ap.add_argument("--units", default="m", choices=["m", "ft"], help="meters or feet in spoken distances")
@@ -175,6 +188,7 @@ log = None if args.no_log else SessionLog()
 ctl_kw = dict(mode=args.mode, setup=args.setup, gate=not args.no_gate, log=log, goal_tags=goal_tags, units=args.units)
 if "cane" in inspect.signature(LiveController).parameters:
     ctl_kw["cane"] = not args.no_cane
+    ctl_kw["aid"] = args.aid
 elif args.no_cane:
     print("note: this LiveController has no cane layer; --no-cane changes nothing", flush=True)
 ctl = LiveController(policy, **ctl_kw)
@@ -195,7 +209,7 @@ listener = VoiceListener(speaker)
 if args.voice == "on" or (args.voice == "auto" and not args.headless):
     ok, why = vosk_status(args.vosk_model)
     if ok:
-        listener.add(VoskBackend(args.vosk_model, device=mic))
+        listener.add(VoskBackend(args.vosk_model, device=mic, recogniser=args.recogniser))
     elif args.voice == "on":
         raise SystemExit(f"--voice on: {why}. Run make voice-setup (installs vosk and a 40 MB offline model).")
     else:
@@ -222,9 +236,12 @@ if script:
 listener.start()
 router.voice = listener.voice_running
 inputs = [b.name for b in listener.backends] + (["script"] if script else [])
+stdin_tty = bool(typed is not None and sys.stdin.isatty())
+eof_stops = typed is not None and input_end_stops_run(args.headless, bool(args.video), args.frames, stdin_tty, inputs)
 
 print(f"SeeForMe live | scheduler {policy_label(policy)} | detector {Path(cfg.perception.yolo_model).name} | "
-      f"mode {args.mode} | setup {args.setup} | repeat filter {'off' if args.no_gate else 'on'} | depth "
+      f"mode {args.mode} | setup {args.setup} | aid {'off' if args.no_cane else args.aid} | "
+      f"repeat filter {'off' if args.no_gate else 'on'} | depth "
       f"{'off' if depth is None else f'every {max(1, args.depth_every)} frames'} | commands "
       f"{'+'.join(inputs) or 'keys only'} | log {log.path if log else 'off'}", flush=True)
 
@@ -456,11 +473,15 @@ try:
         for msg in listener.notices():                 # e.g. the microphone could not be opened
             router.voice = listener.voice_running
             speak_reply(msg, t)
+        input_ended = eof_stops and not typed.running   # read before poll: every line before the end is queued by now
         for cmd in listener.poll(t):
             run_command(cmd, res.tracks, t)
             if router.quit_requested:
                 break
         if router.quit_requested:
+            break
+        if input_ended:
+            line(t, "stdin", "end of the piped commands: stopping (a headless camera run has nothing else to stop it)")
             break
         finish_flip(t)
         flush_pending(t)

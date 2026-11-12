@@ -1,2 +1,2 @@
 // Visible app version (header tag, "Updated to version X" notice). Bump it with every release, together with web/package.json.
-export const APP_VERSION = "0.4.0";
+export const APP_VERSION = "0.4.1";

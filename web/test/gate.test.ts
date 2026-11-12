@@ -6,74 +6,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { distancePhrase } from "../src/compose";
-import { AnnouncementGate, sameSign, type GateConfig } from "../src/gate";
-import { Camera, TYPICAL_SIZE } from "../src/tracker";
+import { AnnouncementGate, sameSign } from "../src/gate";
 import type { BBox, ChannelState, Cue, Track } from "../src/types";
-
-const FREE: ChannelState = { busy: false, remaining: 0, currentUtility: 0, currentSeverity: 0, currentTrack: null };
-const cam = new Camera();
-/** box centred at u (0..1) with the given width and top / bottom */
-const boxAt = (u: number, w: number, top: number, bottom: number): BBox => [u - w / 2, top, u + w / 2, bottom];
-
-interface Obj { id: number; label?: string; bbox: BBox; z?: number | null; v?: number; path?: number; ttc?: number; hits?: number; text?: string }
-
-class Sim {
-  gate: AnnouncementGate;
-  tracks = new Map<number, Track>();
-  log: Array<{ t: number; cue: Cue | null; reason: string; text: string }> = [];
-  constructor(cfg: Partial<GateConfig> = {}) { this.gate = new AnnouncementGate(cam, cfg); }
-
-  /** One frame: the listed objects are seen (metric depth z, or none), every other track misses. */
-  frame(t: number, objs: Obj[]): Track[] {
-    const seen = new Set<number>();
-    for (const o of objs) {
-      seen.add(o.id);
-      let tr = this.tracks.get(o.id);
-      if (!tr) {
-        tr = { id: o.id, label: o.label ?? "person", kind: o.text ? "text" : "object", text: o.text, bbox: o.bbox, confidence: 0.8, firstSeen: t, lastSeen: t, hits: 0, misses: 0,
-          confirmed: false, lastAnnounced: null, lastAnnouncedBBox: null, announceCount: 0, lastHaptic: null, bboxHistory: [], distance: null, depthConf: 0,
-          lateral: 0, relSpeed: 0, lateralSpeed: 0, ttc: Infinity, pathProb: 0.3, distHistory: [] };
-        this.tracks.set(o.id, tr);
-      }
-      tr.bbox = o.bbox; tr.lastSeen = t; tr.hits = o.hits ?? tr.hits + 1; tr.misses = 0; tr.confirmed = tr.hits >= 2;
-      const depth = o.z != null;
-      tr.distance = depth ? o.z! : cam.distanceFromBBox(o.bbox, tr.label);
-      tr.depthConf = depth ? 0.9 : 0.25;
-      tr.relSpeed = o.v ?? 0;
-      // as the tracker: a measured TTC from the closing speed; without depth it assumes the user walks at 1 m/s
-      tr.ttc = o.ttc ?? (depth ? (-tr.relSpeed >= 0.12 ? Math.max(0, (tr.distance - 0.6) / -tr.relSpeed) : Infinity) : Math.max(0, tr.distance - 0.6));
-      tr.pathProb = o.path ?? 0.3;
-      tr.bboxHistory.push([t, o.bbox]); if (tr.bboxHistory.length > 15) tr.bboxHistory.shift();
-      tr.distHistory.push([t, tr.distance, 0]); if (tr.distHistory.length > 25) tr.distHistory.shift();
-    }
-    for (const [id, tr] of this.tracks) if (!seen.has(id)) tr.misses++;
-    const visible = [...this.tracks.values()].filter((tr) => tr.misses === 0);
-    this.gate.observe(visible, t);
-    return visible;
-  }
-  /** A decision: the scheduler offers a cue about track `id` (or nothing); returns what the gate lets through. */
-  decide(t: number, id: number | null, action: Cue["action"] = "speak", ch: ChannelState = FREE, message = "Person, close, ahead."): Cue | null {
-    const visible = [...this.tracks.values()].filter((tr) => tr.misses === 0);
-    const cues: Cue[] = [];
-    if (id != null) {
-      const tr = this.tracks.get(id)!;
-      cues.push({ t, trackId: id, label: tr.label, message, action, duration: action === "haptic" ? 0 : 1.2, utility: 1, severity: 0.5,
-        distance: tr.distance, depthConf: tr.depthConf, ttc: Number.isFinite(tr.ttc) ? tr.ttc : null, slots: ["object", "distance", "direction"] });
-    }
-    const out = this.gate.filter(cues, visible, t, ch);
-    this.log.push({ t, cue: out, reason: this.gate.last?.reason ?? "", text: this.gate.last?.text ?? "" });
-    return out;
-  }
-  /** Run frames from t0 to t1 (10 fps); `objs(t)` gives what is seen, `offer(t)` what the scheduler offers at each decision. */
-  run(t0: number, t1: number, objs: (t: number) => Obj[], offer: (t: number) => number | null = () => null, action: Cue["action"] = "speak") {
-    for (let k = 0; t0 + k * 0.1 <= t1 + 1e-9; k++) {
-      const t = +(t0 + k * 0.1).toFixed(3);
-      this.frame(t, objs(t));
-      if (Math.abs(t * 2 - Math.round(t * 2)) < 1e-6) this.decide(t, offer(t), action);
-    }
-  }
-  passes() { return this.log.filter((l) => l.cue); }
-}
+import { FREE, Sim, boxAt, boxAtRange, type Obj } from "./sim";
 
 const AHEAD = boxAt(0.5, 0.2, 0.3, 0.8);
 
@@ -212,8 +147,7 @@ test("a cue held for confirmation is said once the track is confirmed, even afte
   s.frame(0.95, [{ id: 1, bbox: b, z: 3, hits: 1 }]);
   s.frame(1.0, [{ id: 1, bbox: b, z: 3, hits: 2 }]);   // two matches 0.05 s apart: not confirmed yet
   assert.equal(s.decide(1.0, 1), null); assert.equal(s.gate.last?.reason, "unconfirmed");
-  s.frame(1.1, [{ id: 1, bbox: b, z: 3 }]);
-  for (let t = 1.2; t < 1.55; t += 0.1) s.frame(+t.toFixed(2), []);   // the track flickers out at the next decision
+  for (let t = 1.1; t < 1.55; t += 0.1) s.frame(+t.toFixed(2), []);   // the track flickers out before it is confirmed
   assert.equal(s.decide(1.5, null), null);
   // it comes back as a new track id (the tracker lost it) and is confirmed: the held cue is said without a new offer
   s.frame(1.6, [{ id: 7, bbox: b, z: 3, hits: 1 }]); s.frame(1.7, [{ id: 7, bbox: b, z: 3, hits: 2 }]); s.frame(1.8, [{ id: 7, bbox: b, z: 3, hits: 3 }]);
@@ -222,6 +156,15 @@ test("a cue held for confirmation is said once the track is confirmed, even afte
   assert.ok(out, "the held cue is said");
   assert.equal(out!.trackId, 7);
   assert.equal(s.gate.last?.reason, "new");
+  assert.equal(out!.message, "Person, about 3 meters, ahead.");   // held for a second: said as it is now (gate/compose.ts)
+
+  // confirmed, then out of view at the decision (a sighting 0.4 s ago): said at that decision, not a flicker later
+  const f = new Sim();
+  f.frame(0.95, [{ id: 1, bbox: b, z: 3, hits: 1 }]); f.frame(1.0, [{ id: 1, bbox: b, z: 3, hits: 2 }]);
+  assert.equal(f.decide(1.0, 1), null);
+  f.frame(1.1, [{ id: 1, bbox: b, z: 3 }]);
+  for (let t = 1.2; t < 1.55; t += 0.1) f.frame(+t.toFixed(2), []);
+  assert.equal(f.decide(1.5, null)?.trackId, 1);
 });
 
 test("the reported loop: 'Person, close, ahead.' every 3.6 s at 3.2 m (box guess, noisy TTC, id switches) is held", () => {
@@ -291,12 +234,6 @@ test("signs: numbers tell them apart, OCR noise does not", () => {
 });
 
 // ---- id switches that are not: a different object where a remembered one vanished ---------------------------------------
-/** a box `label` would have at range d (its typical size), centred at u */
-function boxAtRange(label: string, d: number, u = 0.5): BBox {
-  const [H, W] = TYPICAL_SIZE[label];
-  const h = Math.min(0.98, (cam.fy * H) / d), w = Math.min(0.98, (cam.fx * W) / d);
-  return [u - w / 2, 0.5 - h / 2, u + w / 2, 0.5 + h / 2];
-}
 /** A is said at t = 1 and vanishes at `vanish`; B appears `gap` s later where A was last seen and comes closer, and the
  *  scheduler offers B at every decision (a bare scheduler says a new track at its first offer). When B is first said. */
 function successorRun(label: string, depth: boolean, a: (t: number) => number, vanish: number, gap: number, b0: number, vB: number, path = 0.8) {

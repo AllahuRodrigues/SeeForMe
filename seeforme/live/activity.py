@@ -553,9 +553,12 @@ class TaskAdapter:
               gate.rebaseline() so what is static *here* becomes the background. Nothing when gate is None.
       policy  policy.cfg.verbosity, when the policy has a cfg with that attribute (an AnnouncementGate forwards cfg
               to its inner scheduler, so the gate itself can be passed as the policy). Nothing otherwise.
-    `applied` records what was actually set. GateConfig has no objects_muted field, so read mode is enforced here:
-    `should_mute_objects` is True and `filter_cues(cues)` drops non-critical object cues (text cues, haptics,
-    interrupts and severity >= critical_severity pass). filter_cues is a no-op in every other case.
+    `applied` records what was actually set. Read mode mutes object cues that are not about safety (text cues,
+    haptics, interrupts, severity >= critical_severity and anything approaching pass). The AnnouncementGate has an
+    objects_muted field and applies that filter itself *before* it remembers a cue as said: a cue muted after the gate
+    had committed it would make the scheduler's later warning about the same object a "repeat" of a cue nobody heard.
+    Only for a gate without that field (or none) is read mode enforced here: `should_mute_objects` is True and
+    `filter_cues(cues)` drops those cues. filter_cues is a no-op in every other case.
     """
 
     def __init__(self, gate=None, policy=None, goal_fn: Optional[Callable[[], bool]] = None,

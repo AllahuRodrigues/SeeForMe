@@ -55,7 +55,7 @@
               <button id="mic" type="button" class="btn btn-voice btn-talk" aria-keyshortcuts="A" aria-describedby="mic-hint">Talk</button>
               <button id="wake" type="button" class="btn btn-voice btn-toggle" aria-pressed="false" aria-keyshortcuts="V" aria-describedby="voice-state">Hands-free voice</button>
             </div>
-            <p id="voice-state" class="voice-state" role="none">Turn on hands-free, then say "SeeForMe, find a door".</p>
+            <p id="voice-state" class="voice-state" role="none">Turn on hands-free, then say "SeeForMe, help" for commands.</p>
             <p id="mic-hint" class="sr-only">Say one command, for example: find a door.</p>
           </section>
 
@@ -112,6 +112,9 @@
           <details class="settings-box">
             <summary><span class="summary-title">Settings</span></summary>
             <div class="settings">
+              <div class="field field-wide"><label for="aid">I travel with</label>
+                <select id="aid" aria-describedby="aid-hint"><option value="cane" selected>White cane</option><option value="guide-dog">Guide dog</option><option value="none">Neither</option></select>
+                <p class="hint" id="aid-hint">Obstacle cues from the depth map skip what your cane or dog already finds and always warn at head height. Cues about people, vehicles and what you search for stay the same.</p></div>
               <div class="field"><label for="scheduler">Scheduler</label>
                 <select id="scheduler"><option value="learned" selected>Learned (default)</option><option value="pcacs">Linear P-CACS</option></select></div>
               <div class="field"><label for="verbosity">Verbosity</label>
@@ -205,7 +208,7 @@
     </aside>
 
     <footer class="foot">
-      <p class="foot-meta">SeeForMe <span id="app-version">v0.4.0</span> · scheduler <span id="sched-tag">P-CACS</span></p>
+      <p class="foot-meta">SeeForMe <span id="app-version">v0.4.1</span> · scheduler <span id="sched-tag">P-CACS</span></p>
       <p id="diag" class="diag" aria-hidden="true"></p>
     </footer>
 

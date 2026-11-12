@@ -87,10 +87,24 @@ eval-live:
 	$(PY) scripts/eval_live_detector.py
 	$(PY) scripts/eval_live_gate.py
 
+# safety of the live gate and controller: seeded synthetic scenes (approach, id switches, dropouts, FIND, desk ...) through
+# the real tracker and schedulers, gated vs bare; writes results/live/safety_harness.{md,json} (scripts/live_safety.py)
+.PHONY: live-safety
+live-safety:
+	OMP_NUM_THREADS=2 $(PY) scripts/live_safety.py --families all --seeds 3000 --policies pcacs,rl --jobs 4
+
 # the cane / guide-dog layer on EgoBlind development videos (results/live/cane_eval_dev.md; refuses holdout and test;
-# about 15 min, one depth model at a time)
+# the 84-video set: about 16 min on a quiet machine, over an hour under load; one depth model at a time)
 eval-cane:
 	OMP_NUM_THREADS=2 $(PY) scripts/eval_live_cane.py
+
+# voice commands through the real Vosk recogniser: every command vector and 30 natural variants synthesised with four
+# macOS voices (Samantha, Daniel, Karen, Moira), clean and with mild noise, plus 20 "see / for / me" sentences that must
+# not wake it; compares the open, grammar, hybrid and snap (default) recognisers (results/live/voice_eval.md; needs
+# voice-setup and macOS say)
+.PHONY: eval-voice
+eval-voice:
+	OMP_NUM_THREADS=2 $(PY) scripts/eval_voice.py
 
 # needs ELEVENLABS_API_KEY in the environment or .env (falls back to the default speaker without one)
 live-elevenlabs:

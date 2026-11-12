@@ -17,14 +17,21 @@ a vehicle closing in, or a FIND goal coming into view is a bug.
 
 Identity across track ids. A track in view for the first time takes over from a track of the same identity that
 vanished within switch_gap_s, in the same sector (or within 2 x sector_hyst_deg of its angle) as where it was last
-seen, not farther than it was then by half of max(closer_m, closer_frac x range) (nearer is fine: it may have come
-closer unseen), and whose last match came before the new track's first one (both matched in one frame: two objects,
-or one box twice): its cue held for confirmation, its held cue, its approach release and its tracker matches (its
-memory entries are adopted when the new track is next judged, so the track the scheduler talks about wins). So a
-lighting dropout or an id switch keeps what the gate owes the user about the object, and an object seen in two short
-sightings at the same place is confirmed. Memory passes *only* along that chain of successors (or to a duplicate box
-of the same object, overlapping it at the same range, or back to a track id the tracker re-acquires): a car that
-drives off to the side and another car coming from 6 m where it stood is a new car.
+seen, not farther than it was then by half of max(closer_m, closer_frac x range), not nearer than the object could
+have come while out of view (its top speed by identity, a chair none, plus the user's walk; at least that step), and
+whose last match came before the new track's first one (both matched in one frame: two objects, or one box twice):
+its cue held for confirmation, its held cue, its approach release and its tracker matches (its memory entries are
+adopted when the new track is next judged, so the track the scheduler talks about wins), unless the object had moved
+away since it was said by max(closer_m, closer_frac x range) (one that walked off and vanished, and another coming
+from there, are two objects: the web gate's successorOf). So a lighting dropout or an id switch keeps what the gate
+owes the user about the object, and an object seen in two short sightings at the same place is confirmed. Memory
+passes *only* along that chain of successors (or to a duplicate box of the same object, overlapping it at the same
+range, or back to a track id the tracker re-acquires): a car that drives off to the side and another car coming from
+6 m where it stood is a new car. The IoU tracker itself may keep one track id for two objects (another person steps
+in where the first stood within its max_age, or in the very frame the first leaves): a track whose range jumps farther
+by half the closer step, across a dropout or from one frame to the next by more than the object could move away in
+that time, lets go of the memory said about it before the jump (and of its background record), as if its object had
+left view.
 
 A cue passes when one of these is true, checked in this order:
 
@@ -52,11 +59,15 @@ A cue passes when one of these is true, checked in this order:
                   or by the box growing over 0.5-1 s (only the sides the frame edge does not cut count: a floor obstacle
                   a step away is cut off at the bottom, so its box-height range *grows* while the user walks into it),
                   at most every min_gap_s. A static object (the user at a desk) does not loom, so it is not repeated
-    closing       an object in the walking path or corridor nearer than bg_path_m that is max(release_m, release_frac x
-                  range) nearer than when it was last said and still closing (measured depth, else the box), at most
-                  every min_gap_s: finer than `closer` for what is a few steps away (a person or a car that starts
-                  coming at a user who stands still is said again before its TTC turns critical)
-    reminder      hold time elapsed: hold_goal_s for a FIND goal, hold_moving_s if the object moves, else hold_static_s
+    closing       an object in the walking path or corridor nearer than path_m that is max(release_m, release_frac x
+                  range) nearer than when it was last said (smoothed ranges: measured depth, else the box), at most every
+                  min_gap_s: finer than `closer` for what is a few steps away (a person or a car that starts coming at a
+                  user who stands still is said again before its TTC turns critical, and so is a chair the user walks
+                  at slowly). The scheduler offering it is enough; the gate says it unasked (rescue) only while it
+                  measurably closes too
+    reminder      hold time elapsed: hold_goal_s for a FIND goal, hold_moving_s if the object moves or is in the walking
+                  path or corridor between operator_max_m and path_m and release_m nearer than when it was said (the user
+                  walking at it: without depth, or in a flicker, no closing speed may show), else hold_static_s
     interrupt     the scheduler wants to cut the current message for it, the object moves or approaches (measured),
                   and it was said at least min_gap_s ago
 and it is held back when:
@@ -70,15 +81,22 @@ and it is held back when:
                   track flickered out, once it or a successor is back and confirmed, within flicker_keep_s. A flicker
                   that never comes back is never spoken; a real object waits one decision step
     warmup        during the warm-up (the first warmup_s after the camera first sees something): a track the gate has
-                  seen static for warm_min_samples box samples spanning warm_hold_span_s (never on its first samples)
-                  and that is not a vehicle, not closing in and not in the walking path nearby, or that looks like the
-                  operator
+                  seen static for warm_min_samples box samples spanning warm_hold_span_s (never on its first samples;
+                  in the walking path or corridor bg_min_span_s) and that is not a vehicle, not closing in and not in
+                  the walking path nearby, nor an object in the path that came into view after the warm-up began (an
+                  arrival is not part of the scene the warm-up learns), or that looks like the operator
     background    static through the warm-up (warm_min_samples box samples spanning bg_min_span_s inside it, no
                   measurable closing), until it is released. Vehicles (car, bus, truck, bicycle, motorcycle, ...) and
                   tracks closing in never become background. An object in the walking path (path_prob >= critical_path,
-                  or its box inside the walking corridor) nearer than bg_path_m is said once before it is silenced. A
+                  or its box inside the walking corridor) nearer than bg_path_m is said once before it is silenced, and
+                  so is a person or animal the gate saw arrive (its box moved more than bg_release_disp since it came
+                  into view, before a rebaseline's warm-up: someone who walked in and stopped is news, not furniture). A
                   new track overlapping the place of a background object is that object only at about its range (not
-                  max(closer_m, closer_frac x range) farther: another person stepping in from farther away is not)
+                  max(closer_m, closer_frac x range) farther: another person stepping in from farther away is not).
+                  One in the walking path between operator_max_m and path_m that was not said for hold_moving_s (or
+                  never) and is release_m nearer than where it was said (or rests) is judged like any object: its
+                  approach release needs max(release_m, release_frac x range), which an approach that starts as it
+                  drops out of view, or in a flicker, may never show while in view
     operator      operator_filter (desk webcam): the user, i.e. the largest centred person present and still through
                   the warm-up and at most operator_max_m away (measured depth; without depth the nearer of the box-height
                   and box-width estimates, since a desk user's box is cut off at the bottom), until released. A person
@@ -94,6 +112,18 @@ and it is held back when:
     repeat        none of the pass rules hold
 A FIND goal (label or sign text, multi-word goals match as a phrase) is never held as warm-up or background, nor as
 the operator unless it is the user themself (FIND "person" at a desk must not announce the user every 8 s).
+
+The scheduler's view. The gate must not change what the scheduler decides: P-CACS and the learned scheduler decide on
+the channel, their speech budget and the 'announced' marks on the tracks (novelty, recent block, the learned model's
+features), so a scheduler that sees another state than it would alone stops giving the warnings it gives alone (a
+rescued bench stamped as announced kept P-CACS from warning about it 1.8 s before contact). So the gate never touches
+the scheduler's budget or the tracks' marks (a held cue was spent, as alone; the gate's own messages are not the
+scheduler's), and shows it the channel as it would be alone: busy with its own last cue, passed or held, while that
+would still be playing, else free (while the gate's own message plays, or the real channel is free). What the
+scheduler offers under the gate is then what it offers alone. A safety cue it offers while the gate's own message plays
+(critical, approach, closing, near, reacquired, or about a vehicle, the FIND goal, an object in the path or corridor, a
+measured TTC under approach_ttc_s) cuts that message; a routine one waits for the channel (within DISPLACED_KEEP_S),
+because the live speaker drops a message it gets while it speaks.
 
 Release. A background object or the operator becomes an ordinary object (so the critical rule applies) as soon as it
 measurably closes in: its distance is below its reference by max(release_m, release_frac x reference) (measured
@@ -123,14 +153,24 @@ repeat_keep_s for a repeat: a known object takes a few seconds to come materiall
 id switches) and the last cue it let through per object. At a decision where no offered or
 pending cue passes, it says one of them itself (distance and direction refreshed, about the object's current track)
 when that object now qualifies: a held cue (the scheduler wanted it said) for critical / approach / near / closing /
-closer / reacquired, or for new once its warm-up, background, operator or read-mode hold no longer applies (a muted
-cue: only once it is no longer muted); a cue said earlier only for
-what the gate's own rules make new: approach (and then critical), or near, the latter only when the user walks
-straight into the object (box centre inside the corridor). It asks for the first rule *among these* that holds, so a
-sector change or a reminder never hides closing. When the channel is busy only critical, approach and near cut in,
-never on a message about the same object. A held cue's seconds go back to the scheduler's speech budget (and are
-charged again if the gate says it later); its 'announced' marks stay on the track, so the scheduler's own recent-block
-and novelty decay stop it from offering the same object at every step.
+closer / reacquired, or for new once its hold no longer applies (a warm-up, background, operator or read-mode hold
+lifted, or the memory it repeated let go of the track: another person stepped in where the said one stood; a muted
+cue: only once it is no longer muted); a cue said earlier only for what the gate's own rules make new: approach (and
+then critical), or near, the latter only when the user walks straight into the object (box centre inside the
+corridor). It asks for the first rule *among these* that holds, so a sector change or a reminder never hides closing.
+When the channel is busy only critical, approach and near cut in, never on a message about the same object. Lost: a
+cue about an object (not a sign) in the walking path between operator_max_m and path_m that the user did not hear about
+for hold_moving_s (or never), held as a repeat or background, whose object then leaves view at once (no track of its
+identity over its last box), is said as the scheduler chose it at the next decision (on a free channel, within 1 s):
+the gate cannot watch it come closer, and an approach that starts as it goes out of view is otherwise first seen when it
+is back, a step away; a static object costs at most one such reminder per hold_moving_s. FIND: a goal cue held as a
+repeat (or only a reminder) while another object the goal names is in view and was never said is said about that one
+instead (a scheduler may keep naming the person it already named, never the other one the user asked for too), unless
+the goal object it names carries news itself (a vehicle, a measured approach, or in the walking path and the `closing`
+step nearer than said): its cue is then judged as any other, and a swapped one waits as held.
+
+Without measured depth, box growth (near, closing, release) compares the medians of the boxes within 0.25 s of each
+end (3 frames at 10 fps), so a jittering box of a static sign or chair is not an object closing in.
 
 "Measured" TTC / speed means the track has depth (depth_conf >= 0.4) and >= 4 range samples spanning >= 1 s.
 Without depth, geometry.TrackDynamics *assumes* the user walks at 1 m/s, so a static person 1.5 m in front of a
@@ -155,19 +195,29 @@ LABEL_ALIAS = {"truck": "car", "bus": "car", "van": "car", "motorcycle": "bicycl
 VEHICLES = frozenset({"car", "bicycle", "train"})
 # background identities that may have moved while out of view (a person lost for a second is not known to be static)
 SELF_MOVING = VEHICLES | {"person", "dog", "cat", "horse", "cow", "sheep", "bird"}
+# how fast an object of the identity may come closer while out of view (m/s; anything else does not move itself), and the
+# user's own walking: a successor track nearer than that could have come is another object (_same_range)
+_MAX_SPEED = {"car": 20.0, "train": 20.0, "bicycle": 10.0, "person": 3.0, "dog": 5.0, "cat": 5.0, "horse": 8.0,
+              "cow": 3.0, "sheep": 3.0, "bird": 5.0}
+_WALK_MPS = 1.5
+# how fast an object of the identity may move *away* between two samples (_range_jump): a person walks off at a brisk
+# pace at most (a sprint away is rare; one stepping in where another stood as it leaves is the case that matters)
+_AWAY_MPS = {"person": 2.0}
 SPEECH_ACTIONS = ("speak", "interrupt")
+DISPLACED_KEEP_S = 3.0           # a routine scheduler cue that waits for the gate's own message to end: said within this
 # which stats counter a hold reason goes to (anything else: suppressed_background)
 _HOLD_STAT = {"repeat": "suppressed_repeat", "critical_gap": "suppressed_repeat",
               "unconfirmed": "suppressed_unconfirmed", "haptic_gap": "suppressed_haptic", "muted": "suppressed_muted"}
 _SILENCE = ("warmup", "background", "operator", "muted")
 # rescue (module docstring): the reasons the gate says a cue itself for, most urgent first. From a cue it held (the
-# scheduler wanted it said) all of them, `new` only once a warm-up / background / operator / read-mode hold no longer
-# applies; from a cue it let through earlier only what the gate's own release or the missing depth makes new (approach,
-# near)
+# scheduler wanted it said) all of them (`new` once its hold no longer applies: a warm-up / background / operator /
+# read-mode hold lifted, or the memory it repeated let go of the track); from a cue it let through earlier only what
+# the gate's own release or the missing depth makes new (approach, near)
 _RESCUE_PRIO = {"critical": 5, "approach": 4, "near": 3, "closing": 3, "closer": 2, "reacquired": 2, "new": 1}
-_RESCUE_HELD = frozenset(_RESCUE_PRIO) - {"new"}
+_RESCUE_HELD = frozenset(_RESCUE_PRIO)
 _RESCUE_SAID = frozenset({"approach", "near"})
 _EDGE = 0.01                     # a box side within this of the frame edge is cut off (its size says nothing)
+_BOX_WIN_S = 0.25                # box growth: the median of the boxes this close to each end (3 frames at 10 fps)
 
 
 @dataclass
@@ -213,6 +263,8 @@ class GateConfig:
     nodepth_near_m: float = 2.0      # without measured depth: an object in the path nearer than this ...
     nodepth_approach_mps: float = 0.3   # ... that the range rate or the box growth shows closing this fast: after min_gap_s
     bg_path_m: float = 3.0           # an object in the walking path nearer than this is said once before it is background
+    path_m: float = 6.0              # an object in the walking path or corridor nearer than this (6 s at a walking pace) is
+                                     # said again at the finer `closing` step, and reminded after hold_moving_s
     corridor_half_m: float = 0.45    # half-width of the walking corridor (geometry.DynamicsConfig.corridor_half_m)
     # safety: who may be held at all, when a held object is released, and the gate saying a held cue itself
     operator_max_m: float = 1.2      # operator: at most this far away (a laptop user sits 0.4-1.0 m from the webcam)
@@ -342,6 +394,15 @@ class _Seen:
     gap: float = 0.0                 # how long its object was out of view before this track took over (0: said since)
     back_rng: Optional[float] = None    # its range when it was last seen before that
     pred: Tuple[int, ...] = ()       # the track ids it took over from, the latest first
+    c0: Tuple[float, float] = (0.5, 0.5)   # box centre where its object (first of the tracks it took over from) appeared
+    moved: float = 0.0               # farthest its box centre has been from c0 (an arrival: not background)
+
+
+def _speech_s(cue: Cue) -> float:
+    """How long a cue holds the channel: its duration (the channel sets it when it speaks), else words x 0.35 s, at
+    least 1.2 s (eval.runner.SpeechChannel)."""
+    d = float(cue.duration_s or 0.0)
+    return d if d > 0 else max(1.2, 0.35 * len((cue.message or "").split()))
 
 
 def normalize_text(s: Optional[str]) -> str:
@@ -547,11 +608,19 @@ class AnnouncementGate:
         # per track id; a successor track (id switch, module docstring: Identity) takes them over
         self._pending: Dict[int, Tuple[Cue, float, float, bool]] = {}   # -> (cue, time held, angle, lost from view since)
         self._held: Dict[int, Tuple[Cue, float, str, float]] = {}       # -> (cue, time, hold reason, angle)
+        self._lost_due: Dict[int, float] = {}                           # -> time a stale in-path cue was held (_say_lost)
+        self._held_ref: Dict[int, float] = {}                           # -> its smoothed range then (rescue: closing)
+        self._closing_ref: Optional[float] = None      # while the rescue judges such a cue: that range (_closing_in_path)
         self._approach: Dict[int, float] = {}                           # -> time of its approach release
         self._closing_since: Dict[int, float] = {}                      # -> since when it closes >= release_mps
         self._seen: Dict[int, _Seen] = {}
+        self._jumps: Dict[int, float] = {}                              # -> its latest range jump farther (_detach_jumps)
         self.releases: List[Tuple[float, int, str]] = []             # (time, track id, why) of every release / re-capture
         self._rescuing: Optional[Set[str]] = None      # while the rescue judges its cue: the reasons it may say it for
+        self._said_last: Optional[Tuple[Cue, float, bool]] = None   # the last speech cue let through (and: the gate's own)
+        self._offer: Optional[Tuple[Cue, float]] = None   # the scheduler's last speech cue (passed or held): (cue, end)
+        self._waiting: Optional[Tuple[Cue, float, float]] = None   # a routine cue that passed while the gate's own
+                                                                    # message played: (cue, time, angle) (decide)
         self.last_reason: str = ""
         self.last_verdict: Optional[Dict[str, Any]] = None
         self._rebaseline_state()
@@ -588,8 +657,79 @@ class AnnouncementGate:
 
     # ---- scheduler interface --------------------------------------------------------------------------------
     def decide(self, tracks: List[Track], t: float, ch=None, *args, **kw) -> List[Cue]:
-        cues = self._inner.decide(tracks, t, ch, *args, **kw)
-        return self.filter(cues, tracks, t, ch=ch)
+        ch_in, freed = self._scheduler_channel(ch, t)
+        cues = self._inner.decide(tracks, t, ch_in, *args, **kw)
+        if cues and cues[0].action in SPEECH_ACTIONS:   # (the pipeline plays the first cue only)
+            self._offer = (cues[0], t + _speech_s(cues[0]))
+        said_last = self._said_last
+        out = self.filter(cues, tracks, t, ch=ch)
+        v = self.last_verdict
+        if freed and out and out[0].action == "speak" and v is not None and not v["deferred"] and v["t"] == t:
+            trk = next((x for x in tracks if x.track_id == out[0].track_id), None)
+            if self._is_safety(out[0], trk, v["reason"]):
+                out = [replace(out[0], action="interrupt", interrupted_track=getattr(ch, "current_track", None))]
+            else:                                # the speaker drops a message it gets while it speaks: wait
+                ang = self.cam.angle_deg_from_u(bbox_center(trk.bbox)[0]) if trk is not None else 0.0
+                self._waiting, self._said_last, out = (out[0], t, ang), said_last, []
+        return out or self._say_waiting(tracks, t, ch)
+
+    def _say_waiting(self, tracks: List[Track], t: float, ch) -> List[Cue]:
+        """The routine cue that passed while the gate's own message played (decide), on a free channel within
+        DISPLACED_KEEP_S (distance and direction refreshed): the live speaker drops a message it gets while it speaks,
+        so the cue the gate recorded as said would never be heard. Dropped when its object is talked about now."""
+        w = self._waiting
+        busy = bool(getattr(ch, "busy", False))
+        if w is None or (busy and getattr(ch, "current_track", None) == w[0].track_id) or t - w[1] > DISPLACED_KEEP_S + 1e-9:
+            self._waiting = None
+            return []
+        if busy or t <= w[1] + 1e-9:
+            return []
+        self._waiting = None
+        trk = next((x for x in tracks if x.track_id == w[0].track_id and not x.remembered and x.misses == 0), None)
+        out = replace(self._refreshed(w[0], w[2], trk, t) if trk is not None else w[0], t=t, action="speak")
+        self._said_last = (out, t, False)
+        return [out]
+
+    def _scheduler_channel(self, ch, t: float):
+        """(the channel the scheduler is shown, freed): the channel as it would be without the gate (module docstring:
+        The scheduler's view), as the controller does for cane cues and replies. While a message the gate said on its
+        own (a deferred or rescued cue) holds it, or while it is free, the scheduler's own last message (passed or held)
+        holds it while that would still be playing, else it is free. Otherwise a warning the scheduler would give
+        alone waits behind a message it never chose (a rescued chair cue held back the FIND goal coming into the path),
+        and a held cue lets it speak about something else where alone it would wait: either way it would decide on
+        another channel than alone, and its next cues would not be the ones it gives alone. `freed`: the gate's own
+        message plays; a safety cue the scheduler then offers cuts it, a routine one waits for the channel (decide)."""
+        busy = bool(getattr(ch, "busy", False))
+        last = self._said_last
+        own = (busy and last is not None and last[2] and getattr(ch, "current_track", None) == last[0].track_id)
+        if busy and not own:
+            return ch, False                     # its own message, a reply or a cane cue: as alone
+        o = self._offer
+        if o is not None and o[1] > t + 1e-9:
+            from ..cues.pcacs import ChannelState
+            c = o[0]
+            return ChannelState(busy=True, remaining_s=o[1] - t, current_utility=c.utility or 0.0,
+                                current_severity=c.severity or 0.0, current_track=c.track_id), own
+        if own:
+            from ..cues.pcacs import ChannelState
+            return ChannelState(), True
+        return ch, False
+
+    def _is_safety(self, cue: Cue, trk: Optional[Track], reason: str) -> bool:
+        """Is a passed cue about safety (it may cut a message the gate said on its own)? Passed as critical, approach,
+        closing, near or reacquired, or about a vehicle, the FIND goal, an object in the walking path or corridor, or one
+        with a measured TTC under approach_ttc_s."""
+        g = self.gate_cfg
+        if reason in ("critical", "approach", "closing", "near", "reacquired"):
+            return True
+        if trk is None:
+            return False
+        if self._is_vehicle(self._identity_of(trk, cue)) or self._is_goal(cue, trk) or trk.path_prob >= g.critical_path:
+            return True
+        rng = self._range_now(trk)
+        if rng is not None and self._in_corridor(trk.label, trk.bbox, rng):
+            return True
+        return measured(trk) and math.isfinite(trk.ttc_s) and trk.ttc_s < g.approach_ttc_s
 
     def select(self, tracks: List[Track], t: float, ctx=None, *args, **kw) -> List[Cue]:
         cues = self._inner.select(tracks, t, ctx, *args, **kw)
@@ -661,6 +801,7 @@ class AnnouncementGate:
         by_id = {trk.track_id: trk for trk in tracks}
         visible = {trk.track_id: trk for trk in tracks if not trk.remembered and trk.misses == 0}
         self._succeed(visible, t)
+        self._detach_jumps(visible, t)
         self._update_closing(visible, t)
         self._track_records(visible, t)
         idents: Optional[Dict[int, Tuple[str, str]]] = None
@@ -685,14 +826,83 @@ class AnnouncementGate:
                         e.dups.discard(o.track_id)
                     else:
                         e.dups.add(o.track_id)
+        goal_tried = False
         for cue in cues or ():
-            out = self._judge(cue, by_id.get(cue.track_id), visible, t)
+            trk = by_id.get(cue.track_id)
+            if not goal_tried and cue.action in SPEECH_ACTIONS and self._is_goal(cue, trk):
+                goal_tried = True
+                _, why, e, _ = self._check(cue, trk, visible, t)
+                if why in ("repeat", "reminder") and not self._goal_news(trk, e):
+                    out = self._goal_other(cue, visible, t, ch)
+                    if out:
+                        # (the scheduler's cue waits as held: the rescue says it if its object comes closer meanwhile)
+                        angle = self.cam.angle_deg_from_u(bbox_center(trk.bbox)[0]) if trk is not None else 0.0
+                        self._held[cue.track_id] = (cue, t, "repeat", angle)
+                        return out
+            out = self._judge(cue, trk, visible, t)
             if out is not None:
                 return out
         out = self._flush_pending(visible, t, ch)
         if out:
             return out
-        return self._rescue(visible, t, ch)
+        return self._rescue(visible, t, ch) or self._say_lost(visible, t, ch)
+
+    def _goal_news(self, trk: Optional[Track], e: Optional[_Said]) -> bool:
+        """Does a FIND goal the scheduler names again carry news for the user's safety, so the gate must not say another
+        goal object in its place (_goal_other)? A vehicle, a measured approach (TTC under approach_ttc_s), or an object
+        in the walking path or corridor nearer than path_m that is max(release_m, release_frac x range) nearer than when
+        it was last said, by its smoothed range (no closing evidence needed: the scheduler offered it)."""
+        g = self.gate_cfg
+        if trk is None:
+            return False
+        if self._is_vehicle(self._identity_of(trk)) or self._approaching(trk, None):
+            return True
+        if e is None or e.rng is None or not self._in_path(trk, g.path_m):
+            return False
+        d = self._smoothed_range(trk)
+        return d is not None and e.rng - d >= max(g.release_m, g.release_frac * e.rng) - 1e-9
+
+    def _goal_other(self, cue: Cue, visible: Dict[int, Track], t: float, ch) -> List[Cue]:
+        """FIND: the scheduler's cue about the goal is a repeat (held) or only a reminder while another object the goal
+        names is in view and was never said since the goal was set (another person when the user asked for a person, the
+        EXIT sign when the scheduler keeps naming EXIT 2): the gate says that one instead, on a free channel (the nearest;
+        distance and direction refreshed). The user asked for the goal, so an unsaid one is news, and a scheduler may
+        keep choosing the one it already said (harness find:2133: the learned scheduler named the same person every
+        1.5 s, all held, and never the other one 6 m away on the left)."""
+        if getattr(ch, "busy", False):
+            return []
+        trk0 = visible.get(cue.track_id)
+        angle0 = self.cam.angle_deg_from_u(bbox_center(trk0.bbox)[0]) if trk0 is not None else 0.0
+        cands = []
+        for tid, trk in visible.items():
+            if tid == cue.track_id or trk.kind != (trk0.kind if trk0 is not None else cue.kind):
+                continue
+            if not self._goal_names(trk) or not self._confirmed(trk):
+                continue
+            if self._own_entry(tid) is not None:
+                continue                         # said before (under this track or one it took over from)
+            rng = self._range_now(trk)
+            cands.append((rng if rng is not None else math.inf, tid, trk))
+        ident0 = self._identity_of(trk0, cue)
+        for _, tid, trk in sorted(cands, key=lambda c: c[:2]):
+            other = self._refreshed(cue, angle0, trk, t)
+            if self._identity_of(trk) != ident0:     # (another sign or label: its own words)
+                from ..cues.compose import compose
+                rng = self._range_now(trk)
+                msg = compose(("object", "distance", "direction"), trk.label, trk.kind, trk.text, distance_m=rng,
+                              depth_conf=trk.depth_conf, angle_deg=self.cam.angle_deg_from_u(bbox_center(trk.bbox)[0]),
+                              units=getattr(self.cfg, "units", "m") or "m")
+                other = replace(other, message=msg, label=trk.label, kind=trk.kind, text=trk.text,
+                                slots=("object", "distance", "direction"))
+            self._rescuing = {"new"}
+            try:
+                out = self._judge(replace(other, action="speak"), trk, visible, t, deferred=True)
+            finally:
+                self._rescuing = None
+            if out:
+                self.stats["rescued"] += 1
+                return out
+        return []
 
     def _judge(self, cue: Cue, trk: Optional[Track], visible: Dict[int, Track], t: float, deferred: bool = False) -> Optional[List[Cue]]:
         # (a rescued cue is judged on the reasons the rescue may say it for: self._rescuing)
@@ -705,24 +915,28 @@ class AnnouncementGate:
                              "passed": ok, "reason": reason, "info": info, "deferred": deferred}
         if ok:
             self.stats["passed"] += 1
-            prev = self._pending.pop(cue.track_id, None)
-            if prev is not None and prev[0] is not cue:
-                self._refund(prev[0])            # the older held cue for this track will never be said
+            self._pending.pop(cue.track_id, None)     # (an older held cue for this track will never be said)
             if cue.action in SPEECH_ACTIONS:
                 self._held.pop(cue.track_id, None)
+                self._lost_due.pop(cue.track_id, None)
+                self._held_ref.pop(cue.track_id, None)
+                self._said_last = (cue, t, deferred)
             self._commit(cue, trk, entry, t, reason)
             return [cue]
         self.stats[_HOLD_STAT.get(reason, "suppressed_background")] += 1
         angle = self.cam.angle_deg_from_u(bbox_center(trk.bbox)[0]) if trk is not None else 0.0
-        if reason == "unconfirmed":
-            prev = self._pending.get(cue.track_id)
-            if prev is not None and prev[0] is not cue:
-                self._refund(prev[0])            # superseded by the scheduler's newer cue for the same track
+        if reason == "unconfirmed":                # (superseding an older held cue for the same track)
             self._pending[cue.track_id] = (cue, t, angle, False)
-        elif not self._rescuing:                 # (a rescued cue was refunded when it was first held)
-            self._refund(cue)
-            if cue.action in SPEECH_ACTIONS:     # the gate may say it itself once the object qualifies (rescue)
-                self._held[cue.track_id] = (cue, t, reason, angle)
+        elif not self._rescuing and cue.action in SPEECH_ACTIONS:
+            self._held[cue.track_id] = (cue, t, reason, angle)   # the gate may say it itself once it qualifies (rescue)
+            if reason in ("repeat", "background") and self._stale_in_path(
+                    trk, t, entry if entry is not None else self._own_entry(cue.track_id)):
+                self._lost_due[cue.track_id] = t
+                rng = self._smoothed_range(trk)
+                if rng is not None:
+                    self._held_ref[cue.track_id] = rng
+            else:
+                self._held_ref.pop(cue.track_id, None)
         return None
 
     def _flush_pending(self, visible: Dict[int, Track], t: float, ch) -> List[Cue]:
@@ -737,7 +951,6 @@ class AnnouncementGate:
             if t - t_held > (g.flicker_keep_s if lost else g.pending_s) + 1e-9:
                 del self._pending[tid]           # a flicker that did not come back: exactly what min_hits is for
                 self.reasons["unconfirmed (dropped)"] += 1
-                self._refund(cue)
                 continue
             self._pending[tid] = (cue, t_held, angle0, lost)
             if trk is None or not self._ready(trk, cue):
@@ -761,7 +974,6 @@ class AnnouncementGate:
     def _rescue(self, visible: Dict[int, Track], t: float, ch) -> List[Cue]:
         """Say a cue the gate held (or one it said earlier) itself when its object now qualifies for safety and the
         scheduler did not offer it again (module docstring: Rescue). At most one, the most urgent."""
-        g = self.gate_cfg
         busy = bool(getattr(ch, "busy", False))
         best = None
         for tid, trk in visible.items():
@@ -769,13 +981,13 @@ class AnnouncementGate:
                 continue                         # (never cut in on a message about the same object)
             h = self._held.get(tid)
             if h is not None and 1e-9 < t - h[1] <= self._held_keep(h[2]) + 1e-9:
-                src, angle0, held_for = h[0], h[3], h[2]
-                allowed = set(_RESCUE_HELD) | ({"new"} if held_for in _SILENCE else set())
+                src, angle0 = h[0], h[3]
+                allowed = set(_RESCUE_HELD)
             else:
                 e = self._own_entry(tid)
                 if e is None or e.cue is None:
                     continue
-                src, angle0, held_for = e.cue, e.angle, None
+                src, angle0 = e.cue, e.angle
                 # a said object the scheduler does not offer again: what is new since only because the gate released it
                 # (approach, then its critical cue) or because without depth nothing is ever critical (near)
                 allowed = set(_RESCUE_SAID) | ({"critical"} if tid in self._approach else set())
@@ -784,30 +996,92 @@ class AnnouncementGate:
                     allowed.discard("near")      # said by the gate unasked only when the user walks straight into it
             cue = self._refreshed(src, angle0, trk, t)
             # the first rule among those allowed that holds (a sector change or a reminder must not hide `closing`)
-            ok, reason, _, _ = self._check(cue, trk, visible, t, allowed=allowed)   # (may release it as approaching)
+            ref = self._held_ref.get(tid) if h is not None and src is h[0] else None
+            self._closing_ref = ref
+            try:
+                ok, reason, _, _ = self._check(cue, trk, visible, t, allowed=allowed)   # (may release it as approaching)
+            finally:
+                self._closing_ref = None
             if not ok or self._muted(cue, trk, reason):
                 continue
             key = (_RESCUE_PRIO[reason], float(cue.utility or 0.0))
             if best is None or key > best[0]:
-                best = (key, cue, trk, reason, allowed)
+                best = (key, cue, trk, reason, allowed, ref)
         if best is None:
             return []
-        _, cue, trk, reason, allowed = best
+        _, cue, trk, reason, allowed, ref = best
         if busy:
             if reason not in ("critical", "approach", "near"):
                 return []
             cue = replace(cue, action="interrupt")
         else:
             cue = replace(cue, action="speak")
-        self._rescuing = allowed
+        self._rescuing, self._closing_ref = allowed, ref
         try:
             out = self._judge(cue, trk, visible, t, deferred=True)
         finally:
-            self._rescuing = None
+            self._rescuing, self._closing_ref = None, None
         if out:
             self.stats["rescued"] += 1
-            self._charge(out[0], trk, t)
         return out or []
+
+    def _stale_in_path(self, trk: Optional[Track], t: float, e: Optional[_Said]) -> bool:
+        """An object (not a sign) in the walking path or corridor between operator_max_m and path_m (a vehicle at any
+        range), seen steadily (matched in half the frames since its track began, release_span_s ago or more), not
+        said for hold_moving_s (or
+        never: entry e): a cue about it held now is said by the gate if the object leaves view at once (_say_lost), and
+        the rescue judges `closing` from where it was then (_held_ref)."""
+        g = self.gate_cfg
+        if trk is None or trk.kind != "object":
+            return False
+        if not self._in_path(trk, math.inf if self._is_vehicle(self._identity_of(trk)) else g.path_m):
+            return False                         # (a bicycle covers path_m in two seconds)
+        rng = self._range_now(trk)
+        if rng is None or rng < g.operator_max_m:
+            return False
+        if trk.hits < 0.5 * (trk.age + 1) or trk.last_seen - trk.first_seen < g.release_span_s - 1e-9:
+            return False                         # a flicker (a hand over the desk user): going out of view says nothing
+        return e is None or t - e.t >= g.hold_moving_s - 1e-9
+
+    def _say_lost(self, visible: Dict[int, Track], t: float, ch) -> List[Cue]:
+        """An object in the walking path the user last heard of hold_moving_s ago (or never), whose cue the gate held as
+        nothing new (a repeat, background) at the last decision, and that left view right after: the gate cannot watch
+        it come closer, so it says the held cue (as the scheduler chose it) on a free channel, within 1 s. An approach
+        that starts as the object goes out of view (an occlusion, a lighting dropout) is otherwise first seen when it is
+        back, a step away; a static object in the path costs at most one reminder per hold_moving_s, and only when it
+        vanishes right after the scheduler offered it."""
+        for tid in [k for k, th in self._lost_due.items() if t - th > 1.0 + 1e-9 or k not in self._held]:
+            del self._lost_due[tid]
+        if getattr(ch, "busy", False):
+            return []
+        lost = []
+        for tid, th in self._lost_due.items():
+            s = self._seen.get(tid)
+            if tid in visible or t - th < 1e-9 or s is None:
+                continue
+            if any(self._identity_of(o) == s.identity and bbox_iou(o.bbox, s.trk.bbox) >= 0.3 for o in visible.values()):
+                continue                         # in view under another id (a switch the succession did not link)
+            lost.append((self._held[tid][0], tid))
+        if not lost:
+            return []
+        cue, tid = max(lost, key=lambda x: float(x[0].utility or 0.0))
+        del self._lost_due[tid]
+        self._held.pop(tid, None)
+        s = self._seen.get(tid)
+        trk = s.trk if s is not None else None
+        out = replace(cue, t=t, action="speak")
+        e = self._own_entry(tid)
+        ago = f"said {t - e.t:.1f} s ago" if e is not None else "never said"
+        info = f"{cue.label} out of view since the cue was held, {ago}"
+        self.stats["passed"] += 1
+        self.stats["rescued"] += 1
+        self.reasons["lost (deferred)"] += 1
+        self.last_reason = f"pass lost (deferred): {info}"
+        self.last_verdict = {"t": t, "track_id": tid, "label": cue.label, "action": out.action, "passed": True,
+                             "reason": "lost", "info": info, "deferred": True}
+        self._said_last = (out, t, True)
+        self._commit(out, trk, e, t, "lost")
+        return [out]
 
     # ---- the decision ---------------------------------------------------------------------------------------
     def _check(self, cue: Cue, trk: Optional[Track], visible: Dict[int, Track], t: float,
@@ -848,17 +1122,17 @@ class AnnouncementGate:
                 return False, "haptic_gap", None, f"{desc}, buzzed {t - last:.1f} s ago"
             return True, "haptic", None, desc
         e = self._lookup(ident, angle, cue.track_id, trk, visible, t)
-        for reason, info in self._passes(cue, trk, e, angle, desc, t):
+        for reason, info in self._passes(cue, trk, e, angle, desc, t, asked=allowed is None):
             if allowed is None or reason in allowed:
                 return True, reason, e, info
         if e is None:
             return False, "repeat", None, desc
-        goal = self._is_goal(cue, trk)
-        hold = g.hold_goal_s if goal else (g.hold_moving_s if trk is not None and self._moving(trk) else g.hold_static_s)
-        return False, "repeat", e, f"{desc}, said {t - e.t:.1f} s ago (hold {hold:.0f} s)"
+        return False, "repeat", e, f"{desc}, said {t - e.t:.1f} s ago (hold {self._hold_s(cue, trk, e):.0f} s)"
 
-    def _passes(self, cue: Cue, trk: Optional[Track], e: Optional[_Said], angle: float, desc: str, t: float):
-        """The pass rules after the holds, in order (lazily: the normal path stops at the first)."""
+    def _passes(self, cue: Cue, trk: Optional[Track], e: Optional[_Said], angle: float, desc: str, t: float,
+                asked: bool = True):
+        """The pass rules after the holds, in order (lazily: the normal path stops at the first). `asked`: the scheduler
+        offers the cue now (not the rescue)."""
         g = self.gate_cfg
         released = self._approach.get(cue.track_id)
         if released is not None and t - released <= g.approach_keep_s:
@@ -881,15 +1155,36 @@ class AnnouncementGate:
             yield "closer", f"{desc}, {e.dist:.1f} -> {d_now:.1f} m"
         if gap and trk is not None and self._near_without_depth(trk):
             yield "near", f"{desc}, {self._range_now(trk):.1f} m, closing (no measured depth), said {ago:.1f} s ago"
-        if gap and trk is not None and self._closing_in_path(trk, e):
+        if gap and trk is not None and self._closing_in_path(trk, e.rng, asked):
             yield "closing", f"{desc}, {self._range_now(trk):.1f} m and closing (said at {e.rng or 0.0:.1f} m)"
-        goal = self._is_goal(cue, trk)
         moving = trk is not None and self._moving(trk)
-        hold = g.hold_goal_s if goal else (g.hold_moving_s if moving else g.hold_static_s)
+        hold = self._hold_s(cue, trk, e)
         if ago >= hold:
             yield "reminder", f"{info} (hold {hold:.0f} s)"
         if gap and cue.action == "interrupt" and trk is not None and (moving or self._approaching(trk, e.dist)):
             yield "interrupt", info
+
+    def _hold_s(self, cue: Cue, trk: Optional[Track], e: Optional[_Said]) -> float:
+        """How long a said object is not repeated: hold_goal_s for a FIND goal, hold_moving_s for an object that moves
+        or that is in the walking path and came release_m nearer since it was said (_path_nearer: the user may be walking
+        at it, and without measured depth, or in a flicker, nothing else may tell the gate before it is a step or two
+        away), else hold_static_s."""
+        g = self.gate_cfg
+        if self._is_goal(cue, trk):
+            return g.hold_goal_s
+        if trk is not None and (self._moving(trk) or (e is not None and self._path_nearer(trk, e.rng))):
+            return g.hold_moving_s
+        return g.hold_static_s
+
+    def _path_nearer(self, trk: Track, ref: Optional[float]) -> bool:
+        """In the walking path or corridor between operator_max_m and path_m, and its smoothed range at least release_m
+        nearer than `ref` (where it was when last said). Nearer than operator_max_m it is the desk user, or a step away,
+        where the critical and near rules speak; a static object's smoothed range does not drift by release_m."""
+        g = self.gate_cfg
+        d = self._smoothed_range(trk)
+        if ref is None or d is None or d < g.operator_max_m or not self._in_path(trk, g.path_m):
+            return False
+        return ref - d >= g.release_m - 1e-9
 
     def _reacquired(self, cue: Cue, trk: Optional[Track], t: float) -> str:
         """reacquired: back in view (a successor track, within its first release_span_s) after more than lost_s out of
@@ -985,6 +1280,11 @@ class AnnouncementGate:
         rw = self.cam.fx * W / w if w > 1e-3 and not _cut_lr(bbox) else None
         return rh, rw
 
+    def _box_range(self, bbox: BBox, label: str) -> Optional[float]:
+        """Range from one box: its width when the frame edge does not cut it, else its height (_range_now)."""
+        rh, rw = self._box_ranges(bbox, label)
+        return rw if rw is not None else rh
+
     def _range_now(self, trk: Track) -> Optional[float]:
         """Measured depth when there is any (depth_conf >= 0.4), else the box: its width when the frame edge does not
         cut it (a floor obstacle a step away is cut off at the bottom; its box-height range grows as it comes closer),
@@ -1003,27 +1303,34 @@ class AnnouncementGate:
 
     def _box_closing(self, trk: Track, rng: float) -> float:
         """Closing speed (m/s) the box growth shows over the last ~0.5 s and ~1 s, from the sides the frame edge does
-        not cut (box size ~ 1 / range); 0 unless the box grew by at least nodepth_grow."""
+        not cut (box size ~ 1 / range); 0 unless the box grew by at least nodepth_grow. Each end is the median of the
+        boxes within _BOX_WIN_S of it (3 frames at 10 fps; one box at a slower rate), so a jittering box of a static
+        sign or chair does not look like it closes in."""
         g = self.gate_cfg
         hist = list(trk.bbox_history)
         if len(hist) < 2:
             return 0.0
-        t1, b1 = hist[-1]
+        t1 = hist[-1][0]
+        now = [b for tt, b in hist if tt >= t1 - _BOX_WIN_S - 1e-9]
         best = 0.0
         for lag in (0.5, 1.0):
             prev = [(tt, b) for tt, b in hist if tt <= t1 - lag + 0.05]
             if not prev:
                 continue
-            t0, b0 = prev[-1]
+            t0 = prev[-1][0]
             dt = t1 - t0
             if dt < 0.3:
                 continue
+            then = [b for tt, b in prev if tt >= t0 - _BOX_WIN_S - 1e-9]
             logs = []
-            w0, w1, h0, h1 = b0[2] - b0[0], b1[2] - b1[0], b0[3] - b0[1], b1[3] - b1[1]
-            if not _cut_lr(b0) and not _cut_lr(b1) and w0 > 1e-3 and w1 > 1e-3:
-                logs.append(math.log(w1 / w0))
-            if not _cut_tb(b0) and not _cut_tb(b1) and h0 > 1e-3 and h1 > 1e-3:
-                logs.append(math.log(h1 / h0))
+            if not any(_cut_lr(b) for b in now + then):
+                w0, w1 = _med([b[2] - b[0] for b in then]), _med([b[2] - b[0] for b in now])
+                if w0 > 1e-3 and w1 > 1e-3:
+                    logs.append(math.log(w1 / w0))
+            if not any(_cut_tb(b) for b in now + then):
+                h0, h1 = _med([b[3] - b[1] for b in then]), _med([b[3] - b[1] for b in now])
+                if h0 > 1e-3 and h1 > 1e-3:
+                    logs.append(math.log(h1 / h0))
             if not logs:
                 continue
             grow = math.exp(sum(logs) / len(logs))
@@ -1058,29 +1365,44 @@ class AnnouncementGate:
         t1 = h[-1][0]
         return _med([z for tt, z, _ in h if tt >= t1 - self.gate_cfg.release_smooth_s - 1e-9])
 
-    def _closing_in_path(self, trk: Track, e: _Said) -> bool:
-        """closing: an object in the walking path or corridor, nearer than bg_path_m, at least max(release_m,
-        release_frac x range) nearer than when it was last said and closing now (>= release_mps; or, by its latest sample,
-        nearer by that much while closing at >= release_fast_mps over the last 0.5 s). Measured depth when there is any,
-        else the box (sides the frame does not cut). Finer than `closer` (1 m) for what is a few steps away: a person
-        or a car that starts coming at a user who stands still is said again before its TTC turns critical."""
+    def _smoothed_range(self, trk: Track) -> Optional[float]:
+        """The range over the last release_smooth_s: the median of the measured depth samples, else of the box ranges."""
+        if measured(trk):
+            return self._smoothed_depth(trk)
+        hist = list(trk.bbox_history)
+        t1 = hist[-1][0] if hist else 0.0
+        rs = [r for r in (self._box_range(b, trk.label) for tt, b in hist if tt >= t1 - self.gate_cfg.release_smooth_s - 1e-9)
+              if r is not None]
+        return _med(rs) if rs else self._range_now(trk)
+
+    def _closing_in_path(self, trk: Track, said_rng: Optional[float], asked: bool = False) -> bool:
+        """closing: an object in the walking path or corridor, nearer than path_m, at least max(release_m,
+        release_frac x range) nearer than when it was last said (smoothed ranges) and, unless the scheduler offers it
+        now (`asked`), closing now (>= release_mps; or, by its latest sample, nearer by that much while closing at
+        >= release_fast_mps over the last 0.5 s): the gate says nothing unasked on a range step alone. Measured depth when
+        there is any, else the box (sides the frame does not cut). Finer than `closer` (1 m) for what is a few steps
+        away: a person or a car that starts coming at a user who stands still is said again before its TTC turns
+        critical, and so is a chair the user walks at slowly (0.2 m/s: no closing speed to measure)."""
         g = self.gate_cfg
-        if e.rng is None or trk.distance_m is None:
+        if said_rng is None or trk.distance_m is None:
             return False
         rng = self._range_now(trk)
-        if rng is None or rng >= g.bg_path_m:
+        if rng is None or rng >= g.path_m:
             return False
         if not (trk.path_prob >= g.critical_path or self._in_corridor(trk.label, trk.bbox, rng)):
             return False
-        if measured(trk):
-            d, d_last = self._smoothed_depth(trk), trk.dist_history[-1][1]
-        else:
-            d = d_last = rng
-        thr = max(g.release_m, g.release_frac * e.rng)
-        fast = self._short_closing(trk)
-        if e.rng - d >= thr - 1e-9 and (fast >= g.release_mps or (measured(trk) and -trk.rel_speed_mps >= g.release_mps)):
+        d = self._smoothed_range(trk)
+        d_last = trk.dist_history[-1][1] if measured(trk) else rng
+        # (a cue held while the user last heard of the object hold_moving_s ago: from where it was when the scheduler
+        # offered it, if that is farther; a stale mention says nothing about an approach that starts now)
+        ref = said_rng if self._closing_ref is None else max(said_rng, self._closing_ref)
+        thr = max(g.release_m, g.release_frac * ref)
+        if asked and d is not None and ref - d >= thr - 1e-9:
             return True
-        return e.rng - d_last >= thr - 1e-9 and fast >= g.release_fast_mps
+        fast = self._short_closing(trk)
+        if ref - d >= thr - 1e-9 and (fast >= g.release_mps or (measured(trk) and -trk.rel_speed_mps >= g.release_mps)):
+            return True
+        return ref - d_last >= thr - 1e-9 and fast >= g.release_fast_mps
 
     def _moving(self, trk: Track) -> bool:
         """Lateral speed above moving_speed_mps (+0.05 m/s per metre: it is noisier at range), or a measured range
@@ -1100,6 +1422,18 @@ class AnnouncementGate:
             return True
         return (measured(trk) and math.isfinite(trk.ttc_s) and trk.ttc_s < g.approach_ttc_s
                 and -trk.rel_speed_mps >= g.approach_min_mps)
+
+    def _goal_names(self, trk: Track) -> bool:
+        """Does the FIND goal in force name this track (its label, alias or sign text)?"""
+        tags = [k for k in (normalize_text(g) for g in self._current_goal_tags()) if k]
+        if not tags:
+            return False
+        label = (trk.label or "").lower()
+        keys = {label, LABEL_ALIAS.get(label, label)}
+        txt = normalize_text(trk.text)
+        if txt:
+            keys.add(txt)
+        return any(self._names(gk, k) for gk in tags for k in keys)
 
     def _is_goal(self, cue: Cue, trk: Optional[Track]) -> bool:
         if "goal" in (cue.slots or ()):
@@ -1164,6 +1498,10 @@ class AnnouncementGate:
             elif other is None and trk is not None:
                 if e.track_id not in pred and not (track_id in e.dups and trk.first_seen - e.seen <= g.switch_gap_s):
                     continue                 # not its successor: a different object
+                if (e.track_id in pred and e.rng is not None and s.back_rng is not None
+                        and s.back_rng - e.rng >= max(g.closer_m, g.closer_frac * e.rng) - 1e-9):
+                    continue                 # its object had moved away since it was said: one walked off and vanished,
+                                             # another comes from there (new to the user)
             cands.append(e)
         if not cands:
             return None
@@ -1176,21 +1514,34 @@ class AnnouncementGate:
     def _dup_box(self, a: Track, b: Track) -> bool:
         """Two tracks of one label in view together are one object detected twice only if their boxes overlap by
         dup_iou and they are at the same range; two people standing side by side overlap less (a second person walking
-        up next to one already said is new)."""
-        return (bbox_iou(a.bbox, b.bbox) >= self.gate_cfg.dup_iou
-                and self._same_range(self._range_now(a), self._range_now(b)))
+        up next to one already said is new). With measured depth on both the range must agree within max(release_m,
+        release_frac x range) (one object's pixels have one depth: a car 0.8 m in front of another, its box over the
+        first's, is a second car); box ranges are coarser (the `closer` step)."""
+        g = self.gate_cfg
+        if bbox_iou(a.bbox, b.bbox) < g.dup_iou:
+            return False
+        if a.depth_conf >= 0.4 and b.depth_conf >= 0.4 and a.distance_m is not None and b.distance_m is not None:
+            return abs(a.distance_m - b.distance_m) < max(g.release_m, g.release_frac * min(a.distance_m, b.distance_m)) - 1e-9
+        return self._same_range(self._range_now(a), self._range_now(b))
 
-    def _same_range(self, r_new: Optional[float], r_old: Optional[float], nearer_ok: bool = False) -> bool:
+    def _same_range(self, r_new: Optional[float], r_old: Optional[float], nearer_ok: bool = False,
+                    span_s: float = 0.0, ident: Optional[Tuple[str, str]] = None) -> bool:
         """Two range readings of one object: not materially nearer or farther (max(closer_m, closer_frac x range), as the
-        `closer` rule); an unknown range does not tell them apart. `nearer_ok` (a track that takes over after a dropout):
-        any amount nearer, the object may have come closer unseen (its held cue then follows it); but half that much
-        farther is another object (a person said at 3.8 m leaves; one 4.4 m away walking up where they stood is new:
-        treating a farther object as new costs a repeat, inheriting a nearer one's memory a late warning)."""
+        `closer` rule); an unknown range does not tell them apart. `nearer_ok` (a track that takes over after a dropout,
+        the readings span_s apart): nearer by as much as the object could have come closer unseen (its held cue then
+        follows it: _MAX_SPEED of its identity plus the user's walk, at least that step); but half the step farther is
+        another object (a person said at 3.8 m leaves; one 4.4 m away walking up where they stood is new: treating a
+        farther object as new costs a repeat, inheriting a nearer one's memory a late warning), and so is one nearer than
+        anything could have come (a chair 2 m away where one 6 m away vanished half a second before)."""
         g = self.gate_cfg
         if r_new is None or r_old is None:
             return True
         if nearer_ok:
-            return r_new - r_old < 0.5 * max(g.closer_m, g.closer_frac * r_old) - 1e-9
+            step = max(g.closer_m, g.closer_frac * r_old)
+            if r_new - r_old >= 0.5 * step - 1e-9:
+                return False
+            v = _MAX_SPEED.get(ident[1] if ident is not None else "", 0.0) + _WALK_MPS
+            return r_old - r_new <= max(step, v * max(0.0, span_s)) + 1e-9
         return abs(r_new - r_old) < max(g.closer_m, g.closer_frac * min(r_new, r_old)) - 1e-9
 
     @staticmethod
@@ -1232,24 +1583,31 @@ class AnnouncementGate:
                 if not (in_sector(angle, sector_of(s.angle, g.sector_deg), g.sector_deg, g.sector_hyst_deg)
                         or abs(angle - s.angle) <= 2 * g.sector_hyst_deg):
                     continue
-                if not self._same_range(self._range_now(trk), self._range_now(s.trk), nearer_ok=True):
-                    continue                     # another object of the label, farther than where it vanished
+                if not self._same_range(self._range_now(trk), self._range_now(s.trk), nearer_ok=True,
+                                        span_s=t - s.trk.last_seen, ident=ident):
+                    continue                     # another object of the label: farther, or nearer than it could have come
                 key = (s.t, -abs(angle - s.angle))
                 if best is None or key > best[0]:
                     best = (key, tid, s)
             if best is None:
-                self._seen[trk.track_id] = _Seen(ident, angle, t, trk, 0, trk.first_seen, t)
+                hist = trk.bbox_history
+                c0 = bbox_center(hist[0][1] if hist else trk.bbox)
+                self._seen[trk.track_id] = _Seen(ident, angle, t, trk, 0, trk.first_seen, t, c0=c0)
                 continue
             _, old, s = best
             del self._seen[old]                  # one successor per track
             self._seen[trk.track_id] = _Seen(ident, angle, t, trk, s.carried + s.trk.hits, min(s.first, s.trk.first_seen), t,
-                                             trk.first_seen - s.trk.last_seen, self._range_now(s.trk), ((old,) + s.pred)[:8])
+                                             trk.first_seen - s.trk.last_seen, self._range_now(s.trk), ((old,) + s.pred)[:8],
+                                             s.c0, s.moved)
             new = trk.track_id
             if old in self._pending and new not in self._pending:
                 cue, t_held, a0, _ = self._pending.pop(old)
                 self._pending[new] = (cue, t_held, a0, True)
             if old in self._held and new not in self._held:
                 self._held[new] = self._held.pop(old)
+                if old in self._held_ref:
+                    self._held_ref[new] = self._held_ref.pop(old)
+            self._lost_due.pop(old, None)        # (back in view: the rescue judges the held cue on what it sees)
             if old in self._approach and new not in self._approach:
                 self._approach[new] = self._approach.pop(old)
             for es in self._mem.values():        # (its memory entries are adopted when it is next judged: _lookup)
@@ -1259,8 +1617,54 @@ class AnnouncementGate:
         for tid, trk in visible.items():
             s = self._seen[tid]
             s.angle, s.t, s.trk = self.cam.angle_deg_from_u(bbox_center(trk.bbox)[0]), t, trk
+            for _, b in list(trk.bbox_history)[-6:] or [(t, trk.bbox)]:   # (the frames since the last decision)
+                c = bbox_center(b)
+                s.moved = max(s.moved, math.hypot(c[0] - s.c0[0], c[1] - s.c0[1]))
         for tid in [k for k, s in self._seen.items() if k not in visible and t - s.t > g.switch_gap_s + 1e-9]:
             del self._seen[tid]
+
+    def _detach_jumps(self, visible: Dict[int, Track], t: float) -> None:
+        """A track whose range jumped farther across a dropout (_range_jump: the IoU tracker matched another object that
+        stepped in where the first one stood, within its max_age) is not what was said about it before: the memory
+        entries said about it before the jump let go of it, as if its object had left view (module docstring:
+        Identity), so the newcomer's first cue is judged as new, not as a repeat of a cue about someone else."""
+        for tid, trk in visible.items():
+            j = self._range_jump(trk)
+            if j is None or j <= self._jumps.get(tid, -math.inf) + 1e-9:
+                continue
+            self._jumps[tid] = j
+            for es in self._mem.values():
+                for e in es:
+                    if e.t < j - 1e-9 and (e.track_id == tid or tid in e.tids):
+                        e.tids.discard(tid)
+                        if e.track_id == tid:
+                            e.track_id = -1      # its object left view: no track continues it
+        for tid in [k for k in self._jumps if k not in visible and k not in self._seen]:
+            del self._jumps[tid]
+
+    def _range_jump(self, trk: Track) -> Optional[float]:
+        """When the track's range last jumped farther (within the last release_span_s) by half the `closer` step (as
+        _same_range: a successor that much farther is another object), or None. Medians of up to 3 samples on each
+        side, so box jitter is not a jump. Across a dropout (samples jump_gap_s or more apart), or from one frame to the
+        next when all 3 samples after are farther than all 3 before by more than the object could move away in that
+        time (_AWAY_MPS, else _MAX_SPEED: the user walking on only brings it nearer): another person stepping in where
+        the first stood as they leave, with no gap the tracker could see (an occlusion handover), is a step, not a
+        walk."""
+        g = self.gate_cfg
+        rs = self._sample_ranges(trk)
+        ident = self._identity_of(trk)[1]       # (walking on, the user only brings it nearer)
+        v = _AWAY_MPS.get(ident, _MAX_SPEED.get(ident, 0.0))
+        for k in range(len(rs) - 1, 0, -1):
+            t0, t1 = rs[k - 1][0], rs[k][0]
+            if rs[-1][0] - t1 > g.release_span_s + 1e-9:
+                break
+            before, after = [r for _, r in rs[max(0, k - 3):k]], [r for _, r in rs[k:k + 3]]
+            step = _med(after) - _med(before) >= 0.5 * max(g.closer_m, g.closer_frac * _med(before)) - 1e-9
+            if t1 - t0 >= g.jump_gap_s - 1e-9:
+                return t1 if step else None
+            if step and len(before) == 3 and len(after) == 3 and min(after) - max(before) >= v * (t1 - t0) - 1e-9:
+                return t1
+        return None
 
     def _commit(self, cue: Cue, trk: Optional[Track], e: Optional[_Said], t: float, reason: str = "") -> None:
         g = self.gate_cfg
@@ -1290,7 +1694,7 @@ class AnnouncementGate:
             e.bbox = trk.bbox if trk is not None else e.bbox
         e.tids.add(cue.track_id)
         e.cue = cue
-        e.rng = self._range_now(trk) if trk is not None else dist
+        e.rng = self._smoothed_range(trk) if trk is not None else dist
         s = self._seen.get(cue.track_id)
         if s is not None:
             s.gap = 0.0                          # said since it came back: `reacquired` is used up
@@ -1313,6 +1717,8 @@ class AnnouncementGate:
             del self._crit_haptic[k]
         for k in [k for k, v in self._held.items() if t - v[1] > self._held_keep(v[2])]:
             del self._held[k]
+        for k in [k for k in self._held_ref if k not in self._held]:
+            del self._held_ref[k]
         for k in [k for k, v in self._approach.items() if t - v > g.approach_keep_s]:
             del self._approach[k]
 
@@ -1401,8 +1807,13 @@ class AnnouncementGate:
                     best_op = (h, w, tid)
             if self._warm_static(w, g.bg_min_span_s):
                 dref = _med(w.dists) if w.dists else None
-                once = self._in_path_near(w.label, w.bbox, dref, w.path)
-                said = once and any(e.track_id == tid for es in self._mem.values() for e in es)
+                # said once before it is background: in the walking path and near, or a person / animal that walked into
+                # place before this warm-up (it arrived: a rebaseline must not silence an arrival nobody heard of)
+                s = self._seen.get(tid)
+                arrived = (w.identity[1] in SELF_MOVING and s is not None and s.trk is w.trk
+                           and s.moved > g.bg_release_disp)
+                once = self._in_path_near(w.label, w.bbox, dref, w.path) or arrived
+                said = once and any(e.track_id == tid or tid in e.tids for es in self._mem.values() for e in es)
                 bg.append((tid, w, once, said))
         op_tid = best_op[2] if best_op is not None else None
         for tid, w, once, said in bg:
@@ -1494,6 +1905,16 @@ class AnnouncementGate:
                 rec.rest.clear()
                 continue
             rec.last_trk = trk
+            if rec is not self._operator and not rec.released:
+                jump = self._jump_after_gap(trk) or ("a step farther with no gap (another object in its place)"
+                                                     if self._range_jump(trk) is not None else "")
+                if jump or self._farther(trk, rec):
+                    # another object stepped in where it stood: let go now, not only when a cue about it is judged (the
+                    # jump leaves the 1 s window before the scheduler may name the newcomer)
+                    drop, ref = self._drop(trk, rec)
+                    self._release(rec, trk, t, approach=False, recapture=True,
+                                  why=jump or f"{-(drop or 0.0):.2f} m farther than its {ref or 0.0:.1f} m reference")
+                    continue
             if rec is self._operator and rec.released and rec.approach:
                 r = self._range_of(trk, rec)
                 if r is not None:
@@ -1614,6 +2035,25 @@ class AnnouncementGate:
             for tid in rec.track_ids | {trk.track_id}:
                 self._approach[tid] = t
 
+    def _in_path(self, trk: Track, max_m: float = math.inf) -> bool:
+        """In the walking path (path_prob >= critical_path) or its box in the walking corridor, nearer than max_m."""
+        rng = self._range_now(trk)
+        if rng is not None and rng >= max_m:
+            return False
+        if trk.path_prob >= self.gate_cfg.critical_path:
+            return True
+        return rng is not None and self._in_corridor(trk.label, trk.bbox, rng)
+
+    def _path_arrival(self, trk: Track) -> bool:
+        """Did the track's object come into view after this warm-up began (by more than warm_hold_span_s; counting the
+        tracks it took over from)? Then it is not part of the scene the warm-up learns: someone stepping into the path a
+        second after the camera started (or after a rebaseline) is not held for the warm-up."""
+        if self._t0 is None:
+            return False
+        s = self._seen.get(trk.track_id)
+        first = min(s.first, trk.first_seen) if s is not None and s.trk is trk else trk.first_seen
+        return first > self._t0 + self.gate_cfg.warm_hold_span_s + 1e-9
+
     def _match_background(self, trk: Track, t: float, visible: Optional[Dict[int, Track]] = None) -> Optional[_Background]:
         """The background record of this track (its own, else an unreleased one of the same identity its box overlaps
         at about its range, now and where the track was first seen, while its own track is out of view: an id switch;
@@ -1712,6 +2152,27 @@ class AnnouncementGate:
         drop, ref = self._drop(trk, rec, first=first)
         return drop is not None and ref is not None and -drop >= max(g.closer_m, g.closer_frac * ref) - 1e-9
 
+    def _background_due(self, trk: Track, rec: _Background, t: float) -> bool:
+        """A background object in the walking path, not said for hold_moving_s (or never), that came release_m nearer
+        than where it was last said (or than where it rests): the scheduler's cue about it is judged like any other's
+        (_hold_s: a reminder; or new). Its approach release needs max(release_m, release_frac x range) (a desk user's
+        lean is 0.25 m): an approach that started as it went out of view, or in a flicker, may never show that much
+        while in view. (While the rescue judges a cue held about it as stale: from where it was when the scheduler
+        offered it, if that is farther, as _closing_in_path.)"""
+        g = self.gate_cfg
+        e = self._own_entry(trk.track_id)
+        if e is not None:
+            if t - e.t < g.hold_moving_s - 1e-9:
+                return False
+            ref = e.rng
+        else:
+            ref = self._drop(trk, rec)[1]
+        if ref is None:
+            return False
+        # (closing at the `closing` step from there, by its latest sample when it closes fast: a median lags)
+        return (self._path_nearer(trk, ref if self._closing_ref is None else max(ref, self._closing_ref))
+                or self._closing_in_path(trk, ref))
+
     def _background_reason(self, trk: Track, t: float, visible: Optional[Dict[int, Track]] = None) -> Optional[str]:
         """'warmup' / 'background' / 'operator' when the cue must be held for that reason, else None. Releases a
         background / operator track that closes in (an approach release: its next cue passes)."""
@@ -1722,8 +2183,12 @@ class AnnouncementGate:
             w = self._warm.get(trk.track_id)
             if w is None:
                 return None
-            static = (g.background and self._warm_static(w, g.warm_hold_span_s) and not self._closing_now(trk)
-                      and not self._in_path_near(trk.label, trk.bbox, trk.distance_m, trk.path_prob))
+            # (in the walking path: only once seen static for bg_min_span_s, never an arrival since the warm-up began)
+            in_path = self._in_path(trk)
+            static = (g.background and self._warm_static(w, g.bg_min_span_s if in_path else g.warm_hold_span_s)
+                      and not self._closing_now(trk)
+                      and not self._in_path_near(trk.label, trk.bbox, trk.distance_m, trk.path_prob)
+                      and not (in_path and self._path_arrival(trk)))
             op_like = g.operator_filter and self._operator_like(w, trk.bbox)
             return "warmup" if (static or op_like) else None
         if g.operator_filter and self._match_operator(trk, visible):
@@ -1743,10 +2208,12 @@ class AnnouncementGate:
                 if math.hypot(c[0] - c0[0], c[1] - c0[1]) > g.bg_release_disp:
                     self._release(b, trk, t, approach=False, why="moved")
                     return None
-                jump = self._jump_after_gap(trk)
+                jump = self._jump_after_gap(trk) or ("a step farther with no gap (another object in its place)"
+                                                     if self._range_jump(trk) is not None else "")
                 if self._farther(trk, b) or jump:
-                    # another object the tracker matched to it after a short dropout (it stepped in where the background
-                    # object stood), or it moved away: not at its place; held again once it rests (recapture_s)
+                    # another object the tracker matched to it after a short dropout, or as the first one left (it stepped
+                    # in where the background object stood), or it moved away: not at its place; held again once it
+                    # rests (recapture_s)
                     drop, ref = self._drop(trk, b)
                     self._release(b, trk, t, approach=False, recapture=True,
                                   why=jump or f"{-(drop or 0.0):.2f} m farther than its {ref or 0.0:.1f} m reference")
@@ -1754,34 +2221,12 @@ class AnnouncementGate:
                 b.bbox = trk.bbox
                 if b.say_once and not b.said:
                     return None              # in the walking path and near: said once before it is silenced
+                if self._background_due(trk, b, t):
+                    return None              # in the walking path, not said for hold_moving_s: judged as any object
                 return "background"
         return None
 
-    # ---- inner-policy bookkeeping ---------------------------------------------------------------------------
-    def _refund(self, cue: Cue) -> None:
-        """A held cue is never spoken: give its seconds back to the scheduler's speech budget (P-CACS token bucket).
-        The scheduler's 'announced' marks on the track stay, so its own recent-block and novelty decay keep it from
-        offering the same repeat or background object at every step and starving the other candidates."""
-        inner = self._inner
-        if cue.action in SPEECH_ACTIONS and isinstance(getattr(inner, "budget", None), (int, float)):
-            cap = getattr(getattr(inner, "cfg", None), "budget_capacity_s", None)
-            b = inner.budget + float(cue.duration_s or 0.0)
-            inner.budget = min(cap, b) if isinstance(cap, (int, float)) else b
-
-    def _charge(self, cue: Cue, trk: Track, t: float) -> None:
-        """The gate said a cue itself (rescue): charge the scheduler's speech budget again and mark the track as
-        announced, as the scheduler does for its own cues."""
-        inner = self._inner
-        if cue.action in SPEECH_ACTIONS and isinstance(getattr(inner, "budget", None), (int, float)):
-            cap = getattr(getattr(inner, "cfg", None), "budget_capacity_s", None)
-            b = inner.budget - float(cue.duration_s or 0.0)
-            inner.budget = max(-cap, b) if isinstance(cap, (int, float)) else b
-        trk.last_announced, trk.last_announced_bbox = t, trk.bbox
-        trk.announce_count += 1
-        ad = getattr(inner, "announced_dist", None)
-        if isinstance(ad, dict) and trk.distance_m is not None:
-            ad[trk.track_id] = trk.distance_m
-
+    # ---- saying a cue again ----------------------------------------------------------------------------------
     def _refreshed(self, cue: Cue, angle0: float, trk: Track, t: float) -> Cue:
         """A copy of an earlier cue for saying now: its distance and direction phrases follow the object, and it is
         about the object's current track (after an id switch, the successor)."""

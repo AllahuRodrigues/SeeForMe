@@ -149,6 +149,24 @@ def test_scene_summary_and_session_log(tmp_path):
     assert "cue" in kinds and "mode" in kinds
 
 
+def test_scene_summary_says_one_object_once():
+    """make live-check: "what's around me" said "A person slightly right, about 2.5 meters." twice: two overlapping
+    tracks of one person. Same label, direction and distance with overlapping boxes is one object; two people side by
+    side that read the same are counted; the "more" count does not count a duplicate either."""
+    a = person(1, 0.0, z=2.5, x=0.6)
+    b = person(2, 0.0, z=2.5, x=0.65)                    # the same person, a second track
+    assert scene_summary([a, b], CAM) == "A person slightly right, about 2.5 meters."
+    c = person(3, 0.0, z=2.5, x=1.05)                    # another person beside them, same phrase, no overlap
+    s = scene_summary([a, b, c], CAM)
+    assert s.startswith("2 people slightly right, about 2.5 meters.") and s.count("person") == 0, s
+    far = [person(10 + i, 0.0, z=6 + i, x=-2.0 + 2.0 * i) for i in range(3)]
+    s = scene_summary([a, b] + far + [person(20, 0.0, z=8, x=2.05)], CAM)    # 20 is a second track of far[2]
+    assert s.count("slightly right, about 2.5 meters") == 1 and s.endswith("1 more person."), s
+    t1 = person(30, 0.0, z=1.5, kind="text", text="EXIT")
+    t2 = person(31, 0.0, z=1.5, x=0.02, kind="text", text="EXIT")
+    assert scene_summary([t1, t2], CAM) == "A sign that says EXIT ahead, about 1.5 meters."
+
+
 # ---- the audio channel: a cane cue or a spoken reply never holds a safety cue back --------------------------------
 # The pipeline's channel (seeforme/eval/runner.SpeechChannel, as LivePipeline uses it): what plays holds it, a scheduler
 # sees it busy, an interrupt cuts it. The user walks at a wall (the cane says "Obstacle ahead" at 3.0 s, severity 0.7)
@@ -175,10 +193,12 @@ class ChannelRule(NearestFirst):
 
 
 def drive_channel(policy, tracks_fn, cane=True, reply=None, gate=False, goal=None, seconds=8.0,
-                  walk=lambda t: max(0.3, 3.5 - 0.6 * t)):
+                  walk=lambda t: max(0.3, 3.5 - 0.6 * t), aid="none"):
     """Every cue the pipeline would act on: frames at 10 fps, a decision every 0.5 s, depth maps at 5 per s of a wall
-    the user walks at (walk(t) metres; None: no depth). reply=(t, text): a reply put on the channel at t."""
-    ctl = LiveController(policy, setup="handheld", gate=gate, cane=cane, goal_tags=goal)
+    the user walks at (walk(t) metres; None: no depth). reply=(t, text): a reply put on the channel at t. The cane
+    says "Obstacle ahead" at 3.0 s without an aid (2 m), at 2.0 s with a cane (2.5 m): aid "none" keeps the timings
+    these channel tests were written for."""
+    ctl = LiveController(policy, setup="handheld", gate=gate, cane=cane, goal_tags=goal, aid=aid)
     chan = SpeechChannel(1.2, 0.35)
     out, next_dec, depth = [], 0.0, None
     for i in range(int(seconds * 10)):
@@ -213,14 +233,15 @@ GOAL_CHAIR = lambda appear: lambda t: [track(6, "chair", (0.05, 0.5, 0.2, 0.8), 
 
 
 @pytest.mark.parametrize("gate", [False, True])
-@pytest.mark.parametrize("appear", [3.5, 4.0])
+@pytest.mark.parametrize("aid,appear", [("none", 3.5), ("none", 4.0), ("cane", 2.5), ("cane", 3.0)])
 @pytest.mark.parametrize("what", ["in-path chair", "FIND goal"])
-def test_a_spoken_cane_cue_never_holds_a_safety_cue_back(what, appear, gate):
+def test_a_spoken_cane_cue_never_holds_a_safety_cue_back(what, aid, appear, gate):
     """Reviewer repro (critical), real P-CACS: the cane's "Obstacle ahead" (3.0 s) held the channel at severity 0.7,
-    which P-CACS does not cut for a non-critical cue, so an in-path chair appearing at 3.5 s was said at 5.0 s."""
+    which P-CACS does not cut for a non-critical cue, so an in-path chair appearing at 3.5 s was said at 5.0 s. The
+    same with the default cane aid, whose cue comes earlier (2.5 m, at 2.0 s)."""
     fn, goal = (IN_PATH_CHAIR(appear), None) if what == "in-path chair" else (GOAL_CHAIR(appear), ["chair"])
-    with_cane, ctl = drive_channel(PCACSPolicy(), fn, cane=True, gate=gate, goal=goal)
-    bare, _ = drive_channel(PCACSPolicy(), fn, cane=False, gate=gate, goal=goal)
+    with_cane, ctl = drive_channel(PCACSPolicy(), fn, cane=True, gate=gate, goal=goal, aid=aid)
+    bare, _ = drive_channel(PCACSPolicy(), fn, cane=False, gate=gate, goal=goal, aid=aid)
     spoken_cane = [c for c in with_cane if c.policy == CANE_POLICY and c.action != "haptic" and c.t < appear]
     assert spoken_cane and appear - spoken_cane[-1].t <= 1.0          # the cane's message was still playing
     assert _first(bare, "chair").t == appear

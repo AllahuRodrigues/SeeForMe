@@ -14,7 +14,10 @@
 //              (max(1 m, 25%): metric depth, else the box side the frame edge cuts in neither), never while both were in
 //              view as separate boxes, and only if the old object had not moved away since it was said (by that same
 //              margin). One that walked off and vanished, and another coming from there, are two objects: the second is
-//              new to the user, so a memory of the first must not hold it.
+//              new to the user, so a memory of the first must not hold it. The same continuity (first seen where and soon
+//              after the old one was last seen, overlapping it, at about its range) decides whether a new track joins a
+//              background record or is the desk user; what its box does later does not matter, so a stranger who walks
+//              up into the user's place is never the user.
 //
 // Safety principle: the gate only removes cues that carry no new safety information. It never makes a warning about an
 // approaching, in-path, vehicle or FIND-goal object later than the bare scheduler would (allowance: one 0.5 s decision
@@ -40,16 +43,22 @@
 //   interrupt   the scheduler cuts in for it and it moves or approaches, at most once per object every 2 s
 //   haptic      at most once per object and sector every 2 s
 // and it is held as
-//   unconfirmed fewer than 3 matches (or 2 spanning 0.15 s): kept by identity for up to 1.5 s and said once a track of that
-//               identity is confirmed, even if the track flickered or switched id in between
+//   unconfirmed fewer than 3 matches (or 2 spanning 0.15 s): kept by identity for up to 3 s and said once a track of that
+//               identity is confirmed, even if the track flickered or switched id in between. Under heavy flicker (each
+//               sighting a new id) the matches of its predecessors at the same place count, and a sighting within 0.8 s
+//               stands in for a track out of view at the decision; a cue held over a decision is recomposed
 //   warmup / background   camera still: an object seen in >= 3 samples over >= 1 s without closing is background until
 //               it measurably closes in. Vehicles and bikes never, FIND goals never, an object in the path within 3 m is
-//               said once first
+//               said once first. A record's track clearly farther than its place (max(1 m, 25%)) is another object
 //   operator    desk: when the camera is still at start-up, a centred person within 1.2 m (no depth: a box taller than 60%
-//               of the frame) is the user, held until they measurably come closer (smoothed drop of max(0.35 m, 15%))
+//               of the frame) is the user, held until they measurably come closer (smoothed drop of max(0.35 m, 15%)).
+//               Another track is the user only by continuity (an id switch; a duplicate box that overlapped the user's
+//               from its first sighting) or once it has rested 3 s at the user's place and range (back from a break)
 //   repeat      none of the above
 // Rescue: when an object the gate held (or said) qualifies later and the scheduler does not offer it again, the gate says
-// it itself with a freshly composed message; a held cue's seconds go back to the scheduler's speech budget.
+// it itself with a freshly composed message; a held cue's seconds go back to the scheduler's speech budget. A cue held as
+// background, the user or warm-up stays rescuable for 20 s, for an approach or a critical TTC only: a learned scheduler
+// may offer an object once and never again.
 //
 // "Measured" TTC / speed: the track has metric depth (depthConf >= 0.4) with >= 4 depth samples spanning >= 1 s. Without
 // depth the tracker assumes the user walks at 1 m/s, so a static person 3 m in front of a laptop gets "TTC 2.6 s".
@@ -83,11 +92,12 @@ export interface GateConfig {
   recapture: number; restSpreadM: number; restSizeFrac: number;
   nodepthNearM: number; nodepthApproach: number; nodepthGrow: number; nodepthBottomFrac: number;
   heldKeep: number; approachKeep: number;
+  silenceKeep: number;      // a cue held as background / the user / warm-up is said when its object approaches within this
 }
 
 export const GATE_DEFAULTS: GateConfig = {
   holdStatic: 20, holdMoving: 8, holdGoal: 8, closerM: 1.0, closerFrac: 0.25, sectorDeg: 20, sectorHystDeg: 5,
-  minHits: 3, confirmAge: 0.15, pending: 1.5, hapticGap: 2, interruptGap: 2,
+  minHits: 3, confirmAge: 0.15, pending: 3, hapticGap: 2, interruptGap: 2,
   criticalTtc: 2.0, criticalPath: 0.5, criticalGap: 2.0, criticalWorseTtc: 0.5, criticalWorseM: 0.3,
   minGap: 2.5, switchGap: 5, switchDist: 0.3, lostS: 0.8, movingSpeed: 0.3, approachTtc: 6, approachMin: 0.5,
   warmup: 3, staticDisp: 0.03, staticSizeFrac: 0.2, warmMinSamples: 3, warmHoldSpan: 0.4, bgMinSpan: 1.0,
@@ -96,7 +106,7 @@ export const GATE_DEFAULTS: GateConfig = {
   releaseM: 0.35, releaseFrac: 0.15, releaseSmooth: 0.3, releaseFast: 0.6, releaseMps: 0.25, releaseSpan: 1.0, releaseTtc: 3.0,
   recapture: 3, restSpreadM: 0.15, restSizeFrac: 0.08,
   nodepthNearM: 2.0, nodepthApproach: 0.3, nodepthGrow: 0.10, nodepthBottomFrac: 0.15,
-  heldKeep: 3, approachKeep: 5,
+  heldKeep: 3, approachKeep: 5, silenceKeep: 20,
 };
 
 /** What the gate needs from the scheduler it wraps (PCACS and LearnedScheduler both have these). */
@@ -118,6 +128,8 @@ const SILENCE = new Set(["warmup", "background", "operator"]);
 const RESCUE_HELD: Record<string, number> = { critical: 5, approach: 4, successor: 4, near: 3, closing: 3, reacquired: 2, new: 1 };
 const RESCUE_SAID: Record<string, number> = { approach: 4, successor: 4, near: 3 };
 const RESCUE_SAID_APPROACH: Record<string, number> = { critical: 5, ...RESCUE_SAID };
+// a cue held as background / the user / warm-up more than heldKeep ago (up to silenceKeep): only when its object approaches
+const RESCUE_SILENCED: Record<string, number> = { critical: 5, approach: 4 };
 const EDGE = 0.01;   // a box side within this of the frame edge is cut off (its size says nothing)
 const HIST_S = 3.0;  // per-track samples the gate keeps (its own, frame-rate independent: the tracker keeps 15 boxes)
 
@@ -207,8 +219,9 @@ interface RestSample { t: number; d: number | null; w: number | null; h: number 
 interface Rec {
   ident: Ident; kind: string; label: string; bbox0: BBox; bbox: BBox; distRef: number | null; wRef: number | null; hRef: number | null; aRef: number | null;
   trackIds: Set<number>; released: boolean; sayOnce: boolean; said: boolean; approach: boolean; rest: RestSample[];
+  last: Sample | null;   // its object's last sighting (any of its tracks): where and when a successor must appear
 }
-interface Pending { cue: Cue; t: number; ident: Ident; sector: Sector; bbox: BBox | null }
+interface Pending { cue: Cue; t: number; ident: Ident; sector: Sector; bbox: BBox | null; z: number | null }
 interface Held { cue: Cue; t: number; reason: string; angle: number }
 interface Check { ok: boolean; reason: string; entry: Said | null; info: string }
 
@@ -231,6 +244,8 @@ export class AnnouncementGate {
   private approach = new Map<number, number>();
   private closingSince = new Map<number, number>();
   private hist = new Map<number, Sample[]>();
+  private first = new Map<number, Sample>();   // each track's first sighting (adoption tests: where did it come from?)
+  private seen = new Map<number, Track>();     // tracks seen in the last few seconds (confirmation across flicker)
   private rescuing = false;
   private t0: number | null = null;
   private warm = new Map<number, Warm>();
@@ -242,7 +257,7 @@ export class AnnouncementGate {
 
   reset() {
     this.mem.clear(); this.hapticT.clear(); this.critHaptic.clear(); this.pending.clear(); this.held.clear(); this.approach.clear();
-    this.closingSince.clear(); this.hist.clear(); this.releases = []; this.stats = { passed: 0, held: 0, rescued: 0 }; this.last = null; this.verdicts = [];
+    this.closingSince.clear(); this.hist.clear(); this.first.clear(); this.seen.clear(); this.releases = []; this.stats = { passed: 0, held: 0, rescued: 0 }; this.last = null; this.verdicts = [];
     this.rebaseline();
   }
   /** Forget the background / desk user and restart the warm-up (the camera became still somewhere new). Memory stays. */
@@ -275,11 +290,15 @@ export class AnnouncementGate {
       if (!h) { h = []; this.hist.set(tr.id, h); }
       const ts = Math.min(t, tr.lastSeen);
       if (h.length && ts <= h[h.length - 1].t + 1e-9) continue;
-      h.push({ t: ts, bbox: tr.bbox, z: tr.depthConf >= 0.4 && tr.distance != null ? tr.distance : null });
+      const smp: Sample = { t: ts, bbox: tr.bbox, z: tr.depthConf >= 0.4 && tr.distance != null ? tr.distance : null };
+      h.push(smp);
       while (h.length > 2 && ts - h[0].t > HIST_S) h.shift();
+      if (!this.first.has(tr.id)) this.first.set(tr.id, smp);
+      this.seen.set(tr.id, tr);
+      for (const rec of this.operator ? [this.operator, ...this.bg] : this.bg) if (rec.trackIds.has(tr.id)) rec.last = smp;
       if (!this.warmDone) this.warmSample(tr, ts);
     }
-    for (const [id, h] of [...this.hist]) if (t - h[h.length - 1].t > 5) this.hist.delete(id);
+    for (const [id, h] of [...this.hist]) if (t - h[h.length - 1].t > 5) { this.hist.delete(id); this.first.delete(id); this.seen.delete(id); }
     if (!this.warmDone) {
       if (this.t0 == null && tracks.some((tr) => tr.misses === 0)) this.t0 = t;
       if (this.t0 != null && t >= this.t0 + this.cfg.warmup) this.finishWarmup();
@@ -377,7 +396,8 @@ export class AnnouncementGate {
       const prev = this.pending.get(ident.id);
       if (prev && prev.cue !== cue) this.refund(prev.cue);     // superseded by the newer cue for the same object
       const angle = trk ? this.angleOf(trk) : 0;
-      this.pending.set(ident.id, { cue, t: prev?.t ?? t, ident, sector: sectorOf(angle, this.cfg.sectorDeg), bbox: trk?.bbox ?? null });
+      this.pending.set(ident.id, { cue, t: prev?.t ?? t, ident, sector: sectorOf(angle, this.cfg.sectorDeg), bbox: trk?.bbox ?? null,
+        z: trk && trk.depthConf >= 0.4 ? trk.distance : null });
     } else if (!this.rescuing) {                                // (a rescued cue was refunded when it was first held)
       this.refund(cue);
       if (isSpeech(cue) && cue.source !== "cane") this.held.set(cue.trackId, { cue, t, reason: c.reason, angle: trk ? this.angleOf(trk) : 0 });
@@ -392,26 +412,42 @@ export class AnnouncementGate {
     for (const [key, p] of [...this.pending].sort((a, b) => b[1].cue.utility - a[1].cue.utility)) {
       if (t - p.t > this.cfg.pending + 1e-9) { this.pending.delete(key); this.refund(p.cue); continue; }
       if (taken(p.cue)) continue;                             // its channel is used at this decision: keep waiting
-      const trk = this.pendingTrack(p, visible);
-      if (!trk || !this.confirmed(trk)) continue;           // not in view at this decision (flicker): keep waiting
+      const trk = this.pendingTrack(p, visible, t);
+      if (!trk || !this.confirmed(trk)) continue;           // not seen at its place lately (flicker): keep waiting
       let action = p.cue.action;
       if (action === "interrupt" && !busy) action = "speak";
       else if (action === "speak" && busy) continue;         // wait for the channel
       this.pending.delete(key);
-      const out = this.judge({ ...p.cue, t, action, trackId: trk.id }, trk, visible, t, true);
+      // held for more than a decision: said as the object is now, not as it was
+      const base = isSpeech(p.cue) && t - p.cue.t > 0.75 ? this.refreshed(p.cue, trk, t) : p.cue;
+      const out = this.judge({ ...base, t, action, trackId: trk.id }, trk, visible, t, true);
       if (out) return out;
     }
     return null;
   }
-  private pendingTrack(p: Pending, visible: Map<number, Track>): Track | null {
+  /** The track a held-for-confirmation cue is about now: its own, else one of its identity in the same place and at
+   *  about the same range (an id switch); else, under flicker, the latest such track seen within lostS (out of view at
+   *  this decision only). */
+  private pendingTrack(p: Pending, visible: Map<number, Track>, t: number): Track | null {
+    const g = this.cfg;
     const own = visible.get(p.cue.trackId);
     if (own) return own;
+    const here = (tr: Track) => {
+      if (this.identityOf(tr, p.cue.identity ? p.cue : undefined).id !== p.ident.id || !inSector(this.angleOf(tr), p.sector, g.sectorDeg, g.sectorHystDeg)) return false;
+      if (!p.bbox) return true;
+      if (centreDist(p.bbox, tr.bbox) > g.switchDist) return false;
+      const r = this.rangePair({ t: p.t, bbox: p.bbox, z: p.z }, { t: tr.lastSeen, bbox: tr.bbox, z: tr.depthConf >= 0.4 ? tr.distance : null }, tr.label);
+      return !r || Math.abs(r[1] - r[0]) <= Math.max(g.closerM, g.closerFrac * r[0]);
+    };
     let best: Track | null = null, bestD = Infinity;
     for (const tr of visible.values()) {
-      if (this.identityOf(tr, p.cue.identity ? p.cue : undefined).id !== p.ident.id) continue;
-      if (!inSector(this.angleOf(tr), p.sector, this.cfg.sectorDeg, this.cfg.sectorHystDeg)) continue;
       const d = p.bbox ? centreDist(p.bbox, tr.bbox) : 0;
-      if (d <= this.cfg.switchDist && d < bestD) { best = tr; bestD = d; }
+      if (here(tr) && d < bestD) { best = tr; bestD = d; }
+    }
+    if (best) return best;
+    for (const tr of this.seen.values()) {
+      if (visible.has(tr.id) || t - tr.lastSeen > g.lostS + 1e-9 || tr.lastSeen < p.t - g.pending) continue;
+      if (here(tr) && (!best || tr.lastSeen > best.lastSeen)) best = tr;
     }
     return best;
   }
@@ -424,16 +460,17 @@ export class AnnouncementGate {
     for (const [tid, trk] of visible) {
       if (!this.confirmed(trk)) continue;
       const h = this.held.get(tid);
-      let src: Cue, heldFor: string | null;
-      if (h && t - h.t > 1e-9 && t - h.t <= g.heldKeep + 1e-9) { src = h.cue; heldFor = h.reason; }
-      else {
+      let src: Cue, heldFor: string | null, late = false;
+      if (h && t - h.t > 1e-9 && (t - h.t <= g.heldKeep + 1e-9 || (SILENCE.has(h.reason) && t - h.t <= g.silenceKeep + 1e-9))) {
+        src = h.cue; heldFor = h.reason; late = t - h.t > g.heldKeep + 1e-9;
+      } else {
         const e = this.ownEntry(tid);
         if (!e || !e.cue || e.cue.source === "cane") continue;
         src = e.cue; heldFor = null;
       }
       const cue = this.refreshed(src, trk, t);
       const c = this.check(cue, trk, visible, t);   // (may release it as approaching)
-      const allowed = heldFor != null ? RESCUE_HELD : this.approach.has(tid) ? RESCUE_SAID_APPROACH : RESCUE_SAID;
+      const allowed = heldFor != null ? (late ? RESCUE_SILENCED : RESCUE_HELD) : this.approach.has(tid) ? RESCUE_SAID_APPROACH : RESCUE_SAID;
       // "new" only for a cue held as background / the user / warm-up, or one another cue's channel crowded out
       if (!c.ok || !(c.reason in allowed) || (c.reason === "new" && !(heldFor != null && (SILENCE.has(heldFor) || heldFor === "channel")))) continue;
       // said by the gate unasked only when the user walks straight into it
@@ -517,7 +554,22 @@ export class AnnouncementGate {
     return { ok: false, reason: "repeat", entry: e, info: `same ${desc}, ${said}` };
   }
 
-  private confirmed(tr: Track) { return tr.hits >= this.cfg.minHits || (tr.hits >= 2 && tr.lastSeen - tr.firstSeen >= this.cfg.confirmAge - 1e-9); }
+  /** minHits matches, or 2 spanning confirmAge. Under heavy flicker each sighting may be a new track id that never gets
+   *  there by itself, so the tracker's matches of its predecessors count too: tracks of the same identity at the same
+   *  place (switchDist) that vanished before it appeared, within `pending`. */
+  private confirmed(tr: Track) {
+    const g = this.cfg;
+    const enough = (hits: number, span: number) => hits >= g.minHits || (hits >= 2 && span >= g.confirmAge - 1e-9);
+    if (enough(tr.hits, tr.lastSeen - tr.firstSeen)) return true;
+    let hits = tr.hits, t0 = tr.firstSeen, id: string | null = null;
+    for (const o of this.seen.values()) {
+      if (o === tr || o.lastSeen >= tr.firstSeen - 1e-9 || tr.firstSeen - o.lastSeen > g.pending || centreDist(o.bbox, tr.bbox) > g.switchDist) continue;
+      id ??= this.identityOf(tr).id;
+      if (this.identityOf(o).id !== id) continue;
+      hits += o.hits; t0 = Math.min(t0, o.firstSeen);
+    }
+    return enough(hits, tr.lastSeen - t0);
+  }
   private critical(tr: Track) {
     return this.measured(tr) && Number.isFinite(tr.ttc) && tr.ttc < this.cfg.criticalTtc && tr.pathProb >= this.cfg.criticalPath;
   }
@@ -788,7 +840,7 @@ export class AnnouncementGate {
     }
     for (const [k, v] of [...this.hapticT]) if (t - v > g.hapticGap) this.hapticT.delete(k);
     for (const [k, v] of [...this.critHaptic]) if (t - v[0] > g.criticalGap) this.critHaptic.delete(k);
-    for (const [k, v] of [...this.held]) if (t - v.t > g.heldKeep) this.held.delete(k);
+    for (const [k, v] of [...this.held]) if (t - v.t > (SILENCE.has(v.reason) ? g.silenceKeep : g.heldKeep)) this.held.delete(k);
     for (const [k, v] of [...this.approach]) if (t - v > g.approachKeep) this.approach.delete(k);
   }
 
@@ -834,7 +886,8 @@ export class AnnouncementGate {
     const half = Math.max(1, Math.floor(w.n / 2));   // a reference size only from a side the frame rarely cut
     return { ident: w.ident, kind: w.kind, label: w.label, bbox0: w.bbox, bbox: w.bbox, distRef: w.depths.length ? med(w.depths) : null,
       wRef: w.widths.length >= half ? med(w.widths) : null, hRef: w.heights.length >= half ? med(w.heights) : null,
-      aRef: w.areas.length ? med(w.areas) : null, trackIds: new Set([tid]), released: false, sayOnce, said, approach: false, rest: [] };
+      aRef: w.areas.length ? med(w.areas) : null, trackIds: new Set([tid]), released: false, sayOnce, said, approach: false, rest: [],
+      last: this.hist.get(tid)?.at(-1) ?? null };
   }
   private finishWarmup() {
     const g = this.cfg;
@@ -950,10 +1003,29 @@ export class AnnouncementGate {
     this.releases.push([t, tr.id, `${rec === this.operator ? "user" : "background"} released: ${why}`]);
     if (approach) for (const id of new Set([...rec.trackIds, tr.id])) this.approach.set(id, t);
   }
+  /** A track's first sighting (the gate's own sample; the track itself when it predates the gate's history). */
+  private firstOf(tr: Track): Sample {
+    return this.first.get(tr.id) ?? { t: tr.firstSeen, bbox: tr.bbox, z: tr.depthConf >= 0.4 && tr.distance != null ? tr.distance : null };
+  }
+  /** Could a track first seen as `first` be the object last seen as `last` (a tracker id switch, a duplicate box)? It
+   *  appeared within switchGap of that sighting, overlapping it, at about its range (within max(m, frac x range); no
+   *  range evidence either way passes). Its box now does not matter: one that walks up into the old box later is
+   *  another object. */
+  private continues(last: Sample | null, first: Sample, label: string, m: number, frac: number, minIou = 0.3): boolean {
+    if (!last || first.t - last.t > this.cfg.switchGap + 1e-9 || iou(last.bbox, first.bbox) < minIou) return false;
+    const r = this.rangePair(last, first, label);
+    return !r || Math.abs(r[1] - r[0]) <= Math.max(m, frac * r[0]) + 1e-9;
+  }
+  /** The background record this track belongs to: its own, or one of the same identity it continues (continues()). */
   private matchBackground(tr: Track): Rec | null {
+    const g = this.cfg;
     for (const b of this.bg) if (b.trackIds.has(tr.id)) return b;
-    const id = this.identityOf(tr).id;
-    for (const b of this.bg) if (!b.released && b.ident.id === id && iou(b.bbox, tr.bbox) >= 0.3) { b.trackIds.add(tr.id); return b; }
+    const id = this.identityOf(tr).id, first = this.firstOf(tr);
+    for (const b of this.bg) {
+      if (b.released || b.ident.id !== id || !this.continues(b.last, first, b.label, g.closerM, g.closerFrac)) continue;
+      b.trackIds.add(tr.id);
+      return b;
+    }
     return null;
   }
   private matchOperator(tr: Track, visible: Map<number, Track>): boolean {
@@ -961,15 +1033,33 @@ export class AnnouncementGate {
     if (!op || op.released || tr.kind !== "object" || this.identityOf(tr).key !== "person") return false;
     if (!op.trackIds.has(tr.id)) {
       const mine = [...op.trackIds].map((id) => visible.get(id)).filter((x): x is Track => !!x);
-      // the user's own track is in view: this is another person (a visitor), unless the two boxes are one detection twice
-      if (mine.length) return mine.some((m) => iou(m.bbox, tr.bbox) >= g.operatorDupIou);
+      const first = this.firstOf(tr);
+      // the user's own track is in view: this is another person (a visitor), unless the two boxes are one detection
+      // twice, which overlapped from its first sighting at the user's range (a visitor walking up in front does not)
+      if (mine.length) {
+        return mine.some((m) => iou(m.bbox, tr.bbox) >= g.operatorDupIou
+          && this.continues(this.hist.get(m.id)?.at(-1) ?? null, first, "person", g.releaseM, g.releaseFrac, g.operatorDupIou));
+      }
+      // a tracker id switch of the user: first seen where and when the user was last seen, at the user's range; or the
+      // user back from a break, settled at their place. A stranger who walks up to the camera after the user left was
+      // first seen farther away and is not at rest: never the user.
       const h = tr.bbox[3] - tr.bbox[1];
       if (!(h >= 0.8 * Math.min(g.operatorMinHeight, op.bbox[3] - op.bbox[1]) && Math.abs(center(tr.bbox)[0] - 0.5) <= g.operatorCenterTol + 0.1
-        && iou(op.bbox, tr.bbox) >= 0.3)) return false;
-      op.trackIds.add(tr.id);   // a tracker id switch of the user
+        && (this.continues(op.last, first, "person", g.releaseM, g.releaseFrac) || (iou(op.bbox, tr.bbox) >= 0.3 && this.settledAt(tr, op))))) return false;
+      op.trackIds.add(tr.id);
     }
     op.bbox = tr.bbox;          // follow the user as they shift in the chair
     return true;
+  }
+  /** At rest for `recapture` s (its own samples: atRest) at the record's range (within max(releaseM, releaseFrac)). */
+  private settledAt(tr: Track, rec: Rec): boolean {
+    const g = this.cfg, h = this.samples(tr), t1 = h[h.length - 1].t;
+    const ss = h.filter((x) => x.t >= t1 - g.recapture - 1e-9);
+    if (t1 - ss[0].t < g.recapture - 0.5 - 1e-9) return false;
+    const rest = ss.map((x) => ({ t: x.t, d: x.z, w: cutLR(x.bbox) ? null : x.bbox[2] - x.bbox[0], h: cutTB(x.bbox) ? null : x.bbox[3] - x.bbox[1], a: area(x.bbox), c: center(x.bbox) }));
+    if (!this.atRest(rest)) return false;
+    const [drop, ref] = this.drop(tr, rec);
+    return drop == null || ref == null || Math.abs(drop) <= Math.max(g.releaseM, g.releaseFrac * ref) + 1e-9;
   }
   /** "warmup" / "background" / "operator" when the cue must be held for that reason, else null. Releases a background
    *  object or the user that closes in (an approach release: its next cue passes). */
@@ -993,6 +1083,10 @@ export class AnnouncementGate {
       if (b && !b.released) {
         const why = this.releaseWhy(tr, b, t);
         if (why) { this.release(b, tr, t, true, why); return null; }
+        // clearly farther than its place: another object the tracker matched to its track after a dropout (or it walked
+        // off): an ordinary object from now on, news to the user since the background was never said
+        const [drop, ref] = this.drop(tr, b);
+        if (drop != null && ref != null && -drop >= Math.max(g.closerM, g.closerFrac * ref) - 1e-9) { this.release(b, tr, t, false, `${(-drop).toFixed(1)} m farther than its place`); return null; }
         const [cx, cy] = center(tr.bbox), [x0, y0] = center(b.bbox0);
         if (Math.hypot(cx - x0, cy - y0) > g.bgReleaseDisp) { this.release(b, tr, t, false, "moved"); return null; }
         b.bbox = tr.bbox;

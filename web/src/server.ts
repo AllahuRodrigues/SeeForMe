@@ -1,6 +1,6 @@
 // Optional Python server (server/app.py): metric depth (and the cane's obstacle summary), OCR, ElevenLabs TTS. The app
 // works without it.
-import { parseCane } from "./cane";
+import { DEFAULT_AID, parseCane, type TravelAid } from "./cane";
 import type { BBox, CaneSummary, Detection } from "./types";
 
 /** One /api/depth answer: per requested box [metres or null, confidence], and the cane summary (null: no depth map). */
@@ -28,13 +28,17 @@ export class ServerClient {
     return new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("frame encoding failed"))), "image/jpeg", 0.7));
   }
 
-  /** Metric depth for the boxes of this frame (an empty list still returns the cane summary). null: not answered. */
-  async depth(canvas: HTMLCanvasElement, boxes: BBox[], outdoor = false): Promise<DepthReply | null> {
+  /** Metric depth for the boxes of this frame (an empty list still returns the cane summary). null: not answered.
+   *  `walking`: the activity detector says the user walks (only then may the summary suggest a stop); `aid`: what the
+   *  user travels with (the summary's stop and path choice follow it; an older server ignores both fields). */
+  async depth(canvas: HTMLCanvasElement, boxes: BBox[], outdoor = false, opts: { walking?: boolean; aid?: TravelAid } = {}): Promise<DepthReply | null> {
     if (!this.available) return null;
     const fd = new FormData();
     fd.append("image", await this.frameBlob(canvas), "f.jpg");
     fd.append("boxes", JSON.stringify(boxes));
     fd.append("outdoor", String(outdoor));
+    fd.append("walking", String(!!opts.walking));
+    fd.append("aid", opts.aid ?? DEFAULT_AID);
     const r = await fetch(`${this.baseUrl}/api/depth`, { method: "POST", body: fd, signal: AbortSignal.timeout(1500) });
     if (!r.ok) return null;
     const j = await r.json() as { distances?: Array<[number | null, number]>; cane?: unknown };

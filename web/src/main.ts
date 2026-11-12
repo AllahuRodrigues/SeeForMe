@@ -5,7 +5,7 @@
 // adds class-agnostic obstacle cues from the server's depth map; voice.ts takes spoken commands.
 import { ActivityDetector, grayFromRGBA, type Activity } from "./activity";
 import { CameraSource } from "./camera";
-import { CaneConsumer } from "./cane";
+import { CaneConsumer, DEFAULT_AID, aidAdvice, isAid, type TravelAid } from "./cane";
 import { distancePhrase } from "./compose";
 import { AnnouncementGate } from "./gate";
 import { LearnedScheduler, loadLearnedRunner, type SchedulerMeta } from "./learned";
@@ -15,7 +15,8 @@ import { Speech, earcon, haptic } from "./speech";
 import { Camera, Tracker, area, iou } from "./tracker";
 import type { BBox, ChannelState, Cue, Detection, Track } from "./types";
 import { APP_VERSION } from "./version";
-import { HELP_TEXT, IDLE_TEXT, VoiceInput, findTarget, normaliseSpeech, parseCommand, type Command, type VoiceState } from "./voice";
+import { HELP_TEXT, IDLE_TEXT, VoiceInput, facingOfSide, findTarget, flipPlan, normaliseSpeech, parseCommand, sideOfFacing, switchedReply,
+  type CameraSide, type Command, type VoiceState } from "./voice";
 import { COCO } from "./yolo";
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -72,7 +73,7 @@ type Mode = "navigate" | "find" | "read" | "ask";
 const state = { mode: "navigate" as Mode, running: false, backend: "", model: "", detMs: 0, lastDecision: -1, t0: performance.now(), cues: [] as Cue[],
   textCache: [] as Detection[], lastOcr: -1e9, ocrT: -1e9, ocrFails: 0, depthOk: false, lastDepth: -1e9, outdoor: false, debug: true, lastCueT: -1e9,
   decisions: 0, silentDecisions: 0, speechSeconds: 0, held: 0,
-  activity: "unclear" as Activity, walkingSince: -1, desk: false, gateOn: true };
+  activity: "unclear" as Activity, walkingSince: -1, desk: false, gateOn: true, aid: DEFAULT_AID as TravelAid };
 const now = () => (performance.now() - state.t0) / 1000;
 
 // ---- detector worker -------------------------------------------------------
@@ -219,7 +220,7 @@ function startLearned() {
       learned = new LearnedScheduler(cfg, camModel, meta, run);
       learned.goalTags = [...linear.goalTags];
       learnedState = "ready";
-      schedInfo.textContent = `Learned scheduler: GRU + RL, model ${meta.version}, last ${meta.K} steps per track, silence bias ${meta.silence_bias.toFixed(2)}.`;
+      schedInfo.textContent = `Learned scheduler: GRU + RL trained on CampusBench (synthetic campus scenes, not EgoBlind video), model ${meta.version}, last ${meta.K} steps per track, silence bias ${meta.silence_bias.toFixed(2)}.`;
       noteModelVersion(meta.version);
       useScheduler(wanted, false);
     } catch (e) { learnedUnavailable(String((e as Error)?.message ?? e).split("\n")[0].slice(0, 120)); }
@@ -308,7 +309,7 @@ function requestDepth(dets: Detection[], t: number) {
   if (!boxes.length && !caneWanted()) return;
   state.lastDepth = t; depthInflight++;
   const seq = ++depthSeq;
-  server.depth(frameCanvas, boxes, state.outdoor)
+  server.depth(frameCanvas, boxes, state.outdoor, { walking: state.activity === "walking", aid: state.aid })
     .then((r) => {
       state.depthOk = r != null;
       if (!r || seq <= depthDone) return;   // an older answer never replaces a newer one
@@ -380,7 +381,7 @@ async function decideAndAct(tracks: Track[], t: number) {
   if (state.gateOn) {
     try {
       const caneCue = cane.propose({ t, tracks, navigating: state.mode === "navigate" || state.mode === "find", still: state.activity === "still",
-        desk: state.desk, channelBusy: busy, units: cfg.units });
+        desk: state.desk, channelBusy: busy, units: cfg.units, aid: state.aid });
       // a haptic stop from the cane goes first; otherwise the scheduler's cue, then the cane's. The gate judges them all
       // and lets one haptic and one speech cue through together, so a cane buzz never hides the scheduler's warning.
       const offered = caneCue?.action === "haptic" ? [caneCue, ...(proposed ? [proposed] : [])] : [...(proposed ? [proposed] : []), ...(caneCue ? [caneCue] : [])];
@@ -506,7 +507,7 @@ function renderBench() {
   $("bench-rows").innerHTML = bench.map((b) => {
     const v = Number(b[metric]);
     const cls = b.id === "pcacs_learned:rl" ? "hl" : b.id === "oracle" ? "ref" : "";
-    return `<div class="b ${cls}"><span class="n">${b.name}</span><span class="t"><i style="width:${Math.max(1, (v / max) * 100)}%"></i></span><span class="v">${v.toFixed(2)}</span></div>`;
+    return `<div class="b ${cls}"><span class="n">${esc(String(b.name))}</span><span class="t"><i style="width:${Math.max(1, (v / max) * 100)}%"></i></span><span class="v">${v.toFixed(2)}</span></div>`;
   }).join("") + `<p class="muted small">${lowerBetter ? "lower is better" : "higher is better"}</p>`;
 }
 fetch("/data/benchmark.json").then((r) => r.json()).then((b) => { bench = b; renderBench(); }).catch(() => {});
@@ -584,7 +585,10 @@ function answer(q: string): string {
   if (/clear|safe|path|way/.test(q)) {
     const h = near.filter((t) => t.pathProb > 0.5 && (t.distance ?? 99) < 6);
     if (h.length) return `Careful, there's ${list(h.slice(0, 2))} in your path.${caneNote() ? ` ${caneNote()}` : ""}`;
-    return caneNote() || "I did not detect anything in your path, but that does not mean it is clear. I can miss obstacles, so check with your cane.";
+    // the user's own aid ("I travel with"), as seeforme/live/commands.py answer()
+    const note = caneNote();
+    return note ? `${note} I can miss things, so ${aidAdvice(state.aid)}.`
+      : `I did not detect anything in your path, but that does not mean it is clear. I can miss obstacles, so ${aidAdvice(state.aid)}.`;
   }
   if (!near.length) return `I could not confirm objects in the current camera view. This does not mean the area is clear.${caneNote() ? ` ${caneNote()}` : ""}`;
   return near.length === 1 ? `I see ${desc(near[0])}.` : `I see ${near.length} things. The closest are ${list(near.slice(0, 3))}.`;
@@ -652,6 +656,21 @@ $("mute").onclick = () => setMuted(speech.enabled);
 const verbositySel = $<HTMLSelectElement>("verbosity");
 verbositySel.onchange = () => { cfg.verbosity = verbositySel.value as typeof cfg.verbosity; };
 $<HTMLSelectElement>("units").onchange = (e) => { cfg.units = (e.target as HTMLSelectElement).value as typeof cfg.units; };
+// "I travel with": what the depth map's obstacle cues leave to the user's own cane or dog (cane.ts); remembered. The
+// scheduler's cues about detected objects do not depend on it.
+const aidSel = opt<HTMLSelectElement>("aid");
+const AID_SAY: Record<TravelAid, string> = {
+  cane: "White cane: obstacle cues skip what your cane can reach and always warn at head height.",
+  "guide-dog": "Guide dog: obstacle cues only warn at head height and buzz to stop.",
+  none: "No cane or guide dog: every obstacle cue from the depth map is said.",
+};
+function setAid(aid: TravelAid, announce: boolean) {
+  state.aid = aid;
+  if (aidSel) aidSel.value = aid;
+  if (announce) { store.set("seeforme:aid", aid); setStatus(AID_SAY[aid]); }
+}
+{ const saved = store.get("seeforme:aid"); setAid(isAid(saved) ? saved : DEFAULT_AID, false); }
+if (aidSel) aidSel.onchange = () => setAid(isAid(aidSel.value) ? aidSel.value : DEFAULT_AID, true);
 voiceSel.onchange = async () => {
   if (voiceSel.value === "elevenlabs") await server.check();   // the server may have started since the page loaded
   pickVoice();
@@ -776,6 +795,16 @@ micBtn.onclick = talk;
 $("ask-voice").onclick = talk;
 document.addEventListener("visibilitychange", () => voice.setHidden(document.hidden));
 const VERBOSITY_SAY: Record<string, string> = { detailed: "More detail.", quiet: "Less detail.", balanced: "Normal detail." };
+/** The side the running camera reports (its track's facingMode), or null: a video file, or a camera that does not say. */
+const cameraSide = (): CameraSide | null => sideOfFacing(cam.stream?.getVideoTracks()[0]?.getSettings().facingMode);
+/** "Front camera" / "back camera": open the camera of that side and say which side the browser reports it is. */
+async function switchCamera(side: CameraSide) {
+  try { await cam.start({ facing: facingOfSide(side) }); }
+  catch { const msg = "I couldn't switch the camera. The camera is off."; stopCamera(msg); say(msg); return; }
+  if (!state.running) { cam.stop(); return; }   // paused while it opened: "The camera is off" must stay true
+  resetSession(); noteVideoShape();
+  say(switchedReply(side, cameraSide()));
+}
 /** Every recognised command does what its button does and gets a short spoken confirmation. */
 function runCommand(cmd: Command) {
   const a = cmd.arg ?? "";
@@ -784,9 +813,12 @@ function runCommand(cmd: Command) {
       if (state.running) { say("Already on."); break; }
       void startCamera().then((ok) => { if (!ok) say("I couldn't start the camera. Press Start."); });
       break;
-    case "pause":
-      if (state.running) { stopCamera("Paused."); say("Paused."); } else say("The camera is already off.");
+    case "pause": {
+      // unlike the terminal demo, where safety cues go on while paused, pausing here stops the camera: say so plainly
+      const msg = "Paused. The camera is off.";
+      if (state.running) { stopCamera(msg); say(msg); } else say("The camera is already off.");
       break;
+    }
     case "quit":
       if (state.running) stopCamera("Stopped.");
       say("Goodbye. Hands-free voice is off.");
@@ -814,10 +846,15 @@ function runCommand(cmd: Command) {
       if (a === "detailed" || a === "quiet" || a === "balanced") { verbositySel.value = a; cfg.verbosity = a; }
       say(VERBOSITY_SAY[a] ?? "Okay.");
       break;
-    case "flip":
-      if (!state.running) { say("The camera is off."); break; }
-      say("Switching camera."); $("flip").click();
+    case "flip": {
+      // "flip camera": the next camera; "front camera" / "back camera": that side, unless the camera already reports it
+      const plan = flipPlan(cmd.arg, state.running, cameraSide());
+      if (plan.act === "later") cam.facing = facingOfSide(a as CameraSide);   // the next Start opens that side
+      if (plan.say) say(plan.say);
+      if (plan.act === "next") $("flip").click();
+      if (plan.act === "switch") void switchCamera(a as CameraSide);
       break;
+    }
     case "wake": break;   // handled by the listener (follow-up window)
   }
 }

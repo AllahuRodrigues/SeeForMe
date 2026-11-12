@@ -2,130 +2,177 @@
 
 `make live` runs SeeForMe on the Mac's camera: YOLO detections and metric depth feed a tracker, the learned scheduler
 (`pcacs_learned:rl`, a GRU trained with imitation and reinforcement learning on CampusBench) proposes what to say, and
-the layer in `seeforme/live/` decides whether it is worth saying now. This page describes that layer, the commands,
-and what was measured. It is a demo for development and supervised testing, not a mobility aid: it can miss objects
-and cannot tell you that a path is clear.
+the layer in `seeforme/live/` decides whether it is worth saying now. You talk to it ("SeeForMe, find a door"), and a
+cane / guide-dog layer adds the obstacles the detector cannot name. This page describes that layer, the commands, and
+what was measured. It is a demo for development and supervised testing, not a mobility aid: it can miss objects and
+never tells you that a path is clear.
 
 ## Commands
 
 ```bash
-make live          # webcam, learned scheduler, repeat filter, activity-driven modes, spoken with the macOS voice
+make voice-setup   # once: vosk + sounddevice and the 40 MB offline English model in models/vosk/ (git-ignored)
+make live          # webcam, learned scheduler, repeat filter, modes, cane layer, voice commands, macOS voice
 make live-desk     # laptop webcam on a desk: you, in front of it, are never announced unless you come closer
 make live-raw      # the bare scheduler (no repeat filter, navigate mode), to hear the difference
 make live-pcacs    # the linear P-CACS rule instead of the learned scheduler
 make live-elevenlabs   # ElevenLabs voice (needs ELEVENLABS_API_KEY; falls back to the macOS voice)
 make live-help     # every option
-make live-check    # headless replay of a local clip: policy, decisions, cues, gate and mode summary
+make live-check    # headless replay of a local clip with scripted voice commands: policy, cues, replies, summary
+make live-safety   # the safety harness: 3,000 seeded scenes, gated vs bare (results/live/safety_harness.md)
 make eval-live     # re-measure the detector choice and the gate on EgoBlind development replays
+make eval-cane     # the cane layer per travel aid on EgoBlind development videos
+make eval-voice    # voice commands through the real recogniser (needs voice-setup and macOS say)
 ```
 
-Useful options (`scripts/run_live.py --help` lists all): `--setup desk|handheld|auto`, `--mode auto|navigate|scene|read|find`,
-`--goal "door"`, `--units ft`, `--no-gate`, `--no-depth`, `--depth-every N`, `--camera N` (`--list-cameras`), `--video clip.mp4`,
-`--no-log`.
+Useful options (`scripts/run_live.py --help` lists all): `--aid cane|guide-dog|none`, `--voice auto|on|off`, `--mic N`,
+`--recogniser snap|open|grammar|hybrid`, `--setup desk|handheld|auto`, `--mode auto|navigate|scene|read|find`,
+`--goal "door"`, `--units ft`, `--no-gate`, `--no-cane`, `--no-depth`, `--depth-every N`, `--camera N`
+(`--list-cameras`), `--video clip.mp4`, `--commands "2:find a chair;6:pause"`, `--no-log`.
 
-Keys while the window has focus:
+The window shows the camera picture exactly as captured, never mirrored: an object on your left is on the left of the
+picture and is announced as "left".
+
+## Talking to it
+
+Say **"SeeForMe"** and a command, in one breath or after a pause: a bare "SeeForMe" opens a 5 s window for one command.
+Common mis-hearings of the wake phrase ("see for me", "sea for me", "see four me", "C for me", "hey SeeForMe") count.
+Without the wake phrase nothing happens, so ordinary conversation near the laptop does not trigger commands. The
+microphone is ignored while SeeForMe is speaking and for 0.4 s after, so its own voice cannot command it.
+
+| say "SeeForMe, ..." | what happens |
+|---|---|
+| find a door / where is the exit / take me to room 204 / look for a seat | sets a FIND goal; spoken numbers become digits ("room two oh four" is room 204) |
+| stop looking / cancel / never mind | clears the FIND goal |
+| pause / stop / wait, and start / resume / continue | pauses routine cues and resumes them; while paused, anything that carries safety information (in the path, approaching, a vehicle, the FIND goal, the cane layer) is still said |
+| what's around me / describe / look around | up to three named objects, nearest first, with direction and distance |
+| read / read the sign / what does it say | reads the text in view (needs OCR, the default) |
+| is there a chair / is the path clear / what's on my left | a rule-based answer from the current tracks and the cane layer; never "the path is clear" |
+| repeat / say that again | the last cue again |
+| mute / be quiet, and unmute / sound on | sound off and on |
+| more detail / less detail / normal detail | verbosity |
+| navigation mode / scene mode / reading mode / automatic mode | pins a mode, or returns to the activity detector |
+| switch camera | the next camera that opens |
+| help / what can I say | the list of commands |
+| quit / goodbye | ends the session |
+
+The recogniser is Vosk (`vosk-model-small-en-us-0.15`), fully offline at 16 kHz. Typed commands work in any terminal,
+with or without the microphone (the same phrases, the wake phrase optional), and `--commands` scripts them for replays.
+The parser (`seeforme/live/voice.py`) and the web app's port (`web/src/voice.ts`) share their test vectors
+(`tests/data/voice_commands.json`) and agree on every one of 31,242 generated phrases.
+
+Keys, while the window has focus:
 
 | key | what it does |
 |---|---|
 | `h` | speaks the list of keys |
-| `w` | "what is around me": up to three named objects, nearest first, with direction and distance |
-| `r` | reads the text in view (needs OCR, the default) |
+| `l` | listens for one command without the wake phrase |
+| `w` | what is around me |
+| `r` | reads the text in view |
+| `p` | pause or resume |
 | `m` | cycles the mode: automatic, navigate, scene, read, find, back to automatic (spoken) |
-| `space` or `s` | sound on or off (muting now really silences the macOS voice) |
+| `space` or `s` | sound on or off |
 | `f` | asks for a FIND goal in the terminal |
 | `v` | verbosity: quiet, balanced, detailed |
 | `g` | repeat filter on or off |
 | `d` | metric depth on or off |
+| `i` | debug overlay on or off |
 | `1`-`5` | scheduler: threshold, cooldown, CACS, P-CACS, learned |
 | `q` | quit |
 
 ## What decides whether a cue is spoken
 
-The scheduler proposes at most one cue every 0.5 s. Three things can still stop it:
+The scheduler proposes at most one cue every 0.5 s. Then:
 
-1. **The announcement gate** (`seeforme/live/gate.py`) remembers what it has said about each object and direction
-   (left, ahead, right), keyed so that a track that is lost and found again is the same object, while a second object
-   of the same label seen at the same time is a different one; signs are told apart by their numbers ("room 204" and
-   "room 206" are two signs). It holds a cue when the same object in the same direction was announced recently (20 s
-   while walking, 60 s while standing, 8 s for a moving object) and nothing new happened. New means: the object came
-   materially closer (by at least 1 m and 25%), is still closing in the path within 3 m (0.35 m or 15% nearer than when
-   last said), changed side, or became critical (a measured time to contact under 2 s with the object in the walking
-   path; a critical object may be repeated every 2 s, or sooner if it gets worse). A track must be confirmed (seen in
-   several frames) before its first cue, so a one-frame flicker is never spoken. Without measured depth (depth off or
-   too uncertain), closing is read from the growth of the box sides the frame edge does not cut, and an object whose
-   box reaches the bottom of the frame in the walking corridor counts as near.
-2. **Background and the user's own body.** When standing still, objects that stay where they are for at least a second
-   become background and speak only once they measurably close in (a distance drop of 0.35 m or 15%, or a sustained
-   closing speed, or a short measured time to contact); the first cue after that passes. Vehicles and bikes never
-   become background, nothing is held on its first sample, a FIND goal is never held as background, and an object in
-   the walking path within 3 m is said once before it becomes background. With a desk webcam, a person within 1.2 m in
-   front of the camera at start-up is you: you are not announced, even when you lean in, unless you measurably come
-   closer. If the scheduler will not offer a held cue again in time once its object qualifies, the gate says it itself.
-3. **Read mode** mutes object cues unless they are critical or approaching (whatever their class), so a sign can be
-   read without interruptions about furniture.
+1. **The repeat filter** (`seeforme/live/gate.py`) remembers what it has said about each object and direction (left,
+   ahead, right). Identity survives a tracker that loses and re-finds the object, and a newcomer that takes over a
+   lost track's id is not mistaken for it when its range or position jumps; signs are told apart by their numbers
+   ("room 204" and "room 206" are two signs). A cue is held when the same object in the same direction was announced
+   recently and nothing new happened. New means: the object came materially closer, is still closing in the path,
+   changed side, came back nearer after being lost, or became critical. Objects in the walking path, vehicles and
+   FIND goals never wait for confirmation; other tracks must be seen in several frames first, so a one-frame
+   flicker is never spoken. Without measured depth, closing is read from the growth of the box sides the frame edge
+   does not cut.
+2. **Background and the user's own body.** When standing still, objects that stay where they are become background and
+   speak only once they measurably close in. Vehicles never become background, nothing is held on its first sample, and
+   a FIND goal is never background. With a desk webcam, the person in front of the camera at start-up is you: you are
+   not announced when you lean in, but a second person who walks up is.
+3. **The safety rule.** If the scheduler will not offer a held cue again in time once its object qualifies, the filter
+   says it itself. The design rule, checked by the harness below, is that the gated demo warns no later than the bare
+   scheduler would (one decision step of slack), or at least 1.5 s before contact.
+4. **Read mode** mutes object cues unless they are critical or approaching, so a sign can be read without interruptions
+   about furniture.
+5. **One audio channel.** A spoken reply or a cane cue never holds back a safety cue from the scheduler (something in
+   the path, approaching, a vehicle, stairs or the FIND goal): the safety cue cuts it. A cane cue may cut a reply, never
+   a scheduler warning. A haptic "Stop." wins over any spoken cue, since it does not occupy the audio channel.
 
-An acceptance harness ran every safety scenario found in review (a person walking up from 2 m, a person standing
-ahead at start-up then approaching, a car that is the first thing seen, a FIND goal already in view, depth-off
-obstacles, background vehicles creeping in) through the bare scheduler and seven gated setups: in all 694 runs the
-gated demo warns no later than the bare scheduler plus one decision step (0.5 s), while a still or leaning desk user
-produced no cue in 217 runs.
+## The cane and guide-dog layer
 
-The mode comes from the activity detector (`seeforme/live/activity.py`), which measures camera motion on a
-160-pixel grey copy of each frame (phase correlation, frame difference, a forward-zoom cue and a walking bob):
+The 80 COCO classes have no wall, door, pole, post, kerb, barrier or stairs, so the scheduler cannot warn about them.
+`seeforme/live/cane.py` looks only at the metric depth map: it fits the floor (RANSAC on inverse depth, which also gives
+camera height and pitch), finds surfaces that rise out of it in the walking corridor, and sorts them into sectors (left,
+ahead, right) and levels (ground, body, head). It speaks short cues ("Obstacle ahead, about 1 meter.", "Something at
+head height ahead.") and, while walking, a haptic "Stop." for something within 0.6 m ahead in a steady approach. It is
+off at a desk, without a depth map, and quiet while you stand still unless the obstacle approaches.
+
+What it says depends on what you travel with (`--aid`, the web app's "I travel with" setting, the server's `aid`
+field). The rules follow the BLV-Road-Nav focus group (Islam et al., arXiv 2407.16777): stay quiet about what the cane
+already touches, and warn about "objects that pick you before you pick them".
+
+| aid | what the cane layer says |
+|---|---|
+| cane (default) | no low obstacle within the cane's reach (1.2 m), beyond it only in a steady approach; body level from 1.2 to 2.5 m, said again only once 40% nearer; head level within 2.5 m always; the stop only for body or head level |
+| guide-dog | head level within 2.5 m and the stop only: the dog leads around ground and body obstacles |
+| none | every cue: obstacles of any level within 2 m, the stop for any level |
+
+The scheduler's cues about detected objects are the same for every aid.
+
+## Modes from what you are doing
+
+The mode comes from the activity detector (`seeforme/live/activity.py`), which measures camera motion on a 160-pixel
+grey copy of each frame (phase correlation, frame difference, a forward-zoom cue and a walking bob):
 
 | activity | mode | what changes |
 |---|---|---|
-| walking, turning, or unclear | navigate | balanced verbosity, 20 s repeat hold, no background |
-| standing still | scene | quiet verbosity, 60 s hold, static objects are background: only arrivals, approaching objects and critical events |
+| walking, turning, or unclear | navigate | balanced verbosity, repeats held while nothing changes, no background |
+| standing still | scene | quiet verbosity, longer hold, static objects are background: only arrivals, approaching objects and critical events |
 | standing still with text in view for 1 s | read | object cues muted unless critical or approaching |
 | a FIND goal is set | find | the goal is said as soon as it is seen and reminded sooner |
 
-Leaving a still mode is the safe direction: any sign of walking (including slow walking), mixed signals, or a stalled
-camera switches back to navigate within about 1-2 s. With `--setup auto` (the default) a camera that is still in the
-first seconds after start is taken to be a desk webcam.
+Leaving a still mode is the safe direction: any sign of walking, mixed signals, or a stalled camera switches back to
+navigate within about 1-2 s. With `--setup auto` (the default) a camera that is still in the first seconds after start
+is taken to be a desk webcam.
 
 ## What was measured
 
+GATE_MEASUREMENTS
+
+* **Voice commands** (`results/live/voice_eval.md`, `scripts/eval_voice.py`): every hands-free command vector plus 30
+  natural variants, synthesised with four macOS voices (US, UK, Australian and Irish English), clean and with pink
+  noise at 20 dB, then decoded by the real Vosk recogniser through the live code path: 736 command recordings and 184
+  negatives. The default "snap" recogniser (open vocabulary, near-misses snapped to the command words) gets 89.9% of
+  commands fully right (intent and argument; 95% interval 88-92%) against 81.8% for the open vocabulary alone. No plain
+  sentence woke it (0 of 128), but sentences built to sound like the wake phrase ("Let's see, for me it's fine") did in
+  15 of 32. The recogniser was chosen on these same recordings, so the 89.9% is in-sample, and synthetic speech is
+  cleaner than a real room.
+* **Cane layer** (`results/live/cane_eval_dev.md`, `scripts/eval_live_cane.py`): 84 EgoBlind development videos
+  (70 minutes; never the holdout or test splits). With every cue (aid none) the layer speaks 6.1 times a minute while
+  walking and stops the user 1.2 times a minute; the cane default halves that to 3.2 cues and 0.41 stops a minute, and
+  the guide-dog setting to 0.6 cues. Its cues come about 1.5 times more often than chance just before the blind users'
+  own questions about obstacles the detector cannot name (lift 1.53, 95% interval 0.93-2.38 with the cane rules, 1.56
+  and 1.14-2.04 with every cue), and not more often before other events (the control, 0.92).
 * **Detector** (`results/live/detector_choice.md`, `scripts/eval_live_detector.py`): YOLO11s instead of YOLO11n.
   On the 671 labelled BLV-Road-Nav keyframes its recall of the directly mapped COCO classes is 0.85 against 0.80
   (difference +0.05, 95% interval +0.03 to +0.08) at the same precision (0.94), with clear gains on cars, buses,
-  bicycles and traffic lights. The whole pipeline (detector, Depth Anything Small, tracker, scheduler) takes 54 ms per
-  frame against 51 ms on an M1 Max; with depth every second frame the demo runs at about 20 frames per second. On the
-  `make live-check` clip YOLO11n confidently calls a decorated door "refrigerator, approaching"; YOLO11s is less sure
-  of that wrong label and stays silent. Doors are not a COCO class at all, which is the vocabulary gap the research
-  side documents (`docs/egoblind.md`).
-* **Gate and modes on real blind-user video** (`results/live/gate_eval_dev.md`, `scripts/eval_live_gate.py`):
-  on 138 development videos (103 minutes, the finetune and select splits; never the holdout or test), wrapping the
-  learned scheduler in the gate cuts its cues per minute by 15-19% (1.02 to 0.87 on the COCO cache, 1.07 to 0.87 on
-  the open-vocabulary cache) and removes every repeat of the same object within 6 s (dup rate 0.019 to 0), while
-  losing no timely event and leaving quiet-window violations unchanged; the same holds for P-CACS and the
-  EgoBlind-trained scheduler in all six detector-by-scheduler comparisons (cues per minute -4% to -19%). 86% of the
-  label-and-direction repeats the bare schedulers make are about a different track id than the cue they repeat: the
-  tracker lost and re-found the object (or a second object with the same label stands in the same direction), and the
-  scheduler's per-track memory cannot see that. That is the mechanism the gate's identity memory addresses, and the
-  likely cause of the "Person." loop at a desk. The replays are walking clips, so they do not contain a desk session.
-* **The desk case.** Replays of a still camera with a person in front confirm that the activity detector reaches
-  scene mode within 2 s and detects the desk setup; simulated fidgeting and leaning (with the real tracker and depth
-  noise) do not re-announce the user. The exact repetition reported from a real webcam could not be reproduced
-  offline, because the learned scheduler stays silent on still synthetic clips; the session log of the next real run
-  (`results/live_sessions/`) records every cue and every held cue's reason, which is the check to do.
-
-## Also fixed in this round
-
-* An interrupt cue was printed but never spoken with the macOS voice (the old `say` process had not exited when the
-  new one was started); `Speaker.interrupt()` now waits for it.
-* Haptic cues only printed `[haptic] buzz`; a laptop has no vibration motor, so they now play a short system sound.
-* Muting with `s` did not silence the macOS voice.
-* Replayed video uses the file's own timestamps (no drift on variable-frame-rate phone video); the end-of-run summary
-  lists haptic cues; `--strict` fails when nothing was tested; the learned scheduler's import failure falls back to
-  P-CACS out loud instead of exiting; the detector weights are resolved inside the repository, so starting the demo
-  from another directory cannot trigger a download.
+  bicycles and traffic lights. The whole pipeline takes 54 ms per frame against 51 ms on an M1 Max; with depth every
+  second frame the demo runs at about 20 frames per second.
 
 ## Limits
 
-* The gate and the activity thresholds were calibrated on EgoBlind development clips and synthetic desk scenes, not
-  on a recorded walk with this Mac's camera. `describe()` in the end-of-run summary and the session log show what the
-  detector concluded; check them on a short real recording before relying on the desk detection.
-* Everything spoken depends on the 80 COCO classes; doors, stairs, poles, curbs and kerbs are mostly invisible to it.
-* Screen-reader use of the window has not been tested; the demo is driven by keys and speech, the window is for
-  sighted developers.
+* Every threshold was calibrated on EgoBlind development clips, synthetic scenes and synthetic speech, not on a recorded
+  walk with this Mac's camera or on real voices in a real room. The session log (`results/live_sessions/`) records every
+  cue, every held cue's reason and every command heard: check it on a short real recording before relying on the demo.
+* The scheduler names only the 80 COCO classes; the cane layer finds walls, poles and other surfaces by geometry but
+  cannot say what they are, and depth from one camera fails on glass, mirrors and in the dark.
+* Sentences that sound like the wake phrase can trigger a command (15 of 32 such test sentences did).
+* Screen-reader use of the window has not been tested; the demo is driven by voice, keys and speech, and the window is
+  for sighted developers.

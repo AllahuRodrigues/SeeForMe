@@ -13,7 +13,9 @@ goal -> find) unless a mode is pinned. With setup "auto", a camera that is still
 to be a desk webcam, and the large centred person in front of it (the user) is not announced unless they approach.
 
 The cane (seeforme/live/cane.py, on unless cane=False) adds what the detector cannot name: walls, doors, poles, low
-and head-height obstacles, from the metric depth map passed to on_frame. Spoken replies to voice commands (run_live
+and head-height obstacles, from the metric depth map passed to on_frame. aid ("cane" by default, "guide-dog" or
+"none": what the user travels with) keeps it quiet about what the user's own cane or dog already covers (cane.py); the
+scheduler's cues are the same for every aid. Spoken replies to voice commands (run_live
 registers them on the pipeline's channel with reply_cue) are the other message the scheduler did not choose. One cue
 per decision at most, and neither may make the scheduler warn later than it would alone:
     - while a cane cue or a reply holds the channel (ChannelState.current_track < 0) and something in view could need
@@ -46,7 +48,7 @@ from ..cues.pcacs import ChannelState
 from ..geometry.camera import CameraModel
 from ..types import Cue
 from .activity import Activity, ActivityDetector, MODES, TaskAdapter
-from .cane import CANE_POLICY, CANE_TRACK_ID, Cane, CaneConfig
+from .cane import AIDS, CANE_POLICY, CANE_TRACK_ID, Cane, CaneConfig
 from .commands import is_safety_cue, is_safety_track
 from .gate import AnnouncementGate, GateConfig
 from .summary import SessionLog, scene_summary
@@ -116,11 +118,14 @@ class LiveController:
     def __init__(self, policy, mode: str = "auto", setup: str = "auto", gate: bool = True,
                  gate_cfg: Optional[GateConfig] = None, camera: Optional[CameraModel] = None,
                  log: Optional[SessionLog] = None, goal_tags: Optional[Sequence[str]] = None, units: str = "m",
-                 cane: bool = True, cane_cfg: Optional[CaneConfig] = None):
+                 cane: bool = True, cane_cfg: Optional[CaneConfig] = None, aid: str = "cane"):
         if setup not in SETUPS:
             raise ValueError(f"setup must be one of {', '.join(SETUPS)}")
         if mode != "auto" and mode not in MODES:
             raise ValueError(f"mode must be auto or one of {', '.join(MODES)}")
+        if aid not in AIDS:
+            raise ValueError(f"aid must be one of {', '.join(AIDS)}")
+        self.aid = aid
         self.camera = camera or CameraModel()
         self.setup = setup
         self.use_gate = gate
@@ -134,7 +139,7 @@ class LiveController:
         self.desk = setup == "desk"            # a still camera with the user in front of it
         self.activity = ActivityDetector()
         self.adapter = TaskAdapter()
-        self.cane: Optional[Cane] = Cane(cane_cfg) if cane else None
+        self.cane: Optional[Cane] = Cane(cane_cfg, aid=aid) if cane else None
         self.gate: Optional[AnnouncementGate] = None
         self.policy = None
         self.set_policy(policy)
@@ -376,4 +381,4 @@ class LiveController:
         return lines
 
 
-__all__ = ["LiveController", "SETUPS", "CANE_POLICY", "REPLY_TRACK_ID", "cue_urgency", "held_by", "reply_cue"]
+__all__ = ["LiveController", "SETUPS", "AIDS", "CANE_POLICY", "REPLY_TRACK_ID", "cue_urgency", "held_by", "reply_cue"]

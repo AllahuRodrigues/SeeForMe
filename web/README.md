@@ -4,10 +4,11 @@ Audio-first camera assistant that runs **in the browser**: YOLO11 (ONNX Runtime 
 on WASM) in a Web Worker, an IoU tracker with metric dynamics (distance, relative speed, time-to-contact,
 path-intersection probability), and a scheduler that decides speak / interrupt / haptic / silence under a
 speech budget. The default scheduler is the **learned GRU + RL scheduler**, the same model and the same decision
-rule as the Python pipeline (`pcacs_learned:rl`, `models/scheduler/scheduler_rl.pt`); the linear **P-CACS** is the
-fallback. In front of either sits the **repeat filter** (`src/gate.ts`, a port of `seeforme/live/gate.py`): it
-holds what was just said, the desk user and still background, and never what approaches, is critical or is a Find
-goal. Works on phones, tablets and laptops; front and rear cameras; video files; spoken commands. Version 0.4.0.
+rule as the Python pipeline (`pcacs_learned:rl`, `models/scheduler/scheduler_rl.pt`, trained on CampusBench
+synthetic campus scenes, not on EgoBlind video); the linear **P-CACS** is the fallback. In front of either sits
+the **repeat filter** (`src/gate.ts`, a port of `seeforme/live/gate.py`): it holds what was just said, the desk
+user and still background, and never what approaches, is critical or is a Find goal. Works on phones, tablets
+and laptops; front and rear cameras; video files; spoken commands. Version 0.4.1.
 
 ```bash
 cd web && npm install && npm run dev        # http://localhost:5173  (Vite dev server)
@@ -58,8 +59,10 @@ Anything V2 at ~4 Hz and READ mode works.
   alone plays a short tone and opens 5 s for one command. It restarts itself with a growing back-off and stops while
   the page is hidden.
 - Commands: start, pause, quit, find ..., stop looking, read, what's around me, repeat, mute / unmute, more / less
-  detail, flip camera, help, or any question. `tests/data/voice_commands.json` holds the cases the TypeScript
-  parser (`src/voice.ts`) and the Python one (`seeforme/live/voice.py`) both pass.
+  detail, flip camera, help, or any question. The parser (`src/voice.ts`) is a rule-for-rule port of the Python one
+  (`seeforme/live/voice.py`): a FIND verb wins over mode and detail words, which must be the whole command ("find
+  the scene mode button" is a FIND, "switch to reading mode" a mode), and spoken numbers become digits ("room two oh
+  four" -> room 204, "room oh four" -> room 04). `tests/data/voice_commands.json` holds the cases both pass.
 - The app never acts on its own voice: results that arrive while it speaks (and 0.4 s after), or that repeat what it
   or the status line (read aloud by screen readers) said a moment ago, are ignored. Of a result's alternatives the
   best decides; a lower one may only refine a command addressed to the app, never start one.
@@ -71,18 +74,33 @@ Anything V2 at ~4 Hz and READ mode works.
   holds repeats; closer, closing in, a side change, critical (measured TTC < 2 s in the path), a Find goal and the
   hold running out (20 s walking, 60 s still) pass. A new track only continues a remembered object when it
   appears where that one vanished, at about its range, and that one had not walked away since it was said; one
-  back in the path after a dropout, or closing in, is said again. A held cue's seconds go back to the speech budget,
-  and the filter says a held object itself when it later closes in. A buzz and a spoken cue can pass at the same
-  decision. `#action-why` in the Algorithm panel shows each verdict.
+  back in the path after a dropout, or closing in, is said again. The same continuity decides whether a new track
+  joins a background object or is the desk user, so a stranger who walks up to a laptop, or a visitor in front of
+  the user, is warned about like anyone else. A detection that flickers (a new track id at every sighting) is
+  confirmed by its sightings together. A held cue's seconds go back to the speech budget, and the filter says a held
+  object itself when it later closes in (up to 20 s later for one held as background or as the user). A buzz and a
+  spoken cue can pass at the same decision. `#action-why` in the Algorithm panel shows each verdict.
 - **Activity** (`src/activity.ts`): camera motion on a 160 px grey frame (phase correlation). Still: 60 s hold and
   still objects as background; a camera still in the first seconds after Start is a laptop on a desk, and the
   person in front of it is the user (held until they measurably come closer). 2 s of walking ends that.
-- **Cane cues** (`src/cane.ts`): with the server, `/api/depth` also returns a class-agnostic obstacle summary;
-  while navigating (not still, not at a desk) an obstacle no detected object explains is said ("Obstacle ahead,
-  about 1 meter, clearer on your left.") and goes through the repeat filter; under 0.6 m straight ahead it is a
-  buzz. The app never says a path is clear.
+- **Cane cues** (`src/cane.ts`): with the server, `/api/depth` also returns a class-agnostic obstacle summary
+  (the app sends `walking` from the activity detector and the travel aid); while navigating (not still, not at a
+  desk) an obstacle no detected object explains is said ("Obstacle ahead, about 1 meter, and on your right.":
+  path choice names what blocks, never a side that looks open, since drop-offs are not detected) and goes through
+  the repeat filter; very close straight ahead it is a buzz. The app never says or implies a path is clear.
+- **I travel with** (Settings; White cane by default, remembered): what the obstacle cues leave to the user's own
+  aid, after the BLV-Road-Nav focus group (Islam et al., arXiv 2407.16777): quiet about what the cane can already
+  touch, always warn at head height.
+  - White cane: no cue for a low obstacle within the cane's reach (1.2 m), farther ones only in a steady approach;
+    body height from 1.2 to 2.5 m ahead; head height always (within 2.5 m); the buzz only at body or head height
+    within 0.6 m in a steady approach.
+  - Guide dog: head height and the buzz only (the dog leads around the rest).
+  - Neither: every obstacle cue, as before.
+  With a cane or a dog only the corridor ahead is spoken about. Cues about detected objects (people, vehicles,
+  chairs, the Find goal) are the same for every choice.
 
-Settings: **Scheduler** Learned (default) / Linear P-CACS (remembered in this browser); verbosity QUIET /
+Settings: **I travel with** White cane (default) / Guide dog / Neither (remembered; see above); **Scheduler**
+Learned (default) / Linear P-CACS (remembered in this browser); verbosity QUIET /
 BALANCED / DETAILED changes which message slots the linear P-CACS speaks (the learned scheduler picks its own
 slots, verbosity only changes its speech-cost input, as in Python); units metres / feet; voice Browser
 (default) / ElevenLabs (through the server, used only when the server reports an ElevenLabs API key). An
@@ -179,7 +197,8 @@ Accessibility:
 | `src/main.ts` | loop, modes, UI, ASK rules |
 
 Known limits: WebGPU support differs by browser (iOS Safari falls back to WASM, ~10 FPS on older
-devices); OCR and metric depth need the server; ASK is rule-based (no LLM).
+devices); iOS Safari has no vibration API, so on iPhone a haptic cue is only the earcon; OCR and metric depth
+need the server; ASK is rule-based (no LLM).
 
 ## Dev server vs production
 

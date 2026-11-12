@@ -10,7 +10,7 @@ from pathlib import Path
 import pytest
 
 from seeforme.geometry import CameraModel
-from seeforme.live.commands import (HELP_VOICE, CommandRouter, answer, goal_tags, is_question, is_safety_cue,
+from seeforme.live.commands import (AID_ADVICE, HELP_VOICE, CommandRouter, answer, goal_tags, is_question, is_safety_cue,
                                     is_safety_track, names_goal, read_phrase, says_clear)
 from seeforme.live.voice import Command
 from seeforme.types import Cue, Track
@@ -93,6 +93,26 @@ def test_path_answers():
     assert a.startswith("Careful, there's a person") and a.endswith(WALL_NOTE)
     assert answer("what's ahead", [], CAM, cane_note=WALL_NOTE).endswith(WALL_NOTE)
     assert WALL_NOTE not in answer("what's on my left", [], CAM, cane_note=WALL_NOTE)   # the note is about ahead
+
+
+def test_path_answers_name_the_users_own_travel_aid():
+    """Reviewer: the web app told a guide dog user (and one with neither) to "check with your cane". A path answer now
+    names the aid the user chose (run_live --aid, the controller's aid; the web app's "I travel with"), in the same
+    words as web/src/cane.ts aidAdvice, and never says clear."""
+    from seeforme.live.cane import AIDS
+    assert set(AID_ADVICE) == set(AIDS)
+    for aid, end in (("cane", "keep using your cane."), ("guide-dog", "keep working with your guide dog."),
+                     ("none", "go carefully."), (None, "keep using your cane or guide dog.")):
+        for note in ("", WALL_NOTE):
+            a = answer("is the path clear", [], CAM, cane_note=note, aid=aid)
+            assert a.endswith(f"so {end}") and not says_clear(a), (aid, a)
+            assert ("cane" in a) is (aid in ("cane", None)) and ("guide dog" in a) is (aid in ("guide-dog", None)), a
+    r, ctl, _ = router()
+    ctl.aid = "guide-dog"
+    assert r.handle(Command("ask", "is the path clear"), []).endswith("so keep working with your guide dog.")
+    cane_ts = (Path(__file__).resolve().parents[1] / "web" / "src" / "cane.ts").read_text()
+    for aid, words in AID_ADVICE.items():          # the web app says the same
+        assert f'"{aid}": "{words}"' in cane_ts or f'{aid}: "{words}"' in cane_ts, (aid, words)
 
 
 def test_object_and_side_answers():
@@ -428,27 +448,32 @@ def test_path_question_reports_the_canes_wall():
 
 
 # ---- run_live, headless, with scripted commands -------------------------------------------------------------------
+# Each run pays the interpreter, torch and detector start-up plus one detector pass per frame (seconds each on a loaded
+# machine), so they use the small detector, no depth, no OCR, the linear P-CACS rule and as few frames as the check
+# needs: the commands are spread over the first 0.4 s (15 frames of the 30 fps clip).
+FAST = ["--fast", "--headless", "--no-ocr", "--no-depth", "--no-log", "--policy", "pcacs", "--model", "yolo11n.pt"]
+
+
 @pytest.mark.skipif(not CLIP.exists(), reason="local EgoBlind clip data/egoblind/videos/train/00700.mp4 not present")
 def test_run_live_headless_with_scripted_commands():
-    cmd = [sys.executable, str(ROOT / "scripts" / "run_live.py"), "--video", str(CLIP), "--fast", "--headless",
-           "--no-ocr", "--no-depth", "--no-log", "--frames", "40", "--policy", "pcacs",
-           "--commands", "0.2:see for me find a chair;0.5:what's around me;0.8:pause;1.1:start"]
+    cmd = [sys.executable, str(ROOT / "scripts" / "run_live.py"), "--video", str(CLIP), *FAST, "--frames", "15",
+           "--commands", "0.1:see for me find a chair;0.2:what's around me;0.3:pause;0.4:start"]
     env = dict(os.environ, OMP_NUM_THREADS="2")
     out = subprocess.run(cmd, cwd=ROOT, env=env, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=300)
     assert out.returncode == 0, out.stderr[-2000:]
     text = out.stdout
     for expected in ("heard     find chair", "reply     Looking for a chair.", "heard     describe",
                      "heard     pause", "reply     Paused. I'll still warn you about hazards.", "heard     start",
-                     "reply     Resumed", "commands: describe 1, find 1, pause 1, start 1"):
+                     "reply     Resumed", "commands: describe 1, find 1, pause 1, start 1", "aid cane"):
         assert expected in text, text[-3000:]
     assert "Voice commands: run make voice-setup" not in text      # headless: no microphone, no hint
+    assert "scripted commands not reached" not in text
 
 
 @pytest.mark.skipif(not CLIP.exists(), reason="local EgoBlind clip data/egoblind/videos/train/00700.mp4 not present")
 def test_run_live_reads_commands_piped_into_stdin():
     """Reviewer repro: piped commands were ignored ("commands keys only") and a headless run never quit."""
-    cmd = [sys.executable, str(ROOT / "scripts" / "run_live.py"), "--video", str(CLIP), "--fast", "--headless",
-           "--no-ocr", "--no-depth", "--no-log", "--frames", "200", "--policy", "pcacs"]
+    cmd = [sys.executable, str(ROOT / "scripts" / "run_live.py"), "--video", str(CLIP), *FAST, "--frames", "200"]
     env = dict(os.environ, OMP_NUM_THREADS="2")
     out = subprocess.run(cmd, cwd=ROOT, env=env, input="what's around me\nfind a chair\nq\n", capture_output=True,
                          text=True, timeout=300)
@@ -459,3 +484,17 @@ def test_run_live_reads_commands_piped_into_stdin():
         assert expected in text, text[-3000:]
     frames = int(text.split("frames: ")[1].split()[0])
     assert frames < 200                                            # quit ended the run
+    assert "end of the piped commands" not in text                 # a video run: the commands' end is not the run's
+
+
+@pytest.mark.parametrize("headless,video,frames,tty,sources,stops", [
+    (True, False, 0, False, ["typed"], True),            # headless camera, commands piped in: nothing else ends it
+    (True, True, 0, False, ["typed"], False),            # a replayed video ends by itself
+    (True, False, 300, False, ["typed"], False),         # so does --frames
+    (True, False, 0, True, ["typed"], False),            # a terminal's ctrl-D is not the end
+    (True, False, 0, False, ["typed", "script"], False),  # a script may still quit
+    (True, False, 0, False, ["vosk", "typed"], False),    # so may the microphone
+    (False, False, 0, False, ["typed"], False)])          # a window has the q key
+def test_end_of_piped_commands_stops_only_a_run_nothing_else_stops(headless, video, frames, tty, sources, stops):
+    from seeforme.live.voice import input_end_stops_run
+    assert input_end_stops_run(headless, video, frames, tty, sources) is stops

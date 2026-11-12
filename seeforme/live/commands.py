@@ -256,6 +256,13 @@ def is_question(text: str) -> bool:
 
 
 NOT_CLEAR = "that does not mean it is clear"
+# how a path answer ends: the user's own travel aid (LiveController.aid, run_live --aid; web/src/cane.ts aidAdvice says
+# the same), never "clear". Without a known aid, both.
+AID_ADVICE = {"cane": "keep using your cane", "guide-dog": "keep working with your guide dog", "none": "go carefully"}
+
+
+def aid_advice(aid: Optional[str]) -> str:
+    return AID_ADVICE.get(aid or "", "keep using your cane or guide dog")
 
 
 def says_clear(text: str) -> bool:
@@ -265,11 +272,12 @@ def says_clear(text: str) -> bool:
 
 
 def answer(question: str, tracks: Iterable, camera: Optional[CameraModel] = None, units: str = "m",
-           cane_note: str = "") -> str:
+           cane_note: str = "", aid: Optional[str] = None) -> str:
     """A spoken answer about the current camera view. Never says a path is clear: an empty answer says what could not
     be confirmed, that this does not mean it is clear, and that the camera can miss things. `cane_note` (from
     LiveController.cane_note, "" without one) is the cane's confirmed obstacle ahead: path and "ahead" questions report
-    it, as the web app's answer() does, so an empty answer never ignores a wall the depth map shows."""
+    it, as the web app's answer() does, so an empty answer never ignores a wall the depth map shows. `aid`: what the
+    user travels with; a path answer tells them to keep using it (a guide dog user is not told to use a cane)."""
     cam = camera or CameraModel()
     q = normalize(question)
     near = sorted(_visible(tracks), key=_dist_of)
@@ -290,9 +298,8 @@ def answer(question: str, tracks: Iterable, camera: Optional[CameraModel] = None
         if hits:
             return f"Careful, there's {_list(hits[:2], cam, units)} in your path.{note}"
         if cane_note:
-            return f"{cane_note} I can miss things, so keep using your cane or guide dog."
-        return (f"I did not detect anything in your path, but {NOT_CLEAR}. I can miss obstacles, so keep using your "
-                "cane or guide dog.")
+            return f"{cane_note} I can miss things, so {aid_advice(aid)}."
+        return f"I did not detect anything in your path, but {NOT_CLEAR}. I can miss obstacles, so {aid_advice(aid)}."
     if side is not None:
         hits = [t for t in near if _on_side(t, side, cam)]
         if hits:
@@ -529,14 +536,21 @@ class CommandRouter:
         return _VERBOSITY_PHRASE.get(cfg.verbosity, f"Detail {cfg.verbosity}.")
 
     def _do_flip(self, cmd, tracks, t) -> str:
-        return self.flip() if self.flip is not None else "Switching cameras is only in the web app."
+        """"Flip camera" switches to the next camera. "Front camera" / "back camera" (arg "front" / "back") do the same:
+        the terminal demo cycles camera indices and cannot tell which way a camera faces, so the reply says so instead
+        of naming a side."""
+        if self.flip is None:
+            return "Switching cameras is only in the web app."
+        reply = self.flip()
+        return f"This demo cannot tell which way a camera faces. {reply}" if cmd.arg else reply
 
     def _do_ask(self, cmd, tracks, t) -> str:
         q = cmd.arg or cmd.text
         if not is_question(q):        # a mis-heard command ("see for me newt"): say so instead of describing the scene
             return ("Sorry, I didn't catch that. Say SeeForMe, help, for the commands." if self.voice
                     else "Sorry, I didn't understand. Type help for the commands.")
-        msg = answer(q, tracks, self._cam(), self._units(), cane_note=self._cane_note(t))
+        msg = answer(q, tracks, self._cam(), self._units(), cane_note=self._cane_note(t),
+                     aid=getattr(self.ctl, "aid", None))
         self._cane_note(t, said_in=msg)
         self.last_message = msg
         return msg

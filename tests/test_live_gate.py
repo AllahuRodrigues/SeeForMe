@@ -223,7 +223,8 @@ def test_unconfirmed_track_is_held_and_a_flicker_never_spoken():
     assert cues == [] and 1 in gate._pending                     # kept for flicker_keep_s: it may come back (Cause 2)
     cues = run(gate, lambda t: [], 4.0, t0=3.5)
     assert cues == [] and gate.stats["suppressed_unconfirmed"] == 1 and gate.reasons["unconfirmed (dropped)"] == 1
-    assert inner.budget == pytest.approx(inner.cfg.budget_capacity_s)     # the unspoken cue's seconds were refunded
+    # the scheduler's budget is what it would be alone, which spent the cue (a refund would change what it says next)
+    assert inner.budget == pytest.approx(inner.cfg.budget_capacity_s - 1.2)
     # a real object is said one step later even though the scheduler (recent block) does not offer it again
     gate = AnnouncementGate(NearestPolicy(recent_block_s=2.8), GateConfig(background=False))
     cues = run(gate, lambda t: [dict(tid=1, bbox=box(0.95), dist=4.0, **({"hits": 1} if t == 0.0 else {}))], 3.0)
@@ -715,7 +716,8 @@ class OfferAt(NearestPolicy):
 def test_held_object_that_comes_closer_is_said_by_the_gate():
     # Cause 1 (car repro): a car said at 5.6 m creeps toward the user from 12.4 s at 0.37 m/s (contact 26 s); the
     # scheduler offered it once more while it was parked (held: a repeat) and not again. The gate says that cue itself
-    # once the car is materially closer (the old rescue dropped `closer`, and kept a held cue for 3 s only)
+    # once the car is materially closer (the old rescue dropped `closer`, and kept a held cue for 3 s only): in the
+    # walking path within path_m, at the `closing` step (0.84 m at 5.6 m) while it closes
     z = lambda t: 5.6 if t < 12.4 else 5.6 - 0.37 * (t - 12.4)
     def scene(t):
         go = t >= 12.4
@@ -725,8 +727,8 @@ def test_held_object_that_comes_closer_is_said_by_the_gate():
         gate = AnnouncementGate(OfferAt([2.0, 10.0]), gcfg)
         ts = [c.t for c in run(gate, scene, 25.5)]
         assert ts[0] == 2.0 and not [x for x in ts if 2.0 < x < 12.4]          # parked: no repeats
-        assert [x for x in ts if x > 12.4][:1] == [16.5], ts                    # 1.4 m closer, 9.5 s before contact
-        assert gate.stats["rescued"] >= 1 and gate.reasons["closer (deferred)"] == 1
+        assert [x for x in ts if x > 12.4][:1] == [15.0], ts                    # 0.96 m closer, 11 s before contact
+        assert gate.stats["rescued"] >= 1 and gate.reasons["closing (deferred)"] == 1
 
 
 def test_rescue_finds_the_safety_reason_behind_a_sector_change():
@@ -812,9 +814,14 @@ def test_held_cue_follows_the_object_across_an_id_switch(dropout):
                      ttc=(z(t) - 0.6) / 0.5 if go else math.inf, path=0.3)]
     gate = AnnouncementGate(OfferAt([20.5]))
     cues = run(gate, scene, 22.0)
+    if dropout:
+        # out of view right after its cue was held (a person in the path the user never heard of): the gate cannot
+        # watch it come closer, so it says the held cue at once (_say_lost), and the successor is not said again
+        assert [(c.t, c.track_id) for c in cues] == [(21.0, 1)] and 1 not in gate._held
+        assert gate.reasons["lost (deferred)"] == 1 and any("lost from view" in r[2] for r in gate.releases)
+        return
     assert [(c.t, c.track_id) for c in cues] == [(21.5, 2)] and 1 not in gate._held
-    why = "lost from view" if dropout else "nearer than its"
-    assert gate.reasons["new (deferred)" if dropout else "approach (deferred)"] == 1 and any(why in r[2] for r in gate.releases)
+    assert gate.reasons["approach (deferred)"] == 1 and any("nearer than its" in r[2] for r in gate.releases)
 
 
 @pytest.mark.parametrize("lean_m", [0.35, 0.6])
@@ -980,7 +987,8 @@ def test_another_object_stepping_in_during_a_dropout_releases_the_background_rec
     assert bare[-1] == (8.5, "B") and ids["A"] == ids["B"]     # (the tracker kept one id for both)
     cues, gate, _ = boxes_session(OfferAt([1.5, 8.5]), objs, GateConfig(), T=tc, depth=False)
     assert [t for t, n in cues if n == "B"][:1] == [8.5], (cues, gate.releases)
-    assert any("farther than its" in r[2] for r in gate.releases)
+    # (released by the range jump across the dropout, or by its range against the reference: either says "farther")
+    assert any(r[2].startswith("background") and "farther" in r[2] for r in gate.releases), gate.releases
 
 
 class OfferTrack(NearestPolicy):
@@ -1110,3 +1118,367 @@ def test_a_cue_said_again_by_the_gate_carries_its_distance_now():
     assert near.message == "Person, very close." and near.distance_m == pytest.approx(gate._range_now(trk))
     far = Scene().at(13.0, [dict(tid=1, bbox=box(0.5, h=0.2, w=0.06), dist=5.0, depth_conf=0.25)])[0]
     assert gate._refreshed(cue, 0.0, far, 13.0).message == "Person."      # (a bbox guess that far: no distance)
+
+
+# ---- fifth round (scripts/live_safety.py sweeps): tracker re-use, arrivals before a rebaseline, implausible successors --
+def test_another_object_the_tracker_keeps_under_the_same_id_is_not_a_repeat():
+    # Harness lost_background:380 (learned scheduler, depth off, background off): a person said at 4 m vanishes, and
+    # 0.7 s later another person appears where they stood, 6 m away, and walks at the user. The IoU tracker kept the old
+    # track id, so the memory of the first person (said 9.5 s before) held the newcomer's only offer as a repeat until
+    # `closer` passed 2.5 s later. A range that jumps farther across a dropout is another object: the memory lets go
+    zb = lambda t: max(0.3, 6.0 - 1.4 * max(0.0, t - 10.2))
+    objs = [dict(name="A", label="person", z=lambda t: 4.0, x=lambda t: 0.1, on=lambda t: t < 9.5),
+            dict(name="B", label="person", z=zb, x=lambda t: 0.1, on=lambda t: t >= 10.2)]
+    tc = 10.2 + 5.4 / 1.4
+    bare, _, ids = boxes_session(OfferAt([1.0, 10.5]), objs, T=tc, depth=False)
+    assert (10.5, "B") in bare and ids["A"] == ids["B"]          # (one track id for both)
+    for gcfg in (GateConfig(background=False), GateConfig()):
+        cues, gate, _ = boxes_session(OfferAt([1.0, 10.5]), objs, gcfg, T=tc, depth=False)
+        assert [t for t, n in cues if n == "B"][:1] == [10.5], (cues, dict(gate.reasons), gate.releases)
+    # the same person back after the same dropout, at their place, is still a repeat
+    objs = [dict(name="A", label="person", z=lambda t: 4.0, x=lambda t: 0.1, on=lambda t: not 9.5 <= t < 10.2)]
+    cues, gate, _ = boxes_session(OfferAt([1.0, 10.5]), objs, GateConfig(background=False), T=12.0, depth=False)
+    assert [t for t, _ in cues] == [1.0] and gate.reasons["repeat"] == 1
+
+
+def test_a_person_who_walked_into_place_before_a_rebaseline_is_said_once():
+    # Harness side_entry:194 (learned scheduler, controller): a person walks in from the left and stops 5.7 m ahead in
+    # the path; the user stands still, the controller enters scene mode and rebaselines, and the person, static through
+    # the new warm-up, became background: the scheduler's first offer (bare says it) was held. An object the gate saw
+    # arrive (a person or an animal whose box moved into place) is said once before it is background; one that stood
+    # there all along stays quiet
+    def scene(t):
+        cx = 0.2 + 0.32 * min(1.0, max(0.0, t - 2.0) / 2.5)
+        walker = [dict(tid=1, bbox=box(cx, h=0.27, w=0.08), dist=5.7)] if t >= 2.0 else []
+        return walker + [dict(tid=2, bbox=box(0.8, h=0.3, w=0.09), dist=5.0)]
+    gate, sc, cues = AnnouncementGate(OfferTrack({1: [15.5], 2: [16.0]}), GateConfig()), Scene(), []
+    for i in range(35):
+        t = i * DT
+        if t == 12.0:
+            gate.rebaseline()                                   # (the walk-in is older than the tracker's box history)
+        cues += gate.decide(sc.at(t, scene(t)), t, ChannelState())
+    assert [(c.track_id, c.t) for c in cues] == [(1, 15.5)], (dict(gate.reasons), [(b.track_ids, b.say_once) for b in gate._bg])
+    assert gate.last_verdict["reason"] == "background"          # the person who was there all along
+
+
+def test_a_successor_nearer_than_it_could_have_come_is_a_different_object():
+    # a chair said 6 m ahead vanishes; half a second later a chair appears 2 m ahead where it was. A chair does not move
+    # itself: 4 m nearer in a second is another chair, new to the user (it inherited the memory: a repeat within
+    # min_gap_s). A person 1 m nearer after the same gap may be the one said, come closer unseen: a successor
+    gate = AnnouncementGate(OfferTrack({1: [4.5], 2: [5.0]}), GateConfig(background=False))
+    cues = run(gate, lambda t: [dict(tid=1, label="chair", bbox=box(0.5, h=0.12), dist=6.0)] if t <= 4.5 else
+               [dict(tid=2, label="chair", bbox=box(0.5, h=0.35), dist=2.0)], 6.0)
+    assert [(c.track_id, c.t) for c in cues] == [(1, 4.5), (2, 5.0)], dict(gate.reasons)
+    gate = AnnouncementGate(OfferTrack({1: [4.5], 2: [5.0]}), GateConfig(background=False))
+    cues = run(gate, lambda t: [dict(tid=1, bbox=box(0.5, h=0.3), dist=4.0)] if t <= 4.5 else
+               [dict(tid=2, bbox=box(0.5, h=0.4), dist=3.0)], 6.0)
+    assert [(c.track_id, c.t) for c in cues] == [(1, 4.5)] and gate._seen[2].pred == (1,)
+
+
+def test_a_successor_of_an_object_that_walked_away_since_it_was_said_is_new():
+    # web gate successorOf: a person said 3 m ahead walks off to 6 m and vanishes; another person comes from there (a
+    # new track at the range the first one vanished at). The first was said at 3 m: the newcomer at 6 m was held as a
+    # repeat until it came materially closer than 3 m. One that walked off and vanished, and another coming from there,
+    # are two objects
+    zf = lambda t: 3.0 + 0.6 * min(5.0, max(0.0, t - 1.0))
+    def scene(t):
+        if t <= 6.0:
+            return [dict(tid=1, bbox=box(0.5, h=min(0.95, 1.0 / zf(t))), dist=zf(t), rel=0.6 if 1.0 <= t < 6.0 else 0.0)]
+        if t < 6.5:
+            return []                                           # (out of view less than lost_s: not `reacquired`)
+        z = 6.0 - 1.5 * (t - 6.5)
+        return [dict(tid=2, bbox=box(0.5, h=min(0.95, 1.0 / z)), dist=z, rel=-1.5, path=0.6)]
+    gate = AnnouncementGate(OfferTrack({1: [1.0], 2: [7.0]}), GateConfig(background=False))
+    cues = run(gate, scene, 8.0)
+    assert [(c.track_id, c.t) for c in cues] == [(1, 1.0), (2, 7.0)], dict(gate.reasons)
+    assert gate._seen[2].pred == (1,)                           # (it does take over the first one's track)
+
+
+def test_someone_stepping_into_the_path_during_the_warm_up_is_not_held_for_it():
+    # Harness approach:1272 (learned scheduler, depth off): a person appears 3.6 m ahead in the walking path 2 s after
+    # the camera started and walks at the user 1 s later (contact 1.4 s after that). The bare scheduler said it at once;
+    # the gate held its only offer for the warm-up (static for a few samples) and said it 1 s later, 0.9 s before
+    # contact. An object that came into view after the warm-up began is not part of the scene it learns
+    z = lambda t: 3.6 if t < 3.0 else max(0.3, 3.6 - 2.3 * (t - 3.0))
+    def scene(t):
+        plant = dict(tid=1, label="potted plant", bbox=(0.85, 0.5, 0.95, 0.7), dist=4.0)
+        person = [dict(tid=2, bbox=box(0.48, h=min(0.95, 1.5 / z(t))), dist=z(t), depth_conf=0.25, path=0.6)] if t >= 2.0 else []
+        return [plant] + person
+    gate = AnnouncementGate(OfferTrack({2: [2.5]}))
+    cues = run(gate, scene, 4.0)
+    assert [(c.track_id, c.t) for c in cues][:1] == [(2, 2.5)], dict(gate.reasons)   # (then again as it approaches)
+    # a person in the path from the camera's first frame is still the warm-up's (held, background unless near)
+    gate = AnnouncementGate(OfferTrack({2: [2.5]}))
+    cues = run(gate, lambda t: [dict(tid=2, bbox=box(0.48, h=0.42), dist=3.6, depth_conf=0.25, path=0.6)], 4.0)
+    assert cues == [] and gate.last_verdict["reason"] == "warmup"
+
+
+def test_box_jitter_of_a_static_object_is_not_closing():
+    # Harness read_scene:1415 / lost_background:1448 (depth off, box jitter of 0.8 % of the frame): the box of a static
+    # sign or chair 1.6-2 m ahead grew 10 % between two single frames now and then, so the gate said it again by itself
+    # as `near` / `closing` and the message held back the scheduler's warning about a car. Box growth now compares the
+    # medians of the boxes around each end: 1 false closing in 1450 decisions (single frames: 25)
+    import random
+    from seeforme.geometry import CameraModel
+    cam, gate = CameraModel(), AnnouncementGate(NearestPolicy(), GateConfig())
+    false = n = 0
+    for z, label, H, W, base_h in ((1.6, "chair", 0.9, 0.5, 0.0), (2.0, "text", 0.3, 0.8, 1.0)):
+        base = cam.clip(cam.project_box(0.0, z, H, W, base_height=base_h))
+        for seed in range(5):
+            rng = random.Random(seed)
+            trk = Track(track_id=1, label=label, kind="object", bbox=base, confidence=0.9, first_seen=0.0, last_seen=0.0)
+            for i in range(300):
+                trk.bbox = tuple(c + rng.gauss(0.0, 0.008) for c in base)
+                trk.bbox_history.append((i / 10, trk.bbox))
+                if i >= 10 and i % 5 == 0:
+                    n += 1
+                    false += gate._box_closing(trk, z) >= gate.gate_cfg.nodepth_approach_mps
+    assert n == 580 and false <= 2, false
+    # a real approach still shows: the same box growing as the user walks in at 0.5 m/s
+    trk = Track(track_id=1, label="chair", kind="object", bbox=base, confidence=0.9, first_seen=0.0, last_seen=0.0)
+    for i in range(15):
+        zz = 2.0 - 0.05 * i
+        trk.bbox = cam.clip(cam.project_box(0.0, zz, 0.9, 0.5))
+        trk.bbox_history.append((i / 10, trk.bbox))
+    assert gate._box_closing(trk, 1.3) >= 0.3
+
+
+class BusyAware(OfferTrack):
+    """Like P-CACS for a routine cue: offers nothing while it is shown a busy channel."""
+
+    def decide(self, tracks, t, ch=None):
+        return [] if ch is not None and ch.busy else super().decide(tracks, t, ch)
+
+
+def test_a_message_the_gate_said_on_its_own_does_not_hold_back_the_scheduler():
+    # Harness find:1017 (read mode): the gate said a chair cue it had held (muted) once that chair approached; while
+    # that message played, the scheduler, shown the busy channel, did not offer the FIND-goal chair coming into the path,
+    # which the controller without the gate said at once. The scheduler is now shown the channel as it would be without
+    # the gate's own message (as the controller does for cane cues and replies), and its safety cue cuts that message
+    za = lambda t: 4.5 if t < 3.0 else 4.5 - 1.0 * (t - 3.0)
+    zh = lambda t: 5.5 - 0.9 * t
+    def scene(t):
+        return [dict(tid=1, label="chair", bbox=box(0.75, h=0.2), dist=za(t), rel=-1.0 if t >= 3.0 else 0.0,
+                     ttc=(za(t) - 0.6) / 1.0 if t >= 3.0 else math.inf),
+                dict(tid=2, label="chair", bbox=box(0.5, h=0.18), dist=zh(t), rel=-0.9, ttc=(zh(t) - 0.6) / 0.9, path=0.8)]
+    gate = AnnouncementGate(BusyAware({1: [1.0], 2: [3.5]}), GateConfig(background=False, objects_muted=True))
+    sc, said, busy_until, cur = Scene(), [], -1.0, None
+    for i in range(10):
+        t = i * DT
+        ch = ChannelState(busy=t < busy_until, remaining_s=max(0.0, busy_until - t), current_track=cur if t < busy_until else None)
+        for c in gate.decide(sc.at(t, scene(t)), t, ch):
+            said.append((c.track_id, t, c.action))
+            busy_until, cur = t + 2.4, c.track_id               # (a long message)
+    # chair 1: muted at 1.0 (no TTC), said by the gate itself at 3.0 once it approaches (TTC 3.9 s); chair 2, offered
+    # while that message plays, cuts it
+    assert said == [(1, 3.0, "speak"), (2, 3.5, "interrupt")], (said, dict(gate.reasons))
+
+
+def test_find_goal_another_unsaid_object_is_said_when_the_scheduler_repeats_one():
+    # Harness find:2133 (learned scheduler, FIND "person"): two people in view; the scheduler named the one on the right
+    # every 1.5 s (all held as repeats) and never the one 6 m away on the left, which the bare scheduler named at 19 s.
+    # When a FIND-goal cue is held as a repeat while another object the goal names is in view and was never said, the
+    # gate says that one instead
+    def scene(t):
+        return [dict(tid=1, bbox=box(0.62, h=0.45), dist=3.0), dict(tid=2, bbox=box(0.3, h=0.22), dist=6.0)]
+    for goal in (["person"], None):
+        gate = AnnouncementGate(OfferTrack({1: [1.0, 2.5, 4.0]}), GateConfig(background=False))
+        if goal:
+            gate.set_goal(goal)
+        cues = run(gate, scene, 5.0)
+        assert [(c.track_id, c.t) for c in cues] == ([(1, 1.0), (2, 2.5)] if goal else [(1, 1.0)]), dict(gate.reasons)
+
+
+def test_a_second_car_whose_box_covers_the_first_is_not_a_duplicate_at_another_depth():
+    # Harness twins:1375: car A said 5.4 m ahead; car B pulls in 0.8 m in front of it, its box over A's (IoU >= dup_iou),
+    # then drives at the user. Within the `closer` step (1.1 m) the two boxes counted as one car detected twice, so B
+    # inherited A's memory and its cue was held as a repeat. With measured depth on both, a duplicate box is at the same
+    # depth (within max(release_m, release_frac x range)); without depth the coarser box range still decides, and B
+    # takes A's memory, but in the walking path 0.83 m nearer than the car the user heard of is news either way (closing)
+    from seeforme.geometry import CameraModel
+    from seeforme.types import bbox_iou
+    cam = CameraModel()
+    ba, bb = cam.clip(cam.project_box(0.33, 5.37, 1.5, 1.8)), cam.clip(cam.project_box(0.06, 4.54, 1.5, 1.8))
+    assert bbox_iou(ba, bb) >= GateConfig().dup_iou
+    for conf, why in ((0.9, "new"), (0.25, "closing")):
+        gate = AnnouncementGate(OfferTrack({1: [2.0], 2: [7.0]}), GateConfig(background=False))
+        cues = run(gate, lambda t: [dict(tid=1, label="car", bbox=ba, dist=5.37, depth_conf=conf)]
+                   + ([dict(tid=2, label="car", bbox=bb, dist=4.54, depth_conf=conf)] if t >= 5.5 else []), 7.5)
+        assert [(c.track_id, c.t) for c in cues] == [(1, 2.0), (2, 7.0)], (conf, dict(gate.reasons))
+        assert gate.reasons[why] == 1 + (why == "new")
+
+
+def test_find_goal_an_unsaid_sign_comes_before_a_reminder_about_another():
+    # Harness find:2709 (learned scheduler, FIND "exit"): the signs EXIT and EXIT 2 are both in view (the goal names
+    # both); the scheduler named EXIT 2 when the goal was set and again as a reminder, never EXIT, which the bare
+    # scheduler named. A goal cue that is only a reminder (or a repeat) while another object the goal names was never
+    # said gives way to that one, in its own words
+    def scene(t):
+        return [dict(tid=1, kind="text", label="text", text="EXIT", bbox=box(0.35, h=0.08, w=0.2), dist=4.5),
+                dict(tid=2, kind="text", label="text", text="EXIT 2", bbox=box(0.6, h=0.08, w=0.25), dist=3.0)]
+    gate = AnnouncementGate(OfferTrack({2: [2.5, 11.0]}), GateConfig(background=False))
+    cues = run(gate, scene, 2.0)
+    gate.set_goal(["exit"])
+    cues += run(gate, scene, 12.0, t0=2.5)
+    assert [(c.track_id, c.t) for c in cues] == [(2, 2.5), (1, 11.0)], dict(gate.reasons)
+    assert "EXIT" in cues[1].message and "EXIT 2" not in cues[1].message and cues[1].text == "EXIT"
+
+
+# ---- second verification (gate_verify_r2): the scheduler's own view, FIND swaps, handovers, flickers ---------------
+def _cam_box(x, z, label="person"):
+    from seeforme.geometry import CameraModel
+    from seeforme.geometry.camera import TYPICAL_SIZE_M
+    H, W = TYPICAL_SIZE_M.get(label, (1.0, 0.5))
+    return CameraModel().clip(CameraModel().project_box(x, z, H, W))
+
+
+def test_the_gates_own_messages_leave_the_scheduler_as_it_would_be_alone():
+    # Critical (static_path:70997 with P-CACS; find:71473, swap:91001 with the learned scheduler): the gate said cues
+    # itself (a false release, a rescue) and stamped the track as announced, charged or refunded the speech budget,
+    # and showed the scheduler a free channel where alone its held cue would still be playing. The scheduler then
+    # decided on another state than alone and did not give the warning it gives alone (P-CACS's novelty decay kept the
+    # bench unsaid until contact). The gate's own messages and its holds now leave the scheduler's tracks, budget and
+    # channel as they would be without the gate
+    z = lambda t: 5.6 if t < 12.4 else 5.6 - 0.37 * (t - 12.4)
+
+    class Watch(OfferAt):
+        def decide(self, tracks, t, ch=None):
+            self.seen.append((round(t, 3), bool(ch is not None and ch.busy)))
+            return super().decide(tracks, t, ch)
+    inner = Watch([2.0, 10.0])
+    inner.seen = []
+    gate, sc = AnnouncementGate(inner, GateConfig(background=False)), Scene()
+    for i in range(int(25.5 / DT) + 1):
+        t = i * DT
+        go = t >= 12.4
+        gate.decide(sc.at(t, [dict(tid=1, label="car", bbox=box(0.46, h=min(0.95, 1.4 / z(t)), w=min(0.95, 1.7 / z(t))),
+                                   dist=z(t), rel=-0.37 if go else 0.0, ttc=(z(t) - 0.6) / 0.37 if go else math.inf,
+                                   path=0.6)]), t, ChannelState())
+    trk = sc.tracks[1]
+    assert gate.stats["rescued"] >= 1                                       # the gate did say the car itself ...
+    assert trk.last_announced == 10.0 and trk.announce_count == 2           # ... but the track has only the scheduler's
+    assert inner.budget == pytest.approx(inner.cfg.budget_capacity_s - 2 * 1.2)   # marks, and its budget is as alone
+    seen = dict(inner.seen)
+    assert seen[10.5] and seen[11.0] and not seen[11.5]     # its held cue (10.0 s, 1.2 s long) plays as it would alone
+
+
+def test_find_goal_coming_closer_in_the_path_is_not_swapped_for_another_one():
+    # Major (find:71797, learned scheduler, FIND "person", box depth): the scheduler named the goal person walking at
+    # the user (4.8 m, in the path, 1.3 m nearer than said); the gate held it as a repeat and said instead another
+    # person off to the left, who left view a moment later. The goal person was next said 1.4 s before contact. A goal
+    # object in the path that came nearer by the `closing` step is news: no swap (and a swapped cue waits as held)
+    zh = lambda t: 6.1 if t < 3.0 else 6.1 - 0.65 * (t - 3.0)
+    def scene(t):
+        return [dict(tid=1, bbox=_cam_box(0.0, zh(t)), dist=zh(t), depth_conf=0.25, path=0.53),
+                dict(tid=2, bbox=_cam_box(-2.4, 4.7), dist=4.7, depth_conf=0.25, path=0.04)]
+    gate = AnnouncementGate(OfferTrack({1: [1.0, 5.0]}), GateConfig(background=False))
+    gate.set_goal(["person"])
+    cues = run(gate, scene, 6.0)
+    assert [(c.track_id, c.t) for c in cues] == [(1, 1.0), (1, 5.0)], dict(gate.reasons)
+    assert gate.reasons["closing"] == 1
+
+
+@pytest.mark.parametrize("gap_frames", [0, 1])
+@pytest.mark.parametrize("background", [True, False])
+@pytest.mark.parametrize("offers", ["every step", "once"])
+def test_a_person_stepping_in_where_another_stood_without_a_gap_is_new(gap_frames, background, offers):
+    # Major (bgref:90278, bgref:90998, the 144-scene handover grid; learned scheduler, no depth): person A, said at 3 m,
+    # leaves; person B steps in where A stood 0.9 m farther in the same frame or the next one, then walks at the user at
+    # 1.7 m/s. The IoU tracker keeps one id and no dropout of jump_gap_s shows the range jump, so B's cue was held as a
+    # repeat of A (or as A's background) until B came 1 m nearer than 3 m, under 1 s before contact. A step farther
+    # from one frame to the next that the object could not walk lets go of A's memory and background record; a cue held
+    # as a repeat before the step showed is then said as new (the scheduler offered B once, at the switch)
+    from seeforme.geometry import TrackDynamics
+    from seeforme.geometry import CameraModel
+    from seeforme.tracking.tracker import IoUTracker
+    from seeforme.types import Detection
+    tracker = IoUTracker(PipelineConfig().tracker, dynamics=TrackDynamics(CameraModel()))
+    inner = NearestPolicy() if offers == "every step" else OfferAt([0.5, 9.5 + 0.5 * gap_frames])   # (first step with B)
+    gate = AnnouncementGate(inner, GateConfig(background=background))
+    said = []
+    for i in range(125):
+        t = round(i / 10, 3)
+        if i < 95:
+            dets = [Detection("person", 0.9, _cam_box(0.1, 3.0))]
+        elif i < 95 + gap_frames:
+            dets = []
+        else:
+            dets = [Detection("person", 0.9, _cam_box(0.08, max(0.3, 3.9 - 1.7 * max(0.0, t - 9.8))))]
+        tracks = tracker.update(dets, t)
+        if i % 5 == 0:
+            said += [c.t for c in gate.decide(tracks, t, ChannelState())]
+    b = [x for x in said if x >= 9.5]
+    assert b and b[0] <= 10.0, (said, dict(gate.reasons))           # contact at 11.7 s
+
+
+def test_an_object_in_the_path_that_came_nearer_is_said_again_after_hold_moving_s():
+    # Major (flicker:72656, learned scheduler, no depth, 2-frame sightings): a chair said at 4.2 m; 9 s later the user
+    # walks at it, and the scheduler names it again at 3.75 m. Under flicker no box growth shows, and 0.45 m is under
+    # the `closing` step (0.63 m) and the `closer` one (1 m): held as a static repeat for 30 s, it was said 0.7 s
+    # before contact. An object in the walking path that is release_m nearer than when it was said is held only
+    # hold_moving_s, like a moving one
+    z = lambda t: 4.2 if t < 8.5 else 4.2 - 0.45 * (t - 8.5)
+    def scene(t):
+        return [dict(tid=1, label="chair", bbox=_cam_box(0.0, z(t), "chair"), dist=z(t), depth_conf=0.25, path=0.6)]
+    gate = AnnouncementGate(OfferTrack({1: [0.5, 6.5, 9.5]}), GateConfig(background=False))
+    cues = run(gate, scene, 10.0)
+    assert [c.t for c in cues] == [0.5, 9.5] and gate.reasons["reminder"] == 1, dict(gate.reasons)
+
+
+def test_a_slow_approach_in_the_path_is_said_again_on_a_range_step():
+    # Major (read_scene:72879, learned scheduler, box depth): the user walks at a chair at 0.2 m/s; said at 1.9 m, the
+    # scheduler names it again at 1.3 m, 3.5 s before contact. A closing speed of 0.2 m/s is under release_mps and
+    # nodepth_approach_mps, so neither `closing` nor `near` held. A cue the scheduler offers about an object in the
+    # walking path passes on the `closing` step alone (the gate's own rescue still needs a closing speed)
+    z = lambda t: 2.0 - 0.2 * t
+    def scene(t):
+        return [dict(tid=1, label="chair", bbox=_cam_box(0.0, z(t), "chair"), dist=z(t), depth_conf=0.25, path=0.7)]
+    gate = AnnouncementGate(OfferTrack({1: [0.5, 3.5]}), GateConfig(background=False))
+    cues = run(gate, scene, 4.0)
+    assert [c.t for c in cues] == [0.5, 3.5] and gate.reasons["closing"] == 1, dict(gate.reasons)
+
+
+@pytest.mark.parametrize("background", [True, False])
+def test_an_object_in_the_path_that_leaves_view_right_after_its_cue_was_held_is_said(background):
+    # Major (rescue_switch:90860, 90676, 90572; learned scheduler, no depth): a person standing 4.9 m ahead in the path
+    # (background, or said long ago) starts to walk at the user just before the scheduler names it again, and drops
+    # out of view right after for 1.5 s. Nothing in view showed the approach, so the cue was held; the gate first said
+    # the person back in view, 1.1 s before contact. A cue about an object in the path that the user did not hear about
+    # for hold_moving_s, held as nothing new, is said at the next decision if the object leaves view meanwhile
+    z = lambda t: 4.9 if t < 13.3 else 4.9 - 1.46 * (t - 13.3)
+    def scene(t):
+        if 13.6 <= t < 15.0:
+            return []
+        return [dict(tid=1 if t < 13.6 else 2, bbox=_cam_box(-0.2, z(t)), dist=z(t), depth_conf=0.25, path=0.55)]
+    gate = AnnouncementGate(OfferTrack({1: [1.5, 13.5]}), GateConfig(background=background))
+    cues = run(gate, scene, 15.5)
+    first = [(c.track_id, c.t) for c in cues if c.t > 2.0][:1]
+    assert first == [(1, 14.0)] and gate.reasons["lost (deferred)"] == 1, (first, dict(gate.reasons))
+    # a static object in the path that leaves view is said at most once per hold_moving_s (a reacquired person)
+    def flick(t):
+        return [] if t % 3.0 >= 2.0 else [dict(tid=1 + int(t // 3.0), bbox=_cam_box(-0.2, 3.0), dist=3.0, depth_conf=0.25,
+                                               path=0.55)]
+    gate = AnnouncementGate(NearestPolicy(), GateConfig(background=background))
+    cues = run(gate, flick, 60.0)
+    assert len(cues) <= 1 + 60.0 / GateConfig().hold_moving_s, [c.t for c in cues]
+
+
+def test_a_routine_cue_waits_while_the_gates_own_message_plays():
+    # The live speakers drop a message they get while they speak (feedback/speech.py Speaker.say). While the gate's own
+    # message plays (here a cue held for confirmation, said a step later), the scheduler is shown its own channel, which
+    # is free, and offers a routine cue about another object: the gate passed it as "speak" onto the busy channel, where
+    # it was lost although the gate recorded it as said. A safety cue still cuts the gate's message; a routine one now
+    # waits for the channel
+    def scene(t):
+        return [dict(tid=1, bbox=box(0.95), dist=4.0, **({"hits": 1} if t == 0.0 else {})),
+                dict(tid=2, bbox=box(0.08), dist=5.0)]
+    gate = AnnouncementGate(OfferTrack({1: [0.0], 2: [1.0]}), GateConfig(background=False))
+    sc, said, busy_until, cur = Scene(), [], -1.0, None
+    for i in range(10):
+        t = i * DT
+        ch = ChannelState(busy=t < busy_until, remaining_s=max(0.0, busy_until - t), current_track=cur if t < busy_until else None)
+        for c in gate.decide(sc.at(t, scene(t)), t, ch):
+            assert c.action != "speak" or t >= busy_until            # never onto a busy channel
+            said.append((c.track_id, t, c.action))
+            busy_until, cur = t + 2.4, c.track_id
+    assert said == [(1, 0.5, "speak"), (2, 3.0, "speak")], (said, dict(gate.reasons))

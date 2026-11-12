@@ -15,10 +15,15 @@ map, for what the detector cannot name (walls, doors, poles, low and head-height
                     "suggest": null | "left" | "right" | "stop"}
 
 It is one depth map, with no memory: the caller applies persistence (the live demo waits for 3 maps over 0.5 s),
-decides walking vs standing still, and never reads clear_m out as "clear". "stop" (something within 0.6 m ahead) is
-returned only when the request says the user is walking (form field walking=true): one map cannot tell a walker about
-to hit something from a seated user whose laptop camera sees the desk 0.5 m away, and the live demo stops only for
-what the user walked up to. Without it suggest is "left", "right" or null.
+decides walking vs standing still, and never reads clear_m out as "clear". Two optional form fields shape "suggest"
+(the obstacle and clear_m are reported whatever they say):
+    walking=true    "stop" (something within 0.6 m ahead) is returned only then: one map cannot tell a walker about to
+                    hit something from a seated user whose laptop camera sees the desk 0.5 m away, and the live demo
+                    stops only for what the user walked up to. Without it suggest is "left", "right" or null.
+    aid=cane        what the user travels with: cane (default), guide-dog or none (seeforme/live/cane.py, the BLV-Road-Nav
+                    focus group). cane: "stop" only for a body or head-level obstacle, "left" / "right" only for a body
+                    obstacle beyond the cane's reach (1.2 m); guide-dog: "stop" only for body or head level, never
+                    "left" / "right" (the dog leads); none: every suggestion. Anything else is a 400.
 """
 from __future__ import annotations
 
@@ -38,7 +43,7 @@ from fastapi.staticfiles import StaticFiles
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from seeforme.live.cane import analyze as cane_analyze  # noqa: E402
+from seeforme.live.cane import AIDS, analyze as cane_analyze  # noqa: E402
 from seeforme.perception.depth import DepthAnythingEstimator, INDOOR, OUTDOOR, object_distances  # noqa: E402
 from seeforme.types import Detection  # noqa: E402
 
@@ -92,7 +97,10 @@ def health():
 
 @app.post("/api/depth")
 async def api_depth(image: UploadFile = File(...), boxes: str = Form("[]"), outdoor: str = Form("false"),
-                    walking: str = Form("")):
+                    walking: str = Form(""), aid: str = Form("cane")):
+    aid = aid.strip().lower() or "cane"
+    if aid not in AIDS:
+        raise HTTPException(400, f"aid must be one of {', '.join(AIDS)}")
     img = _decode(await image.read())
     bxs = json.loads(boxes)
     dets = [Detection(label="object", confidence=1.0, bbox=tuple(b)) for b in bxs]
@@ -101,19 +109,20 @@ async def api_depth(image: UploadFile = File(...), boxes: str = Form("[]"), outd
     depth = est(img)
     object_distances(depth, dets)
     return {"distances": [[d.distance_m, d.depth_conf] for d in dets], "ms": round((time.perf_counter() - t0) * 1000, 1),
-            "device": est.device, "cane": cane_summary(depth, walking=walking.strip().lower() == "true")}
+            "device": est.device, "cane": cane_summary(depth, walking=walking.strip().lower() == "true", aid=aid)}
 
 
-def cane_summary(depth, walking: bool = False) -> dict | None:
+def cane_summary(depth, walking: bool = False, aid: str = "cane") -> dict | None:
     """The "cane" field: None when there is no usable depth map (or the analysis fails: distances still go back). A
-    "stop" suggestion only for a client that says the user is walking (module docstring)."""
+    "stop" suggestion only for a client that says the user is walking, and only what the aid leaves to us (module
+    docstring)."""
     if depth is None or getattr(depth, "size", 0) == 0:
         return None
     try:
         fr = cane_analyze(depth)
         if fr.floor is None:
             return None                                               # no valid depth at all: nothing to tell
-        out = fr.as_contract()
+        out = fr.as_contract(aid=aid)
         if out["suggest"] == "stop" and not walking:
             out["suggest"] = None
         return out

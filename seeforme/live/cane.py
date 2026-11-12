@@ -4,7 +4,7 @@ The COCO detector cannot name walls, doors, poles, posts, stairs, kerbs or barri
 them. This layer looks only at the Depth Anything metric depth map (metres) and asks what a cane and a guide dog ask.
 
     analyze(depth, cfg=None, prior=None) -> CaneFrame        one depth map, stateless (server/app.py uses this)
-    Cane(cfg).update(depth, t, tracks) -> CaneFrame          every new depth map (LiveController.on_frame)
+    Cane(cfg, aid).update(depth, t, tracks) -> CaneFrame     every new depth map (LiveController.on_frame)
     Cane.propose(t, moving, busy, read_mode, units) -> Cue   at a decision step: the cane cue to say now, or None
     Cane.commit(cue, t)                                      the controller said it: remember it
 
@@ -57,6 +57,23 @@ about the corridor ahead only: a wall alongside a corridor is always "on your le
 `clear_m` is for the web app's display and path choice; it is never to be read out as "clear". note() puts the
 confirmed obstacle ahead into words for answers ("is the path clear?" never ignores a wall the depth map shows).
 
+Travel aid (Cane(aid=...), run_live --aid, the server's form field aid; default "cane"). The BLV-Road-Nav focus group
+(Islam et al., arXiv 2407.16777) asked for an assistant that stays quiet about what the user's own cane can already
+touch, and most wanted warnings about "objects that pick you before you pick them" (head height) and what a cane finds
+too late. At about 6 cues a minute on EgoBlind walks the layer was too chatty, so what it says depends on the aid:
+    cane       ground level: nothing within reach_m (1.2 m: the cane finds it), beyond only with a steady approach
+               (a noisy floor patch does not close in steadily); body level from reach_m to detour_m (2.5 m: time to plan
+               a detour), nothing nearer, and said again only once 40% nearer; head level always within detour_m (the
+               priority: a cane passes under it); the stop only for body or head level and a steady approach; path
+               choice only for a body obstacle (a low one is said as "Low obstacle ahead": the cane finds it)
+    guide-dog  the dog takes the user around ground and body obstacles in the path: head level and the stop only
+    none       every cue as before (speak_m 2 m, every level, the stop for any level, path choice below head height)
+path_choice_applies is the one rule for path choice, in Cane.propose and in CaneFrame.suggest (the server's "suggest",
+which the web app's path choice follows), so the demo and the web app say the same.
+A steady approach (_SectorTrack.steady_approach): over the last 1.5 s at least 3 maps whose least-squares range closes
+at 0.25 m/s or more, none far off that line and none clearly farther than the one before. The aid changes only this
+layer: the scheduler's cues about detected objects (people, vehicles, chairs, the FIND goal) are the same for every aid.
+
 Known gaps: drop-offs (a kerb or stairs going down) are below the floor, not above it, and are not detected; the near
 floor (about 1.5 m for a chest-height camera pitched 15 degrees) is outside the view, so a low obstacle is seen while
 it is still farther away, not when the cane would touch it; a level camera that sees only a thin strip of far floor
@@ -80,6 +97,7 @@ SECTORS = ("left", "ahead", "right")
 LEVELS = ("ground", "body", "head")
 CANE_TRACK_ID = -7            # Cue.track_id of cane cues: never a tracker id (those start at 1)
 CANE_POLICY = "cane"
+AIDS = ("cane", "guide-dog", "none")      # what the user travels with (module docstring); "cane" is the default
 
 
 @dataclass
@@ -152,6 +170,14 @@ class CaneConfig:
     stop_min_mps: float = 0.25       # ... and only while it closes in at least this fast (least squares over 1.2 s): a
                                      # noisy floor patch whose range jumps about is not a walker closing on something
     speak_conf: float = 0.3          # obstacle confidence needed to speak
+    # travel aid (module docstring): what the user's own cane or dog covers is not said
+    reach_m: float = 1.2             # a long cane's reach: ground and body obstacles nearer than this are the cane's
+    detour_m: float = 2.5            # cane / dog: body (cane) and head obstacles are said out to this (time to plan a detour)
+    steady_s: float = 1.5            # a steady approach: least squares over this window ...
+    steady_resid_m: float = 0.15     # ... every map within this + steady_resid_frac x range of the line, none this much
+    steady_resid_frac: float = 0.05  # ... farther than the map before
+    aid_closer_frac: float = 0.4     # cane / dog: a body or ground obstacle already said is said again only this much
+                                     # nearer (heard at 2.5 m, again under 1.5 m; not every 35 cm while planning)
     walk_min_height_m: float = 0.9   # a fitted "floor" nearer below the camera than this is a table, a panel or a seated
                                      # user's lap: not a walking view, the cane says nothing
     explain_overlap: float = 0.3     # a track explains an obstacle: this share of the obstacle box inside the track box ...
@@ -206,30 +232,46 @@ class CaneFrame:
         side = [o for o in (self.obstacles.get("left"), self.obstacles.get("right")) if o is not None]
         return min(side, key=lambda o: o.distance_m) if side else None
 
-    def suggest(self, cfg: Optional["CaneConfig"] = None) -> Optional[str]:
+    def suggest(self, cfg: Optional["CaneConfig"] = None, aid: str = "none") -> Optional[str]:
         """stop: something within stop_m ahead; left / right: the corridor is blocked within blocked_m and that side
         was seen clear at least clearer_by_m further (the clearer side); None otherwise (never "go ahead"), and in a view
-        that is not a walking view (a fitted floor less than walk_min_height_m below the camera)."""
+        that is not a walking view (a fitted floor less than walk_min_height_m below the camera). The aid (module
+        docstring): with a cane, stop only for body or head level and path choice only for a body obstacle beyond the
+        cane's reach; with a guide dog, stop only for body or head level and no path choice (the dog leads)."""
         c = cfg or CaneConfig()
+        if aid not in AIDS:
+            raise ValueError(f"aid must be one of {', '.join(AIDS)}")
         ahead = self.obstacles.get("ahead")
         fl = self.floor
         if ahead is None or (fl is not None and fl.source == "fit" and fl.height_m < c.walk_min_height_m):
             return None                     # nothing ahead, or not a walking view (a table, a panel, seated)
         if ahead.distance_m <= c.stop_m:
-            return "stop"
-        if ahead.distance_m > c.blocked_m or ahead.level == "head":
+            return "stop" if aid == "none" or ahead.level in ("body", "head") else None
+        if not path_choice_applies(ahead.level, ahead.distance_m, aid, c):
             return None
         return clearer_side(self.clear_m.get("left"), self.clear_m.get("right"), ahead.distance_m, c)
 
-    def as_contract(self, cfg: Optional["CaneConfig"] = None) -> dict:
-        """The "cane" field of server/app.py POST /api/depth (directions are in the camera image)."""
+    def as_contract(self, cfg: Optional["CaneConfig"] = None, aid: str = "none") -> dict:
+        """The "cane" field of server/app.py POST /api/depth (directions are in the camera image); `aid` applies to
+        "suggest" only (the obstacle is reported whatever the aid)."""
         o = self.obstacle
         r = lambda v: None if v is None else round(float(v), 2)   # noqa: E731
         return {"clear_m": {s: r(self.clear_m.get(s)) for s in SECTORS},
                 "obstacle": None if o is None else {"sector": o.sector, "distance_m": r(o.distance_m), "level": o.level,
                                                     "confidence": round(float(o.confidence), 2),
                                                     "bbox": [round(float(v), 4) for v in o.bbox]},
-                "suggest": self.suggest(cfg)}
+                "suggest": self.suggest(cfg, aid)}
+
+
+def path_choice_applies(level: str, d: float, aid: str, cfg: CaneConfig) -> bool:
+    """Is path choice worth saying for the obstacle ahead at this level and range, for this aid? Never at head level
+    (the floor under it is open: "Something at head height" is the message) or beyond blocked_m; with a guide dog never
+    (the dog leads); with a cane only for a body obstacle beyond the cane's reach (a low one is the cane's to find, and
+    "Low obstacle ahead" keeps its level). One rule for CaneFrame.suggest (the server, so the web app) and Cane.propose
+    (the live demo), so both say the same."""
+    if level == "head" or d > cfg.blocked_m or aid == "guide-dog":
+        return False
+    return aid != "cane" or (level == "body" and d >= cfg.reach_m)
 
 
 def clearer_side(left: Optional[float], right: Optional[float], d_ahead: float, cfg: CaneConfig) -> Optional[str]:
@@ -593,6 +635,20 @@ class _SectorTrack:
         dd = np.array([h.d for h in hs])
         return float(min(2.0, max(0.0, -np.polyfit(tt - tt[0], dd, 1)[0])))
 
+    def steady_approach(self, t: float, cfg: CaneConfig) -> bool:
+        """The range falls steadily: over the last steady_s at least 3 maps spanning 0.4 s whose least-squares line
+        closes at stop_min_mps or more, every map within steady_resid_m + steady_resid_frac x range of that line, and
+        none more than that farther than the map before. A walker closing on something; not a noise patch whose range
+        jumps about, nor something the user stands at."""
+        hs = [h for h in self.hits if t - h.t <= cfg.steady_s + 1e-6]
+        if len(hs) < 3 or hs[-1].t - hs[0].t < 0.4:
+            return False
+        tt = np.array([h.t for h in hs]) - hs[0].t
+        dd = np.array([h.d for h in hs])
+        k, b = np.polyfit(tt, dd, 1)
+        tol = cfg.steady_resid_m + cfg.steady_resid_frac * float(np.median(dd))
+        return bool(-k >= cfg.stop_min_mps and np.abs(dd - (k * tt + b)).max() <= tol and np.diff(dd).max() <= tol)
+
     def approaching(self, t: float, cfg: CaneConfig) -> bool:
         """Range fell by max(closer_m, closer_frac x then) within approach_s (median of 3 hits at each end)."""
         hs = [h for h in self.hits if t - h.t <= cfg.approach_s]
@@ -632,8 +688,11 @@ def explained_by(o: Obstacle, tracks: Optional[Sequence], cfg: CaneConfig) -> bo
 class Cane:
     """The temporal cane: feed every new depth map, ask for a cue at each decision step, commit what was said."""
 
-    def __init__(self, cfg: Optional[CaneConfig] = None):
+    def __init__(self, cfg: Optional[CaneConfig] = None, aid: str = "cane"):
+        if aid not in AIDS:
+            raise ValueError(f"aid must be one of {', '.join(AIDS)}")
         self.cfg = cfg or CaneConfig()
+        self.aid = aid
         self.reset()
 
     def reset(self) -> None:
@@ -651,19 +710,23 @@ class Cane:
         self.n_maps = 0
         self.ms: Deque[float] = deque(maxlen=200)
         self.stats: Dict[str, int] = {"said": 0, "stop": 0, "path": 0, "head": 0, "held": 0, "explained": 0, "still": 0,
-                                      "close_up": 0, "noted": 0}
+                                      "close_up": 0, "noted": 0, "aid": 0}
 
     # ---- input --------------------------------------------------------------------------------------------------
-    def update(self, depth: Optional[np.ndarray], t: float, tracks: Optional[Sequence] = None) -> Optional[CaneFrame]:
+    def update(self, depth: Optional[np.ndarray], t: float, tracks: Optional[Sequence] = None,
+               frame: Optional[CaneFrame] = None) -> Optional[CaneFrame]:
         """Analyse a *new* depth map (the same array object again, e.g. the pipeline's map between depth runs, is
-        ignored) and update the per-sector persistence."""
-        if depth is None:
-            return self.frame
-        if depth is self._last_map_ref:
-            return self.frame
-        self._last_map_ref = depth
-        prior = self.floor if (self.floor is not None and t - self._floor_t <= self.cfg.reuse_floor_s) else None
-        fr = analyze(depth, self.cfg, prior)
+        ignored) and update the per-sector persistence. `frame`: the analysis of a new map made elsewhere, used instead
+        of analysing `depth` (scripts/eval_live_cane.py runs one analysis per map for several aids; it must come from
+        a Cane fed the same maps, whose floor prior is this one's)."""
+        if frame is not None:
+            fr = frame
+        else:
+            if depth is None or depth is self._last_map_ref:
+                return self.frame
+            self._last_map_ref = depth
+            prior = self.floor if (self.floor is not None and t - self._floor_t <= self.cfg.reuse_floor_s) else None
+            fr = analyze(depth, self.cfg, prior)
         if fr.floor is not None and fr.floor.source == "fit":
             self.floor, self._floor_t = fr.floor, t
         for s in SECTORS:
@@ -688,9 +751,12 @@ class Cane:
         return fr
 
     def _stop_due(self, t: float, d: float) -> bool:
-        """Intelligent disobedience: something big within stop_m that the user walked up to, once per obstacle."""
+        """Intelligent disobedience: something big within stop_m that the user walked up to, once per obstacle. With a
+        cane or a guide dog, only at body or head level and in a steady approach (the cane or the dog finds the rest)."""
         c, ahead = self.cfg, self.sectors["ahead"]
         if not self._stop_armed or t - self._stop_t < c.stop_gap_s or ahead.hits[-1].area < c.stop_area_m2:
+            return False
+        if self.aid != "none" and (ahead.level == "ground" or not ahead.steady_approach(t, c)):
             return False
         # where it will be at the next decision: a walker covers 0.5 m between decisions, so waiting for 0.6 m is late
         # (closing speed capped at a brisk walk; the latest map must be within near_m: noise is not an approach)
@@ -703,6 +769,21 @@ class Cane:
         """The obstacle ahead was seen at least stop_seen_m farther than d within the last 3 s: the user walked up to it
         (a seat back, a wall the user stands at or a panel they read never came closer)."""
         return any(h.d >= d + self.cfg.stop_seen_m for h in self.sectors["ahead"].hits if t - h.t <= 3.0)
+
+    @property
+    def speak_m(self) -> float:
+        """How far ahead the cane speaks: speak_m without an aid, detour_m with one (body and head obstacles are said
+        early enough to plan a detour; what is nearer is the aid's)."""
+        return self.cfg.speak_m if self.aid == "none" else self.cfg.detour_m
+
+    def aid_says(self, level: str, d: float, t: float) -> bool:
+        """Is this obstacle ahead (level, range) news for a user with this aid (module docstring)?"""
+        c = self.cfg
+        if self.aid == "none" or level == "head":
+            return True                     # (both already within speak_m)
+        if self.aid == "guide-dog" or d < c.reach_m:
+            return False                    # the dog leads around it; the cane touches it
+        return level == "body" or self.sectors["ahead"].steady_approach(t, c)
 
     @property
     def walking_view(self) -> bool:
@@ -739,7 +820,7 @@ class Cane:
             return None
         if moving and self._stop_due(t, d):
             return self._cue(t, "Stop.", "stop:ahead", d, conf, 1.0, action="haptic")
-        if read_mode or busy or d > c.speak_m or conf < c.speak_conf or t - self._stop_t < c.stop_gap_s:
+        if read_mode or busy or d > self.speak_m or conf < c.speak_conf or t - self._stop_t < c.stop_gap_s:
             return None                     # (right after a stop the buzz has said it)
         if d <= c.stop_m and not self._approached(t, d):
             self.stats["close_up"] += 1     # within reach and never walked up to: something the user is handling
@@ -751,13 +832,17 @@ class Cane:
         if not moving and not approaching:
             self.stats["still"] += 1
             return None
+        if not self.aid_says(level, d, t):
+            self.stats["aid"] += 1          # the user's cane or dog covers it
+            return None
         key = f"obstacle:ahead:{level}"
         e = self._recall(key, level)
         if e is not None and d > e.d + max(0.5, 0.25 * e.d):
             self.memory.pop(key, None)                # clearly farther than when it was said: a new obstacle
             e = None
         if e is not None:
-            closer = d <= e.d - max(c.closer_m, c.closer_frac * e.d)
+            frac = c.closer_frac if self.aid == "none" or level == "head" else c.aid_closer_frac
+            closer = d <= e.d - max(c.closer_m, frac * e.d)
             band = d <= c.near_m < e.d
             if t - e.t < c.min_gap_s and not band:
                 self.stats["held"] += 1
@@ -767,7 +852,7 @@ class Cane:
                 return None
         dist = distance_phrase(d, conf, units)
         side = blocked = None
-        if level != "head" and d <= c.blocked_m:
+        if path_choice_applies(level, d, self.aid, c):
             side = clearer_side(self.side_clear("left", t), self.side_clear("right", t), d, c)
             other = None if side is None else ("right" if side == "left" else "left")
             v = None if other is None else self.side_clear(other, t)
@@ -841,12 +926,14 @@ class Cane:
         return f"The depth map shows {what} ahead" + (f", {dist}." if dist else ".")
 
     def summary(self) -> Optional[dict]:
-        return None if self.frame is None else self.frame.as_contract(self.cfg)
+        """The latest map's server contract, its suggestion for this Cane's aid."""
+        return None if self.frame is None else self.frame.as_contract(self.cfg, self.aid)
 
     def describe(self) -> str:
         s, fl = self.stats, self.floor
         ms = f"{np.mean(self.ms):.1f} ms/map" if self.ms else "no maps"
         floor = (f"floor {fl.height_m:.2f} m, pitch {fl.pitch_deg:.0f} deg" + (f", depth x{fl.scale:.2f}" if abs(fl.scale - 1) > 1e-3 else "")
                  if fl is not None else "no floor fit yet")
-        return (f"cane: {s['said']} said ({s['path']} path, {s['head']} head), {s['stop']} stop; quiet: {s['held']} held, "
-                f"{s['explained']} explained by a track, {s['still']} still; {self.n_maps} maps, {ms}; {floor}")
+        return (f"cane (aid {self.aid}): {s['said']} said ({s['path']} path, {s['head']} head), {s['stop']} stop; quiet: "
+                f"{s['held']} held, {s['explained']} explained by a track, {s['still']} still, {s['aid']} left to the aid; "
+                f"{self.n_maps} maps, {ms}; {floor}")
