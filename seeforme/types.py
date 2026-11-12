@@ -1,6 +1,8 @@
 """Core data types shared across the pipeline."""
 from __future__ import annotations
 
+import math
+
 from collections import deque
 from dataclasses import dataclass, field
 from typing import Deque, Optional, Tuple
@@ -105,6 +107,29 @@ class Track:
         if a0 <= 1e-6:
             return 0.0
         return (a1 - a0) / a0 / dt
+
+    def looming_ttc(self, window_s: float = 1.2, min_points: int = 3) -> float:
+        """Image-scale time to contact from box-height growth (looming).
+
+        Under perspective projection the box height is h = f*H/Z, so d(log h)/dt = -dZ/dt / Z and the time to
+        contact at the current closing speed is 1 / d(log h)/dt. It needs no metric depth and no estimate of the
+        user's walking speed. The least-squares slope over the window estimates the rate at the window's mean
+        time; at constant closing speed time-to-contact falls one second per second, so the value is shifted to
+        the newest sample. Returns inf for static, receding or too-short tracks."""
+        if len(self.bbox_history) < min_points:
+            return math.inf
+        t_last = self.bbox_history[-1][0]
+        pts = [(t, math.log(max(b[3] - b[1], 1e-6))) for t, b in self.bbox_history if t >= t_last - window_s - 1e-9]
+        if len(pts) < min_points:
+            return math.inf
+        n = len(pts); tm = sum(p[0] for p in pts) / n; vm = sum(p[1] for p in pts) / n
+        den = sum((p[0] - tm) ** 2 for p in pts)
+        if den <= 1e-9:
+            return math.inf
+        slope = sum((p[0] - tm) * (p[1] - vm) for p in pts) / den
+        if slope <= 1e-3:
+            return math.inf
+        return max(0.0, 1.0 / slope - (t_last - tm))
 
 
 @dataclass

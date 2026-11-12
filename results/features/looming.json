@@ -1,0 +1,50 @@
+{
+ "n_train": 20774,
+ "n_finetune": 4479,
+ "pos_train": 3454,
+ "pos_finetune": 959,
+ "base": {
+  "auc_train": 0.7283399539443507,
+  "auc_finetune": 0.6745337235756944
+ },
+ "groups": {
+  "looming_track": {
+   "auc_train": 0.7288083501941051,
+   "auc_finetune": 0.6753000876860366,
+   "delta": 0.0007663641103421437,
+   "ci": [
+    -0.003213957759412245,
+    0.0035004595638050695
+   ],
+   "passes_gate": false
+  },
+  "looming_decision": {
+   "auc_train": 0.7320887119529386,
+   "auc_finetune": 0.6829998696558914,
+   "delta": 0.008466146080197023,
+   "ci": [
+    -0.003795397940597023,
+    0.020669087529860963
+   ],
+   "passes_gate": false
+  },
+  "looming_all": {
+   "auc_train": 0.7325617719389509,
+   "auc_finetune": 0.6840132950990615,
+   "delta": 0.009479571523367092,
+   "ci": [
+    -0.004106757343542711,
+    0.02328721945209622
+   ],
+   "passes_gate": false
+  }
+ },
+ "single_feature_auc_finetune": {
+  "has_loom": 0.5255692186463171,
+  "inv_loom": 0.5504606479287136,
+  "loom_lt3": 0.5295316795430847,
+  "dec_has_loom": 0.5236792290738459,
+  "dec_max_inv_loom": 0.6027428547729643,
+  "dec_n_loom_lt3": 0.6033378460043606
+ }
+}

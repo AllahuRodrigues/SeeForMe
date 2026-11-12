@@ -113,6 +113,23 @@ Full-information labels delivered d seconds after each decision; everything else
 
 8. **Recall falls steadily with label delay, and by the end of the clip full labels are worth no more than taps and questions.** Events last a few seconds, so a label that arrives within a second or two mostly teaches the learner about the *same* event while it is still happening; that is adaptation within an event, which no real user can supply before the event. What transfers across videos is worth about 0.06 over the floor (0.20 vs 0.14). The open problem is therefore cross-event generalisation: features that recognise a should-speak moment in advance. That, not the feedback channel, is what the next experiments target.
 
+**Recall over all events.** Coverable recall counts only the 160 of 293 dev events (55%) the detector can see. Counted over all weakly labelled events, with uncoverable events as misses, greedy catches 98 of 879 seed-events = **0.111**, the no-learning floor 0.075 and causal full information 0.109. That is far from what a dependable navigation aid needs; perception and anticipation matter more than the feedback channel.
+
+**All feedback is simulated or replayed.** Taps are simulated (p_tap 0.5, oracle usefulness) and questions are replayed from EgoBlind's annotation, most of which was written after recording. These are simulated-feedback replay experiments; no BLV user has interacted with the learner.
+
+## Anticipation feature gate: looming time to contact (added 2026-11-12, night)
+
+Box-height growth gives time to contact without depth: h = fH/Z, so 1 / d(log h)/dt = Z / (-dZ/dt) (CPSC 480 lecture 3, magnification inversely proportional to depth). `Track.looming_ttc()`, gated with `scripts/feature_auc.py` (logistic on `train` candidates, AUC on `finetune`, paired bootstrap over videos; pass = +0.02 with the interval above 0).
+
+| Features | AUC train | AUC finetune | Δ vs base [95% CI] | Gate |
+|---|---|---|---|---|
+| base 29 | 0.728 | 0.675 | | |
+| + per-track looming | 0.729 | 0.675 | +0.001 [-0.003, +0.004] | fail |
+| + decision-level looming | 0.732 | 0.683 | +0.008 [-0.004, +0.021] | fail |
+| + both | 0.733 | 0.684 | +0.009 [-0.004, +0.023] | fail |
+
+9. **Looming alone does not pass.** Decision-level looming separates somewhat on its own (single-feature AUC 0.60) but adds little beyond the existing box-growth and depth features. Next in line: camera ego-motion from corner matching and RANSAC (`docs/research/lectures.md`, idea 2), which also works when the detector sees nothing.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.

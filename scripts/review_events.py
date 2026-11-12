@@ -5,6 +5,11 @@
     python scripts/review_events.py serve  --split train --reviewer r2 --second-rater   # 20% sample for agreement
     python scripts/review_events.py merge  --split train --reviewer ar   # write human_verdict into the review CSV
     python scripts/review_events.py kappa  --split train --a ar --b r2   # Cohen's kappa on the overlap
+    python scripts/review_events.py audit  --n-speak 30 --n-quiet 20      # blind mixed audit set (split "audit")
+    python scripts/review_events.py audit-score --reviewer ar              # verdicts vs the hidden derived labels
+
+The audit mixes random should-speak events with user-confirmed quiet moments ("is it clear?" "yes") from train and
+finetune, shuffled, with the derived answer hidden, so it measures whether verdicts separate the two.
 
 Reads results/egoblind/review_events_<split>.csv (scripts/diagnose_egoblind_recall.py). Model columns are never shown.
 Frames and verdicts live in data/review/<split>/ (git-ignored: frames are EgoBlind video, CC BY-NC).
@@ -23,15 +28,44 @@ STEP_S, BEFORE_S, AFTER_S, WIDTH = 0.75, 3.0, 1.0, 480
 MIN_GAP_S = 2.0   # server-side floor between two verdicts by one reviewer (held keys, scripted clicks)
 
 ap = argparse.ArgumentParser()
-ap.add_argument("cmd", choices=["frames", "serve", "merge", "kappa"])
+ap.add_argument("cmd", choices=["frames", "serve", "merge", "kappa", "audit", "audit-score"])
 ap.add_argument("--split", default="train")
 ap.add_argument("--reviewer", default="")
 ap.add_argument("--second-rater", action="store_true", help="review only the seeded 20% agreement sample")
 ap.add_argument("--port", type=int, default=8765)
 ap.add_argument("--a", default=""); ap.add_argument("--b", default="")
+ap.add_argument("--n-speak", type=int, default=30); ap.add_argument("--n-quiet", type=int, default=20)
+ap.add_argument("--seed", type=int, default=0)
 args = ap.parse_args()
+if args.cmd.startswith("audit"):
+    args.split = "audit"
 
 csv_path = ROOT / "results" / "egoblind" / f"review_events_{args.split}.csv"
+if args.cmd == "audit":
+    import random
+    cand = {"speak": [], "silent": []}
+    for src_split in ("train", "finetune"):
+        for f in sorted((ROOT / "data" / "egoblind" / "scenarios" / src_split).glob("*.json")):
+            d = json.loads(f.read_text())
+            for e in d.get("events", []):
+                cls = "speak" if e.get("should_speak") else ("silent" if e.get("reason") == "user_confirmed_clear" else None)
+                if cls is None:
+                    continue
+                det = e.get("detail") or {}
+                cand[cls].append({"video": d["name"], "video_id": d["video_id"], "obj_id": e["obj_id"],
+                                  "t_q": det.get("t_q", e["latest_safe_s"]), "window": f"{e['earliest_useful_s']:.2f}-{e['latest_safe_s']:.2f}",
+                                  "qtype": det.get("qtype", ""), "question": det.get("question", ""),
+                                  "answers": " || ".join(det.get("answers", []) or []), "labels": e.get("label", ""),
+                                  "human_verdict": "", "human_note": "", "source_split": src_split, "derived:label": cls})
+    rng = random.Random(args.seed)
+    picked = rng.sample(cand["speak"], min(args.n_speak, len(cand["speak"]))) + rng.sample(cand["silent"], min(args.n_quiet, len(cand["silent"])))
+    rng.shuffle(picked)
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(csv_path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(picked[0].keys())); w.writeheader(); w.writerows(picked)
+    print(f"{len(picked)} audit items ({len(cand['speak'])} speak / {len(cand['silent'])} quiet available) -> {csv_path}")
+    print("next: review_events.py frames --split audit, then serve --split audit --reviewer <initials>")
+    sys.exit(0)
 if not csv_path.exists():
     sys.exit(f"{csv_path} missing: run scripts/diagnose_egoblind_recall.py --split {args.split}")
 rows = list(csv.DictReader(open(csv_path)))
@@ -48,7 +82,7 @@ def window_of(r):
 
 
 def video_path(r):
-    sc = ROOT / "data" / "egoblind" / "scenarios" / args.split / f"{int(float(r['video_id']))}.json"
+    sc = ROOT / "data" / "egoblind" / "scenarios" / r.get("source_split", args.split) / f"{int(float(r['video_id']))}.json"
     if sc.exists():
         p = Path(json.loads(sc.read_text()).get("video", ""))
         if p.exists():
@@ -103,6 +137,16 @@ elif args.cmd == "merge":
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(merged)
     print(f"{len(v)} of {len(rows)} events have a human verdict from {args.reviewer} -> {csv_path}")
 
+elif args.cmd == "audit-score":
+    from seeforme.egoblind.review import audit_score, event_key
+    if not args.reviewer:
+        sys.exit("--reviewer is required")
+    derived = {event_key(r): r["derived:label"] for r in rows}
+    v = {k: r["verdict"] for k, r in latest_verdicts(load_records(), reviewer=args.reviewer).items()}
+    res = audit_score(derived, v)
+    print(json.dumps(res, indent=1))
+    (out_dir / f"audit_score_{args.reviewer}.json").write_text(json.dumps(res, indent=1))
+
 elif args.cmd == "kappa":
     recs = load_records()
     a = {k: r["verdict"] for k, r in latest_verdicts(recs, reviewer=args.a).items()}
@@ -114,6 +158,9 @@ else:
     if not args.reviewer:
         sys.exit("--reviewer is required (your initials)")
     events = [blind_row(r) for r in rows]
+    if args.split == "audit":   # the annotators' answers would give the derived label away; judge from the frames
+        for e in events:
+            e["answers"] = "(hidden in the audit)"
     if args.second_rater:
         keep = set(sample_second_rater([e["key"] for e in events], 0.2, seed=0))
         events = [e for e in events if e["key"] in keep]
