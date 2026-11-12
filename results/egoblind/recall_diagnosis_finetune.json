@@ -1,0 +1,19 @@
+{
+ "pcacs": {
+  "all": {
+   "not_coverable": 29,
+   "below_threshold": 20,
+   "not_detected": 3,
+   "spoken_late": 1,
+   "spoken_timely": 3
+  },
+  "coverable": {
+   "below_threshold": 20,
+   "not_detected": 3,
+   "spoken_late": 1,
+   "spoken_timely": 3
+  },
+  "n_events": 56,
+  "n_coverable": 27
+ }
+}
