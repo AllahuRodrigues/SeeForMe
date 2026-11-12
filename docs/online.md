@@ -44,6 +44,20 @@ One full-information pass over the 84 CampusBench v2 training scenarios (about 1
 5. **Naive simulation pretraining hurts.** Carrying the full optimiser state lowers greedy recall by 0.06, and the interval excludes zero. After 17,000 simulated labels the AdaGrad steps are small and the posterior is confident, so the learner cannot move far from a simulator that is wrong about real video. Quiet violations also rise, to 0.10–0.14.
 6. **A weights-only prior is safe but doesn't close the gap.** It removes the harm. Thompson rises to 0.206, and on `finetune` it catches 6–8 of 27 events against 4 for the frozen IL model. Every interval still includes zero. The gap to full information (0.53) is not a cold-start problem, so the next lever is the label signal itself.
 
+## Implicit negatives (a candidate nobody asked about)
+
+When a remembered candidate leaves the 15 s lookback without any feedback covering it, it becomes a negative of weight w. Stream: `train`, `finetune`, then `select`. Pooled over three seeds; `select` holds 33 coverable events per seed, 99 in all.
+
+| w | greedy dev recall | greedy `select` | Thompson dev recall | Thompson `select` |
+|---|---|---|---|---|
+| 0 (off) | **0.204** | **9/33** | **0.188** | **12/33** |
+| 0.02 | 0.173 | 9/33 | 0.183 | 8/33 |
+| 0.05 | 0.169 | 9/33 | 0.175 | 7/33 |
+| 0.1 | 0.169 | 7/33 | 0.175 | 7/33 |
+| 0.3 | 0.154 | 5/33 | 0.160 | 5/33 |
+
+7. **Silence-as-negative makes things worse, and more weight makes them worse still.** Quiet-window violations don't improve consistently either. Selected on `select`: w = 0, so the feature stays off. Most candidates nobody asks about sit next to the ones that matter (same label, same moment), so the negatives push down exactly the features the rare positives rely on.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** a missed question currently labels every candidate of the event in [earliest, t_q] equally. Weighting the moment closest to the ideal cue time may sharpen the signal.
