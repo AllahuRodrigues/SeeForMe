@@ -52,3 +52,18 @@ def test_second_rater_sample_is_seeded_and_sized():
     keys = [str(i) for i in range(100)]
     s1, s2 = sample_second_rater(keys, 0.2, seed=0), sample_second_rater(keys, 0.2, seed=0)
     assert s1 == s2 and len(s1) == 20 and set(s1) <= set(keys)
+
+
+def test_derived_answer_is_hidden_from_the_reviewer():
+    row = dict(ROW, **{"derived:label": "silent"})
+    assert "derived:label" not in blind_row(row)
+
+
+def test_audit_score_confusion_and_rates():
+    from seeforme.egoblind.review import audit_score
+    derived = {"a": "speak", "b": "speak", "c": "silent", "d": "silent", "e": "silent"}
+    verdicts = {"a": "speak", "b": "silent", "c": "silent", "d": "speak", "e": "unclear"}
+    s = audit_score(derived, verdicts)
+    assert s["n"] == 5 and s["n_decided"] == 4
+    assert s["speak_confirmed"] == 0.5 and s["silent_confirmed"] == 0.5     # of decided, per derived class
+    assert s["confusion"]["silent"]["speak"] == 1 and s["unclear"] == 1

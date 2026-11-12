@@ -18,7 +18,7 @@ from collections import Counter
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 VERDICTS = ("speak", "silent", "wrong_object", "unclear")
-MODEL_PREFIXES = ("bin:", "max_score:")
+MODEL_PREFIXES = ("bin:", "max_score:", "derived:")   # model outputs and the audit answer key stay hidden
 
 
 def event_key(row: Dict) -> str:
@@ -87,3 +87,19 @@ def sample_second_rater(keys: Sequence[str], share: float = 0.2, seed: int = 0) 
     keys = sorted(keys)
     k = max(1, round(share * len(keys)))
     return sorted(random.Random(seed).sample(keys, k))
+
+
+def audit_score(derived: Dict[str, str], verdicts: Dict[str, str]) -> Dict:
+    """Compare a reviewer's verdicts with the derived labels on a mixed audit set (should-speak events plus
+    user-confirmed quiet moments). Rates are over decided verdicts (not 'unclear') per derived class."""
+    keys = [k for k in derived if k in verdicts]
+    conf: Dict[str, Counter] = {"speak": Counter(), "silent": Counter()}
+    for k in keys:
+        conf.setdefault(derived[k], Counter())[verdicts[k]] += 1
+    def rate(cls, want):
+        c = conf.get(cls, Counter()); dec = sum(v for kk, v in c.items() if kk != "unclear")
+        return c[want] / dec if dec else None
+    return {"n": len(keys), "n_decided": sum(verdicts[k] != "unclear" for k in keys),
+            "unclear": sum(verdicts[k] == "unclear" for k in keys),
+            "speak_confirmed": rate("speak", "speak"), "silent_confirmed": rate("silent", "silent"),
+            "confusion": {k: dict(v) for k, v in conf.items()}}

@@ -1,0 +1,51 @@
+video,video_id,obj_id,t_q,window,qtype,question,answers,labels,human_verdict,human_note,source_split,derived:label
+egoblind_170,170,2,9.0,5.00-9.50,safety,Is there any hot liquid nearby that I should be aware of?,I don't know. || No.,none,,,train,silent
+egoblind_496,496,3,102.99,93.00-103.49,safety,Is the path clear for me to move forward?,"No,There are passers-by in front of you,please walk carefully. || There are many pedestrians. || Someone on the right.",person,,,train,speak
+egoblind_270,270,1,6.99,0.99-7.49,safety,Is there anything hot nearby that I should be cautious of?,"Yes, an oven in front of you. || Yes.",oven,,,train,speak
+egoblind_375,375,2,15.0,5.60-15.50,safety,Are there any obstacles or people ahead?,"Yes, there are much people and steps ahead. || Yes.",person,,,train,speak
+egoblind_26,26,1,9.99,5.99-10.49,safety,Is it safe to approach the stove now?,"Yes. || Yes, but be careful. || Yes, the lid has been removed.",none,,,train,silent
+egoblind_262,262,2,9.0,3.00-9.50,safety,Am I holding the knife safely?,"No, keep your left hand away from the cutting area.",knife,,,train,speak
+egoblind_272,272,2,3.0,0.00-3.50,safety,Are there any obstacles on the kitchen floor?,No.,none,,,train,silent
+egoblind_362,362,2,27.0,17.00-27.50,safety,Are there a lot of people around me that I need to avoid?,"Yes, there are several people walking around. || There are some people. || Yes.",person,,,finetune,speak
+egoblind_185,185,2,16.98,12.98-17.48,safety,Is it safe for me to continue walking forward?,Yes.,none,,,finetune,silent
+egoblind_705,705,1,14.36,4.40-14.86,navigation,Where is this?,There is a car parked in front of you. || Open-air parking lot || This is the parking lot,car,,,train,speak
+egoblind_21,21,2,58.27,54.27-58.77,safety,Is it safe to touch the lid on the stove now?,"Yes. || Yes, currently holding the lid. || It's best not to touch it. The stove is already on fire and may burn you.",none,,,train,silent
+egoblind_438,438,1,9.0,3.00-9.50,safety,Is the path to the store entrance clear?,No. || I don't know.,unknown,,,finetune,speak
+egoblind_884,884,1,5.87,0.00-6.37,navigation,What is ahead?,"Zebra crossing. || In front of you is a pedestrian crossing, and there is a small road post one meter in front of you. || A busy intersection, a pedestrian crossing ahead, and a cement pier.",person,,,finetune,speak
+egoblind_772,772,2,4.98,0.40-5.48,navigation,How can I get around a row of parked scooters?,Move slightly to your right and continue straight. || There's still a distance of about 20 meters between you and the parked scooters. || Walk forward.,motorcycle,,,train,speak
+egoblind_206,206,1,10.98,4.98-11.48,safety,Is there any debris or potential tripping hazards near the door?,"Yes, there is a pile of construction debris on the left side of the door. || Yes, there are construction waste on both sides. || There is a mound of soil behind the door to the left.",door,,,train,speak
+egoblind_717,717,1,2.53,0.00-3.03,navigation,Is there a road ahead?,"Yes, go straight ahead and turn right after passing the car next to you. || a very narrow road",car,,,finetune,speak
+egoblind_439,439,1,3.99,0.00-4.49,safety,Is there a counter nearby where I can get help?,Yes.,dining table,,,finetune,speak
+egoblind_870,870,1,0.0,0.00-0.50,navigation,Which direction does the moving walkway go?,"Going forward. || Walk towards the exit of the subway station. || After leaving the escalator, you will arrive at an outdoor environment.",stairs,,,finetune,speak
+egoblind_14,14,5,99.14,89.20-99.64,safety,Is there any vehicular traffic on the road I need to watch out for?,"Yes. || Yes, in addition to the motorcycle at the end of the stairs, there is also a tricycle with an iron frame on the right where you and the passerby pass by. || A car is parked some distance ahead on the left.",motorcycle,,,train,speak
+egoblind_373,373,4,28.98,19.00-29.48,navigation,How do I find the entrance to this building?,"Move two meters to the left to pass the parked car ahead, then straight ahead and turn right. || Asking passersby, currently there is no obvious entrance. || I don't know.",car,,,train,speak
+egoblind_362,362,6,84.79,74.80-85.29,safety,Are there any obstacles in my way?,There are two women standing in front of you. || Yes.,person,,,finetune,speak
+egoblind_105,105,1,3.99,0.00-4.49,safety,Is Alpha able to pass through the security checkpoint safely?,Yes.,none,,,train,silent
+egoblind_158,158,1,4.98,0.98-5.48,safety,Is there any sharp or hot object near where I'm placing this bowl?,No. || There is a powered water heater base in front of you on the left.,none,,,train,silent
+egoblind_90,90,2,111.0,103.60-111.50,safety,Is there any traffic passing by?,"Yes,a motorcycle is passing by. || Yes, a motorcycle passed by on the road. || Yes.",motorcycle,,,train,speak
+egoblind_916,916,2,65.4,59.40-65.90,navigation,How to get there?,"It's impossible to pass here. || Directly ahead is a barrier. || You can't pass through here directly, you need to go around.",fence,,,train,speak
+egoblind_243,243,4,41.79,37.79-42.29,safety,Are there any sharp objects nearby?,"No. || No, there is a coffee machine on the right, with some edges and corners.",none,,,train,silent
+egoblind_265,265,3,7.98,3.98-8.48,safety,Is it safe for me to continue pressing down the dough?,Yes.,none,,,train,silent
+egoblind_714,714,1,23.97,17.97-24.47,safety,Is there an obstacle ahead?,There is a staircase in front of you. || There is a step || There is a step,stairs,,,train,speak
+egoblind_36,36,3,163.98,159.98-164.48,safety,Is it safe to stand here to hail a taxi?,Yes.,none,,,train,silent
+egoblind_637,637,1,18.99,14.99-19.49,safety,Is the intersection ahead passable?,No.,none,,,train,silent
+egoblind_358,358,7,153.0,143.00-153.50,safety,Is the sidewalk ahead clear for me to walk on?,"Yes, but there are people and parked motorcycles around you. || Yes.",person,,,train,speak
+egoblind_211,211,1,9.0,0.00-9.50,safety,Are there any obstacles ahead as I walk on this path?,"Yes, there're several people on the road. || Yes, there is a small vendor tricycle parked on the blind road. || Yes.",person,,,train,speak
+egoblind_878,878,1,20.39,16.39-20.89,navigation,Can I go straight in from here?,"Yes. || Yes, but the road ahead ten meters is a bit narrow.",none,,,finetune,silent
+egoblind_35,35,2,64.98,58.98-65.48,safety,Is there any tree or obstacle directly in front?,Yes. || There is a tree in front of you on the right. || There is a tree in the right front.,tree,,,train,speak
+egoblind_267,267,1,12.0,8.00-12.50,safety,Is it safe to reach for the baking tray?,Yes.,none,,,train,silent
+egoblind_434,434,1,9.0,5.00-9.50,safety,Is there anything I need to avoid when pushing this door?,No. || I don't know. || A stone pillar.,none,,,finetune,silent
+egoblind_392,392,1,54.99,48.99-55.49,safety,Are there any obstacles in my way as I walk now?,"Yes, there are some bollards ahead. || Yes.",pole,,,train,speak
+egoblind_156,156,3,15.24,11.24-15.74,safety,Is there any sharp objects in the immediate area that I should be aware of?,No.,none,,,train,silent
+egoblind_602,602,1,4.98,0.00-5.48,navigation,How can I avoid the pole in front of me?,Move to the right to avoid the pole. || Move a little to the right. || Go straight ahead to the right.,pole,,,train,speak
+egoblind_346,346,1,1.98,0.00-2.48,navigation,Which direction should I go when I exit the elevator?,Go straight ahead. || Direct ahead. || Front.,none,,,train,silent
+egoblind_492,492,3,7.98,0.00-8.48,safety,"When we are about to cross the road, is there a car coming towards us?",Yes.,car,,,train,speak
+egoblind_494,494,1,6.99,0.00-7.49,safety,Is it safe to walk through this street?,"Yes, but proceed carefully as there are pedestrians and workers. || Yes. || There are two people ahead.",person,,,train,speak
+egoblind_111,111,2,6.99,2.99-7.49,safety,Is it safe for me to get out of the car now?,I don't know. || Yes.,none,,,train,silent
+egoblind_21,21,1,48.99,44.40-49.49,navigation,Where's the lid?,"The lid is on the left side of the pool, about 30cm in front of you. || On the left side of the pool, cover the dumpling bag. || On the left. || On the left side of the sink.",backpack,,,train,speak
+egoblind_87,87,2,43.98,37.98-44.48,navigation,How can I get out of this backyard?,"Go left for about 3 meters, then go forward. || Turn left and there is a gate. || I don't know.",door,,,train,speak
+egoblind_760,760,3,196.49,192.49-196.99,navigation,Is this a blind path?,"No, there is no blind path nearby. || no",none,,,train,silent
+egoblind_716,716,1,14.39,10.39-14.89,safety,Can I cross the road now?,yes || I don't know.,none,,,finetune,silent
+egoblind_197,197,1,0.81,0.00-1.31,safety,Is there a car passing ahead?,Yes,car,,,train,speak
+egoblind_90,90,3,124.98,120.98-125.48,safety,Is it clear to cross the street now?,"Yes. || Yes, there are currently no cars passing through.",none,,,train,silent
+egoblind_405,405,2,27.0,18.40-27.50,safety,What obstacles should I be aware of when moving in the area?,There's a long desk in front of you and many chairs nearby. || The table is in front. || There are two chairs on the right.,dining table,,,finetune,speak
