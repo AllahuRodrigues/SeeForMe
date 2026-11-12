@@ -1,0 +1,19 @@
+stream ['train', 'finetune', 'select']: 592 videos, 333.6 min, 320 events, 126 proxy users; p_tap=0.5 target=2.0/min
+-- online_greedy
+   100/592 tau=0.413 labels=10741
+   200/592 tau=0.112 labels=27094
+   300/592 tau=0.170 labels=39162
+   400/592 tau=0.189 labels=55976
+   500/592 tau=0.134 labels=71087
+-- online_thompson
+   100/592 tau=0.886 labels=10739
+   200/592 tau=0.361 labels=27082
+   300/592 tau=0.272 labels=39194
+   400/592 tau=0.239 labels=55961
+   500/592 tau=0.340 labels=71072
+Online stream ['train', 'finetune', 'select']: 592 videos, 333.6 min, p_tap=0.5, target 2.0/min
+
+| policy | coverable recall | quiet violations | cues/min | coverable events |
+|---|---|---|---|---|
+| online_greedy | 0.164 | 0.114 | 1.66 | 171 |
+| online_thompson | 0.175 | 0.101 | 1.66 | 171 |
