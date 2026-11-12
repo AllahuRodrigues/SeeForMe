@@ -1,0 +1,12 @@
+policy,videos_seen,recall_coverable,quiet_violation,cues_per_min
+online_greedy,50,0.5,0.1333,2.036
+online_greedy,100,0.2857,0.0,1.405
+online_greedy,150,0.3571,0.0909,1.361
+online_greedy,200,0.1765,0.1579,1.722
+online_greedy,250,0.1905,0.0667,1.928
+online_greedy,300,0.1429,0.4,1.422
+online_greedy,350,0.08,0.0323,1.676
+online_greedy,400,0.2308,0.125,1.772
+online_greedy,450,0.1667,0.125,1.486
+online_greedy,500,0.2,0.1,1.743
+online_greedy,550,0.1111,0.1,1.668

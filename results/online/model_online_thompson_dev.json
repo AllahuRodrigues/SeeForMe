@@ -1,8 +1,17 @@
 {
  "mode": "thompson",
  "tau": 0.7607425412112014,
- "eps": 0.05,
+ "eps": 0.25,
+ "implicit_neg_w": 0.0,
+ "full_info_delay": null,
  "n_labels": 9056,
+ "n_pos": 2894,
+ "label_counts": {
+  "quiet_window": 6101,
+  "tap_not_useful": 61,
+  "missed_question": 2869,
+  "tap_useful": 25
+ },
  "w": [
   0.1161,
   0.089,

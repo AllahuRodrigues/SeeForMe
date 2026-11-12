@@ -1,0 +1,46 @@
+{
+ "summary": {
+  "egoblind_learned:il@reid_off": {
+   "recall_coverable": 0.33125,
+   "quiet_violation": 0.035842293906810034,
+   "cues_per_min": 0.7858922385481675,
+   "repeat_gt_share": 0.2850877192982456,
+   "repeat_track_share": 0.13596491228070176,
+   "repeat_label_per_min": 0.33779578674438776,
+   "reid_per_min": 0.0,
+   "reid_announced": 0,
+   "n_coverable": 160,
+   "n_spoken": 228
+  },
+  "egoblind_learned:il+guard10@reid_off": {
+   "recall_coverable": 0.33125,
+   "quiet_violation": 0.035842293906810034,
+   "cues_per_min": 0.7376356975846835,
+   "repeat_gt_share": 0.2616822429906542,
+   "repeat_track_share": 0.0794392523364486,
+   "repeat_label_per_min": 0.2895392457809038,
+   "reid_per_min": 0.0,
+   "reid_announced": 0,
+   "n_coverable": 160,
+   "n_spoken": 214
+  },
+  "_meta": {
+   "stream": [
+    "train",
+    "finetune"
+   ],
+   "n_videos": 558,
+   "with_embeddings": 558,
+   "configs": [
+    [
+     0.0,
+     null
+    ]
+   ],
+   "label_window": 60.0,
+   "final": false,
+   "seed": 0
+  }
+ },
+ "paired_diffs": {}
+}
