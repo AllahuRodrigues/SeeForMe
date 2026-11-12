@@ -1,0 +1,145 @@
+/Users/allahurodrigues/Desktop/Desktop/My-Desk/Yale/Yale-Senior/cpsc-4900/Project/.venv/lib/python3.13/site-packages/torch/jit/_serialization.py:176: FutureWarning: `torch.jit.load` is deprecated. Please switch to `torch.export`.
+  warnings.warn(
+592 videos, encoder clip-ViT-B/32 on mps
+  25/592  12667 detections  5 det/s  43.1 min
+  50/592  38647 detections  8 det/s  76.8 min
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 17733).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 17737
+[h264 @ 0x70c9713fa0] Invalid NAL unit size (0 > 17733).
+[h264 @ 0x70c9713fa0] Error splitting the input into NAL units.
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 70787).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 70791
+[h264 @ 0x70c971c800] Invalid NAL unit size (0 > 70787).
+[h264 @ 0x70c971c800] Error splitting the input into NAL units.
+[h264 @ 0x70c93f25f0] cabac decode of qscale diff failed at 75 24
+[h264 @ 0x70c93f25f0] error while decoding MB 75 24, bytestream -1
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 19257).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 19261
+[h264 @ 0x70c9725060] Invalid NAL unit size (0 > 19257).
+[h264 @ 0x70c9725060] Error splitting the input into NAL units.
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 61508).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 61512
+[h264 @ 0x70c972d8c0] Invalid NAL unit size (0 > 61508).
+[h264 @ 0x70c972d8c0] Error splitting the input into NAL units.
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 28823).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 28827
+[h264 @ 0x70c9736120] Invalid NAL unit size (0 > 28823).
+[h264 @ 0x70c9736120] Error splitting the input into NAL units.
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 57982).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 57986
+[h264 @ 0x70c93e0870] Invalid NAL unit size (0 > 57982).
+[h264 @ 0x70c93e0870] Error splitting the input into NAL units.
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 18390).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 18394
+[h264 @ 0x70c93c45b0] Invalid NAL unit size (0 > 18390).
+[h264 @ 0x70c93c45b0] Error splitting the input into NAL units.
+[h264 @ 0x70c93bce00] Invalid NAL unit size (0 > 56882).
+[h264 @ 0x70c93bce00] missing picture in access unit with size 56886
+[h264 @ 0x70c93cce10] Invalid NAL unit size (0 > 56882).
+[h264 @ 0x70c93cce10] Error splitting the input into NAL units.
+  75/592  47403 detections  10 det/s  81.5 min
+  100/592  59299 detections  11 det/s  87.6 min
+  125/592  69056 detections  12 det/s  92.4 min
+[h264 @ 0x70c7fd5fa0] Invalid NAL unit size (0 > 34664).
+[h264 @ 0x70c7fd5fa0] missing picture in access unit with size 34668
+[h264 @ 0x17c60ad00] Invalid NAL unit size (0 > 34664).
+[h264 @ 0x17c60ad00] Error splitting the input into NAL units.
+[h264 @ 0x70c92fe3d0] error while decoding MB 85 26, bytestream -5
+[h264 @ 0x70c7fd5fa0] Invalid NAL unit size (0 > 71565).
+[h264 @ 0x70c7fd5fa0] missing picture in access unit with size 71569
+[h264 @ 0x17c613560] Invalid NAL unit size (0 > 71565).
+[h264 @ 0x17c613560] Error splitting the input into NAL units.
+[h264 @ 0x70c7fd5fa0] Invalid NAL unit size (0 > 37798).
+[h264 @ 0x70c7fd5fa0] missing picture in access unit with size 37802
+[h264 @ 0x17c61c070] Invalid NAL unit size (0 > 37798).
+[h264 @ 0x17c61c070] Error splitting the input into NAL units.
+[h264 @ 0x70c7fd5fa0] Invalid NAL unit size (0 > 70727).
+[h264 @ 0x70c7fd5fa0] missing picture in access unit with size 70731
+[h264 @ 0x17c624bf0] Invalid NAL unit size (0 > 70727).
+[h264 @ 0x17c624bf0] Error splitting the input into NAL units.
+[h264 @ 0x70c7fd5fa0] Invalid NAL unit size (0 > 29658).
+[h264 @ 0x70c7fd5fa0] missing picture in access unit with size 29662
+[h264 @ 0x17c62d770] Invalid NAL unit size (0 > 29658).
+[h264 @ 0x17c62d770] Error splitting the input into NAL units.
+[h264 @ 0x70c7fd5fa0] Invalid NAL unit size (0 > 71637).
+[h264 @ 0x70c7fd5fa0] missing picture in access unit with size 71641
+[h264 @ 0x17c6362f0] Invalid NAL unit size (0 > 71637).
+[h264 @ 0x17c6362f0] Error splitting the input into NAL units.
+[h264 @ 0x70c7fd5fa0] Invalid NAL unit size (0 > 34404).
+[h264 @ 0x70c7fd5fa0] missing picture in access unit with size 34408
+[h264 @ 0x70c7fd72c0] Invalid NAL unit size (0 > 34404).
+[h264 @ 0x70c7fd72c0] Error splitting the input into NAL units.
+  150/592  75694 detections  13 det/s  95.4 min
+  175/592  100998 detections  17 det/s  101.7 min
+  200/592  110224 detections  18 det/s  104.0 min
+  225/592  116534 detections  18 det/s  106.3 min
+  250/592  129627 detections  20 det/s  109.4 min
+  275/592  144872 detections  21 det/s  115.8 min
+  300/592  179479 detections  24 det/s  124.2 min
+  325/592  185693 detections  25 det/s  126.3 min
+  350/592  198644 detections  26 det/s  129.2 min
+  375/592  213727 detections  27 det/s  133.7 min
+  400/592  243745 detections  29 det/s  140.1 min
+  425/592  251284 detections  29 det/s  142.1 min
+  450/592  287608 detections  32 det/s  151.0 min
+[h264 @ 0x17cba4480] Invalid NAL unit size (0 > 17927).
+[h264 @ 0x17cba4480] missing picture in access unit with size 17931
+[h264 @ 0x17cb993b0] Invalid NAL unit size (0 > 17927).
+[h264 @ 0x17cb993b0] Error splitting the input into NAL units.
+[h264 @ 0x17cba4480] Invalid NAL unit size (0 > 63485).
+[h264 @ 0x17cba4480] missing picture in access unit with size 63489
+[h264 @ 0x17cb80e70] Invalid NAL unit size (0 > 63485).
+[h264 @ 0x17cb80e70] Error splitting the input into NAL units.
+[h264 @ 0x17cba4480] Invalid NAL unit size (0 > 18473).
+[h264 @ 0x17cba4480] missing picture in access unit with size 18477
+[h264 @ 0x17cb897f0] Invalid NAL unit size (0 > 18473).
+[h264 @ 0x17cb897f0] Error splitting the input into NAL units.
+[h264 @ 0x17cb90aa0] cabac decode of qscale diff failed at 4 46
+[h264 @ 0x17cb90aa0] error while decoding MB 4 46, bytestream -3
+[h264 @ 0x17cba4480] Invalid NAL unit size (0 > 65803).
+[h264 @ 0x17cba4480] missing picture in access unit with size 65807
+[h264 @ 0x17cbce680] Invalid NAL unit size (0 > 65803).
+[h264 @ 0x17cbce680] Error splitting the input into NAL units.
+[h264 @ 0x17cba4480] Invalid NAL unit size (0 > 18505).
+[h264 @ 0x17cba4480] missing picture in access unit with size 18509
+[h264 @ 0x17cb66010] Invalid NAL unit size (0 > 18505).
+[h264 @ 0x17cb66010] Error splitting the input into NAL units.
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 20699).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 20703
+[h264 @ 0x70c9797770] Invalid NAL unit size (0 > 20699).
+[h264 @ 0x70c9797770] Error splitting the input into NAL units.
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 74970).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 74974
+[h264 @ 0x70c971ff90] Invalid NAL unit size (0 > 74970).
+[h264 @ 0x70c971ff90] Error splitting the input into NAL units.
+[h264 @ 0x70c978ef10] error while decoding MB 69 37, bytestream -6
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 21491).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 21495
+[h264 @ 0x70c975b6b0] Invalid NAL unit size (0 > 21491).
+[h264 @ 0x70c975b6b0] Error splitting the input into NAL units.
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 70584).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 70588
+[h264 @ 0x70c9751270] Invalid NAL unit size (0 > 70584).
+[h264 @ 0x70c9751270] Error splitting the input into NAL units.
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 34522).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 34526
+[h264 @ 0x70c9764530] Invalid NAL unit size (0 > 34522).
+[h264 @ 0x70c9764530] Error splitting the input into NAL units.
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 68312).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 68316
+[h264 @ 0x70c976cd90] Invalid NAL unit size (0 > 68312).
+[h264 @ 0x70c976cd90] Error splitting the input into NAL units.
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 22127).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 22131
+[h264 @ 0x70c97755f0] Invalid NAL unit size (0 > 22127).
+[h264 @ 0x70c97755f0] Error splitting the input into NAL units.
+[h264 @ 0x70c97504f0] Invalid NAL unit size (0 > 71259).
+[h264 @ 0x70c97504f0] missing picture in access unit with size 71263
+[h264 @ 0x70c977de50] Invalid NAL unit size (0 > 71259).
+[h264 @ 0x70c977de50] Error splitting the input into NAL units.
+  475/592  312534 detections  33 det/s  158.2 min
+  500/592  328122 detections  34 det/s  163.1 min
+  525/592  334523 detections  34 det/s  165.1 min
+  550/592  346804 detections  34 det/s  168.6 min
+  575/592  384729 detections  36 det/s  180.6 min
+done: 592 videos embedded, 414017 detections, 191.4 min

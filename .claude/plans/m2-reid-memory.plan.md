@@ -11,8 +11,8 @@ The tracker's ledger (`memory_ttl_s`, about 3 s) handles only short occlusions. 
 | Slice | Deliverable | Status |
 |---|---|---|
 | S1 | `seeforme/tracking/reid.py` gallery; `TrackerConfig.reid_horizon_s` (0 = off) and `reid_threshold`; `Detection.emb` and `Track.emb`/`reid_of` | done, tests in `tests/test_reid_memory.py` |
-| S2 | `seeforme/perception/appearance.py` (crops plus CLIP encoder); `scripts/cache_appearance.py` side-cars in `data/egoblind_app/`; `PerceptionCache.load_embeddings` | code done; the full embedding run is waiting for the machine's load to drop (load average ~400 on 2026-11-12) |
-| S3 | Evaluation: P-CACS and the online learner with re-ID on and off on the dev stream | todo |
+| S2 | CLIP encoder and side-car caches in `data/egoblind_app/` | done: 592 videos, 414k detections |
+| S3 | Evaluation: P-CACS, IL and the online learner with re-ID on and off on the dev stream | done, `docs/memory.md`; hand check of 50 matches pending |
 | S4 | Choose θ and the horizon on `select` only, then a single `--final` run | todo |
 
 S3 measures three things:
