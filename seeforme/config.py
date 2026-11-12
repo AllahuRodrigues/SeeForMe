@@ -19,6 +19,10 @@ class TrackerConfig:
     memory_ttl_s: float = 0.0
     memory_decay: float = 0.8
     memory_user_speed: float = 1.0
+    # long-term re-identification (seeforme.tracking.reid): a dead track's appearance embedding is remembered for
+    # reid_horizon_s; a new track of the same label with cosine >= reid_threshold inherits its announced state; 0 = off
+    reid_horizon_s: float = 0.0
+    reid_threshold: float = 0.85
 
 
 @dataclass

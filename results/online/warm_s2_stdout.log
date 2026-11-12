@@ -1,0 +1,21 @@
+stream ['train', 'finetune']: 558 videos, 290.1 min, 293 events, 111 proxy users; p_tap=0.5 target=2.0/min
+-- online_greedy+campus
+   warm start: {'videos': 84, 'labels': 17388, 'positives': 1846}
+   100/558 tau=0.701 labels=19433
+   200/558 tau=0.295 labels=22740
+   300/558 tau=0.554 labels=23857
+   400/558 tau=0.510 labels=25623
+   500/558 tau=0.410 labels=26401
+-- online_thompson+campus
+   warm start: {'videos': 84, 'labels': 17388, 'positives': 1846}
+   100/558 tau=0.701 labels=19425
+   200/558 tau=0.295 labels=22594
+   300/558 tau=0.693 labels=23709
+   400/558 tau=0.584 labels=25330
+   500/558 tau=0.410 labels=26110
+Online stream ['train', 'finetune']: 558 videos, 290.1 min, p_tap=0.5, target 2.0/min
+
+| policy | coverable recall | quiet violations | cues/min | coverable events |
+|---|---|---|---|---|
+| online_greedy+campus | 0.131 | 0.115 | 1.67 | 160 |
+| online_thompson+campus | 0.150 | 0.097 | 1.68 | 160 |

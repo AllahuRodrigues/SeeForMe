@@ -64,6 +64,7 @@ def run_on_egoblind(policy, scenario: EgoBlindScenario, cfg: Optional[PipelineCo
         if on_decision is not None:
             on_decision(t, tracks, policy.last_observations() if hasattr(policy, "last_observations") else [], cue, ch, due)
     log.channel_log = [[a, min(b, scenario.duration), c] for a, b, c in channel.log]
+    log.reid_matches = list(tracker.reid_log)
     return log
 
 
