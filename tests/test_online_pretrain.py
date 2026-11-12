@@ -28,3 +28,13 @@ def test_pretraining_is_deterministic():
     a, b = OnlinePolicy(mode="greedy"), OnlinePolicy(mode="greedy")
     pretrain_on_campus(a, _campus(2)); pretrain_on_campus(b, _campus(2))
     assert np.allclose(a.state.w, b.state.w)
+
+
+def test_weights_only_carry_resets_optimizer_posterior_and_normalizer():
+    full, wonly = OnlinePolicy(mode="thompson"), OnlinePolicy(mode="thompson")
+    pretrain_on_campus(full, _campus(2))
+    pretrain_on_campus(wonly, _campus(2), carry="weights")
+    assert np.allclose(full.state.w, wonly.state.w)                     # same prior mean
+    assert np.allclose(wonly.state.g2, 1e-8) and np.allclose(wonly.state.prec, 1.0)
+    assert wonly.norm.n == 0 and full.norm.n > 0                        # real features are normalised on real data
+    assert full.state.g2.max() > 1e-3

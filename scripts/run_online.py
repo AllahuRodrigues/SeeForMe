@@ -39,7 +39,7 @@ ap.add_argument("--noise", default="")
 ap.add_argument("--final", action="store_true", help="required to touch holdout / test (run once, never tune afterwards)")
 ap.add_argument("--tag", default="dev")
 ap.add_argument("--curve-every", type=int, default=50)
-ap.add_argument("--campus-epochs", type=int, default=1, help="warm-start passes over CampusBench v2 train for online_<mode>+campus")
+ap.add_argument("--campus-epochs", type=int, default=1, help="warm-start passes over CampusBench v2 train for online_<mode>+campus (carry all) and +campusw (weights only)")
 args = ap.parse_args()
 
 splits = [s for s in args.stream.split(",") if s]
@@ -75,14 +75,16 @@ for name in [p for p in args.policies.split(",") if p]:
     print(f"-- {name}", flush=True)
     if name.startswith("online_"):
         mode, _, warm = name.split("_", 1)[1].partition("+")
-        if mode not in MODES or warm not in ("", "campus"):
+        if mode not in MODES or warm not in ("", "campus", "campusw"):
             sys.exit(f"unknown online policy {name}")
         pol = OnlinePolicy(mode=mode, target_per_min=args.target, tau0=args.tau0, eps=args.eps, lr=args.lr, seed=args.seed)
-        if warm == "campus":
+        if warm:
             from seeforme.campus.world import CampusScenario
             from seeforme.online.pretrain import pretrain_on_campus
             sim = [CampusScenario.from_json(str(f)) for f in sorted((ROOT / "data" / "campus_v2" / "train").glob("*.json"))]
-            print(f"   warm start: {pretrain_on_campus(pol, sim, cfg, epochs=args.campus_epochs, seed=args.seed)}", flush=True)
+            stats = pretrain_on_campus(pol, sim, cfg, epochs=args.campus_epochs, seed=args.seed,
+                                       carry="weights" if warm == "campusw" else "all")
+            print(f"   warm start ({warm}): {stats}", flush=True)
         prog = lambda k, sc, log: (k + 1) % 100 == 0 and print(f"   {k + 1}/{len(scenarios)} tau={pol.tau:.3f} labels={pol.n_labels}", flush=True)
         for k, (sc, log) in enumerate(run_stream(pol, scenarios, cfg, p_tap=args.p_tap, seed=args.seed, noise=noise, on_video=prog)):
             rows.append(row_for(name, k, sc, log))

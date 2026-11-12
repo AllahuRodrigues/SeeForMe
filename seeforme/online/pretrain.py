@@ -6,11 +6,14 @@ CampusBench is generated data, so a model pretrained on it stays on the commerci
 """
 from __future__ import annotations
 
+from dataclasses import replace
 from typing import Dict, Optional, Sequence, Set
+
+import numpy as np
 
 from ..campus.runner import run_on_campus
 from ..config import PipelineConfig
-from .policy import BudgetController, OnlinePolicy
+from .policy import N_FEAT, BudgetController, OnlinePolicy, _Normalizer
 
 
 class _Announced:
@@ -32,8 +35,14 @@ class _SimLabels:
 
 
 def pretrain_on_campus(policy: OnlinePolicy, scenarios: Sequence, cfg: Optional[PipelineConfig] = None, epochs: int = 1,
-                       seed: int = 0) -> Dict[str, int]:
-    """Full-information passes over simulated scenarios; restores the policy's mode and gives it a fresh budget."""
+                       seed: int = 0, carry: str = "all") -> Dict[str, int]:
+    """Full-information passes over simulated scenarios; restores the policy's mode and gives it a fresh budget.
+
+    carry="all" keeps everything the simulator taught (weights, AdaGrad accumulator, posterior precision, feature
+    normaliser). carry="weights" keeps only the weights as a prior mean: step sizes and posterior variance start fresh
+    and real features are normalised on real data, so the learner can move away from a simulator that is wrong."""
+    if carry not in ("all", "weights"):
+        raise ValueError(f"carry must be 'all' or 'weights', got {carry!r}")
     mode, ctl = policy.mode, policy.ctl
     n0, p0 = policy.n_labels, policy.n_pos
     policy.mode = "full_info"
@@ -54,5 +63,9 @@ def pretrain_on_campus(policy: OnlinePolicy, scenarios: Sequence, cfg: Optional[
         policy.mode = mode
         policy.ctl = BudgetController.make(ctl.target_per_min, policy.tau0, ctl.eta)   # deployment budget starts fresh
         policy.begin_video(None, None)
+        if carry == "weights":
+            st = policy.state
+            policy.state = replace(st, g2=np.full_like(st.g2, 1e-8), prec=np.ones_like(st.prec))
+            policy.norm = _Normalizer(N_FEAT)
     return {"videos": videos, "labels": policy.n_labels - n0, "positives": policy.n_pos - p0}
 
