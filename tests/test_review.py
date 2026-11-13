@@ -15,24 +15,24 @@ def test_blind_row_hides_every_model_column():
 
 
 def test_verdict_validation_and_provenance():
-    v = make_verdict("2:1", "speak", reviewer="ar", window=(5.0, 7.5), note="car approaching")
-    assert v["verification"] == "human" and v["verdict"] == "speak" and v["window"] == [5.0, 7.5]
+    v = make_verdict("2:1", "proactive_warn", reviewer="ar", window=(5.0, 7.5), note="car approaching")
+    assert v["verification"] == "human" and v["verdict"] == "proactive_warn" and v["window"] == [5.0, 7.5]
     with pytest.raises(ValueError):
         make_verdict("2:1", "maybe", reviewer="ar")
     with pytest.raises(ValueError):
         make_verdict("2:1", "speak", reviewer="")
     with pytest.raises(ValueError):
         make_verdict("2:1", "speak", reviewer="ar", window=(8.0, 7.0))
-    assert set(VERDICTS) == {"speak", "confirm_clear", "silent", "wrong_object", "unclear"}
+    assert set(VERDICTS) == {"proactive_warn", "proactive_clear", "on_request", "silent", "uncertain", "wrong_object"}
 
 
 def test_latest_verdict_per_reviewer_wins_and_merge_fills_csv_columns():
     vs = [make_verdict("2:1", "silent", reviewer="ar"), make_verdict("2:1", "speak", reviewer="ar", note="changed mind"),
           make_verdict("2:1", "silent", reviewer="r2")]
     latest = latest_verdicts(vs, reviewer="ar")
-    assert latest["2:1"]["verdict"] == "speak"
+    assert latest["2:1"]["verdict"] == "proactive_warn"
     rows = merge_verdicts([dict(ROW)], latest)
-    assert rows[0]["human_verdict"] == "speak" and rows[0]["human_note"] == "changed mind"
+    assert rows[0]["human_verdict"] == "proactive_warn" and rows[0]["human_note"] == "changed mind"
 
 
 def test_model_prelabels_never_count_as_human():
@@ -66,7 +66,7 @@ def test_audit_score_confusion_and_rates():
     s = audit_score(derived, verdicts)
     assert s["n"] == 5 and s["n_decided"] == 4
     assert s["speak_confirmed"] == 0.5 and s["silent_confirmed"] == 0.5     # of decided, per derived class
-    assert s["confusion"]["silent"]["speak"] == 1 and s["unclear"] == 1
+    assert s["confusion"]["silent"]["proactive_warn"] == 1 and s["uncertain"] == 1
 
 
 def test_confirm_clear_counts_as_not_a_warning_in_the_audit():
@@ -74,3 +74,20 @@ def test_confirm_clear_counts_as_not_a_warning_in_the_audit():
     derived = {"a": "speak", "b": "silent", "c": "silent"}
     s = audit_score(derived, {"a": "speak", "b": "confirm_clear", "c": "silent"})
     assert s["speak_confirmed"] == 1.0 and s["silent_confirmed"] == 1.0 and s["confirm_clear_on_quiet"] == 0.5
+
+
+def test_legacy_verdicts_map_onto_rubric_v3():
+    from seeforme.egoblind.review import canonical
+    assert canonical("speak") == "proactive_warn" and canonical("confirm_clear") == "proactive_clear"
+    assert canonical("unclear") == "uncertain" and canonical("silent") == "silent"
+
+
+def test_uncertain_is_never_scored_as_silent():
+    from seeforme.egoblind.review import audit_score
+    s = audit_score({"a": "silent", "b": "silent"}, {"a": "uncertain", "b": "on_request"})
+    assert s["n_decided"] == 1 and s["silent_confirmed"] == 1.0          # on_request is not a proactive warning
+
+
+def test_decision_time_frames_stop_at_the_question():
+    from seeforme.egoblind.review import decision_time_frames
+    assert decision_time_frames([4.0, 5.0, 6.0, 7.0, 8.0], t_q=6.5) == [0, 1, 2]
