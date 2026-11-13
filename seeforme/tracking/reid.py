@@ -24,6 +24,7 @@ class MemoryEntry:
     announce_count: int
     track_id: int
     source_id: Optional[int] = None     # ground-truth object id when known (evaluation only)
+    bbox: Optional[tuple] = None        # last box of the retired track (for visual audits)
 
 
 class ReIDGallery:
@@ -36,12 +37,12 @@ class ReIDGallery:
         return len(self._entries)
 
     def add(self, label: str, kind: str, emb: np.ndarray, last_seen: float, last_announced: Optional[float],
-            announce_count: int, track_id: int, source_id: Optional[int] = None) -> None:
+            announce_count: int, track_id: int, source_id: Optional[int] = None, bbox: Optional[tuple] = None) -> None:
         e = np.asarray(emb, dtype=np.float32)
         n = float(np.linalg.norm(e))
         if n <= 1e-6:
             return
-        self._entries.append(MemoryEntry(label, kind, e / n, last_seen, last_announced, announce_count, track_id, source_id))
+        self._entries.append(MemoryEntry(label, kind, e / n, last_seen, last_announced, announce_count, track_id, source_id, bbox))
         if len(self._entries) > self.max_entries:
             self._entries = self._entries[-self.max_entries:]
 

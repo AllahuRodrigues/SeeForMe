@@ -121,3 +121,10 @@ def test_tracker_logs_each_reid_match_for_audit():
     assert 0.85 <= m["cos"] <= 1.0 and m["gap_s"] > 30
     trk.reset()
     assert trk.reid_log == []
+
+
+def test_reid_log_records_both_boxes_for_visual_audit():
+    trk = IoUTracker(TrackerConfig(reid_horizon_s=120.0, reid_threshold=0.85))
+    _announce_first_track(trk, _scene(A2))
+    m = trk.reid_log[0]
+    assert m["old_t"] < m["t"] and len(m["old_bbox"]) == 4 and len(m["new_bbox"]) == 4

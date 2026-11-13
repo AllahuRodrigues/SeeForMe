@@ -138,7 +138,7 @@ class IoUTracker:
     def _retire(self, trk: Track) -> None:
         if self.gallery is not None and trk.confirmed and trk.emb is not None:
             sid = max(trk.source_votes, key=trk.source_votes.get) if trk.source_votes else None
-            self.gallery.add(trk.label, trk.kind, trk.emb, trk.last_seen, trk.last_announced, trk.announce_count, trk.track_id, sid)
+            self.gallery.add(trk.label, trk.kind, trk.emb, trk.last_seen, trk.last_announced, trk.announce_count, trk.track_id, sid, tuple(trk.bbox))
 
     # ------------------------------------------------------------------
     def _update_track(self, trk: Track, det: Detection, t: float) -> None:
@@ -188,7 +188,8 @@ class IoUTracker:
                 trk.reid_of, trk.last_announced, trk.announce_count = m.track_id, m.last_announced, m.announce_count
                 self.reid_log.append({"t": t, "label": det.label, "old_track": m.track_id, "new_track": trk.track_id,
                                       "cos": self.gallery.last_score, "gap_s": t - m.last_seen, "announced": m.last_announced is not None,
-                                      "old_sid": m.source_id, "new_sid": det.source_id})
+                                      "old_sid": m.source_id, "new_sid": det.source_id, "old_t": m.last_seen,
+                                      "old_bbox": list(m.bbox) if m.bbox else None, "new_bbox": list(det.bbox)})
         self.tracks[trk.track_id] = trk
         self._next_id += 1
         if self.dynamics is not None:
