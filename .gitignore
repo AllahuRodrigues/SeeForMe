@@ -6,6 +6,7 @@ __pycache__/
 !models/scheduler/*.pt
 !models/egoblind*/scheduler/*.pt
 !models/arch_*/scheduler/*.pt
+!models/decision_models/*.pt
 *.mp4
 models/*.joblib
 results/figures/*.png
