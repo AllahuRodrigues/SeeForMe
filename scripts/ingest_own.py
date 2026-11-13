@@ -1,7 +1,11 @@
 """Ingest the owner's chest-mounted iPhone recordings (issue #9; recording protocol in docs/recording-protocol.md).
 
-    python scripts/ingest_own.py                      # every new file in data/own/raw/
+    python scripts/ingest_own.py                      # every new file in data/own/raw/dev/
+    python scripts/ingest_own.py --batch lockbox      # the sealed final-evaluation walks (data/own/raw/lockbox/)
     python scripts/ingest_own.py --only 2026-11-14_akw-to-sss_take1.MOV
+
+Two batches that never share a folder: `dev` (looked at, tuned on) and `lockbox` (other routes, scored once after
+everything is frozen). The lockbox ingest prints counts only, so running it does not show its labels.
 
 For each raw video (data/own/raw/, git-ignored, never uploaded):
   1. ffmpeg: upright 640-px-wide H.264 copy at the source frame rate, and a 16 kHz mono WAV of the narration;
@@ -17,16 +21,18 @@ from pathlib import Path
 import cv2
 
 from _common import ROOT
-from seeforme.own.ingest import blur_regions, head_region, parse_narration
+from seeforme.own.ingest import BATCHES, batch_dirs, blur_regions, head_region, parse_narration
 
-RAW, OUT = ROOT / "data" / "own" / "raw", ROOT / "data" / "own" / "processed"
 VOSK = ROOT / "models" / "vosk" / "vosk-model-small-en-us-0.15"
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--only", default="")
+ap.add_argument("--batch", default="dev", choices=BATCHES)
 ap.add_argument("--width", type=int, default=640)
 ap.add_argument("--no-blur", action="store_true", help="debug only; never share an unblurred output")
 args = ap.parse_args()
+RAW, OUT = batch_dirs(ROOT, args.batch)
+RAW.mkdir(parents=True, exist_ok=True)
 OUT.mkdir(parents=True, exist_ok=True)
 
 
@@ -86,5 +92,5 @@ for src in files:
     cap.release(); writer.release(); tmp.unlink()
     lab.write_text(json.dumps({"source": src.name, "fps": fps, "frames": n, "duration_s": n / fps, "frames_with_blur": blurred,
                                "blurred": not args.no_blur, "words": words, "events": events}, indent=1))
-    print(f"{name}: {n / fps:.0f} s, {len(words)} words, {len(events)} events "
-          f"({', '.join(e['phrase'] for e in events[:8])}{' ...' if len(events) > 8 else ''}), people blurred in {blurred} frames")
+    shown = "labels not shown" if args.batch == "lockbox" else ", ".join(e["phrase"] for e in events[:8]) + (" ..." if len(events) > 8 else "")
+    print(f"{name}: {n / fps:.0f} s, {len(words)} words, {len(events)} events ({shown}), people blurred in {blurred} frames")

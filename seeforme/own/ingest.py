@@ -70,3 +70,17 @@ def blur_regions(img: np.ndarray, boxes: Sequence[Tuple[float, float, float, flo
         kk = max(3, (min(k, (c - a) | 1, (d - b) | 1)) | 1)
         out[b:d, a:c] = cv2.GaussianBlur(out[b:d, a:c], (kk, kk), 0)
     return out
+
+
+BATCHES = ("dev", "lockbox")
+
+
+def batch_dirs(root, batch: str):
+    """(raw, processed) folders of one recording batch. The development batch may be looked at and tuned on; the
+    lockbox batch is recorded on other routes and is scored once, after models and thresholds are frozen
+    (docs/recording-protocol.md). Keeping them in separate folders means no script reads both by accident."""
+    from pathlib import Path
+    if batch not in BATCHES:
+        raise ValueError(f"batch must be one of {BATCHES}, got {batch!r}")
+    own = Path(root) / "data" / "own"
+    return own / "raw" / batch, own / "processed" / batch
