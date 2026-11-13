@@ -1,6 +1,7 @@
 """Feature gate: does a new feature help separate should-speak candidates from the rest, across videos?
 
     python scripts/feature_auc.py --tag looming          # fit on `train`, score on `finetune` (development only)
+    python scripts/feature_auc.py --tag egomotion --ego  # + camera ego-motion side-car cache (cache_egomotion.py)
 
 Every legal candidate at every decision on the dev stream is labelled as in the full-information learner:
 1 inside its event's window before the event is announced, 0 near a labelled question otherwise (rows with no
@@ -26,6 +27,7 @@ ap.add_argument("--tag", default="looming")
 ap.add_argument("--boot", type=int, default=1000)
 ap.add_argument("--limit", type=int, default=0)
 ap.add_argument("--seg", action="store_true", help="join per-second segmentation shares from data/egoblind_seg/")
+ap.add_argument("--ego", action="store_true", help="join camera ego-motion features from data/egoblind_ego/")
 args = ap.parse_args()
 
 
@@ -106,9 +108,33 @@ if args.seg and SEG_DIR.exists():
     GROUPS["segmentation_architecture"] = [n for n in seg_names if any(k in n for k in ("stairs", "door", "railing", "walkable"))]
     print(f"segmentation features joined ({n_missing} rows without a cache dropped from every model)", flush=True)
 
+# causal camera ego-motion features (scripts/cache_egomotion.py, seeforme.perception.egomotion.decision_features):
+# the last frame pair at or before t and the max / mean over the previous 3 s; unreliable pairs masked to 0.
+EGO_DIR = ROOT / "data" / "egoblind_ego"
+ego_names = []
+if args.ego and EGO_DIR.exists():
+    from seeforme.perception.egomotion import DECISION_FEATURES, EgoSample, decision_features
+    ego = {}
+    for r in rows:
+        v = r["video"]
+        if v not in ego:
+            f = EGO_DIR / f"{v}.npz"
+            z = np.load(f) if f.exists() else None
+            if z is not None:
+                assert tuple(str(x) for x in z["fields"]) == EgoSample.FIELDS
+            ego[v] = None if z is None else (z["t"].astype(float), z["feats"].astype(float))
+        r["ego"] = None if ego[v] is None else decision_features(ego[v][0], ego[v][1], r["t"])
+    n_missing = sum(r["ego"] is None for r in rows)
+    rows = [r for r in rows if r["ego"] is not None]
+    for r in rows:
+        r["extra"] = np.concatenate([r["extra"], r["ego"]])
+    ego_names = list(DECISION_FEATURES)
+    GROUPS["egomotion"] = ego_names
+    print(f"ego-motion features joined ({n_missing} rows without a cache dropped from every model)", flush=True)
+
 tr = [r for r in rows if r["split"] == "train"]
 te = [r for r in rows if r["split"] == "finetune"]
-extra_names = GROUPS["looming_track"] + GROUPS["looming_decision"] + seg_names
+extra_names = GROUPS["looming_track"] + GROUPS["looming_decision"] + seg_names + ego_names
 print(f"rows train {len(tr)} (pos {sum(r['y'] for r in tr)}), finetune {len(te)} (pos {sum(r['y'] for r in te)})", flush=True)
 
 
