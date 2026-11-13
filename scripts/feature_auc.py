@@ -25,6 +25,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--tag", default="looming")
 ap.add_argument("--boot", type=int, default=1000)
 ap.add_argument("--limit", type=int, default=0)
+ap.add_argument("--seg", action="store_true", help="join per-second segmentation shares from data/egoblind_seg/")
 args = ap.parse_args()
 
 
@@ -74,9 +75,40 @@ pol = Dump(mode="full_info", lr=0.0, seed=0)
 for _ in run_stream(pol, scen, cfg, p_tap=0.5, seed=0):
     pass
 
+# causal scene-segmentation features (scripts/cache_segmentation.py): the last sample at or before t, and the
+# maximum over the previous 3 s, per group. Only past frames are used.
+SEG_DIR = ROOT / "data" / "egoblind_seg"
+seg_names = []
+if args.seg and SEG_DIR.exists():
+    seg = {}
+    for r in rows:
+        v = r["video"]
+        if v not in seg:
+            f = SEG_DIR / f"{v}.npz"
+            seg[v] = np.load(f) if f.exists() else None
+        z = seg[v]
+        if z is None or len(z["t"]) == 0:
+            r["seg"] = None
+            continue
+        grp = [str(g) for g in z["groups"]]
+        i = int(np.searchsorted(z["t"], r["t"] + 1e-6)) - 1
+        if i < 0:
+            r["seg"] = np.zeros(2 * len(grp)); continue
+        j0 = int(np.searchsorted(z["t"], r["t"] - 3.0))
+        r["seg"] = np.concatenate([z["share"][i], z["share"][j0:i + 1].max(0)])
+        if not seg_names:
+            seg_names = [f"seg_{g}" for g in grp] + [f"seg_{g}_max3s" for g in grp]
+    n_missing = sum(r.get("seg") is None for r in rows)
+    rows = [r for r in rows if r.get("seg") is not None]
+    for r in rows:
+        r["extra"] = np.concatenate([r["extra"], r["seg"]])
+    GROUPS["segmentation"] = seg_names
+    GROUPS["segmentation_architecture"] = [n for n in seg_names if any(k in n for k in ("stairs", "door", "railing", "walkable"))]
+    print(f"segmentation features joined ({n_missing} rows without a cache dropped from every model)", flush=True)
+
 tr = [r for r in rows if r["split"] == "train"]
 te = [r for r in rows if r["split"] == "finetune"]
-extra_names = GROUPS["looming_track"] + GROUPS["looming_decision"]
+extra_names = GROUPS["looming_track"] + GROUPS["looming_decision"] + seg_names
 print(f"rows train {len(tr)} (pos {sum(r['y'] for r in tr)}), finetune {len(te)} (pos {sum(r['y'] for r in te)})", flush=True)
 
 
@@ -123,7 +155,7 @@ for j, nme in enumerate(extra_names):
     if E[:, j].std() > 0:
         single[nme] = roc_auc_score(ye, E[:, j])
 res["single_feature_auc_finetune"] = single
-for gname, cols in list(GROUPS.items()) + [("looming_all", extra_names)]:
+for gname, cols in list(GROUPS.items()) + [("looming_all", GROUPS["looming_track"] + GROUPS["looming_decision"])]:
     se, st = fit_score(cols)
     lo, hi = boot_auc_diff(se, base_e, args.boot)
     d = roc_auc_score(ye, se) - res["base"]["auc_finetune"]
