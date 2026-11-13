@@ -1,0 +1,564 @@
+{
+ "_meta": {
+  "videos": 104,
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "target_cues_per_min": 2.0,
+  "boot": 2000,
+  "unit": "finetune video, resampled once and used for all seeds",
+  "runs": {
+   "logistic_s0": {
+    "family": "logistic",
+    "K": 1,
+    "tau": 0.5026162531498828,
+    "mean_score_ms": 0.09284240136805252,
+    "tau_end": 0.5026162531498828,
+    "seconds": 35.32773399353027
+   },
+   "logistic_cw_platt_s0": {
+    "family": "logistic",
+    "K": 1,
+    "tau": 0.5026162531498312,
+    "mean_score_ms": 0.07330396473400863,
+    "tau_end": 0.5026162531498312,
+    "seconds": 29.063979625701904
+   },
+   "mlp_s0": {
+    "family": "mlp",
+    "K": 1,
+    "tau": 0.502616253149783,
+    "mean_score_ms": 0.20188291758723467,
+    "tau_end": 0.502616253149783,
+    "seconds": 30.51434588432312
+   },
+   "gru_k8_s0": {
+    "family": "gru",
+    "K": 8,
+    "tau": 0.4281177370451379,
+    "mean_score_ms": 0.6615803773453134,
+    "tau_end": 0.4281177370451379,
+    "seconds": 45.184011936187744
+   },
+   "tcn_k2_s0": {
+    "family": "tcn",
+    "K": 2,
+    "tau": 0.4281177370451256,
+    "mean_score_ms": 3.492821384815953,
+    "tau_end": 0.4281177370451256,
+    "seconds": 122.10273003578186
+   },
+   "online_greedy_s0": {
+    "tau_end": 0.42811773704518075,
+    "seconds": 51.26579403877258
+   },
+   "logistic_s1": {
+    "family": "logistic",
+    "K": 1,
+    "tau": 0.5026162531498828,
+    "mean_score_ms": 0.599459512092312,
+    "tau_end": 0.5026162531498828,
+    "seconds": 168.00631499290466
+   },
+   "logistic_cw_platt_s1": {
+    "family": "logistic",
+    "K": 1,
+    "tau": 0.5026162531498312,
+    "mean_score_ms": 0.10222105296481003,
+    "tau_end": 0.5026162531498312,
+    "seconds": 36.21219277381897
+   },
+   "mlp_s1": {
+    "family": "mlp",
+    "K": 1,
+    "tau": 0.502616253149783,
+    "mean_score_ms": 0.26598191537277455,
+    "tau_end": 0.502616253149783,
+    "seconds": 35.89794611930847
+   },
+   "gru_k8_s1": {
+    "family": "gru",
+    "K": 8,
+    "tau": 0.4281177370451379,
+    "mean_score_ms": 9.778532887882243,
+    "tau_end": 0.4281177370451379,
+    "seconds": 597.7293362617493
+   },
+   "tcn_k2_s1": {
+    "family": "tcn",
+    "K": 2,
+    "tau": 0.4281177370451256,
+    "mean_score_ms": 18.69586423336124,
+    "tau_end": 0.4281177370451256,
+    "seconds": 581.2696237564087
+   },
+   "online_greedy_s1": {
+    "tau_end": 0.5026162531499245,
+    "seconds": 263.69337701797485
+   },
+   "logistic_s2": {
+    "family": "logistic",
+    "K": 1,
+    "tau": 0.5026162531498828,
+    "mean_score_ms": 0.29553118719117333,
+    "tau_end": 0.5026162531498828,
+    "seconds": 90.55687403678894
+   },
+   "logistic_cw_platt_s2": {
+    "family": "logistic",
+    "K": 1,
+    "tau": 0.5026162531498312,
+    "mean_score_ms": 0.2968848548074892,
+    "tau_end": 0.5026162531498312,
+    "seconds": 84.15495300292969
+   },
+   "mlp_s2": {
+    "family": "mlp",
+    "K": 1,
+    "tau": 0.502616253149783,
+    "mean_score_ms": 0.7980971987477228,
+    "tau_end": 0.502616253149783,
+    "seconds": 103.64439082145691
+   },
+   "gru_k8_s2": {
+    "family": "gru",
+    "K": 8,
+    "tau": 0.4281177370451379,
+    "mean_score_ms": 2.2248593110457797,
+    "tau_end": 0.4281177370451379,
+    "seconds": 148.37257981300354
+   },
+   "tcn_k2_s2": {
+    "family": "tcn",
+    "K": 2,
+    "tau": 0.4281177370451256,
+    "mean_score_ms": 4.164838569669073,
+    "tau_end": 0.4281177370451256,
+    "seconds": 143.1901729106903
+   },
+   "online_greedy_s2": {
+    "tau_end": 0.5026162531499063,
+    "seconds": 32.29831099510193
+   }
+  }
+ },
+ "logistic": {
+  "pooled": {
+   "recall_all": 0.16071428571428573,
+   "recall_coverable": 0.3333333333333333,
+   "quiet_violation": 0.15789473684210525,
+   "cues_per_min": 1.7214221422142206,
+   "speech_s_per_min": 3.801473897389738,
+   "hits_all": 27.0,
+   "n_events": 168.0,
+   "hits_coverable": 27.0,
+   "n_coverable": 81.0,
+   "n_quiet": 114.0
+  },
+  "per_seed": {
+   "0": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.15789473684210525,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 3.801473897389738,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "1": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.15789473684210525,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 3.801473897389738,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "2": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.15789473684210525,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 3.801473897389738,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   }
+  }
+ },
+ "logistic_cw_platt": {
+  "pooled": {
+   "recall_all": 0.16071428571428573,
+   "recall_coverable": 0.3333333333333333,
+   "quiet_violation": 0.13157894736842105,
+   "cues_per_min": 1.7214221422142206,
+   "speech_s_per_min": 3.8875450045004487,
+   "hits_all": 27.0,
+   "n_events": 168.0,
+   "hits_coverable": 27.0,
+   "n_coverable": 81.0,
+   "n_quiet": 114.0
+  },
+  "per_seed": {
+   "0": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.13157894736842105,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 3.8875450045004496,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "1": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.13157894736842105,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 3.8875450045004496,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "2": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.13157894736842105,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 3.8875450045004496,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   }
+  },
+  "diff_vs_logistic_recall_all": {
+   "value": 0.0,
+   "ci95": [
+    -0.05263157894736842,
+    0.046153846153846156
+   ]
+  },
+  "diff_vs_logistic_recall_coverable": {
+   "value": 0.0,
+   "ci95": [
+    -0.1363636363636364,
+    0.08695652173913046
+   ]
+  },
+  "diff_vs_logistic_quiet_violation": {
+   "value": -0.02631578947368421,
+   "ci95": [
+    -0.09090909090909088,
+    0.0
+   ]
+  }
+ },
+ "mlp": {
+  "pooled": {
+   "recall_all": 0.16071428571428573,
+   "recall_coverable": 0.3333333333333333,
+   "quiet_violation": 0.10526315789473684,
+   "cues_per_min": 1.704545454545454,
+   "speech_s_per_min": 3.388838883888386,
+   "hits_all": 27.0,
+   "n_events": 168.0,
+   "hits_coverable": 27.0,
+   "n_coverable": 81.0,
+   "n_quiet": 114.0
+  },
+  "per_seed": {
+   "0": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.10526315789473684,
+    "cues_per_min": 1.7045454545454544,
+    "speech_s_per_min": 3.388838883888388,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "1": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.10526315789473684,
+    "cues_per_min": 1.7045454545454544,
+    "speech_s_per_min": 3.388838883888388,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "2": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.10526315789473684,
+    "cues_per_min": 1.7045454545454544,
+    "speech_s_per_min": 3.388838883888388,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   }
+  },
+  "diff_vs_logistic_recall_all": {
+   "value": 0.0,
+   "ci95": [
+    -0.07936507936507936,
+    0.06666666666666667
+   ]
+  },
+  "diff_vs_logistic_recall_coverable": {
+   "value": 0.0,
+   "ci95": [
+    -0.21428571428571427,
+    0.12
+   ]
+  },
+  "diff_vs_logistic_quiet_violation": {
+   "value": -0.05263157894736842,
+   "ci95": [
+    -0.13793103448275862,
+    0.0
+   ]
+  }
+ },
+ "gru_k8": {
+  "pooled": {
+   "recall_all": 0.19642857142857142,
+   "recall_coverable": 0.4074074074074074,
+   "quiet_violation": 0.05263157894736842,
+   "cues_per_min": 1.704545454545454,
+   "speech_s_per_min": 3.6453645364536427,
+   "hits_all": 33.0,
+   "n_events": 168.0,
+   "hits_coverable": 33.0,
+   "n_coverable": 81.0,
+   "n_quiet": 114.0
+  },
+  "per_seed": {
+   "0": {
+    "recall_all": 0.19642857142857142,
+    "recall_coverable": 0.4074074074074074,
+    "quiet_violation": 0.05263157894736842,
+    "cues_per_min": 1.7045454545454544,
+    "speech_s_per_min": 3.6453645364536444,
+    "hits_all": 11.0,
+    "n_events": 56.0,
+    "hits_coverable": 11.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "1": {
+    "recall_all": 0.19642857142857142,
+    "recall_coverable": 0.4074074074074074,
+    "quiet_violation": 0.05263157894736842,
+    "cues_per_min": 1.7045454545454544,
+    "speech_s_per_min": 3.6453645364536444,
+    "hits_all": 11.0,
+    "n_events": 56.0,
+    "hits_coverable": 11.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "2": {
+    "recall_all": 0.19642857142857142,
+    "recall_coverable": 0.4074074074074074,
+    "quiet_violation": 0.05263157894736842,
+    "cues_per_min": 1.7045454545454544,
+    "speech_s_per_min": 3.6453645364536444,
+    "hits_all": 11.0,
+    "n_events": 56.0,
+    "hits_coverable": 11.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   }
+  },
+  "diff_vs_logistic_recall_all": {
+   "value": 0.0357142857142857,
+   "ci95": [
+    -0.03125,
+    0.09433962264150944
+   ]
+  },
+  "diff_vs_logistic_recall_coverable": {
+   "value": 0.07407407407407407,
+   "ci95": [
+    -0.07692307692307693,
+    0.1875
+   ]
+  },
+  "diff_vs_logistic_quiet_violation": {
+   "value": -0.10526315789473684,
+   "ci95": [
+    -0.22916666666666666,
+    -0.023255813953488372
+   ]
+  }
+ },
+ "tcn_k2": {
+  "pooled": {
+   "recall_all": 0.16071428571428573,
+   "recall_coverable": 0.3333333333333333,
+   "quiet_violation": 0.18421052631578946,
+   "cues_per_min": 1.687668766876687,
+   "speech_s_per_min": 3.536509900990097,
+   "hits_all": 27.0,
+   "n_events": 168.0,
+   "hits_coverable": 27.0,
+   "n_coverable": 81.0,
+   "n_quiet": 114.0
+  },
+  "per_seed": {
+   "0": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.18421052631578946,
+    "cues_per_min": 1.6876687668766877,
+    "speech_s_per_min": 3.5365099009900973,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "1": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.18421052631578946,
+    "cues_per_min": 1.6876687668766877,
+    "speech_s_per_min": 3.5365099009900973,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "2": {
+    "recall_all": 0.16071428571428573,
+    "recall_coverable": 0.3333333333333333,
+    "quiet_violation": 0.18421052631578946,
+    "cues_per_min": 1.6876687668766877,
+    "speech_s_per_min": 3.5365099009900973,
+    "hits_all": 9.0,
+    "n_events": 56.0,
+    "hits_coverable": 9.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   }
+  },
+  "diff_vs_logistic_recall_all": {
+   "value": 0.0,
+   "ci95": [
+    -0.07936507936507936,
+    0.06666666666666667
+   ]
+  },
+  "diff_vs_logistic_recall_coverable": {
+   "value": 0.0,
+   "ci95": [
+    -0.21428571428571427,
+    0.12
+   ]
+  },
+  "diff_vs_logistic_quiet_violation": {
+   "value": 0.02631578947368421,
+   "ci95": [
+    -0.14285714285714285,
+    0.2
+   ]
+  }
+ },
+ "online_greedy": {
+  "pooled": {
+   "recall_all": 0.07738095238095238,
+   "recall_coverable": 0.16049382716049382,
+   "quiet_violation": 0.13157894736842105,
+   "cues_per_min": 1.715796579657965,
+   "speech_s_per_min": 4.57723897389739,
+   "hits_all": 13.0,
+   "n_events": 168.0,
+   "hits_coverable": 13.0,
+   "n_coverable": 81.0,
+   "n_quiet": 114.0
+  },
+  "per_seed": {
+   "0": {
+    "recall_all": 0.05357142857142857,
+    "recall_coverable": 0.1111111111111111,
+    "quiet_violation": 0.10526315789473684,
+    "cues_per_min": 1.7045454545454544,
+    "speech_s_per_min": 4.6005850585058505,
+    "hits_all": 3.0,
+    "n_events": 56.0,
+    "hits_coverable": 3.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "1": {
+    "recall_all": 0.07142857142857142,
+    "recall_coverable": 0.14814814814814814,
+    "quiet_violation": 0.13157894736842105,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 4.450382538253826,
+    "hits_all": 4.0,
+    "n_events": 56.0,
+    "hits_coverable": 4.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   },
+   "2": {
+    "recall_all": 0.10714285714285714,
+    "recall_coverable": 0.2222222222222222,
+    "quiet_violation": 0.15789473684210525,
+    "cues_per_min": 1.7214221422142213,
+    "speech_s_per_min": 4.680749324932491,
+    "hits_all": 6.0,
+    "n_events": 56.0,
+    "hits_coverable": 6.0,
+    "n_coverable": 27.0,
+    "n_quiet": 38.0
+   }
+  },
+  "diff_vs_logistic_recall_all": {
+   "value": -0.08333333333333334,
+   "ci95": [
+    -0.171875,
+    -0.011111111111111113
+   ]
+  },
+  "diff_vs_logistic_recall_coverable": {
+   "value": -0.1728395061728395,
+   "ci95": [
+    -0.3913043478260869,
+    -0.022222222222222227
+   ]
+  },
+  "diff_vs_logistic_quiet_violation": {
+   "value": -0.02631578947368421,
+   "ci95": [
+    -0.17777777777777776,
+    0.10869565217391303
+   ]
+  }
+ }
+}

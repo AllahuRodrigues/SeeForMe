@@ -216,6 +216,22 @@ Cost over the 17,602 dev video-seconds: 4.5 candidate-seconds per minute (fence 
 15. **The rule that silences missed events is the score threshold, and nothing else.** Combined with the budget curve, scheduler misses are a scoring problem.
 16. **Segmentation as a generator recovers 8 of 124 perception losses and is not promoted.** It adds 4.5 candidate-seconds a minute at 3-13% event precision and does not help the learned schedulers. The 34 scene-level events and most doors (19 of 22 still lost) remain out of reach; a stairs-only generator (best precision) or OWLv2-taught door boxes are the remaining perception options.
 
+## Speak-or-silence model ladder (added 2026-11-13)
+
+`scripts/train_decision_models.py`: models fitted on `train` candidates (full-information labels), causal K-step history windows, standardised with train statistics; every hyperparameter, epoch, K and calibrator chosen on `finetune`, so finetune numbers are a development comparison. Frozen scorers replayed at equal speech rate (BudgetController, 2 cues/min) on the 104 finetune videos (`results/decision_models/`).
+
+| Policy | Finetune AUC | All-event recall | vs logistic [95% CI] | Quiet violations | Cues/min |
+|---|---|---|---|---|---|
+| logistic (last step) | 0.682 | 27/168 = 0.161 | reference | 0.158 | 1.72 |
+| logistic, class-weighted + Platt | 0.680 | 0.161 | +0.000 | 0.132 | 1.72 |
+| MLP | 0.674 | 0.161 | +0.000 | 0.105 | 1.70 |
+| **GRU, 4 s history** | **0.697** | **33/168 = 0.196** | **+0.036 [-0.031, +0.094]** | **0.053** | 1.70 |
+| TCN, 1 s | 0.669 | 0.161 | +0.000 | 0.184 | 1.69 |
+| online greedy (learning online) | | 13/168 = 0.077 | **-0.083 [-0.172, -0.011]** | 0.132 | 1.72 |
+
+17. **A scorer trained offline on full labels beats learning online from one-sided feedback** at equal speech rate (frozen logistic vs online greedy, CI excludes 0). On this benchmark, supervised training on the train split is worth more than adapting online.
+18. **The GRU with 4 s of history is the lead candidate, not yet a result:** highest recall (+0.036, CI includes 0) and fewer quiet-window violations (-0.105 [-0.229, -0.023], on 38 quiet windows), but K was chosen on the same videos. The networks overfit (train AUC 0.73-0.77, finetune flat), cross-fitted calibration is poor (ECE about 0.21), and the TCN loses at every K. Next: confirm GRU vs logistic once on `select`.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
