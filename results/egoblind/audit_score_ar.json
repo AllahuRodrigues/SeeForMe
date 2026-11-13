@@ -1,0 +1,16 @@
+{
+ "n": 50,
+ "n_decided": 49,
+ "unclear": 1,
+ "speak_confirmed": 1.0,
+ "silent_confirmed": 0.0,
+ "confusion": {
+  "speak": {
+   "unclear": 1,
+   "speak": 29
+  },
+  "silent": {
+   "speak": 20
+  }
+ }
+}
