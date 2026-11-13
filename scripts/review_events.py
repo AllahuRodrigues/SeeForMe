@@ -13,14 +13,14 @@ finetune, shuffled, with the derived answer hidden, so it measures whether verdi
 
 Reads results/egoblind/review_events_<split>.csv (scripts/diagnose_egoblind_recall.py). Model columns are never shown.
 Frames and verdicts live in data/review/<split>/ (git-ignored: frames are EgoBlind video, CC BY-NC).
-Keys in the page (rubric v2): 1 warn about an object, 2 confirm the way is clear, 3 nothing needed, 4 wrong object, 5 unclear; left/right arrows to move.
+Keys in the page (rubric v3): 1 proactive warning, 2 proactive all-clear, 3 useful only if asked, 4 nothing needed, 5 uncertain, 6 warning needed but wrong object; left/right arrows to move. Only frames up to the question are shown.
 """
 import argparse, csv, html, json, sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 from _common import ROOT
-from seeforme.egoblind.review import (VERDICTS, blind_row, cohen_kappa, latest_verdicts, make_verdict, merge_verdicts,
+from seeforme.egoblind.review import (VERDICTS, blind_row, decision_time_frames, cohen_kappa, latest_verdicts, make_verdict, merge_verdicts,
                                       sample_second_rater)
 
 REVIEW = ROOT / "data" / "review"
@@ -166,7 +166,9 @@ else:
         events = [e for e in events if e["key"] in keep]
     for e in events:
         m = out_dir / "frames" / e["key"].replace(":", "_") / "meta.json"
-        e["times"] = json.loads(m.read_text())["times"] if m.exists() else []
+        times = json.loads(m.read_text())["times"] if m.exists() else []
+        idx = decision_time_frames(times, float(e["t_q"]))    # decision-time view: nothing after the question
+        e["times"], e["frame_idx"] = [times[i] for i in idx], idx
         e["win"] = list(window_of(e))
     out_dir.mkdir(parents=True, exist_ok=True)
     page = (Path(__file__).parent / "review_ui.html").read_text()
