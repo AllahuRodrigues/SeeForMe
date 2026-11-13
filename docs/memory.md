@@ -46,6 +46,17 @@ Match precision against ground-truth object ids, where both sides have one: **0.
 
 The guard removes 14 cues, all of them same-track repeats, at no cost in recall. The 17 that remain pass the approach exception, mostly on far-range depth estimates (for example 29 m to 23 m), where a fixed 3 m rule is weak. The guard length (10 s, P-CACS's `reannounce_tau_s`) was not tuned.
 
+## Guard length chosen on `select` (2026-11-13)
+
+| IL configuration | `select` coverable recall | `select` same-track repeats | dev coverable recall | dev same-track repeats |
+|---|---|---|---|---|
+| no guard (October baseline) | 0.091 | 0.194 | 0.331 | 0.136 |
+| guard 5 s | 0.091 | 0.138 | | |
+| guard 10 s | 0.091 | 0.138 | 0.331 | 0.079 |
+| **guard 20 s (selected)** | 0.091 | **0.107** | 0.331 | **0.075** |
+
+Selection rule: fewest same-track repeats with recall unchanged. `egoblind_learned:il` stays the reproducible October baseline; `egoblind_learned:il+guard20` is the configuration to deploy. `select` has 11 coverable events, so the recall column cannot detect small losses; dev confirms none.
+
 ## Still to do
 
 - Hand-check 50 sampled matches (`results/memory/matches_dev.csv`), with crops shown side by side.
