@@ -28,9 +28,26 @@ ap.add_argument("--policies", default="pcacs,egoblind_learned:il,online_greedy")
 ap.add_argument("--seed", type=int, default=0)
 ap.add_argument("--limit", type=int, default=0)
 ap.add_argument("--tag", default="dev")
+ap.add_argument("--seg-candidates", action="store_true", help="add segmentation stairs / door / railing candidates (data/egoblind_seg)")
+ap.add_argument("--seg-min-share", type=float, default=0.02)
+ap.add_argument("--seg-consecutive", type=int, default=2)
 args = ap.parse_args()
 if any(s in ("holdout", "test") for s in args.stream.split(",")):
     ap.error("development splits only")
+
+if args.seg_candidates:
+    import numpy as np
+    from seeforme.egoblind.scenario import EgoBlindScenario
+    from seeforme.perception.seg_candidates import inject_segmentation
+    _orig_frames = EgoBlindScenario.frames
+
+    def _frames_with_seg(self, noise=None, rng=None):
+        fr = _orig_frames(self, noise=noise, rng=rng)
+        f = ROOT / "data" / "egoblind_seg" / f"{self.video_id}.npz"
+        if not f.exists():
+            return fr
+        return inject_segmentation(fr, np.load(f), self.speak_events(), min_share=args.seg_min_share, min_consecutive=args.seg_consecutive)
+    EgoBlindScenario.frames = _frames_with_seg
 
 cfg = load_campus_cfg()
 src = source_recordings()
@@ -71,11 +88,13 @@ def make_hook(rec, policy):
                 rec["top"][sid].append(t)                    # ranked first among legal candidates
             elif cue is not None and cue.action != "haptic":
                 rec["outranked"][sid].append(t)              # another object was spoken about instead
+        reasons = getattr(policy, "last_reasons", {}) or {}
         for o in obs or []:
             sid = o.track.source_id
             if sid is None:
                 continue
             rec["cand"][sid].append(t)
+            rec["reason"][sid].append((t, reasons.get(o.track.track_id, "unlogged")))
             la = o.track.last_announced
             if not ch.busy and (la is None or t - la >= block):
                 rec["cand_legal"][sid].append(t)
@@ -85,7 +104,7 @@ def make_hook(rec, policy):
 
 
 def new_rec():
-    r = {k: defaultdict(list) for k in ("track", "cand", "cand_legal", "cue", "top", "outranked")}
+    r = {k: defaultdict(list) for k in ("track", "cand", "cand_legal", "cue", "top", "outranked", "reason")}
     return r
 
 
@@ -131,6 +150,7 @@ for name in [p for p in args.policies.split(",") if p]:
                                            track=rec["track"].get(e.obj_id, []), cand=rec["cand"].get(e.obj_id, []),
                                            cand_legal=rec["cand_legal"].get(e.obj_id, []), cue=rec["cue"].get(e.obj_id, []),
                                            top=rec["top"].get(e.obj_id, []), outranked=rec["outranked"].get(e.obj_id, []),
+                                           reasons=rec["reason"].get(e.obj_id, []),
                                            meta={"video": sc.video_id, "obj": e.obj_id, "split": sc.split, "label": e.label,
                                                  "ideal": e.ideal_s, "t_q": float(det.get("t_q", e.latest_safe_s - 0.5)),
                                                  "qtype": det.get("qtype", ""), "question": det.get("question", ""),
@@ -146,6 +166,11 @@ for name, trs in traces.items():
     why = Counter("outranked" if inw(tr, tr.outranked) else ("top_but_below_threshold" if inw(tr, tr.top) else "never_top_never_outranked")
                   for tr in sched)
     res_why = dict(why)
+    # exact rejection reasons the policy logged at every in-window opportunity of scheduler-missed events
+    opp = Counter(r for tr in sched for (tt, r) in tr.reasons if tr.window[0] - 1e-6 <= tt <= tr.window[1] + 1e-6)
+    dom = Counter(Counter(r for (tt, r) in tr.reasons if tr.window[0] - 1e-6 <= tt <= tr.window[1] + 1e-6).most_common(1)[0][0]
+                  for tr in sched if any(tr.window[0] - 1e-6 <= tt <= tr.window[1] + 1e-6 for tt, _ in tr.reasons))
+    res_why = {"by_rank": dict(why), "opportunities_by_reason": dict(opp), "events_by_main_reason": dict(dom)}
     res[name] = {"funnel": funnel_counts(trs), "scheduler_misses": res_why,
                  "lost_by_label": {s: dict(Counter(t.meta["label"] for t, x in zip(trs, st) if x == s).most_common(8)) for s in STAGES},
                  "lost_by_qtype": {s: dict(Counter(t.meta["qtype"] for t, x in zip(trs, st) if x == s)) for s in STAGES}}
@@ -164,7 +189,8 @@ for name, trs in traces.items():
 dump_json(res, out / f"{args.tag}.json")
 with open(out / f"events_{args.tag}.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
-lines = [f"Event-failure funnel on {args.stream} ({len(scen)} videos), seed {args.seed}\n",
+lines = [f"Event-failure funnel on {args.stream} ({len(scen)} videos), seed {args.seed}"
+         f"{', with segmentation candidates (share >= %g, %d consecutive s)' % (args.seg_min_share, args.seg_consecutive) if args.seg_candidates else ''}\n",
          "| policy | N events | P detected | T tracked | C candidate | S spoken | D on time | lost: perception / tracking / candidate / scheduler (blocked) / timing |",
          "|---|---|---|---|---|---|---|---|"]
 for name, r in res.items():
@@ -182,7 +208,10 @@ for name, r in res.items():
 lines += ["", "Why scheduler misses happened (inside the window): outranked = another object was spoken about while it was a legal candidate; "
           "top but below threshold = it ranked first and the policy stayed silent.", ""]
 for name, r in res.items():
-    lines.append(f"- {name}: " + ", ".join(f"{k} {v}" for k, v in r["scheduler_misses"].items()))
+    m = r["scheduler_misses"]
+    lines.append(f"- {name}: by rank: " + ", ".join(f"{k} {v}" for k, v in m["by_rank"].items()))
+    lines.append("  - main logged reason per missed event: " + ", ".join(f"{k} {v}" for k, v in sorted(m["events_by_main_reason"].items(), key=lambda kv: -kv[1])))
+    lines.append("  - all in-window opportunities: " + ", ".join(f"{k} {v}" for k, v in sorted(m["opportunities_by_reason"].items(), key=lambda kv: -kv[1])))
 for name, r in res.items():
     lines += ["", f"**{name}**, most common labels lost at each stage:"]
     for s in STAGES[:-1]:

@@ -167,6 +167,7 @@ class PCACSPolicy(CuePolicy):
     def __init__(self, cfg: Optional[PCACSConfig] = None, text_model=None, camera: Optional[CameraModel] = None,
                  goal_tags: Optional[Sequence[str]] = None, name: Optional[str] = None):
         self.cfg = cfg or PCACSConfig()
+        self.last_reasons: Dict[int, str] = {}     # track id -> why it was or was not spoken about at the last decision
         self.decision_interval = self.cfg.decision_interval
         self.text_model = text_model or KeywordTextImportance()
         self.cam = camera or CameraModel()
@@ -366,11 +367,14 @@ class PCACSPolicy(CuePolicy):
         obs.sort(key=lambda o: -o.score)
         self._last_obs = obs
         self.last_action = "silence"
+        # why each candidate was or was not spoken about (diagnostics only; never changes the decision)
+        self.last_reasons = {o.track.track_id: "outranked" for o in obs}
         if not obs:
             return []
-        for o in obs:
+        for k, o in enumerate(obs):
             trk, f = o.track, o.event  # type: ignore[attr-defined]
             if trk.confidence < c.min_confidence:
+                self.last_reasons[trk.track_id] = "low_confidence"
                 continue
             imminent = (f.severity >= c.haptic_min_severity and f.path_prob >= c.haptic_min_path
                         and f.ttc <= c.haptic_ttc and f.depth_conf >= 0.4)
@@ -378,24 +382,32 @@ class PCACSPolicy(CuePolicy):
             haptic_ok = (c.use_haptic and imminent and (trk.last_haptic is None or t - trk.last_haptic >= c.haptic_repeat_s)
                          and (trk.last_announced is None or t - trk.last_announced >= c.haptic_after_speech_s))
             if recently:
+                self.last_reasons[trk.track_id] = "recently_announced"
                 if haptic_ok:
                     self.last_action = "haptic"
                     return [self._make_cue(o, t, "haptic", ch)]
                 continue
             if o.score < c.threshold_speak:
+                for rest in obs[k:]:
+                    if self.last_reasons.get(rest.track.track_id) == "outranked":
+                        self.last_reasons[rest.track.track_id] = "below_threshold"
                 break
             urgent = f.hazard * f.urgency >= c.urgent_bypass
             if not ch.busy:
                 if c.use_budget and not urgent and self.budget < o.duration:  # type: ignore[attr-defined]
+                    self.last_reasons[trk.track_id] = "budget"
                     continue        # defer non-urgent speech until the budget recovers
                 self.last_action = "speak"
+                self.last_reasons[trk.track_id] = "spoken"
                 return [self._make_cue(o, t, "speak", ch)]
+            self.last_reasons[trk.track_id] = "channel_busy"
             # channel busy
             critical = (f.severity >= c.critical_severity and f.urgency >= c.critical_urgency and f.path_prob >= 0.5
                         and ch.current_severity < 0.7)
             if c.use_interrupt and ch.current_track != trk.track_id and f.severity > ch.current_severity and (
                     critical or (o.score >= c.threshold_interrupt and o.score >= ch.current_utility + c.interrupt_margin)):
                 self.last_action = "interrupt"
+                self.last_reasons[trk.track_id] = "spoken"
                 return [self._make_cue(o, t, "interrupt", ch)]
             if haptic_ok:
                 self.last_action = "haptic"

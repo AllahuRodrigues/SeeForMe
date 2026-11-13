@@ -1,0 +1,117 @@
+dumped 81126 candidate rows in 23s
+{
+ "splits_used": [
+  "train",
+  "finetune"
+ ],
+ "n_videos": {
+  "train": 454,
+  "finetune": 104
+ },
+ "minutes": {
+  "train": 230.86277777777778,
+  "finetune": 59.25333333333333
+ },
+ "rows_all": 81126,
+ "rows_unlabelled_history_only": 55873,
+ "rows": {
+  "train": 20774,
+  "finetune": 4479
+ },
+ "positives": {
+  "train": 3454,
+  "finetune": 959
+ },
+ "videos_with_labelled_rows": {
+  "train": 265,
+  "finetune": 48
+ },
+ "decision_interval_s": 0.5,
+ "K_steps": [
+  2,
+  4,
+  8,
+  16
+ ],
+ "K_seconds": [
+  1.0,
+  2.0,
+  4.0,
+  8.0
+ ],
+ "history_coverage_mean_slots": {
+  "K2": 1.4913079738616943,
+  "K4": 2.294301748275757,
+  "K8": 3.4955451488494873,
+  "K16": 4.797172546386719
+ },
+ "label_rule": "1 inside the event window before announcement; 0 where counts_fp(t); unlabelled dropped (kept as history)",
+ "standardisation": "mean/sd of labelled train rows, clipped to +-5, padded slots 0"
+}
+logistic               AUC ft 0.682 tr 0.713 AP 0.349 Brier 0.1576 ECE 0.0435 params 30 0.021 ms
+logistic_cw (raw)      AUC ft 0.680 tr 0.714 AP 0.347 Brier 0.2507 ECE 0.2962 params 30 0.045 ms
+logistic_cw_platt      AUC ft 0.680 tr 0.714 AP 0.347 Brier 0.1575 ECE 0.0344 params 32 0.021 ms
+mlp                    AUC ft 0.674 tr 0.745 AP 0.313 Brier 0.1589 ECE 0.0325 params 6145 0.083 ms
+gru_k2                 AUC ft 0.685 tr 0.730 AP 0.327 Brier 0.1587 ECE 0.0368 params 6177 0.517 ms
+gru_k4                 AUC ft 0.694 tr 0.727 AP 0.335 Brier 0.1583 ECE 0.0468 params 6177 1.072 ms
+gru_k8                 AUC ft 0.697 tr 0.732 AP 0.339 Brier 0.1577 ECE 0.0455 params 6177 0.512 ms
+gru_k16                AUC ft 0.697 tr 0.732 AP 0.341 Brier 0.1578 ECE 0.0448 params 6177 1.507 ms
+tcn_k2                 AUC ft 0.669 tr 0.752 AP 0.313 Brier 0.1591 ECE 0.0404 params 9153 1.772 ms
+tcn_k4                 AUC ft 0.666 tr 0.758 AP 0.308 Brier 0.1595 ECE 0.0413 params 9153 1.669 ms
+tcn_k8                 AUC ft 0.665 tr 0.766 AP 0.306 Brier 0.1599 ECE 0.0339 params 9153 1.071 ms
+tcn_k16                AUC ft 0.668 tr 0.766 AP 0.314 Brier 0.1591 ECE 0.0319 params 9153 2.644 ms
+offline fits 1193s
+# Offline comparison: fitted on `train`, selected and scored on `finetune`
+
+Rows: train 20774 (3454 positive), finetune 4479 (959 positive, base rate 0.214). Finetune chose every hyperparameter (logistic C, network weight decay, early-stopping epoch, K, Platt calibration), so these finetune numbers are a development comparison, not a held-out estimate. One training seed per network.
+
+| model | K (s) | AUC finetune | AUC delta vs logistic [95% CI] | AP | Brier | ECE | AUC train | params | ms / decision |
+|---|---|---|---|---|---|---|---|---|---|
+| logistic | 1 (0.5) | 0.682 |  | 0.349 | 0.1576 | 0.0435 | 0.713 | 30 | 0.021 |
+| logistic_cw_raw | 1 (0.5) | 0.680 |  | 0.347 | 0.2507 | 0.2962 | 0.714 | 30 | 0.045 |
+| logistic_cw_platt | 1 (0.5) | 0.680 | -0.002 [-0.006, +0.004] | 0.347 | 0.1575 (0.2033 cf) | 0.0344 (0.2082 cf) | 0.714 | 32 | 0.021 |
+| mlp | 1 (0.5) | 0.674 | -0.007 [-0.047, +0.032] | 0.313 | 0.1589 | 0.0325 | 0.745 | 6145 | 0.083 |
+| gru_k2 | 2 (1) | 0.685 | +0.003 [-0.018, +0.023] | 0.327 | 0.1587 | 0.0368 | 0.730 | 6177 | 0.517 |
+| gru_k4 | 4 (2) | 0.694 | +0.012 [-0.014, +0.039] | 0.335 | 0.1583 | 0.0468 | 0.727 | 6177 | 1.072 |
+| gru_k8 | 8 (4) | 0.697 | +0.015 [-0.015, +0.046] | 0.339 | 0.1577 | 0.0455 | 0.732 | 6177 | 0.512 |
+| gru_k16 | 16 (8) | 0.697 | +0.015 [-0.014, +0.043] | 0.341 | 0.1578 | 0.0448 | 0.732 | 6177 | 1.507 |
+| tcn_k2 | 2 (1) | 0.669 | -0.012 [-0.054, +0.026] | 0.313 | 0.1591 | 0.0404 | 0.752 | 9153 | 1.772 |
+| tcn_k4 | 4 (2) | 0.666 | -0.016 [-0.066, +0.032] | 0.308 | 0.1595 | 0.0413 | 0.758 | 9153 | 1.669 |
+| tcn_k8 | 8 (4) | 0.665 | -0.017 [-0.065, +0.029] | 0.306 | 0.1599 | 0.0339 | 0.766 | 9153 | 1.071 |
+| tcn_k16 | 16 (8) | 0.668 | -0.013 [-0.062, +0.034] | 0.314 | 0.1591 | 0.0319 | 0.766 | 9153 | 2.644 |
+
+Best K by finetune AUC: GRU gru_k8, TCN tcn_k2. ECE: 15 equal-width bins. 'cf' = Platt cross-fitted over two halves of the finetune videos. ms / decision: all confirmed candidates of one real finetune decision scored in one batch, mean over 500 decisions, 2 CPU threads.
+logistic_cw_raw is the class-weighted fit before calibration (its probabilities are inflated by the weighting).
+replay logistic seed 0: 35s tau_end 0.503
+replay logistic_cw_platt seed 0: 29s tau_end 0.503
+replay mlp seed 0: 31s tau_end 0.503
+replay gru_k8 seed 0: 45s tau_end 0.428
+replay tcn_k2 seed 0: 122s tau_end 0.428
+replay online_greedy seed 0: 51s tau_end 0.428
+replay logistic seed 1: 168s tau_end 0.503
+replay logistic_cw_platt seed 1: 36s tau_end 0.503
+replay mlp seed 1: 36s tau_end 0.503
+replay gru_k8 seed 1: 598s tau_end 0.428
+replay tcn_k2 seed 1: 581s tau_end 0.428
+replay online_greedy seed 1: 264s tau_end 0.503
+replay logistic seed 2: 91s tau_end 0.503
+replay logistic_cw_platt seed 2: 84s tau_end 0.503
+replay mlp seed 2: 104s tau_end 0.503
+replay gru_k8 seed 2: 148s tau_end 0.428
+replay tcn_k2 seed 2: 143s tau_end 0.428
+replay online_greedy seed 2: 32s tau_end 0.503
+# Replay at equal speech rate on `finetune` (104 videos, seeds 0, 1, 2 pooled)
+
+Frozen scorers speak the top legal candidate when its score is at least the BudgetController's tau (target 2 cues/min), exactly like online greedy. Every policy streams `train` then `finetune` with the same seeds; only the `finetune` videos are reported (the `train` part lets the controller settle and is in-sample for the frozen models). online_greedy learns online from simulated taps and replayed questions, as in docs/online.md. Seeds only change the simulated feedback, so frozen scorers give the same cues on every seed. Model choice (K, weight decay, epochs, Platt) was made on these same finetune videos.
+
+| policy | coverable recall | all-event recall | all-event recall vs logistic [95% CI] | quiet violations | cues/min | speech s/min |
+|---|---|---|---|---|---|---|
+| logistic | 27/81 = 0.333 | 27/168 = 0.161 | reference | 0.158 | 1.72 | 3.8 |
+| logistic_cw_platt | 27/81 = 0.333 | 27/168 = 0.161 | +0.000 [-0.053, +0.046] | 0.132 | 1.72 | 3.9 |
+| mlp | 27/81 = 0.333 | 27/168 = 0.161 | +0.000 [-0.079, +0.067] | 0.105 | 1.70 | 3.4 |
+| gru_k8 | 33/81 = 0.407 | 33/168 = 0.196 | +0.036 [-0.031, +0.094] | 0.053 | 1.70 | 3.6 |
+| tcn_k2 | 27/81 = 0.333 | 27/168 = 0.161 | +0.000 [-0.079, +0.067] | 0.184 | 1.69 | 3.5 |
+| online_greedy | 13/81 = 0.160 | 13/168 = 0.077 | -0.083 [-0.172, -0.011] | 0.132 | 1.72 | 4.6 |
+
+Paired bootstrap: 2,000 resamples of finetune videos, each resample used for all three seeds of both policies.
+Per-seed all-event recall: logistic 0.161 / 0.161 / 0.161; logistic_cw_platt 0.161 / 0.161 / 0.161; mlp 0.161 / 0.161 / 0.161; gru_k8 0.196 / 0.196 / 0.196; tcn_k2 0.161 / 0.161 / 0.161; online_greedy 0.054 / 0.071 / 0.107

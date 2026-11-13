@@ -1,0 +1,49 @@
+{
+ "splits_used": [
+  "train",
+  "finetune"
+ ],
+ "n_videos": {
+  "train": 454,
+  "finetune": 104
+ },
+ "minutes": {
+  "train": 230.86277777777778,
+  "finetune": 59.25333333333333
+ },
+ "rows_all": 81126,
+ "rows_unlabelled_history_only": 55873,
+ "rows": {
+  "train": 20774,
+  "finetune": 4479
+ },
+ "positives": {
+  "train": 3454,
+  "finetune": 959
+ },
+ "videos_with_labelled_rows": {
+  "train": 265,
+  "finetune": 48
+ },
+ "decision_interval_s": 0.5,
+ "K_steps": [
+  2,
+  4,
+  8,
+  16
+ ],
+ "K_seconds": [
+  1.0,
+  2.0,
+  4.0,
+  8.0
+ ],
+ "history_coverage_mean_slots": {
+  "K2": 1.4913079738616943,
+  "K4": 2.294301748275757,
+  "K8": 3.4955451488494873,
+  "K16": 4.797172546386719
+ },
+ "label_rule": "1 inside the event window before announcement; 0 where counts_fp(t); unlabelled dropped (kept as history)",
+ "standardisation": "mean/sd of labelled train rows, clipped to +-5, padded slots 0"
+}

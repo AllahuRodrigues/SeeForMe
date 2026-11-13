@@ -1,0 +1,405 @@
+{
+ "pcacs": {
+  "funnel": {
+   "N": 293,
+   "P": 169,
+   "T": 160,
+   "C": 160,
+   "S": 23,
+   "D": 15,
+   "lost_perception": 124,
+   "lost_tracking": 9,
+   "lost_candidate": 0,
+   "lost_scheduler": 137,
+   "lost_timing": 8,
+   "lost_delivered": 15,
+   "blocked": 0
+  },
+  "scheduler_misses": {
+   "by_rank": {
+    "top_but_below_threshold": 103,
+    "never_top_never_outranked": 26,
+    "outranked": 8
+   },
+   "opportunities_by_reason": {
+    "below_threshold": 4558,
+    "low_confidence": 65,
+    "outranked": 26,
+    "recently_announced": 1
+   },
+   "events_by_main_reason": {
+    "below_threshold": 133,
+    "low_confidence": 4
+   }
+  },
+  "lost_by_label": {
+   "perception": {
+    "unknown": 34,
+    "door": 22,
+    "pole": 9,
+    "stairs": 8,
+    "dining table": 6,
+    "fence": 6,
+    "wall": 4,
+    "car": 4
+   },
+   "tracking": {
+    "dining table": 2,
+    "car": 2,
+    "knife": 1,
+    "couch": 1,
+    "person": 1,
+    "motorcycle": 1,
+    "horse": 1
+   },
+   "candidate": {},
+   "scheduler": {
+    "person": 65,
+    "car": 23,
+    "motorcycle": 12,
+    "dining table": 8,
+    "dog": 4,
+    "chair": 4,
+    "bicycle": 4,
+    "knife": 3
+   },
+   "timing": {
+    "motorcycle": 4,
+    "car": 3,
+    "person": 1
+   },
+   "delivered": {
+    "car": 10,
+    "bicycle": 2,
+    "motorcycle": 2,
+    "person": 1
+   }
+  },
+  "lost_by_qtype": {
+   "perception": {
+    "safety": 83,
+    "navigation": 41
+   },
+   "tracking": {
+    "safety": 6,
+    "navigation": 3
+   },
+   "candidate": {},
+   "scheduler": {
+    "safety": 99,
+    "navigation": 38
+   },
+   "timing": {
+    "safety": 6,
+    "navigation": 2
+   },
+   "delivered": {
+    "safety": 12,
+    "navigation": 3
+   }
+  },
+  "timing_native": {
+   "events": 293,
+   "matched": 15,
+   "recall": 0.051194539249146756,
+   "start@0.5": 0.2,
+   "start@0.5_all": 0.010238907849829351,
+   "start@1": 0.4,
+   "start@1_all": 0.020477815699658702,
+   "start@2": 0.4666666666666667,
+   "start@2_all": 0.023890784982935155,
+   "mean_abs_delta": 3.5393333333333334,
+   "median_abs_delta": 2.190000000000005,
+   "sd_abs_delta": 3.19882367267858,
+   "mean_signed_delta": -3.455333333333333
+  },
+  "timing_egovoice": {
+   "events": 293,
+   "matched": 8,
+   "recall": 0.027303754266211604,
+   "start@0.5": 0.25,
+   "start@0.5_all": 0.006825938566552901,
+   "start@1": 0.375,
+   "start@1_all": 0.010238907849829351,
+   "start@2": 0.875,
+   "start@2_all": 0.023890784982935155,
+   "mean_abs_delta": 1.0325,
+   "median_abs_delta": 1.105,
+   "sd_abs_delta": 0.6169228071647203,
+   "mean_signed_delta": 0.23749999999999913
+  }
+ },
+ "egoblind_learned:il": {
+  "funnel": {
+   "N": 293,
+   "P": 169,
+   "T": 160,
+   "C": 154,
+   "S": 66,
+   "D": 57,
+   "lost_perception": 124,
+   "lost_tracking": 9,
+   "lost_candidate": 6,
+   "lost_scheduler": 88,
+   "lost_timing": 9,
+   "lost_delivered": 57,
+   "blocked": 0
+  },
+  "scheduler_misses": {
+   "by_rank": {
+    "top_but_below_threshold": 70,
+    "never_top_never_outranked": 12,
+    "outranked": 6
+   },
+   "opportunities_by_reason": {
+    "below_threshold": 1560
+   },
+   "events_by_main_reason": {
+    "below_threshold": 88
+   }
+  },
+  "lost_by_label": {
+   "perception": {
+    "unknown": 34,
+    "door": 22,
+    "pole": 9,
+    "stairs": 8,
+    "dining table": 6,
+    "fence": 6,
+    "wall": 4,
+    "car": 4
+   },
+   "tracking": {
+    "dining table": 2,
+    "car": 2,
+    "knife": 1,
+    "couch": 1,
+    "person": 1,
+    "motorcycle": 1,
+    "horse": 1
+   },
+   "candidate": {
+    "dining table": 2,
+    "car": 2,
+    "bed": 1,
+    "horse": 1
+   },
+   "scheduler": {
+    "person": 37,
+    "car": 11,
+    "motorcycle": 7,
+    "dining table": 6,
+    "dog": 4,
+    "chair": 4,
+    "bicycle": 4,
+    "knife": 3
+   },
+   "timing": {
+    "car": 4,
+    "person": 4,
+    "motorcycle": 1
+   },
+   "delivered": {
+    "person": 26,
+    "car": 19,
+    "motorcycle": 10,
+    "bicycle": 2
+   }
+  },
+  "lost_by_qtype": {
+   "perception": {
+    "safety": 83,
+    "navigation": 41
+   },
+   "tracking": {
+    "safety": 6,
+    "navigation": 3
+   },
+   "candidate": {
+    "safety": 5,
+    "navigation": 1
+   },
+   "scheduler": {
+    "safety": 60,
+    "navigation": 28
+   },
+   "timing": {
+    "navigation": 2,
+    "safety": 7
+   },
+   "delivered": {
+    "safety": 45,
+    "navigation": 12
+   }
+  },
+  "timing_native": {
+   "events": 293,
+   "matched": 57,
+   "recall": 0.1945392491467577,
+   "start@0.5": 0.19298245614035087,
+   "start@0.5_all": 0.03754266211604096,
+   "start@1": 0.2631578947368421,
+   "start@1_all": 0.051194539249146756,
+   "start@2": 0.42105263157894735,
+   "start@2_all": 0.08191126279863481,
+   "mean_abs_delta": 3.0528070175438606,
+   "median_abs_delta": 2.780000000000001,
+   "sd_abs_delta": 2.3380099157759244,
+   "mean_signed_delta": -3.013508771929825
+  },
+  "timing_egovoice": {
+   "events": 293,
+   "matched": 33,
+   "recall": 0.11262798634812286,
+   "start@0.5": 0.2727272727272727,
+   "start@0.5_all": 0.030716723549488054,
+   "start@1": 0.6666666666666666,
+   "start@1_all": 0.07508532423208192,
+   "start@2": 1.0,
+   "start@2_all": 0.11262798634812286,
+   "mean_abs_delta": 0.8254545454545442,
+   "median_abs_delta": 0.7800000000000011,
+   "sd_abs_delta": 0.5151527629218413,
+   "mean_signed_delta": -0.3103030303030303
+  }
+ },
+ "online_greedy": {
+  "funnel": {
+   "N": 293,
+   "P": 169,
+   "T": 160,
+   "C": 154,
+   "S": 56,
+   "D": 33,
+   "lost_perception": 124,
+   "lost_tracking": 9,
+   "lost_candidate": 6,
+   "lost_scheduler": 98,
+   "lost_timing": 23,
+   "lost_delivered": 33,
+   "blocked": 0
+  },
+  "scheduler_misses": {
+   "by_rank": {
+    "top_but_below_threshold": 80,
+    "never_top_never_outranked": 13,
+    "outranked": 5
+   },
+   "opportunities_by_reason": {
+    "below_threshold": 2554,
+    "channel_busy": 28,
+    "outranked": 1
+   },
+   "events_by_main_reason": {
+    "below_threshold": 98
+   }
+  },
+  "lost_by_label": {
+   "perception": {
+    "unknown": 34,
+    "door": 22,
+    "pole": 9,
+    "stairs": 8,
+    "dining table": 6,
+    "fence": 6,
+    "wall": 4,
+    "car": 4
+   },
+   "tracking": {
+    "dining table": 2,
+    "car": 2,
+    "knife": 1,
+    "couch": 1,
+    "person": 1,
+    "motorcycle": 1,
+    "horse": 1
+   },
+   "candidate": {
+    "dining table": 2,
+    "car": 2,
+    "bed": 1,
+    "horse": 1
+   },
+   "scheduler": {
+    "person": 42,
+    "car": 16,
+    "motorcycle": 9,
+    "dining table": 5,
+    "dog": 4,
+    "bicycle": 4,
+    "knife": 3,
+    "chair": 3
+   },
+   "timing": {
+    "person": 9,
+    "car": 7,
+    "motorcycle": 6,
+    "bicycle": 1
+   },
+   "delivered": {
+    "person": 16,
+    "car": 11,
+    "motorcycle": 3,
+    "bicycle": 1,
+    "chair": 1,
+    "dining table": 1
+   }
+  },
+  "lost_by_qtype": {
+   "perception": {
+    "safety": 83,
+    "navigation": 41
+   },
+   "tracking": {
+    "safety": 6,
+    "navigation": 3
+   },
+   "candidate": {
+    "safety": 5,
+    "navigation": 1
+   },
+   "scheduler": {
+    "safety": 66,
+    "navigation": 32
+   },
+   "timing": {
+    "safety": 19,
+    "navigation": 4
+   },
+   "delivered": {
+    "safety": 27,
+    "navigation": 6
+   }
+  },
+  "timing_native": {
+   "events": 293,
+   "matched": 33,
+   "recall": 0.11262798634812286,
+   "start@0.5": 0.12121212121212122,
+   "start@0.5_all": 0.013651877133105802,
+   "start@1": 0.15151515151515152,
+   "start@1_all": 0.017064846416382253,
+   "start@2": 0.24242424242424243,
+   "start@2_all": 0.027303754266211604,
+   "mean_abs_delta": 4.25909090909091,
+   "median_abs_delta": 3.7900000000000063,
+   "sd_abs_delta": 2.88586562155533,
+   "mean_signed_delta": -4.231212121212122
+  },
+  "timing_egovoice": {
+   "events": 293,
+   "matched": 18,
+   "recall": 0.06143344709897611,
+   "start@0.5": 0.2777777777777778,
+   "start@0.5_all": 0.017064846416382253,
+   "start@1": 0.4444444444444444,
+   "start@1_all": 0.027303754266211604,
+   "start@2": 0.8888888888888888,
+   "start@2_all": 0.05460750853242321,
+   "mean_abs_delta": 1.096666666666665,
+   "median_abs_delta": 1.1500000000000008,
+   "sd_abs_delta": 0.7296117689109288,
+   "mean_signed_delta": -0.6544444444444445
+  }
+ }
+}

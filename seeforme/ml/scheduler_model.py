@@ -338,6 +338,7 @@ class SchedulerPolicy(PCACSPolicy):
         self.last_logp = self.last_entropy = None
         self.last_action = "silence"
         obs = self._features(tracks, t, ch)
+        self.last_reasons = {o.track.track_id: "low_confidence" for o in obs if o.track.confidence < c.min_confidence}
         obs = [o for o in obs if o.track.confidence >= c.min_confidence]
         if not obs:
             self._last_obs = []
@@ -375,11 +376,25 @@ class SchedulerPolicy(PCACSPolicy):
                     j = ACTION_IDX[a]
                     if legal[i, j] and probs[i, j] >= self.threshold and (best is None or probs[i, j] > best[0]):
                         best = (float(probs[i, j]), i, a)
+            for i, o in enumerate(obs):        # diagnostics only
+                trk = o.track
+                if ch.busy and not legal[i, ACTION_IDX["interrupt"]]:
+                    r = "channel_busy"
+                elif trk.last_announced is not None and t - trk.last_announced < c.recent_block_s:
+                    r = "recently_announced"
+                elif self._guarded(trk, t):
+                    r = "guard"
+                elif max(probs[i, ACTION_IDX[a]] for a in ("interrupt", "speak")) < self.threshold:
+                    r = "below_threshold"
+                else:
+                    r = "outranked"
+                self.last_reasons[trk.track_id] = r
             self._last_obs = sorted(obs, key=lambda o: -o.score)
             if best is None:
                 return []
             _, i, a = best
             self.last_action = a
+            self.last_reasons[obs[i].track.track_id] = "spoken"
             return [self._make_cue(obs[i], t, a, ch)]
 
         # rl mode: joint categorical over (candidate, non-silent action) + global silence,
