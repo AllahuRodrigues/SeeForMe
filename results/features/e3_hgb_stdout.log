@@ -1,0 +1,17 @@
+segmentation features joined (0 rows without a cache dropped from every model)
+ego-motion features joined (0 rows without a cache dropped from every model)
+rows train 20774 (pos 3454), finetune 4479 (pos 959)
+Feature gate (e3_hgb): logistic fit on train (20774 rows, 3454 pos), scored on finetune (4479 rows, 959 pos)
+
+| features | AUC train | AUC finetune | delta vs base [95% CI] | gate |
+|---|---|---|---|---|
+| base 29 | 0.934 | 0.632 | | |
+| base + looming_track | 0.935 | 0.634 | +0.002 [-0.009, +0.015] | fail |
+| base + looming_decision | 0.939 | 0.650 | +0.018 [+0.007, +0.031] | fail |
+| base + segmentation | 0.977 | 0.585 | -0.047 [-0.132, +0.037] | fail |
+| base + segmentation_architecture | 0.962 | 0.612 | -0.020 [-0.068, +0.032] | fail |
+| base + egomotion | 0.968 | 0.623 | -0.009 [-0.135, +0.104] | fail |
+| base + looming_all | 0.938 | 0.643 | +0.011 [+0.001, +0.024] | fail |
+| base + context_all | 0.982 | 0.632 | -0.000 [-0.108, +0.097] | fail |
+
+Single-feature AUC on finetune: has_loom 0.526, inv_loom 0.550, loom_lt3 0.530, dec_has_loom 0.524, dec_max_inv_loom 0.603, dec_n_loom_lt3 0.603, seg_stairs 0.529, seg_door 0.540, seg_railing 0.486, seg_walkable 0.550, seg_vehicle 0.586, seg_person 0.491, seg_obstacle 0.580, seg_stairs_max3s 0.564, seg_door_max3s 0.556, seg_railing_max3s 0.463, seg_walkable_max3s 0.550, seg_vehicle_max3s 0.578, seg_person_max3s 0.474, seg_obstacle_max3s 0.563, ego_yaw_abs 0.527, ego_still 0.421, ego_parallax 0.496, ego_inlier 0.429, ego_reliable 0.465, ego_yaw_abs_max3s 0.598, ego_still_max3s 0.370, ego_parallax_max3s 0.523, ego_inlier_max3s 0.388, ego_yaw_abs_mean3s 0.598, ego_still_mean3s 0.361, ego_parallax_mean3s 0.504, ego_inlier_mean3s 0.414, ego_reliable_frac3s 0.433
