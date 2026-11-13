@@ -18,6 +18,7 @@ from campus_common import load_campus_cfg
 from egoblind_common import load_egoblind_split, make_egoblind_policy, source_recordings
 from seeforme.egoblind import run_on_egoblind
 from seeforme.eval.funnel import STAGES, EventTrace, classify, funnel_counts
+from seeforme.eval.timing import TimedEvent, timing_metrics
 from seeforme.online.policy import OnlinePolicy
 from seeforme.online.stream import run_stream
 
@@ -119,6 +120,7 @@ for name in [p for p in args.policies.split(",") if p]:
                                            track=rec["track"].get(e.obj_id, []), cand=rec["cand"].get(e.obj_id, []),
                                            cand_legal=rec["cand_legal"].get(e.obj_id, []), cue=rec["cue"].get(e.obj_id, []),
                                            meta={"video": sc.video_id, "obj": e.obj_id, "split": sc.split, "label": e.label,
+                                                 "ideal": e.ideal_s, "t_q": float(det.get("t_q", e.latest_safe_s - 0.5)),
                                                  "qtype": det.get("qtype", ""), "question": det.get("question", ""),
                                                  "window": f"{e.earliest_useful_s:.2f}-{e.latest_safe_s:.2f}"}))
 
@@ -134,6 +136,14 @@ for name, trs in traces.items():
         first = lambda ts: f"{min(ts):.2f}" if ts else ""
         rows.append({"policy": name, **t.meta, "stage": x, "blocked": t.blocked, "first_det": first(t.det), "first_track": first(t.track),
                      "first_cand": first(t.cand), "first_cue": first(t.cue), "n_cues": len(t.cue)})
+# D1 onset timing (docs/research/benchmarks.md): native anchor t_q with the EgoBlind window, and EgoVoice-style
+# matching around the anticipation reference ideal_s
+for name, trs in traces.items():
+    cues = [(t, (tr.meta["video"], tr.meta["obj"])) for tr in trs for t in tr.cue]
+    ev_q = [TimedEvent((tr.meta["video"], tr.meta["obj"]), (tr.meta["video"], tr.meta["obj"]), tr.meta["t_q"]) for tr in trs]
+    ev_i = [TimedEvent((tr.meta["video"], tr.meta["obj"]), (tr.meta["video"], tr.meta["obj"]), tr.meta["ideal"]) for tr in trs]
+    res[name]["timing_native"] = timing_metrics(ev_q, cues, early=10.0, late=0.5, taus=(0.5, 1.0, 2.0))
+    res[name]["timing_egovoice"] = timing_metrics(ev_i, cues, early=2.5, late=1.5, taus=(0.5, 1.0, 2.0))
 dump_json(res, out / f"{args.tag}.json")
 with open(out / f"events_{args.tag}.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
@@ -144,6 +154,14 @@ for name, r in res.items():
     f = r["funnel"]
     lines.append(f"| {name} | {f['N']} | {f['P']} | {f['T']} | {f['C']} | {f['S']} | {f['D']} | {f['lost_perception']} / {f['lost_tracking']} / "
                  f"{f['lost_candidate']} / {f['lost_scheduler']} ({f['blocked']}) / {f['lost_timing']} |")
+lines += ["", "Onset timing (D1). native: cue within [t_q - 10 s, t_q + 0.5 s]; EgoVoice-style: within [-2.5 s, +1.5 s] of ideal_s.", "",
+          "| policy | variant | recall | Start@0.5 / 1 / 2 (of matched) | Start@1 of all events | mean \\|Δ\\| (s) | mean signed Δ (s) |", "|---|---|---|---|---|---|---|"]
+fmt = lambda x: "" if x is None else f"{x:.3f}"
+for name, r in res.items():
+    for v in ("timing_native", "timing_egovoice"):
+        m = r[v]
+        lines.append(f"| {name} | {v.split('_')[1]} | {fmt(m['recall'])} | {fmt(m['start@0.5'])} / {fmt(m['start@1'])} / {fmt(m['start@2'])} | "
+                     f"{fmt(m['start@1_all'])} | {fmt(m['mean_abs_delta'])} | {fmt(m['mean_signed_delta'])} |")
 for name, r in res.items():
     lines += ["", f"**{name}**, most common labels lost at each stage:"]
     for s in STAGES[:-1]:
