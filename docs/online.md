@@ -189,6 +189,16 @@ Speech-budget sweep, seed 0, dev (`per_video_budget*_s0.csv`), all-event recall 
 
 13. **The scheduler's misses are a scoring problem, not a ranking or budget problem.** Raising the speech rate buys recall roughly in proportion to quiet-window violations, with hits per 100 cues falling from about 9 to 4. The learner's scores do not separate should-speak moments from other top-ranked moments, so recall has to come from better decision features and calibration, compared at equal speech rate, not from talking more.
 
+**Segmentation feature gate** (`feature_auc.py --seg`, 558 dev videos segmented at 1 fps, 20,991 frames, causal features: last sample at or before t and the 3 s maximum):
+
+| Features | AUC train | AUC finetune | Δ [95% CI] | Gate |
+|---|---|---|---|---|
+| base 29 | 0.728 | 0.675 | | |
+| + all segmentation shares | 0.757 | 0.655 | -0.019 [-0.059, +0.018] | fail |
+| + stairs, door, railing, walkable | 0.737 | 0.654 | -0.020 [-0.050, +0.000] | fail |
+
+14. **As a decision feature among existing candidates, segmentation overfits and fails** (no single share above 0.59 AUC on finetune). The gate only scores detector candidates, so the 124 events lost to perception never enter it: it cannot measure segmentation's actual strength, adding undetected doors and stairs. That needs a separate test: segmentation pseudo-candidates, measured through the failure funnel (detected events and on-time events) at equal speech rate.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
