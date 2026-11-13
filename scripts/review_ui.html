@@ -28,8 +28,8 @@
   button { font: inherit; font-weight:600; min-height:52px; border-radius:12px; border:2px solid var(--line); background:var(--card);
            color:var(--text); cursor:pointer; padding: 8px 14px; }
   button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  button[data-v=speak] { border-color: var(--speak); } button[data-v=confirm_clear] { border-color: var(--accent); } button[data-v=silent] { border-color: var(--silent); }
-  button[data-v=wrong_object] { border-color: var(--wrong); } button[data-v=unclear] { border-color: var(--unclear); }
+  button[data-v=proactive_warn] { border-color: var(--speak); } button[data-v=proactive_clear] { border-color: var(--accent); } button[data-v=on_request] { border-color: var(--silent); } button[data-v=silent] { border-color: var(--line); }
+  button[data-v=wrong_object] { border-color: var(--wrong); } button[data-v=uncertain] { border-color: var(--unclear); }
   button[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color:#fff; }
   .kbd { font-weight:400; color:var(--muted); font-size:13px; margin-left:6px; }
   button[aria-pressed=true] .kbd { color:#fff; }
@@ -56,7 +56,7 @@
   <section class="card" aria-labelledby="frames-h">
     <h2 class="sr" id="frames-h">Frames around the question</h2>
     <div class="strip" id="strip"></div>
-    <div class="muted">Blue border: inside the derived window. Orange: the moment the question was asked.</div>
+    <div class="muted">Only what the assistant could have seen before the question. Blue border: inside the derived window. Orange: the moment the question was asked.</div>
   </section>
 
   <section class="card" aria-labelledby="ctx-h">
@@ -72,7 +72,7 @@
   <section class="card" aria-labelledby="v-h">
     <p style="margin:0 0 6px;font-size:15px;color:var(--muted)">The user asked:</p>
     <p id="q-again" style="margin:0 0 14px;font-size:22px;font-weight:600"></p>
-    <h2 id="v-h" style="font-size:18px;margin:0 0 12px">Before that question, what should the assistant have said, unprompted?</h2>
+    <h2 id="v-h" style="font-size:18px;margin:0 0 12px">Before that question, what should the assistant have done?</h2>
     <div class="actions" role="group" aria-labelledby="v-h" id="actions"></div>
     <div class="row">
       <div><label for="w0">Corrected window start (s)</label><input id="w0" inputmode="decimal"></div>
@@ -88,7 +88,7 @@
 </main>
 <script>
 const D = __DATA__;
-const NAMES = { speak: "Warn about an object", confirm_clear: "Confirm the way is clear", silent: "Nothing needed", wrong_object: "Wrong object", unclear: "Unclear" };
+const NAMES = { proactive_warn: "Warn about an object, unprompted", proactive_clear: "Say the way is clear, unprompted", on_request: "Useful only if asked", silent: "Nothing needed", uncertain: "Can't tell from the frames", wrong_object: "Warning needed, wrong object" };
 let done = {}, i = 0;
 const $ = id => document.getElementById(id);
 const txt = (id, s) => { $(id).textContent = s; };
@@ -118,7 +118,7 @@ function show(n) {
     if (t >= e.win[0] && t <= e.win[1]) f.classList.add("inwin");
     if (Math.abs(t - Number(e.t_q)) < 0.4) f.classList.add("q");
     const img = document.createElement("img");
-    img.src = `/frames/${e.key.replace(":", "_")}/${String(k).padStart(2, "0")}.jpg`;
+    img.src = `/frames/${e.key.replace(":", "_")}/${String(e.frame_idx ? e.frame_idx[k] : k).padStart(2, "0")}.jpg`;
     img.alt = `Frame at ${t.toFixed(1)} seconds`; img.loading = "lazy";
     const c = document.createElement("figcaption"); c.textContent = `${t.toFixed(1)} s`;
     f.append(img, c); strip.append(f);

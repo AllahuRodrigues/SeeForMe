@@ -1,0 +1,16 @@
+threshold train: {'recall': 0.13924050632911392, 'hits': 33.0, 'events': 237.0, 'quiet_violation': 0.1037344398340249, 'cues_per_min': 1.663325737029933, 'speech_s_per_min': 3.8267320895288894}  -> CARE ledger refill 3.83 s/min
+care cost 0 train: {'recall': 0.17721518987341772, 'hits': 42.0, 'events': 237.0, 'quiet_violation': 0.2157676348547718, 'cues_per_min': 2.7938674489174655, 'speech_s_per_min': 3.8033415713519063}
+care cost 0.05 train: {'recall': 0.16033755274261605, 'hits': 38.0, 'events': 237.0, 'quiet_violation': 0.2033195020746888, 'cues_per_min': 2.785204294037101, 'speech_s_per_min': 3.817852355776516}
+care cost 0.1 train: {'recall': 0.10970464135021098, 'hits': 26.0, 'events': 237.0, 'quiet_violation': 0.2033195020746888, 'cues_per_min': 2.7548832519558264, 'speech_s_per_min': 3.725156598556619}
+care cost 0.2 train: {'recall': 0.16033755274261605, 'hits': 38.0, 'events': 237.0, 'quiet_violation': 0.08298755186721991, 'cues_per_min': 1.9405466932015885, 'speech_s_per_min': 2.4819938732243543}
+care cost 0.3 train: {'recall': 0.09282700421940929, 'hits': 22.0, 'events': 237.0, 'quiet_violation': 0.024896265560165973, 'cues_per_min': 0.7970102489935096, 'speech_s_per_min': 0.9772038705050856}
+E2 on finetune (104 videos): identical frozen `logistic` scores; CARE ledger refill 3.83 s/min (threshold's train speech rate), capacity 6 s; speech cost chosen on train = 0
+
+| policy | all-event recall | quiet violations | cues/min | speech s/min | recall vs threshold [95% CI] | quiet vs threshold [95% CI] |
+|---|---|---|---|---|---|---|
+| threshold (adaptive tau) | 9/56 = 0.161 | 0.158 | 1.72 | 3.80 | reference | reference |
+| CARE, cost 0 (chosen) | 7/56 = 0.125 | 0.237 | 2.77 | 3.80 | -0.036 [-0.123, +0.050] | +0.079 [-0.156, +0.295] |
+| CARE, cost 0.05 | 8/56 = 0.143 | 0.184 | 2.75 | 3.77 | -0.018 [-0.107, +0.071] | +0.026 [-0.162, +0.194] |
+| CARE, cost 0.1 | 11/56 = 0.196 | 0.211 | 2.89 | 3.79 | +0.036 [-0.036, +0.098] | +0.053 [-0.162, +0.256] |
+| CARE, cost 0.2 | 10/56 = 0.179 | 0.158 | 1.86 | 2.29 | +0.018 [-0.083, +0.128] | +0.000 [-0.111, +0.098] |
+| CARE, cost 0.3 | 4/56 = 0.071 | 0.026 | 0.49 | 0.59 | -0.089 [-0.190, +0.000] | -0.132 [-0.262, -0.030] |

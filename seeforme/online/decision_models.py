@@ -205,6 +205,22 @@ class FrozenScorerPolicy(OnlinePolicy):
     def decide(self, tracks: List[Track], t: float, ch: Optional[ChannelState] = None, scene_ctx=None) -> List[Cue]:
         c = self.cfg
         ch = ch or ChannelState()
+        obs, p, legal = self._scored(tracks, t, ch)
+        if not obs or not legal:
+            self._step_budget(False)
+            return []
+        i = max(legal, key=lambda j: p[j])
+        speak = bool(p[i] >= self.tau)
+        self._step_budget(speak)
+        if not speak:
+            return []
+        self.last_action = "speak"
+        self.last_reasons[obs[i].track.track_id] = "spoken"
+        return [self._make_cue(obs[i], t, "speak", ch)]
+
+    def _scored(self, tracks: List[Track], t: float, ch: ChannelState):
+        """Features, model scores and the legal candidate indices at one decision (shared with CARE)."""
+        c = self.cfg
         self.last_action = "silence"
         allobs = self._features(tracks, t, ch)
         self.last_reasons = {o.track.track_id: "low_confidence" for o in allobs if o.track.confidence < c.min_confidence}
@@ -218,8 +234,7 @@ class FrozenScorerPolicy(OnlinePolicy):
             for s in [s for s in h if s <= step - K]:
                 del h[s]
         if not obs:
-            self._step_budget(False)
-            return []
+            return [], np.zeros(0), []
         WM = [window_from_history(self._track_hist[o.track.track_id], step, K) for o in obs]
         t0 = time.perf_counter()
         p = self.model.predict_proba(np.stack([w for w, _ in WM]), np.stack([m for _, m in WM]))
@@ -232,17 +247,7 @@ class FrozenScorerPolicy(OnlinePolicy):
         for j, o in enumerate(obs):
             self.last_reasons[o.track.track_id] = ("channel_busy" if ch.busy else "recently_announced" if j not in legal
                                                    else "below_threshold" if p[j] < self.tau else "outranked")
-        if not legal:
-            self._step_budget(False)
-            return []
-        i = max(legal, key=lambda j: p[j])
-        speak = bool(p[i] >= self.tau)
-        self._step_budget(speak)
-        if not speak:
-            return []
-        self.last_action = "speak"
-        self.last_reasons[obs[i].track.track_id] = "spoken"
-        return [self._make_cue(obs[i], t, "speak", ch)]
+        return obs, p, legal
 
     def to_dict(self):
         return {"family": self.model.family, "K": self.model.K, "tau": self.tau,

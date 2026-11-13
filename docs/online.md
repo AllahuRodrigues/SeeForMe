@@ -258,6 +258,25 @@ Cost over the 17,602 dev video-seconds: 4.5 candidate-seconds per minute (fence 
 
 Gains come from tables (3 -> 13 of 16), cars, trucks, scissors. 20. **The product track can drop the AGPL detector without losing coverage**: D-FINE S sees more events on identical frames. Costs to resolve before switching: about 10x the latency in unoptimised PyTorch (YOLO11 runs through Ultralytics' optimised path; an ONNX / Core ML export is the fair speed test) and 2-4x more detections per frame, which the scheduler must absorb (replay check at equal speech rate). Doors, stairs and poles remain outside every COCO detector (OWLv2 teacher and segmentation results above).
 
+## CARE scheduler, experiment E2: decision rule only (added 2026-11-13)
+
+`scripts/compare_care.py`. Same candidates and the same frozen logistic scores; the threshold policy (adaptive tau, 2 cues/min) against CARE (utility = p_helpful - cost * duration, silence = 0) under a strict speech ledger refilled at the threshold policy's measured train rate (3.83 s/min), on one continuous stream clock. Speech cost chosen on `train`; reported on `finetune` (development).
+
+| Policy | All-event recall | Quiet violations | Speech s/min | Recall vs threshold [95% CI] |
+|---|---|---|---|---|
+| threshold | 9/56 = 0.161 | 0.158 | 3.80 | reference |
+| CARE, cost 0 (chosen on train) | 7/56 = 0.125 | 0.237 | 3.80 | -0.036 [-0.123, +0.050] |
+| CARE, cost 0.1 | 11/56 = 0.196 | 0.211 | 3.79 | +0.036 [-0.036, +0.098] |
+| CARE, cost 0.2 | 10/56 = 0.179 | 0.158 | 2.29 | +0.018 [-0.083, +0.128] |
+
+A first run gave each clip a fresh ledger burst and was not budget-matched (CARE spoke 9-12 s/min); fixed and re-run with a regression test.
+
+Audio lifecycle check (CARE, finetune replay, 104 videos): reserved 233.3 s, played 228.9 s; playback never exceeded the reservation in any video. The replay channel uses the same duration estimate as the ledger, so this is partly circular: in the live app the ledger must reconcile against measured TTS length and interruptions, and reset only at a real session boundary. Rubric v3 has no human verdicts yet; migrated v1/v2 verdicts are not treated as validated v3 labels.
+
+With constant value and duration, CARE's rule reduces to p_helpful > cost * duration / value, another probability threshold over the same information, so no recall gain is expected until the usefulness estimate improves.
+
+21. **On identical scores, the decision rule alone does not change recall at a matched speech budget.** CARE's current value is the guarantee (spoken seconds bounded over every interval, every silence has a logged reason), not recall. Consistent with items 13-19: the scores do not separate should-speak moments, so gains must come from better supervision (rubric v3) and decision inputs, then CARE's extra heads (claim reliability, redundancy).
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
