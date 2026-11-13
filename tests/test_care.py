@@ -134,3 +134,14 @@ def test_care_policy_is_silent_when_speech_cost_exceeds_value():
     pol = _care_policy(capacity_s=100.0, refill_per_s=1.0, weights=CareWeights(cost_speech_per_s=10.0))
     pol.reset()
     assert pol.decide(_tracks_at(sc, 6), 6.0, ChannelState()) == []
+
+
+def test_care_ledger_restarts_with_each_video():
+    from seeforme.cues.pcacs import ChannelState
+    from tests.test_egoblind import synthetic_scenario
+    from tests.test_online_policy import _tracks_at
+    sc, _ = synthetic_scenario()
+    tr = _tracks_at(sc, 6)
+    pol = _care_policy()
+    pol.reset(); pol.decide(tr, 9.0, ChannelState())
+    pol.reset(); pol.decide(tr, 0.6, ChannelState())                  # next video: stream time restarts

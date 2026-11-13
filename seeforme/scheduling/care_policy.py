@@ -21,17 +21,14 @@ class CarePolicy(FrozenScorerPolicy):
         self.ledger = SpeechLedger(capacity_s, refill_per_s)
         self.weights = weights or CareWeights()
         self.last_decision = None
-        self._last_t = None
 
     def reset(self) -> None:
         super().reset()
-        if self._last_t is not None:              # the ledger runs on stream time, which restarts in every video
+        if hasattr(self, "ledger"):               # stream time restarts in every video, so the ledger does too
             self.ledger.reset()
-        self._last_t = None
 
     def decide(self, tracks, t: float, ch: Optional[ChannelState] = None, scene_ctx=None) -> List:
         ch = ch or ChannelState()
-        self._last_t = t
         obs, p, legal = self._scored(tracks, t, ch)
         events = [SceneEvent(event_id=str(obs[i].track.track_id), t=t, category=obs[i].track.label, track_ids=(obs[i].track.track_id,),
                              p_helpful=float(p[i]), duration_s=float(getattr(obs[i], "duration", 1.5)))
