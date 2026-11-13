@@ -1,9 +1,11 @@
 """Blind human review of the weak EgoBlind events (M3, issue #5).
 
 The weak events are derived automatically from user questions and detector labels. A reviewer looks at the frames
-around each question and records one verdict:
-    speak         the assistant should have spoken about this object in (the possibly corrected) window
-    silent        no unprompted cue was needed (the question was idle curiosity, or the answer was not visual)
+around each question and records one verdict (rubric v2, after the blind audit showed "should it speak?" mixed a
+warning with an all-clear confirmation):
+    speak         warn: the assistant should have told the user about an object in (the possibly corrected) window
+    confirm_clear no object needed a warning, but confirming that the way is clear would have helped
+    silent        nothing needed (idle curiosity, or the answer was not visual)
     wrong_object  a cue was needed, but about something the derived labels do not name (note says what)
     unclear       the frames do not settle it
 Reviews are blind: every model column (bin:*, max_score:*) is removed before display. Verdicts are append-only
@@ -17,7 +19,7 @@ import time
 from collections import Counter
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
-VERDICTS = ("speak", "silent", "wrong_object", "unclear")
+VERDICTS = ("speak", "confirm_clear", "silent", "wrong_object", "unclear")
 MODEL_PREFIXES = ("bin:", "max_score:", "derived:")   # model outputs and the audit answer key stay hidden
 
 
@@ -96,10 +98,19 @@ def audit_score(derived: Dict[str, str], verdicts: Dict[str, str]) -> Dict:
     conf: Dict[str, Counter] = {"speak": Counter(), "silent": Counter()}
     for k in keys:
         conf.setdefault(derived[k], Counter())[verdicts[k]] += 1
+    def dec(cls):
+        c = conf.get(cls, Counter()); return c, sum(v for kk, v in c.items() if kk != "unclear")
+
     def rate(cls, want):
-        c = conf.get(cls, Counter()); dec = sum(v for kk, v in c.items() if kk != "unclear")
-        return c[want] / dec if dec else None
+        c, n = dec(cls)
+        if not n:
+            return None
+        if cls == "silent" and want == "silent":      # a quiet moment is right if it was not marked as a warning
+            return (n - c["speak"] - c["wrong_object"]) / n
+        return c[want] / n
+    qc, qn = dec("silent")
     return {"n": len(keys), "n_decided": sum(verdicts[k] != "unclear" for k in keys),
             "unclear": sum(verdicts[k] == "unclear" for k in keys),
             "speak_confirmed": rate("speak", "speak"), "silent_confirmed": rate("silent", "silent"),
+            "confirm_clear_on_quiet": (qc["confirm_clear"] / qn) if qn else None,
             "confusion": {k: dict(v) for k, v in conf.items()}}

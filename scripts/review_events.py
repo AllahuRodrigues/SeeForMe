@@ -13,7 +13,7 @@ finetune, shuffled, with the derived answer hidden, so it measures whether verdi
 
 Reads results/egoblind/review_events_<split>.csv (scripts/diagnose_egoblind_recall.py). Model columns are never shown.
 Frames and verdicts live in data/review/<split>/ (git-ignored: frames are EgoBlind video, CC BY-NC).
-Keys in the page: 1 speak, 2 silent, 3 wrong object, 4 unclear, left/right arrows to move.
+Keys in the page (rubric v2): 1 warn about an object, 2 confirm the way is clear, 3 nothing needed, 4 wrong object, 5 unclear; left/right arrows to move.
 """
 import argparse, csv, html, json, sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
