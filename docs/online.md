@@ -244,6 +244,18 @@ Cost over the 17,602 dev video-seconds: 4.5 candidate-seconds per minute (fence 
 
 19. **The GRU lead does not confirm, so nothing is promoted.** On `select` the GRU catches fewer events (its quiet-window advantage remains but is not significant), and online greedy ties the frozen logistic on recall with more quiet-window violations. With 27 events, `select` can only rule out large effects; what is supported across both sets is that no candidate scorer beats a frozen logistic, and that the remaining lever is the information the scorer sees, not its architecture.
 
+## Permissive detectors for the product track (added 2026-11-13, issue 10)
+
+`scripts/compare_detectors.py`: the same review frames inside each `train` / `finetune` event window; an event is seen if a detector outputs one of its labels at confidence >= 0.35. Hugging Face COCO names normalised (motorbike -> motorcycle, diningtable -> dining table, ...); all detectors scored on the same 195 events.
+
+| Detector | Licence | Events seen | Detections / frame | ms / frame (M1 Max) |
+|---|---|---|---|---|
+| YOLO11 (current) | AGPL-3.0 | 163 / 195 = 0.836 | 3.9 | 27 |
+| RT-DETR R18 | Apache-2.0 | 176 / 195 = 0.903 | 7.7 | 270 |
+| **D-FINE S** | **Apache-2.0** | **181 / 195 = 0.928** | 14.6 | 285 |
+
+Gains come from tables (3 -> 13 of 16), cars, trucks, scissors. 20. **The product track can drop the AGPL detector without losing coverage**: D-FINE S sees more events on identical frames. Costs to resolve before switching: about 10x the latency in unoptimised PyTorch (YOLO11 runs through Ultralytics' optimised path; an ONNX / Core ML export is the fair speed test) and 2-4x more detections per frame, which the scheduler must absorb (replay check at equal speech rate). Doors, stairs and poles remain outside every COCO detector (OWLv2 teacher and segmentation results above).
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
