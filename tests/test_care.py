@@ -97,3 +97,40 @@ def test_select_maximises_recall_subject_to_certified_risk():
     assert best == "mid" and info["mid"]["upper"] <= 0.15 and info["loud"]["upper"] > 0.15
     none, _ = select_config(configs, n=34, alpha=0.10, delta=0.05)
     assert none is None                                          # 34 recordings cannot certify 0.10
+
+
+# ------------------------------------------------------------------ CARE in the replay loop
+def _care_policy(**kw):
+    from pathlib import Path
+    from seeforme.online.decision_models import DecisionModel
+    from seeforme.scheduling.care_policy import CarePolicy
+    model = DecisionModel.load(Path(__file__).resolve().parents[1] / "models" / "decision_models" / "logistic.pt")
+    return CarePolicy(model, **kw)
+
+
+def test_care_policy_never_exceeds_its_ledger_and_logs_decisions():
+    from seeforme.cues.pcacs import ChannelState
+    from tests.test_egoblind import synthetic_scenario
+    from tests.test_online_policy import _tracks_at
+    sc, _ = synthetic_scenario()
+    pol = _care_policy(capacity_s=3.0, refill_per_s=0.05, weights=CareWeights(cost_speech_per_s=0.0))
+    pol.reset()
+    tr, spent, t = _tracks_at(sc, 6), 0.0, 6.0
+    for k in range(40):
+        for trk in tr:
+            trk.last_announced = None                      # keep candidates legal so the ledger is the only limit
+        cues = pol.decide(tr, t, ChannelState())
+        spent += sum(c.duration_s for c in cues)
+        assert spent <= 3.0 + 0.05 * (t - 6.0) + 1e-6
+        t += 0.5
+    assert pol.last_decision is not None and pol.last_decision.reason_code in ("max_utility", "no_eligible_event", "no_positive_utility")
+
+
+def test_care_policy_is_silent_when_speech_cost_exceeds_value():
+    from seeforme.cues.pcacs import ChannelState
+    from tests.test_egoblind import synthetic_scenario
+    from tests.test_online_policy import _tracks_at
+    sc, _ = synthetic_scenario()
+    pol = _care_policy(capacity_s=100.0, refill_per_s=1.0, weights=CareWeights(cost_speech_per_s=10.0))
+    pol.reset()
+    assert pol.decide(_tracks_at(sc, 6), 6.0, ChannelState()) == []
