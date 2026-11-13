@@ -142,7 +142,9 @@ class OnlinePolicy(PCACSPolicy):
         self.last_action = "silence"
         self._flush_pending(t)
         self._expire(t - self.lookback_s)
-        obs = [o for o in self._features(tracks, t, ch) if o.track.confidence >= c.min_confidence]
+        allobs = self._features(tracks, t, ch)
+        self.last_reasons = {o.track.track_id: "low_confidence" for o in allobs if o.track.confidence < c.min_confidence}
+        obs = [o for o in allobs if o.track.confidence >= c.min_confidence]
         self._last_obs = obs
         if not obs:
             self._step_budget(False)
@@ -159,6 +161,9 @@ class OnlinePolicy(PCACSPolicy):
             self._learn_full_info(obs, X, t)
         legal = [i for i, o in enumerate(obs)
                  if not ch.busy and (o.track.last_announced is None or t - o.track.last_announced >= c.recent_block_s)]
+        for j, o in enumerate(obs):            # diagnostics only
+            self.last_reasons[o.track.track_id] = ("channel_busy" if ch.busy else "recently_announced" if j not in legal
+                                                   else "below_threshold" if p[j] < self.tau else "outranked")
         if not legal:
             self._step_budget(False)
             return []
@@ -174,6 +179,7 @@ class OnlinePolicy(PCACSPolicy):
         if not speak:
             return []
         self.last_action = "speak"
+        self.last_reasons[obs[i].track.track_id] = "spoken"
         self._spoken.append((t, X[i], weight))
         return [self._make_cue(obs[i], t, "speak", ch)]
 
