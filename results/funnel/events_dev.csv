@@ -1,0 +1,880 @@
+policy,video,obj,split,label,ideal,t_q,qtype,question,window,stage,blocked,first_det,first_track,first_cand,first_cue,n_cues
+pcacs,178,1,train,person,4.99,6.99,safety,Is the area around me safe for continued walking?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,245,1,train,dog,25.0,27.0,safety,Is it safe to walk forward?,21.00-27.50,scheduler,False,19.00,19.20,19.20,,0
+pcacs,250,1,train,dog,4.99,6.99,safety,Is there something on the floor that I might trip over?,0.99-7.49,scheduler,False,0.40,0.60,0.60,,0
+pcacs,256,1,train,backpack,1.99,3.99,safety,Is there anything on the countertop that I might knock over?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,257,1,train,unknown,2.98,4.98,safety,Is there any hot air?,0.00-5.48,perception,False,,,,,0
+pcacs,262,1,train,knife,1.99,3.99,safety,Is there any risk of cutting myself while holding the cake with a knife in my other hand?,0.00-4.49,scheduler,False,4.00,4.20,4.20,,0
+pcacs,262,2,train,knife,7.0,9.0,safety,Am I holding the knife safely?,3.00-9.50,tracking,False,9.40,9.60,9.60,,0
+pcacs,262,4,train,knife,22.53,24.53,safety,Are there any sharp objects around me?,18.53-25.03,scheduler,False,16.60,16.80,16.80,,0
+pcacs,268,2,train,oven,7.0,9.0,safety,Is there anything hot ?,3.00-9.50,perception,False,,,,,0
+pcacs,270,1,train,oven,4.99,6.99,safety,Is there anything hot nearby that I should be cautious of?,0.99-7.49,scheduler,False,0.40,0.60,0.60,,0
+pcacs,272,1,train,machine,0.0,0.99,safety,Is the area around the coffee machine clear of any hazards?,0.00-1.49,perception,False,,,,,0
+pcacs,275,1,train,unknown,1.99,3.99,safety,Are my hands close to any hot surfaces?,0.00-4.49,perception,False,,,,,0
+pcacs,279,1,train,unknown,24.05,26.05,safety,Is the countertop clear of any sharp objects nearby?,20.05-26.55,perception,False,,,,,0
+pcacs,174,1,train,person,0.0,1.98,safety,Are there any obstacles or people blocking the path ahead?,0.00-2.48,scheduler,False,0.00,0.60,0.60,,0
+pcacs,772,2,train,motorcycle,2.98,4.98,navigation,How can I get around a row of parked scooters?,0.40-5.48,scheduler,False,0.40,0.60,0.60,,0
+pcacs,773,1,train,car,0.0,1.98,navigation,How can I cross the street safely?,0.00-2.48,scheduler,False,0.00,0.60,0.60,,0
+pcacs,773,2,train,person,2.98,4.98,navigation,Which direction should I go to reach the nearest crosswalk?,0.00-5.48,scheduler,False,3.60,4.80,4.80,,0
+pcacs,774,1,train,car,4.99,6.99,safety,Is it safe to cross the road here?,0.80-7.49,scheduler,False,0.80,1.20,1.20,,0
+pcacs,778,1,train,cell phone,58.75,60.75,navigation,Are we close to our destination?,54.75-61.25,scheduler,False,53.40,53.40,53.40,,0
+pcacs,200,1,train,person,10.99,12.99,safety,Is there any traffic passing by when crossing the road ahead?,3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+pcacs,200,2,train,person,25.0,27.0,safety,Are there any roadblocks in front of me?,17.20-27.50,scheduler,False,15.60,16.20,16.20,,0
+pcacs,201,1,train,chair,0.0,0.99,safety,Are there any obstacles in my way as I walk forward?,0.00-1.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,203,2,train,bed,0.0,1.98,navigation,What environment am I currently in?,0.00-2.48,perception,False,,,,,0
+pcacs,203,3,train,dog,2.98,4.98,safety,Is it safe to let my dog move around freely in this room?,0.00-5.48,scheduler,False,3.60,4.20,4.20,,0
+pcacs,204,1,train,person,7.0,9.0,safety,Is there anyone else in the elevator that I should be aware of?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,206,1,train,door,8.98,10.98,safety,Is there any debris or potential tripping hazards near the door?,4.98-11.48,perception,False,,,,,0
+pcacs,208,1,train,wall,1.99,3.99,safety,Is it safe to walk straight ahead?,0.00-4.49,perception,False,,,,,0
+pcacs,211,1,train,person,7.0,9.0,safety,Are there any obstacles ahead as I walk on this path?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,211,2,train,person,7.0,9.0,navigation,Can you describe what's ahead of me on this pathway?,0.00-9.50,perception,False,,,,,0
+pcacs,211,3,train,bicycle,16.99,18.99,safety,Is there any traffic or vehicles nearby that I should be aware of?,9.00-19.49,delivered,False,11.60,12.00,12.00,16.20,1
+pcacs,212,1,train,car,1.0,3.0,safety,Are there any obstacles in my path?,0.00-3.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,216,1,train,car,7.0,9.0,safety,Is it safe to cross the road now?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,224,1,train,dog,0.0,1.98,safety,Is there any object or pet nearby that could be a tripping hazard while I'm cycling?,0.00-2.48,perception,False,3.40,3.60,3.60,,0
+pcacs,635,2,train,unknown,10.99,12.99,safety,Is anyone coming towards me?,6.99-13.49,perception,False,,,,,0
+pcacs,636,1,train,car,7.0,9.0,safety,Is there a ramp or steps ahead of me?,0.00-9.50,delivered,False,0.00,0.60,0.60,8.40,1
+pcacs,145,1,train,unknown,1.99,3.99,safety,Are there any obstacles on the floor in front of me?,0.00-4.49,perception,False,,,,,0
+pcacs,146,1,train,unknown,5.98,7.98,safety,Are there any obstacles I need to be aware of in this gym?,1.98-8.48,perception,False,,,,,0
+pcacs,190,1,train,sign,2.98,4.98,safety,Are there any signs or obstacles in my walking path?,0.00-5.48,perception,False,,,,,0
+pcacs,191,1,train,person,10.99,12.99,safety,Is there any obstacle in front of me that could hinder my movement?,3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+pcacs,193,3,train,dining table,10.6,12.6,safety,Is there anything I should be cautious of in this area?,7.80-13.10,scheduler,False,7.80,8.40,8.40,,0
+pcacs,193,4,train,door,16.6,18.6,safety,Am I close to any obstacles that I need to avoid?,12.60-19.10,perception,False,,,,,0
+pcacs,194,1,train,dining table,2.98,4.98,safety,Is there anything on the table that could be a potential tripping hazard?,0.00-5.48,perception,False,,,,,0
+pcacs,194,2,train,dining table,8.98,10.98,safety,Is there anything under the table that I might bump into with my legs?,8.60-11.48,scheduler,False,8.40,9.00,9.00,,0
+pcacs,491,1,train,car,4.99,6.99,safety,Is it safe to cross the road now?,0.00-7.49,delivered,False,0.00,0.60,0.60,6.00,1
+pcacs,491,2,train,car,13.0,15.0,safety,Are there any obstacles in the way when I cross the road?,5.00-15.50,scheduler,False,9.60,12.60,12.60,,0
+pcacs,492,1,train,motorcycle,1.0,3.0,safety,Is it safe for me to cross the road now?,0.00-3.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,492,2,train,motorcycle,4.99,6.99,safety,Are there any nearby obstacles or vehicles that I should be aware of?,0.00-7.49,scheduler,False,5.00,5.40,5.40,,0
+pcacs,492,3,train,car,5.98,7.98,safety,"When we are about to cross the road, is there a car coming towards us?",0.00-8.48,scheduler,False,0.00,0.60,0.60,,0
+pcacs,493,1,train,door,116.98,118.98,safety,Can you tell if the door is fully open so I can exit safely?,112.98-119.48,perception,False,,,,,0
+pcacs,493,3,train,person,140.98,142.98,safety,Are there any people or vehicles nearby that I should be cautious of when getting out?,133.20-143.48,delivered,False,131.20,131.40,131.40,134.40,1
+pcacs,494,1,train,person,4.99,6.99,safety,Is it safe to walk through this street?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,495,1,train,car,28.99,30.99,safety,Is there any traffic I should be aware of?,27.80-31.49,scheduler,False,27.60,28.20,28.20,,0
+pcacs,496,1,train,unknown,85.0,87.0,safety,Is it safe for me to approach the food stand?,81.00-87.50,perception,False,,,,,0
+pcacs,496,3,train,person,100.99,102.99,safety,Is the path clear for me to move forward?,93.00-103.49,scheduler,False,91.00,91.20,91.20,,0
+pcacs,154,1,train,knife,1.0,3.0,safety,Is there any sharp object in the sink?,0.00-3.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,157,1,train,unknown,16.99,18.99,safety,Am I adding the right seasoning while cooking or could this be dangerous?,12.99-19.49,perception,False,,,,,0
+pcacs,162,1,train,dining table,2.98,4.98,safety,Is there anything on the kitchen counter that I should be careful not to knock over?,0.00-5.48,scheduler,False,1.20,1.80,1.80,,0
+pcacs,164,1,train,shelf,7.0,9.0,safety,Is there any risk of my hand getting caught in the dishwasher rack?,3.00-9.50,perception,False,,,,,0
+pcacs,169,2,train,sink,2.98,4.98,navigation,Which direction is the sink faucet located?,0.00-5.48,scheduler,False,1.80,2.40,2.40,,0
+pcacs,232,1,train,car,10.99,12.99,safety,Is it safe to enter the train now?,6.99-13.49,perception,False,,,,,0
+pcacs,232,4,train,person,84.72,86.72,safety,Is there enough space to navigate without bumping into people or objects?,76.80-87.22,scheduler,False,74.80,75.00,75.00,,0
+pcacs,233,3,train,person,13.0,15.0,safety,Is the area ahead crowded and should I be cautious of people walking towards me?,5.00-15.50,scheduler,False,3.00,3.00,3.00,,0
+pcacs,233,4,train,person,26.8,28.8,safety,Is it safe to walk straight ahead without obstacles or people in the way?,18.80-29.30,scheduler,False,17.60,18.00,18.00,,0
+pcacs,233,5,train,car,40.81,42.81,safety,Is the train door open and safe for boarding?,36.81-43.31,perception,False,,,,,0
+pcacs,233,10,train,person,79.58,81.58,safety,Is the path clear ahead for me to walk through?,71.60-82.08,scheduler,False,69.60,69.60,69.60,,0
+pcacs,233,11,train,person,84.56,86.56,safety,Is there anything I should be careful of as I walk forward?,76.60-87.06,scheduler,False,84.20,84.60,84.60,,0
+pcacs,93,1,train,bicycle,7.0,9.0,safety,Is the path ahead clear or are there any obstacles on the sidewalk?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,94,1,train,person,7.0,9.0,safety,Is there anyone blocking the entrance ahead?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,94,2,train,person,16.99,18.99,safety,Is the path ahead crowded with people?,12.99-19.49,perception,False,,,,,0
+pcacs,94,3,train,motorcycle,26.98,28.98,safety,Is there any traffic on the street in front of the building?,22.98-29.48,perception,False,,,,,0
+pcacs,94,4,train,car,26.98,28.98,navigation,Which direction should I go to reach the main road?,22.98-29.48,perception,False,,,,,0
+pcacs,95,1,train,bottle,2.98,4.98,safety,Is there anything on the table that might spill or cause a mess?,0.00-5.48,scheduler,False,0.00,0.60,0.60,,0
+pcacs,95,2,train,dining table,2.98,4.98,navigation,Where is the sit I can sit down?,0.00-5.48,perception,False,,,,,0
+pcacs,97,2,train,car,2.98,4.98,safety,"Is it safe to continue walking straight ahead, or are there any obstacles I should be aware of?",0.00-5.48,timing,False,0.00,0.60,0.60,6.60,1
+pcacs,35,2,train,tree,62.98,64.98,safety,Is there any tree or obstacle directly in front?,58.98-65.48,perception,False,,,,,0
+pcacs,36,1,train,person,139.99,141.99,safety,Is the sidewalk clear for me to walk safely?,132.00-142.49,scheduler,False,130.00,130.20,130.20,,0
+pcacs,36,2,train,person,151.0,153.0,safety,Are there any obstacles or people blocking my way ahead?,143.00-153.50,scheduler,False,144.60,145.20,145.20,,0
+pcacs,27,1,train,person,4.99,6.99,navigation,Where is the nearest train boarding gate from here?,0.20-7.49,scheduler,False,0.20,4.20,4.20,,0
+pcacs,32,1,train,train,2.98,4.98,safety,Is it safe to board the train now?,0.00-5.48,perception,False,,,,,0
+pcacs,33,1,train,person,7.99,9.99,safety,Is there any obstruction directly in front of me?,0.00-10.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,34,4,train,car,40.99,42.99,safety,Is it safe to cross the road now?,33.00-43.49,delivered,False,32.60,33.00,33.00,36.00,1
+pcacs,34,5,train,unknown,146.11,148.11,safety,Are there any roadblocks or steps ahead of me?,142.11-148.61,perception,False,,,,,0
+pcacs,18,1,train,unknown,10.99,12.99,safety,Is there any boiling water that can splash and burn me while removing the dumplings?,6.99-13.49,perception,False,,,,,0
+pcacs,21,1,train,backpack,46.99,48.99,navigation,Where's the lid?,44.40-49.49,scheduler,False,44.40,45.00,45.00,,0
+pcacs,22,1,train,dining table,5.98,7.98,safety,Are there any sharp objects or hazards on the counter in front of me?,1.98-8.48,scheduler,False,0.80,7.20,7.20,,0
+pcacs,22,2,train,bottle,14.98,16.98,safety,Is there anything near the sink that I should be cautious of?,10.98-17.48,scheduler,False,9.00,9.00,9.00,,0
+pcacs,91,1,train,shelf,8.98,10.98,safety,Is there anything on the floor?,4.98-11.48,perception,False,,,,,0
+pcacs,92,1,train,unknown,10.99,12.99,safety,Is there enough space for me?,6.99-13.49,perception,False,,,,,0
+pcacs,92,2,train,person,19.0,21.0,navigation,How do I get to an empty bed?,11.00-21.50,scheduler,False,9.00,9.00,9.00,,0
+pcacs,10,1,train,person,8.98,10.98,navigation,How do I locate the aisle for baby care products from here?,1.00-11.48,scheduler,False,0.80,1.80,1.80,,0
+pcacs,14,1,train,motorcycle,57.02,59.02,safety,Are there any obstacles on the ground I need to be aware of?,49.20-59.52,delivered,False,47.20,47.40,47.40,52.20,2
+pcacs,14,2,train,car,57.4,59.02,navigation,How can I get to the overpass in front of me?,57.40-59.52,scheduler,False,57.40,57.60,57.60,,0
+pcacs,14,3,train,motorcycle,70.23,72.23,safety,Which way should I go to avoid these obstacles?,62.40-72.73,scheduler,False,60.40,60.60,60.60,,0
+pcacs,14,4,train,motorcycle,82.18,84.18,safety,Is there any vehicle parked ahead of the crosswalk or ahead of me?,74.20-84.68,scheduler,False,74.80,75.00,75.00,,0
+pcacs,14,5,train,motorcycle,97.14,99.14,safety,Is there any vehicular traffic on the road I need to watch out for?,89.20-99.64,scheduler,False,87.20,87.60,87.60,,0
+pcacs,90,1,train,car,11.98,13.98,navigation,How to get to the opposite street?,4.00-14.48,scheduler,False,2.00,2.40,2.40,,0
+pcacs,90,2,train,motorcycle,109.0,111.0,safety,Is there any traffic passing by?,103.60-111.50,scheduler,False,103.60,105.00,105.00,,0
+pcacs,392,1,train,pole,52.99,54.99,safety,Are there any obstacles in my way as I walk now?,48.99-55.49,perception,False,,,,,0
+pcacs,393,1,train,bicycle,10.99,12.99,safety,What obstacles on the sidewalk should I avoid?,3.20-13.49,scheduler,False,1.40,4.80,4.80,,0
+pcacs,393,2,train,unknown,25.0,27.0,safety,Can the road ahead be traveled smoothly?,21.00-27.50,perception,False,,,,,0
+pcacs,394,1,train,bicycle,38.98,40.98,navigation,How can I get around these parked bikes?,32.00-41.48,delivered,True,30.00,30.00,30.00,41.40,1
+pcacs,394,2,train,car,52.99,54.99,safety,Is there any obstacle in front of me?,45.00-55.49,delivered,False,43.60,44.40,44.40,52.80,1
+pcacs,283,1,train,person,1.99,3.99,safety,Is there anyone lying in the bed that might pose a tripping hazard?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,284,1,train,bed,0.0,1.98,safety,Are there any obstacles on the floor that I might trip over?,0.00-2.48,scheduler,False,2.20,2.40,2.40,,0
+pcacs,284,2,train,sign,63.03,65.03,safety,Is there any obstruction or hazard around me?,59.03-65.53,perception,False,,,,,0
+pcacs,286,1,train,door,0.0,1.98,safety,Can you see if there are any obstacles in front of me?,0.00-2.48,perception,False,,,,,0
+pcacs,290,1,train,person,25.0,27.0,safety,Is someone standing near me blocking my path?,17.00-27.50,scheduler,False,15.00,15.00,15.00,,0
+pcacs,291,1,train,couch,7.0,9.0,safety,"As I walk toward the street, are there any obstacles in front of me?",3.00-9.50,tracking,False,9.00,9.60,9.60,,0
+pcacs,291,2,train,unknown,16.99,18.99,safety,What traffic conditions should I be aware of before crossing the road?,12.99-19.49,perception,False,,,,,0
+pcacs,292,1,train,person,22.99,24.99,safety,Could I have hit something on my left side?,15.00-25.49,scheduler,False,13.00,13.20,13.20,,0
+pcacs,86,1,train,door,2.98,4.98,navigation,How can I get out of this yard?,0.00-5.48,perception,False,,,,,0
+pcacs,389,1,train,unknown,25.0,27.0,safety,Is it safe to cross the road here?,21.00-27.50,perception,False,,,,,0
+pcacs,389,2,train,car,25.0,27.0,safety,Is it safe for me to move forward?,17.00-27.50,delivered,False,15.00,15.00,15.00,15.60,3
+pcacs,389,3,train,car,121.72,123.72,safety,Is it safe to get off now?,117.72-124.22,perception,False,,,,,0
+pcacs,390,1,train,chair,38.98,40.98,navigation,From here how can I get to the nearest chair?,31.00-41.48,scheduler,False,30.40,33.00,33.00,,0
+pcacs,390,2,train,backpack,52.99,54.99,safety,Are there any fragile items that I need to handle with care?,48.99-55.49,perception,False,,,,,0
+pcacs,387,1,train,shelf,94.99,96.99,safety,Is there a clear path before me to walk on?,90.99-97.49,perception,False,,,,,0
+pcacs,497,1,train,door,7.31,9.31,navigation,Where is the closest door to my current location?,3.31-9.81,perception,False,,,,,0
+pcacs,511,1,train,wall,0.0,0.99,navigation,Where is the light switch?,0.00-1.49,perception,False,,,,,0
+pcacs,512,1,train,dog,35.3,37.3,safety,Will there be any obstacles if I go straight?,31.30-37.80,scheduler,False,29.40,29.40,29.40,,0
+pcacs,73,1,train,car,14.98,16.98,navigation,How do I get to the nearest crosswalk?,7.00-17.48,scheduler,False,5.00,5.40,5.40,,0
+pcacs,74,1,train,car,7.0,9.0,navigation,How can I navigate around these street barriers?,0.00-9.50,delivered,False,0.00,0.60,0.60,7.20,1
+pcacs,74,2,train,pole,11.98,13.98,navigation,Which direction should I take to cross the street safely?,7.98-14.48,perception,False,,,,,0
+pcacs,74,3,train,sign,16.99,18.99,navigation,How do I cross this busy street safely?,12.99-19.49,perception,False,,,,,0
+pcacs,75,1,train,door,4.99,6.99,navigation,Where is the convenience store?,0.99-7.49,perception,False,,,,,0
+pcacs,76,1,train,person,4.99,6.99,navigation,Where is the exit?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,78,1,train,dining table,7.99,9.99,navigation,Where is door to exit this restaurant?,1.20-10.49,scheduler,False,1.20,1.80,1.80,,0
+pcacs,78,2,train,dining table,16.99,18.99,navigation,Where are the napkins located?,9.00-19.49,tracking,False,12.80,,,,0
+pcacs,80,1,train,pole,1.99,3.99,navigation,Where is the crosswalk?,0.00-4.49,perception,False,,,,,0
+pcacs,369,1,train,unknown,0.0,1.98,safety,Are there any steps or obstacles in front of me?,0.00-2.48,perception,False,,,,,0
+pcacs,371,1,train,fence,8.98,10.98,safety,Is there an obstruction in front of me on the sidewalk?,4.98-11.48,perception,False,,,,,0
+pcacs,371,2,train,car,20.98,22.98,safety,Are there any vehicles or bicycles passing on the road?,16.98-23.48,scheduler,False,20.80,22.80,22.80,,0
+pcacs,372,2,train,door,7.0,9.0,safety,Is the front door closed?,3.00-9.50,perception,False,,,,,0
+pcacs,373,2,train,person,10.99,12.99,navigation,Which direction should I go to find the nearest crosswalk?,3.00-13.49,scheduler,False,1.00,1.80,1.80,,0
+pcacs,373,3,train,pole,13.0,15.0,safety,Are there any obstacles in front of me?,9.00-15.50,perception,False,,,,,0
+pcacs,373,4,train,car,26.98,28.98,navigation,How do I find the entrance to this building?,19.00-29.48,scheduler,False,17.00,17.40,17.40,,0
+pcacs,373,5,train,car,28.99,30.99,safety,Is there a car in front of me?,21.00-31.49,tracking,False,30.00,31.80,31.80,,0
+pcacs,374,1,train,person,10.99,12.99,navigation,How can I get past the parked car to my right?,3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+pcacs,375,1,train,ground hazard,4.99,6.99,safety,Can I walk straight ahead without tripping?,0.99-7.49,perception,False,,,,,0
+pcacs,375,2,train,person,13.0,15.0,safety,Are there any obstacles or people ahead?,5.60-15.50,scheduler,False,3.60,3.60,3.60,,0
+pcacs,378,1,train,bus,25.0,27.0,safety,Is there enough room on this bus/train for me to move safely?,21.00-27.50,perception,False,,,,,0
+pcacs,378,2,train,door,52.99,54.99,navigation,Can you tell me where the door is?,48.99-55.49,perception,False,,,,,0
+pcacs,379,1,train,person,25.0,27.0,safety,Can I walk straight safely without hitting anyone?,17.60-27.50,scheduler,False,15.80,16.20,16.20,,0
+pcacs,379,2,train,person,26.98,28.98,navigation,How do I get to Exit 3 of this subway station?,20.20-29.48,tracking,False,28.00,30.00,30.00,,0
+pcacs,380,1,train,car,25.0,27.0,safety,What obstacles do I need to be aware of as I move forward?,21.60-27.50,scheduler,False,19.80,21.00,21.00,,0
+pcacs,359,1,train,person,10.99,12.99,safety,Are there any obstacles or people on the stairs when I go down?,3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+pcacs,359,3,train,stairs,38.98,40.98,navigation,Where is the nearest exit or entrance to the platform?,34.98-41.48,perception,False,,,,,0
+pcacs,360,1,train,person,10.99,12.99,safety,Is the downhill path clear?,3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+pcacs,360,2,train,person,25.0,27.0,safety,Is the person in front blocking the road?,17.00-27.50,scheduler,False,15.60,16.80,16.80,,0
+pcacs,361,2,train,door,19.0,21.0,navigation,How do I get to the nearest stairs from here?,15.00-21.50,perception,False,,,,,0
+pcacs,361,3,train,person,20.98,22.98,safety,Is there any obstacle in front of me?,13.00-23.48,scheduler,False,11.20,11.40,11.40,,0
+pcacs,358,1,train,motorcycle,10.99,12.99,navigation,How do I get around the scooters parked in front of me?,3.00-13.49,timing,False,1.00,1.20,1.20,16.20,2
+pcacs,358,2,train,motorcycle,38.98,40.98,navigation,How do I get past nearby obstacles?,31.00-41.48,timing,False,29.00,29.40,29.40,52.80,1
+pcacs,358,3,train,person,67.0,69.0,navigation,How can I get around the obstacle ahead?,59.00-69.50,scheduler,False,57.00,57.60,57.60,,0
+pcacs,358,4,train,person,106.99,108.99,navigation,How can I walk safely on this sidewalk?,99.20-109.49,scheduler,False,97.20,97.20,97.20,,0
+pcacs,358,5,train,door,122.98,124.98,navigation,How can I get to the entrance of the building from here?,118.98-125.48,perception,False,,,,,0
+pcacs,358,6,train,motorcycle,136.99,138.99,safety,Is there anything in my path that I need to avoid?,129.20-139.49,timing,False,127.20,127.20,127.20,139.80,1
+pcacs,358,7,train,person,151.0,153.0,safety,Is the sidewalk ahead clear for me to walk on?,143.00-153.50,timing,False,141.00,141.00,141.00,158.40,1
+pcacs,358,8,train,person,164.98,166.98,safety,Are there any obstacles in my immediate path?,157.00-167.48,scheduler,False,155.60,156.00,156.00,,0
+pcacs,128,1,train,wall,1.99,3.99,safety,Are there any obstacles in my path ahead?,0.00-4.49,perception,False,,,,,0
+pcacs,129,1,train,person,16.99,18.99,safety,Is there a crowd up ahead that I should be aware of?,9.00-19.49,scheduler,False,7.00,7.20,7.20,,0
+pcacs,130,1,train,person,13.0,15.0,safety,Are there many people standing around?,5.00-15.50,scheduler,False,3.00,3.00,3.00,,0
+pcacs,131,1,train,stairs,2.98,4.98,navigation,How can I get to the nearest staircase from here?,0.00-5.48,perception,False,,,,,0
+pcacs,329,1,train,pole,13.0,15.0,safety,What obstacles are ahead of me on the sidewalk?,9.00-15.50,perception,False,,,,,0
+pcacs,329,2,train,sports ball,25.0,27.0,safety,Is it safe to go straight ahead from here?,21.00-27.50,scheduler,False,20.80,24.60,24.60,,0
+pcacs,329,3,train,person,38.98,40.98,safety,Is there anything I should be aware of in front of a food stall?,31.00-41.48,scheduler,False,29.00,29.40,29.40,,0
+pcacs,330,1,train,stairs,1.99,3.99,navigation,What is in front of me?,0.00-4.49,perception,False,,,,,0
+pcacs,334,1,train,person,1.99,3.99,safety,Is it safe for me to continue straight?,0.40-4.49,scheduler,False,0.40,0.60,0.60,,0
+pcacs,339,1,train,person,1.99,3.99,safety,Do I walk closely behind others and leave enough room to move?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,340,2,train,person,22.96,24.96,safety,Are there any obstacles or people blocking my way?,19.40-25.46,scheduler,False,19.00,19.80,19.80,,0
+pcacs,2,1,train,car,5.6,6.99,safety,Is it safe to cross the street now?,5.60-7.49,delivered,False,4.00,6.00,6.00,7.20,1
+pcacs,2,2,train,person,7.0,9.0,navigation,How can I get to the crosswalk from here?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+pcacs,3,1,train,car,4.99,6.99,safety,Is it safe to cross the street now?,4.00-7.49,scheduler,False,2.00,4.20,4.20,,0
+pcacs,40,1,train,unknown,25.0,27.0,safety,Is it safe for me to cross this intersection?,21.00-27.50,perception,False,,,,,0
+pcacs,106,1,train,chair,4.99,6.99,safety,Is there enough space for aerfa under the seat?,0.99-7.49,perception,False,,,,,0
+pcacs,107,1,train,ground hazard,1.0,3.0,safety,Is there any step or uneven surface in front of me?,0.00-3.50,perception,False,,,,,0
+pcacs,107,2,train,unknown,1.0,3.0,safety,Is there a step in front of me?,0.00-3.50,perception,False,,,,,0
+pcacs,109,2,train,elevator,4.99,6.99,safety,Is the elevator door open or closed?,0.99-7.49,perception,False,,,,,0
+pcacs,112,1,train,person,4.99,6.99,safety,Are there any moving objects or people that I need to be cautious of?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,113,3,train,chair,8.98,10.98,navigation,Where do I sit?,1.40-11.48,scheduler,False,1.40,1.80,1.80,,0
+pcacs,114,1,train,unknown,1.99,3.99,safety,Is there something in front of Alpha that I should be aware of?,0.00-4.49,perception,False,,,,,0
+pcacs,114,3,train,unknown,8.98,10.98,safety,Is there any obstruction on the right side as I move forward?,4.98-11.48,perception,False,,,,,0
+pcacs,114,4,train,person,8.98,10.98,navigation,How do I reach my seat from here?,1.00-11.48,scheduler,False,0.00,0.60,0.60,,0
+pcacs,320,1,train,scissors,1.99,3.99,safety,Are there any sharp objects nearby that I should be aware of?,0.00-4.49,perception,False,,,,,0
+pcacs,325,1,train,dining table,3.8,3.99,safety,Is there anything dangerous on the table that I should be aware of?,3.80-4.49,scheduler,False,2.80,3.00,3.00,,0
+pcacs,326,1,train,dining table,0.0,1.98,safety,Is there any potential sharp object or obstacle on the table that I might bump into while setting up my phone?,0.00-2.48,perception,False,,,,,0
+pcacs,327,1,train,dining table,1.99,3.99,safety,Are there any sharp objects on the table that I should be careful about?,0.00-4.49,tracking,False,3.20,,,,0
+pcacs,328,2,train,cat,7.0,9.0,safety,Is there anything I should be cautious of while reaching out?,3.00-9.50,scheduler,False,1.00,1.20,1.20,,0
+pcacs,647,1,train,bicycle,11.34,13.34,navigation,Is there an obstacle ahead?,7.60-13.84,scheduler,False,7.60,7.80,7.80,,0
+pcacs,648,1,train,pole,10.5,12.5,navigation,Where is the blind path?,6.50-13.00,perception,False,,,,,0
+pcacs,887,1,train,door,71.45,73.45,navigation,Where am I?,67.45-73.95,perception,False,,,,,0
+pcacs,887,2,train,door,125.25,127.25,navigation,Did I enter the store?,121.25-127.75,perception,False,,,,,0
+pcacs,888,1,train,door,0.14,2.14,navigation,Is this the entrance to the restaurant?,0.00-2.64,perception,False,,,,,0
+pcacs,890,1,train,person,93.59,95.59,safety,Who is the person pulling me?,85.60-96.09,scheduler,False,83.60,84.00,84.00,,0
+pcacs,899,1,train,door,21.47,23.47,navigation,Have I arrived at the door?,17.47-23.97,perception,False,,,,,0
+pcacs,899,2,train,motorcycle,46.67,48.67,safety,Is there anything to pay attention to ahead?,39.40-49.17,scheduler,False,37.60,40.20,40.20,,0
+pcacs,900,1,train,door,16.63,18.63,navigation,Where is the door?,12.63-19.13,perception,False,,,,,0
+pcacs,905,1,train,cake,64.93,66.93,navigation,Where am I headed?,60.93-67.43,perception,False,,,,,0
+pcacs,907,6,train,motorcycle,118.13,120.13,safety,Are there any obstacles in the road ahead?,110.20-120.63,scheduler,False,108.20,108.60,108.60,,0
+pcacs,912,1,train,door,132.66,134.66,navigation,Am I out?,128.66-135.16,perception,False,,,,,0
+pcacs,920,1,train,car,49.4,51.4,safety,Are there any obstacles ahead?,41.40-51.90,timing,False,39.40,39.60,39.60,61.80,1
+pcacs,920,2,train,motorcycle,53.91,55.91,safety,Is the road ahead clear?,46.00-56.41,scheduler,False,53.80,54.60,54.60,,0
+pcacs,921,1,train,person,0.0,1.22,safety,What did I hit?,0.00-1.72,scheduler,False,0.00,0.60,0.60,,0
+pcacs,921,2,train,motorcycle,213.64,215.64,safety,Are there any obstacles ahead?,209.64-216.14,perception,False,,,,,0
+pcacs,916,1,train,pole,45.48,47.48,safety,Is the straight road unobstructed?,41.48-47.98,perception,False,,,,,0
+pcacs,916,2,train,fence,63.4,65.4,navigation,How to get there?,59.40-65.90,perception,False,,,,,0
+pcacs,679,1,train,person,37.11,39.11,safety,Is there an obstacle ahead?,29.20-39.61,scheduler,False,27.20,27.60,27.60,,0
+pcacs,679,2,train,motorcycle,64.38,66.38,safety,Is there an obstacle ahead?,56.40-66.88,timing,False,55.00,55.80,55.80,55.80,1
+pcacs,682,1,train,stairs,4.11,6.11,navigation,Are you going to get on the elevator?,0.11-6.61,perception,False,,,,,0
+pcacs,702,1,train,car,0.0,0.83,safety,Is there an obstacle ahead?,0.00-1.33,scheduler,False,0.00,0.60,0.60,,0
+pcacs,705,1,train,car,12.36,14.36,navigation,Where is this?,4.40-14.86,scheduler,False,2.60,3.00,3.00,,0
+pcacs,705,2,train,car,17.36,19.36,safety,Is there an obstacle ahead?,9.40-19.86,scheduler,False,17.00,17.40,17.40,,0
+pcacs,714,1,train,stairs,21.97,23.97,safety,Is there an obstacle ahead?,17.97-24.47,perception,False,,,,,0
+pcacs,714,2,train,motorcycle,29.22,31.22,safety,Is there an obstacle ahead?,28.20-31.72,tracking,False,28.20,31.80,31.80,,0
+pcacs,729,2,train,car,94.48,96.48,navigation,Where is China Construction Bank heading?,86.60-96.98,delivered,False,84.60,84.60,84.60,88.80,1
+pcacs,729,3,train,unknown,216.71,218.71,navigation,Is there a road ahead?,212.71-219.21,perception,False,,,,,0
+pcacs,754,2,train,motorcycle,58.8,60.8,navigation,Where is the sidewalk?,51.20-61.30,scheduler,False,50.20,51.00,51.00,,0
+pcacs,479,1,train,car,8.98,10.98,navigation,How do I avoid parked vehicles in front of me?,3.60-11.48,scheduler,False,3.60,4.20,4.20,,0
+pcacs,558,1,train,apple,7.0,9.0,navigation,Where am I?,3.00-9.50,perception,False,,,,,0
+pcacs,197,1,train,car,0.0,0.81,safety,Is there a car passing ahead?,0.00-1.31,scheduler,False,0.00,0.60,0.60,,0
+pcacs,197,2,train,car,1.0,3.0,safety,Can I cross the road now?,0.00-3.50,tracking,False,2.00,4.20,4.20,,0
+pcacs,198,1,train,pole,0.0,0.16,safety,Can I go now?,0.00-0.66,perception,False,,,,,0
+pcacs,599,1,train,bicycle,4.99,6.99,safety,Are there any obstacles in front of me?,2.60-7.49,scheduler,False,2.60,3.00,3.00,,0
+pcacs,600,1,train,fence,2.98,4.98,navigation,How can I get around this fence?,0.00-5.48,perception,False,,,,,0
+pcacs,601,1,train,car,1.2,3.0,safety,Is there a place ahead where I can cross the road safely?,1.20-3.50,scheduler,False,1.00,1.20,1.20,,0
+pcacs,602,1,train,pole,2.98,4.98,navigation,How can I avoid the pole in front of me?,0.00-5.48,perception,False,,,,,0
+pcacs,602,2,train,tree,16.99,18.99,safety,Is there an obstacle in front of me?,12.99-19.49,perception,False,,,,,0
+pcacs,616,1,train,unknown,22.99,24.99,safety,Is it safe to cross the road now?,18.99-25.49,perception,False,,,,,0
+pcacs,87,1,train,wall,37.0,39.0,navigation,How do I find my way to the gate?,33.00-39.50,perception,False,,,,,0
+pcacs,87,2,train,door,41.98,43.98,navigation,How can I get out of this backyard?,37.98-44.48,perception,False,,,,,0
+pcacs,105,2,train,person,15.14,17.14,safety,Is it safe to step forward from where I am standing?,7.20-17.64,scheduler,False,5.20,5.40,5.40,,0
+pcacs,105,3,train,person,23.15,25.15,safety,Is there anything blocking my path ahead?,15.20-25.65,scheduler,False,19.80,20.40,20.40,,0
+pcacs,368,1,train,fence,1.99,3.99,safety,Is the road ahead clear for riding?,0.00-4.49,perception,False,,,,,0
+pcacs,672,1,train,stairs,0.93,2.93,navigation,Where are the stairs?,0.00-3.43,perception,False,,,,,0
+pcacs,757,1,train,train,98.8,100.8,navigation,Where is this?,94.80-101.30,perception,False,,,,,0
+pcacs,758,3,train,chair,40.7,42.7,navigation,Where are the empty seats?,33.60-43.20,scheduler,False,33.40,33.60,33.60,,0
+pcacs,759,2,train,door,28.9,30.9,navigation,Where am I?,24.90-31.40,perception,False,,,,,0
+pcacs,781,1,finetune,door,32.98,34.98,navigation,How can I reach the exit from this table?,28.98-35.48,perception,False,,,,,0
+pcacs,362,2,finetune,person,25.0,27.0,safety,Are there a lot of people around me that I need to avoid?,17.00-27.50,scheduler,False,15.00,15.00,15.00,,0
+pcacs,362,3,finetune,person,50.3,52.3,safety,How to use this escalator safely?,42.40-52.80,scheduler,False,40.40,40.80,40.80,,0
+pcacs,362,5,finetune,person,68.3,70.3,safety,Is there anything in my way?,60.40-70.80,scheduler,False,58.40,58.80,58.80,,0
+pcacs,362,6,finetune,person,82.79,84.79,safety,Are there any obstacles in my way?,74.80-85.29,scheduler,False,73.00,73.20,73.20,,0
+pcacs,363,1,finetune,person,10.99,12.99,safety,"Is there enough room for me to walk safely, or are there obstacles in my way?",3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+pcacs,363,2,finetune,person,25.0,27.0,safety,Is it safe for me to move around this store? Are there any obstructions or hazards?,17.00-27.50,scheduler,False,15.60,16.20,16.20,,0
+pcacs,365,1,finetune,cell phone,10.99,12.99,safety,What obstacles are there on the table that I should be aware of?,6.99-13.49,scheduler,False,5.40,5.40,5.40,,0
+pcacs,119,1,finetune,horse,6.99,8.99,navigation,Where is the horse going?,2.99-9.49,scheduler,False,1.40,1.80,1.80,,0
+pcacs,119,2,finetune,horse,7.0,9.0,navigation,Which direction should I go to exit the riding area?,3.00-9.50,tracking,False,9.00,,,,0
+pcacs,124,2,finetune,horse,13.0,15.0,navigation,In which direction should I guide the horse to leave the arena?,9.00-15.50,scheduler,False,9.60,10.20,10.20,,0
+pcacs,127,1,finetune,horse,1.96,3.96,navigation,Which direction is the horse heading?,0.00-4.46,scheduler,False,0.00,0.60,0.60,,0
+pcacs,870,1,finetune,stairs,0.0,0.0,navigation,Which direction does the moving walkway go?,0.00-0.50,perception,False,,,,,0
+pcacs,872,1,finetune,person,1.99,3.99,navigation,How can I find the entrance?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,434,2,finetune,unknown,16.99,18.99,safety,Is the path to the seat in the cafe clear so I can walk without tripping?,12.99-19.49,perception,False,,,,,0
+pcacs,434,3,finetune,person,16.99,18.99,navigation,How do I navigate this cafe?,9.00-19.49,scheduler,False,7.00,7.80,7.80,,0
+pcacs,435,3,finetune,animal,104.21,106.21,safety,Is the area around me safe from any potentially dangerous animals?,100.21-106.71,perception,False,,,,,0
+pcacs,435,4,finetune,animal,118.22,120.22,safety,Are there any animals approaching me?,114.22-120.72,perception,False,,,,,0
+pcacs,437,1,finetune,unknown,1.99,3.99,safety,Is there anything in front of me that I might hit?,0.00-4.49,perception,False,,,,,0
+pcacs,438,1,finetune,unknown,7.0,9.0,safety,Is the path to the store entrance clear?,3.00-9.50,perception,False,,,,,0
+pcacs,438,2,finetune,door,13.0,15.0,safety,Are there steps or a ramp at the entrance to this place?,9.00-15.50,perception,False,,,,,0
+pcacs,438,3,finetune,unknown,16.99,18.99,safety,What obstacles on the floor should I be careful of?,12.99-19.49,perception,False,,,,,0
+pcacs,439,1,finetune,dining table,1.99,3.99,safety,Is there a counter nearby where I can get help?,0.00-4.49,perception,False,,,,,0
+pcacs,440,1,finetune,dining table,10.99,12.99,safety,Are there any obstacles or objects on the floor that could cause me to trip?,6.40-13.49,scheduler,False,6.40,6.60,6.60,,0
+pcacs,440,3,finetune,unknown,47.59,49.59,safety,Is there anything in front of me that might trip me?,43.59-50.09,perception,False,,,,,0
+pcacs,440,4,finetune,unknown,61.6,63.6,safety,Is there anyone nearby who might bump into me?,57.60-64.10,perception,False,,,,,0
+pcacs,441,1,finetune,person,4.99,6.99,safety,Are there any obstacles in front of me?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+pcacs,441,2,finetune,unknown,13.0,15.0,safety,Is it safe to move forward?,9.00-15.50,perception,False,,,,,0
+pcacs,441,3,finetune,unknown,20.09,22.09,safety,Is the object I am touching alive and is it dangerous?,16.09-22.59,perception,False,,,,,0
+pcacs,441,6,finetune,animal,39.2,41.2,safety,Are there any animals around me that I should be wary of?,35.20-41.70,perception,False,,,,,0
+pcacs,405,2,finetune,dining table,25.0,27.0,safety,What obstacles should I be aware of when moving in the area?,18.40-27.50,scheduler,False,18.40,18.60,18.60,,0
+pcacs,406,1,finetune,dining table,151.0,153.0,safety,What obstructions on the counter should I be aware of?,147.00-153.50,perception,False,,,,,0
+pcacs,407,1,finetune,dining table,67.0,69.0,safety,Are there any obstacles around the counter?,63.00-69.50,perception,False,,,,,0
+pcacs,407,3,finetune,unknown,100.89,102.89,safety,"As I walk through this store, are there any obstacles in front of me?",96.89-103.39,perception,False,,,,,0
+pcacs,407,4,finetune,person,108.9,110.9,safety,Is there anyone standing in or near my walkway?,101.00-111.40,scheduler,False,99.00,99.00,99.00,,0
+pcacs,805,1,finetune,fence,1.0,3.0,safety,Can I walk on the road ahead smoothly?,0.00-3.50,perception,False,,,,,0
+pcacs,807,1,finetune,fence,32.98,34.98,navigation,Which direction should I go to reach the end of the fence?,28.98-35.48,perception,False,,,,,0
+pcacs,810,1,finetune,unknown,2.98,4.98,safety,Is it safe for me to cross the road now?,0.00-5.48,perception,False,,,,,0
+pcacs,811,1,finetune,unknown,14.98,16.98,safety,Is it safe to move forward now?,10.98-17.48,perception,False,,,,,0
+pcacs,816,1,finetune,unknown,8.98,10.98,safety,Is there a clear path ahead for me?,4.98-11.48,perception,False,,,,,0
+pcacs,817,1,finetune,person,2.98,4.98,navigation,Where is the entrance to the garden?,0.00-5.48,scheduler,False,0.00,0.60,0.60,,0
+pcacs,817,2,finetune,train,20.98,22.98,safety,Is it safe to proceed?,16.98-23.48,perception,False,,,,,0
+pcacs,891,1,finetune,person,60.31,62.31,safety,Is there an obstacle ahead?,52.40-62.81,scheduler,False,50.40,50.40,50.40,,0
+pcacs,878,2,finetune,car,42.32,44.32,navigation,Where is going forward?,34.40-44.82,scheduler,False,32.60,33.00,33.00,,0
+pcacs,878,3,finetune,door,84.79,86.79,navigation,Am I almost at the hospital?,80.79-87.29,perception,False,,,,,0
+pcacs,884,1,finetune,person,3.87,5.87,navigation,What is ahead?,0.00-6.37,scheduler,False,0.00,0.60,0.60,,0
+pcacs,884,2,finetune,car,5.22,7.22,safety,Can I cross the road now?,0.00-7.72,scheduler,False,0.00,0.60,0.60,,0
+pcacs,884,3,finetune,motorcycle,44.78,46.78,safety,What did I hit?,36.80-47.28,scheduler,False,34.80,34.80,34.80,,0
+pcacs,884,4,finetune,motorcycle,105.53,107.53,safety,What is blocking my way?,97.80-108.03,delivered,False,95.80,96.00,96.00,106.80,2
+pcacs,884,5,finetune,person,118.98,120.98,navigation,Can this go?,111.00-121.48,scheduler,False,109.00,109.20,109.20,,0
+pcacs,884,6,finetune,stairs,150.09,152.09,navigation,Where is the subway station?,146.09-152.59,perception,False,,,,,0
+pcacs,706,1,finetune,car,0.0,0.48,safety,Is there an obstacle ahead?,0.00-0.98,timing,False,0.00,0.60,0.60,2.40,2
+pcacs,707,1,finetune,car,0.0,1.47,safety,Is there an obstacle ahead?,0.00-1.97,delivered,False,0.00,0.60,0.60,1.20,2
+pcacs,708,2,finetune,car,32.62,34.62,safety,Is there an obstacle ahead?,24.80-35.12,delivered,False,22.80,22.80,22.80,25.80,2
+pcacs,717,1,finetune,car,0.53,2.53,navigation,Is there a road ahead?,0.00-3.03,scheduler,False,0.00,0.60,0.60,,0
+pcacs,717,2,finetune,unknown,50.03,52.03,safety,Is there an obstacle ahead?,46.03-52.53,perception,False,,,,,0
+egoblind_learned:il,178,1,train,person,4.99,6.99,safety,Is the area around me safe for continued walking?,0.00-7.49,delivered,False,0.00,0.60,0.60,4.80,1
+egoblind_learned:il,245,1,train,dog,25.0,27.0,safety,Is it safe to walk forward?,21.00-27.50,scheduler,False,19.00,19.20,19.20,,0
+egoblind_learned:il,250,1,train,dog,4.99,6.99,safety,Is there something on the floor that I might trip over?,0.99-7.49,scheduler,False,0.40,0.60,0.60,,0
+egoblind_learned:il,256,1,train,backpack,1.99,3.99,safety,Is there anything on the countertop that I might knock over?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,257,1,train,unknown,2.98,4.98,safety,Is there any hot air?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,262,1,train,knife,1.99,3.99,safety,Is there any risk of cutting myself while holding the cake with a knife in my other hand?,0.00-4.49,scheduler,False,4.00,4.20,4.20,,0
+egoblind_learned:il,262,2,train,knife,7.0,9.0,safety,Am I holding the knife safely?,3.00-9.50,tracking,False,9.40,9.60,9.60,,0
+egoblind_learned:il,262,4,train,knife,22.53,24.53,safety,Are there any sharp objects around me?,18.53-25.03,scheduler,False,16.60,16.80,16.80,,0
+egoblind_learned:il,268,2,train,oven,7.0,9.0,safety,Is there anything hot ?,3.00-9.50,perception,False,,,,,0
+egoblind_learned:il,270,1,train,oven,4.99,6.99,safety,Is there anything hot nearby that I should be cautious of?,0.99-7.49,scheduler,False,0.40,0.60,0.60,,0
+egoblind_learned:il,272,1,train,machine,0.0,0.99,safety,Is the area around the coffee machine clear of any hazards?,0.00-1.49,perception,False,,,,,0
+egoblind_learned:il,275,1,train,unknown,1.99,3.99,safety,Are my hands close to any hot surfaces?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,279,1,train,unknown,24.05,26.05,safety,Is the countertop clear of any sharp objects nearby?,20.05-26.55,perception,False,,,,,0
+egoblind_learned:il,174,1,train,person,0.0,1.98,safety,Are there any obstacles or people blocking the path ahead?,0.00-2.48,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,772,2,train,motorcycle,2.98,4.98,navigation,How can I get around a row of parked scooters?,0.40-5.48,delivered,False,0.40,0.60,0.60,3.00,1
+egoblind_learned:il,773,1,train,car,0.0,1.98,navigation,How can I cross the street safely?,0.00-2.48,timing,False,0.00,0.60,0.60,4.20,1
+egoblind_learned:il,773,2,train,person,2.98,4.98,navigation,Which direction should I go to reach the nearest crosswalk?,0.00-5.48,scheduler,False,3.60,4.80,4.80,,0
+egoblind_learned:il,774,1,train,car,4.99,6.99,safety,Is it safe to cross the road here?,0.80-7.49,scheduler,False,0.80,1.20,1.20,,0
+egoblind_learned:il,778,1,train,cell phone,58.75,60.75,navigation,Are we close to our destination?,54.75-61.25,scheduler,False,53.40,53.40,53.40,,0
+egoblind_learned:il,200,1,train,person,10.99,12.99,safety,Is there any traffic passing by when crossing the road ahead?,3.00-13.49,delivered,False,1.00,1.20,1.20,5.40,2
+egoblind_learned:il,200,2,train,person,25.0,27.0,safety,Are there any roadblocks in front of me?,17.20-27.50,scheduler,False,15.60,16.20,16.20,,0
+egoblind_learned:il,201,1,train,chair,0.0,0.99,safety,Are there any obstacles in my way as I walk forward?,0.00-1.49,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,203,2,train,bed,0.0,1.98,navigation,What environment am I currently in?,0.00-2.48,perception,False,,,,,0
+egoblind_learned:il,203,3,train,dog,2.98,4.98,safety,Is it safe to let my dog move around freely in this room?,0.00-5.48,scheduler,False,3.60,4.20,4.20,,0
+egoblind_learned:il,204,1,train,person,7.0,9.0,safety,Is there anyone else in the elevator that I should be aware of?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,206,1,train,door,8.98,10.98,safety,Is there any debris or potential tripping hazards near the door?,4.98-11.48,perception,False,,,,,0
+egoblind_learned:il,208,1,train,wall,1.99,3.99,safety,Is it safe to walk straight ahead?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,211,1,train,person,7.0,9.0,safety,Are there any obstacles ahead as I walk on this path?,0.00-9.50,timing,False,0.00,0.60,0.60,12.60,1
+egoblind_learned:il,211,2,train,person,7.0,9.0,navigation,Can you describe what's ahead of me on this pathway?,0.00-9.50,perception,False,,,,,0
+egoblind_learned:il,211,3,train,bicycle,16.99,18.99,safety,Is there any traffic or vehicles nearby that I should be aware of?,9.00-19.49,delivered,False,11.60,12.00,12.60,16.20,2
+egoblind_learned:il,212,1,train,car,1.0,3.0,safety,Are there any obstacles in my path?,0.00-3.50,delivered,False,0.00,0.60,0.60,3.00,1
+egoblind_learned:il,216,1,train,car,7.0,9.0,safety,Is it safe to cross the road now?,0.00-9.50,delivered,False,0.00,0.60,0.60,4.20,2
+egoblind_learned:il,224,1,train,dog,0.0,1.98,safety,Is there any object or pet nearby that could be a tripping hazard while I'm cycling?,0.00-2.48,perception,False,3.40,3.60,3.60,,0
+egoblind_learned:il,635,2,train,unknown,10.99,12.99,safety,Is anyone coming towards me?,6.99-13.49,perception,False,,,,,0
+egoblind_learned:il,636,1,train,car,7.0,9.0,safety,Is there a ramp or steps ahead of me?,0.00-9.50,delivered,False,0.00,0.60,0.60,3.00,1
+egoblind_learned:il,145,1,train,unknown,1.99,3.99,safety,Are there any obstacles on the floor in front of me?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,146,1,train,unknown,5.98,7.98,safety,Are there any obstacles I need to be aware of in this gym?,1.98-8.48,perception,False,,,,,0
+egoblind_learned:il,190,1,train,sign,2.98,4.98,safety,Are there any signs or obstacles in my walking path?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,191,1,train,person,10.99,12.99,safety,Is there any obstacle in front of me that could hinder my movement?,3.00-13.49,delivered,False,1.00,1.20,1.20,4.80,1
+egoblind_learned:il,193,3,train,dining table,10.6,12.6,safety,Is there anything I should be cautious of in this area?,7.80-13.10,scheduler,False,7.80,8.40,8.40,,0
+egoblind_learned:il,193,4,train,door,16.6,18.6,safety,Am I close to any obstacles that I need to avoid?,12.60-19.10,perception,False,,,,,0
+egoblind_learned:il,194,1,train,dining table,2.98,4.98,safety,Is there anything on the table that could be a potential tripping hazard?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,194,2,train,dining table,8.98,10.98,safety,Is there anything under the table that I might bump into with my legs?,8.60-11.48,candidate,False,8.40,9.00,,,0
+egoblind_learned:il,491,1,train,car,4.99,6.99,safety,Is it safe to cross the road now?,0.00-7.49,delivered,False,0.00,0.60,0.60,2.40,1
+egoblind_learned:il,491,2,train,car,13.0,15.0,safety,Are there any obstacles in the way when I cross the road?,5.00-15.50,scheduler,False,9.60,12.60,12.60,,0
+egoblind_learned:il,492,1,train,motorcycle,1.0,3.0,safety,Is it safe for me to cross the road now?,0.00-3.50,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,492,2,train,motorcycle,4.99,6.99,safety,Are there any nearby obstacles or vehicles that I should be aware of?,0.00-7.49,scheduler,False,5.00,5.40,5.40,,0
+egoblind_learned:il,492,3,train,car,5.98,7.98,safety,"When we are about to cross the road, is there a car coming towards us?",0.00-8.48,delivered,False,0.00,0.60,0.60,1.20,2
+egoblind_learned:il,493,1,train,door,116.98,118.98,safety,Can you tell if the door is fully open so I can exit safely?,112.98-119.48,perception,False,,,,,0
+egoblind_learned:il,493,3,train,person,140.98,142.98,safety,Are there any people or vehicles nearby that I should be cautious of when getting out?,133.20-143.48,timing,False,131.20,131.40,134.40,145.20,1
+egoblind_learned:il,494,1,train,person,4.99,6.99,safety,Is it safe to walk through this street?,0.00-7.49,delivered,False,0.00,0.60,0.60,3.60,1
+egoblind_learned:il,495,1,train,car,28.99,30.99,safety,Is there any traffic I should be aware of?,27.80-31.49,delivered,False,27.60,28.20,28.20,30.60,1
+egoblind_learned:il,496,1,train,unknown,85.0,87.0,safety,Is it safe for me to approach the food stand?,81.00-87.50,perception,False,,,,,0
+egoblind_learned:il,496,3,train,person,100.99,102.99,safety,Is the path clear for me to move forward?,93.00-103.49,delivered,False,91.00,91.20,91.20,97.80,1
+egoblind_learned:il,154,1,train,knife,1.0,3.0,safety,Is there any sharp object in the sink?,0.00-3.50,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,157,1,train,unknown,16.99,18.99,safety,Am I adding the right seasoning while cooking or could this be dangerous?,12.99-19.49,perception,False,,,,,0
+egoblind_learned:il,162,1,train,dining table,2.98,4.98,safety,Is there anything on the kitchen counter that I should be careful not to knock over?,0.00-5.48,candidate,False,1.20,1.80,,,0
+egoblind_learned:il,164,1,train,shelf,7.0,9.0,safety,Is there any risk of my hand getting caught in the dishwasher rack?,3.00-9.50,perception,False,,,,,0
+egoblind_learned:il,169,2,train,sink,2.98,4.98,navigation,Which direction is the sink faucet located?,0.00-5.48,scheduler,False,1.80,2.40,2.40,,0
+egoblind_learned:il,232,1,train,car,10.99,12.99,safety,Is it safe to enter the train now?,6.99-13.49,perception,False,,,,,0
+egoblind_learned:il,232,4,train,person,84.72,86.72,safety,Is there enough space to navigate without bumping into people or objects?,76.80-87.22,delivered,False,74.80,75.00,75.00,77.40,2
+egoblind_learned:il,233,3,train,person,13.0,15.0,safety,Is the area ahead crowded and should I be cautious of people walking towards me?,5.00-15.50,delivered,False,3.00,3.00,3.00,12.00,2
+egoblind_learned:il,233,4,train,person,26.8,28.8,safety,Is it safe to walk straight ahead without obstacles or people in the way?,18.80-29.30,delivered,False,17.60,18.00,18.00,19.80,2
+egoblind_learned:il,233,5,train,car,40.81,42.81,safety,Is the train door open and safe for boarding?,36.81-43.31,perception,False,,,,,0
+egoblind_learned:il,233,10,train,person,79.58,81.58,safety,Is the path clear ahead for me to walk through?,71.60-82.08,delivered,False,69.60,69.60,69.60,79.20,1
+egoblind_learned:il,233,11,train,person,84.56,86.56,safety,Is there anything I should be careful of as I walk forward?,76.60-87.06,scheduler,False,84.20,84.60,84.60,,0
+egoblind_learned:il,93,1,train,bicycle,7.0,9.0,safety,Is the path ahead clear or are there any obstacles on the sidewalk?,0.00-9.50,delivered,False,0.00,0.60,0.60,6.00,1
+egoblind_learned:il,94,1,train,person,7.0,9.0,safety,Is there anyone blocking the entrance ahead?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,94,2,train,person,16.99,18.99,safety,Is the path ahead crowded with people?,12.99-19.49,perception,False,,,,,0
+egoblind_learned:il,94,3,train,motorcycle,26.98,28.98,safety,Is there any traffic on the street in front of the building?,22.98-29.48,perception,False,,,,,0
+egoblind_learned:il,94,4,train,car,26.98,28.98,navigation,Which direction should I go to reach the main road?,22.98-29.48,perception,False,,,,,0
+egoblind_learned:il,95,1,train,bottle,2.98,4.98,safety,Is there anything on the table that might spill or cause a mess?,0.00-5.48,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,95,2,train,dining table,2.98,4.98,navigation,Where is the sit I can sit down?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,97,2,train,car,2.98,4.98,safety,"Is it safe to continue walking straight ahead, or are there any obstacles I should be aware of?",0.00-5.48,delivered,False,0.00,0.60,0.60,3.60,2
+egoblind_learned:il,35,2,train,tree,62.98,64.98,safety,Is there any tree or obstacle directly in front?,58.98-65.48,perception,False,,,,,0
+egoblind_learned:il,36,1,train,person,139.99,141.99,safety,Is the sidewalk clear for me to walk safely?,132.00-142.49,delivered,False,130.00,130.20,130.20,135.60,1
+egoblind_learned:il,36,2,train,person,151.0,153.0,safety,Are there any obstacles or people blocking my way ahead?,143.00-153.50,delivered,False,144.60,145.20,145.20,150.00,2
+egoblind_learned:il,27,1,train,person,4.99,6.99,navigation,Where is the nearest train boarding gate from here?,0.20-7.49,scheduler,False,0.20,4.20,4.20,,0
+egoblind_learned:il,32,1,train,train,2.98,4.98,safety,Is it safe to board the train now?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,33,1,train,person,7.99,9.99,safety,Is there any obstruction directly in front of me?,0.00-10.49,delivered,False,0.00,0.60,0.60,4.20,1
+egoblind_learned:il,34,4,train,car,40.99,42.99,safety,Is it safe to cross the road now?,33.00-43.49,delivered,False,32.60,33.00,33.00,39.60,2
+egoblind_learned:il,34,5,train,unknown,146.11,148.11,safety,Are there any roadblocks or steps ahead of me?,142.11-148.61,perception,False,,,,,0
+egoblind_learned:il,18,1,train,unknown,10.99,12.99,safety,Is there any boiling water that can splash and burn me while removing the dumplings?,6.99-13.49,perception,False,,,,,0
+egoblind_learned:il,21,1,train,backpack,46.99,48.99,navigation,Where's the lid?,44.40-49.49,scheduler,False,44.40,45.00,47.40,,0
+egoblind_learned:il,22,1,train,dining table,5.98,7.98,safety,Are there any sharp objects or hazards on the counter in front of me?,1.98-8.48,scheduler,False,0.80,7.20,7.20,,0
+egoblind_learned:il,22,2,train,bottle,14.98,16.98,safety,Is there anything near the sink that I should be cautious of?,10.98-17.48,scheduler,False,9.00,9.00,9.00,,0
+egoblind_learned:il,91,1,train,shelf,8.98,10.98,safety,Is there anything on the floor?,4.98-11.48,perception,False,,,,,0
+egoblind_learned:il,92,1,train,unknown,10.99,12.99,safety,Is there enough space for me?,6.99-13.49,perception,False,,,,,0
+egoblind_learned:il,92,2,train,person,19.0,21.0,navigation,How do I get to an empty bed?,11.00-21.50,scheduler,False,9.00,9.00,9.00,,0
+egoblind_learned:il,10,1,train,person,8.98,10.98,navigation,How do I locate the aisle for baby care products from here?,1.00-11.48,scheduler,False,0.80,1.80,1.80,,0
+egoblind_learned:il,14,1,train,motorcycle,57.02,59.02,safety,Are there any obstacles on the ground I need to be aware of?,49.20-59.52,delivered,False,47.20,47.40,47.40,49.80,2
+egoblind_learned:il,14,2,train,car,57.4,59.02,navigation,How can I get to the overpass in front of me?,57.40-59.52,scheduler,False,57.40,57.60,58.20,,0
+egoblind_learned:il,14,3,train,motorcycle,70.23,72.23,safety,Which way should I go to avoid these obstacles?,62.40-72.73,delivered,False,60.40,60.60,60.60,63.00,1
+egoblind_learned:il,14,4,train,motorcycle,82.18,84.18,safety,Is there any vehicle parked ahead of the crosswalk or ahead of me?,74.20-84.68,delivered,False,74.80,75.00,75.60,79.20,1
+egoblind_learned:il,14,5,train,motorcycle,97.14,99.14,safety,Is there any vehicular traffic on the road I need to watch out for?,89.20-99.64,delivered,False,87.20,87.60,87.60,90.60,4
+egoblind_learned:il,90,1,train,car,11.98,13.98,navigation,How to get to the opposite street?,4.00-14.48,delivered,False,2.00,2.40,2.40,4.80,3
+egoblind_learned:il,90,2,train,motorcycle,109.0,111.0,safety,Is there any traffic passing by?,103.60-111.50,scheduler,False,103.60,105.00,105.00,,0
+egoblind_learned:il,392,1,train,pole,52.99,54.99,safety,Are there any obstacles in my way as I walk now?,48.99-55.49,perception,False,,,,,0
+egoblind_learned:il,393,1,train,bicycle,10.99,12.99,safety,What obstacles on the sidewalk should I avoid?,3.20-13.49,scheduler,False,1.40,4.80,4.80,,0
+egoblind_learned:il,393,2,train,unknown,25.0,27.0,safety,Can the road ahead be traveled smoothly?,21.00-27.50,perception,False,,,,,0
+egoblind_learned:il,394,1,train,bicycle,38.98,40.98,navigation,How can I get around these parked bikes?,32.00-41.48,scheduler,False,30.00,30.00,30.00,,0
+egoblind_learned:il,394,2,train,car,52.99,54.99,safety,Is there any obstacle in front of me?,45.00-55.49,delivered,False,43.60,44.40,44.40,46.20,4
+egoblind_learned:il,283,1,train,person,1.99,3.99,safety,Is there anyone lying in the bed that might pose a tripping hazard?,0.00-4.49,delivered,False,0.00,0.60,0.60,2.40,1
+egoblind_learned:il,284,1,train,bed,0.0,1.98,safety,Are there any obstacles on the floor that I might trip over?,0.00-2.48,candidate,False,2.20,2.40,3.00,,0
+egoblind_learned:il,284,2,train,sign,63.03,65.03,safety,Is there any obstruction or hazard around me?,59.03-65.53,perception,False,,,,,0
+egoblind_learned:il,286,1,train,door,0.0,1.98,safety,Can you see if there are any obstacles in front of me?,0.00-2.48,perception,False,,,,,0
+egoblind_learned:il,290,1,train,person,25.0,27.0,safety,Is someone standing near me blocking my path?,17.00-27.50,delivered,False,15.00,15.00,15.00,19.20,1
+egoblind_learned:il,291,1,train,couch,7.0,9.0,safety,"As I walk toward the street, are there any obstacles in front of me?",3.00-9.50,tracking,False,9.00,9.60,9.60,,0
+egoblind_learned:il,291,2,train,unknown,16.99,18.99,safety,What traffic conditions should I be aware of before crossing the road?,12.99-19.49,perception,False,,,,,0
+egoblind_learned:il,292,1,train,person,22.99,24.99,safety,Could I have hit something on my left side?,15.00-25.49,scheduler,False,13.00,13.20,13.20,,0
+egoblind_learned:il,86,1,train,door,2.98,4.98,navigation,How can I get out of this yard?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,389,1,train,unknown,25.0,27.0,safety,Is it safe to cross the road here?,21.00-27.50,perception,False,,,,,0
+egoblind_learned:il,389,2,train,car,25.0,27.0,safety,Is it safe for me to move forward?,17.00-27.50,delivered,False,15.00,15.00,15.00,17.40,4
+egoblind_learned:il,389,3,train,car,121.72,123.72,safety,Is it safe to get off now?,117.72-124.22,perception,False,,,,,0
+egoblind_learned:il,390,1,train,chair,38.98,40.98,navigation,From here how can I get to the nearest chair?,31.00-41.48,scheduler,False,30.40,33.00,33.00,,0
+egoblind_learned:il,390,2,train,backpack,52.99,54.99,safety,Are there any fragile items that I need to handle with care?,48.99-55.49,perception,False,,,,,0
+egoblind_learned:il,387,1,train,shelf,94.99,96.99,safety,Is there a clear path before me to walk on?,90.99-97.49,perception,False,,,,,0
+egoblind_learned:il,497,1,train,door,7.31,9.31,navigation,Where is the closest door to my current location?,3.31-9.81,perception,False,,,,,0
+egoblind_learned:il,511,1,train,wall,0.0,0.99,navigation,Where is the light switch?,0.00-1.49,perception,False,,,,,0
+egoblind_learned:il,512,1,train,dog,35.3,37.3,safety,Will there be any obstacles if I go straight?,31.30-37.80,scheduler,False,29.40,29.40,29.40,,0
+egoblind_learned:il,73,1,train,car,14.98,16.98,navigation,How do I get to the nearest crosswalk?,7.00-17.48,delivered,False,5.00,5.40,5.40,10.80,2
+egoblind_learned:il,74,1,train,car,7.0,9.0,navigation,How can I navigate around these street barriers?,0.00-9.50,delivered,False,0.00,0.60,0.60,1.20,4
+egoblind_learned:il,74,2,train,pole,11.98,13.98,navigation,Which direction should I take to cross the street safely?,7.98-14.48,perception,False,,,,,0
+egoblind_learned:il,74,3,train,sign,16.99,18.99,navigation,How do I cross this busy street safely?,12.99-19.49,perception,False,,,,,0
+egoblind_learned:il,75,1,train,door,4.99,6.99,navigation,Where is the convenience store?,0.99-7.49,perception,False,,,,,0
+egoblind_learned:il,76,1,train,person,4.99,6.99,navigation,Where is the exit?,0.00-7.49,delivered,False,0.00,0.60,0.60,7.20,1
+egoblind_learned:il,78,1,train,dining table,7.99,9.99,navigation,Where is door to exit this restaurant?,1.20-10.49,scheduler,False,1.20,1.80,1.80,,0
+egoblind_learned:il,78,2,train,dining table,16.99,18.99,navigation,Where are the napkins located?,9.00-19.49,tracking,False,12.80,,,,0
+egoblind_learned:il,80,1,train,pole,1.99,3.99,navigation,Where is the crosswalk?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,369,1,train,unknown,0.0,1.98,safety,Are there any steps or obstacles in front of me?,0.00-2.48,perception,False,,,,,0
+egoblind_learned:il,371,1,train,fence,8.98,10.98,safety,Is there an obstruction in front of me on the sidewalk?,4.98-11.48,perception,False,,,,,0
+egoblind_learned:il,371,2,train,car,20.98,22.98,safety,Are there any vehicles or bicycles passing on the road?,16.98-23.48,candidate,False,20.80,22.80,,,0
+egoblind_learned:il,372,2,train,door,7.0,9.0,safety,Is the front door closed?,3.00-9.50,perception,False,,,,,0
+egoblind_learned:il,373,2,train,person,10.99,12.99,navigation,Which direction should I go to find the nearest crosswalk?,3.00-13.49,scheduler,False,1.00,1.80,1.80,,0
+egoblind_learned:il,373,3,train,pole,13.0,15.0,safety,Are there any obstacles in front of me?,9.00-15.50,perception,False,,,,,0
+egoblind_learned:il,373,4,train,car,26.98,28.98,navigation,How do I find the entrance to this building?,19.00-29.48,delivered,False,17.00,17.40,17.40,22.20,4
+egoblind_learned:il,373,5,train,car,28.99,30.99,safety,Is there a car in front of me?,21.00-31.49,tracking,False,30.00,31.80,31.80,,0
+egoblind_learned:il,374,1,train,person,10.99,12.99,navigation,How can I get past the parked car to my right?,3.00-13.49,delivered,False,1.00,1.20,1.20,3.60,3
+egoblind_learned:il,375,1,train,ground hazard,4.99,6.99,safety,Can I walk straight ahead without tripping?,0.99-7.49,perception,False,,,,,0
+egoblind_learned:il,375,2,train,person,13.0,15.0,safety,Are there any obstacles or people ahead?,5.60-15.50,scheduler,False,3.60,3.60,3.60,,0
+egoblind_learned:il,378,1,train,bus,25.0,27.0,safety,Is there enough room on this bus/train for me to move safely?,21.00-27.50,perception,False,,,,,0
+egoblind_learned:il,378,2,train,door,52.99,54.99,navigation,Can you tell me where the door is?,48.99-55.49,perception,False,,,,,0
+egoblind_learned:il,379,1,train,person,25.0,27.0,safety,Can I walk straight safely without hitting anyone?,17.60-27.50,scheduler,False,15.80,16.20,16.20,,0
+egoblind_learned:il,379,2,train,person,26.98,28.98,navigation,How do I get to Exit 3 of this subway station?,20.20-29.48,tracking,False,28.00,30.00,30.60,,0
+egoblind_learned:il,380,1,train,car,25.0,27.0,safety,What obstacles do I need to be aware of as I move forward?,21.60-27.50,candidate,False,19.80,21.00,,,0
+egoblind_learned:il,359,1,train,person,10.99,12.99,safety,Are there any obstacles or people on the stairs when I go down?,3.00-13.49,delivered,False,1.00,1.20,1.20,6.00,2
+egoblind_learned:il,359,3,train,stairs,38.98,40.98,navigation,Where is the nearest exit or entrance to the platform?,34.98-41.48,perception,False,,,,,0
+egoblind_learned:il,360,1,train,person,10.99,12.99,safety,Is the downhill path clear?,3.00-13.49,delivered,False,1.00,1.20,1.20,12.00,1
+egoblind_learned:il,360,2,train,person,25.0,27.0,safety,Is the person in front blocking the road?,17.00-27.50,scheduler,False,15.60,16.80,16.80,,0
+egoblind_learned:il,361,2,train,door,19.0,21.0,navigation,How do I get to the nearest stairs from here?,15.00-21.50,perception,False,,,,,0
+egoblind_learned:il,361,3,train,person,20.98,22.98,safety,Is there any obstacle in front of me?,13.00-23.48,scheduler,False,11.20,11.40,11.40,,0
+egoblind_learned:il,358,1,train,motorcycle,10.99,12.99,navigation,How do I get around the scooters parked in front of me?,3.00-13.49,timing,False,1.00,1.20,1.20,19.80,2
+egoblind_learned:il,358,2,train,motorcycle,38.98,40.98,navigation,How do I get past nearby obstacles?,31.00-41.48,delivered,False,29.00,29.40,29.40,31.20,3
+egoblind_learned:il,358,3,train,person,67.0,69.0,navigation,How can I get around the obstacle ahead?,59.00-69.50,scheduler,False,57.00,57.60,57.60,,0
+egoblind_learned:il,358,4,train,person,106.99,108.99,navigation,How can I walk safely on this sidewalk?,99.20-109.49,scheduler,False,97.20,97.20,97.20,,0
+egoblind_learned:il,358,5,train,door,122.98,124.98,navigation,How can I get to the entrance of the building from here?,118.98-125.48,perception,False,,,,,0
+egoblind_learned:il,358,6,train,motorcycle,136.99,138.99,safety,Is there anything in my path that I need to avoid?,129.20-139.49,delivered,False,127.20,127.20,127.20,135.00,2
+egoblind_learned:il,358,7,train,person,151.0,153.0,safety,Is the sidewalk ahead clear for me to walk on?,143.00-153.50,delivered,False,141.00,141.00,141.00,142.80,4
+egoblind_learned:il,358,8,train,person,164.98,166.98,safety,Are there any obstacles in my immediate path?,157.00-167.48,delivered,False,155.60,156.00,156.00,161.40,5
+egoblind_learned:il,128,1,train,wall,1.99,3.99,safety,Are there any obstacles in my path ahead?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,129,1,train,person,16.99,18.99,safety,Is there a crowd up ahead that I should be aware of?,9.00-19.49,delivered,False,7.00,7.20,7.20,10.20,2
+egoblind_learned:il,130,1,train,person,13.0,15.0,safety,Are there many people standing around?,5.00-15.50,scheduler,False,3.00,3.00,3.00,,0
+egoblind_learned:il,131,1,train,stairs,2.98,4.98,navigation,How can I get to the nearest staircase from here?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,329,1,train,pole,13.0,15.0,safety,What obstacles are ahead of me on the sidewalk?,9.00-15.50,perception,False,,,,,0
+egoblind_learned:il,329,2,train,sports ball,25.0,27.0,safety,Is it safe to go straight ahead from here?,21.00-27.50,scheduler,False,20.80,24.60,24.60,,0
+egoblind_learned:il,329,3,train,person,38.98,40.98,safety,Is there anything I should be aware of in front of a food stall?,31.00-41.48,scheduler,False,29.00,29.40,29.40,,0
+egoblind_learned:il,330,1,train,stairs,1.99,3.99,navigation,What is in front of me?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,334,1,train,person,1.99,3.99,safety,Is it safe for me to continue straight?,0.40-4.49,scheduler,False,0.40,0.60,0.60,,0
+egoblind_learned:il,339,1,train,person,1.99,3.99,safety,Do I walk closely behind others and leave enough room to move?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,340,2,train,person,22.96,24.96,safety,Are there any obstacles or people blocking my way?,19.40-25.46,scheduler,False,19.00,19.80,19.80,,0
+egoblind_learned:il,2,1,train,car,5.6,6.99,safety,Is it safe to cross the street now?,5.60-7.49,scheduler,False,4.00,6.00,6.00,,0
+egoblind_learned:il,2,2,train,person,7.0,9.0,navigation,How can I get to the crosswalk from here?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,3,1,train,car,4.99,6.99,safety,Is it safe to cross the street now?,4.00-7.49,scheduler,False,2.00,4.20,4.20,,0
+egoblind_learned:il,40,1,train,unknown,25.0,27.0,safety,Is it safe for me to cross this intersection?,21.00-27.50,perception,False,,,,,0
+egoblind_learned:il,106,1,train,chair,4.99,6.99,safety,Is there enough space for aerfa under the seat?,0.99-7.49,perception,False,,,,,0
+egoblind_learned:il,107,1,train,ground hazard,1.0,3.0,safety,Is there any step or uneven surface in front of me?,0.00-3.50,perception,False,,,,,0
+egoblind_learned:il,107,2,train,unknown,1.0,3.0,safety,Is there a step in front of me?,0.00-3.50,perception,False,,,,,0
+egoblind_learned:il,109,2,train,elevator,4.99,6.99,safety,Is the elevator door open or closed?,0.99-7.49,perception,False,,,,,0
+egoblind_learned:il,112,1,train,person,4.99,6.99,safety,Are there any moving objects or people that I need to be cautious of?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,113,3,train,chair,8.98,10.98,navigation,Where do I sit?,1.40-11.48,scheduler,False,1.40,1.80,1.80,,0
+egoblind_learned:il,114,1,train,unknown,1.99,3.99,safety,Is there something in front of Alpha that I should be aware of?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,114,3,train,unknown,8.98,10.98,safety,Is there any obstruction on the right side as I move forward?,4.98-11.48,perception,False,,,,,0
+egoblind_learned:il,114,4,train,person,8.98,10.98,navigation,How do I reach my seat from here?,1.00-11.48,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,320,1,train,scissors,1.99,3.99,safety,Are there any sharp objects nearby that I should be aware of?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,325,1,train,dining table,3.8,3.99,safety,Is there anything dangerous on the table that I should be aware of?,3.80-4.49,scheduler,False,2.80,3.00,4.20,,0
+egoblind_learned:il,326,1,train,dining table,0.0,1.98,safety,Is there any potential sharp object or obstacle on the table that I might bump into while setting up my phone?,0.00-2.48,perception,False,,,,,0
+egoblind_learned:il,327,1,train,dining table,1.99,3.99,safety,Are there any sharp objects on the table that I should be careful about?,0.00-4.49,tracking,False,3.20,,,,0
+egoblind_learned:il,328,2,train,cat,7.0,9.0,safety,Is there anything I should be cautious of while reaching out?,3.00-9.50,scheduler,False,1.00,1.20,1.20,,0
+egoblind_learned:il,647,1,train,bicycle,11.34,13.34,navigation,Is there an obstacle ahead?,7.60-13.84,scheduler,False,7.60,7.80,11.40,,0
+egoblind_learned:il,648,1,train,pole,10.5,12.5,navigation,Where is the blind path?,6.50-13.00,perception,False,,,,,0
+egoblind_learned:il,887,1,train,door,71.45,73.45,navigation,Where am I?,67.45-73.95,perception,False,,,,,0
+egoblind_learned:il,887,2,train,door,125.25,127.25,navigation,Did I enter the store?,121.25-127.75,perception,False,,,,,0
+egoblind_learned:il,888,1,train,door,0.14,2.14,navigation,Is this the entrance to the restaurant?,0.00-2.64,perception,False,,,,,0
+egoblind_learned:il,890,1,train,person,93.59,95.59,safety,Who is the person pulling me?,85.60-96.09,delivered,False,83.60,84.00,84.00,86.40,3
+egoblind_learned:il,899,1,train,door,21.47,23.47,navigation,Have I arrived at the door?,17.47-23.97,perception,False,,,,,0
+egoblind_learned:il,899,2,train,motorcycle,46.67,48.67,safety,Is there anything to pay attention to ahead?,39.40-49.17,delivered,False,37.60,40.20,40.20,43.20,3
+egoblind_learned:il,900,1,train,door,16.63,18.63,navigation,Where is the door?,12.63-19.13,perception,False,,,,,0
+egoblind_learned:il,905,1,train,cake,64.93,66.93,navigation,Where am I headed?,60.93-67.43,perception,False,,,,,0
+egoblind_learned:il,907,6,train,motorcycle,118.13,120.13,safety,Are there any obstacles in the road ahead?,110.20-120.63,scheduler,False,108.20,108.60,108.60,,0
+egoblind_learned:il,912,1,train,door,132.66,134.66,navigation,Am I out?,128.66-135.16,perception,False,,,,,0
+egoblind_learned:il,920,1,train,car,49.4,51.4,safety,Are there any obstacles ahead?,41.40-51.90,delivered,False,39.40,39.60,39.60,39.60,6
+egoblind_learned:il,920,2,train,motorcycle,53.91,55.91,safety,Is the road ahead clear?,46.00-56.41,scheduler,False,53.80,54.60,55.80,,0
+egoblind_learned:il,921,1,train,person,0.0,1.22,safety,What did I hit?,0.00-1.72,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,921,2,train,motorcycle,213.64,215.64,safety,Are there any obstacles ahead?,209.64-216.14,perception,False,,,,,0
+egoblind_learned:il,916,1,train,pole,45.48,47.48,safety,Is the straight road unobstructed?,41.48-47.98,perception,False,,,,,0
+egoblind_learned:il,916,2,train,fence,63.4,65.4,navigation,How to get there?,59.40-65.90,perception,False,,,,,0
+egoblind_learned:il,679,1,train,person,37.11,39.11,safety,Is there an obstacle ahead?,29.20-39.61,delivered,False,27.20,27.60,27.60,39.60,1
+egoblind_learned:il,679,2,train,motorcycle,64.38,66.38,safety,Is there an obstacle ahead?,56.40-66.88,scheduler,False,55.00,55.80,55.80,,0
+egoblind_learned:il,682,1,train,stairs,4.11,6.11,navigation,Are you going to get on the elevator?,0.11-6.61,perception,False,,,,,0
+egoblind_learned:il,702,1,train,car,0.0,0.83,safety,Is there an obstacle ahead?,0.00-1.33,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,705,1,train,car,12.36,14.36,navigation,Where is this?,4.40-14.86,delivered,False,2.60,3.00,3.00,4.80,3
+egoblind_learned:il,705,2,train,car,17.36,19.36,safety,Is there an obstacle ahead?,9.40-19.86,timing,False,17.00,17.40,17.40,20.40,1
+egoblind_learned:il,714,1,train,stairs,21.97,23.97,safety,Is there an obstacle ahead?,17.97-24.47,perception,False,,,,,0
+egoblind_learned:il,714,2,train,motorcycle,29.22,31.22,safety,Is there an obstacle ahead?,28.20-31.72,tracking,False,28.20,31.80,31.80,,0
+egoblind_learned:il,729,2,train,car,94.48,96.48,navigation,Where is China Construction Bank heading?,86.60-96.98,scheduler,False,84.60,84.60,84.60,,0
+egoblind_learned:il,729,3,train,unknown,216.71,218.71,navigation,Is there a road ahead?,212.71-219.21,perception,False,,,,,0
+egoblind_learned:il,754,2,train,motorcycle,58.8,60.8,navigation,Where is the sidewalk?,51.20-61.30,delivered,False,50.20,51.00,52.80,58.20,1
+egoblind_learned:il,479,1,train,car,8.98,10.98,navigation,How do I avoid parked vehicles in front of me?,3.60-11.48,delivered,False,3.60,4.20,4.20,4.80,6
+egoblind_learned:il,558,1,train,apple,7.0,9.0,navigation,Where am I?,3.00-9.50,perception,False,,,,,0
+egoblind_learned:il,197,1,train,car,0.0,0.81,safety,Is there a car passing ahead?,0.00-1.31,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,197,2,train,car,1.0,3.0,safety,Can I cross the road now?,0.00-3.50,tracking,False,2.00,4.20,4.20,4.20,1
+egoblind_learned:il,198,1,train,pole,0.0,0.16,safety,Can I go now?,0.00-0.66,perception,False,,,,,0
+egoblind_learned:il,599,1,train,bicycle,4.99,6.99,safety,Are there any obstacles in front of me?,2.60-7.49,scheduler,False,2.60,3.00,3.00,,0
+egoblind_learned:il,600,1,train,fence,2.98,4.98,navigation,How can I get around this fence?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,601,1,train,car,1.2,3.0,safety,Is there a place ahead where I can cross the road safely?,1.20-3.50,scheduler,False,1.00,1.20,1.20,,0
+egoblind_learned:il,602,1,train,pole,2.98,4.98,navigation,How can I avoid the pole in front of me?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,602,2,train,tree,16.99,18.99,safety,Is there an obstacle in front of me?,12.99-19.49,perception,False,,,,,0
+egoblind_learned:il,616,1,train,unknown,22.99,24.99,safety,Is it safe to cross the road now?,18.99-25.49,perception,False,,,,,0
+egoblind_learned:il,87,1,train,wall,37.0,39.0,navigation,How do I find my way to the gate?,33.00-39.50,perception,False,,,,,0
+egoblind_learned:il,87,2,train,door,41.98,43.98,navigation,How can I get out of this backyard?,37.98-44.48,perception,False,,,,,0
+egoblind_learned:il,105,2,train,person,15.14,17.14,safety,Is it safe to step forward from where I am standing?,7.20-17.64,delivered,False,5.20,5.40,5.40,6.60,2
+egoblind_learned:il,105,3,train,person,23.15,25.15,safety,Is there anything blocking my path ahead?,15.20-25.65,scheduler,False,19.80,20.40,20.40,,0
+egoblind_learned:il,368,1,train,fence,1.99,3.99,safety,Is the road ahead clear for riding?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,672,1,train,stairs,0.93,2.93,navigation,Where are the stairs?,0.00-3.43,perception,False,,,,,0
+egoblind_learned:il,757,1,train,train,98.8,100.8,navigation,Where is this?,94.80-101.30,perception,False,,,,,0
+egoblind_learned:il,758,3,train,chair,40.7,42.7,navigation,Where are the empty seats?,33.60-43.20,scheduler,False,33.40,33.60,36.60,,0
+egoblind_learned:il,759,2,train,door,28.9,30.9,navigation,Where am I?,24.90-31.40,perception,False,,,,,0
+egoblind_learned:il,781,1,finetune,door,32.98,34.98,navigation,How can I reach the exit from this table?,28.98-35.48,perception,False,,,,,0
+egoblind_learned:il,362,2,finetune,person,25.0,27.0,safety,Are there a lot of people around me that I need to avoid?,17.00-27.50,timing,False,15.00,15.00,15.00,28.20,1
+egoblind_learned:il,362,3,finetune,person,50.3,52.3,safety,How to use this escalator safely?,42.40-52.80,scheduler,False,40.40,40.80,40.80,,0
+egoblind_learned:il,362,5,finetune,person,68.3,70.3,safety,Is there anything in my way?,60.40-70.80,timing,False,58.40,58.80,58.80,60.00,1
+egoblind_learned:il,362,6,finetune,person,82.79,84.79,safety,Are there any obstacles in my way?,74.80-85.29,scheduler,False,73.00,73.20,73.20,,0
+egoblind_learned:il,363,1,finetune,person,10.99,12.99,safety,"Is there enough room for me to walk safely, or are there obstacles in my way?",3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+egoblind_learned:il,363,2,finetune,person,25.0,27.0,safety,Is it safe for me to move around this store? Are there any obstructions or hazards?,17.00-27.50,delivered,False,15.60,16.20,16.20,23.40,1
+egoblind_learned:il,365,1,finetune,cell phone,10.99,12.99,safety,What obstacles are there on the table that I should be aware of?,6.99-13.49,scheduler,False,5.40,5.40,5.40,,0
+egoblind_learned:il,119,1,finetune,horse,6.99,8.99,navigation,Where is the horse going?,2.99-9.49,scheduler,False,1.40,1.80,2.40,,0
+egoblind_learned:il,119,2,finetune,horse,7.0,9.0,navigation,Which direction should I go to exit the riding area?,3.00-9.50,tracking,False,9.00,,,,0
+egoblind_learned:il,124,2,finetune,horse,13.0,15.0,navigation,In which direction should I guide the horse to leave the arena?,9.00-15.50,scheduler,False,9.60,10.20,11.40,,0
+egoblind_learned:il,127,1,finetune,horse,1.96,3.96,navigation,Which direction is the horse heading?,0.00-4.46,candidate,False,0.00,0.60,,,0
+egoblind_learned:il,870,1,finetune,stairs,0.0,0.0,navigation,Which direction does the moving walkway go?,0.00-0.50,perception,False,,,,,0
+egoblind_learned:il,872,1,finetune,person,1.99,3.99,navigation,How can I find the entrance?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,434,2,finetune,unknown,16.99,18.99,safety,Is the path to the seat in the cafe clear so I can walk without tripping?,12.99-19.49,perception,False,,,,,0
+egoblind_learned:il,434,3,finetune,person,16.99,18.99,navigation,How do I navigate this cafe?,9.00-19.49,scheduler,False,7.00,7.80,7.80,,0
+egoblind_learned:il,435,3,finetune,animal,104.21,106.21,safety,Is the area around me safe from any potentially dangerous animals?,100.21-106.71,perception,False,,,,,0
+egoblind_learned:il,435,4,finetune,animal,118.22,120.22,safety,Are there any animals approaching me?,114.22-120.72,perception,False,,,,,0
+egoblind_learned:il,437,1,finetune,unknown,1.99,3.99,safety,Is there anything in front of me that I might hit?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,438,1,finetune,unknown,7.0,9.0,safety,Is the path to the store entrance clear?,3.00-9.50,perception,False,,,,,0
+egoblind_learned:il,438,2,finetune,door,13.0,15.0,safety,Are there steps or a ramp at the entrance to this place?,9.00-15.50,perception,False,,,,,0
+egoblind_learned:il,438,3,finetune,unknown,16.99,18.99,safety,What obstacles on the floor should I be careful of?,12.99-19.49,perception,False,,,,,0
+egoblind_learned:il,439,1,finetune,dining table,1.99,3.99,safety,Is there a counter nearby where I can get help?,0.00-4.49,perception,False,,,,,0
+egoblind_learned:il,440,1,finetune,dining table,10.99,12.99,safety,Are there any obstacles or objects on the floor that could cause me to trip?,6.40-13.49,scheduler,False,6.40,6.60,6.60,,0
+egoblind_learned:il,440,3,finetune,unknown,47.59,49.59,safety,Is there anything in front of me that might trip me?,43.59-50.09,perception,False,,,,,0
+egoblind_learned:il,440,4,finetune,unknown,61.6,63.6,safety,Is there anyone nearby who might bump into me?,57.60-64.10,perception,False,,,,,0
+egoblind_learned:il,441,1,finetune,person,4.99,6.99,safety,Are there any obstacles in front of me?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,441,2,finetune,unknown,13.0,15.0,safety,Is it safe to move forward?,9.00-15.50,perception,False,,,,,0
+egoblind_learned:il,441,3,finetune,unknown,20.09,22.09,safety,Is the object I am touching alive and is it dangerous?,16.09-22.59,perception,False,,,,,0
+egoblind_learned:il,441,6,finetune,animal,39.2,41.2,safety,Are there any animals around me that I should be wary of?,35.20-41.70,perception,False,,,,,0
+egoblind_learned:il,405,2,finetune,dining table,25.0,27.0,safety,What obstacles should I be aware of when moving in the area?,18.40-27.50,scheduler,False,18.40,18.60,18.60,,0
+egoblind_learned:il,406,1,finetune,dining table,151.0,153.0,safety,What obstructions on the counter should I be aware of?,147.00-153.50,perception,False,,,,,0
+egoblind_learned:il,407,1,finetune,dining table,67.0,69.0,safety,Are there any obstacles around the counter?,63.00-69.50,perception,False,,,,,0
+egoblind_learned:il,407,3,finetune,unknown,100.89,102.89,safety,"As I walk through this store, are there any obstacles in front of me?",96.89-103.39,perception,False,,,,,0
+egoblind_learned:il,407,4,finetune,person,108.9,110.9,safety,Is there anyone standing in or near my walkway?,101.00-111.40,scheduler,False,99.00,99.00,99.00,,0
+egoblind_learned:il,805,1,finetune,fence,1.0,3.0,safety,Can I walk on the road ahead smoothly?,0.00-3.50,perception,False,,,,,0
+egoblind_learned:il,807,1,finetune,fence,32.98,34.98,navigation,Which direction should I go to reach the end of the fence?,28.98-35.48,perception,False,,,,,0
+egoblind_learned:il,810,1,finetune,unknown,2.98,4.98,safety,Is it safe for me to cross the road now?,0.00-5.48,perception,False,,,,,0
+egoblind_learned:il,811,1,finetune,unknown,14.98,16.98,safety,Is it safe to move forward now?,10.98-17.48,perception,False,,,,,0
+egoblind_learned:il,816,1,finetune,unknown,8.98,10.98,safety,Is there a clear path ahead for me?,4.98-11.48,perception,False,,,,,0
+egoblind_learned:il,817,1,finetune,person,2.98,4.98,navigation,Where is the entrance to the garden?,0.00-5.48,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,817,2,finetune,train,20.98,22.98,safety,Is it safe to proceed?,16.98-23.48,perception,False,,,,,0
+egoblind_learned:il,891,1,finetune,person,60.31,62.31,safety,Is there an obstacle ahead?,52.40-62.81,scheduler,False,50.40,50.40,50.40,,0
+egoblind_learned:il,878,2,finetune,car,42.32,44.32,navigation,Where is going forward?,34.40-44.82,scheduler,False,32.60,33.00,33.00,,0
+egoblind_learned:il,878,3,finetune,door,84.79,86.79,navigation,Am I almost at the hospital?,80.79-87.29,perception,False,,,,,0
+egoblind_learned:il,884,1,finetune,person,3.87,5.87,navigation,What is ahead?,0.00-6.37,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,884,2,finetune,car,5.22,7.22,safety,Can I cross the road now?,0.00-7.72,delivered,False,0.00,0.60,0.60,6.60,1
+egoblind_learned:il,884,3,finetune,motorcycle,44.78,46.78,safety,What did I hit?,36.80-47.28,delivered,False,34.80,34.80,34.80,34.80,4
+egoblind_learned:il,884,4,finetune,motorcycle,105.53,107.53,safety,What is blocking my way?,97.80-108.03,scheduler,False,95.80,96.00,96.00,,0
+egoblind_learned:il,884,5,finetune,person,118.98,120.98,navigation,Can this go?,111.00-121.48,delivered,False,109.00,109.20,109.20,118.20,1
+egoblind_learned:il,884,6,finetune,stairs,150.09,152.09,navigation,Where is the subway station?,146.09-152.59,perception,False,,,,,0
+egoblind_learned:il,706,1,finetune,car,0.0,0.48,safety,Is there an obstacle ahead?,0.00-0.98,timing,False,0.00,0.60,0.60,1.80,2
+egoblind_learned:il,707,1,finetune,car,0.0,1.47,safety,Is there an obstacle ahead?,0.00-1.97,timing,False,0.00,0.60,0.60,4.20,1
+egoblind_learned:il,708,2,finetune,car,32.62,34.62,safety,Is there an obstacle ahead?,24.80-35.12,delivered,False,22.80,22.80,22.80,29.40,1
+egoblind_learned:il,717,1,finetune,car,0.53,2.53,navigation,Is there a road ahead?,0.00-3.03,scheduler,False,0.00,0.60,0.60,,0
+egoblind_learned:il,717,2,finetune,unknown,50.03,52.03,safety,Is there an obstacle ahead?,46.03-52.53,perception,False,,,,,0
+online_greedy,178,1,train,person,4.99,6.99,safety,Is the area around me safe for continued walking?,0.00-7.49,delivered,False,0.00,0.60,0.60,0.60,1
+online_greedy,245,1,train,dog,25.0,27.0,safety,Is it safe to walk forward?,21.00-27.50,scheduler,False,19.00,19.20,19.20,,0
+online_greedy,250,1,train,dog,4.99,6.99,safety,Is there something on the floor that I might trip over?,0.99-7.49,scheduler,False,0.40,0.60,0.60,,0
+online_greedy,256,1,train,backpack,1.99,3.99,safety,Is there anything on the countertop that I might knock over?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,257,1,train,unknown,2.98,4.98,safety,Is there any hot air?,0.00-5.48,perception,False,,,,,0
+online_greedy,262,1,train,knife,1.99,3.99,safety,Is there any risk of cutting myself while holding the cake with a knife in my other hand?,0.00-4.49,scheduler,False,4.00,4.20,4.20,,0
+online_greedy,262,2,train,knife,7.0,9.0,safety,Am I holding the knife safely?,3.00-9.50,tracking,False,9.40,9.60,9.60,,0
+online_greedy,262,4,train,knife,22.53,24.53,safety,Are there any sharp objects around me?,18.53-25.03,scheduler,False,16.60,16.80,16.80,,0
+online_greedy,268,2,train,oven,7.0,9.0,safety,Is there anything hot ?,3.00-9.50,perception,False,,,,,0
+online_greedy,270,1,train,oven,4.99,6.99,safety,Is there anything hot nearby that I should be cautious of?,0.99-7.49,scheduler,False,0.40,0.60,0.60,,0
+online_greedy,272,1,train,machine,0.0,0.99,safety,Is the area around the coffee machine clear of any hazards?,0.00-1.49,perception,False,,,,,0
+online_greedy,275,1,train,unknown,1.99,3.99,safety,Are my hands close to any hot surfaces?,0.00-4.49,perception,False,,,,,0
+online_greedy,279,1,train,unknown,24.05,26.05,safety,Is the countertop clear of any sharp objects nearby?,20.05-26.55,perception,False,,,,,0
+online_greedy,174,1,train,person,0.0,1.98,safety,Are there any obstacles or people blocking the path ahead?,0.00-2.48,delivered,False,0.00,0.60,0.60,0.60,4
+online_greedy,772,2,train,motorcycle,2.98,4.98,navigation,How can I get around a row of parked scooters?,0.40-5.48,scheduler,False,0.40,0.60,0.60,,0
+online_greedy,773,1,train,car,0.0,1.98,navigation,How can I cross the street safely?,0.00-2.48,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,773,2,train,person,2.98,4.98,navigation,Which direction should I go to reach the nearest crosswalk?,0.00-5.48,scheduler,False,3.60,4.80,4.80,,0
+online_greedy,774,1,train,car,4.99,6.99,safety,Is it safe to cross the road here?,0.80-7.49,delivered,False,0.80,1.20,1.20,1.20,1
+online_greedy,778,1,train,cell phone,58.75,60.75,navigation,Are we close to our destination?,54.75-61.25,scheduler,False,53.40,53.40,53.40,,0
+online_greedy,200,1,train,person,10.99,12.99,safety,Is there any traffic passing by when crossing the road ahead?,3.00-13.49,delivered,False,1.00,1.20,1.20,3.60,1
+online_greedy,200,2,train,person,25.0,27.0,safety,Are there any roadblocks in front of me?,17.20-27.50,scheduler,False,15.60,16.20,16.20,,0
+online_greedy,201,1,train,chair,0.0,0.99,safety,Are there any obstacles in my way as I walk forward?,0.00-1.49,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,203,2,train,bed,0.0,1.98,navigation,What environment am I currently in?,0.00-2.48,perception,False,,,,,0
+online_greedy,203,3,train,dog,2.98,4.98,safety,Is it safe to let my dog move around freely in this room?,0.00-5.48,scheduler,False,3.60,4.20,4.20,,0
+online_greedy,204,1,train,person,7.0,9.0,safety,Is there anyone else in the elevator that I should be aware of?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,206,1,train,door,8.98,10.98,safety,Is there any debris or potential tripping hazards near the door?,4.98-11.48,perception,False,,,,,0
+online_greedy,208,1,train,wall,1.99,3.99,safety,Is it safe to walk straight ahead?,0.00-4.49,perception,False,,,,,0
+online_greedy,211,1,train,person,7.0,9.0,safety,Are there any obstacles ahead as I walk on this path?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,211,2,train,person,7.0,9.0,navigation,Can you describe what's ahead of me on this pathway?,0.00-9.50,perception,False,,,,,0
+online_greedy,211,3,train,bicycle,16.99,18.99,safety,Is there any traffic or vehicles nearby that I should be aware of?,9.00-19.49,scheduler,False,11.60,12.00,12.60,,0
+online_greedy,212,1,train,car,1.0,3.0,safety,Are there any obstacles in my path?,0.00-3.50,delivered,False,0.00,0.60,0.60,0.60,2
+online_greedy,216,1,train,car,7.0,9.0,safety,Is it safe to cross the road now?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,224,1,train,dog,0.0,1.98,safety,Is there any object or pet nearby that could be a tripping hazard while I'm cycling?,0.00-2.48,perception,False,3.40,3.60,3.60,,0
+online_greedy,635,2,train,unknown,10.99,12.99,safety,Is anyone coming towards me?,6.99-13.49,perception,False,,,,,0
+online_greedy,636,1,train,car,7.0,9.0,safety,Is there a ramp or steps ahead of me?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,145,1,train,unknown,1.99,3.99,safety,Are there any obstacles on the floor in front of me?,0.00-4.49,perception,False,,,,,0
+online_greedy,146,1,train,unknown,5.98,7.98,safety,Are there any obstacles I need to be aware of in this gym?,1.98-8.48,perception,False,,,,,0
+online_greedy,190,1,train,sign,2.98,4.98,safety,Are there any signs or obstacles in my walking path?,0.00-5.48,perception,False,,,,,0
+online_greedy,191,1,train,person,10.99,12.99,safety,Is there any obstacle in front of me that could hinder my movement?,3.00-13.49,delivered,False,1.00,1.20,1.20,3.00,1
+online_greedy,193,3,train,dining table,10.6,12.6,safety,Is there anything I should be cautious of in this area?,7.80-13.10,scheduler,False,7.80,8.40,8.40,,0
+online_greedy,193,4,train,door,16.6,18.6,safety,Am I close to any obstacles that I need to avoid?,12.60-19.10,perception,False,,,,,0
+online_greedy,194,1,train,dining table,2.98,4.98,safety,Is there anything on the table that could be a potential tripping hazard?,0.00-5.48,perception,False,,,,,0
+online_greedy,194,2,train,dining table,8.98,10.98,safety,Is there anything under the table that I might bump into with my legs?,8.60-11.48,candidate,False,8.40,9.00,,,0
+online_greedy,491,1,train,car,4.99,6.99,safety,Is it safe to cross the road now?,0.00-7.49,delivered,False,0.00,0.60,0.60,0.60,2
+online_greedy,491,2,train,car,13.0,15.0,safety,Are there any obstacles in the way when I cross the road?,5.00-15.50,scheduler,False,9.60,12.60,12.60,,0
+online_greedy,492,1,train,motorcycle,1.0,3.0,safety,Is it safe for me to cross the road now?,0.00-3.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,492,2,train,motorcycle,4.99,6.99,safety,Are there any nearby obstacles or vehicles that I should be aware of?,0.00-7.49,scheduler,False,5.00,5.40,5.40,,0
+online_greedy,492,3,train,car,5.98,7.98,safety,"When we are about to cross the road, is there a car coming towards us?",0.00-8.48,delivered,False,0.00,0.60,0.60,1.80,2
+online_greedy,493,1,train,door,116.98,118.98,safety,Can you tell if the door is fully open so I can exit safely?,112.98-119.48,perception,False,,,,,0
+online_greedy,493,3,train,person,140.98,142.98,safety,Are there any people or vehicles nearby that I should be cautious of when getting out?,133.20-143.48,delivered,False,131.20,131.40,134.40,138.60,3
+online_greedy,494,1,train,person,4.99,6.99,safety,Is it safe to walk through this street?,0.00-7.49,delivered,False,0.00,0.60,0.60,0.60,1
+online_greedy,495,1,train,car,28.99,30.99,safety,Is there any traffic I should be aware of?,27.80-31.49,timing,False,27.60,28.20,28.20,33.00,1
+online_greedy,496,1,train,unknown,85.0,87.0,safety,Is it safe for me to approach the food stand?,81.00-87.50,perception,False,,,,,0
+online_greedy,496,3,train,person,100.99,102.99,safety,Is the path clear for me to move forward?,93.00-103.49,scheduler,False,91.00,91.20,91.20,,0
+online_greedy,154,1,train,knife,1.0,3.0,safety,Is there any sharp object in the sink?,0.00-3.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,157,1,train,unknown,16.99,18.99,safety,Am I adding the right seasoning while cooking or could this be dangerous?,12.99-19.49,perception,False,,,,,0
+online_greedy,162,1,train,dining table,2.98,4.98,safety,Is there anything on the kitchen counter that I should be careful not to knock over?,0.00-5.48,candidate,False,1.20,1.80,,,0
+online_greedy,164,1,train,shelf,7.0,9.0,safety,Is there any risk of my hand getting caught in the dishwasher rack?,3.00-9.50,perception,False,,,,,0
+online_greedy,169,2,train,sink,2.98,4.98,navigation,Which direction is the sink faucet located?,0.00-5.48,scheduler,False,1.80,2.40,2.40,,0
+online_greedy,232,1,train,car,10.99,12.99,safety,Is it safe to enter the train now?,6.99-13.49,perception,False,,,,,0
+online_greedy,232,4,train,person,84.72,86.72,safety,Is there enough space to navigate without bumping into people or objects?,76.80-87.22,scheduler,False,74.80,75.00,75.00,,0
+online_greedy,233,3,train,person,13.0,15.0,safety,Is the area ahead crowded and should I be cautious of people walking towards me?,5.00-15.50,delivered,False,3.00,3.00,3.00,6.00,2
+online_greedy,233,4,train,person,26.8,28.8,safety,Is it safe to walk straight ahead without obstacles or people in the way?,18.80-29.30,timing,False,17.60,18.00,18.00,29.40,1
+online_greedy,233,5,train,car,40.81,42.81,safety,Is the train door open and safe for boarding?,36.81-43.31,perception,False,,,,,0
+online_greedy,233,10,train,person,79.58,81.58,safety,Is the path clear ahead for me to walk through?,71.60-82.08,timing,False,69.60,69.60,69.60,82.80,1
+online_greedy,233,11,train,person,84.56,86.56,safety,Is there anything I should be careful of as I walk forward?,76.60-87.06,scheduler,False,84.20,84.60,84.60,,0
+online_greedy,93,1,train,bicycle,7.0,9.0,safety,Is the path ahead clear or are there any obstacles on the sidewalk?,0.00-9.50,delivered,False,0.00,0.60,0.60,0.60,1
+online_greedy,94,1,train,person,7.0,9.0,safety,Is there anyone blocking the entrance ahead?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,94,2,train,person,16.99,18.99,safety,Is the path ahead crowded with people?,12.99-19.49,perception,False,,,,,0
+online_greedy,94,3,train,motorcycle,26.98,28.98,safety,Is there any traffic on the street in front of the building?,22.98-29.48,perception,False,,,,,0
+online_greedy,94,4,train,car,26.98,28.98,navigation,Which direction should I go to reach the main road?,22.98-29.48,perception,False,,,,,0
+online_greedy,95,1,train,bottle,2.98,4.98,safety,Is there anything on the table that might spill or cause a mess?,0.00-5.48,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,95,2,train,dining table,2.98,4.98,navigation,Where is the sit I can sit down?,0.00-5.48,perception,False,,,,,0
+online_greedy,97,2,train,car,2.98,4.98,safety,"Is it safe to continue walking straight ahead, or are there any obstacles I should be aware of?",0.00-5.48,timing,False,0.00,0.60,0.60,6.00,1
+online_greedy,35,2,train,tree,62.98,64.98,safety,Is there any tree or obstacle directly in front?,58.98-65.48,perception,False,,,,,0
+online_greedy,36,1,train,person,139.99,141.99,safety,Is the sidewalk clear for me to walk safely?,132.00-142.49,delivered,False,130.00,130.20,130.20,130.20,3
+online_greedy,36,2,train,person,151.0,153.0,safety,Are there any obstacles or people blocking my way ahead?,143.00-153.50,delivered,False,144.60,145.20,145.20,147.60,2
+online_greedy,27,1,train,person,4.99,6.99,navigation,Where is the nearest train boarding gate from here?,0.20-7.49,timing,False,0.20,4.20,4.20,9.60,1
+online_greedy,32,1,train,train,2.98,4.98,safety,Is it safe to board the train now?,0.00-5.48,perception,False,,,,,0
+online_greedy,33,1,train,person,7.99,9.99,safety,Is there any obstruction directly in front of me?,0.00-10.49,timing,False,0.00,0.60,0.60,19.80,1
+online_greedy,34,4,train,car,40.99,42.99,safety,Is it safe to cross the road now?,33.00-43.49,scheduler,False,32.60,33.00,33.00,,0
+online_greedy,34,5,train,unknown,146.11,148.11,safety,Are there any roadblocks or steps ahead of me?,142.11-148.61,perception,False,,,,,0
+online_greedy,18,1,train,unknown,10.99,12.99,safety,Is there any boiling water that can splash and burn me while removing the dumplings?,6.99-13.49,perception,False,,,,,0
+online_greedy,21,1,train,backpack,46.99,48.99,navigation,Where's the lid?,44.40-49.49,scheduler,False,44.40,45.00,47.40,,0
+online_greedy,22,1,train,dining table,5.98,7.98,safety,Are there any sharp objects or hazards on the counter in front of me?,1.98-8.48,scheduler,False,0.80,7.20,7.20,,0
+online_greedy,22,2,train,bottle,14.98,16.98,safety,Is there anything near the sink that I should be cautious of?,10.98-17.48,scheduler,False,9.00,9.00,9.00,,0
+online_greedy,91,1,train,shelf,8.98,10.98,safety,Is there anything on the floor?,4.98-11.48,perception,False,,,,,0
+online_greedy,92,1,train,unknown,10.99,12.99,safety,Is there enough space for me?,6.99-13.49,perception,False,,,,,0
+online_greedy,92,2,train,person,19.0,21.0,navigation,How do I get to an empty bed?,11.00-21.50,scheduler,False,9.00,9.00,9.00,,0
+online_greedy,10,1,train,person,8.98,10.98,navigation,How do I locate the aisle for baby care products from here?,1.00-11.48,scheduler,False,0.80,1.80,1.80,,0
+online_greedy,14,1,train,motorcycle,57.02,59.02,safety,Are there any obstacles on the ground I need to be aware of?,49.20-59.52,scheduler,False,47.20,47.40,47.40,,0
+online_greedy,14,2,train,car,57.4,59.02,navigation,How can I get to the overpass in front of me?,57.40-59.52,timing,False,57.40,57.60,58.20,60.00,1
+online_greedy,14,3,train,motorcycle,70.23,72.23,safety,Which way should I go to avoid these obstacles?,62.40-72.73,delivered,False,60.40,60.60,60.60,63.60,2
+online_greedy,14,4,train,motorcycle,82.18,84.18,safety,Is there any vehicle parked ahead of the crosswalk or ahead of me?,74.20-84.68,delivered,False,74.80,75.00,75.60,75.60,1
+online_greedy,14,5,train,motorcycle,97.14,99.14,safety,Is there any vehicular traffic on the road I need to watch out for?,89.20-99.64,scheduler,False,87.20,87.60,87.60,,0
+online_greedy,90,1,train,car,11.98,13.98,navigation,How to get to the opposite street?,4.00-14.48,delivered,False,2.00,2.40,2.40,9.00,1
+online_greedy,90,2,train,motorcycle,109.0,111.0,safety,Is there any traffic passing by?,103.60-111.50,timing,False,103.60,105.00,105.00,112.20,1
+online_greedy,392,1,train,pole,52.99,54.99,safety,Are there any obstacles in my way as I walk now?,48.99-55.49,perception,False,,,,,0
+online_greedy,393,1,train,bicycle,10.99,12.99,safety,What obstacles on the sidewalk should I avoid?,3.20-13.49,scheduler,False,1.40,4.80,4.80,,0
+online_greedy,393,2,train,unknown,25.0,27.0,safety,Can the road ahead be traveled smoothly?,21.00-27.50,perception,False,,,,,0
+online_greedy,394,1,train,bicycle,38.98,40.98,navigation,How can I get around these parked bikes?,32.00-41.48,scheduler,False,30.00,30.00,30.00,,0
+online_greedy,394,2,train,car,52.99,54.99,safety,Is there any obstacle in front of me?,45.00-55.49,delivered,False,43.60,44.40,44.40,52.80,1
+online_greedy,283,1,train,person,1.99,3.99,safety,Is there anyone lying in the bed that might pose a tripping hazard?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,284,1,train,bed,0.0,1.98,safety,Are there any obstacles on the floor that I might trip over?,0.00-2.48,candidate,False,2.20,2.40,3.00,,0
+online_greedy,284,2,train,sign,63.03,65.03,safety,Is there any obstruction or hazard around me?,59.03-65.53,perception,False,,,,,0
+online_greedy,286,1,train,door,0.0,1.98,safety,Can you see if there are any obstacles in front of me?,0.00-2.48,perception,False,,,,,0
+online_greedy,290,1,train,person,25.0,27.0,safety,Is someone standing near me blocking my path?,17.00-27.50,scheduler,False,15.00,15.00,15.00,,0
+online_greedy,291,1,train,couch,7.0,9.0,safety,"As I walk toward the street, are there any obstacles in front of me?",3.00-9.50,tracking,False,9.00,9.60,9.60,,0
+online_greedy,291,2,train,unknown,16.99,18.99,safety,What traffic conditions should I be aware of before crossing the road?,12.99-19.49,perception,False,,,,,0
+online_greedy,292,1,train,person,22.99,24.99,safety,Could I have hit something on my left side?,15.00-25.49,scheduler,False,13.00,13.20,13.20,,0
+online_greedy,86,1,train,door,2.98,4.98,navigation,How can I get out of this yard?,0.00-5.48,perception,False,,,,,0
+online_greedy,389,1,train,unknown,25.0,27.0,safety,Is it safe to cross the road here?,21.00-27.50,perception,False,,,,,0
+online_greedy,389,2,train,car,25.0,27.0,safety,Is it safe for me to move forward?,17.00-27.50,delivered,False,15.00,15.00,15.00,16.80,3
+online_greedy,389,3,train,car,121.72,123.72,safety,Is it safe to get off now?,117.72-124.22,perception,False,,,,,0
+online_greedy,390,1,train,chair,38.98,40.98,navigation,From here how can I get to the nearest chair?,31.00-41.48,scheduler,False,30.40,33.00,33.00,,0
+online_greedy,390,2,train,backpack,52.99,54.99,safety,Are there any fragile items that I need to handle with care?,48.99-55.49,perception,False,,,,,0
+online_greedy,387,1,train,shelf,94.99,96.99,safety,Is there a clear path before me to walk on?,90.99-97.49,perception,False,,,,,0
+online_greedy,497,1,train,door,7.31,9.31,navigation,Where is the closest door to my current location?,3.31-9.81,perception,False,,,,,0
+online_greedy,511,1,train,wall,0.0,0.99,navigation,Where is the light switch?,0.00-1.49,perception,False,,,,,0
+online_greedy,512,1,train,dog,35.3,37.3,safety,Will there be any obstacles if I go straight?,31.30-37.80,scheduler,False,29.40,29.40,29.40,,0
+online_greedy,73,1,train,car,14.98,16.98,navigation,How do I get to the nearest crosswalk?,7.00-17.48,scheduler,False,5.00,5.40,5.40,,0
+online_greedy,74,1,train,car,7.0,9.0,navigation,How can I navigate around these street barriers?,0.00-9.50,delivered,False,0.00,0.60,0.60,0.60,2
+online_greedy,74,2,train,pole,11.98,13.98,navigation,Which direction should I take to cross the street safely?,7.98-14.48,perception,False,,,,,0
+online_greedy,74,3,train,sign,16.99,18.99,navigation,How do I cross this busy street safely?,12.99-19.49,perception,False,,,,,0
+online_greedy,75,1,train,door,4.99,6.99,navigation,Where is the convenience store?,0.99-7.49,perception,False,,,,,0
+online_greedy,76,1,train,person,4.99,6.99,navigation,Where is the exit?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,78,1,train,dining table,7.99,9.99,navigation,Where is door to exit this restaurant?,1.20-10.49,scheduler,False,1.20,1.80,1.80,,0
+online_greedy,78,2,train,dining table,16.99,18.99,navigation,Where are the napkins located?,9.00-19.49,tracking,False,12.80,,,,0
+online_greedy,80,1,train,pole,1.99,3.99,navigation,Where is the crosswalk?,0.00-4.49,perception,False,,,,,0
+online_greedy,369,1,train,unknown,0.0,1.98,safety,Are there any steps or obstacles in front of me?,0.00-2.48,perception,False,,,,,0
+online_greedy,371,1,train,fence,8.98,10.98,safety,Is there an obstruction in front of me on the sidewalk?,4.98-11.48,perception,False,,,,,0
+online_greedy,371,2,train,car,20.98,22.98,safety,Are there any vehicles or bicycles passing on the road?,16.98-23.48,candidate,False,20.80,22.80,,,0
+online_greedy,372,2,train,door,7.0,9.0,safety,Is the front door closed?,3.00-9.50,perception,False,,,,,0
+online_greedy,373,2,train,person,10.99,12.99,navigation,Which direction should I go to find the nearest crosswalk?,3.00-13.49,scheduler,False,1.00,1.80,1.80,,0
+online_greedy,373,3,train,pole,13.0,15.0,safety,Are there any obstacles in front of me?,9.00-15.50,perception,False,,,,,0
+online_greedy,373,4,train,car,26.98,28.98,navigation,How do I find the entrance to this building?,19.00-29.48,scheduler,False,17.00,17.40,17.40,,0
+online_greedy,373,5,train,car,28.99,30.99,safety,Is there a car in front of me?,21.00-31.49,tracking,False,30.00,31.80,31.80,,0
+online_greedy,374,1,train,person,10.99,12.99,navigation,How can I get past the parked car to my right?,3.00-13.49,delivered,False,1.00,1.20,1.20,3.00,1
+online_greedy,375,1,train,ground hazard,4.99,6.99,safety,Can I walk straight ahead without tripping?,0.99-7.49,perception,False,,,,,0
+online_greedy,375,2,train,person,13.0,15.0,safety,Are there any obstacles or people ahead?,5.60-15.50,scheduler,False,3.60,3.60,3.60,,0
+online_greedy,378,1,train,bus,25.0,27.0,safety,Is there enough room on this bus/train for me to move safely?,21.00-27.50,perception,False,,,,,0
+online_greedy,378,2,train,door,52.99,54.99,navigation,Can you tell me where the door is?,48.99-55.49,perception,False,,,,,0
+online_greedy,379,1,train,person,25.0,27.0,safety,Can I walk straight safely without hitting anyone?,17.60-27.50,scheduler,False,15.80,16.20,16.20,,0
+online_greedy,379,2,train,person,26.98,28.98,navigation,How do I get to Exit 3 of this subway station?,20.20-29.48,tracking,False,28.00,30.00,30.60,,0
+online_greedy,380,1,train,car,25.0,27.0,safety,What obstacles do I need to be aware of as I move forward?,21.60-27.50,candidate,False,19.80,21.00,,,0
+online_greedy,359,1,train,person,10.99,12.99,safety,Are there any obstacles or people on the stairs when I go down?,3.00-13.49,delivered,False,1.00,1.20,1.20,2.40,2
+online_greedy,359,3,train,stairs,38.98,40.98,navigation,Where is the nearest exit or entrance to the platform?,34.98-41.48,perception,False,,,,,0
+online_greedy,360,1,train,person,10.99,12.99,safety,Is the downhill path clear?,3.00-13.49,delivered,False,1.00,1.20,1.20,9.60,1
+online_greedy,360,2,train,person,25.0,27.0,safety,Is the person in front blocking the road?,17.00-27.50,scheduler,False,15.60,16.80,16.80,,0
+online_greedy,361,2,train,door,19.0,21.0,navigation,How do I get to the nearest stairs from here?,15.00-21.50,perception,False,,,,,0
+online_greedy,361,3,train,person,20.98,22.98,safety,Is there any obstacle in front of me?,13.00-23.48,delivered,False,11.20,11.40,11.40,14.40,1
+online_greedy,358,1,train,motorcycle,10.99,12.99,navigation,How do I get around the scooters parked in front of me?,3.00-13.49,timing,False,1.00,1.20,1.20,1.80,1
+online_greedy,358,2,train,motorcycle,38.98,40.98,navigation,How do I get past nearby obstacles?,31.00-41.48,scheduler,False,29.00,29.40,29.40,,0
+online_greedy,358,3,train,person,67.0,69.0,navigation,How can I get around the obstacle ahead?,59.00-69.50,scheduler,False,57.00,57.60,57.60,,0
+online_greedy,358,4,train,person,106.99,108.99,navigation,How can I walk safely on this sidewalk?,99.20-109.49,scheduler,False,97.20,97.20,97.20,,0
+online_greedy,358,5,train,door,122.98,124.98,navigation,How can I get to the entrance of the building from here?,118.98-125.48,perception,False,,,,,0
+online_greedy,358,6,train,motorcycle,136.99,138.99,safety,Is there anything in my path that I need to avoid?,129.20-139.49,timing,False,127.20,127.20,127.20,139.80,1
+online_greedy,358,7,train,person,151.0,153.0,safety,Is the sidewalk ahead clear for me to walk on?,143.00-153.50,scheduler,False,141.00,141.00,141.00,,0
+online_greedy,358,8,train,person,164.98,166.98,safety,Are there any obstacles in my immediate path?,157.00-167.48,scheduler,False,155.60,156.00,156.00,,0
+online_greedy,128,1,train,wall,1.99,3.99,safety,Are there any obstacles in my path ahead?,0.00-4.49,perception,False,,,,,0
+online_greedy,129,1,train,person,16.99,18.99,safety,Is there a crowd up ahead that I should be aware of?,9.00-19.49,scheduler,False,7.00,7.20,7.20,,0
+online_greedy,130,1,train,person,13.0,15.0,safety,Are there many people standing around?,5.00-15.50,scheduler,False,3.00,3.00,3.00,,0
+online_greedy,131,1,train,stairs,2.98,4.98,navigation,How can I get to the nearest staircase from here?,0.00-5.48,perception,False,,,,,0
+online_greedy,329,1,train,pole,13.0,15.0,safety,What obstacles are ahead of me on the sidewalk?,9.00-15.50,perception,False,,,,,0
+online_greedy,329,2,train,sports ball,25.0,27.0,safety,Is it safe to go straight ahead from here?,21.00-27.50,scheduler,False,20.80,24.60,24.60,,0
+online_greedy,329,3,train,person,38.98,40.98,safety,Is there anything I should be aware of in front of a food stall?,31.00-41.48,scheduler,False,29.00,29.40,29.40,,0
+online_greedy,330,1,train,stairs,1.99,3.99,navigation,What is in front of me?,0.00-4.49,perception,False,,,,,0
+online_greedy,334,1,train,person,1.99,3.99,safety,Is it safe for me to continue straight?,0.40-4.49,scheduler,False,0.40,0.60,0.60,,0
+online_greedy,339,1,train,person,1.99,3.99,safety,Do I walk closely behind others and leave enough room to move?,0.00-4.49,timing,False,0.00,0.60,0.60,4.80,1
+online_greedy,340,2,train,person,22.96,24.96,safety,Are there any obstacles or people blocking my way?,19.40-25.46,scheduler,False,19.00,19.80,19.80,,0
+online_greedy,2,1,train,car,5.6,6.99,safety,Is it safe to cross the street now?,5.60-7.49,scheduler,False,4.00,6.00,6.00,,0
+online_greedy,2,2,train,person,7.0,9.0,navigation,How can I get to the crosswalk from here?,0.00-9.50,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,3,1,train,car,4.99,6.99,safety,Is it safe to cross the street now?,4.00-7.49,timing,False,2.00,4.20,4.20,7.80,1
+online_greedy,40,1,train,unknown,25.0,27.0,safety,Is it safe for me to cross this intersection?,21.00-27.50,perception,False,,,,,0
+online_greedy,106,1,train,chair,4.99,6.99,safety,Is there enough space for aerfa under the seat?,0.99-7.49,perception,False,,,,,0
+online_greedy,107,1,train,ground hazard,1.0,3.0,safety,Is there any step or uneven surface in front of me?,0.00-3.50,perception,False,,,,,0
+online_greedy,107,2,train,unknown,1.0,3.0,safety,Is there a step in front of me?,0.00-3.50,perception,False,,,,,0
+online_greedy,109,2,train,elevator,4.99,6.99,safety,Is the elevator door open or closed?,0.99-7.49,perception,False,,,,,0
+online_greedy,112,1,train,person,4.99,6.99,safety,Are there any moving objects or people that I need to be cautious of?,0.00-7.49,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,113,3,train,chair,8.98,10.98,navigation,Where do I sit?,1.40-11.48,scheduler,False,1.40,1.80,1.80,,0
+online_greedy,114,1,train,unknown,1.99,3.99,safety,Is there something in front of Alpha that I should be aware of?,0.00-4.49,perception,False,,,,,0
+online_greedy,114,3,train,unknown,8.98,10.98,safety,Is there any obstruction on the right side as I move forward?,4.98-11.48,perception,False,,,,,0
+online_greedy,114,4,train,person,8.98,10.98,navigation,How do I reach my seat from here?,1.00-11.48,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,320,1,train,scissors,1.99,3.99,safety,Are there any sharp objects nearby that I should be aware of?,0.00-4.49,perception,False,,,,,0
+online_greedy,325,1,train,dining table,3.8,3.99,safety,Is there anything dangerous on the table that I should be aware of?,3.80-4.49,scheduler,False,2.80,3.00,4.20,,0
+online_greedy,326,1,train,dining table,0.0,1.98,safety,Is there any potential sharp object or obstacle on the table that I might bump into while setting up my phone?,0.00-2.48,perception,False,,,,,0
+online_greedy,327,1,train,dining table,1.99,3.99,safety,Are there any sharp objects on the table that I should be careful about?,0.00-4.49,tracking,False,3.20,,,,0
+online_greedy,328,2,train,cat,7.0,9.0,safety,Is there anything I should be cautious of while reaching out?,3.00-9.50,scheduler,False,1.00,1.20,1.20,,0
+online_greedy,647,1,train,bicycle,11.34,13.34,navigation,Is there an obstacle ahead?,7.60-13.84,scheduler,False,7.60,7.80,11.40,,0
+online_greedy,648,1,train,pole,10.5,12.5,navigation,Where is the blind path?,6.50-13.00,perception,False,,,,,0
+online_greedy,887,1,train,door,71.45,73.45,navigation,Where am I?,67.45-73.95,perception,False,,,,,0
+online_greedy,887,2,train,door,125.25,127.25,navigation,Did I enter the store?,121.25-127.75,perception,False,,,,,0
+online_greedy,888,1,train,door,0.14,2.14,navigation,Is this the entrance to the restaurant?,0.00-2.64,perception,False,,,,,0
+online_greedy,890,1,train,person,93.59,95.59,safety,Who is the person pulling me?,85.60-96.09,delivered,False,83.60,84.00,84.00,91.80,1
+online_greedy,899,1,train,door,21.47,23.47,navigation,Have I arrived at the door?,17.47-23.97,perception,False,,,,,0
+online_greedy,899,2,train,motorcycle,46.67,48.67,safety,Is there anything to pay attention to ahead?,39.40-49.17,delivered,False,37.60,40.20,40.20,40.80,3
+online_greedy,900,1,train,door,16.63,18.63,navigation,Where is the door?,12.63-19.13,perception,False,,,,,0
+online_greedy,905,1,train,cake,64.93,66.93,navigation,Where am I headed?,60.93-67.43,perception,False,,,,,0
+online_greedy,907,6,train,motorcycle,118.13,120.13,safety,Are there any obstacles in the road ahead?,110.20-120.63,timing,False,108.20,108.60,108.60,121.20,2
+online_greedy,912,1,train,door,132.66,134.66,navigation,Am I out?,128.66-135.16,perception,False,,,,,0
+online_greedy,920,1,train,car,49.4,51.4,safety,Are there any obstacles ahead?,41.40-51.90,timing,False,39.40,39.60,39.60,52.20,1
+online_greedy,920,2,train,motorcycle,53.91,55.91,safety,Is the road ahead clear?,46.00-56.41,timing,False,53.80,54.60,55.80,57.00,1
+online_greedy,921,1,train,person,0.0,1.22,safety,What did I hit?,0.00-1.72,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,921,2,train,motorcycle,213.64,215.64,safety,Are there any obstacles ahead?,209.64-216.14,perception,False,,,,,0
+online_greedy,916,1,train,pole,45.48,47.48,safety,Is the straight road unobstructed?,41.48-47.98,perception,False,,,,,0
+online_greedy,916,2,train,fence,63.4,65.4,navigation,How to get there?,59.40-65.90,perception,False,,,,,0
+online_greedy,679,1,train,person,37.11,39.11,safety,Is there an obstacle ahead?,29.20-39.61,scheduler,False,27.20,27.60,27.60,,0
+online_greedy,679,2,train,motorcycle,64.38,66.38,safety,Is there an obstacle ahead?,56.40-66.88,scheduler,False,55.00,55.80,55.80,,0
+online_greedy,682,1,train,stairs,4.11,6.11,navigation,Are you going to get on the elevator?,0.11-6.61,perception,False,,,,,0
+online_greedy,702,1,train,car,0.0,0.83,safety,Is there an obstacle ahead?,0.00-1.33,delivered,False,0.00,0.60,0.60,1.20,1
+online_greedy,705,1,train,car,12.36,14.36,navigation,Where is this?,4.40-14.86,delivered,False,2.60,3.00,3.00,10.80,1
+online_greedy,705,2,train,car,17.36,19.36,safety,Is there an obstacle ahead?,9.40-19.86,scheduler,False,17.00,17.40,17.40,,0
+online_greedy,714,1,train,stairs,21.97,23.97,safety,Is there an obstacle ahead?,17.97-24.47,perception,False,,,,,0
+online_greedy,714,2,train,motorcycle,29.22,31.22,safety,Is there an obstacle ahead?,28.20-31.72,tracking,False,28.20,31.80,31.80,32.40,1
+online_greedy,729,2,train,car,94.48,96.48,navigation,Where is China Construction Bank heading?,86.60-96.98,scheduler,False,84.60,84.60,84.60,,0
+online_greedy,729,3,train,unknown,216.71,218.71,navigation,Is there a road ahead?,212.71-219.21,perception,False,,,,,0
+online_greedy,754,2,train,motorcycle,58.8,60.8,navigation,Where is the sidewalk?,51.20-61.30,scheduler,False,50.20,51.00,52.80,,0
+online_greedy,479,1,train,car,8.98,10.98,navigation,How do I avoid parked vehicles in front of me?,3.60-11.48,delivered,False,3.60,4.20,4.20,4.20,4
+online_greedy,558,1,train,apple,7.0,9.0,navigation,Where am I?,3.00-9.50,perception,False,,,,,0
+online_greedy,197,1,train,car,0.0,0.81,safety,Is there a car passing ahead?,0.00-1.31,timing,False,0.00,0.60,0.60,3.00,1
+online_greedy,197,2,train,car,1.0,3.0,safety,Can I cross the road now?,0.00-3.50,tracking,False,2.00,4.20,4.20,7.80,1
+online_greedy,198,1,train,pole,0.0,0.16,safety,Can I go now?,0.00-0.66,perception,False,,,,,0
+online_greedy,599,1,train,bicycle,4.99,6.99,safety,Are there any obstacles in front of me?,2.60-7.49,timing,False,2.60,3.00,3.00,9.00,1
+online_greedy,600,1,train,fence,2.98,4.98,navigation,How can I get around this fence?,0.00-5.48,perception,False,,,,,0
+online_greedy,601,1,train,car,1.2,3.0,safety,Is there a place ahead where I can cross the road safely?,1.20-3.50,scheduler,False,1.00,1.20,1.20,,0
+online_greedy,602,1,train,pole,2.98,4.98,navigation,How can I avoid the pole in front of me?,0.00-5.48,perception,False,,,,,0
+online_greedy,602,2,train,tree,16.99,18.99,safety,Is there an obstacle in front of me?,12.99-19.49,perception,False,,,,,0
+online_greedy,616,1,train,unknown,22.99,24.99,safety,Is it safe to cross the road now?,18.99-25.49,perception,False,,,,,0
+online_greedy,87,1,train,wall,37.0,39.0,navigation,How do I find my way to the gate?,33.00-39.50,perception,False,,,,,0
+online_greedy,87,2,train,door,41.98,43.98,navigation,How can I get out of this backyard?,37.98-44.48,perception,False,,,,,0
+online_greedy,105,2,train,person,15.14,17.14,safety,Is it safe to step forward from where I am standing?,7.20-17.64,scheduler,False,5.20,5.40,5.40,,0
+online_greedy,105,3,train,person,23.15,25.15,safety,Is there anything blocking my path ahead?,15.20-25.65,scheduler,False,19.80,20.40,20.40,,0
+online_greedy,368,1,train,fence,1.99,3.99,safety,Is the road ahead clear for riding?,0.00-4.49,perception,False,,,,,0
+online_greedy,672,1,train,stairs,0.93,2.93,navigation,Where are the stairs?,0.00-3.43,perception,False,,,,,0
+online_greedy,757,1,train,train,98.8,100.8,navigation,Where is this?,94.80-101.30,perception,False,,,,,0
+online_greedy,758,3,train,chair,40.7,42.7,navigation,Where are the empty seats?,33.60-43.20,delivered,False,33.40,33.60,36.60,39.60,1
+online_greedy,759,2,train,door,28.9,30.9,navigation,Where am I?,24.90-31.40,perception,False,,,,,0
+online_greedy,781,1,finetune,door,32.98,34.98,navigation,How can I reach the exit from this table?,28.98-35.48,perception,False,,,,,0
+online_greedy,362,2,finetune,person,25.0,27.0,safety,Are there a lot of people around me that I need to avoid?,17.00-27.50,timing,False,15.00,15.00,15.00,32.40,1
+online_greedy,362,3,finetune,person,50.3,52.3,safety,How to use this escalator safely?,42.40-52.80,scheduler,False,40.40,40.80,40.80,,0
+online_greedy,362,5,finetune,person,68.3,70.3,safety,Is there anything in my way?,60.40-70.80,timing,False,58.40,58.80,58.80,72.00,1
+online_greedy,362,6,finetune,person,82.79,84.79,safety,Are there any obstacles in my way?,74.80-85.29,delivered,False,73.00,73.20,73.20,77.40,2
+online_greedy,363,1,finetune,person,10.99,12.99,safety,"Is there enough room for me to walk safely, or are there obstacles in my way?",3.00-13.49,scheduler,False,1.00,1.20,1.20,,0
+online_greedy,363,2,finetune,person,25.0,27.0,safety,Is it safe for me to move around this store? Are there any obstructions or hazards?,17.00-27.50,scheduler,False,15.60,16.20,16.20,,0
+online_greedy,365,1,finetune,cell phone,10.99,12.99,safety,What obstacles are there on the table that I should be aware of?,6.99-13.49,scheduler,False,5.40,5.40,5.40,,0
+online_greedy,119,1,finetune,horse,6.99,8.99,navigation,Where is the horse going?,2.99-9.49,scheduler,False,1.40,1.80,2.40,,0
+online_greedy,119,2,finetune,horse,7.0,9.0,navigation,Which direction should I go to exit the riding area?,3.00-9.50,tracking,False,9.00,,,,0
+online_greedy,124,2,finetune,horse,13.0,15.0,navigation,In which direction should I guide the horse to leave the arena?,9.00-15.50,scheduler,False,9.60,10.20,11.40,,0
+online_greedy,127,1,finetune,horse,1.96,3.96,navigation,Which direction is the horse heading?,0.00-4.46,candidate,False,0.00,0.60,,,0
+online_greedy,870,1,finetune,stairs,0.0,0.0,navigation,Which direction does the moving walkway go?,0.00-0.50,perception,False,,,,,0
+online_greedy,872,1,finetune,person,1.99,3.99,navigation,How can I find the entrance?,0.00-4.49,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,434,2,finetune,unknown,16.99,18.99,safety,Is the path to the seat in the cafe clear so I can walk without tripping?,12.99-19.49,perception,False,,,,,0
+online_greedy,434,3,finetune,person,16.99,18.99,navigation,How do I navigate this cafe?,9.00-19.49,timing,False,7.00,7.80,7.80,20.40,1
+online_greedy,435,3,finetune,animal,104.21,106.21,safety,Is the area around me safe from any potentially dangerous animals?,100.21-106.71,perception,False,,,,,0
+online_greedy,435,4,finetune,animal,118.22,120.22,safety,Are there any animals approaching me?,114.22-120.72,perception,False,,,,,0
+online_greedy,437,1,finetune,unknown,1.99,3.99,safety,Is there anything in front of me that I might hit?,0.00-4.49,perception,False,,,,,0
+online_greedy,438,1,finetune,unknown,7.0,9.0,safety,Is the path to the store entrance clear?,3.00-9.50,perception,False,,,,,0
+online_greedy,438,2,finetune,door,13.0,15.0,safety,Are there steps or a ramp at the entrance to this place?,9.00-15.50,perception,False,,,,,0
+online_greedy,438,3,finetune,unknown,16.99,18.99,safety,What obstacles on the floor should I be careful of?,12.99-19.49,perception,False,,,,,0
+online_greedy,439,1,finetune,dining table,1.99,3.99,safety,Is there a counter nearby where I can get help?,0.00-4.49,perception,False,,,,,0
+online_greedy,440,1,finetune,dining table,10.99,12.99,safety,Are there any obstacles or objects on the floor that could cause me to trip?,6.40-13.49,scheduler,False,6.40,6.60,6.60,,0
+online_greedy,440,3,finetune,unknown,47.59,49.59,safety,Is there anything in front of me that might trip me?,43.59-50.09,perception,False,,,,,0
+online_greedy,440,4,finetune,unknown,61.6,63.6,safety,Is there anyone nearby who might bump into me?,57.60-64.10,perception,False,,,,,0
+online_greedy,441,1,finetune,person,4.99,6.99,safety,Are there any obstacles in front of me?,0.00-7.49,timing,False,0.00,0.60,0.60,7.80,1
+online_greedy,441,2,finetune,unknown,13.0,15.0,safety,Is it safe to move forward?,9.00-15.50,perception,False,,,,,0
+online_greedy,441,3,finetune,unknown,20.09,22.09,safety,Is the object I am touching alive and is it dangerous?,16.09-22.59,perception,False,,,,,0
+online_greedy,441,6,finetune,animal,39.2,41.2,safety,Are there any animals around me that I should be wary of?,35.20-41.70,perception,False,,,,,0
+online_greedy,405,2,finetune,dining table,25.0,27.0,safety,What obstacles should I be aware of when moving in the area?,18.40-27.50,delivered,False,18.40,18.60,18.60,25.20,1
+online_greedy,406,1,finetune,dining table,151.0,153.0,safety,What obstructions on the counter should I be aware of?,147.00-153.50,perception,False,,,,,0
+online_greedy,407,1,finetune,dining table,67.0,69.0,safety,Are there any obstacles around the counter?,63.00-69.50,perception,False,,,,,0
+online_greedy,407,3,finetune,unknown,100.89,102.89,safety,"As I walk through this store, are there any obstacles in front of me?",96.89-103.39,perception,False,,,,,0
+online_greedy,407,4,finetune,person,108.9,110.9,safety,Is there anyone standing in or near my walkway?,101.00-111.40,scheduler,False,99.00,99.00,99.00,,0
+online_greedy,805,1,finetune,fence,1.0,3.0,safety,Can I walk on the road ahead smoothly?,0.00-3.50,perception,False,,,,,0
+online_greedy,807,1,finetune,fence,32.98,34.98,navigation,Which direction should I go to reach the end of the fence?,28.98-35.48,perception,False,,,,,0
+online_greedy,810,1,finetune,unknown,2.98,4.98,safety,Is it safe for me to cross the road now?,0.00-5.48,perception,False,,,,,0
+online_greedy,811,1,finetune,unknown,14.98,16.98,safety,Is it safe to move forward now?,10.98-17.48,perception,False,,,,,0
+online_greedy,816,1,finetune,unknown,8.98,10.98,safety,Is there a clear path ahead for me?,4.98-11.48,perception,False,,,,,0
+online_greedy,817,1,finetune,person,2.98,4.98,navigation,Where is the entrance to the garden?,0.00-5.48,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,817,2,finetune,train,20.98,22.98,safety,Is it safe to proceed?,16.98-23.48,perception,False,,,,,0
+online_greedy,891,1,finetune,person,60.31,62.31,safety,Is there an obstacle ahead?,52.40-62.81,delivered,False,50.40,50.40,50.40,62.40,1
+online_greedy,878,2,finetune,car,42.32,44.32,navigation,Where is going forward?,34.40-44.82,scheduler,False,32.60,33.00,33.00,,0
+online_greedy,878,3,finetune,door,84.79,86.79,navigation,Am I almost at the hospital?,80.79-87.29,perception,False,,,,,0
+online_greedy,884,1,finetune,person,3.87,5.87,navigation,What is ahead?,0.00-6.37,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,884,2,finetune,car,5.22,7.22,safety,Can I cross the road now?,0.00-7.72,timing,False,0.00,0.60,0.60,8.40,1
+online_greedy,884,3,finetune,motorcycle,44.78,46.78,safety,What did I hit?,36.80-47.28,timing,False,34.80,34.80,34.80,49.80,1
+online_greedy,884,4,finetune,motorcycle,105.53,107.53,safety,What is blocking my way?,97.80-108.03,scheduler,False,95.80,96.00,96.00,,0
+online_greedy,884,5,finetune,person,118.98,120.98,navigation,Can this go?,111.00-121.48,scheduler,False,109.00,109.20,109.20,,0
+online_greedy,884,6,finetune,stairs,150.09,152.09,navigation,Where is the subway station?,146.09-152.59,perception,False,,,,,0
+online_greedy,706,1,finetune,car,0.0,0.48,safety,Is there an obstacle ahead?,0.00-0.98,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,707,1,finetune,car,0.0,1.47,safety,Is there an obstacle ahead?,0.00-1.97,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,708,2,finetune,car,32.62,34.62,safety,Is there an obstacle ahead?,24.80-35.12,scheduler,False,22.80,22.80,22.80,,0
+online_greedy,717,1,finetune,car,0.53,2.53,navigation,Is there a road ahead?,0.00-3.03,scheduler,False,0.00,0.60,0.60,,0
+online_greedy,717,2,finetune,unknown,50.03,52.03,safety,Is there an obstacle ahead?,46.03-52.53,perception,False,,,,,0

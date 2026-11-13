@@ -165,6 +165,30 @@ Walkable share of the path region (floor, sidewalk, road, path): median 0.26 for
 
 12. **Segmentation is informative for stairs (5.6x base rate), fences and doors (3x), useless for thin poles and for walls**, and the walkable share does not separate "is the path clear?" moments from confirmed-clear ones, so free space alone will not answer scene-level questions. Next: per-second stairs / door / railing shares as decision features through the feature gate.
 
+## Failure funnel and speech-budget curve (added 2026-11-13)
+
+`scripts/failure_funnel.py` attributes each of the 293 dev events (seed 0) to the first stage that lost it (`results/funnel/dev.md`).
+
+| Policy | Events | Detected | Tracked | Candidate | Spoken about | On time |
+|---|---|---|---|---|---|---|
+| P-CACS | 293 | 169 | 160 | 160 | 23 | 15 |
+| October IL (in-sample on train) | 293 | 169 | 160 | 154 | 66 | 57 |
+| Online greedy | 293 | 169 | 160 | 154 | 56 | 33 |
+
+Perception loses 124 events for every policy (no object named 34, door 22, pole 9, stairs 8). The scheduler loses 88-137 events it was offered, none because the channel was busy, and the event was the top-ranked legal candidate in 70-103 of them (outranked only 5-8 times).
+
+Speech-budget sweep, seed 0, dev (`per_video_budget*_s0.csv`), all-event recall and quiet-window violations:
+
+| Cues/min | Greedy recall | Thompson recall | Quiet violations |
+|---|---|---|---|
+| 0.9 | 0.078 | 0.072 | 0.05 |
+| 1.7 | 0.102 | 0.123 | 0.09-0.11 |
+| 2.5 | 0.140 | 0.160 | 0.13-0.16 |
+| 3.4 | 0.143 | 0.167 | 0.19-0.22 |
+| 5.0 | 0.177 | 0.208 | 0.33 |
+
+13. **The scheduler's misses are a scoring problem, not a ranking or budget problem.** Raising the speech rate buys recall roughly in proportion to quiet-window violations, with hits per 100 cues falling from about 9 to 4. The learner's scores do not separate should-speak moments from other top-ranked moments, so recall has to come from better decision features and calibration, compared at equal speech rate, not from talking more.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.

@@ -1,0 +1,36 @@
+{
+ "online_greedy": {
+  "recall_coverable": 0.2625,
+  "quiet_violation": 0.21863799283154123,
+  "cues_per_min": 3.3503827011790297,
+  "n_coverable": 160,
+  "n_quiet": 279,
+  "n_spoken": 972
+ },
+ "online_thompson": {
+  "recall_coverable": 0.30625,
+  "quiet_violation": 0.1935483870967742,
+  "cues_per_min": 3.3572764927452416,
+  "n_coverable": 160,
+  "n_quiet": 279,
+  "n_spoken": 974
+ },
+ "_meta": {
+  "stream": [
+   "train",
+   "finetune"
+  ],
+  "n_videos": 558,
+  "minutes": 290.11611111111114,
+  "p_tap": 0.5,
+  "p_ask": 1.0,
+  "target": 4.0,
+  "tau0": 0.6,
+  "eps": 0.25,
+  "lr": 0.5,
+  "implicit_neg": 0.0,
+  "seed": 0,
+  "noise": "",
+  "final": false
+ }
+}
