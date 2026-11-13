@@ -3,7 +3,7 @@
 Two lecture sets, read page by page; page numbers are PDF page indices. "Derived" marks reasoning built from slide material rather than slide content.
 
 - **Course A:** Yale CPSC 480/580, *Introduction to Computer Vision* (Alex Wong), lectures 1 to 14.
-- **Course B:** *Statistical Learning Theory* (Omar Montasser, Yale), lectures 1 to 9. Online learning appears only in L9 (mistake bounds, Halving, Littlestone dimension, online-to-batch); regret and bandits are not covered.
+- **Course B:** *Statistical Learning Theory* (Omar Montasser, Yale), lectures 1 to 10. Online learning appears in L9 (mistake bounds, Halving, Littlestone dimension, online-to-batch) and L10 (agnostic regret, Multiplicative Weights, Littlestone-class regret, boosting from Multiplicative Weights); bandits, online convex optimisation and delayed feedback are not covered. L10 mapping: `docs/research/benchmarks.md`.
 - Not covered by course A: Hough transform, optical-flow algorithms, epipolar geometry, tracking, time to contact.
 
 ## Concept maps
@@ -35,6 +35,7 @@ Two lecture sets, read page by page; page numbers are PDF page indices. "Derived
 | L5 | MDL, SRM as a regularization path (p11-17); PAC-Bayes with KL(Q, P) and Gibbs posterior (p20-22) |
 | L6-L7 | AdaBoost and its training-error bound; margins bound; sample compression |
 | L8 | Rademacher complexity; linear predictors: L2 ball scales with sqrt(avg norm(x)^2 / m), L1 ball with sqrt(2 log(2d) / m) (p13-14) |
+| L10 | Agnostic regret vs best fixed expert (p7-8); deterministic learners suffer T/2 regret (p9); Multiplicative Weights, regret <= sqrt((T/2) ln\|H\|) (p11-15); Littlestone-class regret (p16-19); boosting via Multiplicative Weights (p20-22) |
 | L9 | Online protocol and no free lunch; mistake bounds; Halving <= log2 abs(H); conservative algorithms (p9); thresholds have infinite Littlestone dimension (p10-11); online-to-batch "longest running survivor" (p18) |
 
 ## Ranked ideas for SeeForMe
