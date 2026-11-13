@@ -1,0 +1,20 @@
+{
+ "n": 50,
+ "n_decided": 47,
+ "unclear": 3,
+ "speak_confirmed": 0.9642857142857143,
+ "silent_confirmed": 0.3157894736842105,
+ "confirm_clear_on_quiet": 0.3157894736842105,
+ "confusion": {
+  "speak": {
+   "speak": 27,
+   "confirm_clear": 1,
+   "unclear": 2
+  },
+  "silent": {
+   "confirm_clear": 6,
+   "speak": 13,
+   "unclear": 1
+  }
+ }
+}

@@ -70,7 +70,9 @@
   </section>
 
   <section class="card" aria-labelledby="v-h">
-    <h2 id="v-h" style="font-size:20px;margin:0 0 12px">Before the question, what should the assistant have said, unprompted?</h2>
+    <p style="margin:0 0 6px;font-size:15px;color:var(--muted)">The user asked:</p>
+    <p id="q-again" style="margin:0 0 14px;font-size:22px;font-weight:600"></p>
+    <h2 id="v-h" style="font-size:18px;margin:0 0 12px">Before that question, what should the assistant have said, unprompted?</h2>
     <div class="actions" role="group" aria-labelledby="v-h" id="actions"></div>
     <div class="row">
       <div><label for="w0">Corrected window start (s)</label><input id="w0" inputmode="decimal"></div>
@@ -103,6 +105,7 @@ function show(n) {
   i = Math.max(0, Math.min(D.events.length - 1, n));
   const e = D.events[i], prev = done[e.key];
   txt("question", e.question);
+  txt("q-again", "\u201c" + e.question + "\u201d");
   txt("meta", `Video ${e.video_id}, event ${e.obj_id}, asked at ${Number(e.t_q).toFixed(1)} s`);
   txt("labels", e.labels || "none");
   txt("window", `${e.win[0].toFixed(1)} to ${e.win[1].toFixed(1)} s`);
