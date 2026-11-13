@@ -271,6 +271,10 @@ Gains come from tables (3 -> 13 of 16), cars, trucks, scissors. 20. **The produc
 
 A first run gave each clip a fresh ledger burst and was not budget-matched (CARE spoke 9-12 s/min); fixed and re-run with a regression test.
 
+Audio lifecycle check (CARE, finetune replay, 104 videos): reserved 233.3 s, played 228.9 s; playback never exceeded the reservation in any video. The replay channel uses the same duration estimate as the ledger, so this is partly circular: in the live app the ledger must reconcile against measured TTS length and interruptions, and reset only at a real session boundary. Rubric v3 has no human verdicts yet; migrated v1/v2 verdicts are not treated as validated v3 labels.
+
+With constant value and duration, CARE's rule reduces to p_helpful > cost * duration / value, another probability threshold over the same information, so no recall gain is expected until the usefulness estimate improves.
+
 21. **On identical scores, the decision rule alone does not change recall at a matched speech budget.** CARE's current value is the guarantee (spoken seconds bounded over every interval, every silence has a logged reason), not recall. Consistent with items 13-19: the scores do not separate should-speak moments, so gains must come from better supervision (rubric v3) and decision inputs, then CARE's extra heads (claim reliability, redundancy).
 
 ## Next experiments (selected on `select`, never on holdout)
