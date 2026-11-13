@@ -1,0 +1,49 @@
+{
+ "logistic": {
+  "all_event_recall": 0.1111111111111111,
+  "hits": 9.0,
+  "events": 81.0,
+  "coverable_recall": 0.2727272727272727,
+  "quiet_violation": 0.05555555555555555,
+  "cues_per_min": 1.6772612391820485,
+  "speech_s_per_min": 4.032319828444512
+ },
+ "gru_k8": {
+  "all_event_recall": 0.07407407407407407,
+  "hits": 6.0,
+  "events": 81.0,
+  "coverable_recall": 0.18181818181818182,
+  "quiet_violation": 0.0,
+  "cues_per_min": 1.7002374205407067,
+  "speech_s_per_min": 3.8450639503714497,
+  "all_event_recall_vs_logistic": [
+   -0.037037037037037035,
+   -0.13043478260869565,
+   0.0
+  ],
+  "quiet_violation_vs_logistic": [
+   -0.05555555555555555,
+   -0.21428571428571427,
+   0.0
+  ]
+ },
+ "online_greedy": {
+  "all_event_recall": 0.1111111111111111,
+  "hits": 9.0,
+  "events": 81.0,
+  "coverable_recall": 0.2727272727272727,
+  "quiet_violation": 0.14814814814814814,
+  "cues_per_min": 1.6772612391820485,
+  "speech_s_per_min": 3.3112506701386244,
+  "all_event_recall_vs_logistic": [
+   0.0,
+   -0.04166666666666666,
+   0.03225806451612903
+  ],
+  "quiet_violation_vs_logistic": [
+   0.09259259259259259,
+   0.0,
+   0.18181818181818182
+  ]
+ }
+}

@@ -232,6 +232,18 @@ Cost over the 17,602 dev video-seconds: 4.5 candidate-seconds per minute (fence 
 17. **A scorer trained offline on full labels beats learning online from one-sided feedback** at equal speech rate (frozen logistic vs online greedy, CI excludes 0). On this benchmark, supervised training on the train split is worth more than adapting online.
 18. **The GRU with 4 s of history is the lead candidate, not yet a result:** highest recall (+0.036, CI includes 0) and fewer quiet-window violations (-0.105 [-0.229, -0.023], on 38 quiet windows), but K was chosen on the same videos. The networks overfit (train AUC 0.73-0.77, finetune flat), cross-fitted calibration is poor (ECE about 0.21), and the TCN loses at every K. Next: confirm GRU vs logistic once on `select`.
 
+## One-shot confirmation on `select` (added 2026-11-13)
+
+`scripts/confirm_decision_model.py`: frozen models from the finetune comparison, no refitting, scored once on the 34 `select` videos (27 events, 11 coverable; three feedback seeds pooled, frozen models identical across seeds).
+
+| Policy | All-event recall | vs logistic [95% CI] | Coverable recall | Quiet violations | vs logistic [95% CI] | Cues/min |
+|---|---|---|---|---|---|---|
+| logistic | 9/81 = 0.111 | reference | 0.273 | 0.056 | reference | 1.68 |
+| GRU, 4 s history | 6/81 = 0.074 | -0.037 [-0.130, +0.000] | 0.182 | 0.000 | -0.056 [-0.214, +0.000] | 1.70 |
+| online greedy | 9/81 = 0.111 | +0.000 [-0.042, +0.032] | 0.273 | 0.148 | +0.093 [+0.000, +0.182] | 1.68 |
+
+19. **The GRU lead does not confirm, so nothing is promoted.** On `select` the GRU catches fewer events (its quiet-window advantage remains but is not significant), and online greedy ties the frozen logistic on recall with more quiet-window violations. With 27 events, `select` can only rule out large effects; what is supported across both sets is that no candidate scorer beats a frozen logistic, and that the remaining lever is the information the scorer sees, not its architecture.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
