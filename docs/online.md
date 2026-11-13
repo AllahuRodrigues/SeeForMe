@@ -199,6 +199,23 @@ Speech-budget sweep, seed 0, dev (`per_video_budget*_s0.csv`), all-event recall 
 
 14. **As a decision feature among existing candidates, segmentation overfits and fails** (no single share above 0.59 AUC on finetune). The gate only scores detector candidates, so the 124 events lost to perception never enter it: it cannot measure segmentation's actual strength, adding undetected doors and stairs. That needs a separate test: segmentation pseudo-candidates, measured through the failure funnel (detected events and on-time events) at equal speech rate.
 
+## Exact silence reasons and segmentation as an event generator (added 2026-11-13)
+
+**Silence reasons.** Each policy now logs, per candidate and decision, the rule that decided it (`last_reasons`). Over the in-window opportunities of every scheduler-missed event, the main reason was `below_threshold` for 133 of 137 P-CACS misses (4 low confidence), 88 of 88 IL misses and 94-98 of 96-98 online greedy misses (2 channel busy). Budget, guard and recent-announcement rules never decided a missed event.
+
+**Segmentation candidates** (`seeforme/perception/seg_candidates.py`; stairs / door / railing share >= 2% of the path region for 2 consecutive seconds, causal, linked by label and concepts). Funnel `results/funnel/dev_segcand.md` vs `dev_reasons.md`:
+
+| Policy | Detected | On time | Δ on time |
+|---|---|---|---|
+| P-CACS | 169 -> 177 | 15 -> 21 | +6 |
+| October IL | 169 -> 177 | 57 -> 57 | 0 |
+| Online greedy | 169 -> 177 | 33 -> 34 | +1 |
+
+Cost over the 17,602 dev video-seconds: 4.5 candidate-seconds per minute (fence 2.0, door 1.5, stairs 1.0), of which 6%, 3% and 13% fall on a labelled event.
+
+15. **The rule that silences missed events is the score threshold, and nothing else.** Combined with the budget curve, scheduler misses are a scoring problem.
+16. **Segmentation as a generator recovers 8 of 124 perception losses and is not promoted.** It adds 4.5 candidate-seconds a minute at 3-13% event precision and does not help the learned schedulers. The 34 scene-level events and most doors (19 of 22 still lost) remain out of reach; a stairs-only generator (best precision) or OWLv2-taught door boxes are the remaining perception options.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
