@@ -1,0 +1,958 @@
+{
+ "summary": {
+  "pcacs@reid_off": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 0.0,
+   "reid_announced": 0,
+   "n_coverable": 11,
+   "n_spoken": 19
+  },
+  "pcacs@reid_h30_t0.8": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 96.06341426054989,
+   "reid_announced": 29,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "pcacs@reid_h30_t0.85": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 87.35544152561845,
+   "reid_announced": 25,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 0.9886363636363636,
+   "n_matches_gt": 88
+  },
+  "pcacs@reid_h30_t0.9": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 65.68890250440377,
+   "reid_announced": 17,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "pcacs@reid_h60_t0.8": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 98.79757984223022,
+   "reid_announced": 34,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "pcacs@reid_h60_t0.85": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 90.20448801409206,
+   "reid_announced": 24,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 0.9886363636363636,
+   "n_matches_gt": 88
+  },
+  "pcacs@reid_h60_t0.9": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 69.04342498276786,
+   "reid_announced": 18,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "pcacs@reid_h120_t0.8": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.41357126445584746,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 99.7396032779352,
+   "reid_announced": 33,
+   "n_coverable": 11,
+   "n_spoken": 18,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "pcacs@reid_h120_t0.85": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 91.35329708202497,
+   "reid_announced": 24,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 0.9885057471264368,
+   "n_matches_gt": 87
+  },
+  "pcacs@reid_h120_t0.9": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 70.5598529524393,
+   "reid_announced": 17,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "pcacs@reid_h300_t0.8": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.41357126445584746,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 99.92341272880448,
+   "reid_announced": 33,
+   "n_coverable": 11,
+   "n_spoken": 18,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "pcacs@reid_h300_t0.85": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 91.51413035153557,
+   "reid_announced": 24,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 0.9885057471264368,
+   "n_matches_gt": 87
+  },
+  "pcacs@reid_h300_t0.9": {
+   "recall_coverable": 0.18181818181818182,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.4365474458145056,
+   "repeat_gt_share": 0.0,
+   "repeat_track_share": 0.0,
+   "repeat_label_per_min": 0.11488090679329095,
+   "reid_per_min": 70.78961476602589,
+   "reid_announced": 17,
+   "n_coverable": 11,
+   "n_spoken": 19,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "egoblind_learned:il@reid_off": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 0.0,
+   "reid_announced": 0,
+   "n_coverable": 11,
+   "n_spoken": 31
+  },
+  "egoblind_learned:il@reid_h30_t0.8": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 96.06341426054989,
+   "reid_announced": 42,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "egoblind_learned:il@reid_h30_t0.85": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 87.35544152561845,
+   "reid_announced": 33,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 0.9886363636363636,
+   "n_matches_gt": 88
+  },
+  "egoblind_learned:il@reid_h30_t0.9": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 65.68890250440377,
+   "reid_announced": 20,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "egoblind_learned:il@reid_h60_t0.8": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 98.79757984223022,
+   "reid_announced": 48,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "egoblind_learned:il@reid_h60_t0.85": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 90.20448801409206,
+   "reid_announced": 37,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 0.9886363636363636,
+   "n_matches_gt": 88
+  },
+  "egoblind_learned:il@reid_h60_t0.9": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 69.04342498276786,
+   "reid_announced": 22,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "egoblind_learned:il@reid_h120_t0.8": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 99.7396032779352,
+   "reid_announced": 47,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "egoblind_learned:il@reid_h120_t0.85": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 91.35329708202497,
+   "reid_announced": 37,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 0.9885057471264368,
+   "n_matches_gt": 87
+  },
+  "egoblind_learned:il@reid_h120_t0.9": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 70.5598529524393,
+   "reid_announced": 23,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "egoblind_learned:il@reid_h300_t0.8": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 99.92341272880448,
+   "reid_announced": 47,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 95
+  },
+  "egoblind_learned:il@reid_h300_t0.85": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 91.51413035153557,
+   "reid_announced": 37,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 0.9885057471264368,
+   "n_matches_gt": 87
+  },
+  "egoblind_learned:il@reid_h300_t0.9": {
+   "recall_coverable": 0.09090909090909091,
+   "quiet_violation": 0.0,
+   "cues_per_min": 0.7122616221184039,
+   "repeat_gt_share": 0.03225806451612903,
+   "repeat_track_share": 0.1935483870967742,
+   "repeat_label_per_min": 0.34464272037987287,
+   "reid_per_min": 70.78961476602589,
+   "reid_announced": 23,
+   "n_coverable": 11,
+   "n_spoken": 31,
+   "match_precision_gt": 1.0,
+   "n_matches_gt": 58
+  },
+  "_meta": {
+   "stream": [
+    "select"
+   ],
+   "n_videos": 34,
+   "with_embeddings": 34,
+   "configs": [
+    [
+     0.0,
+     null
+    ],
+    [
+     30.0,
+     0.8
+    ],
+    [
+     30.0,
+     0.85
+    ],
+    [
+     30.0,
+     0.9
+    ],
+    [
+     60.0,
+     0.8
+    ],
+    [
+     60.0,
+     0.85
+    ],
+    [
+     60.0,
+     0.9
+    ],
+    [
+     120.0,
+     0.8
+    ],
+    [
+     120.0,
+     0.85
+    ],
+    [
+     120.0,
+     0.9
+    ],
+    [
+     300.0,
+     0.8
+    ],
+    [
+     300.0,
+     0.85
+    ],
+    [
+     300.0,
+     0.9
+    ]
+   ],
+   "label_window": 60.0,
+   "final": false,
+   "seed": 0
+  }
+ },
+ "paired_diffs": {
+  "pcacs@reid_h30_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h30_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h30_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h60_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h60_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h60_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h120_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": -0.022976181358658143,
+    "lo": -0.07352941176470595,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h120_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h120_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h300_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": -0.022976181358658143,
+    "lo": -0.07352941176470595,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h300_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "pcacs@reid_h300_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h30_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h30_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h30_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h60_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h60_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h60_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h120_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h120_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h120_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h300_t0.8": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h300_t0.85": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "egoblind_learned:il@reid_h300_t0.9": {
+   "recall_coverable": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "repeat_label_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cues_per_min": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "quiet_violation": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  }
+ }
+}

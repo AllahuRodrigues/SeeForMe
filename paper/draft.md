@@ -69,7 +69,7 @@ We ask: **if an assistant learns when to speak from its user's feedback during u
    - Learning helps a little: greedy beats a no-learning floor by +0.067 [+0.010, +0.121].
    - Feature signal is weak (prelim.: offline AUC about 0.68 on finetune), led by the user's own walking speed.
 4. **Negative results on common remedies.** Exploration, simulator warm start and silence-as-negative do not help, and the last two hurt.
-5. **A memory and repetition result.** Appearance re-identification matches the same object about 90% of the time but has little effect on 31-second clips. The frozen imitation scheduler's repeat cues come mostly from a short per-track block, not from forgetting: 13.6% of its cues repeat the same track, and a 10 s re-announcement guard cuts that to 7.9% with recall unchanged.
+5. **A memory and repetition result.** Appearance re-identification looked about 90% precise by event id, but a hand check of 50 matches finds 0.43 precision among decided pairs (event ids conflate same-label objects), and it has little effect on 31-second clips. The frozen imitation scheduler's repeat cues come mostly from a short per-track block, not from forgetting: 13.6% of its cues repeat the same track, and a 10 s re-announcement guard cuts that to 7.9% with recall unchanged.
 
 ## 2. Related work
 
@@ -315,7 +315,7 @@ Cues/min is 1.66 to 1.69 in every run. Lowering the asking rate to 0.5 or 0.25 l
 
 The online greedy baseline without re-ID is 0.188 recall and 0.496 repeats/min. CLIP embeddings were computed for 414,017 detections across 592 videos.
 
-- Match precision against ground-truth object ids is 0.90 at θ 0.80 (n = 2,041) and 0.89 at θ 0.85 (n = 1,863).
+- Match precision against event-linked ids is 0.90 at θ 0.80 (n = 2,041) and 0.89 at θ 0.85 (n = 1,863), but event ids conflate same-label objects; a hand check of 50 matches (25 with gaps over 5 s) gives 0.43 precision among decided pairs (0.33 for gaps over 5 s).
 - Clips average 31 s, so announced objects rarely leave and return. The memory changes little.
 - 28.5% (65/228) of IL cues name an already-announced weak event. Only 13.6% (31/228) repeat the same tracker track, because EgoBlind links every same-label detection in an event window to that event, so the larger count includes cues about a different person or car. The cause of the same-track repeats is the learned scheduler's 2.8 s per-track block with no novelty decay, not a memory failure. A 10 s re-announcement guard, not tuned, cuts same-track repeats to 7.9% (17/214) with recall unchanged (0.331; 4/27 on finetune) and cues/min falling from 0.79 to 0.74 (`results/memory/reid_il_fix.md`).
 
