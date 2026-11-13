@@ -1,0 +1,644 @@
+{
+ "model": "google/owlv2-base-patch16-ensemble",
+ "thr": 0.2,
+ "n_events": 64,
+ "n_fired": 46,
+ "per_concept": {
+  "tree": {
+   "fired": 2,
+   "n": 2
+  },
+  "pole": {
+   "fired": 9,
+   "n": 9
+  },
+  "sign": {
+   "fired": 3,
+   "n": 3
+  },
+  "door": {
+   "fired": 14,
+   "n": 24
+  },
+  "wall": {
+   "fired": 1,
+   "n": 4
+  },
+  "shelf": {
+   "fired": 2,
+   "n": 3
+  },
+  "ground hazard": {
+   "fired": 1,
+   "n": 2
+  },
+  "elevator": {
+   "fired": 1,
+   "n": 1
+  },
+  "stairs": {
+   "fired": 7,
+   "n": 9
+  },
+  "machine": {
+   "fired": 1,
+   "n": 1
+  },
+  "fence": {
+   "fired": 6,
+   "n": 6
+  },
+  "animal": {
+   "fired": 2,
+   "n": 3
+  }
+ },
+ "score_hist": {
+  "0.4": 13,
+  "0.3": 13,
+  "0.1": 12,
+  "0.2": 11,
+  "0.6": 3,
+  "0.5": 8,
+  "0.0": 1,
+  "0.7": 3
+ },
+ "rows": [
+  {
+   "split": "train",
+   "key": "35_2",
+   "concepts": "tree",
+   "question": "Is there any tree or obstacle directly in front?",
+   "best_score": 0.432,
+   "fired": true,
+   "prompt": "a tree"
+  },
+  {
+   "split": "train",
+   "key": "74_2",
+   "concepts": "pole",
+   "question": "Which direction should I take to cross the street safely?",
+   "best_score": 0.365,
+   "fired": true,
+   "prompt": "a bollard"
+  },
+  {
+   "split": "train",
+   "key": "74_3",
+   "concepts": "sign",
+   "question": "How do I cross this busy street safely?",
+   "best_score": 0.331,
+   "fired": true,
+   "prompt": "a street sign"
+  },
+  {
+   "split": "train",
+   "key": "75_1",
+   "concepts": "door",
+   "question": "Where is the convenience store?",
+   "best_score": 0.138,
+   "fired": false,
+   "prompt": "a doorway"
+  },
+  {
+   "split": "train",
+   "key": "80_1",
+   "concepts": "pole",
+   "question": "Where is the crosswalk?",
+   "best_score": 0.432,
+   "fired": true,
+   "prompt": "a lamp post"
+  },
+  {
+   "split": "train",
+   "key": "86_1",
+   "concepts": "door",
+   "question": "How can I get out of this yard?",
+   "best_score": 0.131,
+   "fired": false,
+   "prompt": "a door"
+  },
+  {
+   "split": "train",
+   "key": "87_1",
+   "concepts": "wall,door",
+   "question": "How do I find my way to the gate?",
+   "best_score": 0.411,
+   "fired": true,
+   "prompt": "a wall"
+  },
+  {
+   "split": "train",
+   "key": "87_2",
+   "concepts": "door",
+   "question": "How can I get out of this backyard?",
+   "best_score": 0.135,
+   "fired": false,
+   "prompt": "a door"
+  },
+  {
+   "split": "train",
+   "key": "91_1",
+   "concepts": "shelf",
+   "question": "Is there anything on the floor?",
+   "best_score": 0.176,
+   "fired": false,
+   "prompt": "a shelf"
+  },
+  {
+   "split": "train",
+   "key": "107_1",
+   "concepts": "ground hazard",
+   "question": "Is there any step or uneven surface in front of me?",
+   "best_score": 0.287,
+   "fired": true,
+   "prompt": "a wet floor"
+  },
+  {
+   "split": "train",
+   "key": "109_2",
+   "concepts": "elevator,door",
+   "question": "Is the elevator door open or closed?",
+   "best_score": 0.599,
+   "fired": true,
+   "prompt": "an elevator"
+  },
+  {
+   "split": "train",
+   "key": "128_1",
+   "concepts": "wall",
+   "question": "Are there any obstacles in my path ahead?",
+   "best_score": 0.159,
+   "fired": false,
+   "prompt": "a wall"
+  },
+  {
+   "split": "train",
+   "key": "131_1",
+   "concepts": "stairs",
+   "question": "How can I get to the nearest staircase from here?",
+   "best_score": 0.282,
+   "fired": true,
+   "prompt": "a staircase"
+  },
+  {
+   "split": "train",
+   "key": "164_1",
+   "concepts": "shelf",
+   "question": "Is there any risk of my hand getting caught in the dishwasher rack?",
+   "best_score": 0.252,
+   "fired": true,
+   "prompt": "a shelf"
+  },
+  {
+   "split": "train",
+   "key": "190_1",
+   "concepts": "sign",
+   "question": "Are there any signs or obstacles in my walking path?",
+   "best_score": 0.505,
+   "fired": true,
+   "prompt": "a sign"
+  },
+  {
+   "split": "train",
+   "key": "193_4",
+   "concepts": "door",
+   "question": "Am I close to any obstacles that I need to avoid?",
+   "best_score": 0.06,
+   "fired": false,
+   "prompt": "a doorway"
+  },
+  {
+   "split": "train",
+   "key": "198_1",
+   "concepts": "pole",
+   "question": "Can I go now?",
+   "best_score": 0.243,
+   "fired": true,
+   "prompt": "a lamp post"
+  },
+  {
+   "split": "train",
+   "key": "206_1",
+   "concepts": "door",
+   "question": "Is there any debris or potential tripping hazards near the door?",
+   "best_score": 0.123,
+   "fired": false,
+   "prompt": "a door"
+  },
+  {
+   "split": "train",
+   "key": "208_1",
+   "concepts": "wall",
+   "question": "Is it safe to walk straight ahead?",
+   "best_score": 0.134,
+   "fired": false,
+   "prompt": "a wall"
+  },
+  {
+   "split": "train",
+   "key": "272_1",
+   "concepts": "machine",
+   "question": "Is the area around the coffee machine clear of any hazards?",
+   "best_score": 0.249,
+   "fired": true,
+   "prompt": "a machine"
+  },
+  {
+   "split": "train",
+   "key": "284_2",
+   "concepts": "sign",
+   "question": "Is there any obstruction or hazard around me?",
+   "best_score": 0.566,
+   "fired": true,
+   "prompt": "a sign"
+  },
+  {
+   "split": "train",
+   "key": "286_1",
+   "concepts": "door",
+   "question": "Can you see if there are any obstacles in front of me?",
+   "best_score": 0.311,
+   "fired": true,
+   "prompt": "a glass door"
+  },
+  {
+   "split": "train",
+   "key": "329_1",
+   "concepts": "pole",
+   "question": "What obstacles are ahead of me on the sidewalk?",
+   "best_score": 0.548,
+   "fired": true,
+   "prompt": "a bollard"
+  },
+  {
+   "split": "train",
+   "key": "330_1",
+   "concepts": "stairs",
+   "question": "What is in front of me?",
+   "best_score": 0.017,
+   "fired": false,
+   "prompt": "an escalator"
+  },
+  {
+   "split": "train",
+   "key": "358_5",
+   "concepts": "door",
+   "question": "How can I get to the entrance of the building from here?",
+   "best_score": 0.091,
+   "fired": false,
+   "prompt": "an entrance door"
+  },
+  {
+   "split": "train",
+   "key": "359_3",
+   "concepts": "stairs",
+   "question": "Where is the nearest exit or entrance to the platform?",
+   "best_score": 0.355,
+   "fired": true,
+   "prompt": "stairs"
+  },
+  {
+   "split": "train",
+   "key": "361_2",
+   "concepts": "door",
+   "question": "How do I get to the nearest stairs from here?",
+   "best_score": 0.382,
+   "fired": true,
+   "prompt": "an entrance door"
+  },
+  {
+   "split": "train",
+   "key": "368_1",
+   "concepts": "fence",
+   "question": "Is the road ahead clear for riding?",
+   "best_score": 0.526,
+   "fired": true,
+   "prompt": "a fence"
+  },
+  {
+   "split": "train",
+   "key": "371_1",
+   "concepts": "fence",
+   "question": "Is there an obstruction in front of me on the sidewalk?",
+   "best_score": 0.72,
+   "fired": true,
+   "prompt": "a fence"
+  },
+  {
+   "split": "train",
+   "key": "372_2",
+   "concepts": "door",
+   "question": "Is the front door closed?",
+   "best_score": 0.187,
+   "fired": false,
+   "prompt": "a door"
+  },
+  {
+   "split": "train",
+   "key": "373_3",
+   "concepts": "pole",
+   "question": "Are there any obstacles in front of me?",
+   "best_score": 0.547,
+   "fired": true,
+   "prompt": "a bollard"
+  },
+  {
+   "split": "train",
+   "key": "375_1",
+   "concepts": "ground hazard",
+   "question": "Can I walk straight ahead without tripping?",
+   "best_score": 0.152,
+   "fired": false,
+   "prompt": "a hole in the ground"
+  },
+  {
+   "split": "train",
+   "key": "378_2",
+   "concepts": "door",
+   "question": "Can you tell me where the door is?",
+   "best_score": 0.083,
+   "fired": false,
+   "prompt": "a doorway"
+  },
+  {
+   "split": "train",
+   "key": "387_1",
+   "concepts": "shelf",
+   "question": "Is there a clear path before me to walk on?",
+   "best_score": 0.266,
+   "fired": true,
+   "prompt": "a store shelf"
+  },
+  {
+   "split": "train",
+   "key": "392_1",
+   "concepts": "pole",
+   "question": "Are there any obstacles in my way as I walk now?",
+   "best_score": 0.38,
+   "fired": true,
+   "prompt": "a bollard"
+  },
+  {
+   "split": "train",
+   "key": "493_1",
+   "concepts": "door",
+   "question": "Can you tell if the door is fully open so I can exit safely?",
+   "best_score": 0.072,
+   "fired": false,
+   "prompt": "a glass door"
+  },
+  {
+   "split": "train",
+   "key": "497_1",
+   "concepts": "door",
+   "question": "Where is the closest door to my current location?",
+   "best_score": 0.342,
+   "fired": true,
+   "prompt": "a glass door"
+  },
+  {
+   "split": "train",
+   "key": "511_1",
+   "concepts": "wall",
+   "question": "Where is the light switch?",
+   "best_score": 0.184,
+   "fired": false,
+   "prompt": "a wall"
+  },
+  {
+   "split": "train",
+   "key": "600_1",
+   "concepts": "fence",
+   "question": "How can I get around this fence?",
+   "best_score": 0.398,
+   "fired": true,
+   "prompt": "a barrier"
+  },
+  {
+   "split": "train",
+   "key": "602_1",
+   "concepts": "pole",
+   "question": "How can I avoid the pole in front of me?",
+   "best_score": 0.709,
+   "fired": true,
+   "prompt": "a pole"
+  },
+  {
+   "split": "train",
+   "key": "602_2",
+   "concepts": "tree",
+   "question": "Is there an obstacle in front of me?",
+   "best_score": 0.469,
+   "fired": true,
+   "prompt": "a tree trunk"
+  },
+  {
+   "split": "train",
+   "key": "648_1",
+   "concepts": "pole",
+   "question": "Where is the blind path?",
+   "best_score": 0.291,
+   "fired": true,
+   "prompt": "a pole"
+  },
+  {
+   "split": "train",
+   "key": "672_1",
+   "concepts": "stairs",
+   "question": "Where are the stairs?",
+   "best_score": 0.344,
+   "fired": true,
+   "prompt": "an escalator"
+  },
+  {
+   "split": "train",
+   "key": "682_1",
+   "concepts": "stairs",
+   "question": "Are you going to get on the elevator?",
+   "best_score": 0.205,
+   "fired": true,
+   "prompt": "an escalator"
+  },
+  {
+   "split": "train",
+   "key": "714_1",
+   "concepts": "stairs",
+   "question": "Is there an obstacle ahead?",
+   "best_score": 0.268,
+   "fired": true,
+   "prompt": "steps"
+  },
+  {
+   "split": "train",
+   "key": "759_2",
+   "concepts": "door",
+   "question": "Where am I?",
+   "best_score": 0.346,
+   "fired": true,
+   "prompt": "a doorway"
+  },
+  {
+   "split": "train",
+   "key": "887_1",
+   "concepts": "door,stairs",
+   "question": "Where am I?",
+   "best_score": 0.481,
+   "fired": true,
+   "prompt": "a doorway"
+  },
+  {
+   "split": "train",
+   "key": "887_2",
+   "concepts": "door",
+   "question": "Did I enter the store?",
+   "best_score": 0.451,
+   "fired": true,
+   "prompt": "a doorway"
+  },
+  {
+   "split": "train",
+   "key": "888_1",
+   "concepts": "door",
+   "question": "Is this the entrance to the restaurant?",
+   "best_score": 0.437,
+   "fired": true,
+   "prompt": "a doorway"
+  },
+  {
+   "split": "train",
+   "key": "899_1",
+   "concepts": "door",
+   "question": "Have I arrived at the door?",
+   "best_score": 0.236,
+   "fired": true,
+   "prompt": "a door"
+  },
+  {
+   "split": "train",
+   "key": "900_1",
+   "concepts": "door",
+   "question": "Where is the door?",
+   "best_score": 0.238,
+   "fired": true,
+   "prompt": "an entrance door"
+  },
+  {
+   "split": "train",
+   "key": "912_1",
+   "concepts": "door",
+   "question": "Am I out?",
+   "best_score": 0.396,
+   "fired": true,
+   "prompt": "a glass door"
+  },
+  {
+   "split": "train",
+   "key": "916_1",
+   "concepts": "pole",
+   "question": "Is the straight road unobstructed?",
+   "best_score": 0.47,
+   "fired": true,
+   "prompt": "a bollard"
+  },
+  {
+   "split": "train",
+   "key": "916_2",
+   "concepts": "fence",
+   "question": "How to get there?",
+   "best_score": 0.365,
+   "fired": true,
+   "prompt": "a railing"
+  },
+  {
+   "split": "finetune",
+   "key": "435_3",
+   "concepts": "animal",
+   "question": "Is the area around me safe from any potentially dangerous animals?",
+   "best_score": 0.262,
+   "fired": true,
+   "prompt": "an animal"
+  },
+  {
+   "split": "finetune",
+   "key": "435_4",
+   "concepts": "animal",
+   "question": "Are there any animals approaching me?",
+   "best_score": 0.294,
+   "fired": true,
+   "prompt": "an animal"
+  },
+  {
+   "split": "finetune",
+   "key": "438_2",
+   "concepts": "door",
+   "question": "Are there steps or a ramp at the entrance to this place?",
+   "best_score": 0.385,
+   "fired": true,
+   "prompt": "a glass door"
+  },
+  {
+   "split": "finetune",
+   "key": "441_6",
+   "concepts": "animal",
+   "question": "Are there any animals around me that I should be wary of?",
+   "best_score": 0.129,
+   "fired": false,
+   "prompt": "an animal"
+  },
+  {
+   "split": "finetune",
+   "key": "781_1",
+   "concepts": "door",
+   "question": "How can I reach the exit from this table?",
+   "best_score": 0.066,
+   "fired": false,
+   "prompt": "a glass door"
+  },
+  {
+   "split": "finetune",
+   "key": "805_1",
+   "concepts": "fence",
+   "question": "Can I walk on the road ahead smoothly?",
+   "best_score": 0.566,
+   "fired": true,
+   "prompt": "a fence"
+  },
+  {
+   "split": "finetune",
+   "key": "807_1",
+   "concepts": "fence",
+   "question": "Which direction should I go to reach the end of the fence?",
+   "best_score": 0.687,
+   "fired": true,
+   "prompt": "a fence"
+  },
+  {
+   "split": "finetune",
+   "key": "870_1",
+   "concepts": "stairs",
+   "question": "Which direction does the moving walkway go?",
+   "best_score": 0.362,
+   "fired": true,
+   "prompt": "an escalator"
+  },
+  {
+   "split": "finetune",
+   "key": "878_3",
+   "concepts": "door",
+   "question": "Am I almost at the hospital?",
+   "best_score": 0.205,
+   "fired": true,
+   "prompt": "a glass door"
+  },
+  {
+   "split": "finetune",
+   "key": "884_6",
+   "concepts": "stairs",
+   "question": "Where is the subway station?",
+   "best_score": 0.149,
+   "fired": false,
+   "prompt": "steps"
+  }
+ ]
+}

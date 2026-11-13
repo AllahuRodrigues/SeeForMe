@@ -141,6 +141,16 @@ Blind mixed audit (`scripts/review_events.py audit`): 30 random should-speak eve
 
 10. **The current human verdicts do not discriminate**, so they cannot be cited as validating the weak labels (train 237/237 and finetune 55/56 speak were entered in bulk or fast passes). Two readings remain open: the passes defaulted to "speak", or the reviewer judges that even a "clear" moment deserves an unprompted cue ("clear to cross"), which would challenge treating those windows as quiet. Settling it needs a sharper rubric (separate "warn about an object" from "confirm all clear") and an independent second rater. Until then the weak labels stay weak.
 
+## Wider perception (added 2026-11-12, night)
+
+Why events are uncoverable (train + finetune, 293 events, 133 uncoverable): 64 name an object the COCO detector has no class for (door 25, pole 9, stairs 9, fence 9, wall 5, ...), 34 ask about the scene with no single object ("is the path clear?", "which direction?"), 31 are filtered taxonomy (decor), 4 truncated caches.
+
+**Open-vocabulary cache (YOLO-World, 41-term navigation vocabulary), 3 seeds, dev:** coverable events rise from 160 to 232 per seed (79% of 293), but all-event recall does not: greedy 77/879 = 0.088 (COCO 0.111), Thompson 99/879 = 0.113 (COCO 0.102), floor 0.075. More detections bring as much noise as signal.
+
+**OWLv2 probe** (`scripts/probe_openvocab.py`, google/owlv2-base-patch16-ensemble, Apache-2.0) on the 64 not-detectable events, review frames inside each window: fires on 46/64 (doors 14/24, stairs 7/9, poles 9/9, fences 6/6). Hand check of 11 hits: 7 correct object, 2 marginal (full-frame elevator, distant door), 2 wrong object (a distant pole instead of the one beside the user; a meaningless "steps" box). About 1.7 s per frame on MPS, so a full 5 fps cache is impractical; it is a teacher, not a runtime detector.
+
+11. **Seeing more is not enough; the scheduler must know which detections matter.** Next: OWLv2 as a teacher for a fast student detector trained on human-verified boxes, and dense scene segmentation (doors, stairs, walls, railings, poles, free floor and sidewalk ahead) for both the architectural classes and the 34 scene-level questions.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
