@@ -1,0 +1,235 @@
+{
+ "budget_x1_s_per_min": 3.8267320895288894,
+ "finetune_recordings": 20,
+ "policies": {
+  "threshold": {
+   "finetune": {
+    "events": 56,
+    "hits": 9,
+    "recall": 0.16071428571428573,
+    "covered": 27,
+    "delivered": 9,
+    "covered_recall": 0.3333333333333333,
+    "quiet_violation": 0.15789473684210525,
+    "cues_per_min": 1.7214221422142215,
+    "speech_s_per_min": 3.8014738973897386,
+    "repeat_same_object": 0.25,
+    "repeat_same_label": 0.21568627450980393,
+    "missed_covered_by_reason": {
+     "below_threshold": 17,
+     "channel_busy": 1
+    }
+   },
+   "dev": {
+    "events": 293,
+    "hits": 42,
+    "recall": 0.14334470989761092,
+    "covered": 154,
+    "delivered": 43,
+    "covered_recall": 0.2792207792207792,
+    "quiet_violation": 0.1111111111111111,
+    "cues_per_min": 1.6751913505895142,
+    "speech_s_per_min": 3.821573354729618,
+    "repeat_same_object": 0.2727272727272727,
+    "repeat_same_label": 0.2366255144032922,
+    "missed_covered_by_reason": {
+     "below_threshold": 107,
+     "channel_busy": 4
+    }
+   }
+  },
+  "coverage-first, budget x1": {
+   "finetune": {
+    "events": 56,
+    "hits": 9,
+    "recall": 0.16071428571428573,
+    "covered": 27,
+    "delivered": 9,
+    "covered_recall": 0.3333333333333333,
+    "quiet_violation": 0.15789473684210525,
+    "cues_per_min": 2.6833933393339335,
+    "speech_s_per_min": 3.817506750675068,
+    "repeat_same_object": 0.0,
+    "repeat_same_label": 0.22012578616352202,
+    "missed_covered_by_reason": {
+     "budget": 12,
+     "unconfirmed": 5,
+     "already_announced": 1
+    }
+   },
+   "dev": {
+    "events": 293,
+    "hits": 39,
+    "recall": 0.13310580204778158,
+    "covered": 154,
+    "delivered": 40,
+    "covered_recall": 0.2597402597402597,
+    "quiet_violation": 0.23655913978494625,
+    "cues_per_min": 2.709260085521313,
+    "speech_s_per_min": 3.802960117500847,
+    "repeat_same_object": 0.09333333333333334,
+    "repeat_same_label": 0.17684478371501272,
+    "missed_covered_by_reason": {
+     "budget": 78,
+     "unconfirmed": 32,
+     "already_announced": 3,
+     "channel_busy": 1
+    }
+   },
+   "recall_vs_threshold": [
+    0.0,
+    -0.10204081632653061,
+    0.10810810810810811
+   ],
+   "quiet_vs_threshold": [
+    0.0,
+    -0.20833333333333337,
+    0.14814814814814814
+   ]
+  },
+  "coverage-first, budget x2": {
+   "finetune": {
+    "events": 56,
+    "hits": 11,
+    "recall": 0.19642857142857142,
+    "covered": 27,
+    "delivered": 13,
+    "covered_recall": 0.48148148148148145,
+    "quiet_violation": 0.2894736842105263,
+    "cues_per_min": 4.961746174617462,
+    "speech_s_per_min": 7.527002700270028,
+    "repeat_same_object": 0.32,
+    "repeat_same_label": 0.4523809523809524,
+    "missed_covered_by_reason": {
+     "budget": 9,
+     "unconfirmed": 5
+    }
+   },
+   "dev": {
+    "events": 293,
+    "hits": 69,
+    "recall": 0.2354948805460751,
+    "covered": 154,
+    "delivered": 81,
+    "covered_recall": 0.525974025974026,
+    "quiet_violation": 0.37992831541218636,
+    "cues_per_min": 5.0014457812868,
+    "speech_s_per_min": 7.475282884821983,
+    "repeat_same_object": 0.3356643356643357,
+    "repeat_same_label": 0.39627842866988283,
+    "missed_covered_by_reason": {
+     "budget": 40,
+     "unconfirmed": 30,
+     "already_announced": 2,
+     "channel_busy": 1
+    }
+   },
+   "recall_vs_threshold": [
+    0.0357142857142857,
+    -0.09090909090909091,
+    0.14583333333333334
+   ],
+   "quiet_vs_threshold": [
+    0.13157894736842107,
+    -0.14705882352941177,
+    0.3170731707317073
+   ]
+  },
+  "coverage-first, budget x4": {
+   "finetune": {
+    "events": 56,
+    "hits": 16,
+    "recall": 0.2857142857142857,
+    "covered": 27,
+    "delivered": 21,
+    "covered_recall": 0.7777777777777778,
+    "quiet_violation": 0.5,
+    "cues_per_min": 8.623987398739875,
+    "speech_s_per_min": 14.597490999099898,
+    "repeat_same_object": 0.5925925925925926,
+    "repeat_same_label": 0.5909980430528375,
+    "missed_covered_by_reason": {
+     "budget": 3,
+     "unconfirmed": 3
+    }
+   },
+   "dev": {
+    "events": 293,
+    "hits": 84,
+    "recall": 0.28668941979522183,
+    "covered": 154,
+    "delivered": 101,
+    "covered_recall": 0.6558441558441559,
+    "quiet_violation": 0.5913978494623656,
+    "cues_per_min": 8.837840787883774,
+    "speech_s_per_min": 14.57433709491794,
+    "repeat_same_object": 0.5224489795918368,
+    "repeat_same_label": 0.5663026521060842,
+    "missed_covered_by_reason": {
+     "unconfirmed": 28,
+     "budget": 21,
+     "already_announced": 3,
+     "channel_busy": 1
+    }
+   },
+   "recall_vs_threshold": [
+    0.12499999999999997,
+    0.06666666666666665,
+    0.1794871794871795
+   ],
+   "quiet_vs_threshold": [
+    0.34210526315789475,
+    0.16666666666666663,
+    0.4761904761904762
+   ]
+  },
+  "coverage-first, no budget": {
+   "finetune": {
+    "events": 56,
+    "hits": 11,
+    "recall": 0.19642857142857142,
+    "covered": 27,
+    "delivered": 21,
+    "covered_recall": 0.7777777777777778,
+    "quiet_violation": 0.868421052631579,
+    "cues_per_min": 16.066606660666068,
+    "speech_s_per_min": 37.67804905490549,
+    "repeat_same_object": 0.7623762376237624,
+    "repeat_same_label": 0.7184873949579832,
+    "missed_covered_by_reason": {
+     "unconfirmed": 3,
+     "already_announced": 2,
+     "channel_busy": 1
+    }
+   },
+   "dev": {
+    "events": 293,
+    "hits": 86,
+    "recall": 0.2935153583617747,
+    "covered": 154,
+    "delivered": 117,
+    "covered_recall": 0.7597402597402597,
+    "quiet_violation": 0.8781362007168458,
+    "cues_per_min": 16.941492773965972,
+    "speech_s_per_min": 38.71949736599713,
+    "repeat_same_object": 0.6971046770601337,
+    "repeat_same_label": 0.6860630722278739,
+    "missed_covered_by_reason": {
+     "unconfirmed": 23,
+     "channel_busy": 8,
+     "already_announced": 6
+    }
+   },
+   "recall_vs_threshold": [
+    0.0357142857142857,
+    -0.09090909090909091,
+    0.14634146341463414
+   ],
+   "quiet_vs_threshold": [
+    0.7105263157894737,
+    0.44999999999999996,
+    0.8620689655172413
+   ]
+  }
+ }
+}
