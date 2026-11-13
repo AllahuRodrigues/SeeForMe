@@ -1,0 +1,69 @@
+{
+ "requested": {
+  "door": 24,
+  "stairs": 24,
+  "pole": 16,
+  "scene": 28,
+  "covered_other": 28,
+  "quiet": 24,
+  "unasked": 16
+ },
+ "picked": {
+  "door": 24,
+  "stairs": 12,
+  "pole": 16,
+  "scene": 17,
+  "covered_other": 28,
+  "quiet": 24,
+  "unasked": 16
+ },
+ "shortfall": {
+  "door": 0,
+  "stairs": 12,
+  "pole": 0,
+  "scene": 11,
+  "covered_other": 0,
+  "quiet": 0,
+  "unasked": 0
+ },
+ "filled": {
+  "covered_other": 7,
+  "quiet": 7,
+  "unasked": 7,
+  "pole": 1,
+  "door": 1
+ },
+ "total": 160,
+ "unfilled": 0,
+ "seed": 7,
+ "max_per_group": 2,
+ "final": {
+  "unasked": 23,
+  "covered_other": 35,
+  "pole": 17,
+  "quiet": 31,
+  "stairs": 12,
+  "scene": 17,
+  "door": 25
+ },
+ "by_split": {
+  "train": 132,
+  "finetune": 28
+ },
+ "available": {
+  "covered_other": 187,
+  "quiet": 279,
+  "unasked": 213,
+  "door": 34,
+  "stairs": 15,
+  "scene": 34,
+  "pole": 23
+ },
+ "claim_source": {
+  "system": 42,
+  "label": 64,
+  "system_top": 43,
+  "none": 11
+ },
+ "recordings": 91
+}

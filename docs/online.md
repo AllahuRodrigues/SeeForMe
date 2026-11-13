@@ -293,6 +293,23 @@ Ego-motion (`seeforme/perception/egomotion.py`; Shi-Tomasi, LK with forward-back
 
 22. **On the current weak labels, neither scene context nor a nonlinear learner separates should-speak moments better than the base logistic.** Boosting memorises train (AUC up to 0.98) and does worse on finetune than logistic; context adds at most +0.02 with intervals including 0. With a few hundred independent events, the binding constraint is now the supervision: E3's decisive row (corrected rubric v3 labels with independent agreement) needs human annotation before any further model or RL work.
 
+## Coverage-first diagnostic: what can the current candidates deliver at all? (added 2026-11-13)
+
+`scripts/compare_coverage.py`; full tables in `results/coverage/dev.md`. The coverage-first policy (`seeforme/scheduling/coverage_policy.py`) has no learned score: every candidate above the confidence floor is confirmed after 2 decisions, queued once and announced first-in first-out when the channel is free and the strict ledger can pay. It is a measuring instrument and must never be a product default. Budget x1 is the threshold rule's own speech rate on `train` (3.83 spoken s/min). `finetune`: 104 videos, 20 source recordings, 56 events, 27 of them with a candidate inside the window.
+
+| Policy on `finetune` | events on time | of the 27 with a candidate | quiet moments spoken over | speech s/min | Δ events on time vs threshold [95%, by recording] |
+|---|---|---|---|---|---|
+| threshold (frozen logistic, production) | 9/56 = 0.161 | 9/27 | 16% | 3.80 | reference |
+| coverage-first, budget x1 | 9/56 = 0.161 | 9/27 | 16% | 3.82 | +0.000 [-0.102, +0.108] |
+| coverage-first, budget x2 | 11/56 = 0.196 | 13/27 | 29% | 7.53 | +0.036 [-0.091, +0.146] |
+| coverage-first, budget x4 | 16/56 = 0.286 | 21/27 | 50% | 14.60 | +0.125 [+0.067, +0.179] |
+| coverage-first, no budget | 11/56 = 0.196 | 21/27 | 87% | 37.68 | +0.036 [-0.091, +0.146] |
+
+On train + finetune (293 events, 154 with a candidate inside the window): threshold 42/293 (in-sample on train), coverage-first x1 39/293, x4 84/293, no budget 86/293 by the benchmark's recall and 117/154 by the funnel. Misses among events with a candidate: threshold `below_threshold` 107 of 111; coverage-first x1 `budget` 78, `unconfirmed` 32; no budget `unconfirmed` 23, `channel_busy` 8, announced before the window 6. The two recall columns differ because the benchmark credits only the first cue about an object, while the funnel credits any cue about it inside the window.
+
+23. **At the production speech budget the learned score selects no better than first-in first-out.** Same events on time (9/56), same false alerts (16%), same seconds of speech; the interval is wide (20 recordings), so this is "no measurable benefit", not "proven equal". It agrees with items 13 to 22: the score does not separate should-speak moments.
+24. **The candidates set a ceiling near 0.40 of all events, and reaching it by talking more is not usable.** With no budget at all the assistant delivers 117 of the 154 events that have a candidate (0.40 of all 293 by the funnel, 0.29 by the benchmark's recall) while speaking 38 s per minute and over 87% of confirmed-clear moments. Four times the budget buys +0.125 recall for 50% false alerts. So two gaps remain, in this order of size: 139 of 293 events never reach the scheduler in time (perception), and at a fixed budget only 9 of 27 reachable events are chosen where 21 of 27 are reachable (selection). Selection needs supervision that says which candidates matter; a higher budget is not a substitute.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.

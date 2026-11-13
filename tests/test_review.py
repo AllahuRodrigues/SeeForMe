@@ -1,8 +1,8 @@
 """M3: blind human review of the weak EgoBlind events (issue #5)."""
 import pytest
 
-from seeforme.egoblind.review import (VERDICTS, blind_row, cohen_kappa, event_key, latest_verdicts, merge_verdicts,
-                                      make_verdict, sample_second_rater)
+from seeforme.egoblind.review import (CLAIMS, USEFULNESS, VERDICTS, agreement, blind_row, cohen_kappa, consensus_targets, event_key,
+                                      latest_verdicts, merge_verdicts, make_verdict, proactive_target, sample_second_rater, two_axis)
 
 ROW = {"video": "egoblind_2", "video_id": "2", "obj_id": "1", "t_q": "6.99", "window": "5.6-7.5", "question": "Is it safe to cross?",
        "labels": "car,truck", "human_verdict": "", "human_note": "", "bin:pcacs": "spoken_timely", "max_score:pcacs": "1.27"}
@@ -91,3 +91,56 @@ def test_uncertain_is_never_scored_as_silent():
 def test_decision_time_frames_stop_at_the_question():
     from seeforme.egoblind.review import decision_time_frames
     assert decision_time_frames([4.0, 5.0, 6.0, 7.0, 8.0], t_q=6.5) == [0, 1, 2]
+
+
+# rubric v4: usefulness and claim correctness are separate labels
+def test_usefulness_and_claim_are_separate_labels():
+    v = make_verdict("2:1", "proactive_warn", reviewer="ar", claim="wrong", evidence="yes", confidence="high")
+    assert two_axis(v) == ("proactive_warn", "wrong")
+    assert "wrong_object" not in USEFULNESS and set(CLAIMS) == {"correct", "partially_correct", "wrong", "not_assessable"}
+    with pytest.raises(ValueError):
+        make_verdict("2:1", "silent", reviewer="ar", claim="maybe")
+    with pytest.raises(ValueError):
+        make_verdict("2:1", "silent", reviewer="ar", evidence="often")
+    with pytest.raises(ValueError):
+        make_verdict("2:1", "silent", reviewer="ar", confidence="very")
+
+
+def test_legacy_wrong_object_splits_into_useful_but_wrong_claim():
+    assert two_axis(make_verdict("2:1", "wrong_object", reviewer="ar")) == ("proactive_warn", "wrong")
+    assert two_axis(make_verdict("2:1", "speak", reviewer="ar")) == ("proactive_warn", None)
+
+
+def test_uncertain_is_never_a_negative():
+    assert proactive_target("proactive_warn") == 1 and proactive_target("proactive_clear") == 1
+    assert proactive_target("on_request") == 0 and proactive_target("silent") == 0
+    assert proactive_target("uncertain") is None
+
+
+def test_consensus_masks_disagreement_and_uncertainty():
+    mk = lambda k, v, r, **kw: make_verdict(k, v, reviewer=r, **kw)
+    a = {"1": mk("1", "proactive_warn", "r1", claim="correct"), "2": mk("2", "silent", "r1"), "3": mk("3", "proactive_warn", "r1"),
+         "4": mk("4", "uncertain", "r1"), "5": mk("5", "on_request", "r1"), "6": mk("6", "silent", "r1")}
+    b = {"1": mk("1", "proactive_clear", "r2", claim="correct"), "2": mk("2", "on_request", "r2"), "3": mk("3", "silent", "r2"),
+         "4": mk("4", "silent", "r2"), "5": mk("5", "on_request", "r2")}
+    c = consensus_targets(a, b)
+    assert c["1"] == {"target": 1, "status": "agree"}              # both proactive (warn vs clear differ in content, not in whether)
+    assert c["2"] == {"target": 0, "status": "agree"}              # both not-proactive
+    assert c["3"] == {"target": None, "status": "disagree"}
+    assert c["4"] == {"target": None, "status": "uncertain"}       # one rater unsure: masked, not negative
+    assert c["5"]["target"] == 0
+    assert c["6"] == {"target": None, "status": "single"}          # one rater only: not ground truth yet
+
+
+def test_agreement_reports_both_axes_and_what_was_excluded():
+    mk = lambda k, v, r, **kw: make_verdict(k, v, reviewer=r, **kw)
+    a = {str(i): mk(str(i), "proactive_warn" if i < 5 else "silent", "r1", claim="correct" if i % 2 else "wrong") for i in range(10)}
+    b = {str(i): mk(str(i), "proactive_warn" if i < 5 else "silent", "r2", claim="correct" if i % 2 else "wrong") for i in range(10)}
+    b["9"] = mk("9", "uncertain", "r2", claim="not_assessable")
+    r = agreement(a, b, n_boot=200, seed=0)
+    assert r["n_overlap"] == 10 and r["binary"]["n"] == 9 and r["binary"]["excluded_uncertain"] == 1
+    assert r["binary"]["kappa"] == pytest.approx(1.0)
+    assert r["usefulness"]["kappa"] < 1.0                          # the uncertain item disagrees on the 5-way axis
+    assert r["claim"]["n"] == 10 and 0.0 < r["claim"]["raw"] < 1.0
+    lo, hi = r["binary"]["kappa_ci"]
+    assert lo <= r["binary"]["kappa"] <= hi

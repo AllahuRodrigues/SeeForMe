@@ -23,6 +23,13 @@ from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 VERDICTS = ("proactive_warn", "proactive_clear", "on_request", "silent", "uncertain", "wrong_object")
 LEGACY = {"speak": "proactive_warn", "confirm_clear": "proactive_clear", "unclear": "uncertain"}
 WARN_LIKE = {"proactive_warn", "wrong_object"}
+# Rubric v4 (2026-11-13) records two labels per decision moment: whether an unprompted announcement would help
+# (USEFULNESS), and whether the statement the assistant would make is true of what was visible (CLAIMS). 'wrong_object'
+# mixed the two; it now reads as useful to announce, with a wrong claim.
+USEFULNESS = ("proactive_warn", "proactive_clear", "on_request", "silent", "uncertain")
+CLAIMS = ("correct", "partially_correct", "wrong", "not_assessable")
+EVIDENCE = ("yes", "no", "uncertain")
+CONFIDENCE = ("high", "medium", "low")
 
 
 def canonical(verdict: str) -> str:
@@ -47,10 +54,14 @@ def blind_row(row: Dict) -> Dict:
 
 
 def make_verdict(key: str, verdict: str, reviewer: str, window: Optional[Tuple[float, float]] = None, note: str = "",
-                 verification: str = "human", t: Optional[float] = None) -> Dict:
+                 verification: str = "human", t: Optional[float] = None, claim: Optional[str] = None,
+                 evidence: Optional[str] = None, confidence: Optional[str] = None) -> Dict:
     verdict = canonical(verdict)
     if verdict not in VERDICTS:
         raise ValueError(f"verdict must be one of {VERDICTS}, got {verdict!r}")
+    for name, val, allowed in (("claim", claim, CLAIMS), ("evidence", evidence, EVIDENCE), ("confidence", confidence, CONFIDENCE)):
+        if val not in (None, "") and val not in allowed:
+            raise ValueError(f"{name} must be one of {allowed}, got {val!r}")
     if not reviewer.strip():
         raise ValueError("reviewer is required")
     if verification not in ("human", "model"):
@@ -60,8 +71,45 @@ def make_verdict(key: str, verdict: str, reviewer: str, window: Optional[Tuple[f
         if not a < b:
             raise ValueError(f"window start must precede its end, got {window}")
         window = [a, b]
-    return {"key": key, "verdict": verdict, "window": window, "note": note.strip(), "reviewer": reviewer.strip(),
-            "verification": verification, "t": time.time() if t is None else t}
+    rec = {"key": key, "verdict": verdict, "window": window, "note": note.strip(), "reviewer": reviewer.strip(),
+           "verification": verification, "t": time.time() if t is None else t}
+    for name, val in (("claim", claim), ("evidence", evidence), ("confidence", confidence)):
+        if val:
+            rec[name] = val
+    return rec
+
+
+def two_axis(record: Dict) -> Tuple[str, Optional[str]]:
+    """(usefulness, claim correctness) of one verdict record, for any rubric version."""
+    v = canonical(record["verdict"])
+    if v == "wrong_object":
+        return "proactive_warn", "wrong"
+    return v, record.get("claim") or None
+
+
+def proactive_target(usefulness: str) -> Optional[int]:
+    """Training target for 'speak unprompted now': 1, 0, or None when the reviewer could not tell (never a negative)."""
+    if usefulness in ("proactive_warn", "proactive_clear"):
+        return 1
+    if usefulness in ("on_request", "silent"):
+        return 0
+    return None
+
+
+def consensus_targets(a: Dict[str, Dict], b: Dict[str, Dict]) -> Dict[str, Dict]:
+    """Per event: the target two reviewers agree on. Disagreement, an unsure reviewer or a single review give None."""
+    out: Dict[str, Dict] = {}
+    for k in sorted(set(a) | set(b)):
+        if k not in a or k not in b:
+            out[k] = {"target": None, "status": "single"}; continue
+        ta, tb = proactive_target(two_axis(a[k])[0]), proactive_target(two_axis(b[k])[0])
+        if ta is None or tb is None:
+            out[k] = {"target": None, "status": "uncertain"}
+        elif ta != tb:
+            out[k] = {"target": None, "status": "disagree"}
+        else:
+            out[k] = {"target": ta, "status": "agree"}
+    return out
 
 
 def latest_verdicts(records: Iterable[Dict], reviewer: Optional[str] = None, human_only: bool = True) -> Dict[str, Dict]:
@@ -97,6 +145,36 @@ def cohen_kappa(a: Dict[str, str], b: Dict[str, str]) -> Optional[float]:
     ca, cb = Counter(a[k] for k in keys), Counter(b[k] for k in keys)
     pe = sum(ca[c] * cb[c] for c in set(ca) | set(cb)) / (n * n)
     return 1.0 if pe >= 1.0 else (po - pe) / (1.0 - pe)
+
+
+def _kappa_block(a: Dict[str, str], b: Dict[str, str], n_boot: int, seed: int) -> Dict:
+    keys = sorted(set(a) & set(b))
+    if not keys:
+        return {"n": 0, "raw": None, "kappa": None, "kappa_ci": None}
+    k = cohen_kappa(a, b)
+    rng, ks = random.Random(seed), []
+    for _ in range(n_boot):                                      # percentile bootstrap over events
+        pick = [rng.choice(keys) for _ in keys]
+        ks.append(cohen_kappa({str(i): a[x] for i, x in enumerate(pick)}, {str(i): b[x] for i, x in enumerate(pick)}))
+    ks.sort()
+    ci = [ks[int(0.025 * len(ks))], ks[max(0, int(0.975 * len(ks)) - 1)]] if ks else None
+    return {"n": len(keys), "raw": sum(a[x] == b[x] for x in keys) / len(keys), "kappa": k, "kappa_ci": ci}
+
+
+def agreement(a: Dict[str, Dict], b: Dict[str, Dict], n_boot: int = 2000, seed: int = 0) -> Dict:
+    """Agreement of two reviewers on each axis. The binary block (speak unprompted or not) drops every event that
+    either reviewer marked uncertain and says how many; it never counts them as silent."""
+    keys = sorted(set(a) & set(b))
+    ua, ub = {k: two_axis(a[k])[0] for k in keys}, {k: two_axis(b[k])[0] for k in keys}
+    decided = [k for k in keys if proactive_target(ua[k]) is not None and proactive_target(ub[k]) is not None]
+    ca = {k: two_axis(a[k])[1] for k in keys if two_axis(a[k])[1] and two_axis(b[k])[1]}
+    cb = {k: two_axis(b[k])[1] for k in ca}
+    binary = _kappa_block({k: str(proactive_target(ua[k])) for k in decided}, {k: str(proactive_target(ub[k])) for k in decided}, n_boot, seed)
+    binary["excluded_uncertain"] = len(keys) - len(decided)
+    cons = consensus_targets(a, b)
+    return {"n_overlap": len(keys), "usefulness": _kappa_block(ua, ub, n_boot, seed), "binary": binary,
+            "claim": _kappa_block(ca, cb, n_boot, seed),
+            "consensus": dict(Counter(("target_%d" % c["target"]) if c["target"] is not None else c["status"] for k, c in cons.items() if k in keys))}
 
 
 def sample_second_rater(keys: Sequence[str], share: float = 0.2, seed: int = 0) -> List[str]:

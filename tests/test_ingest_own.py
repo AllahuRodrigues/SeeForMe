@@ -33,3 +33,16 @@ def test_blur_changes_only_the_region():
     out = blur_regions(img, [(0.0, 0.0, 0.5, 0.5)])
     assert not np.array_equal(out[:50, :100], img[:50, :100])
     assert np.array_equal(out[60:, 120:], img[60:, 120:])
+
+
+def test_development_and_lockbox_recordings_live_in_separate_folders(tmp_path):
+    import pytest
+    from seeforme.own.ingest import BATCHES, batch_dirs
+    assert BATCHES == ("dev", "lockbox")
+    dev_raw, dev_out = batch_dirs(tmp_path, "dev")
+    lock_raw, lock_out = batch_dirs(tmp_path, "lockbox")
+    assert dev_raw != lock_raw and dev_out != lock_out
+    assert lock_raw.name == "lockbox" and lock_out.name == "lockbox"
+    assert dev_raw.parent == lock_raw.parent == tmp_path / "data" / "own" / "raw"
+    with pytest.raises(ValueError):
+        batch_dirs(tmp_path, "test")

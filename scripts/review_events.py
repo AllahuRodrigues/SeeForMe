@@ -13,6 +13,9 @@ finetune, shuffled, with the derived answer hidden, so it measures whether verdi
 
 Reads results/egoblind/review_events_<split>.csv (scripts/diagnose_egoblind_recall.py). Model columns are never shown.
 Frames and verdicts live in data/review/<split>/ (git-ignored: frames are EgoBlind video, CC BY-NC).
+Rubric v4 queues (scripts/build_speech_label_queue.py, a `claim` column) ask two separate questions per decision moment:
+would an unprompted announcement help (keys 1 to 5), and is the sentence the assistant would say true (Q W E R); Enter saves.
+`kappa` then reports agreement on each axis with bootstrap intervals; uncertain is excluded, never counted as silent.
 Keys in the page (rubric v3): 1 proactive warning, 2 proactive all-clear, 3 useful only if asked, 4 nothing needed, 5 uncertain, 6 warning needed but wrong object; left/right arrows to move. Only frames up to the question are shown.
 """
 import argparse, csv, html, json, sys
@@ -20,8 +23,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 from _common import ROOT
-from seeforme.egoblind.review import (VERDICTS, blind_row, decision_time_frames, cohen_kappa, latest_verdicts, make_verdict, merge_verdicts,
-                                      sample_second_rater)
+from seeforme.egoblind.review import (USEFULNESS, VERDICTS, agreement, blind_row, decision_time_frames, cohen_kappa, latest_verdicts,
+                                      make_verdict, merge_verdicts, sample_second_rater)
 
 REVIEW = ROOT / "data" / "review"
 STEP_S, BEFORE_S, AFTER_S, WIDTH = 0.75, 3.0, 1.0, 480
@@ -69,6 +72,7 @@ if args.cmd == "audit":
 if not csv_path.exists():
     sys.exit(f"{csv_path} missing: run scripts/diagnose_egoblind_recall.py --split {args.split}")
 rows = list(csv.DictReader(open(csv_path)))
+TWO_AXIS = bool(rows) and "claim" in rows[0]      # rubric v4 queue (scripts/build_speech_label_queue.py)
 out_dir = REVIEW / args.split
 store = out_dir / "verdicts.jsonl"
 
@@ -149,6 +153,12 @@ elif args.cmd == "audit-score":
 
 elif args.cmd == "kappa":
     recs = load_records()
+    if TWO_AXIS:
+        res = agreement(latest_verdicts(recs, reviewer=args.a), latest_verdicts(recs, reviewer=args.b))
+        print(json.dumps(res, indent=1))
+        (out_dir / f"agreement_{args.a}_{args.b}.json").write_text(json.dumps(res, indent=1))
+        print("binary = speak unprompted or not, over events both reviewers decided; uncertain events are excluded, not counted as silent")
+        sys.exit(0)
     a = {k: r["verdict"] for k, r in latest_verdicts(recs, reviewer=args.a).items()}
     b = {k: r["verdict"] for k, r in latest_verdicts(recs, reviewer=args.b).items()}
     k = cohen_kappa(a, b)
@@ -172,8 +182,10 @@ else:
         e["win"] = list(window_of(e))
     out_dir.mkdir(parents=True, exist_ok=True)
     page = (Path(__file__).parent / "review_ui.html").read_text()
+    claims = {e["key"]: bool((e.get("claim") or "").strip()) for e in events}
     page = page.replace("__DATA__", json.dumps({"events": events, "reviewer": args.reviewer, "split": args.split,
-                                                  "verdicts": list(VERDICTS)}).replace("</", "<\\/"))
+                                                  "mode": "two_axis" if TWO_AXIS else "single",
+                                                  "verdicts": list(USEFULNESS if TWO_AXIS else VERDICTS)}).replace("</", "<\\/"))
     page = page.replace("__TITLE__", html.escape(f"Event review: {args.split}"))
 
     class H(BaseHTTPRequestHandler):
@@ -203,7 +215,15 @@ else:
                 body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
                 win = body.get("window")
                 v = make_verdict(body["key"], body["verdict"], args.reviewer, window=tuple(win) if win else None,
-                                 note=body.get("note", ""))
+                                 note=body.get("note", ""), claim=body.get("claim"), evidence=body.get("evidence"),
+                                 confidence=body.get("confidence"))
+                if TWO_AXIS:
+                    if body["key"] not in claims:
+                        raise ValueError(f"unknown event {body['key']!r}")
+                    if v["verdict"] not in USEFULNESS:
+                        raise ValueError(f"verdict must be one of {USEFULNESS}")
+                    if claims[body["key"]] and not v.get("claim"):
+                        raise ValueError("this moment has a proposed sentence: say whether it is true")
                 recs = load_records()
                 if recs and recs[-1].get("reviewer") == args.reviewer and v["t"] - recs[-1]["t"] < MIN_GAP_S:
                     raise ValueError(f"saved {v['t'] - recs[-1]['t']:.1f} s after the previous verdict; "

@@ -56,10 +56,10 @@
   <section class="card" aria-labelledby="frames-h">
     <h2 class="sr" id="frames-h">Frames around the question</h2>
     <div class="strip" id="strip"></div>
-    <div class="muted">Only what the assistant could have seen before the question. Blue border: inside the derived window. Orange: the moment the question was asked.</div>
+    <div class="muted" id="strip-help">Only what the assistant could have seen before the question. Blue border: inside the derived window. Orange: the moment the question was asked.</div>
   </section>
 
-  <section class="card" aria-labelledby="ctx-h">
+  <section class="card" aria-labelledby="ctx-h" id="ctx-card">
     <h2 class="sr" id="ctx-h">Context</h2>
     <dl>
       <dt>Derived objects</dt><dd id="labels"></dd>
@@ -70,10 +70,22 @@
   </section>
 
   <section class="card" aria-labelledby="v-h">
-    <p style="margin:0 0 6px;font-size:15px;color:var(--muted)">The user asked:</p>
+    <p id="q-label" style="margin:0 0 6px;font-size:15px;color:var(--muted)">The user asked:</p>
     <p id="q-again" style="margin:0 0 14px;font-size:22px;font-weight:600"></p>
     <h2 id="v-h" style="font-size:18px;margin:0 0 12px">Before that question, what should the assistant have done?</h2>
     <div class="actions" role="group" aria-labelledby="v-h" id="actions"></div>
+    <div id="two" hidden>
+      <div id="claim-box">
+        <p style="margin:24px 0 6px;font-size:15px;color:var(--muted)">If it spoke, the assistant would say:</p>
+        <p id="claim-text" style="margin:0 0 14px;font-size:22px;font-weight:600"></p>
+        <h2 id="c-h" style="font-size:18px;margin:0 0 12px">Is that sentence true of what these frames show?</h2>
+        <div class="actions" role="group" aria-labelledby="c-h" id="claims"></div>
+        <h2 id="e-h" style="font-size:18px;margin:20px 0 12px">Can you see the thing it refers to? <span class="kbd">optional</span></h2>
+        <div class="actions" role="group" aria-labelledby="e-h" id="evidence"></div>
+      </div>
+      <h2 id="k-h" style="font-size:18px;margin:20px 0 12px">How sure are you? <span class="kbd">optional</span></h2>
+      <div class="actions" role="group" aria-labelledby="k-h" id="confidence"></div>
+    </div>
     <div class="row">
       <div><label for="w0">Corrected window start (s)</label><input id="w0" inputmode="decimal"></div>
       <div><label for="w1">Corrected window end (s)</label><input id="w1" inputmode="decimal"></div>
@@ -81,6 +93,7 @@
     </div>
     <nav>
       <button id="prev">Previous <span class="kbd">←</span></button>
+      <button id="save2" hidden>Save and next <span class="kbd">Enter</span></button>
       <button id="next">Next unreviewed <span class="kbd">→</span></button>
     </nav>
   </section>
@@ -89,6 +102,11 @@
 <script>
 const D = __DATA__;
 const NAMES = { proactive_warn: "Warn about an object, unprompted", proactive_clear: "Say the way is clear, unprompted", on_request: "Useful only if asked", silent: "Nothing needed", uncertain: "Can't tell from the frames", wrong_object: "Warning needed, wrong object" };
+const TWO = D.mode === "two_axis";       // rubric v4: usefulness and claim correctness are separate labels
+const AXES = { claim: ["claims", "QWER", { correct: "True", partially_correct: "Partly true", wrong: "False", not_assessable: "Can't check from these frames" }],
+               evidence: ["evidence", "ASD", { yes: "Yes", no: "No", uncertain: "Not sure" }],
+               confidence: ["confidence", "ZXC", { high: "Sure", medium: "Fairly sure", low: "Guessing" }] };
+let sel = {};
 let done = {}, i = 0;
 const $ = id => document.getElementById(id);
 const txt = (id, s) => { $(id).textContent = s; };
@@ -97,16 +115,60 @@ D.verdicts.forEach((v, k) => {
   const b = document.createElement("button");
   b.dataset.v = v; b.setAttribute("aria-pressed", "false");
   b.append(NAMES[v]); const s = document.createElement("span"); s.className = "kbd"; s.textContent = String(k + 1); b.append(s);
-  b.addEventListener("click", () => save(v));
+  b.addEventListener("click", () => TWO ? pick("verdict", v) : save(v));
   $("actions").append(b);
 });
+if (TWO) {
+  NAMES.proactive_warn = "Yes: announce something"; NAMES.proactive_clear = "Yes: say the way is clear";
+  NAMES.on_request = "Only if the user asks"; NAMES.silent = "No: stay silent"; NAMES.uncertain = "Can't tell from the frames";
+  document.querySelectorAll("#actions button").forEach(b => { b.firstChild.textContent = NAMES[b.dataset.v]; });
+  for (const [axis, [box, keys, names]] of Object.entries(AXES)) {
+    Object.keys(names).forEach((v, k) => {
+      const b = document.createElement("button");
+      b.dataset.axis = axis; b.dataset.v = v; b.setAttribute("aria-pressed", "false");
+      b.append(names[v]); const s = document.createElement("span"); s.className = "kbd"; s.textContent = keys[k]; b.append(s);
+      b.addEventListener("click", () => pick(axis, v));
+      $(box).append(b);
+    });
+  }
+  $("two").hidden = false; $("save2").hidden = false; $("ctx-card").hidden = true; $("q-label").hidden = true; $("q-again").hidden = true;
+  for (const id of ["w0", "w1"]) $(id).parentElement.hidden = true;
+  $("v-h").textContent = "Nobody has asked anything. At the last frame, should the assistant speak up on its own?";
+  $("strip-help").textContent = "Only what the assistant could have seen up to the decision moment (orange border, the last frame).";
+  document.querySelector("label[for=note]").textContent = "Note (optional: what is wrong or missing)";
+  $("save2").addEventListener("click", saveTwo);
+}
+
+function pick(axis, v) {
+  sel[axis] = sel[axis] === v && axis !== "verdict" ? undefined : v;      // optional answers can be cleared
+  paint();
+}
+
+function paint() {
+  document.querySelectorAll("#actions button").forEach(b => b.setAttribute("aria-pressed", String(sel.verdict === b.dataset.v)));
+  document.querySelectorAll("#two button").forEach(b => b.setAttribute("aria-pressed", String(sel[b.dataset.axis] === b.dataset.v)));
+}
+
+async function saveTwo() {
+  const e = D.events[i];
+  if (!sel.verdict) { txt("status", "Not saved: answer the first question (keys 1 to 5)."); return; }
+  if (e.claim && !sel.claim) { txt("status", "Not saved: say whether the sentence is true (keys Q, W, E, R)."); return; }
+  await save(sel.verdict);
+}
 
 function show(n) {
   i = Math.max(0, Math.min(D.events.length - 1, n));
   const e = D.events[i], prev = done[e.key];
-  txt("question", e.question);
-  txt("q-again", "\u201c" + e.question + "\u201d");
-  txt("meta", `Video ${e.video_id}, event ${e.obj_id}, asked at ${Number(e.t_q).toFixed(1)} s`);
+  if (TWO) {
+    txt("question", `Decision moment ${e.sample_id || e.key}`);
+    txt("meta", `Video ${e.video_id}, at ${Number(e.t_q).toFixed(1)} s`);
+    $("claim-box").hidden = !e.claim; txt("claim-text", e.claim ? "\u201c" + e.claim + "\u201d" : "");
+    sel = prev ? { verdict: prev.verdict, claim: prev.claim, evidence: prev.evidence, confidence: prev.confidence } : {};
+  } else {
+    txt("question", e.question);
+    txt("q-again", "\u201c" + e.question + "\u201d");
+    txt("meta", `Video ${e.video_id}, event ${e.obj_id}, asked at ${Number(e.t_q).toFixed(1)} s`);
+  }
   txt("labels", e.labels || "none");
   txt("window", `${e.win[0].toFixed(1)} to ${e.win[1].toFixed(1)} s`);
   txt("qtype", e.qtype || "");
@@ -115,7 +177,7 @@ function show(n) {
   if (!e.times.length) { const p = document.createElement("p"); p.textContent = "No frames extracted yet: run the frames command."; strip.append(p); }
   e.times.forEach((t, k) => {
     const f = document.createElement("figure");
-    if (t >= e.win[0] && t <= e.win[1]) f.classList.add("inwin");
+    if (!TWO && t >= e.win[0] && t <= e.win[1]) f.classList.add("inwin");
     if (Math.abs(t - Number(e.t_q)) < 0.4) f.classList.add("q");
     const img = document.createElement("img");
     img.src = `/frames/${e.key.replace(":", "_")}/${String(e.frame_idx ? e.frame_idx[k] : k).padStart(2, "0")}.jpg`;
@@ -127,6 +189,7 @@ function show(n) {
   $("w1").value = prev && prev.window ? prev.window[1] : "";
   $("note").value = prev ? prev.note || "" : "";
   document.querySelectorAll("#actions button").forEach(b => b.setAttribute("aria-pressed", String(!!prev && prev.verdict === b.dataset.v)));
+  if (TWO) paint();
   const reviewed = Object.keys(done).filter(k => D.events.some(ev => ev.key === k)).length;
   txt("count", `${i + 1} of ${D.events.length} (${reviewed} reviewed)`);
   $("prog").max = D.events.length; $("prog").value = reviewed;
@@ -151,11 +214,12 @@ async function save(v) {
 async function post(v) {
   const e = D.events[i], a = $("w0").value.trim(), b = $("w1").value.trim();
   const body = { key: e.key, verdict: v, note: $("note").value };
+  if (TWO) for (const a of ["claim", "evidence", "confidence"]) if (sel[a]) body[a] = sel[a];
   if (a !== "" || b !== "") body.window = [Number(a), Number(b)];
   const r = await fetch("/verdict", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!r.ok) { txt("status", `Not saved: ${await r.text()}`); return; }
   done[e.key] = await r.json();
-  txt("status", `Saved: ${NAMES[v]} for event ${e.key}.`);
+  txt("status", `Saved: ${NAMES[v]} for ${TWO ? (e.sample_id || e.key) : "event " + e.key}.`);
   nextUnreviewed();
 }
 
@@ -173,7 +237,16 @@ document.addEventListener("keydown", ev => {
   if (ev.repeat) return;                       // a held-down key must never record verdicts
   if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) return;
   const k = Number(ev.key);
-  if (k >= 1 && k <= D.verdicts.length) { ev.preventDefault(); save(D.verdicts[k - 1]); }
+  if (TWO) {
+    const up = ev.key.toUpperCase();
+    if (k >= 1 && k <= D.verdicts.length) { ev.preventDefault(); return pick("verdict", D.verdicts[k - 1]); }
+    if (ev.key === "Enter") { ev.preventDefault(); return saveTwo(); }
+    for (const [axis, [, keys, names]] of Object.entries(AXES)) {
+      const n = keys.indexOf(up);
+      if (n !== -1 && up.length === 1) { ev.preventDefault(); return pick(axis, Object.keys(names)[n]); }
+    }
+  }
+  if (!TWO && k >= 1 && k <= D.verdicts.length) { ev.preventDefault(); save(D.verdicts[k - 1]); }
   else if (ev.key === "ArrowLeft") show(i - 1);
   else if (ev.key === "ArrowRight") nextUnreviewed();
 });
