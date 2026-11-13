@@ -31,4 +31,8 @@ data/ego4d/
 data/aria/
 data/jrdb/
 data/splits_private/
+data/ade20k/
+data/mapillary/
+data/viabench/
 results/**/*.mp4
+results/egoblind/review_events_priority*.csv
