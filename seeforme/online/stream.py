@@ -15,7 +15,10 @@ from .feedback import FeedbackModel
 
 
 def run_stream(policy, scenarios: Sequence, cfg: Optional[PipelineConfig] = None, p_tap: float = 1.0, seed: int = 0,
-               noise=None, on_video: Optional[Callable] = None, p_ask: float = 1.0) -> List[Tuple[object, RunLog]]:
+               noise=None, on_video: Optional[Callable] = None, p_ask: float = 1.0,
+               decision_hook: Optional[Callable] = None) -> List[Tuple[object, RunLog]]:
+    """`decision_hook(scenario)` may return an extra on_decision callback for that video (diagnostics such as the
+    failure funnel); it runs before the feedback of the same decision is delivered."""
     out: List[Tuple[object, RunLog]] = []
     learns = hasattr(policy, "learn")
     for k, sc in enumerate(scenarios):
@@ -23,7 +26,11 @@ def run_stream(policy, scenarios: Sequence, cfg: Optional[PipelineConfig] = None
         if hasattr(policy, "begin_video"):
             policy.begin_video(sc, fb)
 
-        def hook(t, tracks, obs, cue, ch, due, _fb=fb):
+        extra = decision_hook(sc) if decision_hook is not None else None
+
+        def hook(t, tracks, obs, cue, ch, due, _fb=fb, _extra=extra):
+            if _extra is not None:
+                _extra(t, tracks, obs, cue, ch, due)
             got = []
             if cue is not None and cue.action != "haptic":
                 f = _fb.on_cue(t, cue.source_id)

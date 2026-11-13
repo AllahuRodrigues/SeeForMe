@@ -17,7 +17,7 @@ from _common import dump_json, ROOT
 from campus_common import load_campus_cfg
 from egoblind_common import load_egoblind_split, make_egoblind_policy, source_recordings
 from seeforme.egoblind import run_on_egoblind
-from seeforme.eval.funnel import STAGES, EventTrace, classify, funnel_counts
+from seeforme.eval.funnel import STAGES, FunnelRecorder, classify, funnel_counts
 from seeforme.eval.timing import TimedEvent, timing_metrics
 from seeforme.online.policy import OnlinePolicy
 from seeforme.online.stream import run_stream
@@ -71,90 +71,33 @@ for sc in scen:
 print(f"{len(scen)} videos, {sum(len(sc.speak_events()) for sc in scen)} should-speak events", flush=True)
 
 
-def make_hook(rec, policy):
-    block = getattr(getattr(policy, "cfg", None), "recent_block_s", 2.8)
-
-    def hook(t, tracks, obs, cue, ch, due):
-        for trk in tracks:
-            if trk.source_id is not None:
-                rec["track"][trk.source_id].append(t)
-        legal_obs = [o for o in (obs or []) if not ch.busy and (o.track.last_announced is None or t - o.track.last_announced >= block)]
-        best = max(legal_obs, key=lambda o: getattr(o, "score", 0.0) or 0.0) if legal_obs else None
-        for o in legal_obs:
-            sid = o.track.source_id
-            if sid is None:
-                continue
-            if o is best:
-                rec["top"][sid].append(t)                    # ranked first among legal candidates
-            elif cue is not None and cue.action != "haptic":
-                rec["outranked"][sid].append(t)              # another object was spoken about instead
-        reasons = getattr(policy, "last_reasons", {}) or {}
-        for o in obs or []:
-            sid = o.track.source_id
-            if sid is None:
-                continue
-            rec["cand"][sid].append(t)
-            rec["reason"][sid].append((t, reasons.get(o.track.track_id, "unlogged")))
-            la = o.track.last_announced
-            if not ch.busy and (la is None or t - la >= block):
-                rec["cand_legal"][sid].append(t)
-        if cue is not None and cue.action != "haptic" and cue.source_id is not None:
-            rec["cue"][cue.source_id].append(t)
-    return hook
-
-
-def new_rec():
-    r = {k: defaultdict(list) for k in ("track", "cand", "cand_legal", "cue", "top", "outranked", "reason")}
-    return r
-
-
 traces = defaultdict(list)
 for name in [p for p in args.policies.split(",") if p]:
     print(f"-- {name}", flush=True)
     recs = {}
     if name.startswith("online_"):
         pol = OnlinePolicy(mode=name.split("_", 1)[1], seed=args.seed)
-        # run_stream owns the feedback hook; wrap it to also record the funnel evidence
-        import seeforme.online.stream as stream_mod
-        orig = stream_mod.run_on_egoblind
-
-        def wrapped(policy, sc, cfg_, seed=None, on_decision=None, noise=None, **kw):
-            rec = recs.setdefault(sc.video_id, new_rec())
-            mine = make_hook(rec, policy)
-
-            def both(*a):
-                mine(*a)
-                if on_decision is not None:
-                    on_decision(*a)
-            return orig(policy, sc, cfg_, seed=seed, on_decision=both, noise=noise, **kw)
-        stream_mod.run_on_egoblind = wrapped
-        try:
-            run_stream(pol, scen, cfg, p_tap=0.5, seed=args.seed)
-        finally:
-            stream_mod.run_on_egoblind = orig
+        run_stream(pol, scen, cfg, p_tap=0.5, seed=args.seed,
+                   decision_hook=lambda sc, _p=pol: recs.setdefault(sc.video_id, FunnelRecorder(_p)))
     else:
         for sc in scen:
             try:
                 pol = make_egoblind_policy(name, cfg, sc)
             except FileNotFoundError as e:
                 print(f"   skip {name}: {e}"); break
-            rec = recs.setdefault(sc.video_id, new_rec())
-            run_on_egoblind(pol, sc, cfg, seed=sc.seed, on_decision=make_hook(rec, pol))
+            rec = recs.setdefault(sc.video_id, FunnelRecorder(pol))
+            run_on_egoblind(pol, sc, cfg, seed=sc.seed, on_decision=rec)
     for sc in scen:
         rec = recs.get(sc.video_id)
         if rec is None:
             continue
         for e in sc.speak_events():
             det = e.detail or {}
-            traces[name].append(EventTrace(window=(e.earliest_useful_s, e.latest_safe_s), det=det_times[sc.video_id].get(e.obj_id, []),
-                                           track=rec["track"].get(e.obj_id, []), cand=rec["cand"].get(e.obj_id, []),
-                                           cand_legal=rec["cand_legal"].get(e.obj_id, []), cue=rec["cue"].get(e.obj_id, []),
-                                           top=rec["top"].get(e.obj_id, []), outranked=rec["outranked"].get(e.obj_id, []),
-                                           reasons=rec["reason"].get(e.obj_id, []),
-                                           meta={"video": sc.video_id, "obj": e.obj_id, "split": sc.split, "label": e.label,
-                                                 "ideal": e.ideal_s, "t_q": float(det.get("t_q", e.latest_safe_s - 0.5)),
-                                                 "qtype": det.get("qtype", ""), "question": det.get("question", ""),
-                                                 "window": f"{e.earliest_useful_s:.2f}-{e.latest_safe_s:.2f}"}))
+            traces[name].append(rec.trace(e, det_times[sc.video_id].get(e.obj_id, []),
+                                          meta={"video": sc.video_id, "obj": e.obj_id, "split": sc.split, "label": e.label,
+                                                "ideal": e.ideal_s, "t_q": float(det.get("t_q", e.latest_safe_s - 0.5)),
+                                                "qtype": det.get("qtype", ""), "question": det.get("question", ""),
+                                                "window": f"{e.earliest_useful_s:.2f}-{e.latest_safe_s:.2f}"}))
 
 out = ROOT / "results" / "funnel"
 out.mkdir(parents=True, exist_ok=True)

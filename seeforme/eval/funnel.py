@@ -17,8 +17,9 @@ The event is attributed to the first stage that fails inside the window:
 """
 from __future__ import annotations
 
+from collections import defaultdict
 from dataclasses import dataclass, field
-from typing import Dict, List, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 STAGES = ("perception", "tracking", "candidate", "scheduler", "timing", "delivered")
 
@@ -71,3 +72,47 @@ def funnel_counts(traces: Sequence[EventTrace]) -> Dict[str, int]:
     s = c - lost_by["scheduler"]
     return {"N": n, "P": p, "T": tt, "C": c, "S": s, "D": lost_by["delivered"], **{f"lost_{k}": v for k, v in lost_by.items()},
             "blocked": sum(1 for t, st in zip(traces, stages) if st == "scheduler" and t.blocked)}
+
+
+class FunnelRecorder:
+    """Collects, through the replay's on_decision hook, the evidence the funnel needs for one video and one policy."""
+    KEYS = ("track", "cand", "cand_legal", "cue", "top", "outranked", "reason")
+
+    def __init__(self, policy):
+        self.policy = policy
+        self.rec = {k: defaultdict(list) for k in self.KEYS}
+
+    def __call__(self, t, tracks, obs, cue, ch, due) -> None:
+        rec = self.rec
+        block = getattr(getattr(self.policy, "cfg", None), "recent_block_s", 2.8)
+        for trk in tracks:
+            if trk.source_id is not None:
+                rec["track"][trk.source_id].append(t)
+        legal_obs = [o for o in (obs or []) if not ch.busy and (o.track.last_announced is None or t - o.track.last_announced >= block)]
+        best = max(legal_obs, key=lambda o: getattr(o, "score", 0.0) or 0.0) if legal_obs else None
+        for o in legal_obs:
+            sid = o.track.source_id
+            if sid is None:
+                continue
+            if o is best:
+                rec["top"][sid].append(t)                    # ranked first among legal candidates
+            elif cue is not None and cue.action != "haptic":
+                rec["outranked"][sid].append(t)              # another object was spoken about instead
+        reasons = getattr(self.policy, "last_reasons", {}) or {}
+        for o in obs or []:
+            sid = o.track.source_id
+            if sid is None:
+                continue
+            rec["cand"][sid].append(t)
+            rec["reason"][sid].append((t, reasons.get(o.track.track_id, "unlogged")))
+            la = o.track.last_announced
+            if not ch.busy and (la is None or t - la >= block):
+                rec["cand_legal"][sid].append(t)
+        if cue is not None and cue.action != "haptic" and cue.source_id is not None:
+            rec["cue"][cue.source_id].append(t)
+
+    def trace(self, event, det_times: Sequence[float], meta: Optional[Dict] = None) -> EventTrace:
+        g = lambda k: list(self.rec[k].get(event.obj_id, []))
+        return EventTrace(window=(event.earliest_useful_s, event.latest_safe_s), det=list(det_times), track=g("track"), cand=g("cand"),
+                          cand_legal=g("cand_legal"), cue=g("cue"), top=g("top"), outranked=g("outranked"), reasons=g("reason"),
+                          meta=dict(meta or {}))
