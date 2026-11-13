@@ -139,7 +139,9 @@ Blind mixed audit (`scripts/review_events.py audit`): 30 random should-speak eve
 | should-speak (30) | 29 | 0 | 1 |
 | user-confirmed quiet (20) | 20 | 0 | 0 |
 
-10. **The current human verdicts do not discriminate**, so they cannot be cited as validating the weak labels (train 237/237 and finetune 55/56 speak were entered in bulk or fast passes). Two readings remain open: the passes defaulted to "speak", or the reviewer judges that even a "clear" moment deserves an unprompted cue ("clear to cross"), which would challenge treating those windows as quiet. Settling it needs a sharper rubric (separate "warn about an object" from "confirm all clear") and an independent second rater. Until then the weak labels stay weak.
+**Second audit pass, rubric v2** (reviewer ar2, same 50 blind items, median 2.6 s per item): should-speak events marked warn 27 of 28 decided (0.96); user-confirmed quiet moments marked confirm-clear 6 of 19 decided (0.32), warn 13; overall agreement with the derived labels 33 of 47 (0.70) against 0.60 for always answering warn. Separating "warn" from "confirm the way is clear" helped (quiet moments recognised 0 of 20 -> 6 of 19), but most quiet moments are still marked as warnings. Some may genuinely contain something worth mentioning (the derived quiet label only records that the answerer said no), which is why an independent second rater, not either pass, decides between the readings.
+
+10. **The first human verdicts did not discriminate**, so they cannot be cited as validating the weak labels (train 237/237 and finetune 55/56 speak were entered in bulk or fast passes). Two readings remain open: the passes defaulted to "speak", or the reviewer judges that even a "clear" moment deserves an unprompted cue ("clear to cross"), which would challenge treating those windows as quiet. Settling it needs a sharper rubric (separate "warn about an object" from "confirm all clear") and an independent second rater. Until then the weak labels stay weak.
 
 ## Wider perception (added 2026-11-12, night)
 
