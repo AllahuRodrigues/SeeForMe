@@ -1,0 +1,320 @@
+{
+ "budget_s_per_min": 4.05034958000101,
+ "videos": {
+  "via_train": 152,
+  "via_dev": 48
+ },
+ "policies": {
+  "threshold, VIABench scorer": {
+   "via_dev": {
+    "reminders": 455,
+    "detectable": 179,
+    "answered": 40,
+    "recall": 0.08791208791208792,
+    "recall_of_detectable": 0.22346368715083798,
+    "recall_native": 0.06813186813186813,
+    "unneeded_per_min": 0.2711187214611873,
+    "unneeded_share": 0.16379310344827586,
+    "cues_per_min": 1.6552511415525122,
+    "speech_s_per_min": 3.9504851598173527
+   },
+   "via_train": {
+    "reminders": 1189,
+    "detectable": 526,
+    "answered": 95,
+    "recall": 0.0798990748528175,
+    "recall_of_detectable": 0.1806083650190114,
+    "recall_native": 0.05971404541631623,
+    "unneeded_per_min": 0.3621548211860574,
+    "unneeded_share": 0.21686746987951808,
+    "cues_per_min": 1.6699361199134868,
+    "speech_s_per_min": 4.05034958000101
+   },
+   "vs_fifo": {
+    "recall": [
+     0.04395604395604396,
+     0.02083333333333333,
+     0.06564551422319474
+    ],
+    "unneeded_per_min": [
+     -0.9560502283105027,
+     -1.2124796687860422,
+     -0.696626143969403
+    ],
+    "speech_s_per_min": [
+     -0.04851598173516036,
+     -0.6618883078072475,
+     0.5710764174198868
+    ]
+   }
+  },
+  "threshold, EgoBlind scorer": {
+   "via_dev": {
+    "reminders": 455,
+    "detectable": 179,
+    "answered": 16,
+    "recall": 0.035164835164835165,
+    "recall_of_detectable": 0.0893854748603352,
+    "recall_native": 0.01978021978021978,
+    "unneeded_per_min": 0.5136986301369865,
+    "unneeded_share": 0.3076923076923077,
+    "cues_per_min": 1.6695205479452062,
+    "speech_s_per_min": 3.4146689497716904
+   },
+   "via_train": {
+    "reminders": 1189,
+    "detectable": 526,
+    "answered": 82,
+    "recall": 0.06896551724137931,
+    "recall_of_detectable": 0.155893536121673,
+    "recall_native": 0.0479394449116905,
+    "unneeded_per_min": 0.437603742266486,
+    "unneeded_share": 0.2652439024390244,
+    "cues_per_min": 1.6498164076253725,
+    "speech_s_per_min": 3.712589909964293
+   },
+   "vs_fifo": {
+    "recall": [
+     -0.008791208791208795,
+     -0.03862660944206008,
+     0.020044543429844096
+    ],
+    "unneeded_per_min": [
+     -0.7134703196347035,
+     -0.9529679499336241,
+     -0.48140043763676166
+    ],
+    "speech_s_per_min": [
+     -0.5843321917808226,
+     -1.1606152993348116,
+     -0.002748133559291155
+    ]
+   }
+  },
+  "coverage-first, equal speech": {
+   "via_dev": {
+    "reminders": 455,
+    "detectable": 179,
+    "answered": 20,
+    "recall": 0.04395604395604396,
+    "recall_of_detectable": 0.11173184357541899,
+    "recall_native": 0.026373626373626374,
+    "unneeded_per_min": 1.22716894977169,
+    "unneeded_share": 0.42574257425742573,
+    "cues_per_min": 2.882420091324202,
+    "speech_s_per_min": 3.999001141552513
+   },
+   "via_train": {
+    "reminders": 1189,
+    "detectable": 526,
+    "answered": 80,
+    "recall": 0.0672834314550042,
+    "recall_of_detectable": 0.1520912547528517,
+    "recall_native": 0.0496215306980656,
+    "unneeded_per_min": 1.1065841758462864,
+    "unneeded_share": 0.3819444444444444,
+    "cues_per_min": 2.8972385694884593,
+    "speech_s_per_min": 4.081786630451185
+   }
+  },
+  "control: object class only": {
+   "via_dev": {
+    "reminders": 455,
+    "detectable": 179,
+    "answered": 15,
+    "recall": 0.03296703296703297,
+    "recall_of_detectable": 0.08379888268156424,
+    "recall_native": 0.01978021978021978,
+    "unneeded_per_min": 0.5707762557077628,
+    "unneeded_share": 0.3418803418803419,
+    "cues_per_min": 1.6695205479452062,
+    "speech_s_per_min": 3.476027397260275
+   },
+   "via_train": {
+    "reminders": 1189,
+    "detectable": 526,
+    "answered": 45,
+    "recall": 0.03784693019343986,
+    "recall_of_detectable": 0.08555133079847908,
+    "recall_native": 0.02691337258200168,
+    "unneeded_per_min": 0.6438307932196576,
+    "unneeded_share": 0.3890577507598784,
+    "cues_per_min": 1.6548463356974012,
+    "speech_s_per_min": 3.544338815954936
+   },
+   "vs_fifo": {
+    "recall": [
+     -0.010989010989010992,
+     -0.03184713375796179,
+     0.007092198581560287
+    ],
+    "unneeded_per_min": [
+     -0.6563926940639272,
+     -0.9110562075355161,
+     -0.3980600292825769
+    ],
+    "speech_s_per_min": [
+     -0.522973744292238,
+     -0.9763986455753755,
+     0.014434764991897886
+    ]
+   }
+  },
+  "control: shuffled labels, draw 1": {
+   "via_dev": {
+    "reminders": 455,
+    "detectable": 179,
+    "answered": 11,
+    "recall": 0.024175824175824177,
+    "recall_of_detectable": 0.061452513966480445,
+    "recall_native": 0.017582417582417582,
+    "unneeded_per_min": 0.6992009132420094,
+    "unneeded_share": 0.4188034188034188,
+    "cues_per_min": 1.6695205479452062,
+    "speech_s_per_min": 3.4845890410958926
+   },
+   "via_train": {
+    "reminders": 1189,
+    "detectable": 526,
+    "answered": 41,
+    "recall": 0.034482758620689655,
+    "recall_of_detectable": 0.0779467680608365,
+    "recall_native": 0.024390243902439025,
+    "unneeded_per_min": 0.5482621598511147,
+    "unneeded_share": 0.3323170731707317,
+    "cues_per_min": 1.6498164076253725,
+    "speech_s_per_min": 3.5687339671042744
+   },
+   "vs_fifo": {
+    "recall": [
+     -0.019780219780219783,
+     -0.03644646924829158,
+     -0.005012531328320802
+    ],
+    "unneeded_per_min": [
+     -0.5279680365296806,
+     -0.7623196297304655,
+     -0.2861776209100447
+    ],
+    "speech_s_per_min": [
+     -0.5144121004566204,
+     -0.9720570749108193,
+     -0.07269673704414403
+    ]
+   }
+  },
+  "control: shuffled labels, draw 2": {
+   "via_dev": {
+    "reminders": 455,
+    "detectable": 179,
+    "answered": 14,
+    "recall": 0.03076923076923077,
+    "recall_of_detectable": 0.0782122905027933,
+    "recall_native": 0.01978021978021978,
+    "unneeded_per_min": 0.613584474885845,
+    "unneeded_share": 0.36752136752136755,
+    "cues_per_min": 1.6695205479452062,
+    "speech_s_per_min": 3.9982876712328776
+   },
+   "via_train": {
+    "reminders": 1189,
+    "detectable": 526,
+    "answered": 45,
+    "recall": 0.03784693019343986,
+    "recall_of_detectable": 0.08555133079847908,
+    "recall_native": 0.02607232968881413,
+    "unneeded_per_min": 0.5935315124993719,
+    "unneeded_share": 0.3597560975609756,
+    "cues_per_min": 1.6498164076253725,
+    "speech_s_per_min": 4.203762386197881
+   },
+   "vs_fifo": {
+    "recall": [
+     -0.013186813186813189,
+     -0.034557235421166316,
+     0.006507592190889373
+    ],
+    "unneeded_per_min": [
+     -0.613584474885845,
+     -0.8108108108108111,
+     -0.4100678733031675
+    ],
+    "speech_s_per_min": [
+     -0.0007134703196354231,
+     -0.44268902891030404,
+     0.4011357018054751
+    ]
+   }
+  },
+  "control: shuffled labels, draw 3": {
+   "via_dev": {
+    "reminders": 455,
+    "detectable": 179,
+    "answered": 11,
+    "recall": 0.024175824175824177,
+    "recall_of_detectable": 0.061452513966480445,
+    "recall_native": 0.01978021978021978,
+    "unneeded_per_min": 0.6563926940639272,
+    "unneeded_share": 0.3898305084745763,
+    "cues_per_min": 1.6837899543379002,
+    "speech_s_per_min": 2.8745719178082196
+   },
+   "via_train": {
+    "reminders": 1189,
+    "detectable": 526,
+    "answered": 50,
+    "recall": 0.04205214465937763,
+    "recall_of_detectable": 0.09505703422053231,
+    "recall_native": 0.028595458368376788,
+    "unneeded_per_min": 0.5834716563553147,
+    "unneeded_share": 0.35365853658536583,
+    "cues_per_min": 1.6498164076253725,
+    "speech_s_per_min": 2.9905437352245907
+   },
+   "vs_fifo": {
+    "recall": [
+     -0.019780219780219783,
+     -0.0437636761487965,
+     0.004987531172069827
+    ],
+    "unneeded_per_min": [
+     -0.5707762557077628,
+     -0.7735583684950775,
+     -0.3649990266692623
+    ],
+    "speech_s_per_min": [
+     -1.1244292237442934,
+     -1.4852563792185163,
+     -0.7375859064950157
+    ]
+   }
+  }
+ },
+ "viabench_scorer_vs_class_only": {
+  "recall": [
+   0.05494505494505495,
+   0.034364261168384876,
+   0.07990314769975787
+  ],
+  "unneeded_per_min": [
+   -0.2996575342465755,
+   -0.48517520215633425,
+   -0.1194921583271098
+  ],
+  "speech_s_per_min": [
+   0.4744577625570776,
+   -0.20796847635726579,
+   1.1779603011635889
+  ]
+ },
+ "class_prior_top": {
+  "dining table": 0.38945365537832366,
+  "motorcycle": 0.38047278317294614,
+  "bicycle": 0.33824709424971494,
+  "person": 0.33673140040812416,
+  "car": 0.27761080462306653,
+  "giraffe": 0.233269908698025,
+  "skis": 0.233269908698025,
+  "baseball glove": 0.233269908698025
+ }
+}
