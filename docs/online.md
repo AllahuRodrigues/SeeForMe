@@ -310,6 +310,37 @@ On train + finetune (293 events, 154 with a candidate inside the window): thresh
 23. **At the production speech budget the learned score selects no better than first-in first-out.** Same events on time (9/56), same false alerts (16%), same seconds of speech; the interval is wide (20 recordings), so this is "no measurable benefit", not "proven equal". It agrees with items 13 to 22: the score does not separate should-speak moments.
 24. **The candidates set a ceiling near 0.40 of all events, and reaching it by talking more is not usable.** With no budget at all the assistant delivers 117 of the 154 events that have a candidate (0.40 of all 293 by the funnel, 0.29 by the benchmark's recall) while speaking 38 s per minute and over 87% of confirmed-clear moments. Four times the budget buys +0.125 recall for 50% false alerts. So two gaps remain, in this order of size: 139 of 293 events never reach the scheduler in time (perception), and at a fixed budget only 9 of 27 reachable events are chosen where 21 of 27 are reachable (selection). Selection needs supervision that says which candidates matter; a higher budget is not a substitute.
 
+## E3-V: human proactive reminders in place of question proxies (added 2026-11-13, issue 30)
+
+`scripts/viabench_supervision.py` and `scripts/viabench_policy.py`; full tables in `results/viabench/`. EgoBlind's labels are proxies: they mark when a blind user asked something. VIABench (MCG-NJU) has 13,152 proactive reminders written by human annotators over 530 blind-user videos, each with a start, an end, a task and a sentence. That is direct supervision for "speak now, about this". The same replay (YOLO11 and depth cache, tracker, base 29 candidate features) was run on the first 100 s of 200 VIABench videos, split by source video into `via_train` (152) and `via_dev` (48); `via_test` stays sealed. A candidate is a positive while a reminder naming its object is active (from 1 s before the start to 0.5 s after the end), a negative when no reminder of any kind is within 3 s, and masked otherwise.
+
+| Score level, standardised logistic | EgoBlind, question proxies (`train` to `finetune`) | VIABench, human reminders (`via_train` to `via_dev`) |
+|---|---|---|
+| held-out rows | 4,479 in 48 videos, 959 positive | 7,136 in 47 videos, 2,140 positive |
+| AUC, base 29 features | 0.674 [0.585, 0.768] | 0.718 [0.633, 0.780] |
+| AUC, object class only | 0.612 [0.532, 0.712] | 0.653 [0.588, 0.711] |
+| AUC inside `person` rows | 0.655 [0.550, 0.765] | 0.726 [0.633, 0.790] |
+| AUC inside one video (row-weighted mean) | 0.627 [0.540, 0.740], 19 videos | 0.646 [0.589, 0.715], 34 videos |
+| AUC with the other dataset's model | 0.622 [0.493, 0.731] | 0.599 [0.513, 0.669] |
+| AUC after shuffling the training labels (200 draws) | 0.504 [0.366, 0.623], p = 0.005 | 0.493 [0.388, 0.601], p = 0.005 |
+
+VIABench learning curve on `via_dev` (mean over 10 seeded subsets): 10 training videos 0.601, 20 0.644, 40 0.687, 80 0.699, 120 0.711, all 149 with labelled rows 0.718.
+
+| Policy level on `via_dev` (455 reminders, 179 with the named object in view) | reminders answered | of the 179 in view | cues with no reminder within 3 s | cues/min | speech s/min |
+|---|---|---|---|---|---|
+| threshold rule, scorer trained on VIABench reminders | 40/455 = 0.088 | 0.223 | 16% of cues | 1.66 | 3.95 |
+| threshold rule, production scorer (EgoBlind proxies) | 16/455 = 0.035 | 0.089 | 31% | 1.67 | 3.41 |
+| coverage-first (first-in first-out), equal speech | 20/455 = 0.044 | 0.112 | 43% | 2.88 | 4.00 |
+| control: score = object class share only | 15/455 = 0.033 | 0.084 | 34% | 1.67 | 3.48 |
+| control: scorer fitted on shuffled labels (3 draws) | 11, 14, 11 of 455 | 0.061 to 0.078 | 37% to 42% | 1.67 | 2.87 to 4.00 |
+
+A reminder is answered by a cue about an object it names inside its window. Against first-in first-out at equal speech (95% interval, bootstrap over videos): VIABench scorer +0.044 [+0.021, +0.066] reminders answered and -0.96 [-1.21, -0.70] unneeded cues per minute; production scorer -0.009 [-0.039, +0.020]. VIABench scorer against the object-class control: +0.055 [+0.034, +0.080].
+
+25. **At score level, human reminders are not clearly more learnable than question proxies with the current features.** 0.718 against 0.674 with overlapping intervals, on different videos, so there is no paired test. Both beat shuffled labels, and both order moments inside a single video only modestly (0.646 and 0.627). Changing the labels does not lift the AUC ceiling by itself. The learning curve is still rising at 149 training videos with labelled rows; 206 more `via_train` and 63 more `via_dev` videos are on disk and not yet cached.
+26. **At policy level, a scorer trained on human reminders is the first learned score here to beat first-in first-out at equal speech.** It answers twice as many reminders (40 against 20 of 455, interval excludes zero) with fewer than half the unneeded cues. The two controls rule out the cheap explanations: object class alone answers 15 and shuffled labels 11 to 14, the same as the production scorer's 16, so the gain needs the real labels and uses more than which class is in view.
+27. **What this does not show.** It is in-domain: fitted and scored on VIABench, with no evidence of transfer (its model scores EgoBlind `finetune` at 0.622, below the in-domain 0.674). It is not a like-for-like verdict on EgoBlind's labels, because item 23 had 56 events and an interval of about 0.10 either way, which could hide an effect this size. The level is low: 8.8% of all reminders. The reminders come from sighted annotators, not from blind users' own choices. `via_dev` was looked at once before the final run (score-level AUC at 123 and 132 cached videos) and the two controls were added after the first policy result; the windows, threshold rule and budget were fixed before. Nothing is promoted; the threshold rule with the production scorer stays the default.
+28. **Perception is again the largest loss, and it sits in classes the detector does not have.** On `via_dev`, 276 of 455 reminders (61%) name nothing the detector saw in the window. Over all 200 videos the detector saw the named object for 712 of 1,644 reminders: 535 of 839 obstacle alerts, but 1 of 98 stairs reminders, 1 of 63 entrances and exits, and 0 of 25 tactile paths. Another 459 reminders name nothing in the label table (road branches, direction guidance, camera problems) and need a different kind of perception.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.

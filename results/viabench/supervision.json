@@ -1,0 +1,291 @@
+{
+ "egoblind": {
+  "train": {
+   "split": "train",
+   "videos": 265,
+   "rows": 20774,
+   "positives": 3454
+  },
+  "heldout": {
+   "split": "finetune",
+   "videos": 48,
+   "rows": 4479,
+   "positives": 959
+  },
+  "auc": [
+   0.6744827708787564,
+   0.5851301896495756,
+   0.7682795886656075
+  ],
+  "auc_class_only": [
+   0.6124961489240687,
+   0.5317790144776684,
+   0.7118179067492841
+  ],
+  "auc_person_rows": [
+   0.6553767799842414,
+   0.5495828874886062,
+   0.7650373280625382
+  ],
+  "person_rows": {
+   "rows": 2722,
+   "positives": 627
+  },
+  "auc_within_video": {
+   "auc": [
+    0.627224626365115,
+    0.5404698186844211,
+    0.7402954426888875
+   ],
+   "videos": 19,
+   "rows": 2789,
+   "skipped_single_class": 29
+  },
+  "auc_permuted_labels": {
+   "mean": 0.5042843367854773,
+   "lo": 0.36583027715897243,
+   "hi": 0.622839383472367,
+   "p": 0.004975124378109453,
+   "n": 200
+  },
+  "positive_labels": {
+   "person": 627,
+   "car": 285,
+   "chair": 18,
+   "horse": 11,
+   "motorcycle": 7,
+   "cell phone": 5,
+   "train": 4,
+   "truck": 2
+  },
+  "auc_transfer_from_other": [
+   0.6224947269883401,
+   0.4932471971282756,
+   0.7306419497276053
+  ]
+ },
+ "viabench": {
+  "train": {
+   "split": "via_train",
+   "videos": 149,
+   "rows": 22599,
+   "positives": 6326
+  },
+  "heldout": {
+   "split": "via_dev",
+   "videos": 47,
+   "rows": 7136,
+   "positives": 2140
+  },
+  "auc": [
+   0.7177936741916898,
+   0.6326193081600735,
+   0.7798018203075402
+  ],
+  "auc_class_only": [
+   0.6529991750409673,
+   0.5884568958830141,
+   0.7111856436472501
+  ],
+  "auc_person_rows": [
+   0.7261870264438757,
+   0.633115471054967,
+   0.7900065251430255
+  ],
+  "person_rows": {
+   "rows": 3646,
+   "positives": 1456
+  },
+  "auc_within_video": {
+   "auc": [
+    0.6464336067396365,
+    0.5892899183293848,
+    0.7154131073367853
+   ],
+   "videos": 34,
+   "rows": 6397,
+   "skipped_single_class": 13
+  },
+  "auc_permuted_labels": {
+   "mean": 0.4930053781342831,
+   "lo": 0.38760671855241197,
+   "hi": 0.6009330431635027,
+   "p": 0.004975124378109453,
+   "n": 200
+  },
+  "positive_labels": {
+   "person": 1456,
+   "car": 396,
+   "motorcycle": 190,
+   "bicycle": 29,
+   "potted plant": 20,
+   "bench": 17,
+   "bus": 11,
+   "fire hydrant": 10
+  },
+  "auc_transfer_from_other": [
+   0.5986743600487866,
+   0.5133184635112576,
+   0.6693931599685713
+  ],
+  "learning_curve_train_videos": {
+   "10": {
+    "mean": 0.6012019896290866,
+    "min": 0.5261266022163525,
+    "max": 0.6886171554065683,
+    "runs": 10
+   },
+   "20": {
+    "mean": 0.6443501997859971,
+    "min": 0.6118665960806029,
+    "max": 0.6820763152578138,
+    "runs": 10
+   },
+   "40": {
+    "mean": 0.6873221100244681,
+    "min": 0.6692959975457,
+    "max": 0.7197232552397058,
+    "runs": 10
+   },
+   "80": {
+    "mean": 0.6993323630867311,
+    "min": 0.6672721354653816,
+    "max": 0.7159259183047373,
+    "runs": 10
+   },
+   "120": {
+    "mean": 0.7109110933606698,
+    "min": 0.6955433505683051,
+    "max": 0.7168079323271701,
+    "runs": 10
+   }
+  },
+  "reminder_coverage_by_task": {
+   "Obstacle Alert": {
+    "reminders": 839,
+    "names_an_object": 695,
+    "detector_saw_it_in_window": 535
+   },
+   "Active Avoidance": {
+    "reminders": 235,
+    "names_an_object": 187,
+    "detector_saw_it_in_window": 138
+   },
+   "Stairs Up/Down": {
+    "reminders": 76,
+    "names_an_object": 76,
+    "detector_saw_it_in_window": 1
+   },
+   "Service Facility Detection": {
+    "reminders": 71,
+    "names_an_object": 29,
+    "detector_saw_it_in_window": 15
+   },
+   "Exit/Entry Recognition": {
+    "reminders": 63,
+    "names_an_object": 63,
+    "detector_saw_it_in_window": 1
+   },
+   "Camera Content Anomaly": {
+    "reminders": 54,
+    "names_an_object": 0,
+    "detector_saw_it_in_window": 0
+   },
+   "Road Branch": {
+    "reminders": 41,
+    "names_an_object": 1,
+    "detector_saw_it_in_window": 0
+   },
+   "Road Surface Condition": {
+    "reminders": 37,
+    "names_an_object": 8,
+    "detector_saw_it_in_window": 0
+   },
+   "Camera Obstruction": {
+    "reminders": 29,
+    "names_an_object": 2,
+    "detector_saw_it_in_window": 1
+   },
+   "Direction Guidance": {
+    "reminders": 27,
+    "names_an_object": 10,
+    "detector_saw_it_in_window": 1
+   },
+   "Blind Path Recognition": {
+    "reminders": 25,
+    "names_an_object": 25,
+    "detector_saw_it_in_window": 0
+   },
+   "Pedestrian Traffic Light": {
+    "reminders": 22,
+    "names_an_object": 22,
+    "detector_saw_it_in_window": 13
+   },
+   "Crossing to Other Side": {
+    "reminders": 22,
+    "names_an_object": 0,
+    "detector_saw_it_in_window": 0
+   },
+   "Staircase Up/Down": {
+    "reminders": 22,
+    "names_an_object": 22,
+    "detector_saw_it_in_window": 0
+   },
+   "Direction Deviation": {
+    "reminders": 18,
+    "names_an_object": 4,
+    "detector_saw_it_in_window": 0
+   },
+   "Intersection Recognition": {
+    "reminders": 14,
+    "names_an_object": 6,
+    "detector_saw_it_in_window": 5
+   },
+   "Slope Up/Down": {
+    "reminders": 13,
+    "names_an_object": 3,
+    "detector_saw_it_in_window": 0
+   },
+   "Escalator": {
+    "reminders": 9,
+    "names_an_object": 9,
+    "detector_saw_it_in_window": 0
+   },
+   "Box Elevator": {
+    "reminders": 8,
+    "names_an_object": 8,
+    "detector_saw_it_in_window": 0
+   },
+   "Crosswalk": {
+    "reminders": 7,
+    "names_an_object": 7,
+    "detector_saw_it_in_window": 0
+   },
+   "Sidewalk Detection": {
+    "reminders": 5,
+    "names_an_object": 3,
+    "detector_saw_it_in_window": 0
+   },
+   "Sign Recognition": {
+    "reminders": 5,
+    "names_an_object": 5,
+    "detector_saw_it_in_window": 2
+   },
+   "Simulated Query": {
+    "reminders": 1,
+    "names_an_object": 0,
+    "detector_saw_it_in_window": 0
+   },
+   "Blind Person Query": {
+    "reminders": 1,
+    "names_an_object": 0,
+    "detector_saw_it_in_window": 0
+   }
+  },
+  "reminder_coverage": {
+   "reminders": 1644,
+   "names_an_object": 1185,
+   "detector_saw_it_in_window": 712
+  }
+ }
+}
