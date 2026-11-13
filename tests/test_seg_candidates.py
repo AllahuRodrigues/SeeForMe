@@ -37,3 +37,13 @@ def test_injected_detections_link_to_events_like_detector_output():
     assert {t for t, _ in seg_dets} == {1.5, 2.5, 3.5, 8.0}
     assert all(d.source_id == 7 for t, d in seg_dets if t <= 4.0 + 2.0) and [d.source_id for t, d in seg_dets if t == 8.0] == [None]
     assert all(len(ds) >= 1 and ds[0].label == "person" for _, ds in out)          # detector output untouched
+
+
+def test_links_events_whose_object_no_detector_could_name():
+    # door / stairs events carry the object only in `label` / `concepts`; det_labels and labels are empty
+    class Door:
+        obj_id, should_speak, label, earliest_useful_s, latest_safe_s = 3, True, "door", 1.0, 4.0
+        detail = {"det_labels": [], "labels": [], "concepts": ["door"], "t_q": 3.5}
+    z = {"t": np.array([0, 1, 2, 3], np.float32), "share": np.array([[0, 0.1, 0, 0.5]] * 4, np.float32), "groups": np.array(GROUPS)}
+    out = inject_segmentation([(t, []) for t in (1.5, 2.5)], z, [Door()], min_share=0.02, min_consecutive=2)
+    assert [d.source_id for _, ds in out for d in ds] == [3, 3]

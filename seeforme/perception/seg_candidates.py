@@ -41,8 +41,10 @@ def seg_detections(t: float, z, min_share: float = 0.02, min_consecutive: int = 
 
 
 def _link(lab: str, t: float, events: Sequence, margin: float = SOURCE_MARGIN_S) -> Optional[int]:
-    cands = [e for e in events if getattr(e, "should_speak", False)
-             and lab in ((e.detail or {}).get("det_labels") or (e.detail or {}).get("labels", []))
+    def names(e):
+        d = e.detail or {}
+        return set(d.get("det_labels") or []) | set(d.get("labels") or []) | set(d.get("concepts") or []) | {getattr(e, "label", None)}
+    cands = [e for e in events if getattr(e, "should_speak", False) and lab in names(e)
              and e.earliest_useful_s - margin <= t <= e.latest_safe_s + margin]
     if not cands:
         return None
