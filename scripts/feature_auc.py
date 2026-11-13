@@ -26,6 +26,8 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--tag", default="looming")
 ap.add_argument("--boot", type=int, default=1000)
 ap.add_argument("--limit", type=int, default=0)
+ap.add_argument("--learner", default="logistic", choices=["logistic", "hgb"],
+                help="hgb = histogram gradient boosting (E3 nonlinear baseline; early stopping on an internal train split)")
 ap.add_argument("--seg", action="store_true", help="join per-second segmentation shares from data/egoblind_seg/")
 ap.add_argument("--ego", action="store_true", help="join camera ego-motion features from data/egoblind_ego/")
 args = ap.parse_args()
@@ -149,7 +151,13 @@ def matrix(rs, cols):
 def fit_score(cols):
     Xt, Xe = matrix(tr, cols), matrix(te, cols)
     mu, sd = Xt.mean(0), Xt.std(0) + 1e-6
-    m = LogisticRegression(max_iter=5000, C=1.0).fit((Xt - mu) / sd, [r["y"] for r in tr])
+    if args.learner == "hgb":
+        from sklearn.ensemble import HistGradientBoostingClassifier
+        m = HistGradientBoostingClassifier(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=1.0,
+                                           early_stopping=True, validation_fraction=0.15, random_state=0)
+    else:
+        m = LogisticRegression(max_iter=5000, C=1.0)
+    m.fit((Xt - mu) / sd, [r["y"] for r in tr])
     return m.predict_proba((Xe - mu) / sd)[:, 1], m.predict_proba((Xt - mu) / sd)[:, 1]
 
 
@@ -181,7 +189,8 @@ for j, nme in enumerate(extra_names):
     if E[:, j].std() > 0:
         single[nme] = roc_auc_score(ye, E[:, j])
 res["single_feature_auc_finetune"] = single
-for gname, cols in list(GROUPS.items()) + [("looming_all", GROUPS["looming_track"] + GROUPS["looming_decision"])]:
+context = GROUPS["looming_decision"] + GROUPS.get("segmentation", []) + GROUPS.get("egomotion", [])
+for gname, cols in list(GROUPS.items()) + [("looming_all", GROUPS["looming_track"] + GROUPS["looming_decision"]), ("context_all", context)]:
     se, st = fit_score(cols)
     lo, hi = boot_auc_diff(se, base_e, args.boot)
     d = roc_auc_score(ye, se) - res["base"]["auc_finetune"]

@@ -277,6 +277,22 @@ With constant value and duration, CARE's rule reduces to p_helpful > cost * dura
 
 21. **On identical scores, the decision rule alone does not change recall at a matched speech budget.** CARE's current value is the guarantee (spoken seconds bounded over every interval, every silence has a logged reason), not recall. Consistent with items 13-19: the scores do not separate should-speak moments, so gains must come from better supervision (rubric v3) and decision inputs, then CARE's extra heads (claim reliability, redundancy).
 
+## E3, first rows: scene context and a nonlinear learner on the current labels (added 2026-11-13)
+
+`feature_auc.py --seg --ego` with logistic and with histogram gradient boosting (`--learner hgb`, early stopping on an internal train split). Same candidates, same weak labels, train -> finetune AUC, paired video bootstrap.
+
+| Learner / features | AUC train | AUC finetune | Δ vs same learner's base [95% CI] |
+|---|---|---|---|
+| logistic, base 29 | 0.728 | **0.675** | |
+| logistic + ego-motion | 0.758 | 0.694 | +0.020 [-0.024, +0.066] |
+| logistic + all context (looming, segmentation, ego-motion) | 0.774 | 0.689 | +0.015 [-0.026, +0.057] |
+| boosting, base 29 | 0.934 | 0.632 | |
+| boosting + all context | 0.982 | 0.632 | -0.000 [-0.108, +0.097] |
+
+Ego-motion (`seeforme/perception/egomotion.py`; Shi-Tomasi, LK with forward-backward check, RANSAC homography, 2 fps, 41,148 frame pairs, 18.5 ms per pair plus decode): 44.1% of pairs unreliable (coverage < 0.4 in 40.7%), the largest single-group gain so far but not significant.
+
+22. **On the current weak labels, neither scene context nor a nonlinear learner separates should-speak moments better than the base logistic.** Boosting memorises train (AUC up to 0.98) and does worse on finetune than logistic; context adds at most +0.02 with intervals including 0. With a few hundred independent events, the binding constraint is now the supervision: E3's decisive row (corrected rubric v3 labels with independent agreement) needs human annotation before any further model or RL work.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
