@@ -130,6 +130,17 @@ Box-height growth gives time to contact without depth: h = fH/Z, so 1 / d(log h)
 
 9. **Looming alone does not pass.** Decision-level looming separates somewhat on its own (single-feature AUC 0.60) but adds little beyond the existing box-growth and depth features. Next in line: camera ego-motion from corner matching and RANSAC (`docs/research/lectures.md`, idea 2), which also works when the detector sees nothing.
 
+## Human label audit (added 2026-11-12, night)
+
+Blind mixed audit (`scripts/review_events.py audit`): 30 random should-speak events and 20 user-confirmed quiet moments from `train` + `finetune`, shuffled, with the derived label and the annotators' answers hidden. Reviewer ar, median 2.7 s per item.
+
+| Hidden label | speak | silent | unclear |
+|---|---|---|---|
+| should-speak (30) | 29 | 0 | 1 |
+| user-confirmed quiet (20) | 20 | 0 | 0 |
+
+10. **The current human verdicts do not discriminate**, so they cannot be cited as validating the weak labels (train 237/237 and finetune 55/56 speak were entered in bulk or fast passes). Two readings remain open: the passes defaulted to "speak", or the reviewer judges that even a "clear" moment deserves an unprompted cue ("clear to cross"), which would challenge treating those windows as quiet. Settling it needs a sharper rubric (separate "warn about an object" from "confirm all clear") and an independent second rater. Until then the weak labels stay weak.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
