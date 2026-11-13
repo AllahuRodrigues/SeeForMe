@@ -145,3 +145,21 @@ def test_care_ledger_restarts_with_each_video():
     pol = _care_policy()
     pol.reset(); pol.decide(tr, 9.0, ChannelState())
     pol.reset(); pol.decide(tr, 0.6, ChannelState())                  # next video: stream time restarts
+
+
+def test_care_budget_carries_across_videos_with_no_free_burst():
+    from seeforme.cues.pcacs import ChannelState
+    from tests.test_egoblind import synthetic_scenario
+    from tests.test_online_policy import _tracks_at
+    sc, _ = synthetic_scenario()
+    tr = _tracks_at(sc, 6)
+    pol = _care_policy(capacity_s=3.0, refill_per_s=0.01, weights=CareWeights(cost_speech_per_s=0.0))
+    spent, stream_t = 0.0, 0.0
+    for video in range(10):                                       # ten short clips of 5 s each
+        pol.reset()
+        for k in range(10):
+            for trk in tr:
+                trk.last_announced = None
+            spent += sum(c.duration_s for c in pol.decide(tr, 0.5 * k, ChannelState()))
+        stream_t += 5.0
+    assert spent <= 3.0 + 0.01 * stream_t + 1e-6                   # one capacity for the whole stream, not one per clip

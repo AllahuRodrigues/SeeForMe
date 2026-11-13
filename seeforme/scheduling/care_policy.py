@@ -21,19 +21,24 @@ class CarePolicy(FrozenScorerPolicy):
         self.ledger = SpeechLedger(capacity_s, refill_per_s)
         self.weights = weights or CareWeights()
         self.last_decision = None
+        self._clock_offset, self._video_t = 0.0, 0.0     # one ledger over the whole stream, not one per clip
 
     def reset(self) -> None:
         super().reset()
-        if hasattr(self, "ledger"):               # stream time restarts in every video, so the ledger does too
-            self.ledger.reset()
+        # stream time restarts in every clip; the ledger keeps running on a continuous clock so that no clip
+        # receives a fresh burst (a per-clip refill would multiply the budget on short clips)
+        if hasattr(self, "_clock_offset"):
+            self._clock_offset += self._video_t + self.decision_interval
+            self._video_t = 0.0
 
     def decide(self, tracks, t: float, ch: Optional[ChannelState] = None, scene_ctx=None) -> List:
         ch = ch or ChannelState()
+        self._video_t = max(self._video_t, t)
         obs, p, legal = self._scored(tracks, t, ch)
         events = [SceneEvent(event_id=str(obs[i].track.track_id), t=t, category=obs[i].track.label, track_ids=(obs[i].track.track_id,),
                              p_helpful=float(p[i]), duration_s=float(getattr(obs[i], "duration", 1.5)))
                   for i in legal]
-        d = choose_action(events, t, self.ledger, busy=ch.busy, w=self.weights)
+        d = choose_action(events, self._clock_offset + t, self.ledger, busy=ch.busy, w=self.weights)
         self.last_decision = d
         if d.action != "SPEAK":
             return []
