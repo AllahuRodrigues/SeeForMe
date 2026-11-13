@@ -61,6 +61,16 @@ def make_hook(rec, policy):
         for trk in tracks:
             if trk.source_id is not None:
                 rec["track"][trk.source_id].append(t)
+        legal_obs = [o for o in (obs or []) if not ch.busy and (o.track.last_announced is None or t - o.track.last_announced >= block)]
+        best = max(legal_obs, key=lambda o: getattr(o, "score", 0.0) or 0.0) if legal_obs else None
+        for o in legal_obs:
+            sid = o.track.source_id
+            if sid is None:
+                continue
+            if o is best:
+                rec["top"][sid].append(t)                    # ranked first among legal candidates
+            elif cue is not None and cue.action != "haptic":
+                rec["outranked"][sid].append(t)              # another object was spoken about instead
         for o in obs or []:
             sid = o.track.source_id
             if sid is None:
@@ -75,7 +85,8 @@ def make_hook(rec, policy):
 
 
 def new_rec():
-    return {k: defaultdict(list) for k in ("track", "cand", "cand_legal", "cue")}
+    r = {k: defaultdict(list) for k in ("track", "cand", "cand_legal", "cue", "top", "outranked")}
+    return r
 
 
 traces = defaultdict(list)
@@ -119,6 +130,7 @@ for name in [p for p in args.policies.split(",") if p]:
             traces[name].append(EventTrace(window=(e.earliest_useful_s, e.latest_safe_s), det=det_times[sc.video_id].get(e.obj_id, []),
                                            track=rec["track"].get(e.obj_id, []), cand=rec["cand"].get(e.obj_id, []),
                                            cand_legal=rec["cand_legal"].get(e.obj_id, []), cue=rec["cue"].get(e.obj_id, []),
+                                           top=rec["top"].get(e.obj_id, []), outranked=rec["outranked"].get(e.obj_id, []),
                                            meta={"video": sc.video_id, "obj": e.obj_id, "split": sc.split, "label": e.label,
                                                  "ideal": e.ideal_s, "t_q": float(det.get("t_q", e.latest_safe_s - 0.5)),
                                                  "qtype": det.get("qtype", ""), "question": det.get("question", ""),
@@ -129,7 +141,12 @@ out.mkdir(parents=True, exist_ok=True)
 res, rows = {}, []
 for name, trs in traces.items():
     st = [classify(t) for t in trs]
-    res[name] = {"funnel": funnel_counts(trs),
+    sched = [t for t, x in zip(trs, st) if x == "scheduler"]
+    inw = lambda tr, ts: any(tr.window[0] - 1e-6 <= x <= tr.window[1] + 1e-6 for x in ts)
+    why = Counter("outranked" if inw(tr, tr.outranked) else ("top_but_below_threshold" if inw(tr, tr.top) else "never_top_never_outranked")
+                  for tr in sched)
+    res_why = dict(why)
+    res[name] = {"funnel": funnel_counts(trs), "scheduler_misses": res_why,
                  "lost_by_label": {s: dict(Counter(t.meta["label"] for t, x in zip(trs, st) if x == s).most_common(8)) for s in STAGES},
                  "lost_by_qtype": {s: dict(Counter(t.meta["qtype"] for t, x in zip(trs, st) if x == s)) for s in STAGES}}
     for t, x in zip(trs, st):
@@ -162,6 +179,10 @@ for name, r in res.items():
         m = r[v]
         lines.append(f"| {name} | {v.split('_')[1]} | {fmt(m['recall'])} | {fmt(m['start@0.5'])} / {fmt(m['start@1'])} / {fmt(m['start@2'])} | "
                      f"{fmt(m['start@1_all'])} | {fmt(m['mean_abs_delta'])} | {fmt(m['mean_signed_delta'])} |")
+lines += ["", "Why scheduler misses happened (inside the window): outranked = another object was spoken about while it was a legal candidate; "
+          "top but below threshold = it ranked first and the policy stayed silent.", ""]
+for name, r in res.items():
+    lines.append(f"- {name}: " + ", ".join(f"{k} {v}" for k, v in r["scheduler_misses"].items()))
 for name, r in res.items():
     lines += ["", f"**{name}**, most common labels lost at each stage:"]
     for s in STAGES[:-1]:

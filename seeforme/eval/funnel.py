@@ -31,6 +31,8 @@ class EventTrace:
     cand: List[float] = field(default_factory=list)
     cand_legal: List[float] = field(default_factory=list)
     cue: List[float] = field(default_factory=list)
+    top: List[float] = field(default_factory=list)        # ranked first among legal candidates
+    outranked: List[float] = field(default_factory=list)  # legal, but another object was spoken about
     meta: Dict = field(default_factory=dict)
 
     def _inw(self, ts: Sequence[float]) -> bool:
