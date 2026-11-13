@@ -46,7 +46,7 @@ A camera can detect twenty things at once; a person cannot listen to twenty thin
 
 Deployed assistants handle this tension in two ways:
 - **On request.** Be My Eyes and Be My AI answer when asked.
-- **By fixed, content-gated rules.** Seeing AI's Short Text channel reads text as soon as it is in view (https://www.guidedogs.org.uk/services-we-provide/technology/Seeing-AI, https://hadleyhelps.org/workshops/seeing-ai-apple-voiceover-series/reading-short-text) [verify]. Lookout's Explore mode (beta) speaks as the user points the camera around (https://support.google.com/accessibility/android/answer/9031274).
+- **By fixed, content-gated rules.** Seeing AI's Read channel (formerly Short Text) speaks text "as soon as it appears in front of the camera" (Microsoft's App Store listing, https://apps.apple.com/us/app/seeing-ai/id999062298; https://hadleyhelps.org/workshops/seeing-ai-apple-voiceover-series/reading-short-text). Lookout's Explore mode (beta) speaks as the user points the camera around (https://support.google.com/accessibility/android/answer/9031274).
 
 None of these learns when to speak. The nearest commercial systems are Google's Project Astra, described as able to "intuitively start conversations" (https://deepmind.google/models/project-astra/), and Gemini Live Guided Vision, launched on 2026-10-01 and not intended for navigation (https://www.androidauthority.com/gemini-live-guided-vision-launch-3718122/). Neither has a published method.
 
@@ -69,14 +69,14 @@ We ask: **if an assistant learns when to speak from its user's feedback during u
    - Learning helps a little: greedy beats a no-learning floor by +0.067 [+0.010, +0.121].
    - Feature signal is weak (prelim.: offline AUC about 0.68 on finetune), led by the user's own walking speed.
 4. **Negative results on common remedies.** Exploration, simulator warm start and silence-as-negative do not help, and the last two hurt.
-5. **A memory and repetition result.** Appearance re-identification matches the same object about 90% of the time but has little effect on 31-second clips. The frozen imitation scheduler's repeat cues come mostly from a short per-track block, not from forgetting: 13.6% of its cues repeat the same track, and a 10 s re-announcement guard cuts that to 7.9% with recall unchanged.
+5. **A memory and repetition result.** Appearance re-identification looked about 90% precise by event id, but a hand check of 50 matches finds 0.43 precision among decided pairs (event ids conflate same-label objects), and it has little effect on 31-second clips. The frozen imitation scheduler's repeat cues come mostly from a short per-track block, not from forgetting: 13.6% of its cues repeat the same track, and a 10 s re-announcement guard cuts that to 7.9% with recall unchanged.
 
 ## 2. Related work
 
-All citations below were checked against the source at abstract level or deeper, except those marked [verify] or (unverified), which must be opened before submission.
+Every citation below was checked against the source (arXiv metadata, publisher, proceedings or Crossref record) on 2026-11-13; the table with URLs and verdicts is `docs/research/citations.md`. One sentence in section 6.2 rests on a second-hand report and is marked there.
 
 **When to speak for BLV users.**
-- **TIMELI** (Kuribayashi, Shangguan, Ohn-Bar; ICRA 2026, arXiv 2609.05596). Treats silence as an explicit label. Trains on about 67K CARLA clips with a rule-based target and has a small real test set.
+- **TIMELI** (Kuribayashi, Shangguan, Ohn-Bar; ICRA 2026, arXiv 2609.05596). Treats silence as an explicit label. Trains on about 67K CARLA clips (79.1% silent) with a rule-based target, validates on 2,000 real videos (TIMELI-Real), and ran a pilot with ten blind participants and O&M guides to inform the benchmark. No online learning from user feedback.
 - **VIABench** (arXiv 2607.14660). 761 videos, 46.9 h, 530 of them real videos from visually impaired creators. Its Proactive Reminder task scores alerts within event intervals and proposes TPAD, a training-free warning probability. LiveCC reaches 75.8% Stage-1 recall, which the authors attribute to dense output. There is no budget and no feedback.
 - **WorldScribe** (UIST 2024, arXiv 2408.06627). Gives unprompted descriptions using hand-set triggers: orientation change, frame similarity and stability. It does not learn from feedback.
 - **WalkVLM** (arXiv 2412.20903) and **WalkVLM-LR** (ICASSP 2026, arXiv 2508.16070). Use a discriminator to gate when to speak and use offline reward shaping to cut redundancy.
@@ -89,27 +89,27 @@ We differ from all of these in learning online from one-sided user feedback unde
 **Proactive egocentric assistants (not BLV).**
 - EgoVoice (EMNLP 2026, arXiv 2610.12248): when and what to say, trained by fine-tuning and offline DPO.
 - Vinci2 (ECCV 2026, arXiv 2607.11523): a training-free decision on whether to intervene.
-- Zhang et al. (EMNLP 2025, https://aclanthology.org/2025.emnlp-main.605/) [verify]: speak-or-stay-silent dialogue generation from streaming egocentric video.
-- ProactiveAgent (arXiv 2410.12361; ICLR 2025 venue unverified): a reward model trained on accept and reject labels.
+- Zhang et al. (EMNLP 2025, pp. 12044-12068, https://aclanthology.org/2025.emnlp-main.605/, arXiv 2506.05904): proactive dialogue generation from streaming egocentric video, with a speak-or-stay-silent decision and explicit handling of data imbalance.
+- ProactiveAgent (Lu et al., ICLR 2025, https://proceedings.iclr.cc/paper_files/paper/2025/hash/75c37811e830bf029584b1c6fac17726-Abstract-Conference.html, arXiv 2410.12361): a reward model trained on accept and reject labels.
 
 All of them are offline, and most use two-sided labels.
 
-**Interruption management.** Horvitz et al., attention-sensitive alerting (UAI 1999, arXiv 1301.6707). Interruptibility prediction from behaviour [verify: Pielot et al., IMWUT 2017; Okoshi et al., KDD 2019]. In our setting the cost of silence is a missed event the user cannot see, not lost engagement.
+**Interruption management.** Horvitz et al., attention-sensitive alerting (UAI 1999, arXiv 1301.6707). Interruptibility prediction from behaviour (Pielot et al., IMWUT 2017, https://doi.org/10.1145/3130956; Okoshi et al., KDD 2019, https://doi.org/10.1145/3292500.3330732). In our setting the cost of silence is a missed event the user cannot see, not lost engagement.
 
 **One-sided and partial feedback.**
-- Apple tasting (Helmbold, Littlestone, Long, Inf. Comput. 2000, https://dblp1.uni-trier.de/rec/journals/iandc/HelmboldLL00.html) [verify]. Its agnostic characterisation, with Θ(1), Θ(√T) or Θ(T) realizable rates, is Raman et al., COLT 2024 (arXiv 2310.19064).
-- Label-efficient prediction (Cesa-Bianchi, Lugosi, Stoltz, IEEE TIT 2005) [verify].
-- Partial monitoring (Bartók et al. 2014, https://www.mit.edu/~rakhlin/papers/partial_monitoring.pdf) [verify].
-- One-sided feedback in lending (Jiang, Jiang, Pacchiano, arXiv 2006.04858, AISTATS 2021 venue unverified; Bechavod et al., NeurIPS 2019, arXiv 1902.02242).
-- Sculley (KDD 2007) [verify]: mistake-driven learners suffer under one-sided feedback.
+- Apple tasting (Helmbold, Littlestone, Long, Information and Computation 161(2):85-139, 2000, https://doi.org/10.1006/inco.2000.2870). Its agnostic characterisation, with Θ(1), Θ(√T) or Θ(T) realizable rates, is Raman et al., COLT 2024 (arXiv 2310.19064).
+- Label-efficient prediction (Cesa-Bianchi, Lugosi, Stoltz, IEEE Trans. Inf. Theory 51(6):2152-2162, 2005, https://doi.org/10.1109/TIT.2005.847729).
+- Partial monitoring (Bartók, Foster, Pál, Rakhlin, Szepesvári, Mathematics of Operations Research 39(4):967-997, 2014, https://doi.org/10.1287/moor.2014.0663).
+- One-sided feedback in lending (Jiang, Jiang, Pacchiano, AISTATS 2021, PMLR 130:2413-2421, https://proceedings.mlr.press/v130/jiang21b.html, arXiv 2006.04858; Bechavod et al., NeurIPS 2019, arXiv 1902.02242).
+- Sculley (KDD 2007, https://doi.org/10.1145/1281192.1281258): one-sided feedback can cripple mistake-driven online learners such as the Perceptron (spam filtering).
 - User-triggered supervision in contextual bandits (Agarwal, Gentile, Marinov, arXiv 2302.03784, no venue listed). This is our closest formal ancestor.
-- Delay (Joulani et al., ICML 2013) [verify] and delayed, aggregated, anonymous feedback (Pike-Burke et al., ICML 2018, arXiv 1709.06853).
+- Delay (Joulani, György, Szepesvári, ICML 2013, https://proceedings.mlr.press/v28/joulani13.html) and delayed, aggregated, anonymous feedback (Pike-Burke et al., ICML 2018, arXiv 1709.06853).
 - Bandits with knapsacks (Badanidiyuru et al., arXiv 1305.2545; Agrawal and Devanur, arXiv 1507.06738).
-- Positive-unlabelled learning (Elkan and Noto, KDD 2008; Kiryo et al., NeurIPS 2017) [verify].
+- Positive-unlabelled learning (Elkan and Noto, KDD 2008, https://doi.org/10.1145/1401890.1401920; Kiryo, Niu, du Plessis, Sugiyama, NeurIPS 2017, https://neurips.cc/virtual/2017/poster/8958).
 
 **BLV egocentric data.**
 - EgoBlind (NeurIPS 2025 D&B, arXiv 2503.08221): 1,329 clips from 478 source videos, 5,311 questions.
-- GuideDog (ACL 2026, arXiv 2503.12844): 22K image-description pairs from still images, gated; the CC BY-NC licence is unverified.
+- GuideDog (ACL 2026, arXiv 2503.12844): 22K image-description pairs from still images, CC BY-NC 4.0, gated on Hugging Face (https://huggingface.co/datasets/kjunh/GuideDog).
 - ORBIT (ICCV 2021, arXiv 2104.03841): teachable recognition.
 
 None of them carries timing or feedback labels.
@@ -229,7 +229,7 @@ The online learners and the floor run at about 1.7 cues/min against a target of 
 
 ### 6.2 Exploration does not help
 
-Apple tasting (0.183) and Thompson sampling (0.188) are within seed noise of greedy (0.204). This agrees with Sculley's observation that explicit apple-tasting exploration can underperform greedy in practice [verify: cited second-hand; open Sculley, KDD 2007, before keeping this sentence].
+Apple tasting (0.183) and Thompson sampling (0.188) are within seed noise of greedy (0.204). This agrees with Sculley's spam-filtering result, as summarised by Jiang et al. (AISTATS 2021, section 2), that the apple-tasting transformation of Helmbold et al. was less effective than a simple greedy strategy (cited second-hand through Jiang et al.).
 
 ### 6.3 Simulator warm start
 
@@ -315,7 +315,7 @@ Cues/min is 1.66 to 1.69 in every run. Lowering the asking rate to 0.5 or 0.25 l
 
 The online greedy baseline without re-ID is 0.188 recall and 0.496 repeats/min. CLIP embeddings were computed for 414,017 detections across 592 videos.
 
-- Match precision against ground-truth object ids is 0.90 at θ 0.80 (n = 2,041) and 0.89 at θ 0.85 (n = 1,863).
+- Match precision against event-linked ids is 0.90 at θ 0.80 (n = 2,041) and 0.89 at θ 0.85 (n = 1,863), but event ids conflate same-label objects; a hand check of 50 matches (25 with gaps over 5 s) gives 0.43 precision among decided pairs (0.33 for gaps over 5 s).
 - Clips average 31 s, so announced objects rarely leave and return. The memory changes little.
 - 28.5% (65/228) of IL cues name an already-announced weak event. Only 13.6% (31/228) repeat the same tracker track, because EgoBlind links every same-label detection in an event window to that event, so the larger count includes cues about a different person or car. The cause of the same-track repeats is the learned scheduler's 2.8 s per-track block with no novelty decay, not a memory failure. A 10 s re-announcement guard, not tuned, cuts same-track repeats to 7.9% (17/214) with recall unchanged (0.331; 4/27 on finetune) and cues/min falling from 0.79 to 0.74 (`results/memory/reid_il_fix.md`).
 
@@ -369,7 +369,7 @@ All remaining items run on the dev stream (train then finetune) with 3 seeds, an
 - **Safety framing.** SeeForMe supplements the cane or guide dog and does not replace them. A missed cue must never be the only safeguard.
 - **Data licences.**
   - EgoBlind is used under its non-commercial research licence. Its videos are public uploads by blind creators. We redistribute no video or derived features, and models trained on it stay in a research-only track.
-  - GuideDog (gated; CC BY-NC unverified) is not used in these results.
+  - GuideDog (gated; CC BY-NC 4.0) is not used in these results.
   - BLV-Road-Nav has no licence file and is not used until permission is granted.
   - A product track will be trained only on the authors' own recordings, CampusBench and permissively licensed detectors.
 - **Representation.** EgoBlind creators are not a representative sample of BLV pedestrians (country, mobility aid, phone placement). Results must not be generalised to all BLV users.
@@ -419,7 +419,7 @@ Scored against the corrected framing: a diagnostic benchmark whose main result i
 
 **Clarity (→ 20)**
 15. Add a system figure, a feedback-timeline figure (cue, tap, question, window), the label-delay curve, learning curves, and a recall against cues/min frontier.
-16. Open and verify every [verify] and (unverified) citation and complete the bibliography with DOIs.
+16. Citations were verified on 2026-11-13 (`docs/research/citations.md`). Still open: build the final bibliography with DOIs (the Sculley sentence in section 6.2 is cited second-hand through Jiang et al.).
 
 **Accessibility relevance (→ 20)**
 17. Run an IRB-approved BLV pilot (6 to 10 participants) with real feedback controls in the app. Report feedback latency, learning within a session, SUS or NASA-TLX, interviews, and preferences for latency, rate and direction format.

@@ -23,7 +23,7 @@ def test_verdict_validation_and_provenance():
         make_verdict("2:1", "speak", reviewer="")
     with pytest.raises(ValueError):
         make_verdict("2:1", "speak", reviewer="ar", window=(8.0, 7.0))
-    assert set(VERDICTS) == {"speak", "silent", "wrong_object", "unclear"}
+    assert set(VERDICTS) == {"speak", "confirm_clear", "silent", "wrong_object", "unclear"}
 
 
 def test_latest_verdict_per_reviewer_wins_and_merge_fills_csv_columns():
@@ -67,3 +67,10 @@ def test_audit_score_confusion_and_rates():
     assert s["n"] == 5 and s["n_decided"] == 4
     assert s["speak_confirmed"] == 0.5 and s["silent_confirmed"] == 0.5     # of decided, per derived class
     assert s["confusion"]["silent"]["speak"] == 1 and s["unclear"] == 1
+
+
+def test_confirm_clear_counts_as_not_a_warning_in_the_audit():
+    from seeforme.egoblind.review import audit_score
+    derived = {"a": "speak", "b": "silent", "c": "silent"}
+    s = audit_score(derived, {"a": "speak", "b": "confirm_clear", "c": "silent"})
+    assert s["speak_confirmed"] == 1.0 and s["silent_confirmed"] == 1.0 and s["confirm_clear_on_quiet"] == 0.5

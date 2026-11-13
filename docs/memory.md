@@ -17,11 +17,11 @@ Every detection in the 592 development-pool videos has a CLIP ViT-B/32 embedding
 | Online greedy | θ 0.80 | 0.125 | 0.545 | 611 | **-0.062** [-0.117, -0.012] | +0.048 [-0.071, +0.171] |
 | Online greedy | θ 0.85 | 0.188 | 0.472 | 401 | +0.000 [-0.048, +0.044] | -0.024 [-0.104, +0.055] |
 
-Match precision against ground-truth object ids, where both sides have one: **0.90** at θ 0.80 (n = 2,041) and 0.89 at θ 0.85 (n = 1,863).
+Match "precision" against ground-truth ids, where both sides have one: 0.90 at θ 0.80 (n = 2,041) and 0.89 at θ 0.85 (n = 1,863). **This overstates precision** (see the hand check below): EgoBlind links every same-label detection in an event window to that event, so two different people near the same question share an id.
 
 ## What this says
 
-1. **Matching works; on EgoBlind there's almost nothing for it to do.** About 90% of matches are the same object. But the clips average 31 seconds, so an object rarely leaves and comes back after being announced: 127–611 such cases in 290 minutes. Most of the 85–92 re-identifications a minute are tracks that flicker out for two seconds and were never announced, and those change nothing.
+1. **On EgoBlind there's almost nothing for matching to do, and the matching itself is weaker than the id check suggested** (hand check: 0.43 precision among decided pairs). But the clips average 31 seconds, so an object rarely leaves and comes back after being announced: 127–611 such cases in 290 minutes. Most of the 85–92 re-identifications a minute are tracks that flicker out for two seconds and were never announced, and those change nothing.
 2. **For the fixed rule it helps a little and costs nothing.** P-CACS loses 14% of its label repeats at θ 0.80 with no change in recall.
 3. **For the online learner, a loose threshold hurts.** At θ 0.80 the inherited state changes which candidates look new, the learner drifts onto a different trajectory, and recall falls by 0.06. θ 0.85 is neutral.
 4. **The October IL model's repeats aren't a memory problem, and most aren't the same object.** 28.5% of its cues (65/228) name a weak event it already announced, and re-ID doesn't change that. But EgoBlind links every detection of the event's label inside its window to the event, so that count includes cues about a different person or car. Only 31/228 cues (13.6%) re-announce the same tracker track; 18 of those are the same event. See "Issue 6" below.
@@ -45,6 +45,33 @@ Match precision against ground-truth object ids, where both sides have one: **0.
 | Same-event repeat share (`repeat_gt`) | 0.285 | 0.262 | -0.023 [-0.042, -0.006] |
 
 The guard removes 14 cues, all of them same-track repeats, at no cost in recall. The 17 that remain pass the approach exception, mostly on far-range depth estimates (for example 29 m to 23 m), where a fixed 3 m rule is weak. The guard length (10 s, P-CACS's `reannounce_tau_s`) was not tuned.
+
+## Guard length chosen on `select` (2026-11-13)
+
+| IL configuration | `select` coverable recall | `select` same-track repeats | dev coverable recall | dev same-track repeats |
+|---|---|---|---|---|
+| no guard (October baseline) | 0.091 | 0.194 | 0.331 | 0.136 |
+| guard 5 s | 0.091 | 0.138 | | |
+| guard 10 s | 0.091 | 0.138 | 0.331 | 0.079 |
+| **guard 20 s (selected)** | 0.091 | **0.107** | 0.331 | **0.075** |
+
+Selection rule: fewest same-track repeats with recall unchanged. `egoblind_learned:il` stays the reproducible October baseline; `egoblind_learned:il+guard20` is the configuration to deploy. `select` has 11 coverable events, so the recall column cannot detect small losses; dev confirms none.
+
+## Hand check of 50 matches and θ / horizon on `select` (issue 8, 2026-11-13)
+
+50 matches from the dev re-ID run (P-CACS, θ 0.85, 120 s): 25 with a gap over 5 s and 25 random. Retired and new crops side by side (`data/review/reid_audit/`, local); judged by eye by the assistant, not by a person, as same / different / unclear.
+
+| Stratum | Same | Different | Unclear | Precision among decided |
+|---|---|---|---|---|
+| gap > 5 s | 6 | 12 | 7 | 0.33 |
+| random | 9 | 8 | 8 | 0.53 |
+| all | 15 | 20 | 15 | 0.43 |
+
+Typical errors: two people in the same uniform, a ridden shared bike matched to a parked one, a grey car matched to a white SUV, body parts of different people. CLIP ViT-B/32 crop embeddings separate classes, not instances.
+
+On `select` (34 videos), no setting of θ in {0.8, 0.85, 0.9} and horizon in {30, 60, 120, 300} s changes recall, quiet-window violations or repeats for P-CACS or IL; θ 0.9 makes the fewest matches (17-23 per run).
+
+**Decision:** θ = 0.9, horizon 60 s, and re-identification stays **off by default** (`reid_horizon_s = 0`) until a stronger instance-level appearance model (a person re-ID network, or a learned embedding trained on own long walks) reaches a hand-checked precision worth trusting. Long-horizon memory is measured on own recordings (issue 9), not EgoBlind.
 
 ## Still to do
 

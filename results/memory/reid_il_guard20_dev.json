@@ -1,0 +1,34 @@
+{
+ "summary": {
+  "egoblind_learned:il+guard20@reid_off": {
+   "recall_coverable": 0.33125,
+   "quiet_violation": 0.035842293906810034,
+   "cues_per_min": 0.7341888018015774,
+   "repeat_gt_share": 0.25821596244131456,
+   "repeat_track_share": 0.07511737089201878,
+   "repeat_label_per_min": 0.2860923499977978,
+   "reid_per_min": 0.0,
+   "reid_announced": 0,
+   "n_coverable": 160,
+   "n_spoken": 213
+  },
+  "_meta": {
+   "stream": [
+    "train",
+    "finetune"
+   ],
+   "n_videos": 558,
+   "with_embeddings": 558,
+   "configs": [
+    [
+     0.0,
+     null
+    ]
+   ],
+   "label_window": 60.0,
+   "final": false,
+   "seed": 0
+  }
+ },
+ "paired_diffs": {}
+}

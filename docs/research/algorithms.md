@@ -41,21 +41,21 @@ Two more checks point the same way:
 
 ## 2. Existing theory and algorithms (citations checked)
 
-- **Apple tasting** (Helmbold, Littlestone, Long 2000): the learner sees the label only when it accepts an instance. They give reductions to the standard mistake-bound model. https://dblp1.uni-trier.de/rec/journals/iandc/HelmboldLL00.html
-  - Raman et al. (2023) show the Littlestone dimension still characterises the agnostic case, and the realizable rates are Θ(1), Θ(√T) or Θ(T). https://pdf.arxiv.org/abs/2310.19064
-- **One-sided feedback in practice** (Sculley 2007): mistake-driven learners such as the Perceptron suffer under one-sided feedback. He tested on spam filtering, and a later paper reports he found the Helmbold et al. method weaker than plain greedy, which matches our finding that exploration does not help. https://dblp.uni-trier.de/rec/conf/kdd/Sculley07.html and https://ar5iv.arxiv.org/html/2006.04858
-- **Label-efficient prediction** (Cesa-Bianchi, Lugosi, Stoltz 2005): matching upper and lower bounds when the learner may query only a limited number of labels. https://dblp.uni-trier.de/rec/conf/colt/Cesa-BianchiLS04.html
-- **Partial monitoring** (Bartók, Foster, Pál, Rakhlin, Szepesvári 2014): every finite game has minimax regret of order 0, √T, T^{2/3} or T, and local observability separates √T from T^{2/3}. https://www.mit.edu/~rakhlin/papers/partial_monitoring.pdf
+- **Apple tasting** (Helmbold, Littlestone, Long 2000): the learner sees the label only when it accepts an instance. They give reductions to the standard mistake-bound model. Information and Computation 161(2):85-139, https://doi.org/10.1006/inco.2000.2870
+  - Raman et al. (COLT 2024) show the Littlestone dimension still characterises the agnostic case, and the realizable rates are Θ(1), Θ(√T) or Θ(T). https://arxiv.org/abs/2310.19064
+- **One-sided feedback in practice** (Sculley 2007): mistake-driven learners such as the Perceptron suffer under one-sided feedback. He tested on spam filtering. Jiang et al. (AISTATS 2021, section 2) report that he found the Helmbold et al. method less effective than a simple greedy strategy, which matches our finding that exploration does not help (second-hand: Sculley's full text was not opened). https://doi.org/10.1145/1281192.1281258 and https://arxiv.org/abs/2006.04858
+- **Label-efficient prediction** (Cesa-Bianchi, Lugosi, Stoltz 2005): matching upper and lower bounds when the learner may query only a limited number of labels. IEEE Trans. Inf. Theory 51(6):2152-2162, https://doi.org/10.1109/TIT.2005.847729 (COLT 2004 version: https://doi.org/10.1007/978-3-540-27819-1_6)
+- **Partial monitoring** (Bartók, Foster, Pál, Rakhlin, Szepesvári 2014): every finite game has minimax regret of order 0, √T, T^{2/3} or T, and local observability separates √T from T^{2/3}. Mathematics of Operations Research 39(4):967-997, https://doi.org/10.1287/moor.2014.0663 (preprint: https://www.mit.edu/~rakhlin/papers/partial_monitoring.pdf)
   - Unverified: which class two-action apple tasting falls into. My own reasoning is that it is locally observable (√T), because the speak action reveals the outcome. I found no source that says so.
-- **Bandits with knapsacks** (Badanidiyuru, Kleinberg, Slivkins 2013/2018): https://arxiv.org/abs/1305.2545v4
-  - Linear contextual version: Agrawal and Devanur (NeurIPS 2016), https://arxiv.org/pdf/1507.06738v2.pdf
-  - Resourceful contextual bandits: Badanidiyuru, Langford, Slivkins (2014), https://ar5iv.arxiv.org/html/1402.6779
+- **Bandits with knapsacks** (Badanidiyuru, Kleinberg, Slivkins, FOCS 2013; J. ACM 65, 2018, https://doi.org/10.1145/3164539): https://arxiv.org/abs/1305.2545
+  - Linear contextual version: Agrawal and Devanur (NeurIPS 2016, pp. 3450-3458), https://arxiv.org/abs/1507.06738
+  - Resourceful contextual bandits: Badanidiyuru, Langford, Slivkins (COLT 2014), https://arxiv.org/abs/1402.6779
   - Primal-dual threshold updates of this kind are what `BudgetController` approximates.
-- **Delayed feedback:** Joulani, György, Szepesvári (ICML 2013) show delay costs multiplicatively in adversarial settings and additively in stochastic ones. https://proceedings.mlr.press/v28/joulani13.html
+- **Delayed feedback:** Joulani, György, Szepesvári (ICML 2013) show delay costs multiplicatively in adversarial settings and additively in stochastic ones. PMLR 28(3):1453-1461, https://proceedings.mlr.press/v28/joulani13.html
   - Delayed, aggregated, anonymous feedback, which is our question label over an interval: Pike-Burke, Agrawal, Szepesvári, Grünewälder (ICML 2018), https://ar5iv.labs.arxiv.org/html/1709.06853
-- **Positive-unlabeled learning:** Elkan and Noto (KDD 2008) show that under "selected completely at random", a P-vs-U classifier differs from the true one by a constant factor. https://dblp.org/rec/conf/kdd/ElkanN08
-  - Kiryo et al. (NeurIPS 2017), non-negative PU risk estimator: https://neurips.cc/virtual/2017/poster/8958
-- **KWIK** (Li, Littman, Walsh, ICML 2008): the learner may say "I don't know", with a bounded number of such answers. https://mlanthology.org/icml/2008/li2008icml-knows/
+- **Positive-unlabeled learning:** Elkan and Noto (KDD 2008) show that under "selected completely at random", a P-vs-U classifier differs from the true one by a constant factor. https://doi.org/10.1145/1401890.1401920
+  - Kiryo, Niu, du Plessis, Sugiyama (NeurIPS 2017), non-negative PU risk estimator: https://neurips.cc/virtual/2017/poster/8958
+- **KWIK** (Li, Littman, Walsh, ICML 2008): the learner may say "I don't know", with a bounded number of such answers. https://doi.org/10.1145/1390156.1390228
 
 ## 3. Why one-sided learners reach only about 0.20
 

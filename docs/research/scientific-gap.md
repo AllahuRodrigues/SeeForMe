@@ -5,7 +5,7 @@ Method: I read the repo docs you listed (online.md, memory.md, PRD, M1/M2 plans,
 ## Bottom line
 
 1. **"When to speak unprompted for BLV users" is no longer an open problem as stated.** Since mid-2026, three papers address it directly: TIMELI (Sep 2026), VIABench's Proactive Reminder task (Jul 2026) and WorldScribe (UIST 2024). EgoVoice (Oct 2026, EMNLP 2026) and Vinci2 (ECCV 2026) do the same for general wearable assistants. A reviewer will reject a claim of novelty for the timing problem itself.
-2. **The PRD sentence that Be My Eyes, Seeing AI and Lookout "answer only when asked" is factually wrong for two of them.** Seeing AI's Short Text channel reads text as soon as it appears. Lookout's Explore mode describes objects continuously as the camera moves. The defensible version: deployed apps either wait for a request or speak by fixed rules, and none of them learns when to speak.
+2. **The PRD sentence that Be My Eyes, Seeing AI and Lookout "answer only when asked" is factually wrong for two of them.** Seeing AI's Read channel (formerly Short Text) reads text as soon as it appears. Lookout's Explore mode describes objects continuously as the camera moves. The defensible version: deployed apps either wait for a request or speak by fixed rules, and none of them learns when to speak.
 3. **What still looks novel** (from what I could find; I did not run an exhaustive SLR):
    - learning when to speak for BLV users online, during use;
    - from one-sided feedback: taps after a cue, a later user question exposing a miss, silence never labelled;
@@ -24,7 +24,7 @@ Method: I read the repo docs you listed (online.md, memory.md, PRD, M1/M2 plans,
    - IL scores 0.331 overall (in-sample on train), against 0.183 to 0.204 for the online learners.
    - On the out-of-sample finetune split, IL scores 4/27 and the online learners 2 to 7/27, which is not separable.
 
-   What is currently strong and publishable is the measured cost of one-sided feedback: 0.525 with full information against about 0.20 one-sided. That is a gap of about 0.32, about 60% of the learnable recall. Negative results also hold: warm-start harm and implicit negatives hurt.
+   (Superseded: the 0.525 "full-information" figure used zero-delay labels. With labels held to clip end, full information gets 0.200 against 0.204 one-sided; see docs/research/README.md.) What is publishable is the label-delay curve and the failure analysis. Negative results also hold: warm-start harm and implicit negatives hurt.
 
 ## 1. What is done (with citations)
 
@@ -32,15 +32,15 @@ Method: I read the repo docs you listed (online.md, memory.md, PRD, M1/M2 plans,
 
 - **TIMELI, "Time-Aware Assistive Navigation"**, Kuribayashi, Shangguan, Ohn-Bar. Source: https://arxiv.org/abs/2609.05596 (abstract) and repo `docs/timeli_notes.md`.
   - Asks "can agents learn when to speak, not just what to say". Silence is an explicit target label ("None").
-  - Training data is CARLA simulation, about 67K clips, with a rule-based ground truth (`determine_to_talk`). There is a small real YouTube test set.
-  - Supervised MLLM fine-tuning plus reason prediction. No user feedback, no online learning, and no BLV user study in the abstract.
-  - Venue inconsistency: arXiv says "ICRA 2026" but it was submitted 4 Sep 2026. Unverified which ICRA.
+  - Training data is CARLA simulation, about 67K clips (67,101; 79.1% silent), with a rule-based ground truth computed from the simulator state (the name `determine_to_talk` comes from repo notes, not the paper). TIMELI-Real has 2,000 real videos (in-situ study plus annotated YouTube), reserved for validation.
+  - Supervised MLLM fine-tuning plus reason prediction. No user feedback and no online learning. The body (not the abstract) reports a pilot with ten blind participants and O&M guides that informed the benchmark (checked in the arXiv HTML, 2026-11-13).
+  - Venue: arXiv comment and project page (https://timeli-icra.github.io/) both say "ICRA 2026", although arXiv v1 is dated 4 Sep 2026. Not checked against the ICRA 2026 proceedings (unverified).
 - **VIABench**, Liu et al. (Nanjing, Limin Wang group). Source: https://arxiv.org/abs/2607.14660, HTML read.
   - 761 videos, 46.9 h; 530 real videos from visually impaired creators on YouTube, Bilibili and DouYin.
   - Its **Proactive Reminder** task annotates [ts, te] event intervals and scores a detection rate (an alert anywhere in the interval) plus GPT-5 similarity of the content.
   - It proposes TPAD, a training-free per-frame "should the user be warned? A/B" probability.
   - Offline models stay under 45% recall. LiveCC gets 75.8% by talking densely, which shows the benchmark does not penalise verbosity well.
-  - No user feedback, no budget. Data release is promised ("will be released"); dataset licence not stated.
+  - No user feedback, no budget. The paper states no dataset licence. Data is now on Hugging Face (https://huggingface.co/datasets/MCG-NJU/VIABench, tag MIT, 2026-07-17); the GitHub repo has no licence file, and the rights to the underlying creator videos are unclear.
 - **WorldScribe**, Chang, Liu, Guo, UIST 2024 Best Paper. Source: https://arxiv.org/abs/2408.06627, HTML read.
   - Gives continuous, unprompted live descriptions to blind users.
   - Hand-set triggers: 30 degree orientation change, frame similarity below 0.6, stability over 5 frames.
@@ -65,48 +65,48 @@ Method: I read the repo docs you listed (online.md, memory.md, PRD, M1/M2 plans,
 - **Proactive Assistant Dialogue Generation from Streaming Egocentric Videos** (Zhang et al., https://arxiv.org/abs/2506.05904; listed in ACL Anthology as EMNLP 2025 at https://aclanthology.org/2025.emnlp-main.605/): synthetic dialogues, a speak or stay-silent decision, class imbalance named as a difficulty.
 - **EgoPro-Bench** (https://arxiv.org/abs/2605.07299, abstract): personalised proactive interaction from simulated user profiles. The abstract does not mention EgoBlind. A search snippet claimed it uses 420 EgoBlind videos and a navigation domain for visually impaired users; unverified.
 - **YETI** (https://arxiv.org/abs/2501.09355): proactive intervention in AR tasks. Title only checked.
-- **ProactiveAgent**, Lu et al., ICLR 2025 (https://arxiv.org/abs/2410.12361): a reward model trained on human accept or reject labels of proposed help. Offline and two-sided labels. Its F1 numbers came from a third-party summary; unverified.
+- **ProactiveAgent**, Lu et al., ICLR 2025 (https://proceedings.iclr.cc/paper_files/paper/2025/hash/75c37811e830bf029584b1c6fac17726-Abstract-Conference.html, https://arxiv.org/abs/2410.12361): a reward model trained on human accept or reject labels of proposed help. Offline and two-sided labels. The abstract reports F1 66.47% for proactively offering help (ProactiveBench, 6,790 events).
 - **Project Astra with Aira "Visual Interpreter"** (https://aira.io/projectastra, https://deepmind.google/models/project-astra/): Google markets Astra as able to start conversations. A pilot for BLV users is underway, with human interpreters monitoring calls. No public method. This is a commercial threat to "nobody does this".
 
 ### C. Interruption management (HCI)
 
-From a curated list (https://github.com/tao-hpu/awesome-proactive-agents); I did not open each paper:
+From a curated list (https://github.com/tao-hpu/awesome-proactive-agents). Authors, titles, venues and DOIs were checked against Crossref on 2026-11-13; the papers themselves were not read:
 
 - Horvitz, Jacobs and Hovel, Attention-Sensitive Alerting, UAI 1999: https://arxiv.org/abs/1301.6707
 - Horvitz, Principles of Mixed-Initiative UI, CHI 1999: https://doi.org/10.1145/302979.303030
-- McFarlane 2002: https://doi.org/10.1207/S15327051HCI1701_2
+- McFarlane, Comparison of Four Primary Methods for Coordinating the Interruption of People in Human-Computer Interaction, Human-Computer Interaction 17(1), 2002: https://doi.org/10.1207/S15327051HCI1701_2
 - Fogarty et al., TOCHI 2005: https://dl.acm.org/doi/10.1145/1057237.1057243
 - Pielot et al., Beyond Interruptibility, IMWUT 2017: https://dl.acm.org/doi/10.1145/3130956
-- Okoshi et al., KDD 2019, adaptive notification scheduling in production: https://doi.org/10.1145/3292500.3330732
+- Okoshi, Tsubouchi, Tokuda, Real-World Product Deployment of Adaptive Push Notification Scheduling on Smartphones, KDD 2019: https://doi.org/10.1145/3292500.3330732
 
 This literature already learns interruptibility from behaviour. The SeeForMe difference: the cost of silence is a missed safety or awareness event, not lost engagement, and the user cannot see what was missed.
 
 ### D. Learning from one-sided or implicit feedback (theory)
 
-- **Apple tasting**: Helmbold, Littlestone, Long, FOCS 1992 and Information and Computation 161 (2000). Indexed in bibliographic catalogues found by search; I did not read the paper. Agnostic characterisation by Raman, Subedi, Raman, Tewari (https://arxiv.org/abs/2310.19064, COLT 2024 per search).
-- **Label-efficient prediction**, Cesa-Bianchi, Lugosi, Stoltz, IEEE Transactions on Information Theory 2005 (https://hal.archives-ouvertes.fr/hal-00007537). **Partial monitoring**, same authors, Mathematics of Operations Research 2006 (search result only).
+- **Apple tasting**: Helmbold, Littlestone, Long, "Apple tasting and nearly one-sided learning", FOCS 1992 (https://doi.org/10.1109/SFCS.1992.267802), and "Apple tasting", Information and Computation 161(2):85-139, 2000 (https://doi.org/10.1006/inco.2000.2870). Bibliographic data checked on Crossref; the paper was not read. Agnostic characterisation by Raman, Subedi, Raman, Tewari (https://arxiv.org/abs/2310.19064, COLT 2024 per the arXiv comment).
+- **Label-efficient prediction**, Cesa-Bianchi, Lugosi, Stoltz, IEEE Transactions on Information Theory 51(6):2152-2162, 2005 (https://doi.org/10.1109/TIT.2005.847729, https://hal.archives-ouvertes.fr/hal-00007537). **Partial monitoring**, same authors, "Regret Minimization Under Partial Monitoring", Mathematics of Operations Research 31(3):562-580, 2006 (https://doi.org/10.1287/moor.1060.0206).
 - **One-sided feedback in lending**:
-  - Jiang, Jiang, Pacchiano, AISTATS 2021 (https://arxiv.org/abs/2006.04858). Without bias correction a GLM can converge suboptimally or not at all; they propose an adaptive UCB fix.
+  - Jiang, Jiang, Pacchiano, AISTATS 2021, PMLR 130:2413-2421 (https://proceedings.mlr.press/v130/jiang21b.html, https://arxiv.org/abs/2006.04858). Without bias correction a GLM can converge suboptimally or not at all; they propose an adaptive UCB fix.
   - Bechavod et al., NeurIPS 2019 (https://arxiv.org/abs/1902.02242).
 - **User-triggered supervision in contextual bandits**, Agarwal, Gentile, Marinov 2023 (https://arxiv.org/abs/2302.03784, abstract). The user sometimes volunteers the best action, as in autocomplete, and the method stays robust to the bias of that signal. **This is the closest formal analogue to "a question reveals a miss".**
-- **Online positive-unlabeled (PU) learning**, Zhang et al., IJCAI 2020 (https://www.ijcai.org/proceedings/2020/311). Silence-as-unlabelled is a PU problem.
+- **Online positive-unlabeled (PU) learning**, Chuang Zhang et al., IJCAI 2020, pp. 2248-2254 (https://www.ijcai.org/proceedings/2020/311). Silence-as-unlabelled is a PU problem.
 - **Budget**: Resourceful Contextual Bandits / bandits with knapsacks, Badanidiyuru, Langford, Slivkins, COLT 2014 (https://arxiv.org/abs/1402.6779).
 
 ### E. Egocentric BLV datasets (no timing or feedback labels)
 
 - **EgoBlind**, NeurIPS 2025 D&B (https://arxiv.org/abs/2503.08221, HTML v4 read).
-  - 1,392 videos (1,329 clips of about 40 s), downloaded from blind creators on Bilibili and TikTok.
+  - The abstract says 1,392 videos, but the body (section 3.1, Table 2) gives 1,329 clips of about 40 s cut from 478 long-form source videos downloaded from blind creators on Bilibili and TikTok. Cite 1,329 clips from 478 source videos.
   - 5,311 questions; 14.1% navigation and 23.7% safety (my arithmetic from Table 1).
   - Best MLLM about 60% against 87.4% for humans.
-- **GuideDog** (https://arxiv.org/abs/2503.12844, ACL 2026 per Anthology): about 22K image-description pairs, about 2K gold. CC BY-NC 4.0, gated on Hugging Face. Still images, no timing.
+- **GuideDog** (https://arxiv.org/abs/2503.12844, ACL 2026 Main per the arXiv comment): about 22K image-description pairs, about 2K human-verified. CC BY-NC 4.0, gated (auto-approved) on Hugging Face (https://huggingface.co/datasets/kjunh/GuideDog). Still images, no timing.
 - **ORBIT**, ICCV 2021 (https://arxiv.org/abs/2104.03841): 3,822 videos of 486 objects filmed by BLV users. Teachable recognition, not timing.
-- **VizWiz**, Gurari et al., CVPR 2018: venue not re-verified in this pass; the ORBIT paper describes it as 31,173 images from 11,045 BLV users. Single photos with questions, entirely user-initiated.
+- **VizWiz**, Gurari et al., CVPR 2018 (https://doi.org/10.1109/CVPR.2018.00380; venue checked on Crossref). The ORBIT paper describes it as 31,173 images from 11,045 BLV users (count not re-checked). Single photos with questions, entirely user-initiated.
 - **Ego4D**: general egocentric data; I found no Ego4D-based BLV timing work.
 
 ## 2. What is NOT done (as far as I found)
 
 1. No BLV system or paper learns when to speak online from the user's own reactions while in use. All of them are offline-supervised, preference-optimised, rule-based or training-free.
-2. No work measures how much proactive-cue recall is lost to one-sided feedback against full labels, on real BLV video. SeeForMe's 0.525 against about 0.20 appears to be the first such measurement.
+2. No work measures how much proactive-cue recall is lost to one-sided feedback against full labels, on real BLV video. SeeForMe measures it and finds no cost against a causal full-information reference (0.200 vs 0.204), with recall falling steadily as label delay grows; this appears to be the first such measurement.
 3. No BLV timing benchmark imposes an explicit speech budget. VIABench rewards dense output (LiveCC gets 75.8% recall by talking a lot), and TIMELI's rule hard-codes "never two in a row".
 4. No benchmark uses later user questions as delayed "miss" labels for the timing policy. EgoBlind questions are used only as VideoQA targets.
 5. No work tests whether simulator pretraining helps or hurts online adaptation on real BLV video. SeeForMe's warm-start result (-0.058, CI excludes 0, with optimiser state carried over) is a useful negative result against TIMELI-style sim-first pipelines.
@@ -133,7 +133,7 @@ SeeForMe is, to my knowledge, the first to:
 
 > Existing proactive assistants for blind users learn when to speak from offline labels. In use, an assistant only sees one-sided feedback. We measure how much that costs on real blind users' video and develop learners that recover part of it under a 2 cue/min budget.
 
-Drop "Be My Eyes, Seeing AI, Lookout answer only when asked". Replace it with "they either wait to be asked or speak by fixed rules (Seeing AI Short Text, Lookout Explore); none learns when".
+Drop "Be My Eyes, Seeing AI, Lookout answer only when asked". Replace it with "they either wait to be asked or speak by fixed rules (Seeing AI Read, formerly Short Text; Lookout Explore); none learns when".
 
 ## 4. Closest competing papers and how to differentiate
 
@@ -170,16 +170,15 @@ Drop "Be My Eyes, Seeing AI, Lookout answer only when asked". Replace it with "t
 
 ## Unverified items to check before citing
 
-- VizWiz CVPR 2018 author and venue details.
-- Apple tasting and partial-monitoring full texts.
-- The DOIs on the interruption-management list (from a GitHub list, not opened).
-- EgoPro-Bench's use of EgoBlind (snippet only).
-- TIMELI's venue year.
-- Whether VIABench's data and licence are released.
-- ProactiveAgent's F1 figures.
-- Whether VIA-Agent participants were BLV.
+Resolved on 2026-11-13 (see `docs/research/citations.md`): VizWiz venue, apple-tasting and partial-monitoring bibliographic data, the interruption-management DOIs, ProactiveAgent's venue and F1, VIABench's data release. Still open:
+
+- Apple tasting and partial-monitoring full texts (bibliographic data only).
+- EgoPro-Bench's use of EgoBlind (snippet only; the abstract does not mention it).
+- TIMELI's ICRA 2026 venue against the proceedings.
+- VIABench's licence for the underlying videos (HF tag MIT, no licence file on GitHub).
+- Whether VIA-Agent participants were BLV (the abstract does not say).
 - Whether Lookout Explore still behaves as described: sources are 2019 to 2022, and Google's help page lists it as beta (https://support.google.com/accessibility/android/answer/9031274).
-- Seeing AI Short Text evidence is from third-party guides (https://www.guidedogs.org.uk/services-we-provide/technology/Seeing-AI, https://hadleyhelps.org/workshops/seeing-ai-apple-voiceover-series/reading-short-text), not Microsoft documentation.
+- Seeing AI: resolved. Microsoft's App Store listing (https://apps.apple.com/us/app/seeing-ai/id999062298) says Read (which replaced Short Text in version 5.5.1) lets you "hear text as soon as it appears in front of the camera". The guidedogs.org.uk link is dead (404) and was dropped; the Hadley guide still confirms that reading starts without a button press.
 
 ## Repo files consulted
 

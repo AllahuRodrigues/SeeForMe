@@ -28,7 +28,7 @@
   button { font: inherit; font-weight:600; min-height:52px; border-radius:12px; border:2px solid var(--line); background:var(--card);
            color:var(--text); cursor:pointer; padding: 8px 14px; }
   button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  button[data-v=speak] { border-color: var(--speak); } button[data-v=silent] { border-color: var(--silent); }
+  button[data-v=speak] { border-color: var(--speak); } button[data-v=confirm_clear] { border-color: var(--accent); } button[data-v=silent] { border-color: var(--silent); }
   button[data-v=wrong_object] { border-color: var(--wrong); } button[data-v=unclear] { border-color: var(--unclear); }
   button[aria-pressed=true] { background: var(--accent); border-color: var(--accent); color:#fff; }
   .kbd { font-weight:400; color:var(--muted); font-size:13px; margin-left:6px; }
@@ -70,7 +70,7 @@
   </section>
 
   <section class="card" aria-labelledby="v-h">
-    <h2 id="v-h" style="font-size:20px;margin:0 0 12px">Should the assistant have spoken up about this, unprompted?</h2>
+    <h2 id="v-h" style="font-size:20px;margin:0 0 12px">Before the question, what should the assistant have said, unprompted?</h2>
     <div class="actions" role="group" aria-labelledby="v-h" id="actions"></div>
     <div class="row">
       <div><label for="w0">Corrected window start (s)</label><input id="w0" inputmode="decimal"></div>
@@ -86,7 +86,7 @@
 </main>
 <script>
 const D = __DATA__;
-const NAMES = { speak: "Speak", silent: "Stay silent", wrong_object: "Wrong object", unclear: "Unclear" };
+const NAMES = { speak: "Warn about an object", confirm_clear: "Confirm the way is clear", silent: "Nothing needed", wrong_object: "Wrong object", unclear: "Unclear" };
 let done = {}, i = 0;
 const $ = id => document.getElementById(id);
 const txt = (id, s) => { $(id).textContent = s; };
