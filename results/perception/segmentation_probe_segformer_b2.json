@@ -1,0 +1,86 @@
+{
+ "model": "nvidia/segformer-b2-finetuned-ade-512-512",
+ "min_frac": 0.02,
+ "concepts": {
+  "door": {
+   "hit": 7,
+   "n": 24,
+   "hit_rate": 0.2916666666666667,
+   "base_rate": 0.09266409266409266,
+   "base_n": 259
+  },
+  "stairs": {
+   "hit": 5,
+   "n": 9,
+   "hit_rate": 0.5555555555555556,
+   "base_rate": 0.10144927536231885,
+   "base_n": 276
+  },
+  "pole": {
+   "hit": 1,
+   "n": 9,
+   "hit_rate": 0.1111111111111111,
+   "base_rate": 0.1392857142857143,
+   "base_n": 280
+  },
+  "fence": {
+   "hit": 5,
+   "n": 6,
+   "hit_rate": 0.8333333333333334,
+   "base_rate": 0.2206405693950178,
+   "base_n": 281
+  },
+  "wall": {
+   "hit": 4,
+   "n": 4,
+   "hit_rate": 1.0,
+   "base_rate": 0.7228070175438597,
+   "base_n": 285
+  },
+  "tree": {
+   "hit": 1,
+   "n": 2,
+   "hit_rate": 0.5,
+   "base_rate": 0.17073170731707318,
+   "base_n": 287
+  },
+  "sign": {
+   "hit": 2,
+   "n": 3,
+   "hit_rate": 0.6666666666666666,
+   "base_rate": 0.2103448275862069,
+   "base_n": 290
+  },
+  "shelf": {
+   "hit": 0,
+   "n": 3,
+   "hit_rate": 0.0,
+   "base_rate": 0.1972318339100346,
+   "base_n": 289
+  },
+  "animal": {
+   "hit": 0,
+   "n": 3,
+   "hit_rate": 0.0,
+   "base_rate": 0.06896551724137931,
+   "base_n": 290
+  }
+ },
+ "scene": {
+  "other_speak_events": {
+   "n": 259,
+   "mean_walkable": 0.42300583523289687,
+   "median_walkable": 0.46075312841185856
+  },
+  "no_object_named": {
+   "n": 34,
+   "mean_walkable": 0.3530115549766178,
+   "median_walkable": 0.2621468314319227
+  },
+  "user_confirmed_quiet": {
+   "n": 20,
+   "mean_walkable": 0.2792629237384758,
+   "median_walkable": 0.21982190590356512
+  }
+ }
+}

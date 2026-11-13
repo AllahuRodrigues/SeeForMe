@@ -151,6 +151,20 @@ Why events are uncoverable (train + finetune, 293 events, 133 uncoverable): 64 n
 
 11. **Seeing more is not enough; the scheduler must know which detections matter.** Next: OWLv2 as a teacher for a fast student detector trained on human-verified boxes, and dense scene segmentation (doors, stairs, walls, railings, poles, free floor and sidewalk ahead) for both the architectural classes and the 34 scene-level questions.
 
+**Scene segmentation probe** (`scripts/probe_segmentation.py`, SegFormer-B2 on ADE20K, research-only weights). A concept is "seen" if its classes cover at least 2% of the path region in a window frame; the base rate is the same test on events not about that concept.
+
+| Concept | Seen on its not-detectable events | Base rate elsewhere |
+|---|---|---|
+| door | 7/24 (29%) | 9% |
+| stairs | 5/9 (56%) | 10% |
+| fence / railing | 5/6 (83%) | 22% |
+| pole | 1/9 (11%) | 14% |
+| wall | 4/4 | 72% |
+
+Walkable share of the path region (floor, sidewalk, road, path): median 0.26 for the 34 "is the path clear?" events, 0.46 for other speak events, 0.22 for the 20 user-confirmed quiet moments.
+
+12. **Segmentation is informative for stairs (5.6x base rate), fences and doors (3x), useless for thin poles and for walls**, and the walkable share does not separate "is the path clear?" moments from confirmed-clear ones, so free space alone will not answer scene-level questions. Next: per-second stairs / door / railing shares as decision features through the feature gate.
+
 ## Next experiments (selected on `select`, never on holdout)
 
 - **Credit assignment for question labels:** expected to be null. Causal full information already has perfect per-candidate credit and only reaches 0.200; a hindsight relabelling prototype gave 0.156 and 0.175 on seed 0.
