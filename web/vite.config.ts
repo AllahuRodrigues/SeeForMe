@@ -82,6 +82,9 @@ export default defineConfig({
         runtimeCaching: [
           // the 14-28 MB ORT wasm builds are cached on first use, per ORT version
           { urlPattern: /\/ort\/.*\.wasm$/, handler: "CacheFirst", options: { cacheName: ORT_CACHE, cacheableResponse: { statuses: [200] } } },
+          // the recorded voice (about 4.5 MB): fetched once in the background, then served from the cache, also offline;
+          // it is not in the precache, so the app installs and runs before the voice has arrived
+          { urlPattern: /\/voice\/.*\.mp3$/, handler: "CacheFirst", options: { cacheName: "seeforme-voice-v1", cacheableResponse: { statuses: [200] }, expiration: { maxEntries: 4 } } },
           // YOLO11s, per content hash (the ?v= of this release's URL); main.ts deletes the caches of earlier hashes
           ...(MODELS.gpuCache ? [{ urlPattern: /\/models\/yolo11s\.onnx(\?.*)?$/, handler: "CacheFirst" as const,
             options: { cacheName: MODELS.gpuCache, cacheableResponse: { statuses: [200] }, expiration: { maxEntries: 1 } } }] : []),

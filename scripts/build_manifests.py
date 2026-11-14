@@ -122,6 +122,8 @@ models = [
     {"name": "Depth Anything V2 Metric Outdoor Small", "kind": "metric depth", "license": "Apache-2.0 tag, but fine-tuned on Virtual KITTI 2, which is non-commercial",
      "commercial_use_permitted": "no", "trained_on": "Depth Anything V2 Small fine-tuned on Virtual KITTI 2 (by the authors)", "used_in": "perception (outdoor), EgoBlind caches"},
     {"name": "EasyOCR", "kind": "OCR", "license": "Apache-2.0 (CRAFT detector MIT)", "commercial_use_permitted": "yes", "trained_on": "by JaidedAI / Clova AI", "used_in": "sign reading"},
+    {"name": "Kokoro-82M v1.0 (voice af_heart)", "kind": "text to speech", "license": "Apache-2.0", "commercial_use_permitted": "yes",
+     "trained_on": "by hexgrad (permissive and public-domain audio, per the model card)", "used_in": "recorded voice pack of the web app (web/public/voice/af_heart, built by web/voice/build.mjs)"},
     {"name": "ElevenLabs TTS", "kind": "API", "license": "ElevenLabs terms (free plan non-commercial with attribution; paid plans commercial)", "commercial_use_permitted": "conditional",
      "trained_on": "-", "used_in": "optional voice in the web app and run_live.py"},
     {"name": "configs/pcacs_egoblind.yaml", "kind": "tuned P-CACS weights", "license": "derived from CC BY-NC 4.0 data (EgoBlind): research only",
