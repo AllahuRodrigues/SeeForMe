@@ -39,3 +39,4 @@ data/viabench/
 results/**/*.mp4
 results/egoblind/review_events_priority*.csv
 results/live_sessions/
+web/.hallmark/

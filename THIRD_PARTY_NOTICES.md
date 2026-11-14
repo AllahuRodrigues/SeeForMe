@@ -27,6 +27,7 @@ same information in machine-readable form (`python scripts/build_manifests.py`).
 | Depth Anything V2 Metric Indoor Small | Apache-2.0, fine-tuned on Hypersim (CC BY-SA 3.0) | commercial use possible with attribution |
 | Depth Anything V2 Metric Outdoor Small | Apache-2.0 tag, fine-tuned on Virtual KITTI 2 (non-commercial) | treat as non-commercial |
 | EasyOCR | Apache-2.0 | sign reading |
+| Kokoro-82M v1.0 (hexgrad), run with kokoro-js 1.2.1 | Apache-2.0 | the recorded voice pack `web/public/voice/af_heart/` (voice `af_heart`), generated offline by `web/voice/build.mjs`; the model itself is not shipped |
 | ElevenLabs API | ElevenLabs terms (commercial use needs a paid plan) | optional voice |
 | Vosk (`vosk` package and `vosk-model-small-en-us-0.15`), sounddevice (PortAudio) | Apache-2.0; MIT | offline voice commands in `make live`; installed by `make voice-setup`, model in `models/vosk/` (not in git) |
 | Browser speech recognition (Web Speech API) | the browser vendor's terms | hands-free voice in the web app, off until the user turns it on; Chrome sends the audio to Google's speech service |

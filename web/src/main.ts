@@ -13,11 +13,16 @@ import { LearnedScheduler, loadLearnedRunner, type SchedulerMeta } from "./learn
 import { PCACS, DEFAULT_CFG, type Candidate } from "./pcacs";
 import { ServerClient } from "./server";
 import { Speech, earcon, haptic } from "./speech";
+import { ClipVoice } from "./clipvoice";
+import { bestVoice, voiceNote } from "./devicevoice";
+import { attachSheet } from "./sheet";
 import { Camera, Tracker, area, iou } from "./tracker";
 import type { BBox, ChannelState, Cue, Detection, Track } from "./types";
 import { APP_VERSION } from "./version";
 import { HELP_TEXT, IDLE_TEXT, VoiceInput, findTarget, normaliseSpeech, parseCommand, type Command, type VoiceState } from "./voice";
 import { COCO } from "./yolo";
+// the stylesheet hides script-driven elements (the cue card between cues) only when the script is running
+document.documentElement.classList.add("js");
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 /** an element the page may not have (ids added in later page layouts) */
@@ -62,8 +67,26 @@ const cfgReady = fetch("/config/pcacs.json", { cache: "no-cache" }).then((r) => 
 const speech = new Speech(serverUrl, (text, urgent) => { lastCueEl.textContent = text; if (!speech.enabled) (urgent ? srAlert : srLive).textContent = text; },
   () => policy);   // measured playback is settled against the active scheduler's speech budget
 const voiceSel = $<HTMLSelectElement>("voice");
-/** The browser voice unless ElevenLabs was picked and the server says its TTS works (an API key is set). */
-function pickVoice() { speech.backend = voiceSel.value === "elevenlabs" && server.available && server.tts ? "elevenlabs" : "browser"; }
+/** The recorded natural voice by default; the browser voice on request; ElevenLabs only when the server says its TTS
+ *  works (an API key is set). */
+function pickVoice() {
+  speech.backend = voiceSel.value === "elevenlabs" ? (server.available && server.tts ? "elevenlabs" : "browser") : voiceSel.value === "browser" ? "browser" : "natural";
+  noteVoice();
+}
+/** Settings names the device voice in use and says when a more natural one can be installed. */
+function noteVoice() {
+  const el = opt("voice-hint");
+  if (!el || !("speechSynthesis" in window)) return;
+  el.textContent = voiceSel.value === "elevenlabs" ? "" : voiceNote(bestVoice(window.speechSynthesis.getVoices()), voiceSel.value === "browser");
+}
+// some browsers list their voices only after the page has loaded
+if ("speechSynthesis" in window) window.speechSynthesis.addEventListener?.("voiceschanged", noteVoice);
+// the recorded voice pack (about 3 MB) is fetched and decoded in the background; until then the browser voice speaks
+speech.clips = new ClipVoice(`${import.meta.env.BASE_URL}voice/af_heart`);
+void speech.clips.load();
+pickVoice();
+// on a phone, an open <details data-sheet> is a sheet that rises from the bottom and can be dragged away
+document.querySelectorAll<HTMLDetailsElement>("details[data-sheet]").forEach((d) => attachSheet(d));
 const frameCanvas = document.createElement("canvas");
 const fctx = frameCanvas.getContext("2d", { willReadFrequently: true })!;
 const smallCanvas = document.createElement("canvas");   // 160 px grey copy for the activity detector

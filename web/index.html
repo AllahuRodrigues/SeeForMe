@@ -4,14 +4,19 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#f4f6f5" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0b0f14" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#fbf9f5" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a0d14" media="(prefers-color-scheme: dark)" />
+  <!-- Added to the Home Screen on iOS it runs full screen, under a translucent status bar -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="SeeForMe" />
   <title>SeeForMe</title>
   <meta name="description" content="Experimental voice-first camera assistant for blind and low-vision people: spoken cues about what is ahead, and Find, Read and Ask by voice." />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/icons/icon-192.png" />
-  <link rel="stylesheet" href="/src/styles.css" />
+  <link rel="stylesheet" href="src/styles.css" />
 </head>
 <body>
   <!-- One voice-first screen: camera, Start, Talk, hands-free voice, the last spoken sentence and the four modes.
@@ -22,15 +27,11 @@
   <div id="app" class="app">
     <header class="top">
       <div class="brand">
-        <span class="dot" id="live-dot" aria-hidden="true"></span>
         <h1>SeeForMe</h1>
       </div>
-      <p class="status"><span id="status" role="status" aria-live="polite">Starting…</span></p>
+      <p class="status"><span class="dot" id="live-dot" aria-hidden="true"></span><span id="status" role="status" aria-live="polite">Starting…</span></p>
     </header>
-
     <main id="main" class="main">
-      <p class="notice" id="safety-notice"><strong>Experimental.</strong> SeeForMe can miss things and is not a replacement for a cane, guide dog or mobility training. Silence does not mean the way is clear.</p>
-
       <div class="layout">
         <!-- The camera picture exactly as captured (never mirrored). Visual only: what matters is spoken.
              --vw / --vh on #view (the stream's width and height) set its aspect ratio so overlay boxes line up. -->
@@ -45,27 +46,23 @@
               <div class="cue-meta" id="cue-meta"></div>
             </div>
           </div>
+          <!-- the sentence the app last said, set large: the one thing on this screen a sighted or low-vision person reads -->
+          <section class="said" aria-labelledby="said-title">
+            <h2 id="said-title" class="sr-only">Last spoken</h2>
+            <p id="last-cue" class="last-cue">Nothing yet.</p>
+          </section>
         </div>
-
         <div class="console">
+          <p class="notice" id="safety-notice"><strong>Experimental.</strong> SeeForMe can miss things and is not a replacement for a cane, guide dog or mobility training. Silence does not mean the way is clear.</p>
+          <!-- Start and Talk: on a phone this section is a bar fixed at the bottom of the screen, under the thumb -->
           <section id="controls" class="controls" tabindex="-1" aria-labelledby="controls-title">
             <h2 id="controls-title" class="sr-only">Controls</h2>
             <button id="start" type="button" class="btn btn-start" aria-keyshortcuts="Space">Start</button>
-            <div class="voice">
-              <button id="mic" type="button" class="btn btn-voice btn-talk" aria-keyshortcuts="A" aria-describedby="mic-hint">Talk</button>
-              <button id="wake" type="button" class="btn btn-voice btn-toggle" aria-pressed="false" aria-keyshortcuts="V" aria-describedby="voice-state">Hands-free voice</button>
-            </div>
-            <p id="voice-state" class="voice-state" role="none">Turn on hands-free, then say "SeeForMe, help" for commands.</p>
+            <button id="mic" type="button" class="btn btn-voice btn-talk" aria-keyshortcuts="A" aria-describedby="mic-hint">Talk</button>
             <p id="mic-hint" class="sr-only">Say one command, for example: find a door.</p>
           </section>
-
-          <section class="said" aria-labelledby="said-title">
-            <h2 id="said-title" class="eyebrow">Last spoken</h2>
-            <p id="last-cue" class="last-cue">Nothing yet.</p>
-          </section>
-
           <section class="modes-box" aria-labelledby="modes-title">
-            <h2 id="modes-title" class="eyebrow">Mode</h2>
+            <h2 id="modes-title" class="sr-only">Mode</h2>
             <div class="modes" role="group" aria-labelledby="modes-title">
               <button type="button" class="mode active" data-mode="navigate" aria-pressed="true">Navigate</button>
               <button type="button" class="mode" data-mode="find" aria-pressed="false">Find</button>
@@ -99,19 +96,29 @@
               </form>
             </div>
           </section>
-
+          <div class="voice">
+            <button id="wake" type="button" class="btn btn-voice btn-toggle" aria-pressed="false" aria-keyshortcuts="V" aria-describedby="voice-state">Hands-free voice</button>
+            <p id="voice-state" class="voice-state" role="none">Turn on hands-free, then say “SeeForMe, help” for commands.</p>
+          </div>
           <div class="secondary" role="group" aria-label="Sound and camera">
             <button id="mute" type="button" class="btn" aria-pressed="false" aria-keyshortcuts="M">Mute</button>
             <button id="flip" type="button" class="btn" aria-keyshortcuts="F">Flip camera</button>
           </div>
-
           <!-- A heading inside <summary> is lost to heading navigation in some screen readers (the summary is a button),
-               so each disclosure has its heading just before it, for screen readers, and plain text in its summary. -->
+               so each disclosure has its heading just before it, for screen readers, and plain text in its summary.
+               On a phone the open disclosure is a sheet that slides up from the bottom and can be dragged away (sheet.ts). -->
           <section class="settings-section" aria-labelledby="settings-title">
           <h2 id="settings-title" class="sr-only">Settings</h2>
-          <details class="settings-box">
+          <details class="settings-box" data-sheet>
             <summary><span class="summary-title">Settings</span></summary>
-            <div class="settings">
+            <button type="button" class="sheet-scrim" data-sheet-close tabindex="-1" aria-hidden="true"></button>
+            <div class="sheet">
+              <div class="sheet-grab" data-sheet-grab>
+                <span class="sheet-handle" aria-hidden="true"></span>
+                <p class="sheet-title" aria-hidden="true">Settings</p>
+                <button type="button" class="btn btn-quiet sheet-done" data-sheet-close>Done</button>
+              </div>
+              <div class="settings">
               <div class="field field-wide"><label for="aid">I travel with</label>
                 <select id="aid" aria-describedby="aid-hint"><option value="cane" selected>White cane</option><option value="guide-dog">Guide dog</option><option value="none">Neither</option></select>
                 <p class="hint" id="aid-hint">Obstacle cues from the depth map skip what your cane or dog already finds and always warn at head height. Cues about people, vehicles and what you search for stay the same.</p></div>
@@ -122,7 +129,8 @@
               <div class="field"><label for="units">Units</label>
                 <select id="units"><option value="m">Meters</option><option value="ft">Feet</option></select></div>
               <div class="field"><label for="voice">Voice</label>
-                <select id="voice"><option value="browser" selected>Browser</option><option value="elevenlabs">ElevenLabs · Sarah</option></select></div>
+                <select id="voice" aria-describedby="voice-hint"><option value="natural" selected>Natural</option><option value="browser">Device voice</option><option value="elevenlabs">ElevenLabs, Sarah</option></select>
+                <p class="hint" id="voice-hint"></p></div>
               <div class="field"><label for="camera-select">Camera</label>
                 <select id="camera-select"><option value="">auto</option></select></div>
               <div class="field"><label for="file-input">Play a video file instead</label>
@@ -132,21 +140,22 @@
                 <p class="hint" id="gate-hint">Holds back announcements that repeat what was just said.</p>
               </div>
               <div class="field field-action"><button id="test-voice" type="button" class="btn">Test voice</button></div>
+              </div>
+              <p class="hint" id="sched-info">Learned scheduler: loading…</p>
             </div>
-            <p class="hint" id="sched-info">Learned scheduler: loading…</p>
           </details>
           </section>
         </div>
       </div>
     </main>
-
     <aside class="research" aria-labelledby="details-title">
       <h2 id="details-title" class="sr-only">How SeeForMe decides</h2>
       <details id="details" class="details">
-        <summary aria-describedby="details-sub"><span class="summary-title">How SeeForMe decides</span><span class="summary-sub" id="details-sub" aria-hidden="true">The live scheduler, this session's numbers and the benchmark.</span></summary>
+        <summary aria-describedby="details-sub"><span class="summary-title">How SeeForMe decides</span><span class="summary-sub" id="details-sub" aria-hidden="true">The live scheduler, this session’s numbers and the benchmark.</span></summary>
         <div class="panels">
           <section class="panel panel-wide" aria-labelledby="algo-title">
-            <h3 id="algo-title">Algorithm <span class="sub">live</span></h3>
+            <h3 id="algo-title">Algorithm</h3>
+            <p class="sub">live</p>
             <p class="formula" id="formula">U = w<sub>h</sub>·H·f(TTC) + w<sub>a</sub>·A·P + w<sub>t</sub>·T + w<sub>g</sub>·G &nbsp;·&nbsp; (0.35 + 0.65·N) − w<sub>u</sub>·Unc − λ<sub>s</sub>·cost − λ<sub>q</sub>·queue</p>
             <p class="action-line"><span>Decision</span> <strong id="action-now">silence</strong> <span id="action-why"></span></p>
             <div class="table-wrap" role="region" aria-labelledby="cands-caption" tabindex="0">
@@ -176,7 +185,8 @@
           </section>
 
           <section class="panel" aria-labelledby="session-title">
-            <h3 id="session-title">This session <span class="sub">live</span></h3>
+            <h3 id="session-title">This session</h3>
+            <p class="sub">live</p>
             <div class="stats" id="session-stats">
               <div><em id="s-cues">0</em><span>cues</span></div>
               <div><em id="s-rate">0.0</em><span>cues / min</span></div>
@@ -190,7 +200,8 @@
           </section>
 
           <section class="panel" aria-labelledby="bench-title">
-            <h3 id="bench-title">Benchmark <span class="sub">CampusBench, held-out test</span></h3>
+            <h3 id="bench-title">Benchmark</h3>
+            <p class="sub">CampusBench, held-out test</p>
             <div class="field bench-field">
               <label for="bench-metric">Metric</label>
               <select id="bench-metric">
@@ -203,14 +214,14 @@
               </select>
             </div>
             <div id="bench-rows" class="bench"></div>
-            <p class="hint">66 scenarios × 3 noise seeds · 11 scene types · metric depth + TTC · <code>results/campus/CAMPUS_RESULTS.md</code></p>
+            <p class="hint">66 scenarios × 3 noise seeds, 11 scene types, metric depth + TTC.<br /><code>results/campus/CAMPUS_RESULTS.md</code></p>
           </section>
         </div>
       </details>
     </aside>
 
     <footer class="foot">
-      <p class="foot-meta">SeeForMe <span id="app-version">v0.4.2</span> · scheduler <span id="sched-tag">P-CACS</span></p>
+      <p class="foot-meta"><span>SeeForMe <span id="app-version">v0.5.0</span></span><span>Scheduler <span id="sched-tag">linear</span></span></p>
       <p id="diag" class="diag" aria-hidden="true"></p>
     </footer>
 
