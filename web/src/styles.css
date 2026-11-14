@@ -1,5 +1,5 @@
 /* Hallmark · shape: app screen · genre: atmospheric · theme: Ribbon (deal 1/3, seed voice-first-camera-assistant-app-b558·8776a9cd·2026-11-14·r0) · redesign: full
- * nav: kept (one screen, a wordmark and the live status) · signature: the sentence last spoken, set large under the camera · states: camera off, starting, live, listening, muted, error · ribbon: two-in-the-morning in dark, dawn in light
+ * nav: kept (one screen, a wordmark and the live status) · signature: the sentence last spoken, set large under the camera · states: camera off, starting, live, listening, muted · ribbon: two-in-the-morning in dark, dawn in light
  * axes: light/grotesk-sans/chromatic-teal · posture: committed · contrast: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: V, a camera app has little of its own to show until the camera runs, so the spoken sentence carries the screen */
 /* Hallmark · waive 39b · Start and Talk are the only controls at 64px, every other control stands 44 to 52px · the app is used eyes-free while walking, and a blind or low-vision thumb needs the larger target */
@@ -8,6 +8,8 @@
 /* Hallmark · reworded "This session live" to "This session" · 38iii names the accented word in a heading; "live" is now the line under it */
 /* Hallmark · reworded "Benchmark CampusBench, held-out test" to "Benchmark" · 38iii names the accented word in a heading; the rest is now the line under it */
 /* Hallmark · answered F25 · the candidates table scrolls inside its own region with the first column kept in view */
+/* Hallmark · answered F4 · a pressed toggle and the chosen mode are ink, a state; Start is the only accent fill, the one action */
+/* Hallmark · answered F7 · the modes are one segmented control and the meters are bars; pills are kept to controls and meters */
 @import url("./tokens.css");
 @import url("./base.css");
 
@@ -24,7 +26,7 @@
   --color-view: oklch(12% 0.02 258); --color-view-ink: oklch(86% 0.012 85);
   --color-danger: oklch(50% 0.18 27); --color-warn: oklch(48% 0.11 70);
   --color-edge: oklch(100% 0 0 / 0.55);
-  --color-thumb: var(--color-paper); --color-knob: oklch(99% 0.004 85);
+  --color-control-edge: oklch(60% 0.012 80); --color-knob: oklch(47% 0.012 80); --color-knob-on: oklch(98% 0.006 85);
   --color-scrim: oklch(18% 0.02 258 / 0.38);
   --material: var(--color-paper); --material-thick: var(--color-paper);   /* solid where color-mix is unknown (iOS 16.1 and older) */
   --shadow-float: 0 1px 0 oklch(20% 0.01 80 / 0.12), 0 18px 40px -18px oklch(20% 0.02 80 / 0.4);
@@ -44,7 +46,7 @@
     --color-view: oklch(8% 0.02 258);
     --color-danger: oklch(74% 0.15 27); --color-warn: oklch(80% 0.11 80);
     --color-edge: oklch(100% 0 0 / 0.12);
-    --color-thumb: oklch(27% 0.022 258); --color-knob: oklch(93.5% 0.012 85);
+    --color-control-edge: oklch(52% 0.02 255); --color-knob: oklch(72% 0.02 255); --color-knob-on: oklch(20% 0.03 62);
     --color-scrim: oklch(4% 0.02 258 / 0.55);
     --shadow-float: 0 1px 0 oklch(0% 0 0 / 0.4), 0 18px 40px -18px oklch(0% 0 0 / 0.7);
   }
@@ -59,7 +61,7 @@
   --color-view: oklch(8% 0.02 258);
   --color-danger: oklch(74% 0.15 27); --color-warn: oklch(80% 0.11 80);
   --color-edge: oklch(100% 0 0 / 0.12);
-  --color-thumb: oklch(27% 0.022 258); --color-knob: oklch(93.5% 0.012 85);
+  --color-control-edge: oklch(52% 0.02 255); --color-knob: oklch(72% 0.02 255); --color-knob-on: oklch(20% 0.03 62);
   --color-scrim: oklch(4% 0.02 258 / 0.55);
   --shadow-float: 0 1px 0 oklch(0% 0 0 / 0.4), 0 18px 40px -18px oklch(0% 0 0 / 0.7);
 }
@@ -106,8 +108,8 @@ abbr[title] { text-decoration: none; cursor: help; }
 .dot { display: none; flex: none; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--color-accent); }
 .dot.live { display: block; }
 .main { display: flex; flex-direction: column; }
-/* said first to a screen reader, shown after the controls on a phone so the camera and Start come first */
-.notice { order: 2; margin: var(--space-lg) var(--space-md) 0; padding-top: var(--space-md); border-top: var(--rule-hair) solid var(--color-rule); color: var(--color-muted); font-size: var(--text-sm); line-height: 1.5; max-width: 65ch; }
+/* the caution sits between the sentence and the controls, on the first screen of a phone */
+.notice { color: var(--color-muted); font-size: var(--text-sm); line-height: 1.45; max-width: 65ch; }
 .notice strong { color: var(--color-ink); font-weight: 650; }
 .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
 
@@ -132,8 +134,9 @@ video { z-index: 1; }
 canvas#overlay { z-index: 2; }
 /* what was just said, on the picture, as a pane of material: it materialises (opacity and a small rise), never slides */
 .cue-card {
-  position: absolute; left: var(--space-sm); right: var(--space-sm); bottom: var(--space-sm); z-index: 3;
-  padding: var(--space-sm) var(--space-md); border-radius: var(--radius-control);
+  position: absolute; left: var(--space-sm); bottom: var(--space-sm); z-index: 3; max-width: calc(100% - 2 * var(--space-sm));
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--space-xs);
+  padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-control);
   background: var(--material-thick); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
   box-shadow: inset 0 1px 0 var(--color-edge), var(--shadow-float); color: var(--color-ink);
   transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
@@ -143,13 +146,14 @@ canvas#overlay { z-index: 2; }
 .cue-card:has(.cue-text:empty) { display: none; }
 .cue-card[data-kind="interrupt"] { box-shadow: inset 0 0 0 2px var(--color-danger), var(--shadow-float); }
 .cue-card[data-kind="haptic"] { box-shadow: inset 0 0 0 2px var(--color-warn), var(--shadow-float); }
-.cue-kind { font-size: var(--text-xs); font-weight: 600; color: var(--color-muted); }
-.cue-text { font-size: var(--text-lg); font-weight: 650; line-height: 1.25; letter-spacing: -0.01em; }
-.cue-meta { font-size: var(--text-xs); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.cue-kind { font-size: var(--text-sm); font-weight: 650; }
+.cue-text { display: none; }
+.cue-meta { font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
 
 /* ---- the sentence last spoken: the signature ---------------------------------------------------- */
 .said { padding: var(--space-md) var(--space-md) 0; }
-.last-cue { min-height: 2.4em; max-width: 24ch; font-size: var(--text-2xl); font-weight: 650; line-height: 1.2; letter-spacing: var(--tracking-display); text-wrap: balance; }
+.last-cue { min-height: 2.3em; max-width: 22ch; font-size: var(--text-3xl); font-weight: 650; line-height: 1.15; letter-spacing: var(--tracking-display); text-wrap: balance; color: var(--color-muted); }
+.app[data-running="true"] .last-cue { color: var(--color-ink); }
 
 /* ---- controls ----------------------------------------------------------------------------------- */
 /* Every control answers on the press itself (a small, instant shrink), not on release. */
@@ -157,7 +161,7 @@ canvas#overlay { z-index: 2; }
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xs);
   min-height: var(--control); padding: 0 var(--space-md);
   background: var(--color-paper-2); color: var(--color-ink);
-  border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-control);
+  border: var(--rule-hair) solid var(--color-control-edge); border-radius: var(--radius-pill);
   font-size: var(--text-md); font-weight: 600; line-height: 1.2; text-align: center; white-space: nowrap;
   cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none;
   transition: transform var(--dur-micro) var(--ease-out), background-color var(--dur-micro) linear, border-color var(--dur-micro) linear, opacity var(--dur-micro) linear;
@@ -168,13 +172,13 @@ canvas#overlay { z-index: 2; }
 }
 .btn:active, .mode:active { transform: scale(0.97); }
 .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; }
-.btn[aria-pressed="true"] { background: var(--color-paper-3); border-color: var(--color-ink-2); }
+.btn[aria-pressed="true"] { background: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
 .console { display: grid; gap: var(--space-lg); padding-inline: calc(var(--space-md) + env(safe-area-inset-left)) calc(var(--space-md) + env(safe-area-inset-right)); min-width: 0; }
 
 /* Start and Talk: a bar of material fixed under the thumb; the page scrolls beneath it */
 .controls {
   position: fixed; inset: auto 0 0 0; z-index: var(--z-sticky-nav);
-  display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: var(--space-sm);
+  display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: var(--space-md);
   padding: var(--space-sm) calc(var(--space-md) + env(safe-area-inset-right)) calc(var(--space-sm) + env(safe-area-inset-bottom)) calc(var(--space-md) + env(safe-area-inset-left));
   background: var(--material); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur);
   box-shadow: inset 0 1px 0 var(--color-edge), 0 -1px 0 var(--color-rule-2);
@@ -186,7 +190,7 @@ canvas#overlay { z-index: 2; }
 }
 @media (hover: hover) { .btn-start:hover { background: var(--color-accent); opacity: 0.92; } }
 /* running: the same button is Stop, and it goes quiet so the amber light is the camera's, not the button's */
-.app[data-running="true"] .btn-start { background: var(--color-paper-3); color: var(--color-ink); border-color: var(--color-rule); }
+.app[data-running="true"] .btn-start { background: var(--color-paper-3); color: var(--color-ink); border-color: var(--color-control-edge); }
 .btn-talk { min-height: var(--control-lg); border-radius: var(--radius-pill); font-size: var(--text-lg); }
 .btn-talk::before, .i-mic {
   content: ""; display: inline-block; flex: none; width: 1.25em; height: 1.25em; background: currentColor;
@@ -197,17 +201,24 @@ canvas#overlay { z-index: 2; }
 @keyframes listen { from { box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-accent) 55%, transparent); } to { box-shadow: 0 0 0 0.9rem transparent; } }
 
 /* modes: one segmented control; the lit thumb slides under the chosen mode */
-.modes { --mode-i: 0; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: var(--space-2xs); background: var(--color-paper-2); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-pill); }
+.modes-box { container-type: inline-size; }
+.modes { --mode-i: 0; position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: var(--space-2xs); background: var(--color-paper-2); border: var(--rule-hair) solid var(--color-control-edge); border-radius: var(--radius-pill); }
 .modes::before {
   content: ""; position: absolute; inset-block: var(--space-2xs); left: var(--space-2xs); width: calc((100% - 2 * var(--space-2xs)) / 4);
-  border-radius: var(--radius-pill); background: var(--color-thumb); box-shadow: inset 0 1px 0 var(--color-edge), var(--shadow-part);
+  border-radius: var(--radius-pill); background: var(--color-ink);
   transform: translateX(calc(var(--mode-i) * 100%)); transition: transform var(--dur-long) var(--ease-out);
 }
 .modes:has(.mode:nth-of-type(2).active) { --mode-i: 1; }
 .modes:has(.mode:nth-of-type(3).active) { --mode-i: 2; }
 .modes:has(.mode:nth-of-type(4).active) { --mode-i: 3; }
 .mode { position: relative; z-index: 1; min-height: 2.75rem; padding: 0 var(--space-xs); background: none; border: 0; border-radius: var(--radius-pill); color: var(--color-muted); font-size: var(--text-md); }
-.mode.active, .mode[aria-pressed="true"] { color: var(--color-ink); }
+.mode.active, .mode[aria-pressed="true"] { color: var(--color-paper); }
+/* the container is measured in rem, so a larger text size narrows it: below this the four modes no longer fit across */
+@container (max-width: 19.5rem) {
+  .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2xs); border-radius: var(--radius-card); }
+  .modes::before { display: none; }
+  .mode.active, .mode[aria-pressed="true"] { background: var(--color-ink); }
+}
 .mode-panel { margin-top: var(--space-sm); display: grid; gap: var(--space-sm); }
 .mode-hint { color: var(--color-muted); font-size: var(--text-sm); }
 .modes-box:has(.mode[data-mode="navigate"][aria-pressed="false"]) .mode-hint { display: none; }
@@ -219,26 +230,29 @@ canvas#overlay { z-index: 2; }
 .field-actions .btn-icon, .btn-icon { width: var(--control); padding: 0; }
 .btn-wide { width: 100%; }
 .btn-quiet { background: none; border-color: transparent; color: var(--color-muted); }
+.btn-icon { border-radius: 50%; }
 input[type="text"], select {
   min-height: var(--control); width: 100%; padding: 0 var(--space-md);
   background: var(--color-paper); color: var(--color-ink);
-  border: var(--rule-hair) solid var(--color-muted); border-radius: var(--radius-control); font-size: var(--text-md);
+  border: var(--rule-hair) solid var(--color-control-edge); border-radius: var(--radius-pill); font-size: var(--text-md);
 }
 input::placeholder { color: var(--color-muted); opacity: 1; }
 select { padding-right: var(--space-sm); }
 input[type="file"] { max-width: 100%; font-size: var(--text-sm); color: var(--color-muted); }
-input[type="file"]::file-selector-button { min-height: 2.75rem; margin-right: var(--space-sm); padding: 0 var(--space-md); background: var(--color-paper-2); color: var(--color-ink); border: var(--rule-hair) solid var(--color-rule); border-radius: var(--radius-control); font: inherit; font-weight: 600; cursor: pointer; }
+input[type="file"]::file-selector-button { min-height: 2.75rem; margin-right: var(--space-sm); padding: 0 var(--space-md); background: var(--color-paper-2); color: var(--color-ink); border: var(--rule-hair) solid var(--color-control-edge); border-radius: var(--radius-pill); font: inherit; font-weight: 600; cursor: pointer; }
 
 /* hands-free: one row, a label and a switch, with its state said underneath */
 .voice { display: grid; gap: var(--space-xs); }
-.btn-toggle { width: 100%; justify-content: space-between; text-align: left; padding-inline: var(--space-md); }
+.btn-toggle { width: 100%; justify-content: space-between; text-align: left; padding-inline: var(--space-lg) var(--space-md); white-space: normal; }
+.secondary .btn { white-space: normal; padding-block: var(--space-xs); }
 .btn-toggle::after {
   content: ""; flex: none; width: 3.1875rem; height: 1.9375rem; border-radius: var(--radius-pill);
-  background: radial-gradient(circle at 0.96875rem 50%, var(--color-knob) 0.8rem, transparent calc(0.8rem + 1px)) var(--color-muted);
+  background: radial-gradient(circle at 0.96875rem 50%, var(--color-knob) 0.72rem, transparent calc(0.72rem + 1px)) var(--color-paper-3);
+  box-shadow: inset 0 0 0 1px var(--color-control-edge);
   transition: background-color var(--dur-short) var(--ease-out);
 }
-.btn-toggle[aria-pressed="true"] { background: var(--color-paper-2); border-color: var(--color-rule); }
-.btn-toggle[aria-pressed="true"]::after { background: radial-gradient(circle at calc(100% - 0.96875rem) 50%, var(--color-knob) 0.8rem, transparent calc(0.8rem + 1px)) var(--color-accent); }
+.btn-toggle[aria-pressed="true"] { background: var(--color-paper-2); color: var(--color-ink); border-color: var(--color-control-edge); }
+.btn-toggle[aria-pressed="true"]::after { background: radial-gradient(circle at calc(100% - 0.96875rem) 50%, var(--color-knob-on) 0.72rem, transparent calc(0.72rem + 1px)) var(--color-accent); box-shadow: none; }
 .btn-toggle.listening { border-color: var(--color-accent); }
 .voice-state { color: var(--color-muted); font-size: var(--text-sm); }
 .secondary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm); }
@@ -283,7 +297,7 @@ details[open] > summary::after { transform: rotate(-135deg) translate(-0.125rem,
 .details { border-top: var(--rule-hair) solid var(--color-rule); border-bottom: var(--rule-hair) solid var(--color-rule); }
 .details > summary { display: grid; grid-template-columns: 1fr auto; column-gap: var(--space-md); align-items: center; min-height: 3.5rem; padding-block: var(--space-sm); }
 .details > summary .summary-title { font-size: var(--text-md); font-weight: 600; line-height: 1.25; }
-.details > summary .summary-sub { grid-column: 1; font-size: var(--text-sm); font-weight: 400; color: var(--color-muted); }
+.details > summary .summary-sub { grid-column: 1; font-size: var(--text-sm); font-weight: 400; color: var(--color-muted); text-wrap: pretty; }
 .details > summary::after { grid-column: 2; grid-row: 1 / span 2; }
 .panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--space-xl) var(--space-lg); padding-block: var(--space-md) var(--space-lg); }
 .panel { min-width: 0; }
@@ -344,13 +358,11 @@ code { font-size: var(--text-xs); overflow-wrap: anywhere; }
   .brand, .status { min-height: 0; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
   .brand h1 { font-size: var(--text-xl); letter-spacing: var(--tracking-display); }
   .status { max-width: 60%; color: var(--color-muted); }
-  .notice { order: 0; margin: 0 0 var(--space-lg); padding: 0 0 var(--space-md); border-top: 0; border-bottom: var(--rule-hair) solid var(--color-rule); max-width: none; }
   .layout { grid-template-columns: minmax(0, 1.4fr) minmax(20rem, 26rem); gap: var(--space-xl); align-items: start; }
   .stage { position: sticky; top: var(--space-lg); }
   .view { --view-max-h: calc(100svh - 14rem); border-radius: var(--radius-card); }
   .view-empty { padding-top: 0; }
   .said { padding: var(--space-lg) 0 0; }
-  .last-cue { font-size: var(--text-3xl); max-width: 22ch; }
   .console { padding-inline: 0; }
   .controls { position: static; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
   .research, .foot { margin-inline: 0; }
