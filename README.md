@@ -84,7 +84,7 @@ guide-dog layer warns about walls, poles and head-height obstacles from the dept
 (`--aid cane|guide-dog|none`). The picture is never mirrored. Rules, keys and measurements (voice accuracy, cane cue
 rates, the safety harness): [docs/live_demo.md](docs/live_demo.md).
 
-**Web app** (phone, iPad, laptop; front and rear cameras; video files; version 0.4.1). One screen: Start, Talk (tap,
+**Web app** (phone, iPad, laptop; front and rear cameras; video files; version 0.4.2). One screen: Start, Talk (tap,
 then say one command) and an opt-in hands-free mode that listens for "SeeForMe, ..." with the same command parser as the
 terminal (`web/src/voice.ts`, shared test vectors). It runs the same learned scheduler in the browser (ONNX Runtime
 Web, `web/public/models/scheduler_rl.onnx`) behind the same repeat filter (`web/src/gate.ts`), YOLO11s on WebGPU and

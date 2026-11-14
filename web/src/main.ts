@@ -59,7 +59,8 @@ const cfgReady = fetch("/config/pcacs.json", { cache: "no-cache" }).then((r) => 
 // Every spoken cue/answer updates the visible last-cue line; it goes to a live region only while the app's own voice is
 // muted, so a screen-reader user never hears the same cue from both the app and the screen reader. Interrupt cues go to
 // the assertive #sr-alert (a hazard must not queue behind what the screen reader is reading), the rest to the polite #sr-live.
-const speech = new Speech(serverUrl, (text, urgent) => { lastCueEl.textContent = text; if (!speech.enabled) (urgent ? srAlert : srLive).textContent = text; });
+const speech = new Speech(serverUrl, (text, urgent) => { lastCueEl.textContent = text; if (!speech.enabled) (urgent ? srAlert : srLive).textContent = text; },
+  () => policy);   // measured playback is settled against the active scheduler's speech budget
 const voiceSel = $<HTMLSelectElement>("voice");
 /** The browser voice unless ElevenLabs was picked and the server says its TTS works (an API key is set). */
 function pickVoice() { speech.backend = voiceSel.value === "elevenlabs" && server.available && server.tts ? "elevenlabs" : "browser"; }
@@ -496,6 +497,10 @@ function renderSession(t: number) {
   $("s-silent").textContent = `${Math.round(100 * (state.decisions ? state.silentDecisions / state.decisions : 1))}%`;
   $("s-haptic").textContent = String(state.cues.filter((c) => c.action === "haptic").length);
   $("s-interrupt").textContent = String(state.cues.filter((c) => c.action === "interrupt").length);
+  // measured playback: seconds the voice really played against the seconds the scheduler booked for those cues
+  const pb = speech.ledger.summary();
+  $("s-played").textContent = `${pb.playedS.toFixed(1)} / ${pb.reservedS.toFixed(1)} s`;
+  $("s-cut").textContent = String(pb.cues - pb.outcomes.completed);
 }
 interface BenchRow { id: string; name: string; [k: string]: number | string }
 let bench: BenchRow[] = [];

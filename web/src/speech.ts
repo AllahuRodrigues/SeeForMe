@@ -1,5 +1,6 @@
 // Speech output (browser TTS or ElevenLabs through our server), haptics, and the audio-channel model.
 import type { Cue } from "./types";
+import { PlaybackLedger, type BudgetHolder } from "./playback";
 
 export type VoiceBackend = "browser" | "elevenlabs";
 /** A cue is never spoken late: ElevenLabs audio has TTS_WAIT_MS to arrive before the browser voice says it instead, and a
@@ -30,13 +31,18 @@ export class Speech {
   busyUntil = -1e9;
   current: Cue | null = null;
   log: Array<[number, number, Cue]> = [];
-  /** onSpoken: `urgent` marks an interrupt cue (critical hazard), not an answer that cuts in (sayNow) */
-  constructor(private serverUrl: () => string, private onSpoken?: (text: string, urgent: boolean) => void) {}
+  /** What each cue really played (start, end, how it ended), settled against the scheduler's speech budget. */
+  readonly ledger: PlaybackLedger;
+  /** onSpoken: `urgent` marks an interrupt cue (critical hazard), not an answer that cuts in (sayNow).
+   *  budgetOf: the scheduler whose speech budget the cues were charged to (main.ts swaps schedulers, hence a getter). */
+  constructor(private serverUrl: () => string, private onSpoken?: (text: string, urgent: boolean) => void,
+              budgetOf: () => BudgetHolder | null | undefined = () => null) { this.ledger = new PlaybackLedger(budgetOf); }
 
   /** what was said (text, performance.now() ms when it was issued), newest last: the voice input's echo guard */
   private said: Array<[string, number]> = [];
 
-  free(t: number) { return t >= this.busyUntil && !this.pending && !(this.audio && !this.audio.paused && !this.audio.ended); }
+  /** Free once the estimated end has passed and no cue is still sounding (a voice slower than the estimate keeps it busy). */
+  free(t: number) { return t >= this.busyUntil && !this.pending && !(this.audio && !this.audio.paused && !this.audio.ended) && !this.ledger.active(); }
 
   /** Is the app making a sound now, or did it stop less than `tailMs` ago? (browser voice, ElevenLabs audio, earcons) */
   audible(tailMs = 400): boolean {
@@ -65,12 +71,13 @@ export class Speech {
 
   /** Speak free text (answers, confirmations) right away, cutting whatever is playing. */
   sayNow(text: string, t: number) {
-    this.speak({ t, trackId: -1, label: "answer", message: text, action: "speak", duration: Math.max(1.2, text.split(/\s+/).length * 0.35), utility: 0, severity: 0, distance: null, ttc: null, slots: [] }, t, true);
+    this.speak({ t, trackId: -1, label: "answer", message: text, action: "speak", duration: Math.max(1.2, text.split(/\s+/).length * 0.35), utility: 0, severity: 0, distance: null, ttc: null, slots: [] }, t, true, false);
   }
   remaining(t: number) { return Math.max(0, this.busyUntil - t); }
 
-  /** Register the cue on the channel (even when muted, so the scheduler's model of the channel holds). */
-  speak(cue: Cue, t: number, interrupt = false) {
+  /** Register the cue on the channel (even when muted, so the scheduler's model of the channel holds).
+   *  charged: the scheduler spent speech budget on this cue (false for answers), so its playback is settled against it. */
+  speak(cue: Cue, t: number, interrupt = false, charged = true) {
     if (interrupt && this.log.length && this.busyUntil > t) this.log[this.log.length - 1][1] = t;
     this.busyUntil = t + cue.duration; this.current = cue; this.log.push([t, t + cue.duration, cue]);
     this.onSpoken?.(cue.message, cue.action === "interrupt");
@@ -79,19 +86,26 @@ export class Speech {
     if (cue.message) { this.said.push([cue.message, performance.now()]); if (this.said.length > 12) this.said.shift(); }
     markSound(cue.duration * 1000);   // until its estimated end, even before the voice actually starts
     // an interrupt cannot wait for a TTS round trip: the browser voice says it unless its ElevenLabs audio is cached
-    if (this.backend === "elevenlabs" && (cue.action !== "interrupt" || this.cache.has(cue.message))) void this.playEleven(cue.message);
-    else this.playBrowser(cue.message);
+    const id = this.ledger.issue(cue.message, cue.duration, this.backend, charged);
+    if (this.backend === "elevenlabs" && (cue.action !== "interrupt" || this.cache.has(cue.message))) void this.playEleven(cue.message, id);
+    else this.playBrowser(cue.message, id);
   }
-  private playBrowser(text: string) {
-    if (!("speechSynthesis" in window)) return;
+  private playBrowser(text: string, id: number) {
+    if (!("speechSynthesis" in window)) { this.ledger.ended(id, "failed"); return; }
     const u = new SpeechSynthesisUtterance(text); u.rate = 1.05; u.lang = "en-US";
     const voices = window.speechSynthesis.getVoices();
     const pick = voices.find((v) => /Samantha|Google US English|Karen|Moira|Zira|Jenny/i.test(v.name)) ?? voices.find((v) => v.lang.startsWith("en") && /female/i.test(v.name)) ?? null;
     if (pick) u.voice = pick;
-    u.onend = u.onerror = () => markSound();
+    u.onstart = () => this.ledger.started(id);
+    u.onend = () => { markSound(); this.ledger.ended(id, "completed"); };
+    u.onerror = (e) => {
+      markSound();
+      const why = (e as SpeechSynthesisErrorEvent).error;
+      this.ledger.ended(id, why === "interrupted" || why === "canceled" ? "interrupted" : "failed");
+    };
     window.speechSynthesis.speak(u);
   }
-  private async playEleven(text: string) {
+  private async playEleven(text: string, id: number) {
     const gen = ++this.gen, t0 = performance.now();
     const stale = () => gen !== this.gen || !this.enabled; // muted, stopped or superseded while awaiting
     this.pending = true;
@@ -103,21 +117,29 @@ export class Speech {
         if (!r.ok) throw new Error(`tts ${r.status}`);
         url = URL.createObjectURL(await r.blob()); this.cache.set(text, url);
       }
-      if (stale() || performance.now() - t0 > TTS_LATE_MS) return;   // too late to be useful: dropped, never spoken late
+      if (stale() || performance.now() - t0 > TTS_LATE_MS) { this.ledger.ended(id, "cancelled"); return; }   // too late to be useful: dropped, never spoken late
       if (this.audio) this.audio.pause();
       const a = new Audio(url); this.audio = a;
-      a.onended = a.onpause = () => markSound();
+      a.onplaying = () => this.ledger.started(id);
+      // the element knows how much it played; whichever of pause / ended comes first settles the cue
+      const done = () => { markSound(); this.ledger.ended(id, a.ended || (a.duration > 0 && a.currentTime >= a.duration - 0.05) ? "completed" : "interrupted", a.currentTime); };
+      a.onended = a.onpause = done;
+      a.onerror = () => this.ledger.ended(id, "failed", a.currentTime || 0);
       await a.play();
-    } catch { if (!stale() && performance.now() - t0 <= TTS_LATE_MS) this.playBrowser(text); }
+    } catch {
+      if (!stale() && performance.now() - t0 <= TTS_LATE_MS) this.playBrowser(text, id);
+      else this.ledger.ended(id, "failed");
+    }
     finally { if (gen === this.gen) this.pending = false; }
   }
   stop() {
     this.gen++; this.pending = false;
+    this.ledger.abandonAll();           // whatever was sounding is charged for what was heard, the rest is refunded
     soundUntilMs = performance.now();   // silent from now on (the estimated end of a cut cue no longer applies)
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     if (this.audio) { this.audio.pause(); this.audio = null; }
   }
-  reset() { this.stop(); this.busyUntil = -1e9; this.current = null; this.log = []; }
+  reset() { this.stop(); this.busyUntil = -1e9; this.current = null; this.log = []; this.ledger.clear(); }
 }
 
 export function haptic(pattern: number | number[] = [80, 60, 80]) {
