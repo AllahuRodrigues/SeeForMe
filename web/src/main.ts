@@ -14,6 +14,7 @@ import { PCACS, DEFAULT_CFG, type Candidate } from "./pcacs";
 import { ServerClient } from "./server";
 import { Speech, earcon, haptic } from "./speech";
 import { ClipVoice } from "./clipvoice";
+import { bestVoice, voiceNote } from "./devicevoice";
 import { attachSheet } from "./sheet";
 import { Camera, Tracker, area, iou } from "./tracker";
 import type { BBox, ChannelState, Cue, Detection, Track } from "./types";
@@ -70,7 +71,16 @@ const voiceSel = $<HTMLSelectElement>("voice");
  *  works (an API key is set). */
 function pickVoice() {
   speech.backend = voiceSel.value === "elevenlabs" ? (server.available && server.tts ? "elevenlabs" : "browser") : voiceSel.value === "browser" ? "browser" : "natural";
+  noteVoice();
 }
+/** Settings names the device voice in use and says when a more natural one can be installed. */
+function noteVoice() {
+  const el = opt("voice-hint");
+  if (!el || !("speechSynthesis" in window)) return;
+  el.textContent = voiceSel.value === "elevenlabs" ? "" : voiceNote(bestVoice(window.speechSynthesis.getVoices()), voiceSel.value === "browser");
+}
+// some browsers list their voices only after the page has loaded
+if ("speechSynthesis" in window) window.speechSynthesis.addEventListener?.("voiceschanged", noteVoice);
 // the recorded voice pack (about 3 MB) is fetched and decoded in the background; until then the browser voice speaks
 speech.clips = new ClipVoice(`${import.meta.env.BASE_URL}voice/af_heart`);
 void speech.clips.load();

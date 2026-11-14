@@ -1,5 +1,6 @@
 // Speech output (browser TTS or ElevenLabs through our server), haptics, and the audio-channel model.
 import type { Cue } from "./types";
+import { bestVoice } from "./devicevoice";
 import { PlaybackLedger, type BudgetHolder } from "./playback";
 import type { ClipVoice } from "./clipvoice";
 import type { PlannedClip } from "./voicepack";
@@ -119,8 +120,7 @@ export class Speech {
   private playBrowser(text: string, id: number) {
     if (!("speechSynthesis" in window)) { this.ledger.ended(id, "failed"); return; }
     const u = new SpeechSynthesisUtterance(text); u.rate = 1.05; u.lang = "en-US";
-    const voices = window.speechSynthesis.getVoices();
-    const pick = voices.find((v) => /Samantha|Google US English|Karen|Moira|Zira|Jenny/i.test(v.name)) ?? voices.find((v) => v.lang.startsWith("en") && /female/i.test(v.name)) ?? null;
+    const pick = bestVoice(window.speechSynthesis.getVoices());
     if (pick) u.voice = pick;
     u.onstart = () => this.ledger.started(id);
     u.onend = () => { markSound(); this.ledger.ended(id, "completed"); };

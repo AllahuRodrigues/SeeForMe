@@ -190,6 +190,12 @@ the background and cached). A cue is a few fragments joined at its commas. Text 
 answers to questions) is spoken whole by the device voice, and so is everything until the pack has loaded. Settings,
 Voice chooses between Natural, Device voice and ElevenLabs.
 
+The device voice is chosen by `src/devicevoice.ts`: the most natural English female voice the browser lists, with
+downloaded Premium and Enhanced system voices and Edge's online Natural voices ahead of the standard ones, and never
+a novelty voice. Settings names the voice in use. On an iPhone a better system voice is added under Settings,
+Accessibility, Read & Speak (Spoken Content on older iOS), Voices, English; whether Safari then offers it to web pages
+differs between iOS versions and has not been checked on a device here.
+
 | file | what |
 |---|---|
 | `src/detector.worker.ts`, `src/yolo.ts` | ONNX Runtime Web session, letterbox, decode + NMS |
@@ -200,6 +206,7 @@ Voice chooses between Natural, Device voice and ElevenLabs.
 | `src/version.ts` | visible app version (bump with every release) |
 | `src/compose.ts` | slot-based minimal messages |
 | `src/speech.ts` | the voice: recorded pack first, then the device voice or ElevenLabs; interrupt, vibration + earcon |
+| `src/devicevoice.ts` | which device voice speaks what the pack does not hold, and the note Settings shows about it |
 | `src/voicepack.ts` | what the recorded voice can say: every cue fragment (twice: before a comma, before a full stop) and the fixed app sentences; plans a sentence as clips, or hands it to another voice whole |
 | `src/clipvoice.ts` | plays the pack through Web Audio from one sprite file (`public/voice/af_heart/`), back to back on the audio clock, with an exactly known length |
 | `voice/build.mjs` | records the pack with Kokoro-82M (Apache-2.0); `cd web/voice && npm install && node build.mjs`; not part of the web build |
