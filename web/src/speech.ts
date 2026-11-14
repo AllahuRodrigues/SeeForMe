@@ -1,8 +1,11 @@
 // Speech output (browser TTS or ElevenLabs through our server), haptics, and the audio-channel model.
 import type { Cue } from "./types";
 import { PlaybackLedger, type BudgetHolder } from "./playback";
+import type { ClipVoice } from "./clipvoice";
+import type { PlannedClip } from "./voicepack";
 
-export type VoiceBackend = "browser" | "elevenlabs";
+/** natural: the recorded voice pack, and the browser voice for any sentence the pack does not hold. */
+export type VoiceBackend = "natural" | "browser" | "elevenlabs";
 /** A cue is never spoken late: ElevenLabs audio has TTS_WAIT_MS to arrive before the browser voice says it instead, and a
  *  cue that still has not started TTS_LATE_MS after it was issued is dropped. */
 const TTS_WAIT_MS = 1500, TTS_LATE_MS = 2000;
@@ -24,6 +27,8 @@ function audioCtx(): AudioContext | null {
 export class Speech {
   enabled = true;
   backend: VoiceBackend = "browser";
+  /** The recorded voice (main.ts sets it and loads it at start-up). Until it has loaded, the browser voice speaks. */
+  clips: ClipVoice | null = null;
   private audio: HTMLAudioElement | null = null;
   private pending = false;
   private gen = 0; // bumped by stop()/reset(): an ElevenLabs fetch that resolves after that is dropped
@@ -47,7 +52,7 @@ export class Speech {
   /** Is the app making a sound now, or did it stop less than `tailMs` ago? (browser voice, ElevenLabs audio, earcons) */
   audible(tailMs = 400): boolean {
     const now = performance.now();
-    const playing = this.pending || (this.audio != null && !this.audio.paused && !this.audio.ended)
+    const playing = this.pending || (this.audio != null && !this.audio.paused && !this.audio.ended) || !!this.clips?.playing
       || ("speechSynthesis" in globalThis && (globalThis as any).speechSynthesis.speaking);
     if (playing) markSound();
     return playing || now < soundUntilMs + tailMs;
@@ -66,6 +71,9 @@ export class Speech {
       a.volume = 0.01; void a.play().catch(() => {});
       if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; window.speechSynthesis.speak(u); }
       audioCtx();
+      // iOS plays Web Audio as "ambient" sound, which the ring/silent switch mutes; speech for a blind user must not be
+      const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
+      if (session) session.type = "playback";
     } catch { /* ignore */ }
   }
 
@@ -86,9 +94,22 @@ export class Speech {
     if (cue.message) { this.said.push([cue.message, performance.now()]); if (this.said.length > 12) this.said.shift(); }
     markSound(cue.duration * 1000);   // until its estimated end, even before the voice actually starts
     // an interrupt cannot wait for a TTS round trip: the browser voice says it unless its ElevenLabs audio is cached
-    const id = this.ledger.issue(cue.message, cue.duration, this.backend, charged);
+    // the recorded voice needs no round trip and no synthesis, so it serves interrupts too; a sentence it does not
+    // hold, or a pack that has not loaded yet, goes to the browser voice at once (a cue never waits for a voice)
+    const plan = this.backend === "natural" ? this.clips?.plan(cue.message) ?? null : null;
+    const actx = plan ? audioCtx() : null;
+    if (plan && actx && actx.state === "running") { this.playClips(plan, actx, this.ledger.issue(cue.message, cue.duration, "natural", charged), t); return; }
+    const id = this.ledger.issue(cue.message, cue.duration, this.backend === "elevenlabs" ? "elevenlabs" : "browser", charged);
     if (this.backend === "elevenlabs" && (cue.action !== "interrupt" || this.cache.has(cue.message))) void this.playEleven(cue.message, id);
     else this.playBrowser(cue.message, id);
+  }
+  /** Recorded clips: the length is known exactly before the first sample, so the channel model is exact too. */
+  private playClips(plan: PlannedClip[], actx: AudioContext, id: number, t: number) {
+    const secs = this.clips!.seconds(plan);
+    this.busyUntil = t + secs;
+    if (this.log.length) this.log[this.log.length - 1][1] = t + secs;
+    markSound(secs * 1000);
+    this.clips!.play(plan, actx, () => this.ledger.started(id), (completed) => { markSound(); this.ledger.ended(id, completed ? "completed" : "interrupted"); });
   }
   private playBrowser(text: string, id: number) {
     if (!("speechSynthesis" in window)) { this.ledger.ended(id, "failed"); return; }
@@ -135,6 +156,7 @@ export class Speech {
   stop() {
     this.gen++; this.pending = false;
     this.ledger.abandonAll();           // whatever was sounding is charged for what was heard, the rest is refunded
+    this.clips?.stop();
     soundUntilMs = performance.now();   // silent from now on (the estimated end of a cut cue no longer applies)
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     if (this.audio) { this.audio.pause(); this.audio = null; }

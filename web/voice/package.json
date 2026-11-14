@@ -1,0 +1,8 @@
+{
+  "name": "seeforme-voice-pack",
+  "private": true,
+  "type": "module",
+  "description": "Records the SeeForMe voice pack with Kokoro-82M (Apache-2.0). Not part of the web build.",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "kokoro-js": "1.2.1" }
+}

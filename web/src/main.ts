@@ -13,6 +13,7 @@ import { LearnedScheduler, loadLearnedRunner, type SchedulerMeta } from "./learn
 import { PCACS, DEFAULT_CFG, type Candidate } from "./pcacs";
 import { ServerClient } from "./server";
 import { Speech, earcon, haptic } from "./speech";
+import { ClipVoice } from "./clipvoice";
 import { Camera, Tracker, area, iou } from "./tracker";
 import type { BBox, ChannelState, Cue, Detection, Track } from "./types";
 import { APP_VERSION } from "./version";
@@ -62,8 +63,15 @@ const cfgReady = fetch("/config/pcacs.json", { cache: "no-cache" }).then((r) => 
 const speech = new Speech(serverUrl, (text, urgent) => { lastCueEl.textContent = text; if (!speech.enabled) (urgent ? srAlert : srLive).textContent = text; },
   () => policy);   // measured playback is settled against the active scheduler's speech budget
 const voiceSel = $<HTMLSelectElement>("voice");
-/** The browser voice unless ElevenLabs was picked and the server says its TTS works (an API key is set). */
-function pickVoice() { speech.backend = voiceSel.value === "elevenlabs" && server.available && server.tts ? "elevenlabs" : "browser"; }
+/** The recorded natural voice by default; the browser voice on request; ElevenLabs only when the server says its TTS
+ *  works (an API key is set). */
+function pickVoice() {
+  speech.backend = voiceSel.value === "elevenlabs" ? (server.available && server.tts ? "elevenlabs" : "browser") : voiceSel.value === "browser" ? "browser" : "natural";
+}
+// the recorded voice pack (about 3 MB) is fetched and decoded in the background; until then the browser voice speaks
+speech.clips = new ClipVoice(`${import.meta.env.BASE_URL}voice/af_heart`);
+void speech.clips.load();
+pickVoice();
 const frameCanvas = document.createElement("canvas");
 const fctx = frameCanvas.getContext("2d", { willReadFrequently: true })!;
 const smallCanvas = document.createElement("canvas");   // 160 px grey copy for the activity detector
