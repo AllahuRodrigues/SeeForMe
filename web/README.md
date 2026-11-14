@@ -8,7 +8,7 @@ rule as the Python pipeline (`pcacs_learned:rl`, `models/scheduler/scheduler_rl.
 synthetic campus scenes, not on EgoBlind video); the linear **P-CACS** is the fallback. In front of either sits
 the **repeat filter** (`src/gate.ts`, a port of `seeforme/live/gate.py`): it holds what was just said, the desk
 user and still background, and never what approaches, is critical or is a Find goal. Works on phones, tablets
-and laptops; front and rear cameras; video files; spoken commands. Version 0.4.1.
+and laptops; front and rear cameras; video files; spoken commands. Version 0.4.2.
 
 ```bash
 cd web && npm install && npm run dev        # http://localhost:5173  (Vite dev server)
@@ -187,6 +187,7 @@ Accessibility:
 | `src/version.ts` | visible app version (bump with every release) |
 | `src/compose.ts` | slot-based minimal messages |
 | `src/speech.ts` | Web Speech / ElevenLabs playback, interrupt, vibration + earcon |
+| `src/playback.ts` | measured playback: each cue's start, end and how it ended, settled once against the scheduler's speech budget (unplayed seconds refunded, overruns charged); the channel stays busy while a cue is still sounding |
 | `src/camera.ts` | `CameraSource`: facingMode, device picker, flip, video file; every open is cancellable (a newer open, a stop or a video file wins, and no stream is left running) |
 | `src/camcontrol.ts` | `CameraControl`: the one path that opens and stops the camera for Start / Space, Flip, the picker, a video file and the voice commands start, pause, goodbye, flip / front / back camera; says only what the browser reports |
 | `src/server.ts` | depth / OCR / TTS client |

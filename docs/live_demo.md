@@ -151,6 +151,12 @@ is taken to be a desk webcam.
   objects leave the view quickly, so they measure what the gate costs, not what it saves at a desk. The desk case
   is covered by `tests/test_live_gate.py`.
 
+* **Speech actually played** (`results/live/playback_browser.md`, `web/src/playback.ts`): the scheduler charges its
+  speech budget with an estimate (0.35 s per word, at least 1.2 s). On ten typical cues in a desktop Chromium with
+  the Samantha voice, the voice ran 34% longer than that in total (21.5 s against 16.0 s, largest overrun 1.1 s).
+  The web app now settles every cue against the seconds it really played: a cue that is cut off, cancelled or fails
+  is refunded for what was not heard, a slow voice is charged the difference, and the channel is not free while a
+  cue is still sounding. One run, one browser, one voice; Safari, phones and the ElevenLabs voice are not measured.
 * **Voice commands** (`results/live/voice_eval.md`, `scripts/eval_voice.py`): every hands-free command vector plus 30
   natural variants, synthesised with four macOS voices (US, UK, Australian and Irish English), clean and with pink
   noise at 20 dB, then decoded by the real Vosk recogniser through the live code path: 736 command recordings and 184
