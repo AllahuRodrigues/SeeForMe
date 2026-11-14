@@ -14,11 +14,14 @@ import { PCACS, DEFAULT_CFG, type Candidate } from "./pcacs";
 import { ServerClient } from "./server";
 import { Speech, earcon, haptic } from "./speech";
 import { ClipVoice } from "./clipvoice";
+import { attachSheet } from "./sheet";
 import { Camera, Tracker, area, iou } from "./tracker";
 import type { BBox, ChannelState, Cue, Detection, Track } from "./types";
 import { APP_VERSION } from "./version";
 import { HELP_TEXT, IDLE_TEXT, VoiceInput, findTarget, normaliseSpeech, parseCommand, type Command, type VoiceState } from "./voice";
 import { COCO } from "./yolo";
+// the stylesheet hides script-driven elements (the cue card between cues) only when the script is running
+document.documentElement.classList.add("js");
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 /** an element the page may not have (ids added in later page layouts) */
@@ -72,6 +75,8 @@ function pickVoice() {
 speech.clips = new ClipVoice(`${import.meta.env.BASE_URL}voice/af_heart`);
 void speech.clips.load();
 pickVoice();
+// on a phone, an open <details data-sheet> is a sheet that rises from the bottom and can be dragged away
+document.querySelectorAll<HTMLDetailsElement>("details[data-sheet]").forEach((d) => attachSheet(d));
 const frameCanvas = document.createElement("canvas");
 const fctx = frameCanvas.getContext("2d", { willReadFrequently: true })!;
 const smallCanvas = document.createElement("canvas");   // 160 px grey copy for the activity detector

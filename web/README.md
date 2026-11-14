@@ -8,7 +8,7 @@ rule as the Python pipeline (`pcacs_learned:rl`, `models/scheduler/scheduler_rl.
 synthetic campus scenes, not on EgoBlind video); the linear **P-CACS** is the fallback. In front of either sits
 the **repeat filter** (`src/gate.ts`, a port of `seeforme/live/gate.py`): it holds what was just said, the desk
 user and still background, and never what approaches, is critical or is a Find goal. Works on phones, tablets
-and laptops; front and rear cameras; video files; spoken commands. Version 0.4.2.
+and laptops; front and rear cameras; video files; spoken commands. Version 0.5.0.
 
 ```bash
 cd web && npm install && npm run dev        # http://localhost:5173  (Vite dev server)
@@ -177,6 +177,19 @@ Accessibility:
 
 ## Where things are
 
+### On an iPhone
+
+Open the site in Safari, then Share, Add to Home Screen: it then runs full screen like an app. Start must be tapped once
+(iOS only lets a page use the camera and play sound after a touch). Speech plays with the ring/silent switch on silent.
+There is no vibration on iOS; a short tone stands in for it. Not yet tried on a device: see the pull request.
+
+### The voice
+
+Cues are spoken by a recorded voice pack (Kokoro-82M, voice `af_heart`, 570 clips in one 4.5 MB file that is fetched in
+the background and cached). A cue is a few fragments joined at its commas. Text the pack does not hold (sign text,
+answers to questions) is spoken whole by the device voice, and so is everything until the pack has loaded. Settings,
+Voice chooses between Natural, Device voice and ElevenLabs.
+
 | file | what |
 |---|---|
 | `src/detector.worker.ts`, `src/yolo.ts` | ONNX Runtime Web session, letterbox, decode + NMS |
@@ -186,7 +199,12 @@ Accessibility:
 | `parity/run.mjs` | Python ↔ TypeScript parity runner (fixtures from `scripts/web_parity.py`) |
 | `src/version.ts` | visible app version (bump with every release) |
 | `src/compose.ts` | slot-based minimal messages |
-| `src/speech.ts` | Web Speech / ElevenLabs playback, interrupt, vibration + earcon |
+| `src/speech.ts` | the voice: recorded pack first, then the device voice or ElevenLabs; interrupt, vibration + earcon |
+| `src/voicepack.ts` | what the recorded voice can say: every cue fragment (twice: before a comma, before a full stop) and the fixed app sentences; plans a sentence as clips, or hands it to another voice whole |
+| `src/clipvoice.ts` | plays the pack through Web Audio from one sprite file (`public/voice/af_heart/`), back to back on the audio clock, with an exactly known length |
+| `voice/build.mjs` | records the pack with Kokoro-82M (Apache-2.0); `cd web/voice && npm install && node build.mjs`; not part of the web build |
+| `src/sheet.ts` | the Settings sheet on a phone: spring by damping ratio and response, one-to-one drag, momentum projection, rubber-banding |
+| `src/tokens.css`, `src/base.css`, `src/styles.css` | the design system (Hallmark, theme Ribbon) and the one screen built on it |
 | `src/playback.ts` | measured playback: each cue's start, end and how it ended, settled once against the scheduler's speech budget (unplayed seconds refunded, overruns charged); the channel stays busy while a cue is still sounding |
 | `src/camera.ts` | `CameraSource`: facingMode, device picker, flip, video file; every open is cancellable (a newer open, a stop or a video file wins, and no stream is left running) |
 | `src/camcontrol.ts` | `CameraControl`: the one path that opens and stops the camera for Start / Space, Flip, the picker, a video file and the voice commands start, pause, goodbye, flip / front / back camera; says only what the browser reports |

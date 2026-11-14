@@ -30,6 +30,7 @@ export class Speech {
   /** The recorded voice (main.ts sets it and loads it at start-up). Until it has loaded, the browser voice speaks. */
   clips: ClipVoice | null = null;
   private audio: HTMLAudioElement | null = null;
+  private silent: HTMLAudioElement | null = null;   // the unlock clip, kept for iOS (see unlock)
   private pending = false;
   private gen = 0; // bumped by stop()/reset(): an ElevenLabs fetch that resolves after that is dropped
   private cache = new Map<string, string>();
@@ -69,11 +70,15 @@ export class Speech {
     try {
       const a = new Audio("data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQxAADB8AhSmxhIIEVCSiJrDCQBTcu3UrAIwUdkRgQbFAZC1CQEwTJ9mjRvBA4UOLD8nKVOWfh+UlK3z/177OXrfOdKl7pyn3Xf//WreyTRUoAWgBgkOAGbZHBgG1OF6zM82DWbZaUmMBptgQhGjsyYqc9ae9XPAx/jRXw4V5JdQ1Zfzp3LnpVf/w0uSvtY2rnc3dFA7W1Me9jUYc/HYm2gi7ZYa9HhqfNXb+dr3W9qr++qrl+rtaf1qYKf///+9Ms3gXnmP3S8TgxEqmj3xJ9iI7kR2Hbp5p26Vq0h3SBAAAAA");
       a.volume = 0.01; void a.play().catch(() => {});
+      this.silent ??= a;
       if ("speechSynthesis" in window) { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; window.speechSynthesis.speak(u); }
       audioCtx();
-      // iOS plays Web Audio as "ambient" sound, which the ring/silent switch mutes; speech for a blind user must not be
+      // iOS plays Web Audio as "ambient" sound, which the ring/silent switch mutes; speech for a blind user must not be.
+      // Where the page can name its audio session it asks for "playback"; elsewhere a silent, looping media element
+      // (media elements are never "ambient") keeps the session in playback while the app is open.
       const session = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
       if (session) session.type = "playback";
+      else if (this.silent && /iP(hone|ad|od)|Macintosh.*Mobile/.test(navigator.userAgent)) { this.silent.loop = true; void this.silent.play().catch(() => {}); }
     } catch { /* ignore */ }
   }
 
