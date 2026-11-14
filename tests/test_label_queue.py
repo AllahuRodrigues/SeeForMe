@@ -61,3 +61,25 @@ def test_one_recording_cannot_dominate():
     picked, rep = build_queue(p, QUOTAS, seed=7, max_per_group=2)
     assert sum(x["group"] == "one-long-recording" for x in picked) == 2
     assert len(picked) == 160                                        # the gap is filled from elsewhere
+
+
+def test_rater_report_splits_by_stratum_weak_label_and_claim_source():
+    from seeforme.egoblind.label_queue import rater_report
+    items = [
+        {"stratum": "door", "weak_should_speak": True, "claim_source": "system", "usefulness": "proactive_warn", "claim": "correct"},
+        {"stratum": "door", "weak_should_speak": True, "claim_source": "label", "usefulness": "on_request", "claim": "wrong"},
+        {"stratum": "door", "weak_should_speak": True, "claim_source": "label", "usefulness": "uncertain", "claim": "not_assessable"},
+        {"stratum": "quiet", "weak_should_speak": False, "claim_source": "system_top", "usefulness": "silent", "claim": "correct"},
+        {"stratum": "quiet", "weak_should_speak": False, "claim_source": "none", "usefulness": "proactive_clear", "claim": None},
+        {"stratum": "unasked", "weak_should_speak": None, "claim_source": "system_top", "usefulness": "proactive_warn", "claim": "correct"},
+    ]
+    r = rater_report(items)
+    assert r["n"] == 6 and r["usefulness"] == {"proactive_warn": 2, "on_request": 1, "uncertain": 1, "silent": 1, "proactive_clear": 1}
+    assert r["by_stratum"]["unasked"] == {"n": 1, "decided": 1, "proactive": 1, "uncertain": 0}
+    door = r["by_stratum"]["door"]
+    assert door["n"] == 3 and door["decided"] == 2 and door["proactive"] == 1 and door["uncertain"] == 1
+    weak = r["against_weak_label"]
+    assert weak["weak_speak"] == {"decided": 2, "rater_proactive": 1} and weak["weak_quiet"] == {"decided": 2, "rater_proactive": 1}
+    assert weak["excluded_uncertain"] == 1 and weak["agreement"] == 0.5 and weak["no_weak_label"] == 1
+    assert r["claim_by_source"]["label"] == {"wrong": 1, "not_assessable": 1} and "none" not in r["claim_by_source"]
+    assert r["claim_by_source"]["system_top"] == {"correct": 2}

@@ -76,3 +76,38 @@ def build_queue(pool: Sequence[Dict], quotas: Dict[str, int] = QUOTAS, seed: int
               "filled": dict(filled), "total": len(picked), "unfilled": need, "seed": seed, "max_per_group": max_per_group,
               "final": dict(Counter(p["stratum"] for p in picked)), "by_split": dict(Counter(p["source_split"] for p in picked))}
     return picked, report
+
+
+def rater_report(items) -> dict:
+    """Aggregate one rater's rubric v4 labels against the hidden queue design. Each item: stratum, weak_should_speak,
+    claim_source, usefulness, claim. `weak_should_speak` is True, False or None (a moment nobody asked about has no weak
+    label and stays out of that comparison). Uncertain is counted and excluded from every rate, never read as silent."""
+    from collections import Counter, defaultdict
+
+    from .review import proactive_target
+
+    by, weak, claims = defaultdict(Counter), {True: Counter(), False: Counter()}, defaultdict(Counter)
+    agree = decided = unsure = unlabelled = 0
+    for it in items:
+        t, ws = proactive_target(it["usefulness"]), it["weak_should_speak"]
+        s = by[it["stratum"]]
+        s["n"] += 1
+        unlabelled += ws is None
+        if t is None:
+            s["uncertain"] += 1; unsure += ws is not None
+        else:
+            s["decided"] += 1; s["proactive"] += t
+            if ws is not None:
+                w = weak[bool(ws)]
+                w["decided"] += 1; w["rater_proactive"] += t
+                decided += 1; agree += int(t == int(bool(ws)))
+        if it.get("claim") and it.get("claim_source") not in (None, "", "none"):
+            claims[it["claim_source"]][it["claim"]] += 1
+    row = lambda c, keys: {k: int(c[k]) for k in keys}
+    return {"n": len(items), "usefulness": dict(Counter(it["usefulness"] for it in items)),
+            "by_stratum": {k: row(v, ("n", "decided", "proactive", "uncertain")) for k, v in by.items()},
+            "against_weak_label": {"weak_speak": row(weak[True], ("decided", "rater_proactive")),
+                                   "weak_quiet": row(weak[False], ("decided", "rater_proactive")),
+                                   "excluded_uncertain": int(unsure), "no_weak_label": int(unlabelled),
+                                   "agreement": agree / decided if decided else None},
+            "claim_by_source": {k: dict(v) for k, v in claims.items()}}
