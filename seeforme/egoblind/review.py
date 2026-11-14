@@ -124,6 +124,71 @@ def latest_verdicts(records: Iterable[Dict], reviewer: Optional[str] = None, hum
     return out
 
 
+def rater_kind(records: Iterable[Dict], reviewer: str) -> Optional[str]:
+    """'human' or 'model' for a reviewer id, None if it has no records. One id is never both."""
+    kinds = {r.get("verification", "human") for r in records if r.get("reviewer") == reviewer}
+    if len(kinds) > 1:
+        raise ValueError(f"reviewer {reviewer!r} has both human and model records")
+    return next(iter(kinds), None)
+
+
+def model_verdict_records(labels: Sequence[Dict], events: Sequence[Dict], reviewer: str, existing: Iterable[Dict] = ()) -> List[Dict]:
+    """Validate a model's pre-labels against a rubric v4 queue and return store records with verification 'model'.
+    `events` are blind rows (sample_id, key, claim). The reviewer id must not belong to a human."""
+    if rater_kind(existing, reviewer) == "human":
+        raise ValueError(f"reviewer {reviewer!r} already has human verdicts; model labels need their own id")
+    by_id = {e["sample_id"]: e for e in events}
+    out, seen = [], set()
+    for lab in labels:
+        sid = lab.get("sample_id")
+        if sid not in by_id:
+            raise ValueError(f"unknown sample id {sid!r}")
+        if sid in seen:
+            raise ValueError(f"sample {sid} is labelled twice")
+        seen.add(sid)
+        use, claim = lab.get("usefulness"), lab.get("claim") or None
+        if use not in USEFULNESS:
+            raise ValueError(f"{sid}: usefulness must be one of {USEFULNESS}, got {use!r}")
+        has_sentence = bool((by_id[sid].get("claim") or "").strip())
+        if has_sentence and claim is None:
+            raise ValueError(f"{sid} has a proposed sentence: the claim label is required")
+        if not has_sentence and claim is not None:
+            raise ValueError(f"{sid} has no sentence to judge, but a claim label was given")
+        out.append(make_verdict(by_id[sid]["key"], use, reviewer, note=lab.get("note", "") or "", verification="model", claim=claim,
+                                evidence=lab.get("evidence") or None, confidence=lab.get("confidence") or None))
+    return out
+
+
+def disagreements(a: Dict[str, Dict], b: Dict[str, Dict]) -> List[Dict]:
+    """Events both raters labelled where they differ, with what differs: the speak-or-not decision, one rater unsure,
+    the usefulness category, or the truth of the sentence."""
+    out = []
+    for k in sorted(set(a) & set(b)):
+        (ua, ca), (ub, cb) = two_axis(a[k]), two_axis(b[k])
+        ta, tb = proactive_target(ua), proactive_target(ub)
+        differs = []
+        if ta is not None and tb is not None and ta != tb:
+            differs.append("speak_or_not")
+        if (ta is None) != (tb is None):
+            differs.append("one_unsure")
+        if ua != ub:
+            differs.append("category")
+        if ca and cb and ca != cb:
+            differs.append("claim")
+        if differs:
+            out.append({"key": k, "differs": differs, "a": ua, "b": ub, "claim_a": ca, "claim_b": cb,
+                        "note_a": a[k].get("note", ""), "note_b": b[k].get("note", "")})
+    return out
+
+
+def packet_frames(times: Sequence[float], t_q: float, n: int = 4, gap: int = 2) -> List[int]:
+    """Frame indices for a contact sheet: the decision-time frame last, earlier ones `gap` steps apart, none after t_q."""
+    idx = decision_time_frames(times, t_q)
+    while gap > 1 and (n - 1) * gap > len(idx) - 1:
+        gap -= 1
+    return idx[::-1][::gap][:n][::-1]
+
+
 def merge_verdicts(rows: List[Dict], verdicts: Dict[str, Dict]) -> List[Dict]:
     for row in rows:
         v = verdicts.get(event_key(row))

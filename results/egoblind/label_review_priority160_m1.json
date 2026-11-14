@@ -1,0 +1,89 @@
+{
+ "n": 160,
+ "usefulness": {
+  "proactive_warn": 50,
+  "on_request": 90,
+  "uncertain": 4,
+  "silent": 16
+ },
+ "by_stratum": {
+  "unasked": {
+   "n": 23,
+   "decided": 23,
+   "proactive": 2,
+   "uncertain": 0
+  },
+  "covered_other": {
+   "n": 35,
+   "decided": 35,
+   "proactive": 18,
+   "uncertain": 0
+  },
+  "pole": {
+   "n": 17,
+   "decided": 16,
+   "proactive": 6,
+   "uncertain": 1
+  },
+  "quiet": {
+   "n": 31,
+   "decided": 31,
+   "proactive": 6,
+   "uncertain": 0
+  },
+  "stairs": {
+   "n": 12,
+   "decided": 11,
+   "proactive": 6,
+   "uncertain": 1
+  },
+  "scene": {
+   "n": 17,
+   "decided": 15,
+   "proactive": 4,
+   "uncertain": 2
+  },
+  "door": {
+   "n": 25,
+   "decided": 25,
+   "proactive": 8,
+   "uncertain": 0
+  }
+ },
+ "against_weak_label": {
+  "weak_speak": {
+   "decided": 102,
+   "rater_proactive": 42
+  },
+  "weak_quiet": {
+   "decided": 31,
+   "rater_proactive": 6
+  },
+  "excluded_uncertain": 4,
+  "no_weak_label": 23,
+  "agreement": 0.5037593984962406
+ },
+ "claim_by_source": {
+  "system_top": {
+   "correct": 29,
+   "partially_correct": 8,
+   "wrong": 6
+  },
+  "label": {
+   "correct": 32,
+   "not_assessable": 3,
+   "partially_correct": 13,
+   "wrong": 16
+  },
+  "system": {
+   "correct": 26,
+   "partially_correct": 11,
+   "wrong": 5
+  }
+ },
+ "queue": "priority160",
+ "reviewer": "m1",
+ "rater_kind": "model",
+ "queue_size": 160,
+ "notes_flagging_subtitles": 124
+}
