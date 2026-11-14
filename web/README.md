@@ -185,7 +185,7 @@ There is no vibration on iOS; a short tone stands in for it. Not yet tried on a 
 
 ### The voice
 
-Cues are spoken by a recorded voice pack (Kokoro-82M, voice `af_heart`, 570 clips in one 4.5 MB file that is fetched in
+Cues are spoken by a recorded voice pack (Kokoro-82M, voice `af_heart`, 594 clips in one 5 MB file that is fetched in
 the background and cached). A cue is a few fragments joined at its commas. Text the pack does not hold (sign text,
 answers to questions) is spoken whole by the device voice, and so is everything until the pack has loaded. Settings,
 Voice chooses between Natural, Device voice and ElevenLabs.
