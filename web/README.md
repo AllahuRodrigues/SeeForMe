@@ -1,11 +1,14 @@
 # SeeForMe web app
 
-Audio-first camera assistant that runs **in the browser**: YOLO11n (ONNX Runtime Web, WebGPU → WASM
-fallback) in a Web Worker, an IoU tracker with metric dynamics (distance, relative speed, time-to-contact,
+Audio-first camera assistant that runs **in the browser**: YOLO11 (ONNX Runtime Web: YOLO11s on WebGPU, YOLO11n
+on WASM) in a Web Worker, an IoU tracker with metric dynamics (distance, relative speed, time-to-contact,
 path-intersection probability), and a scheduler that decides speak / interrupt / haptic / silence under a
 speech budget. The default scheduler is the **learned GRU + RL scheduler**, the same model and the same decision
-rule as the Python pipeline (`pcacs_learned:rl`, `models/scheduler/scheduler_rl.pt`); the linear **P-CACS** is the
-fallback. Works on phones, tablets and laptops; front and rear cameras; video files. Version 0.3.1.
+rule as the Python pipeline (`pcacs_learned:rl`, `models/scheduler/scheduler_rl.pt`, trained on CampusBench
+synthetic campus scenes, not on EgoBlind video); the linear **P-CACS** is the fallback. In front of either sits
+the **repeat filter** (`src/gate.ts`, a port of `seeforme/live/gate.py`): it holds what was just said, the desk
+user and still background, and never what approaches, is critical or is a Find goal. Works on phones, tablets
+and laptops; front and rear cameras; video files; spoken commands. Version 0.4.1.
 
 ```bash
 cd web && npm install && npm run dev        # http://localhost:5173  (Vite dev server)
@@ -28,11 +31,12 @@ Anything V2 at ~4 Hz and READ mode works.
 1. Start the server with `make serve-ssl` and note your Mac's LAN address (System Settings → Network).
 2. On the phone open `https://<mac-ip>:8000`, accept the self-signed certificate, allow the camera.
 3. **Flip** switches rear ↔ front (`facingMode: environment | user`); the camera picker lists every device
-   (Continuity Camera and external webcams appear here on a Mac). Front cameras are mirrored, so left/right
-   in the cues are swapped automatically.
-4. Add to Home Screen: it is a PWA (manifest + service worker). The app shell, configs, benchmark JSON, both
-   ONNX models and the ORT loaders are precached with content revisions, so a release replaces exactly the
-   files it changed; the ORT wasm binaries are cached on first use under a per-ORT-version cache. A new release
+   (Continuity Camera and external webcams appear here on a Mac). No camera is mirrored, the front one
+   included: the picture is shown as captured, and "left" / "right" in the cues are the picture's left and right.
+4. Add to Home Screen: it is a PWA (manifest + service worker). The app shell, configs, benchmark JSON, the
+   scheduler model, YOLO11n and the ORT loaders are precached with content revisions, so a release replaces
+   exactly the files it changed; the ORT wasm binaries are cached on first use under a per-ORT-version cache, and
+   YOLO11s (36 MB, WebGPU only) on first use under a cache named by its content hash. A new release
    activates at once (autoUpdate, skipWaiting + clientsClaim); the page reloads when it takes over, but while
    the camera runs the reload waits until Stop. After the reload the status says "Updated to version X" once.
 
@@ -43,9 +47,60 @@ Anything V2 at ~4 Hz and READ mode works.
 | **Navigate** | push: P-CACS speaks only what changes your next action ("Stairs down, about 3 meters. Handrail left."), buzzes for imminent obstacles, cuts in for critical hazards |
 | **Find** | pull: "exit", "room 204", "a seat" become goal tags (articles and words under 3 letters are dropped; "seat" also matches chair/bench); matching objects/signs are announced even off the walking path. Without the server only detector objects (COCO classes) can match, so for signs and room numbers the app says they need the server |
 | **Read** | reads the text in view (server OCR) |
-| **Ask** | rule-based answers over the live event graph: "what's around me", "any stairs?", "what's on my left", "where is the door" (sets a Find goal), "more detail"; voice input where Web Speech recognition exists |
+| **Ask** | rule-based answers over the live event graph: "what's around me", "any stairs?", "what's on my left", "where is the door" (sets a Find goal). Typed text goes through the voice command parser first, so "help", "unmute" or "where is room two oh four" do what they say |
 
-Settings: **Scheduler** Learned (default) / Linear P-CACS (remembered in this browser); verbosity QUIET /
+## Voice
+
+- **Talk** (the A key, or the microphone button in Ask): one command, no wake phrase needed. The first press only
+  says that the browser's speech recognition may send the audio to its speech service (Chrome: Google); the next
+  press listens.
+- **Hands-free voice** (the V key; off by default, remembered): continuous listening for "SeeForMe, ..." (also the
+  usual mis-hearings, "sea for me", "c for me"). The command is the text after the last wake phrase; the wake phrase
+  alone plays a short tone and opens 5 s for one command. It restarts itself with a growing back-off and stops while
+  the page is hidden.
+- Commands: start, pause, quit, find ..., stop looking, read, what's around me, repeat, mute / unmute, more / less
+  detail, flip camera, help, or any question. The parser (`src/voice.ts`) is a rule-for-rule port of the Python one
+  (`seeforme/live/voice.py`): a FIND verb wins over mode and detail words, which must be the whole command ("find
+  the scene mode button" is a FIND, "switch to reading mode" a mode), and spoken numbers become digits ("room two oh
+  four" -> room 204, "room oh four" -> room 04). `tests/data/voice_commands.json` holds the cases both pass.
+- The app never acts on its own voice: results that arrive while it speaks (and 0.4 s after), or that repeat what it
+  or the status line (read aloud by screen readers) said a moment ago, are ignored. Of a result's alternatives the
+  best decides; a lower one may only refine a command addressed to the app, never start one.
+
+## Repeat filter, activity and cane cues
+
+- **Repeat filter** (`src/gate.ts`, Settings checkbox, on by default and remembered): remembers what was said per
+  object identity (label, or sign text whose numbers must match) and direction, across tracker id switches, and
+  holds repeats; closer, closing in, a side change, critical (measured TTC < 2 s in the path), a Find goal and the
+  hold running out (20 s walking, 60 s still) pass. A new track only continues a remembered object when it
+  appears where that one vanished, at about its range, and that one had not walked away since it was said; one
+  back in the path after a dropout, or closing in, is said again. The same continuity decides whether a new track
+  joins a background object or is the desk user, so a stranger who walks up to a laptop, or a visitor in front of
+  the user, is warned about like anyone else. A detection that flickers (a new track id at every sighting) is
+  confirmed by its sightings together. A held cue's seconds go back to the speech budget, and the filter says a held
+  object itself when it later closes in (up to 20 s later for one held as background or as the user). A buzz and a
+  spoken cue can pass at the same decision. `#action-why` in the Algorithm panel shows each verdict.
+- **Activity** (`src/activity.ts`): camera motion on a 160 px grey frame (phase correlation). Still: 60 s hold and
+  still objects as background; a camera still in the first seconds after Start is a laptop on a desk, and the
+  person in front of it is the user (held until they measurably come closer). 2 s of walking ends that.
+- **Cane cues** (`src/cane.ts`): with the server, `/api/depth` also returns a class-agnostic obstacle summary
+  (the app sends `walking` from the activity detector and the travel aid); while navigating (not still, not at a
+  desk) an obstacle no detected object explains is said ("Obstacle ahead, about 1 meter, and on your right.":
+  path choice names what blocks, never a side that looks open, since drop-offs are not detected) and goes through
+  the repeat filter; very close straight ahead it is a buzz. The app never says or implies a path is clear.
+- **I travel with** (Settings; White cane by default, remembered): what the obstacle cues leave to the user's own
+  aid, after the BLV-Road-Nav focus group (Islam et al., arXiv 2407.16777): quiet about what the cane can already
+  touch, always warn at head height.
+  - White cane: no cue for a low obstacle within the cane's reach (1.2 m), farther ones only in a steady approach;
+    body height from 1.2 to 2.5 m ahead; head height always (within 2.5 m); the buzz only at body or head height
+    within 0.6 m in a steady approach.
+  - Guide dog: head height and the buzz only (the dog leads around the rest).
+  - Neither: every obstacle cue, as before.
+  With a cane or a dog only the corridor ahead is spoken about. Cues about detected objects (people, vehicles,
+  chairs, the Find goal) are the same for every choice.
+
+Settings: **I travel with** White cane (default) / Guide dog / Neither (remembered; see above); **Scheduler**
+Learned (default) / Linear P-CACS (remembered in this browser); verbosity QUIET /
 BALANCED / DETAILED changes which message slots the linear P-CACS speaks (the learned scheduler picks its own
 slots, verbosity only changes its speech-cost input, as in Python); units metres / feet; voice Browser
 (default) / ElevenLabs (through the server, used only when the server reports an ElevenLabs API key). An
@@ -98,13 +153,14 @@ Known differences: text tracks use the keyword text-importance rules (Python's C
 learned n-gram classifier, which the browser does not ship); Find also matches a multi-word goal as a whole
 phrase inside a longer sign ("gate 7" in "Gate 7 →"), which Python's exact-word match does not.
 
-Keyboard: **Space** start/stop, **F** flip camera, **M** mute, **A** ask by voice. Shortcuts are ignored
-while focus is on a button, link, form field or the Settings summary, and whenever Cmd, Ctrl or Alt is held.
+Keyboard: **Space** start/stop, **F** flip camera, **M** mute, **A** Talk (one spoken command), **V** hands-free
+voice on/off. Shortcuts are ignored while focus is on a button, link, form field or a disclosure summary, and
+whenever Cmd, Ctrl or Alt is held.
 
-The **Algorithm** panel (right column, always visible) shows the live P-CACS decision and, per candidate
-track, distance, TTC, path probability, hazard, urgency, novelty, speech cost and utility, plus the
-speech-budget bar, channel state and the last cues; **This session** and **Benchmark** sit below it. This
-is the live view for the thesis demo.
+The research view sits in the collapsed **How SeeForMe decides** section below the main screen: the
+**Algorithm** panel shows the live decision and, per candidate track, distance, TTC, path probability, hazard,
+urgency, novelty, speech cost and the score, plus the repeat filter's verdict, the speech-budget bar, channel
+state and the last cues; **This session** and **Benchmark** follow. This is the live view for the thesis demo.
 
 Accessibility:
 
@@ -113,8 +169,10 @@ Accessibility:
 - Cues and answers are spoken by the app. While the app voice is muted (the **Mute** button, exposed with
   `aria-pressed`), speak cues and answers go to a polite `aria-live` region and interrupt cues go to an
   assertive one, so a screen reader reads each one once and urgent hazards are not queued.
-- A skip link jumps to the camera controls, focus is always visible, and Start, Ask, Flip, Mute and the
-  mode buttons are at least 44 px tall.
+- A skip link jumps to the controls, focus is always visible, and every control is at least 44 px tall (Start
+  80 px, Talk and Hands-free 64 px). Start, Talk, Hands-free, Mute and Flip declare their keys
+  (`aria-keyshortcuts`). The two disclosures (Settings, How SeeForMe decides) have their headings just before
+  them, since a heading inside a `<summary>` is lost to heading navigation in some screen readers.
 - The camera overlay and cue card are for low-vision users, developers and demos (hidden from screen readers).
 
 ## Where things are
@@ -129,20 +187,28 @@ Accessibility:
 | `src/version.ts` | visible app version (bump with every release) |
 | `src/compose.ts` | slot-based minimal messages |
 | `src/speech.ts` | Web Speech / ElevenLabs playback, interrupt, vibration + earcon |
-| `src/camera.ts` | `CameraSource`: facingMode, device picker, flip, video file |
+| `src/camera.ts` | `CameraSource`: facingMode, device picker, flip, video file; every open is cancellable (a newer open, a stop or a video file wins, and no stream is left running) |
+| `src/camcontrol.ts` | `CameraControl`: the one path that opens and stops the camera for Start / Space, Flip, the picker, a video file and the voice commands start, pause, goodbye, flip / front / back camera; says only what the browser reports |
 | `src/server.ts` | depth / OCR / TTS client |
+| `src/gate.ts` | repeat filter (announcement gate) in front of either scheduler |
+| `src/activity.ts` | camera motion: still / walking / unclear, desk webcam |
+| `src/voice.ts` | command parser (spoken and typed) and the Web Speech listener (Talk, hands-free) |
+| `src/cane.ts` | class-agnostic obstacle cues from the server's depth summary |
+| `test/*.test.ts` | unit tests: `npm test` type-checks them (`test/tsconfig.json`) and runs them with node's test runner |
 | `src/main.ts` | loop, modes, UI, ASK rules |
 
 Known limits: WebGPU support differs by browser (iOS Safari falls back to WASM, ~10 FPS on older
-devices); OCR and metric depth need the server; ASK is rule-based (no LLM).
+devices); iOS Safari has no vibration API, so on iPhone a haptic cue is only the earcon; OCR and metric depth
+need the server; ASK is rule-based (no LLM).
 
 ## Dev server vs production
 
 ONNX Runtime is loaded as a raw bundle from `/ort/` (never bundled by Vite): in dev a small plugin in
 `vite.config.ts` serves those files straight from `node_modules`; in production they come from
 `public/ort/`. Under `npm run dev` the detector runs single-threaded (threaded WASM init hangs there);
-the production server on :8000 is cross-origin-isolated and uses up to 4 threads, ~3× faster. If a
-worker fails or does not become ready within 25 s the app restarts it single-threaded by itself. A
+the production server on :8000 is cross-origin-isolated and uses up to 4 threads, ~3× faster. Start-up is a
+ladder: YOLO11s on WebGPU with one WASM thread (WebGPU session creation hangs in a worker with threaded WASM),
+then YOLO11n on threaded WASM in a fresh worker, then single-threaded WASM, then the failure is said aloud. A
 detection request that fails, or gets no answer within 5 s, returns no detections instead of stalling the loop.
 
 ## Beta readiness: accessibility and safety

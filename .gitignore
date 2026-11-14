@@ -18,6 +18,7 @@ web/node_modules/
 web/dist/
 server/certs/
 models/depth/
+models/vosk/
 models/export/*.mlpackage/
 external/
 data/egoblind/
@@ -37,3 +38,4 @@ data/mapillary/
 data/viabench/
 results/**/*.mp4
 results/egoblind/review_events_priority*.csv
+results/live_sessions/

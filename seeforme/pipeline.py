@@ -149,7 +149,17 @@ class Pipeline:
 # P-CACS live pipeline: adds metric depth, track dynamics and the four-action scheduler
 # ---------------------------------------------------------------------------
 
-def make_live_policy(name: str, cfg: PipelineConfig, model_dir: str = "models", goal_tags=None, scene_context=None) -> CuePolicy:
+def make_live_policy(name: str, cfg: PipelineConfig, model_dir: str = "models", goal_tags=None, scene_context=None,
+                     fallback: bool = False) -> CuePolicy:
+    """Policy for the live / video pipeline.
+
+    `pcacs_learned:rl` is the production learned scheduler (models/scheduler/scheduler_rl.pt, greedy RL mode),
+    `pcacs_learned:il` the imitation one (needs the threshold in scheduler_report.json), `egoblind_learned:*` the
+    schedulers in models/egoblind. With `fallback=True` a learned scheduler that cannot be loaded (missing or unreadable
+    checkpoint) is replaced by the linear P-CACS instead of raising; the returned policy then carries `fallback_from`
+    (the requested name) and `fallback_reason`, so the caller can warn the user. Evaluation scripts keep the default
+    and fail loudly. A loaded learned policy carries `checkpoint` (the file it came from).
+    """
     from .cues.pcacs import PCACSPolicy
     text_model = LearnedTextImportance(f"{model_dir}/text_importance.joblib")
     if name == "pcacs":
@@ -157,20 +167,33 @@ def make_live_policy(name: str, cfg: PipelineConfig, model_dir: str = "models", 
     if name.startswith("pcacs_learned") or name.startswith("egoblind_learned"):
         import json
         from pathlib import Path
-        from .ml.scheduler_model import SchedulerModel, SchedulerPolicy
-        if name.startswith("egoblind_learned"):      # scheduler trained on EgoBlind replays (scripts/train_scheduler_egoblind.py)
-            model_dir = str(Path(model_dir) / "egoblind")
-        rep_path = Path(model_dir) / "scheduler_report.json"
-        if not rep_path.exists():
-            raise FileNotFoundError(f"no trained scheduler in {model_dir}: run scripts/train_scheduler.py or scripts/train_scheduler_egoblind.py")
-        rep = json.loads(rep_path.read_text())
         which = name.split(":", 1)[1] if ":" in name else "rl"
-        d = Path(model_dir) / "scheduler"
-        if which == "il":
-            return SchedulerPolicy(SchedulerModel.load(str(d / "scheduler_il.pt")), cfg.pcacs, threshold=rep["il"]["threshold"],
-                                   mode="imitation", name=name, goal_tags=goal_tags, text_model=text_model)
-        return SchedulerPolicy(SchedulerModel.load(str(d / "scheduler_rl.pt")), cfg.pcacs, mode="rl", name=name,
-                               goal_tags=goal_tags, text_model=text_model)
+        if which not in ("il", "rl"):
+            raise ValueError(f"unknown learned scheduler {name!r}: use {name.split(':', 1)[0]}:il or :rl")
+        # egoblind_learned: scheduler trained on EgoBlind replays (scripts/train_scheduler_egoblind.py)
+        sched_dir = Path(model_dir) / "egoblind" if name.startswith("egoblind_learned") else Path(model_dir)
+        ckpt = sched_dir / "scheduler" / f"scheduler_{which}.pt"
+        try:
+            from .ml.scheduler_model import SchedulerModel, SchedulerPolicy   # inside the try: a broken torch install falls back too
+            if not ckpt.exists():
+                raise FileNotFoundError(f"no trained scheduler at {ckpt}: run scripts/train_scheduler.py or scripts/train_scheduler_egoblind.py")
+            if which == "il":
+                rep_path = sched_dir / "scheduler_report.json"
+                if not rep_path.exists():
+                    raise FileNotFoundError(f"no {rep_path} (holds the imitation threshold): run scripts/train_scheduler.py")
+                pol = SchedulerPolicy(SchedulerModel.load(str(ckpt)), cfg.pcacs, threshold=json.loads(rep_path.read_text())["il"]["threshold"],
+                                      mode="imitation", name=name, goal_tags=goal_tags, text_model=text_model)
+            else:
+                pol = SchedulerPolicy(SchedulerModel.load(str(ckpt)), cfg.pcacs, mode="rl", name=name,
+                                      goal_tags=goal_tags, text_model=text_model)
+        except Exception as e:      # missing file, wrong feature count, corrupt pickle, ...
+            if not fallback:
+                raise
+            pol = PCACSPolicy(cfg.pcacs, text_model=text_model, goal_tags=goal_tags)
+            pol.fallback_from, pol.fallback_reason = name, f"{type(e).__name__}: {e}"   # type: ignore[attr-defined]
+            return pol
+        pol.checkpoint = str(ckpt)   # type: ignore[attr-defined]
+        return pol
     return make_policy(name, cfg, model_dir, scene_context=scene_context)
 
 
@@ -190,6 +213,11 @@ class LivePipeline(Pipeline):
         self.bbox_depth = BBoxDepthEstimator(self.cam)
         self._depth_map = None
         self.latency.__dict__.setdefault("depth", deque(maxlen=200))
+
+    @property
+    def depth_map(self) -> Optional[np.ndarray]:
+        """The latest metric depth map (metres, at inference resolution) this pipeline computed, or None."""
+        return self._depth_map
 
     def process(self, frame: np.ndarray, t: Optional[float] = None) -> StepResult:
         from .cues.pcacs import ChannelState
@@ -246,7 +274,10 @@ class LivePipeline(Pipeline):
                 cue = cues[0]
                 self.cue_log.append(cue)
                 if cue.action == "haptic":
-                    print("[haptic] buzz", flush=True)
+                    if self.speaker is not None and hasattr(self.speaker, "haptic"):
+                        self.speaker.haptic()
+                    else:
+                        print("[haptic] buzz", flush=True)
                 else:
                     self.channel.speak(cue, interrupt=(cue.action == "interrupt"))
                     if self.speaker is not None:
