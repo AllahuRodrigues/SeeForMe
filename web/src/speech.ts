@@ -6,6 +6,11 @@ export type VoiceBackend = "browser" | "elevenlabs";
  *  cue that still has not started TTS_LATE_MS after it was issued is dropped. */
 const TTS_WAIT_MS = 1500, TTS_LATE_MS = 2000;
 
+/** When the app last made a sound (performance.now() ms): the voice input ignores what it hears while the app speaks
+ *  and for a moment after, so the app never hears itself. */
+let soundUntilMs = 0;
+const markSound = (ms = 0) => { soundUntilMs = Math.max(soundUntilMs, performance.now() + ms); };
+
 /** One AudioContext for the whole app: created/resumed by Speech.unlock() inside the Start gesture (iOS keeps a
  *  context created outside a gesture suspended), then reused by earcon(). */
 let ctx: AudioContext | null = null;
@@ -28,7 +33,25 @@ export class Speech {
   /** onSpoken: `urgent` marks an interrupt cue (critical hazard), not an answer that cuts in (sayNow) */
   constructor(private serverUrl: () => string, private onSpoken?: (text: string, urgent: boolean) => void) {}
 
+  /** what was said (text, performance.now() ms when it was issued), newest last: the voice input's echo guard */
+  private said: Array<[string, number]> = [];
+
   free(t: number) { return t >= this.busyUntil && !this.pending && !(this.audio && !this.audio.paused && !this.audio.ended); }
+
+  /** Is the app making a sound now, or did it stop less than `tailMs` ago? (browser voice, ElevenLabs audio, earcons) */
+  audible(tailMs = 400): boolean {
+    const now = performance.now();
+    const playing = this.pending || (this.audio != null && !this.audio.paused && !this.audio.ended)
+      || ("speechSynthesis" in globalThis && (globalThis as any).speechSynthesis.speaking);
+    if (playing) markSound();
+    return playing || now < soundUntilMs + tailMs;
+  }
+  /** Texts spoken in the last `ms` milliseconds (counted from when they were issued plus their spoken length). */
+  recent(ms = 3000): string[] {
+    const now = performance.now();
+    this.said = this.said.filter(([text, at]) => now - at < ms + 400 * text.split(/\s+/).length);
+    return this.said.map(([text]) => text);
+  }
 
   /** Must run inside a user gesture (Start tap): unlocks audio playback and browser TTS on iOS/Safari. */
   unlock() {
@@ -53,6 +76,8 @@ export class Speech {
     this.onSpoken?.(cue.message, cue.action === "interrupt");
     if (!this.enabled) return;
     if (interrupt) this.stop();
+    if (cue.message) { this.said.push([cue.message, performance.now()]); if (this.said.length > 12) this.said.shift(); }
+    markSound(cue.duration * 1000);   // until its estimated end, even before the voice actually starts
     // an interrupt cannot wait for a TTS round trip: the browser voice says it unless its ElevenLabs audio is cached
     if (this.backend === "elevenlabs" && (cue.action !== "interrupt" || this.cache.has(cue.message))) void this.playEleven(cue.message);
     else this.playBrowser(cue.message);
@@ -63,6 +88,7 @@ export class Speech {
     const voices = window.speechSynthesis.getVoices();
     const pick = voices.find((v) => /Samantha|Google US English|Karen|Moira|Zira|Jenny/i.test(v.name)) ?? voices.find((v) => v.lang.startsWith("en") && /female/i.test(v.name)) ?? null;
     if (pick) u.voice = pick;
+    u.onend = u.onerror = () => markSound();
     window.speechSynthesis.speak(u);
   }
   private async playEleven(text: string) {
@@ -79,12 +105,15 @@ export class Speech {
       }
       if (stale() || performance.now() - t0 > TTS_LATE_MS) return;   // too late to be useful: dropped, never spoken late
       if (this.audio) this.audio.pause();
-      const a = new Audio(url); this.audio = a; await a.play();
+      const a = new Audio(url); this.audio = a;
+      a.onended = a.onpause = () => markSound();
+      await a.play();
     } catch { if (!stale() && performance.now() - t0 <= TTS_LATE_MS) this.playBrowser(text); }
     finally { if (gen === this.gen) this.pending = false; }
   }
   stop() {
     this.gen++; this.pending = false;
+    soundUntilMs = performance.now();   // silent from now on (the estimated end of a cut cue no longer applies)
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     if (this.audio) { this.audio.pause(); this.audio = null; }
   }
@@ -95,10 +124,12 @@ export function haptic(pattern: number | number[] = [80, 60, 80]) {
   try { if ("vibrate" in navigator) navigator.vibrate(pattern); } catch { /* ignore */ }
 }
 
-/** Short earcon for haptic cues on devices without vibration (laptops). */
-export function earcon(freq = 660, ms = 120) {
+/** Short earcon for haptic cues on devices without vibration (laptops), and the voice input's acknowledgement. */
+export function earcon(freq = 660, ms = 120, delayMs = 0) {
   try {
     const ac = audioCtx(); if (!ac) return;
+    markSound(delayMs + ms + 20);
+    if (delayMs > 0) { setTimeout(() => earcon(freq, ms), delayMs); return; }
     const o = ac.createOscillator(), g = ac.createGain();
     o.frequency.value = freq; o.connect(g); g.connect(ac.destination);
     g.gain.setValueAtTime(0.0001, ac.currentTime); g.gain.exponentialRampToValueAtTime(0.4, ac.currentTime + 0.01);
