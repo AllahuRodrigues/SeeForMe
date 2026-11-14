@@ -16,6 +16,11 @@ Frames and verdicts live in data/review/<split>/ (git-ignored: frames are EgoBli
 Rubric v4 queues (scripts/build_speech_label_queue.py, a `claim` column) ask two separate questions per decision moment:
 would an unprompted announcement help (keys 1 to 5), and is the sentence the assistant would say true (Q W E R); Enter saves.
 `kappa` then reports agreement on each axis with bootstrap intervals; uncertain is excluded, never counted as silent.
+A model can take a first pass on a rubric v4 queue. It is stored under its own reviewer id with verification "model",
+never as a human verdict, and it sees the same blind view as a person (frames up to the decision, the sentence, nothing else):
+    python scripts/review_events.py packet --split priority160                                # blind contact sheets + packet.json
+    python scripts/review_events.py import-model --split priority160 --reviewer m1 --file labels.json
+    python scripts/review_events.py compare --split priority160 --a m1 --b ar                 # where two raters differ
 Keys in the page (rubric v3): 1 proactive warning, 2 proactive all-clear, 3 useful only if asked, 4 nothing needed, 5 uncertain, 6 warning needed but wrong object; left/right arrows to move. Only frames up to the question are shown.
 """
 import argparse, csv, html, json, sys
@@ -23,15 +28,17 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 from _common import ROOT
-from seeforme.egoblind.review import (USEFULNESS, VERDICTS, agreement, blind_row, decision_time_frames, cohen_kappa, latest_verdicts,
-                                      make_verdict, merge_verdicts, sample_second_rater)
+from seeforme.egoblind.review import (USEFULNESS, VERDICTS, agreement, blind_row, decision_time_frames, cohen_kappa, disagreements,
+                                      latest_verdicts, make_verdict, merge_verdicts, model_verdict_records, packet_frames, rater_kind,
+                                      sample_second_rater)
 
 REVIEW = ROOT / "data" / "review"
 STEP_S, BEFORE_S, AFTER_S, WIDTH = 0.75, 3.0, 1.0, 480
 MIN_GAP_S = 2.0   # server-side floor between two verdicts by one reviewer (held keys, scripted clicks)
 
 ap = argparse.ArgumentParser()
-ap.add_argument("cmd", choices=["frames", "serve", "merge", "kappa", "audit", "audit-score"])
+ap.add_argument("cmd", choices=["frames", "serve", "merge", "kappa", "audit", "audit-score", "packet", "import-model", "compare"])
+ap.add_argument("--file", default="", help="import-model: JSON list of {sample_id, usefulness, claim, evidence, confidence, note}")
 ap.add_argument("--split", default="train")
 ap.add_argument("--reviewer", default="")
 ap.add_argument("--second-rater", action="store_true", help="review only the seeded 20% agreement sample")
@@ -154,8 +161,11 @@ elif args.cmd == "audit-score":
 elif args.cmd == "kappa":
     recs = load_records()
     if TWO_AXIS:
-        res = agreement(latest_verdicts(recs, reviewer=args.a), latest_verdicts(recs, reviewer=args.b))
+        res = agreement(latest_verdicts(recs, reviewer=args.a, human_only=False), latest_verdicts(recs, reviewer=args.b, human_only=False))
+        res["raters"] = {args.a: rater_kind(recs, args.a), args.b: rater_kind(recs, args.b)}
         print(json.dumps(res, indent=1))
+        if "model" in res["raters"].values():
+            print("one rater is a model: this is model-to-human agreement, not agreement between two people")
         (out_dir / f"agreement_{args.a}_{args.b}.json").write_text(json.dumps(res, indent=1))
         print("binary = speak unprompted or not, over events both reviewers decided; uncertain events are excluded, not counted as silent")
         sys.exit(0)
@@ -164,9 +174,72 @@ elif args.cmd == "kappa":
     k = cohen_kappa(a, b)
     print(f"overlap {len(set(a) & set(b))} events, kappa = {k if k is None else round(k, 3)}")
 
+elif args.cmd == "packet":
+    import cv2
+    import numpy as np
+    pk = out_dir / "packet"
+    pk.mkdir(parents=True, exist_ok=True)
+    items, ORANGE = [], (0, 140, 255)
+    for r in rows:
+        b = blind_row(r); d = out_dir / "frames" / b["key"].replace(":", "_")
+        times = json.loads((d / "meta.json").read_text())["times"]
+        tiles = []
+        idx = packet_frames(times, float(b["t_q"]))
+        for j, i in enumerate(idx):
+            im = cv2.imread(str(d / f"{i:02d}.jpg"))
+            w = 384 if im.shape[0] > im.shape[1] else 480
+            im = cv2.resize(im, (w, int(im.shape[0] * w / im.shape[1])))
+            last = j == len(idx) - 1
+            bar = np.full((30, w, 3), 255, np.uint8)
+            cv2.putText(bar, f"{'DECISION MOMENT  ' if last else ''}t = {times[i]:.1f} s", (8, 21), cv2.FONT_HERSHEY_SIMPLEX, 0.55,
+                        ORANGE if last else (60, 60, 60), 2 if last else 1, cv2.LINE_AA)
+            im = np.vstack([bar, im])
+            tiles.append(cv2.copyMakeBorder(im, 5, 5, 5, 5, cv2.BORDER_CONSTANT, value=ORANGE if last else (255, 255, 255)))
+        if not tiles:
+            print(f"   no decision-time frame for {b['sample_id']}"); continue
+        blank = np.full_like(tiles[0], 255)
+        if tiles[0].shape[0] > tiles[0].shape[1]:                 # portrait video: one row, oldest left, decision right
+            sheet = np.hstack(tiles)
+        else:                                                     # landscape: 2 x 2, reading order, decision last
+            tiles += [blank] * (-len(tiles) % 2)
+            sheet = np.vstack([np.hstack(tiles[k:k + 2]) for k in range(0, len(tiles), 2)])
+        cv2.imwrite(str(pk / f"{b['sample_id']}.jpg"), sheet, [cv2.IMWRITE_JPEG_QUALITY, 85])
+        items.append({"sample_id": b["sample_id"], "sheet": f"{b['sample_id']}.jpg", "decision_time_s": float(b["t_q"]),
+                      "sentence": (b.get("claim") or "").strip()})
+    (pk / "packet.json").write_text(json.dumps(items, indent=1))
+    print(f"{len(items)} blind contact sheets -> {pk} (sample id, frames up to the decision, the sentence; nothing else)")
+
+elif args.cmd == "import-model":
+    if not (args.reviewer and args.file):
+        sys.exit("--reviewer (the model's own id) and --file are required")
+    recs = model_verdict_records(json.loads(Path(args.file).read_text()), [blind_row(r) for r in rows], args.reviewer, existing=load_records())
+    out_dir.mkdir(parents=True, exist_ok=True)
+    with open(store, "a") as f:
+        for v in recs:
+            f.write(json.dumps(v) + "\n")
+    print(f"{len(recs)} model verdicts stored for {args.reviewer} (verification: model) -> {store}")
+
+elif args.cmd == "compare":
+    recs = load_records()
+    sid = {blind_row(r)["key"]: r.get("sample_id", "") for r in rows}
+    a, b = latest_verdicts(recs, reviewer=args.a, human_only=False), latest_verdicts(recs, reviewer=args.b, human_only=False)
+    ds = disagreements(a, b)
+    out = out_dir / f"disagreements_{args.a}_{args.b}.csv"
+    with open(out, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["sample_id", "differs", f"{args.a}_usefulness", f"{args.b}_usefulness", f"{args.a}_claim", f"{args.b}_claim", f"{args.a}_note", f"{args.b}_note"])
+        for d in sorted(ds, key=lambda d: sid.get(d["key"], d["key"])):
+            w.writerow([sid.get(d["key"], d["key"]), " + ".join(d["differs"]), d["a"], d["b"], d["claim_a"] or "", d["claim_b"] or "", d["note_a"], d["note_b"]])
+    n = len(set(a) & set(b))
+    print(f"{args.a} ({rater_kind(recs, args.a)}) and {args.b} ({rater_kind(recs, args.b)}) both labelled {n} moments; they differ on {len(ds)}: "
+          + ", ".join(f"{k} {sum(k in d['differs'] for d in ds)}" for k in ("speak_or_not", "one_unsure", "category", "claim")))
+    print(f"-> {out}")
+
 else:
     if not args.reviewer:
         sys.exit("--reviewer is required (your initials)")
+    if rater_kind(load_records(), args.reviewer) == "model":
+        sys.exit(f"{args.reviewer!r} is a model rater in this store; a person reviews under their own initials")
     events = [blind_row(r) for r in rows]
     if args.split == "audit":   # the annotators' answers would give the derived label away; judge from the frames
         for e in events:
